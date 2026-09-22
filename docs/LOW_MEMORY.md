@@ -264,6 +264,31 @@ with compressed-tensors 0.18.0. All 48 combinations spanning bit widths 1–8
 and aligned/unaligned row lengths match; the evidence is in
 `reports/qwen35_packing_compatibility.json`.
 
+The tiny writer gate now passes as well. `tools/audit_tiny_packed_roundtrip.py`
+constructs a one-layer, two-expert `Qwen3_5MoeForCausalLM`, maps all six
+logical expert projections from synthetic RCO bundles through the same
+`compressed_state_from_bundle` path, and writes a deliberately small indexed
+checkpoint. The 51,025-byte artifact has three safetensors shards, 34 indexed
+tensors, and six Q2 `weight_packed` tensors. It exists only in a temporary
+directory and is deleted when the audit finishes.
+
+Under Transformers 5.13.1 and `compressed-tensors` 0.18.0, both supported load
+paths succeed with no missing, unexpected, mismatched, or error entries. The
+meta load leaves every parameter on `meta`. A materialized CPU load dequantizes
+and merges the logical `gate_proj` and `up_proj` tensors into runtime
+`gate_up_proj` and stacks `down_proj` across experts. Both fused tensors equal
+the values reconstructed directly from the source RCO codes, zero points, and
+scales with maximum absolute error `0.0`. The complete compact evidence is in
+`reports/qwen35_tiny_packed_roundtrip.json`; peak process RSS was 325,640,192
+bytes and the retained report is 2.4 KiB.
+
+This proves the logical packed-expert schema, index, sharding, and loader
+conversion needed by a bounded writer. It does not prove the old
+full-model `run_build_checkpoint.py` path is memory-safe, nor does it validate
+a full mixed-bit assignment. Repository dependency pins remain unchanged in
+this milestone so the version update and any compatibility fixes can be
+reviewed separately.
+
 ## Remaining work
 
 Pinned Transformers 5.7.0 meta initialization has been checked against the
@@ -284,9 +309,9 @@ driver now rejects such a mismatch before starting an optimization pass.
    base checkpoint using the pinned Qwen3.6 Transformers implementation.
 2. Add a training-aware streamed backward path for pruning masks if full-model
    pruning remains in scope.
-3. Derive the published packed tensor layout and prove a tiny writer round trip
-   with Transformers 5.13.1 plus `compressed-tensors` 0.18.0, then write
-   selected tensors directly into bounded-size output shards.
+3. Implement the production writer that streams copied and selected tensors
+   directly into bounded-size output shards, using the now-proven published
+   packed schema and tiny round-trip path.
 4. Validate one complete optimization step, then a multi-step run, while
    recording CUDA allocated/reserved peaks, process RSS, disk growth, and I/O.
 5. Load the materialized checkpoint and run numerical layer comparisons and a

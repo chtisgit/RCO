@@ -1,0 +1,87 @@
+{
+  "architecture": {
+    "experts": 2,
+    "hidden_size": 32,
+    "layers": 1,
+    "moe_intermediate_size": 16
+  },
+  "checkpoint": {
+    "files": {
+      "config.json": 2134,
+      "model-00001-of-00003.safetensors": 18760,
+      "model-00002-of-00003.safetensors": 14360,
+      "model-00003-of-00003.safetensors": 12688,
+      "model.safetensors.index.json": 3083
+    },
+    "indexed_tensor_count": 34,
+    "packed_tensor_count": 6,
+    "shard_count": 3,
+    "shards": [
+      "model-00001-of-00003.safetensors",
+      "model-00002-of-00003.safetensors",
+      "model-00003-of-00003.safetensors"
+    ],
+    "total_bytes": 51025
+  },
+  "compressed_tensors": "0.18.0",
+  "elapsed_seconds": 0.07164778199512511,
+  "mapped_packed_sha256": {
+    "model.layers.0.mlp.experts.0.down_proj": "11e7f5a6f15a4addba9b6b21bc4f8ecbdd969e179335269fc68d3a05f0f3da4a",
+    "model.layers.0.mlp.experts.0.gate_proj": "9697b22c1858c1124c849eea82844cf87e265161f173c7e73d49aff179dc00d9",
+    "model.layers.0.mlp.experts.0.up_proj": "50e7877bb3277b2d47072ede0488ecd69e2a673b20d3fc221657f73bfb3b339a",
+    "model.layers.0.mlp.experts.1.down_proj": "50e7877bb3277b2d47072ede0488ecd69e2a673b20d3fc221657f73bfb3b339a",
+    "model.layers.0.mlp.experts.1.gate_proj": "77a42ae035afdee9d8bc221e5a73331547873f2a78af22c7af94be34e68442ae",
+    "model.layers.0.mlp.experts.1.up_proj": "9697b22c1858c1124c849eea82844cf87e265161f173c7e73d49aff179dc00d9"
+  },
+  "materialized_load": {
+    "clean": true,
+    "exact": true,
+    "loading_info": {
+      "error_msgs": [],
+      "mismatched_keys": [],
+      "missing_keys": [],
+      "unexpected_keys": []
+    },
+    "max_abs_errors": {
+      "down_max_abs": 0.0,
+      "gate_up_max_abs": 0.0
+    },
+    "runtime_expert_shapes": {
+      "down_proj": [
+        2,
+        32,
+        16
+      ],
+      "gate_up_proj": [
+        2,
+        32,
+        32
+      ]
+    }
+  },
+  "meta_load": {
+    "clean": true,
+    "loading_info": {
+      "error_msgs": [],
+      "mismatched_keys": [],
+      "missing_keys": [],
+      "unexpected_keys": []
+    },
+    "parameter_devices": [
+      "meta"
+    ]
+  },
+  "model_class": "Qwen3_5MoeForCausalLM",
+  "process_peak_rss_bytes": 325640192,
+  "quantization": {
+    "act_order": false,
+    "bits": 2,
+    "group_size": 8,
+    "mapped_logical_projection_count": 6,
+    "symmetric": true
+  },
+  "result": "passed",
+  "schema": 1,
+  "torch": "2.11.0+cpu",
+  "transformers": "5.13.1"
+}
