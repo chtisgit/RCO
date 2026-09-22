@@ -91,13 +91,18 @@ production-ready.
 
 Both search drivers accept `--kl-topk`; the default is 20. With compact mode,
 the cache contains `[batch, tokens, k]` values and indices rather than
-`[batch, tokens, vocabulary]` probabilities. `--kl-topk 0` retains the original
+`[batch, tokens, vocabulary]` probabilities. Schema 2 also stores one FP16
+retained-probability value per token, adding two bytes per position so the
+omitted teacher mass is measurable. `--kl-topk 0` retains the original
 full-vocabulary behavior.
 
 The compact implementation reproduces the previous top-k objective on a test
 model and retains a nonzero gradient through the candidate model. It preserves
 the existing top-k objective semantics; it is not equivalent to full-vocabulary
-KL.
+KL. Cache construction logs mean/minimum retained mass and mean/maximum omitted
+mass. Search JSON records the same statistics over loss-selected token
+positions. Quantization cache filenames include `massv2`, preventing older
+compact caches without mass measurements from being silently reused.
 
 ## Hard assignment search
 

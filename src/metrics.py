@@ -28,6 +28,80 @@ from common import get_input_device
 
 logger = logging.getLogger(__name__)
 
+COMPACT_REFERENCE_SCHEMA = 2
+
+
+def summarize_compact_reference_mass(ref_log_probs, masks=None):
+    """Summarize teacher probability retained by a compact top-k cache.
+
+    ``masks`` may be one unshifted calibration tensor or a list of batch
+    tensors. Only next-token positions selected by the mask contribute. The
+    function streams scalar aggregates and never concatenates cache tensors.
+    Returns ``None`` for full-vocabulary or legacy compact caches that do not
+    contain retained-mass measurements.
+    """
+    if not ref_log_probs or not isinstance(ref_log_probs[0], dict):
+        return None
+    if any("retained_mass" not in item for item in ref_log_probs):
+        return None
+
+    if masks is None:
+        mask_batches = [None] * len(ref_log_probs)
+    elif isinstance(masks, (list, tuple)):
+        if len(masks) != len(ref_log_probs):
+            raise ValueError("mask batch count does not match reference cache")
+        mask_batches = masks
+    else:
+        mask_batches = []
+        offset = 0
+        for item in ref_log_probs:
+            batch = item["retained_mass"].shape[0]
+            mask_batches.append(masks[offset:offset + batch])
+            offset += batch
+        if offset != masks.shape[0]:
+            raise ValueError("mask sample count does not match reference cache")
+
+    total = 0.0
+    count = 0
+    minimum = float("inf")
+    maximum = float("-inf")
+    for item, mask in zip(ref_log_probs, mask_batches):
+        mass = item["retained_mass"].float()
+        if mask is not None:
+            selected = mask[:, 1:].to(dtype=torch.bool, device=mass.device)
+            if selected.shape != mass.shape:
+                raise ValueError(
+                    f"shifted mask shape {selected.shape} does not match "
+                    f"retained mass shape {mass.shape}")
+            mass = mass[selected]
+        else:
+            mass = mass.reshape(-1)
+        if mass.numel() == 0:
+            continue
+        total += mass.sum().item()
+        count += mass.numel()
+        minimum = min(minimum, mass.min().item())
+        maximum = max(maximum, mass.max().item())
+
+    if count == 0:
+        return {
+            "token_count": 0,
+            "retained_mass_mean": None,
+            "retained_mass_min": None,
+            "retained_mass_max": None,
+            "omitted_mass_mean": None,
+            "omitted_mass_max": None,
+        }
+    mean = total / count
+    return {
+        "token_count": count,
+        "retained_mass_mean": mean,
+        "retained_mass_min": minimum,
+        "retained_mass_max": maximum,
+        "omitted_mass_mean": 1.0 - mean,
+        "omitted_mass_max": 1.0 - minimum,
+    }
+
 
 # ----------------------------------------------------------------------------
 # Training-loop losses
@@ -40,9 +114,11 @@ def compute_reference_log_probs(model, calibration_data, batch_size=4,
     """Cache next-token reference log-probabilities for the calibration set.
 
     With topk=0, returns a list of (B, T-1, V) float16 CPU tensors. With
-    topk>0, each list item is a dict containing only ``values`` (top-k
-    reference log-probabilities, float16) and ``indices`` (int32 token IDs).
-    The compact form avoids a full-vocabulary CPU cache.
+    topk>0, each list item is a schema-versioned dict containing ``values``
+    (top-k reference log-probabilities, float16), ``indices`` (int32 token
+    IDs), and ``retained_mass`` (the summed teacher probability of those
+    entries, float16). The compact form avoids a full-vocabulary CPU cache
+    while making the approximation's omitted probability measurable.
     """
     logger.info("Computing reference log-probabilities...")
     device = get_input_device(model)
@@ -55,9 +131,12 @@ def compute_reference_log_probs(model, calibration_data, batch_size=4,
             k = min(topk, logits.size(-1))
             top_values, top_indices = logits.topk(k, dim=-1)
             log_normalizer = logits.logsumexp(dim=-1, keepdim=True)
+            top_log_probs = top_values - log_normalizer
             ref_log_probs.append({
-                "values": (top_values - log_normalizer).half().cpu(),
+                "schema_version": COMPACT_REFERENCE_SCHEMA,
+                "values": top_log_probs.half().cpu(),
                 "indices": top_indices.to(torch.int32).cpu(),
+                "retained_mass": top_log_probs.exp().sum(dim=-1).half().cpu(),
             })
         else:
             ref_log_probs.append(F.log_softmax(logits, dim=-1).half().cpu())
@@ -66,6 +145,7 @@ def compute_reference_log_probs(model, calibration_data, batch_size=4,
         total_tokens = sum(item["values"].numel() // item["values"].size(-1)
                            for item in ref_log_probs)
         mem_bytes = sum(item["values"].nbytes + item["indices"].nbytes
+                        + item["retained_mass"].nbytes
                         for item in ref_log_probs)
     else:
         total_tokens = sum(lp.numel() // lp.size(-1) for lp in ref_log_probs)
@@ -73,6 +153,15 @@ def compute_reference_log_probs(model, calibration_data, batch_size=4,
     mem_mb = mem_bytes / 1e6
     logger.info(f"Cached reference log-probs: {len(ref_log_probs)} batches, "
                 f"{total_tokens} tokens, {mem_mb:.0f} MB, topk={topk}")
+    mass = summarize_compact_reference_mass(ref_log_probs)
+    if mass is not None:
+        logger.info(
+            "Teacher top-k retained mass: mean=%.6f min=%.6f max=%.6f; "
+            "mean omitted=%.6f max omitted=%.6f",
+            mass["retained_mass_mean"], mass["retained_mass_min"],
+            mass["retained_mass_max"], mass["omitted_mass_mean"],
+            mass["omitted_mass_max"],
+        )
     return ref_log_probs
 
 

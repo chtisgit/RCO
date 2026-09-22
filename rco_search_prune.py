@@ -15,7 +15,7 @@ import numpy as np
 import torch
 
 from models import get_tokenizer, load_model
-from data import load_calibration_data
+from metrics import summarize_compact_reference_mass
 from search.prune import (
     build_ref_cache,
     compute_frequency,
@@ -88,6 +88,8 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv=None) -> int:
     args = build_parser().parse_args(argv)
+    from data import load_calibration_data
+
     torch.manual_seed(args.seed)
     np.random.seed(args.seed)
 
@@ -129,6 +131,8 @@ def main(argv=None) -> int:
         args.calibration_seq_length, tokenizer, args.seed)
     ref_log_probs, ref_masks = build_ref_cache(
         model, cal_data, cal_masks, args.batch_size, topk=args.kl_topk)
+    reference_mass_stats = summarize_compact_reference_mass(
+        ref_log_probs, ref_masks)
 
     freq_kl = None
     if not args.skip_freq_baseline:
@@ -204,6 +208,7 @@ def main(argv=None) -> int:
             'sparsity': args.sparsity,
             'target_budget': target_budget,
             'calibration_data': args.calibration_data,
+            'compact_reference_mass': reference_mass_stats,
             'freq_baseline': {'kl': freq_kl}
                 if freq_kl is not None else None,
             'search': {

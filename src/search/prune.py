@@ -18,7 +18,6 @@ import torch.nn.functional as F
 from tqdm import tqdm
 
 from common import get_input_device
-from data import load_calibration_data
 from model_adapter import get_model_adapter
 from manifold import (
     project_gradient,
@@ -31,6 +30,7 @@ from manifold import (
 from metrics import (
     compute_kl_loss,
     compute_reference_log_probs as _compute_reference_log_probs,
+    summarize_compact_reference_mass,
 )
 
 logger = logging.getLogger(__name__)
@@ -64,6 +64,14 @@ def build_ref_cache(model, data, masks, batch_size=4, topk=0):
     for i in range(0, n, batch_size):
         end = min(i + batch_size, n)
         ref_masks.append(masks[i:end].float().cpu())
+    mass = summarize_compact_reference_mass(ref_lps, ref_masks)
+    if mass is not None:
+        logger.info(
+            "Selected-token teacher mass: mean retained %.6f, "
+            "max omitted %.6f over %d positions",
+            mass["retained_mass_mean"], mass["omitted_mass_max"],
+            mass["token_count"],
+        )
     return ref_lps, ref_masks
 
 

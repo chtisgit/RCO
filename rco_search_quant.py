@@ -22,6 +22,7 @@ from metrics import (
     compute_baseline_topk,
     compute_objective,
     compute_reference_log_probs,
+    summarize_compact_reference_mass,
 )
 from grouping import (
     build_layer_groups,
@@ -340,14 +341,16 @@ def main(argv=None) -> int:
             )
 
     ref_log_probs = None
+    reference_mass_stats = None
     if args.objective == 'kl' and not args.stream_hard_eval:
         model_slug = args.model.replace('/', '_').replace('-', '_')
+        cache_schema_tag = "_massv2" if args.kl_topk > 0 else ""
         ref_lp_path = (
             layer_dir
             / f"ref_log_probs_{model_slug}_{args.calibration_data}"
               f"_{args.calibration_samples}x{args.calibration_seq_length}"
               f"_bs{args.batch_size}_seed{args.seed}"
-              f"_topk{args.kl_topk}.pt"
+              f"_topk{args.kl_topk}{cache_schema_tag}.pt"
         )
         if ref_lp_path.exists():
             ref_log_probs = torch.load(str(ref_lp_path))
@@ -357,6 +360,20 @@ def main(argv=None) -> int:
                 topk=args.kl_topk,
             )
             torch.save(ref_log_probs, str(ref_lp_path))
+        reference_mass_stats = summarize_compact_reference_mass(
+            ref_log_probs, calibration_masks)
+        if args.kl_topk > 0 and reference_mass_stats is None:
+            raise ValueError(
+                "compact reference cache does not contain retained-mass "
+                "measurements; remove it and rebuild with schema 2")
+        if reference_mass_stats is not None:
+            logger.info(
+                "Selected-token teacher mass: mean retained %.6f, "
+                "max omitted %.6f over %d positions",
+                reference_mass_stats["retained_mass_mean"],
+                reference_mass_stats["omitted_mass_max"],
+                reference_mass_stats["token_count"],
+            )
 
     if args.search_mode in {'hard-spsa', 'hard-reinforce'}:
         if len(bitwidths) != 2:
@@ -632,6 +649,8 @@ def main(argv=None) -> int:
             },
             'loss_history': history,
         }
+        if reference_mass_stats is not None:
+            output['compact_reference_mass'] = reference_mass_stats
         if bitwidth_map:
             output['bitwidth_map'] = {str(k): v for k, v in bitwidth_map.items()}
         if args.stream_hard_eval:
