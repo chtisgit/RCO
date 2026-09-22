@@ -44,6 +44,44 @@ def load_model(model_path, dtype="bfloat16", device_map="balanced",
     return model
 
 
+def load_meta_model(model_path, dtype="bfloat16"):
+    """Instantiate a checkpoint-compatible model skeleton on ``meta``.
+
+    Conditional-generation architectures use the image/text auto class so
+    their checkpoint names retain the outer multimodal wrapper.  All vision
+    parameters remain shape-only; callers can stream only the text prefixes
+    selected by :mod:`model_adapter`.
+    """
+    from accelerate import init_empty_weights
+    from transformers import AutoConfig, AutoModelForCausalLM
+
+    config = AutoConfig.from_pretrained(model_path, trust_remote_code=True)
+    architectures = tuple(getattr(config, "architectures", ()) or ())
+    is_conditional = any(
+        name.endswith("ForConditionalGeneration") for name in architectures)
+    if is_conditional:
+        try:
+            from transformers import AutoModelForImageTextToText
+        except ImportError as exc:
+            raise RuntimeError(
+                "The checkpoint declares a conditional-generation model, but "
+                "this Transformers build has no AutoModelForImageTextToText") from exc
+        factory = AutoModelForImageTextToText
+    else:
+        factory = AutoModelForCausalLM
+
+    with init_empty_weights(include_buffers=False):
+        model = factory.from_config(config, trust_remote_code=True)
+    if dtype != "auto":
+        model.to(dtype=getattr(torch, dtype) if isinstance(dtype, str) else dtype)
+    if hasattr(model.config, "use_cache"):
+        model.config.use_cache = False
+    model.eval()
+    logger.info(
+        "Meta model created: %s via %s", type(model).__name__, factory.__name__)
+    return model
+
+
 def find_linear_layers(model, exclude_patterns=None):
     """All Linear/quantized-Linear modules, excluding embeddings and the LM head."""
     if exclude_patterns is None:

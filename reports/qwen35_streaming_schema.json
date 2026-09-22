@@ -1,0 +1,1176 @@
+{
+  "model_path": "../../data/qwen36_gsq",
+  "transformers_version": "5.7.0",
+  "torch_version": "2.11.0+cpu",
+  "model_class": "Qwen3_5MoeForConditionalGeneration",
+  "adapter_family": "qwen3_5",
+  "layers_path": "model.language_model.layers",
+  "num_layers": 40,
+  "layer_types": {
+    "full_attention": 10,
+    "linear_attention": 30
+  },
+  "meta_parameter_count": 35107181936,
+  "resident_parameter_bytes": 0,
+  "resident_buffer_bytes": 164,
+  "process_peak_rss_bytes": 357605376,
+  "streaming_schema_compatible": false,
+  "prefixes": [
+    {
+      "prefix": "model.language_model.embed_tokens",
+      "expected_count": 1,
+      "checkpoint_count": 1,
+      "missing_count": 0,
+      "unexpected_count": 0,
+      "missing_preview": [],
+      "unexpected_preview": [],
+      "compatible": true
+    },
+    {
+      "prefix": "model.language_model.layers.0",
+      "expected_count": 18,
+      "checkpoint_count": 2332,
+      "missing_count": 8,
+      "unexpected_count": 2322,
+      "missing_preview": [
+        "model.language_model.layers.0.linear_attn.in_proj_qkv.weight",
+        "model.language_model.layers.0.linear_attn.in_proj_z.weight",
+        "model.language_model.layers.0.linear_attn.out_proj.weight",
+        "model.language_model.layers.0.mlp.experts.down_proj",
+        "model.language_model.layers.0.mlp.experts.gate_up_proj",
+        "model.language_model.layers.0.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.0.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.0.mlp.shared_expert.up_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.0.linear_attn.in_proj_qkv.weight_packed",
+        "model.language_model.layers.0.linear_attn.in_proj_qkv.weight_scale",
+        "model.language_model.layers.0.linear_attn.in_proj_qkv.weight_shape",
+        "model.language_model.layers.0.linear_attn.in_proj_z.weight_packed",
+        "model.language_model.layers.0.linear_attn.in_proj_z.weight_scale",
+        "model.language_model.layers.0.linear_attn.in_proj_z.weight_shape",
+        "model.language_model.layers.0.linear_attn.out_proj.weight_packed",
+        "model.language_model.layers.0.linear_attn.out_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.1",
+      "expected_count": 18,
+      "checkpoint_count": 2332,
+      "missing_count": 8,
+      "unexpected_count": 2322,
+      "missing_preview": [
+        "model.language_model.layers.1.linear_attn.in_proj_qkv.weight",
+        "model.language_model.layers.1.linear_attn.in_proj_z.weight",
+        "model.language_model.layers.1.linear_attn.out_proj.weight",
+        "model.language_model.layers.1.mlp.experts.down_proj",
+        "model.language_model.layers.1.mlp.experts.gate_up_proj",
+        "model.language_model.layers.1.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.1.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.1.mlp.shared_expert.up_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.1.linear_attn.in_proj_qkv.weight_packed",
+        "model.language_model.layers.1.linear_attn.in_proj_qkv.weight_scale",
+        "model.language_model.layers.1.linear_attn.in_proj_qkv.weight_shape",
+        "model.language_model.layers.1.linear_attn.in_proj_z.weight_packed",
+        "model.language_model.layers.1.linear_attn.in_proj_z.weight_scale",
+        "model.language_model.layers.1.linear_attn.in_proj_z.weight_shape",
+        "model.language_model.layers.1.linear_attn.out_proj.weight_packed",
+        "model.language_model.layers.1.linear_attn.out_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.2",
+      "expected_count": 18,
+      "checkpoint_count": 2332,
+      "missing_count": 8,
+      "unexpected_count": 2322,
+      "missing_preview": [
+        "model.language_model.layers.2.linear_attn.in_proj_qkv.weight",
+        "model.language_model.layers.2.linear_attn.in_proj_z.weight",
+        "model.language_model.layers.2.linear_attn.out_proj.weight",
+        "model.language_model.layers.2.mlp.experts.down_proj",
+        "model.language_model.layers.2.mlp.experts.gate_up_proj",
+        "model.language_model.layers.2.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.2.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.2.mlp.shared_expert.up_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.2.linear_attn.in_proj_qkv.weight_packed",
+        "model.language_model.layers.2.linear_attn.in_proj_qkv.weight_scale",
+        "model.language_model.layers.2.linear_attn.in_proj_qkv.weight_shape",
+        "model.language_model.layers.2.linear_attn.in_proj_z.weight_packed",
+        "model.language_model.layers.2.linear_attn.in_proj_z.weight_scale",
+        "model.language_model.layers.2.linear_attn.in_proj_z.weight_shape",
+        "model.language_model.layers.2.linear_attn.out_proj.weight_packed",
+        "model.language_model.layers.2.linear_attn.out_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.3",
+      "expected_count": 15,
+      "checkpoint_count": 2331,
+      "missing_count": 9,
+      "unexpected_count": 2325,
+      "missing_preview": [
+        "model.language_model.layers.3.mlp.experts.down_proj",
+        "model.language_model.layers.3.mlp.experts.gate_up_proj",
+        "model.language_model.layers.3.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.3.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.3.mlp.shared_expert.up_proj.weight",
+        "model.language_model.layers.3.self_attn.k_proj.weight",
+        "model.language_model.layers.3.self_attn.o_proj.weight",
+        "model.language_model.layers.3.self_attn.q_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.3.mlp.experts.0.down_proj.weight_packed",
+        "model.language_model.layers.3.mlp.experts.0.down_proj.weight_scale",
+        "model.language_model.layers.3.mlp.experts.0.down_proj.weight_shape",
+        "model.language_model.layers.3.mlp.experts.0.gate_proj.weight_packed",
+        "model.language_model.layers.3.mlp.experts.0.gate_proj.weight_scale",
+        "model.language_model.layers.3.mlp.experts.0.gate_proj.weight_shape",
+        "model.language_model.layers.3.mlp.experts.0.up_proj.weight_packed",
+        "model.language_model.layers.3.mlp.experts.0.up_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.4",
+      "expected_count": 18,
+      "checkpoint_count": 2332,
+      "missing_count": 8,
+      "unexpected_count": 2322,
+      "missing_preview": [
+        "model.language_model.layers.4.linear_attn.in_proj_qkv.weight",
+        "model.language_model.layers.4.linear_attn.in_proj_z.weight",
+        "model.language_model.layers.4.linear_attn.out_proj.weight",
+        "model.language_model.layers.4.mlp.experts.down_proj",
+        "model.language_model.layers.4.mlp.experts.gate_up_proj",
+        "model.language_model.layers.4.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.4.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.4.mlp.shared_expert.up_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.4.linear_attn.in_proj_qkv.weight_packed",
+        "model.language_model.layers.4.linear_attn.in_proj_qkv.weight_scale",
+        "model.language_model.layers.4.linear_attn.in_proj_qkv.weight_shape",
+        "model.language_model.layers.4.linear_attn.in_proj_z.weight_packed",
+        "model.language_model.layers.4.linear_attn.in_proj_z.weight_scale",
+        "model.language_model.layers.4.linear_attn.in_proj_z.weight_shape",
+        "model.language_model.layers.4.linear_attn.out_proj.weight_packed",
+        "model.language_model.layers.4.linear_attn.out_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.5",
+      "expected_count": 18,
+      "checkpoint_count": 2332,
+      "missing_count": 8,
+      "unexpected_count": 2322,
+      "missing_preview": [
+        "model.language_model.layers.5.linear_attn.in_proj_qkv.weight",
+        "model.language_model.layers.5.linear_attn.in_proj_z.weight",
+        "model.language_model.layers.5.linear_attn.out_proj.weight",
+        "model.language_model.layers.5.mlp.experts.down_proj",
+        "model.language_model.layers.5.mlp.experts.gate_up_proj",
+        "model.language_model.layers.5.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.5.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.5.mlp.shared_expert.up_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.5.linear_attn.in_proj_qkv.weight_packed",
+        "model.language_model.layers.5.linear_attn.in_proj_qkv.weight_scale",
+        "model.language_model.layers.5.linear_attn.in_proj_qkv.weight_shape",
+        "model.language_model.layers.5.linear_attn.in_proj_z.weight_packed",
+        "model.language_model.layers.5.linear_attn.in_proj_z.weight_scale",
+        "model.language_model.layers.5.linear_attn.in_proj_z.weight_shape",
+        "model.language_model.layers.5.linear_attn.out_proj.weight_packed",
+        "model.language_model.layers.5.linear_attn.out_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.6",
+      "expected_count": 18,
+      "checkpoint_count": 2332,
+      "missing_count": 8,
+      "unexpected_count": 2322,
+      "missing_preview": [
+        "model.language_model.layers.6.linear_attn.in_proj_qkv.weight",
+        "model.language_model.layers.6.linear_attn.in_proj_z.weight",
+        "model.language_model.layers.6.linear_attn.out_proj.weight",
+        "model.language_model.layers.6.mlp.experts.down_proj",
+        "model.language_model.layers.6.mlp.experts.gate_up_proj",
+        "model.language_model.layers.6.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.6.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.6.mlp.shared_expert.up_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.6.linear_attn.in_proj_qkv.weight_packed",
+        "model.language_model.layers.6.linear_attn.in_proj_qkv.weight_scale",
+        "model.language_model.layers.6.linear_attn.in_proj_qkv.weight_shape",
+        "model.language_model.layers.6.linear_attn.in_proj_z.weight_packed",
+        "model.language_model.layers.6.linear_attn.in_proj_z.weight_scale",
+        "model.language_model.layers.6.linear_attn.in_proj_z.weight_shape",
+        "model.language_model.layers.6.linear_attn.out_proj.weight_packed",
+        "model.language_model.layers.6.linear_attn.out_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.7",
+      "expected_count": 15,
+      "checkpoint_count": 2331,
+      "missing_count": 9,
+      "unexpected_count": 2325,
+      "missing_preview": [
+        "model.language_model.layers.7.mlp.experts.down_proj",
+        "model.language_model.layers.7.mlp.experts.gate_up_proj",
+        "model.language_model.layers.7.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.7.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.7.mlp.shared_expert.up_proj.weight",
+        "model.language_model.layers.7.self_attn.k_proj.weight",
+        "model.language_model.layers.7.self_attn.o_proj.weight",
+        "model.language_model.layers.7.self_attn.q_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.7.mlp.experts.0.down_proj.weight_packed",
+        "model.language_model.layers.7.mlp.experts.0.down_proj.weight_scale",
+        "model.language_model.layers.7.mlp.experts.0.down_proj.weight_shape",
+        "model.language_model.layers.7.mlp.experts.0.gate_proj.weight_packed",
+        "model.language_model.layers.7.mlp.experts.0.gate_proj.weight_scale",
+        "model.language_model.layers.7.mlp.experts.0.gate_proj.weight_shape",
+        "model.language_model.layers.7.mlp.experts.0.up_proj.weight_packed",
+        "model.language_model.layers.7.mlp.experts.0.up_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.8",
+      "expected_count": 18,
+      "checkpoint_count": 2332,
+      "missing_count": 8,
+      "unexpected_count": 2322,
+      "missing_preview": [
+        "model.language_model.layers.8.linear_attn.in_proj_qkv.weight",
+        "model.language_model.layers.8.linear_attn.in_proj_z.weight",
+        "model.language_model.layers.8.linear_attn.out_proj.weight",
+        "model.language_model.layers.8.mlp.experts.down_proj",
+        "model.language_model.layers.8.mlp.experts.gate_up_proj",
+        "model.language_model.layers.8.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.8.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.8.mlp.shared_expert.up_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.8.linear_attn.in_proj_qkv.weight_packed",
+        "model.language_model.layers.8.linear_attn.in_proj_qkv.weight_scale",
+        "model.language_model.layers.8.linear_attn.in_proj_qkv.weight_shape",
+        "model.language_model.layers.8.linear_attn.in_proj_z.weight_packed",
+        "model.language_model.layers.8.linear_attn.in_proj_z.weight_scale",
+        "model.language_model.layers.8.linear_attn.in_proj_z.weight_shape",
+        "model.language_model.layers.8.linear_attn.out_proj.weight_packed",
+        "model.language_model.layers.8.linear_attn.out_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.9",
+      "expected_count": 18,
+      "checkpoint_count": 2332,
+      "missing_count": 8,
+      "unexpected_count": 2322,
+      "missing_preview": [
+        "model.language_model.layers.9.linear_attn.in_proj_qkv.weight",
+        "model.language_model.layers.9.linear_attn.in_proj_z.weight",
+        "model.language_model.layers.9.linear_attn.out_proj.weight",
+        "model.language_model.layers.9.mlp.experts.down_proj",
+        "model.language_model.layers.9.mlp.experts.gate_up_proj",
+        "model.language_model.layers.9.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.9.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.9.mlp.shared_expert.up_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.9.linear_attn.in_proj_qkv.weight_packed",
+        "model.language_model.layers.9.linear_attn.in_proj_qkv.weight_scale",
+        "model.language_model.layers.9.linear_attn.in_proj_qkv.weight_shape",
+        "model.language_model.layers.9.linear_attn.in_proj_z.weight_packed",
+        "model.language_model.layers.9.linear_attn.in_proj_z.weight_scale",
+        "model.language_model.layers.9.linear_attn.in_proj_z.weight_shape",
+        "model.language_model.layers.9.linear_attn.out_proj.weight_packed",
+        "model.language_model.layers.9.linear_attn.out_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.10",
+      "expected_count": 18,
+      "checkpoint_count": 2332,
+      "missing_count": 8,
+      "unexpected_count": 2322,
+      "missing_preview": [
+        "model.language_model.layers.10.linear_attn.in_proj_qkv.weight",
+        "model.language_model.layers.10.linear_attn.in_proj_z.weight",
+        "model.language_model.layers.10.linear_attn.out_proj.weight",
+        "model.language_model.layers.10.mlp.experts.down_proj",
+        "model.language_model.layers.10.mlp.experts.gate_up_proj",
+        "model.language_model.layers.10.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.10.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.10.mlp.shared_expert.up_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.10.linear_attn.in_proj_qkv.weight_packed",
+        "model.language_model.layers.10.linear_attn.in_proj_qkv.weight_scale",
+        "model.language_model.layers.10.linear_attn.in_proj_qkv.weight_shape",
+        "model.language_model.layers.10.linear_attn.in_proj_z.weight_packed",
+        "model.language_model.layers.10.linear_attn.in_proj_z.weight_scale",
+        "model.language_model.layers.10.linear_attn.in_proj_z.weight_shape",
+        "model.language_model.layers.10.linear_attn.out_proj.weight_packed",
+        "model.language_model.layers.10.linear_attn.out_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.11",
+      "expected_count": 15,
+      "checkpoint_count": 2331,
+      "missing_count": 9,
+      "unexpected_count": 2325,
+      "missing_preview": [
+        "model.language_model.layers.11.mlp.experts.down_proj",
+        "model.language_model.layers.11.mlp.experts.gate_up_proj",
+        "model.language_model.layers.11.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.11.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.11.mlp.shared_expert.up_proj.weight",
+        "model.language_model.layers.11.self_attn.k_proj.weight",
+        "model.language_model.layers.11.self_attn.o_proj.weight",
+        "model.language_model.layers.11.self_attn.q_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.11.mlp.experts.0.down_proj.weight_packed",
+        "model.language_model.layers.11.mlp.experts.0.down_proj.weight_scale",
+        "model.language_model.layers.11.mlp.experts.0.down_proj.weight_shape",
+        "model.language_model.layers.11.mlp.experts.0.gate_proj.weight_packed",
+        "model.language_model.layers.11.mlp.experts.0.gate_proj.weight_scale",
+        "model.language_model.layers.11.mlp.experts.0.gate_proj.weight_shape",
+        "model.language_model.layers.11.mlp.experts.0.up_proj.weight_packed",
+        "model.language_model.layers.11.mlp.experts.0.up_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.12",
+      "expected_count": 18,
+      "checkpoint_count": 2332,
+      "missing_count": 8,
+      "unexpected_count": 2322,
+      "missing_preview": [
+        "model.language_model.layers.12.linear_attn.in_proj_qkv.weight",
+        "model.language_model.layers.12.linear_attn.in_proj_z.weight",
+        "model.language_model.layers.12.linear_attn.out_proj.weight",
+        "model.language_model.layers.12.mlp.experts.down_proj",
+        "model.language_model.layers.12.mlp.experts.gate_up_proj",
+        "model.language_model.layers.12.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.12.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.12.mlp.shared_expert.up_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.12.linear_attn.in_proj_qkv.weight_packed",
+        "model.language_model.layers.12.linear_attn.in_proj_qkv.weight_scale",
+        "model.language_model.layers.12.linear_attn.in_proj_qkv.weight_shape",
+        "model.language_model.layers.12.linear_attn.in_proj_z.weight_packed",
+        "model.language_model.layers.12.linear_attn.in_proj_z.weight_scale",
+        "model.language_model.layers.12.linear_attn.in_proj_z.weight_shape",
+        "model.language_model.layers.12.linear_attn.out_proj.weight_packed",
+        "model.language_model.layers.12.linear_attn.out_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.13",
+      "expected_count": 18,
+      "checkpoint_count": 2332,
+      "missing_count": 8,
+      "unexpected_count": 2322,
+      "missing_preview": [
+        "model.language_model.layers.13.linear_attn.in_proj_qkv.weight",
+        "model.language_model.layers.13.linear_attn.in_proj_z.weight",
+        "model.language_model.layers.13.linear_attn.out_proj.weight",
+        "model.language_model.layers.13.mlp.experts.down_proj",
+        "model.language_model.layers.13.mlp.experts.gate_up_proj",
+        "model.language_model.layers.13.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.13.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.13.mlp.shared_expert.up_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.13.linear_attn.in_proj_qkv.weight_packed",
+        "model.language_model.layers.13.linear_attn.in_proj_qkv.weight_scale",
+        "model.language_model.layers.13.linear_attn.in_proj_qkv.weight_shape",
+        "model.language_model.layers.13.linear_attn.in_proj_z.weight_packed",
+        "model.language_model.layers.13.linear_attn.in_proj_z.weight_scale",
+        "model.language_model.layers.13.linear_attn.in_proj_z.weight_shape",
+        "model.language_model.layers.13.linear_attn.out_proj.weight_packed",
+        "model.language_model.layers.13.linear_attn.out_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.14",
+      "expected_count": 18,
+      "checkpoint_count": 2332,
+      "missing_count": 8,
+      "unexpected_count": 2322,
+      "missing_preview": [
+        "model.language_model.layers.14.linear_attn.in_proj_qkv.weight",
+        "model.language_model.layers.14.linear_attn.in_proj_z.weight",
+        "model.language_model.layers.14.linear_attn.out_proj.weight",
+        "model.language_model.layers.14.mlp.experts.down_proj",
+        "model.language_model.layers.14.mlp.experts.gate_up_proj",
+        "model.language_model.layers.14.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.14.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.14.mlp.shared_expert.up_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.14.linear_attn.in_proj_qkv.weight_packed",
+        "model.language_model.layers.14.linear_attn.in_proj_qkv.weight_scale",
+        "model.language_model.layers.14.linear_attn.in_proj_qkv.weight_shape",
+        "model.language_model.layers.14.linear_attn.in_proj_z.weight_packed",
+        "model.language_model.layers.14.linear_attn.in_proj_z.weight_scale",
+        "model.language_model.layers.14.linear_attn.in_proj_z.weight_shape",
+        "model.language_model.layers.14.linear_attn.out_proj.weight_packed",
+        "model.language_model.layers.14.linear_attn.out_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.15",
+      "expected_count": 15,
+      "checkpoint_count": 2331,
+      "missing_count": 9,
+      "unexpected_count": 2325,
+      "missing_preview": [
+        "model.language_model.layers.15.mlp.experts.down_proj",
+        "model.language_model.layers.15.mlp.experts.gate_up_proj",
+        "model.language_model.layers.15.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.15.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.15.mlp.shared_expert.up_proj.weight",
+        "model.language_model.layers.15.self_attn.k_proj.weight",
+        "model.language_model.layers.15.self_attn.o_proj.weight",
+        "model.language_model.layers.15.self_attn.q_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.15.mlp.experts.0.down_proj.weight_packed",
+        "model.language_model.layers.15.mlp.experts.0.down_proj.weight_scale",
+        "model.language_model.layers.15.mlp.experts.0.down_proj.weight_shape",
+        "model.language_model.layers.15.mlp.experts.0.gate_proj.weight_packed",
+        "model.language_model.layers.15.mlp.experts.0.gate_proj.weight_scale",
+        "model.language_model.layers.15.mlp.experts.0.gate_proj.weight_shape",
+        "model.language_model.layers.15.mlp.experts.0.up_proj.weight_packed",
+        "model.language_model.layers.15.mlp.experts.0.up_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.16",
+      "expected_count": 18,
+      "checkpoint_count": 2332,
+      "missing_count": 8,
+      "unexpected_count": 2322,
+      "missing_preview": [
+        "model.language_model.layers.16.linear_attn.in_proj_qkv.weight",
+        "model.language_model.layers.16.linear_attn.in_proj_z.weight",
+        "model.language_model.layers.16.linear_attn.out_proj.weight",
+        "model.language_model.layers.16.mlp.experts.down_proj",
+        "model.language_model.layers.16.mlp.experts.gate_up_proj",
+        "model.language_model.layers.16.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.16.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.16.mlp.shared_expert.up_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.16.linear_attn.in_proj_qkv.weight_packed",
+        "model.language_model.layers.16.linear_attn.in_proj_qkv.weight_scale",
+        "model.language_model.layers.16.linear_attn.in_proj_qkv.weight_shape",
+        "model.language_model.layers.16.linear_attn.in_proj_z.weight_packed",
+        "model.language_model.layers.16.linear_attn.in_proj_z.weight_scale",
+        "model.language_model.layers.16.linear_attn.in_proj_z.weight_shape",
+        "model.language_model.layers.16.linear_attn.out_proj.weight_packed",
+        "model.language_model.layers.16.linear_attn.out_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.17",
+      "expected_count": 18,
+      "checkpoint_count": 2332,
+      "missing_count": 8,
+      "unexpected_count": 2322,
+      "missing_preview": [
+        "model.language_model.layers.17.linear_attn.in_proj_qkv.weight",
+        "model.language_model.layers.17.linear_attn.in_proj_z.weight",
+        "model.language_model.layers.17.linear_attn.out_proj.weight",
+        "model.language_model.layers.17.mlp.experts.down_proj",
+        "model.language_model.layers.17.mlp.experts.gate_up_proj",
+        "model.language_model.layers.17.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.17.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.17.mlp.shared_expert.up_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.17.linear_attn.in_proj_qkv.weight_packed",
+        "model.language_model.layers.17.linear_attn.in_proj_qkv.weight_scale",
+        "model.language_model.layers.17.linear_attn.in_proj_qkv.weight_shape",
+        "model.language_model.layers.17.linear_attn.in_proj_z.weight_packed",
+        "model.language_model.layers.17.linear_attn.in_proj_z.weight_scale",
+        "model.language_model.layers.17.linear_attn.in_proj_z.weight_shape",
+        "model.language_model.layers.17.linear_attn.out_proj.weight_packed",
+        "model.language_model.layers.17.linear_attn.out_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.18",
+      "expected_count": 18,
+      "checkpoint_count": 2332,
+      "missing_count": 8,
+      "unexpected_count": 2322,
+      "missing_preview": [
+        "model.language_model.layers.18.linear_attn.in_proj_qkv.weight",
+        "model.language_model.layers.18.linear_attn.in_proj_z.weight",
+        "model.language_model.layers.18.linear_attn.out_proj.weight",
+        "model.language_model.layers.18.mlp.experts.down_proj",
+        "model.language_model.layers.18.mlp.experts.gate_up_proj",
+        "model.language_model.layers.18.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.18.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.18.mlp.shared_expert.up_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.18.linear_attn.in_proj_qkv.weight_packed",
+        "model.language_model.layers.18.linear_attn.in_proj_qkv.weight_scale",
+        "model.language_model.layers.18.linear_attn.in_proj_qkv.weight_shape",
+        "model.language_model.layers.18.linear_attn.in_proj_z.weight_packed",
+        "model.language_model.layers.18.linear_attn.in_proj_z.weight_scale",
+        "model.language_model.layers.18.linear_attn.in_proj_z.weight_shape",
+        "model.language_model.layers.18.linear_attn.out_proj.weight_packed",
+        "model.language_model.layers.18.linear_attn.out_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.19",
+      "expected_count": 15,
+      "checkpoint_count": 2331,
+      "missing_count": 9,
+      "unexpected_count": 2325,
+      "missing_preview": [
+        "model.language_model.layers.19.mlp.experts.down_proj",
+        "model.language_model.layers.19.mlp.experts.gate_up_proj",
+        "model.language_model.layers.19.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.19.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.19.mlp.shared_expert.up_proj.weight",
+        "model.language_model.layers.19.self_attn.k_proj.weight",
+        "model.language_model.layers.19.self_attn.o_proj.weight",
+        "model.language_model.layers.19.self_attn.q_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.19.mlp.experts.0.down_proj.weight_packed",
+        "model.language_model.layers.19.mlp.experts.0.down_proj.weight_scale",
+        "model.language_model.layers.19.mlp.experts.0.down_proj.weight_shape",
+        "model.language_model.layers.19.mlp.experts.0.gate_proj.weight_packed",
+        "model.language_model.layers.19.mlp.experts.0.gate_proj.weight_scale",
+        "model.language_model.layers.19.mlp.experts.0.gate_proj.weight_shape",
+        "model.language_model.layers.19.mlp.experts.0.up_proj.weight_packed",
+        "model.language_model.layers.19.mlp.experts.0.up_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.20",
+      "expected_count": 18,
+      "checkpoint_count": 2332,
+      "missing_count": 8,
+      "unexpected_count": 2322,
+      "missing_preview": [
+        "model.language_model.layers.20.linear_attn.in_proj_qkv.weight",
+        "model.language_model.layers.20.linear_attn.in_proj_z.weight",
+        "model.language_model.layers.20.linear_attn.out_proj.weight",
+        "model.language_model.layers.20.mlp.experts.down_proj",
+        "model.language_model.layers.20.mlp.experts.gate_up_proj",
+        "model.language_model.layers.20.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.20.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.20.mlp.shared_expert.up_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.20.linear_attn.in_proj_qkv.weight_packed",
+        "model.language_model.layers.20.linear_attn.in_proj_qkv.weight_scale",
+        "model.language_model.layers.20.linear_attn.in_proj_qkv.weight_shape",
+        "model.language_model.layers.20.linear_attn.in_proj_z.weight_packed",
+        "model.language_model.layers.20.linear_attn.in_proj_z.weight_scale",
+        "model.language_model.layers.20.linear_attn.in_proj_z.weight_shape",
+        "model.language_model.layers.20.linear_attn.out_proj.weight_packed",
+        "model.language_model.layers.20.linear_attn.out_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.21",
+      "expected_count": 18,
+      "checkpoint_count": 2332,
+      "missing_count": 8,
+      "unexpected_count": 2322,
+      "missing_preview": [
+        "model.language_model.layers.21.linear_attn.in_proj_qkv.weight",
+        "model.language_model.layers.21.linear_attn.in_proj_z.weight",
+        "model.language_model.layers.21.linear_attn.out_proj.weight",
+        "model.language_model.layers.21.mlp.experts.down_proj",
+        "model.language_model.layers.21.mlp.experts.gate_up_proj",
+        "model.language_model.layers.21.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.21.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.21.mlp.shared_expert.up_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.21.linear_attn.in_proj_qkv.weight_packed",
+        "model.language_model.layers.21.linear_attn.in_proj_qkv.weight_scale",
+        "model.language_model.layers.21.linear_attn.in_proj_qkv.weight_shape",
+        "model.language_model.layers.21.linear_attn.in_proj_z.weight_packed",
+        "model.language_model.layers.21.linear_attn.in_proj_z.weight_scale",
+        "model.language_model.layers.21.linear_attn.in_proj_z.weight_shape",
+        "model.language_model.layers.21.linear_attn.out_proj.weight_packed",
+        "model.language_model.layers.21.linear_attn.out_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.22",
+      "expected_count": 18,
+      "checkpoint_count": 2332,
+      "missing_count": 8,
+      "unexpected_count": 2322,
+      "missing_preview": [
+        "model.language_model.layers.22.linear_attn.in_proj_qkv.weight",
+        "model.language_model.layers.22.linear_attn.in_proj_z.weight",
+        "model.language_model.layers.22.linear_attn.out_proj.weight",
+        "model.language_model.layers.22.mlp.experts.down_proj",
+        "model.language_model.layers.22.mlp.experts.gate_up_proj",
+        "model.language_model.layers.22.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.22.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.22.mlp.shared_expert.up_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.22.linear_attn.in_proj_qkv.weight_packed",
+        "model.language_model.layers.22.linear_attn.in_proj_qkv.weight_scale",
+        "model.language_model.layers.22.linear_attn.in_proj_qkv.weight_shape",
+        "model.language_model.layers.22.linear_attn.in_proj_z.weight_packed",
+        "model.language_model.layers.22.linear_attn.in_proj_z.weight_scale",
+        "model.language_model.layers.22.linear_attn.in_proj_z.weight_shape",
+        "model.language_model.layers.22.linear_attn.out_proj.weight_packed",
+        "model.language_model.layers.22.linear_attn.out_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.23",
+      "expected_count": 15,
+      "checkpoint_count": 2331,
+      "missing_count": 9,
+      "unexpected_count": 2325,
+      "missing_preview": [
+        "model.language_model.layers.23.mlp.experts.down_proj",
+        "model.language_model.layers.23.mlp.experts.gate_up_proj",
+        "model.language_model.layers.23.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.23.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.23.mlp.shared_expert.up_proj.weight",
+        "model.language_model.layers.23.self_attn.k_proj.weight",
+        "model.language_model.layers.23.self_attn.o_proj.weight",
+        "model.language_model.layers.23.self_attn.q_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.23.mlp.experts.0.down_proj.weight_packed",
+        "model.language_model.layers.23.mlp.experts.0.down_proj.weight_scale",
+        "model.language_model.layers.23.mlp.experts.0.down_proj.weight_shape",
+        "model.language_model.layers.23.mlp.experts.0.gate_proj.weight_packed",
+        "model.language_model.layers.23.mlp.experts.0.gate_proj.weight_scale",
+        "model.language_model.layers.23.mlp.experts.0.gate_proj.weight_shape",
+        "model.language_model.layers.23.mlp.experts.0.up_proj.weight_packed",
+        "model.language_model.layers.23.mlp.experts.0.up_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.24",
+      "expected_count": 18,
+      "checkpoint_count": 2332,
+      "missing_count": 8,
+      "unexpected_count": 2322,
+      "missing_preview": [
+        "model.language_model.layers.24.linear_attn.in_proj_qkv.weight",
+        "model.language_model.layers.24.linear_attn.in_proj_z.weight",
+        "model.language_model.layers.24.linear_attn.out_proj.weight",
+        "model.language_model.layers.24.mlp.experts.down_proj",
+        "model.language_model.layers.24.mlp.experts.gate_up_proj",
+        "model.language_model.layers.24.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.24.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.24.mlp.shared_expert.up_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.24.linear_attn.in_proj_qkv.weight_packed",
+        "model.language_model.layers.24.linear_attn.in_proj_qkv.weight_scale",
+        "model.language_model.layers.24.linear_attn.in_proj_qkv.weight_shape",
+        "model.language_model.layers.24.linear_attn.in_proj_z.weight_packed",
+        "model.language_model.layers.24.linear_attn.in_proj_z.weight_scale",
+        "model.language_model.layers.24.linear_attn.in_proj_z.weight_shape",
+        "model.language_model.layers.24.linear_attn.out_proj.weight_packed",
+        "model.language_model.layers.24.linear_attn.out_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.25",
+      "expected_count": 18,
+      "checkpoint_count": 2332,
+      "missing_count": 8,
+      "unexpected_count": 2322,
+      "missing_preview": [
+        "model.language_model.layers.25.linear_attn.in_proj_qkv.weight",
+        "model.language_model.layers.25.linear_attn.in_proj_z.weight",
+        "model.language_model.layers.25.linear_attn.out_proj.weight",
+        "model.language_model.layers.25.mlp.experts.down_proj",
+        "model.language_model.layers.25.mlp.experts.gate_up_proj",
+        "model.language_model.layers.25.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.25.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.25.mlp.shared_expert.up_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.25.linear_attn.in_proj_qkv.weight_packed",
+        "model.language_model.layers.25.linear_attn.in_proj_qkv.weight_scale",
+        "model.language_model.layers.25.linear_attn.in_proj_qkv.weight_shape",
+        "model.language_model.layers.25.linear_attn.in_proj_z.weight_packed",
+        "model.language_model.layers.25.linear_attn.in_proj_z.weight_scale",
+        "model.language_model.layers.25.linear_attn.in_proj_z.weight_shape",
+        "model.language_model.layers.25.linear_attn.out_proj.weight_packed",
+        "model.language_model.layers.25.linear_attn.out_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.26",
+      "expected_count": 18,
+      "checkpoint_count": 2332,
+      "missing_count": 8,
+      "unexpected_count": 2322,
+      "missing_preview": [
+        "model.language_model.layers.26.linear_attn.in_proj_qkv.weight",
+        "model.language_model.layers.26.linear_attn.in_proj_z.weight",
+        "model.language_model.layers.26.linear_attn.out_proj.weight",
+        "model.language_model.layers.26.mlp.experts.down_proj",
+        "model.language_model.layers.26.mlp.experts.gate_up_proj",
+        "model.language_model.layers.26.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.26.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.26.mlp.shared_expert.up_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.26.linear_attn.in_proj_qkv.weight_packed",
+        "model.language_model.layers.26.linear_attn.in_proj_qkv.weight_scale",
+        "model.language_model.layers.26.linear_attn.in_proj_qkv.weight_shape",
+        "model.language_model.layers.26.linear_attn.in_proj_z.weight_packed",
+        "model.language_model.layers.26.linear_attn.in_proj_z.weight_scale",
+        "model.language_model.layers.26.linear_attn.in_proj_z.weight_shape",
+        "model.language_model.layers.26.linear_attn.out_proj.weight_packed",
+        "model.language_model.layers.26.linear_attn.out_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.27",
+      "expected_count": 15,
+      "checkpoint_count": 2331,
+      "missing_count": 9,
+      "unexpected_count": 2325,
+      "missing_preview": [
+        "model.language_model.layers.27.mlp.experts.down_proj",
+        "model.language_model.layers.27.mlp.experts.gate_up_proj",
+        "model.language_model.layers.27.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.27.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.27.mlp.shared_expert.up_proj.weight",
+        "model.language_model.layers.27.self_attn.k_proj.weight",
+        "model.language_model.layers.27.self_attn.o_proj.weight",
+        "model.language_model.layers.27.self_attn.q_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.27.mlp.experts.0.down_proj.weight_packed",
+        "model.language_model.layers.27.mlp.experts.0.down_proj.weight_scale",
+        "model.language_model.layers.27.mlp.experts.0.down_proj.weight_shape",
+        "model.language_model.layers.27.mlp.experts.0.gate_proj.weight_packed",
+        "model.language_model.layers.27.mlp.experts.0.gate_proj.weight_scale",
+        "model.language_model.layers.27.mlp.experts.0.gate_proj.weight_shape",
+        "model.language_model.layers.27.mlp.experts.0.up_proj.weight_packed",
+        "model.language_model.layers.27.mlp.experts.0.up_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.28",
+      "expected_count": 18,
+      "checkpoint_count": 2332,
+      "missing_count": 8,
+      "unexpected_count": 2322,
+      "missing_preview": [
+        "model.language_model.layers.28.linear_attn.in_proj_qkv.weight",
+        "model.language_model.layers.28.linear_attn.in_proj_z.weight",
+        "model.language_model.layers.28.linear_attn.out_proj.weight",
+        "model.language_model.layers.28.mlp.experts.down_proj",
+        "model.language_model.layers.28.mlp.experts.gate_up_proj",
+        "model.language_model.layers.28.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.28.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.28.mlp.shared_expert.up_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.28.linear_attn.in_proj_qkv.weight_packed",
+        "model.language_model.layers.28.linear_attn.in_proj_qkv.weight_scale",
+        "model.language_model.layers.28.linear_attn.in_proj_qkv.weight_shape",
+        "model.language_model.layers.28.linear_attn.in_proj_z.weight_packed",
+        "model.language_model.layers.28.linear_attn.in_proj_z.weight_scale",
+        "model.language_model.layers.28.linear_attn.in_proj_z.weight_shape",
+        "model.language_model.layers.28.linear_attn.out_proj.weight_packed",
+        "model.language_model.layers.28.linear_attn.out_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.29",
+      "expected_count": 18,
+      "checkpoint_count": 2332,
+      "missing_count": 8,
+      "unexpected_count": 2322,
+      "missing_preview": [
+        "model.language_model.layers.29.linear_attn.in_proj_qkv.weight",
+        "model.language_model.layers.29.linear_attn.in_proj_z.weight",
+        "model.language_model.layers.29.linear_attn.out_proj.weight",
+        "model.language_model.layers.29.mlp.experts.down_proj",
+        "model.language_model.layers.29.mlp.experts.gate_up_proj",
+        "model.language_model.layers.29.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.29.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.29.mlp.shared_expert.up_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.29.linear_attn.in_proj_qkv.weight_packed",
+        "model.language_model.layers.29.linear_attn.in_proj_qkv.weight_scale",
+        "model.language_model.layers.29.linear_attn.in_proj_qkv.weight_shape",
+        "model.language_model.layers.29.linear_attn.in_proj_z.weight_packed",
+        "model.language_model.layers.29.linear_attn.in_proj_z.weight_scale",
+        "model.language_model.layers.29.linear_attn.in_proj_z.weight_shape",
+        "model.language_model.layers.29.linear_attn.out_proj.weight_packed",
+        "model.language_model.layers.29.linear_attn.out_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.30",
+      "expected_count": 18,
+      "checkpoint_count": 2332,
+      "missing_count": 8,
+      "unexpected_count": 2322,
+      "missing_preview": [
+        "model.language_model.layers.30.linear_attn.in_proj_qkv.weight",
+        "model.language_model.layers.30.linear_attn.in_proj_z.weight",
+        "model.language_model.layers.30.linear_attn.out_proj.weight",
+        "model.language_model.layers.30.mlp.experts.down_proj",
+        "model.language_model.layers.30.mlp.experts.gate_up_proj",
+        "model.language_model.layers.30.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.30.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.30.mlp.shared_expert.up_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.30.linear_attn.in_proj_qkv.weight_packed",
+        "model.language_model.layers.30.linear_attn.in_proj_qkv.weight_scale",
+        "model.language_model.layers.30.linear_attn.in_proj_qkv.weight_shape",
+        "model.language_model.layers.30.linear_attn.in_proj_z.weight_packed",
+        "model.language_model.layers.30.linear_attn.in_proj_z.weight_scale",
+        "model.language_model.layers.30.linear_attn.in_proj_z.weight_shape",
+        "model.language_model.layers.30.linear_attn.out_proj.weight_packed",
+        "model.language_model.layers.30.linear_attn.out_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.31",
+      "expected_count": 15,
+      "checkpoint_count": 2331,
+      "missing_count": 9,
+      "unexpected_count": 2325,
+      "missing_preview": [
+        "model.language_model.layers.31.mlp.experts.down_proj",
+        "model.language_model.layers.31.mlp.experts.gate_up_proj",
+        "model.language_model.layers.31.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.31.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.31.mlp.shared_expert.up_proj.weight",
+        "model.language_model.layers.31.self_attn.k_proj.weight",
+        "model.language_model.layers.31.self_attn.o_proj.weight",
+        "model.language_model.layers.31.self_attn.q_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.31.mlp.experts.0.down_proj.weight_packed",
+        "model.language_model.layers.31.mlp.experts.0.down_proj.weight_scale",
+        "model.language_model.layers.31.mlp.experts.0.down_proj.weight_shape",
+        "model.language_model.layers.31.mlp.experts.0.gate_proj.weight_packed",
+        "model.language_model.layers.31.mlp.experts.0.gate_proj.weight_scale",
+        "model.language_model.layers.31.mlp.experts.0.gate_proj.weight_shape",
+        "model.language_model.layers.31.mlp.experts.0.up_proj.weight_packed",
+        "model.language_model.layers.31.mlp.experts.0.up_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.32",
+      "expected_count": 18,
+      "checkpoint_count": 2332,
+      "missing_count": 8,
+      "unexpected_count": 2322,
+      "missing_preview": [
+        "model.language_model.layers.32.linear_attn.in_proj_qkv.weight",
+        "model.language_model.layers.32.linear_attn.in_proj_z.weight",
+        "model.language_model.layers.32.linear_attn.out_proj.weight",
+        "model.language_model.layers.32.mlp.experts.down_proj",
+        "model.language_model.layers.32.mlp.experts.gate_up_proj",
+        "model.language_model.layers.32.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.32.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.32.mlp.shared_expert.up_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.32.linear_attn.in_proj_qkv.weight_packed",
+        "model.language_model.layers.32.linear_attn.in_proj_qkv.weight_scale",
+        "model.language_model.layers.32.linear_attn.in_proj_qkv.weight_shape",
+        "model.language_model.layers.32.linear_attn.in_proj_z.weight_packed",
+        "model.language_model.layers.32.linear_attn.in_proj_z.weight_scale",
+        "model.language_model.layers.32.linear_attn.in_proj_z.weight_shape",
+        "model.language_model.layers.32.linear_attn.out_proj.weight_packed",
+        "model.language_model.layers.32.linear_attn.out_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.33",
+      "expected_count": 18,
+      "checkpoint_count": 2332,
+      "missing_count": 8,
+      "unexpected_count": 2322,
+      "missing_preview": [
+        "model.language_model.layers.33.linear_attn.in_proj_qkv.weight",
+        "model.language_model.layers.33.linear_attn.in_proj_z.weight",
+        "model.language_model.layers.33.linear_attn.out_proj.weight",
+        "model.language_model.layers.33.mlp.experts.down_proj",
+        "model.language_model.layers.33.mlp.experts.gate_up_proj",
+        "model.language_model.layers.33.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.33.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.33.mlp.shared_expert.up_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.33.linear_attn.in_proj_qkv.weight_packed",
+        "model.language_model.layers.33.linear_attn.in_proj_qkv.weight_scale",
+        "model.language_model.layers.33.linear_attn.in_proj_qkv.weight_shape",
+        "model.language_model.layers.33.linear_attn.in_proj_z.weight_packed",
+        "model.language_model.layers.33.linear_attn.in_proj_z.weight_scale",
+        "model.language_model.layers.33.linear_attn.in_proj_z.weight_shape",
+        "model.language_model.layers.33.linear_attn.out_proj.weight_packed",
+        "model.language_model.layers.33.linear_attn.out_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.34",
+      "expected_count": 18,
+      "checkpoint_count": 2332,
+      "missing_count": 8,
+      "unexpected_count": 2322,
+      "missing_preview": [
+        "model.language_model.layers.34.linear_attn.in_proj_qkv.weight",
+        "model.language_model.layers.34.linear_attn.in_proj_z.weight",
+        "model.language_model.layers.34.linear_attn.out_proj.weight",
+        "model.language_model.layers.34.mlp.experts.down_proj",
+        "model.language_model.layers.34.mlp.experts.gate_up_proj",
+        "model.language_model.layers.34.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.34.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.34.mlp.shared_expert.up_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.34.linear_attn.in_proj_qkv.weight_packed",
+        "model.language_model.layers.34.linear_attn.in_proj_qkv.weight_scale",
+        "model.language_model.layers.34.linear_attn.in_proj_qkv.weight_shape",
+        "model.language_model.layers.34.linear_attn.in_proj_z.weight_packed",
+        "model.language_model.layers.34.linear_attn.in_proj_z.weight_scale",
+        "model.language_model.layers.34.linear_attn.in_proj_z.weight_shape",
+        "model.language_model.layers.34.linear_attn.out_proj.weight_packed",
+        "model.language_model.layers.34.linear_attn.out_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.35",
+      "expected_count": 15,
+      "checkpoint_count": 2331,
+      "missing_count": 9,
+      "unexpected_count": 2325,
+      "missing_preview": [
+        "model.language_model.layers.35.mlp.experts.down_proj",
+        "model.language_model.layers.35.mlp.experts.gate_up_proj",
+        "model.language_model.layers.35.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.35.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.35.mlp.shared_expert.up_proj.weight",
+        "model.language_model.layers.35.self_attn.k_proj.weight",
+        "model.language_model.layers.35.self_attn.o_proj.weight",
+        "model.language_model.layers.35.self_attn.q_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.35.mlp.experts.0.down_proj.weight_packed",
+        "model.language_model.layers.35.mlp.experts.0.down_proj.weight_scale",
+        "model.language_model.layers.35.mlp.experts.0.down_proj.weight_shape",
+        "model.language_model.layers.35.mlp.experts.0.gate_proj.weight_packed",
+        "model.language_model.layers.35.mlp.experts.0.gate_proj.weight_scale",
+        "model.language_model.layers.35.mlp.experts.0.gate_proj.weight_shape",
+        "model.language_model.layers.35.mlp.experts.0.up_proj.weight_packed",
+        "model.language_model.layers.35.mlp.experts.0.up_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.36",
+      "expected_count": 18,
+      "checkpoint_count": 2332,
+      "missing_count": 8,
+      "unexpected_count": 2322,
+      "missing_preview": [
+        "model.language_model.layers.36.linear_attn.in_proj_qkv.weight",
+        "model.language_model.layers.36.linear_attn.in_proj_z.weight",
+        "model.language_model.layers.36.linear_attn.out_proj.weight",
+        "model.language_model.layers.36.mlp.experts.down_proj",
+        "model.language_model.layers.36.mlp.experts.gate_up_proj",
+        "model.language_model.layers.36.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.36.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.36.mlp.shared_expert.up_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.36.linear_attn.in_proj_qkv.weight_packed",
+        "model.language_model.layers.36.linear_attn.in_proj_qkv.weight_scale",
+        "model.language_model.layers.36.linear_attn.in_proj_qkv.weight_shape",
+        "model.language_model.layers.36.linear_attn.in_proj_z.weight_packed",
+        "model.language_model.layers.36.linear_attn.in_proj_z.weight_scale",
+        "model.language_model.layers.36.linear_attn.in_proj_z.weight_shape",
+        "model.language_model.layers.36.linear_attn.out_proj.weight_packed",
+        "model.language_model.layers.36.linear_attn.out_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.37",
+      "expected_count": 18,
+      "checkpoint_count": 2332,
+      "missing_count": 8,
+      "unexpected_count": 2322,
+      "missing_preview": [
+        "model.language_model.layers.37.linear_attn.in_proj_qkv.weight",
+        "model.language_model.layers.37.linear_attn.in_proj_z.weight",
+        "model.language_model.layers.37.linear_attn.out_proj.weight",
+        "model.language_model.layers.37.mlp.experts.down_proj",
+        "model.language_model.layers.37.mlp.experts.gate_up_proj",
+        "model.language_model.layers.37.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.37.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.37.mlp.shared_expert.up_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.37.linear_attn.in_proj_qkv.weight_packed",
+        "model.language_model.layers.37.linear_attn.in_proj_qkv.weight_scale",
+        "model.language_model.layers.37.linear_attn.in_proj_qkv.weight_shape",
+        "model.language_model.layers.37.linear_attn.in_proj_z.weight_packed",
+        "model.language_model.layers.37.linear_attn.in_proj_z.weight_scale",
+        "model.language_model.layers.37.linear_attn.in_proj_z.weight_shape",
+        "model.language_model.layers.37.linear_attn.out_proj.weight_packed",
+        "model.language_model.layers.37.linear_attn.out_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.38",
+      "expected_count": 18,
+      "checkpoint_count": 2332,
+      "missing_count": 8,
+      "unexpected_count": 2322,
+      "missing_preview": [
+        "model.language_model.layers.38.linear_attn.in_proj_qkv.weight",
+        "model.language_model.layers.38.linear_attn.in_proj_z.weight",
+        "model.language_model.layers.38.linear_attn.out_proj.weight",
+        "model.language_model.layers.38.mlp.experts.down_proj",
+        "model.language_model.layers.38.mlp.experts.gate_up_proj",
+        "model.language_model.layers.38.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.38.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.38.mlp.shared_expert.up_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.38.linear_attn.in_proj_qkv.weight_packed",
+        "model.language_model.layers.38.linear_attn.in_proj_qkv.weight_scale",
+        "model.language_model.layers.38.linear_attn.in_proj_qkv.weight_shape",
+        "model.language_model.layers.38.linear_attn.in_proj_z.weight_packed",
+        "model.language_model.layers.38.linear_attn.in_proj_z.weight_scale",
+        "model.language_model.layers.38.linear_attn.in_proj_z.weight_shape",
+        "model.language_model.layers.38.linear_attn.out_proj.weight_packed",
+        "model.language_model.layers.38.linear_attn.out_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.layers.39",
+      "expected_count": 15,
+      "checkpoint_count": 2331,
+      "missing_count": 9,
+      "unexpected_count": 2325,
+      "missing_preview": [
+        "model.language_model.layers.39.mlp.experts.down_proj",
+        "model.language_model.layers.39.mlp.experts.gate_up_proj",
+        "model.language_model.layers.39.mlp.shared_expert.down_proj.weight",
+        "model.language_model.layers.39.mlp.shared_expert.gate_proj.weight",
+        "model.language_model.layers.39.mlp.shared_expert.up_proj.weight",
+        "model.language_model.layers.39.self_attn.k_proj.weight",
+        "model.language_model.layers.39.self_attn.o_proj.weight",
+        "model.language_model.layers.39.self_attn.q_proj.weight"
+      ],
+      "unexpected_preview": [
+        "model.language_model.layers.39.mlp.experts.0.down_proj.weight_packed",
+        "model.language_model.layers.39.mlp.experts.0.down_proj.weight_scale",
+        "model.language_model.layers.39.mlp.experts.0.down_proj.weight_shape",
+        "model.language_model.layers.39.mlp.experts.0.gate_proj.weight_packed",
+        "model.language_model.layers.39.mlp.experts.0.gate_proj.weight_scale",
+        "model.language_model.layers.39.mlp.experts.0.gate_proj.weight_shape",
+        "model.language_model.layers.39.mlp.experts.0.up_proj.weight_packed",
+        "model.language_model.layers.39.mlp.experts.0.up_proj.weight_scale"
+      ],
+      "compatible": false
+    },
+    {
+      "prefix": "model.language_model.norm",
+      "expected_count": 1,
+      "checkpoint_count": 1,
+      "missing_count": 0,
+      "unexpected_count": 0,
+      "missing_preview": [],
+      "unexpected_preview": [],
+      "compatible": true
+    },
+    {
+      "prefix": "lm_head",
+      "expected_count": 1,
+      "checkpoint_count": 3,
+      "missing_count": 1,
+      "unexpected_count": 3,
+      "missing_preview": [
+        "lm_head.weight"
+      ],
+      "unexpected_preview": [
+        "lm_head.weight_packed",
+        "lm_head.weight_scale",
+        "lm_head.weight_shape"
+      ],
+      "compatible": false
+    }
+  ]
+}

@@ -6,6 +6,7 @@ from pathlib import Path as _Path
 sys.path.insert(0, str(_Path(__file__).resolve().parent / "src"))
 
 import argparse
+import dataclasses
 import hashlib
 import json
 import logging
@@ -17,7 +18,6 @@ import numpy as np
 import torch
 
 from common import cleanup_memory, get_input_device, get_layer_param_counts
-from data import load_calibration_data
 from metrics import (
     compute_baseline_topk,
     compute_objective,
@@ -28,7 +28,8 @@ from grouping import (
     build_moe_per_expert_groups,
     parse_group_spec,
 )
-from models import get_tokenizer, load_model
+from models import get_tokenizer, load_meta_model, load_model
+from checkpoint_stream import SafeTensorPrefixLoader
 from search.quant import (
     InterpolatedModel,
     evaluate_assignment,
@@ -39,6 +40,7 @@ from search.quant import (
     round_with_budget_dp,
 )
 from search.hard import HardCandidateModel, optimize_hard_spsa
+from search.streaming import StreamingHardCausalEvaluator
 from store import LoadMode, WeightStore
 from unfuse import unfuse_moe_experts
 
@@ -80,6 +82,14 @@ def build_parser() -> argparse.ArgumentParser:
                         help="hard-spsa streams one selected candidate per layer; "
                              "relaxed retains the released dense-delta method")
     parser.add_argument('--spsa-perturbation', type=float, default=0.1)
+    parser.add_argument(
+        '--stream-hard-eval', action='store_true', default=False,
+        help="Run hard-SPSA CE evaluations through a meta model that loads "
+             "one checkpoint block and one selected candidate at a time.")
+    parser.add_argument(
+        '--vocab-chunk-size', type=int, default=8192,
+        help="Vocabulary rows per exact CE normalization chunk in streamed "
+             "hard evaluation.")
 
     parser.add_argument('--calibration-data', type=str, default='fineweb_edu',
                         choices=['c4', 'wikitext2', 'fineweb_edu',
@@ -134,6 +144,7 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv=None) -> int:
     args = build_parser().parse_args(argv)
+    from data import load_calibration_data
 
     if args.bitwidths:
         bitwidths = parse_bitwidths(args.bitwidths)
@@ -144,6 +155,17 @@ def main(argv=None) -> int:
 
     if len(bitwidths) < 2:
         raise SystemExit("Need at least 2 distinct bitwidths")
+    if args.stream_hard_eval:
+        if args.search_mode != 'hard-spsa':
+            raise SystemExit("--stream-hard-eval requires --search-mode hard-spsa")
+        if args.objective != 'ce':
+            raise SystemExit(
+                "--stream-hard-eval currently implements the exact CE objective")
+        if args.gradient_checkpointing:
+            raise SystemExit(
+                "--stream-hard-eval is inference-only and does not use gradient checkpointing")
+        if args.vocab_chunk_size < 1:
+            raise SystemExit("--vocab-chunk-size must be positive")
 
     torch.manual_seed(args.seed)
     np.random.seed(args.seed)
@@ -163,8 +185,11 @@ def main(argv=None) -> int:
     group_hash = (hashlib.md5(args.layer_groups.encode()).hexdigest()[:8]
                   if args.layer_groups.strip() else "nogrp")
     bw_tag = "-".join(str(b) for b in bitwidths)
+    search_tag = (
+        "stream_hard_spsa" if args.stream_hard_eval
+        else "projected_gumbel")
     out_stem = (
-        f"projected_gumbel_{args.objective}_bw{bw_tag}"
+        f"{search_tag}_{args.objective}_bw{bw_tag}"
         f"_target{args.target_avg_bits}"
         f"_{args.calibration_data}_{args.calibration_samples}s"
         f"_grp{group_hash}"
@@ -199,19 +224,28 @@ def main(argv=None) -> int:
     else:
         max_memory = None
 
-    model = load_model(args.model, device_map=device_map, max_memory=max_memory,
-                       offload_folder=args.offload_folder)
+    checkpoint_loader = None
+    if args.stream_hard_eval:
+        model = load_meta_model(args.model)
+        checkpoint_loader = SafeTensorPrefixLoader(args.model)
+        logger.info(
+            "Using inference-only block streaming; dense checkpoint weights "
+            "remain in safetensors until their block is called")
+    else:
+        model = load_model(
+            args.model, device_map=device_map, max_memory=max_memory,
+            offload_folder=args.offload_folder)
 
-    try:
-        replaced = unfuse_moe_experts(model)
-        if replaced:
-            logger.info(f"Unfused {len(replaced)} MoE expert modules")
-    except Exception as e:
-        logger.warning(f"Could not unfuse experts: {e}")
+        try:
+            replaced = unfuse_moe_experts(model)
+            if replaced:
+                logger.info(f"Unfused {len(replaced)} MoE expert modules")
+        except Exception as e:
+            logger.warning(f"Could not unfuse experts: {e}")
 
     tokenizer = get_tokenizer(args.model)
 
-    if args.gradient_checkpointing:
+    if args.gradient_checkpointing and not args.stream_hard_eval:
         model.gradient_checkpointing_enable(
             gradient_checkpointing_kwargs={"use_reentrant": False}
         )
@@ -236,7 +270,6 @@ def main(argv=None) -> int:
     weight_store = WeightStore(str(layer_dir), mode=ws_mode, cache=ws_cache).load()
 
     layer_names = weight_store.get_layer_names()
-    param_counts = get_layer_param_counts(model, layer_names)
     if args.moe_per_expert:
         layer_groups = build_moe_per_expert_groups(layer_names, group_patterns)
     else:
@@ -251,30 +284,47 @@ def main(argv=None) -> int:
                 logger.error(f"Layer {name} missing bitwidth {bw}. Available: {available}")
                 return 1
 
+    if args.stream_hard_eval:
+        if ws_cache:
+            raise ValueError(
+                "--stream-hard-eval requires --weightstore-cache off")
+        positive_choices = [bits for bits in bitwidths if bits > 0]
+        if not positive_choices:
+            raise ValueError("At least one nonzero candidate bitwidth is required")
+        shape_choice = positive_choices[0]
+        param_counts = {
+            name: weight_store.get_layer_numel(name, shape_choice)
+            for name in layer_names
+        }
+    else:
+        param_counts = get_layer_param_counts(model, layer_names)
+
     logger.info(f"Layers: {len(layer_names)}, Groups: {len(layer_groups)}")
     logger.info(f"Bitwidths: {bitwidths}, Target: {args.target_avg_bits}")
 
-    baseline_path = (
-        layer_dir
-        / f"baseline_topk{args.top_k}_{args.calibration_data}"
-          f"_{args.calibration_samples}x{args.calibration_seq_length}.pt"
-    )
-    if baseline_path.exists():
-        baseline_data = torch.load(str(baseline_path))
-        baseline_topk_vals = baseline_data['topk_vals']
-        baseline_topk_idx = baseline_data['topk_idx']
-    else:
-        baseline_topk_vals, baseline_topk_idx = compute_baseline_topk(
-            model, calibration_data, args.batch_size, args.top_k,
-            masks=calibration_masks
+    baseline_topk_vals = baseline_topk_idx = None
+    if not args.stream_hard_eval:
+        baseline_path = (
+            layer_dir
+            / f"baseline_topk{args.top_k}_{args.calibration_data}"
+              f"_{args.calibration_samples}x{args.calibration_seq_length}.pt"
         )
-        torch.save(
-            {'topk_vals': baseline_topk_vals, 'topk_idx': baseline_topk_idx},
-            str(baseline_path),
-        )
+        if baseline_path.exists():
+            baseline_data = torch.load(str(baseline_path))
+            baseline_topk_vals = baseline_data['topk_vals']
+            baseline_topk_idx = baseline_data['topk_idx']
+        else:
+            baseline_topk_vals, baseline_topk_idx = compute_baseline_topk(
+                model, calibration_data, args.batch_size, args.top_k,
+                masks=calibration_masks
+            )
+            torch.save(
+                {'topk_vals': baseline_topk_vals, 'topk_idx': baseline_topk_idx},
+                str(baseline_path),
+            )
 
     ref_log_probs = None
-    if args.objective == 'kl':
+    if args.objective == 'kl' and not args.stream_hard_eval:
         model_slug = args.model.replace('/', '_').replace('-', '_')
         ref_lp_path = (
             layer_dir
@@ -303,15 +353,29 @@ def main(argv=None) -> int:
             raise ValueError(
                 "hard-spsa currently requires equal-size groups; use "
                 "--moe-per-expert and search routed experts separately")
-        runtime = HardCandidateModel(
-            model, weight_store, layer_groups, bitwidths)
-        input_device = get_input_device(runtime.model)
+        if args.stream_hard_eval:
+            stream_device = torch.device(
+                "cuda:0" if torch.cuda.is_available() else "cpu")
+            runtime = StreamingHardCausalEvaluator(
+                model,
+                checkpoint_loader,
+                weight_store,
+                layer_groups,
+                bitwidths,
+                device=stream_device,
+                vocab_chunk_size=args.vocab_chunk_size,
+            )
+            input_device = torch.device("cpu")
+        else:
+            runtime = HardCandidateModel(
+                model, weight_store, layer_groups, bitwidths)
+            input_device = get_input_device(runtime.model)
         batch_starts = list(range(0, calibration_data.size(0), args.batch_size))
         evaluation_count = 0
+        stream_memory = None
 
         def evaluate_hard(group_assignment):
-            nonlocal evaluation_count
-            runtime.apply(group_assignment)
+            nonlocal evaluation_count, stream_memory
             # SPSA calls plus/minus consecutively. Reusing a batch for each pair
             # removes calibration-sampling noise from the finite difference.
             pair_index = evaluation_count // 2
@@ -324,6 +388,22 @@ def main(argv=None) -> int:
             if ref_log_probs is not None:
                 ref_lp = ref_log_probs[min(
                     start // args.batch_size, len(ref_log_probs) - 1)]
+            if args.stream_hard_eval:
+                result = runtime.evaluate(
+                    batch,
+                    group_assignment,
+                    loss_mask=batch_masks,
+                )
+                current = dataclasses.asdict(result.memory)
+                if stream_memory is None:
+                    stream_memory = current
+                else:
+                    stream_memory = {
+                        key: max(stream_memory[key], value)
+                        for key, value in current.items()
+                    }
+                return result.loss
+            runtime.apply(group_assignment)
             with torch.no_grad():
                 return compute_objective(
                     runtime.model, batch, args.objective, ref_lp, batch_masks,
@@ -409,23 +489,59 @@ def main(argv=None) -> int:
         logger.info(f"  {bw}-bit: {bw_counts[bw]} layers")
     logger.info(f"Actual avg bits: {actual_avg_bits:.3f} (target: {args.target_avg_bits})")
 
-    del model
-    cleanup_memory()
-    model = load_model(
-        args.model, device_map=device_map, max_memory=max_memory,
-        offload_folder=args.offload_folder)
-    try:
-        replaced = unfuse_moe_experts(model)
-        if replaced:
-            logger.info(f"Unfused {len(replaced)} MoE expert modules for evaluation")
-    except Exception as e:
-        logger.warning(f"Could not unfuse experts for evaluation: {e}")
+    if args.stream_hard_eval:
+        total_loss = 0.0
+        total_tokens = 0
+        for start in range(0, calibration_data.size(0), args.batch_size):
+            result = runtime.evaluate(
+                calibration_data[start:start + args.batch_size],
+                group_assignment,
+                loss_mask=(
+                    calibration_masks[start:start + args.batch_size]
+                    if calibration_masks is not None else None),
+            )
+            total_loss += result.loss * result.token_count
+            total_tokens += result.token_count
+            current = dataclasses.asdict(result.memory)
+            stream_memory = {
+                key: max(stream_memory[key], value)
+                for key, value in current.items()
+            }
+        metrics = {
+            'nll': total_loss / total_tokens,
+            'kl': None,
+        }
+        logger.info(
+            "Streamed peak: block %.3f GiB, candidate %.3f GiB, "
+            "CUDA allocated %.3f GiB, CUDA reserved %.3f GiB, RSS %.3f GiB; "
+            "logical checkpoint read %.3f GiB/eval, candidate files %.3f GiB/eval",
+            stream_memory['max_block_bytes'] / 2**30,
+            stream_memory['max_candidate_bytes'] / 2**30,
+            stream_memory['cuda_max_allocated'] / 2**30,
+            stream_memory['cuda_max_reserved'] / 2**30,
+            stream_memory['process_peak_rss'] / 2**30,
+            stream_memory['checkpoint_tensor_bytes_read'] / 2**30,
+            stream_memory['candidate_storage_bytes_read'] / 2**30,
+        )
+    else:
+        del model
+        cleanup_memory()
+        model = load_model(
+            args.model, device_map=device_map, max_memory=max_memory,
+            offload_folder=args.offload_folder)
+        try:
+            replaced = unfuse_moe_experts(model)
+            if replaced:
+                logger.info(
+                    f"Unfused {len(replaced)} MoE expert modules for evaluation")
+        except Exception as e:
+            logger.warning(f"Could not unfuse experts for evaluation: {e}")
 
-    metrics = evaluate_assignment(
-        model, weight_store, assignment,
-        calibration_data, baseline_topk_vals, baseline_topk_idx,
-        args.batch_size, args.top_k, masks=calibration_masks,
-    )
+        metrics = evaluate_assignment(
+            model, weight_store, assignment,
+            calibration_data, baseline_topk_vals, baseline_topk_idx,
+            args.batch_size, args.top_k, masks=calibration_masks,
+        )
 
     total_bits = sum(
         get_actual_bitwidth(assignment[n], bitwidth_map) * param_counts.get(n, 0)
@@ -446,7 +562,10 @@ def main(argv=None) -> int:
         f.write(f"# Average bitwidth: {actual_avg_bits:.4f}\n")
         f.write(f"# Total params: {total_params}\n")
         f.write(f"# Total bits: {total_bits:.0f}\n")
-        f.write(f"# Final KL: {metrics['kl']:.6f}\n")
+        if metrics['kl'] is None:
+            f.write("# Final KL: not computed by streamed CE evaluation\n")
+        else:
+            f.write(f"# Final KL: {metrics['kl']:.6f}\n")
         f.write(f"# Final NLL: {metrics['nll']:.4f}\n")
         f.write(f"# Optimization time: {t_elapsed:.1f}s\n")
         f.write(f"#\n")
@@ -483,6 +602,8 @@ def main(argv=None) -> int:
         }
         if bitwidth_map:
             output['bitwidth_map'] = {str(k): v for k, v in bitwidth_map.items()}
+        if args.stream_hard_eval:
+            output['stream_memory_bytes'] = stream_memory
         with open(out_json_path, 'w') as f:
             json.dump(output, f, indent=2)
         logger.info(f"JSON saved to {out_json_path}")
@@ -494,7 +615,8 @@ def main(argv=None) -> int:
     logger.info(f"Target bits: {args.target_avg_bits}")
     logger.info(f"Actual bits: {actual_avg_bits:.3f}")
     logger.info(f"NLL:         {metrics['nll']:.4f}")
-    logger.info(f"KL:          {metrics['kl']:.6f}")
+    if metrics['kl'] is not None:
+        logger.info(f"KL:          {metrics['kl']:.6f}")
     logger.info(f"Time:        {t_elapsed:.1f}s")
     logger.info(f"Output:      {out_path}")
     return 0

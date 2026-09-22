@@ -26,24 +26,27 @@ class PackedWeightStoreTest(unittest.TestCase):
             quantizer_dict={bits: SimpleNamespace(sym=False, perchannel=True)},
             group_size=4,
             d_col=4,
-            act_order=False,
+            act_order=True,
             W_shape=codes.shape,
             W_dtype=torch.float32,
         )
         with tempfile.TemporaryDirectory() as directory:
             layer_path = Path(directory) / "model.layers.0.mlp.down_proj"
             layer_path.mkdir()
+            perm = torch.tensor([2, 0, 3, 1])
             save_qparams(
                 layer_path, bits=bits, qweight=codes, scales=scales,
-                zeros=zeros, perm=None, handle=handle)
+                zeros=zeros, perm=perm, handle=handle)
 
             store = WeightStore(
                 directory, mode=LoadMode.LAZY, cache=False).load()
             self.assertEqual(store.get_layer_names(), [layer_path.name])
             self.assertEqual(store.get_available_bitwidths(layer_path.name), [bits])
+            self.assertEqual(store.get_layer_numel(layer_path.name, bits), 8)
+            self.assertGreater(store.get_layer_storage_bytes(layer_path.name, bits), 0)
             actual = store.get_layer_weight(layer_path.name, bits)
 
-            expected = scales * (codes.float() - zeros)
+            expected = (scales * (codes.float() - zeros))[:, perm.argsort()]
             self.assertTrue(torch.equal(actual, expected))
             self.assertFalse(store._index[layer_path.name][bits].loaded)
 

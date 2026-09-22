@@ -53,6 +53,8 @@ class CheckpointStreamTest(unittest.TestCase):
 
             model = self.Model()
             loader = SafeTensorPrefixLoader(root)
+            report = loader.assert_prefix_schema(self.Model(), "layers.0")
+            self.assertEqual(report["checkpoint_count"], 1)
             loaded = loader.load_prefix(model, "layers.0", device="cpu")
 
             self.assertEqual(loaded, tensors["layers.0.weight"].nbytes)
@@ -72,6 +74,20 @@ class CheckpointStreamTest(unittest.TestCase):
             loader = SafeTensorPrefixLoader(root)
             with self.assertRaisesRegex(KeyError, "no tensors"):
                 loader.load_prefix(self.Model(), "layers.9", device="cpu")
+
+    def test_schema_preflight_rejects_mismatched_tensor_names(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            save_file(
+                {"layers.0.weight_packed": torch.ones(1)},
+                root / "model.safetensors")
+            loader = SafeTensorPrefixLoader(root)
+            report = loader.validate_prefix_schema(self.Model(), "layers.0")
+            self.assertEqual(report["missing"], ["layers.0.weight"])
+            self.assertEqual(
+                report["unexpected"], ["layers.0.weight_packed"])
+            with self.assertRaisesRegex(ValueError, "schema does not match"):
+                loader.assert_prefix_schema(self.Model(), "layers.0")
 
     def test_quantizer_advances_activations_while_releasing_each_block(self):
         class Block(nn.Module):

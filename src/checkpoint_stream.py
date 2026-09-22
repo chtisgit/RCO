@@ -50,6 +50,45 @@ class SafeTensorPrefixLoader:
             if name == prefix or name.startswith(marker)
         )
 
+    def validate_prefix_schema(self, model: nn.Module, prefix: str) -> dict:
+        """Compare a meta module's persistent state with checkpoint names.
+
+        This is index-only: tensor payloads remain unopened.  It catches
+        compressed or version-mismatched checkpoint layouts before a long
+        streaming run reaches the first block.
+        """
+        module = model.get_submodule(prefix)
+        expected = {
+            f"{prefix}.{name}" if name else prefix
+            for name in module.state_dict().keys()
+        }
+        checkpoint = set(self.names_for_prefix(prefix))
+        missing = sorted(expected - checkpoint)
+        unexpected = sorted(checkpoint - expected)
+        return {
+            "prefix": prefix,
+            "expected_count": len(expected),
+            "checkpoint_count": len(checkpoint),
+            "missing": missing,
+            "unexpected": unexpected,
+        }
+
+    def assert_prefix_schema(self, model: nn.Module, prefix: str) -> dict:
+        """Validate one streamed prefix and raise with a bounded diagnostic."""
+        report = self.validate_prefix_schema(model, prefix)
+        if report["missing"] or report["unexpected"]:
+            def preview(names):
+                shown = ", ".join(repr(name) for name in names[:5])
+                if len(names) > 5:
+                    shown += f", ... ({len(names) - 5} more)"
+                return shown or "none"
+
+            raise ValueError(
+                f"Checkpoint schema does not match model prefix {prefix!r}; "
+                f"missing: {preview(report['missing'])}; unexpected: "
+                f"{preview(report['unexpected'])}")
+        return report
+
     @staticmethod
     def _set_tensor(model: nn.Module, name: str, value: torch.Tensor) -> None:
         parent_path, _, attribute = name.rpartition(".")
@@ -112,27 +151,30 @@ class SafeTensorPrefixLoader:
             moved_bytes += moved.numel() * moved.element_size()
         return moved_bytes
 
-    @classmethod
-    def release_prefix(cls, model: nn.Module, prefix: str) -> int:
-        """Replace a materialized module subtree with shape-only meta tensors."""
-        module = model.get_submodule(prefix)
+    def release_prefix(self, model: nn.Module, prefix: str) -> int:
+        """Release only checkpoint-backed tensors below *prefix* to meta.
+
+        Configuration-created, non-persistent buffers are deliberately left
+        alone.  Releasing every tensor exposed by ``named_buffers`` would turn
+        runtime state absent from the safetensors index into meta tensors that
+        a later streamed pass cannot reload.
+        """
         released_bytes = 0
-        for relative_name, parameter in list(module.named_parameters(recurse=True)):
-            if parameter.device.type != "meta":
-                released_bytes += parameter.numel() * parameter.element_size()
-            cls._set_tensor(
-                module,
-                relative_name,
-                torch.empty_like(parameter, device="meta"),
-            )
-        for relative_name, buffer in list(module.named_buffers(recurse=True)):
-            if buffer.device.type != "meta":
-                released_bytes += buffer.numel() * buffer.element_size()
-            cls._set_tensor(
-                module,
-                relative_name,
-                torch.empty_like(buffer, device="meta"),
-            )
+        for name in self.names_for_prefix(prefix):
+            parent_path, _, attribute = name.rpartition(".")
+            parent = model.get_submodule(parent_path) if parent_path else model
+            if attribute in parent._parameters:
+                tensor = parent._parameters[attribute]
+            elif attribute in parent._buffers:
+                tensor = parent._buffers[attribute]
+            else:
+                raise KeyError(
+                    f"Checkpoint tensor {name!r} no longer maps to a parameter "
+                    "or buffer")
+            if tensor.device.type != "meta":
+                released_bytes += tensor.numel() * tensor.element_size()
+            self._set_tensor(
+                model, name, torch.empty_like(tensor, device="meta"))
         return released_bytes
 
 

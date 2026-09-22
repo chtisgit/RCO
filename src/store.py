@@ -2,6 +2,7 @@
 
 import json
 import logging
+import math
 from pathlib import Path
 from typing import Dict, Optional, Any, Tuple, List
 from dataclasses import dataclass
@@ -119,6 +120,13 @@ class WeightStore:
         if source == "qparams":
             bundle = load_qparams(layer_path, bitwidth, unpack=False)
             weight = dequantize_from_qparams(bundle)
+            perm = bundle.get("perm")
+            if perm is not None:
+                # GPTQ act-order stores columns in Hessian order. A normal
+                # nn.Linear (including a fused expert slice) expects the
+                # original input-feature order because it has no QLinear
+                # activation-permutation hook.
+                weight = weight[:, torch.argsort(perm)]
             metadata = {
                 key: value for key, value in bundle.items()
                 if key not in {"qweight", "qweight_packed", "scales", "zeros", "perm"}
@@ -206,13 +214,47 @@ class WeightStore:
         if self.cache and layer_data.loaded:
             return layer_data.metadata
 
-        _, metadata = self._load_single_weight(
-            layer_name, bitwidth, source=layer_data.source)
+        if layer_data.source == "qparams":
+            bundle = load_qparams(
+                self.layer_dir / layer_name, bitwidth, unpack=False)
+            metadata = {
+                key: value for key, value in bundle.items()
+                if key not in {
+                    "qweight", "qweight_packed", "scales", "zeros", "perm"
+                }
+            }
+            del bundle
+        else:
+            _, metadata = self._load_single_weight(
+                layer_name, bitwidth, source=layer_data.source)
 
         if self.cache:
             layer_data.metadata = metadata
 
         return metadata
+
+    def get_layer_numel(self, layer_name: str, bitwidth: int) -> int:
+        """Return a candidate's logical element count without dequantizing it."""
+        metadata = self.get_layer_metadata(layer_name, bitwidth)
+        if metadata is not None and "shape" in metadata:
+            return int(math.prod(int(value) for value in metadata["shape"]))
+        # Legacy dense files may predate shape metadata. Load only the one
+        # requested tensor and release it immediately after counting.
+        weight = self.get_layer_weight(layer_name, bitwidth)
+        result = int(weight.numel())
+        del weight
+        return result
+
+    def get_layer_storage_bytes(self, layer_name: str, bitwidth: int) -> int:
+        """Return bytes in the selected on-disk candidate file."""
+        self._validate_access(layer_name, bitwidth)
+        source = self._index[layer_name][bitwidth].source
+        layer_path = self.layer_dir / layer_name
+        if source == "qparams":
+            path = layer_path / f"{bitwidth}{QPARAMS_SUFFIX}"
+        else:
+            path = layer_path / f"{bitwidth}.pth"
+        return path.stat().st_size
 
     def get_layer_names(self) -> List[str]:
         """Return list of all available layer names."""
