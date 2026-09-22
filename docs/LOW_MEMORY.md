@@ -149,6 +149,37 @@ from paired scalar losses, so it needs no activation or weight backward graph.
 Pruning masks and any future relaxed assignment method still require a real
 training-aware streamed backward path.
 
+## Packed output compatibility gate
+
+The released `run_build_checkpoint.py --format compressed-tensors` is not a
+bounded-memory writer: it loads or decompresses the complete base model, applies
+quantization wrappers in memory, and then calls `save_pretrained`. More
+critically, its pinned output stack does not currently support this Qwen schema.
+
+With Transformers 5.7.0 and the repository-pinned `compressed-tensors` 0.15.0.1,
+the published GSQ checkpoint fails during model preprocessing, before tensor
+payloads are loaded:
+
+```text
+ValueError: Quantization of module type Qwen3_5MoeGatedDeltaNet is not supported
+```
+
+Stable `compressed-tensors` 0.18.0 adds arbitrary-module configuration support
+and successfully applies the published quantization config to a meta skeleton.
+That change alone does not establish checkpoint compatibility under pinned
+Transformers 5.7.0: the skeleton retains fused expert state keys
+`experts.gate_up_proj` and `experts.down_proj`, whereas the published packed
+checkpoint contains per-expert `gate_proj`, `up_proj`, and `down_proj` tensors.
+
+The evidence is recorded in
+`reports/qwen35_compressed_tensors_compatibility.json`. A tensor-level packed
+writer is paused at this gate. Emitting a guessed schema would risk producing a
+small checkpoint that silently leaves experts uninitialized or cannot load.
+The next implementation should begin only after a Transformers and
+`compressed-tensors` version pair loads this exact fused-expert and hybrid
+attention layout without patches, or after another target format proves it can
+represent the selected qparams without requantization.
+
 ## Remaining work
 
 Pinned Transformers 5.7.0 meta initialization has been checked against the
@@ -169,8 +200,9 @@ driver now rejects such a mismatch before starting an optimization pass.
    base checkpoint using the pinned Qwen3.6 Transformers implementation.
 2. Add a training-aware streamed backward path for pruning masks if full-model
    pruning remains in scope.
-3. Remove the remaining full-model dependency from final checkpoint building
-   by writing selected tensors directly into bounded-size output shards.
+3. Resolve the packed runtime schema gate, then remove the remaining full-model
+   dependency from final checkpoint building by writing selected tensors
+   directly into bounded-size output shards.
 4. Validate one complete optimization step, then a multi-step run, while
    recording CUDA allocated/reserved peaks, process RSS, disk growth, and I/O.
 5. Load the materialized checkpoint and run numerical layer comparisons and a

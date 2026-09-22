@@ -1,0 +1,39 @@
+{
+  "date": "2026-09-22",
+  "model_config": "local Qwen3.6-35B-A3B GSQ checkpoint",
+  "model_class": "Qwen3_5MoeForConditionalGeneration",
+  "tests": [
+    {
+      "transformers": "5.7.0",
+      "compressed_tensors": "0.15.0.1",
+      "operation": "AutoModelForImageTextToText.from_pretrained with device_map meta",
+      "result": "failed before tensor payload materialization",
+      "exception": "ValueError: Quantization of module type Qwen3_5MoeGatedDeltaNet is not supported",
+      "process_peak_rss_bytes": 401530880
+    },
+    {
+      "transformers": "5.7.0",
+      "compressed_tensors": "0.18.0",
+      "operation": "apply published quantization config and compress a meta skeleton",
+      "result": "configuration application and compression completed",
+      "process_peak_rss_bytes": 326283264,
+      "layer_0_expert_state_keys": [
+        "model.language_model.layers.0.mlp.experts.gate_up_proj",
+        "model.language_model.layers.0.mlp.experts.down_proj"
+      ],
+      "remaining_schema_issue": "The pinned Transformers model still exposes fused expert parameters, while the published compressed checkpoint index contains per-expert gate_proj, up_proj, and down_proj packed tensors."
+    }
+  ],
+  "published_checkpoint_dense_schema_audit": {
+    "required_prefixes": 43,
+    "compatible_prefixes": 2,
+    "missing_dense_names": 331,
+    "unexpected_compressed_names": 92913
+  },
+  "decision": "Do not implement or emit a compressed-tensors checkpoint until a loader/version combination proves the exact Qwen fused-expert and hybrid-attention schema. Do not patch third-party loader internals as part of the low-memory pipeline.",
+  "unblocked_alternatives": [
+    "Validate a newer Transformers and compressed-tensors pair in isolation before changing repository pins.",
+    "Choose another runtime container only if it can represent the selected RCO candidates without silently requantizing them.",
+    "Use a dense base checkpoint for the existing block-streamed evaluator and candidate-generation gates."
+  ]
+}
