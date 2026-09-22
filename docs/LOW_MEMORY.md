@@ -69,6 +69,52 @@ atomic storage, checksummed streaming reads, and bounded decoding. It does not
 replace the pending reference-GGUF load test, real Qwen3.5-2B candidate run,
 genuine Qwen3.6-MoE block gate, or CUDA memory gates.
 
+The reference-GGUF and synthetic-MoE load gate is now complete as a separate
+audit. `tools/audit_tiny_native_gguf.py` constructs a deterministic, complete
+one-layer Qwen3.5-MoE checkpoint with three routed experts, converts it through
+the pinned llama.cpp converter, and verifies that gate/up/down aggregation
+preserves source expert order `[0, 1, 2]` exactly. It then creates both Q2_0
+and Q4_0 native candidates for an ordinary attention matrix and all three
+aggregated routed projections. A mixed assignment selects Q2_0 for attention-q
+and routed-up, and Q4_0 for routed-gate and routed-down.
+
+`src/native_gguf.py` substitutes those selected payloads into the complete
+reference model without decode or requantization. It rejects names or shapes
+that disagree with the reference schema, copies all unselected tensors
+unchanged, writes to a same-directory temporary file, and atomically publishes
+only a complete GGUF. The audit reloads the result with pinned `gguf-py`, proves
+all four selected SHA-256 hashes byte-for-byte, proves store decoding equals
+decoding the bytes in the GGUF, and verifies all fourteen unselected tensors
+remain exact. Finally, the external `tools/llama_model_probe.cpp` harness loads
+the complete model through the unmodified pinned
+`llama_model_load_from_file(..., check_tensors=true)` API on CPU.
+
+The recorded result is `reports/qwen35_tiny_native_gguf.json`: 18 complete
+model tensors, four decision groups, eight stored alternatives, two selected
+native types, exact expert ordering, and a successful stock llama.cpp model
+load. Peak audit RSS is approximately 2.30 GiB. This closes the tiny synthetic
+MoE and reference-GGUF byte-preservation gates; it is not evidence for genuine
+35B weights, a full 2B candidate block, generation quality, or CUDA memory.
+
+Build the small external loader against the same pinned llama.cpp build and
+reproduce the audit with:
+
+```bash
+g++ -std=c++17 -O2 tools/llama_model_probe.cpp \
+  -I /path/to/llama.cpp/include -I /path/to/llama.cpp/ggml/include \
+  -L /path/to/llama-build/bin \
+  -Wl,-rpath,/path/to/llama-build/bin -lllama \
+  -o /tmp/rco-llama-model-probe
+
+python tools/audit_tiny_native_gguf.py \
+  --tokenizer-source /path/to/Qwen3.5-2B-Base \
+  --llama-cpp /path/to/pinned/llama.cpp \
+  --llama-revision 911f6cdc8ab8a530b2bee09ee61471a6f3178eeb \
+  --ggml-library /path/to/llama-build/bin/libggml-base.so \
+  --llama-probe /tmp/rco-llama-model-probe \
+  --output reports/qwen35_tiny_native_gguf.json
+```
+
 ## Qwen3.5-2B dense oracle
 
 The primary development checkpoint is pinned to
