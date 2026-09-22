@@ -46,6 +46,28 @@ state to one transformer block and a small routed-expert group.
   row chunks instead of materializing `[batch, sequence, vocabulary]` logits.
 - Candidate generation checks free space before each write. The CLI default
   stops at a 50 GiB free-space floor.
+- `GGMLNativeCodec` calls the pinned GGML shared library directly for native
+  row quantization and bounded caller-buffer dequantization. The schema-1
+  `NativeCandidateStore` atomically publishes exact payloads and its index,
+  recording canonical GGUF shapes, native type geometry, exact payload and
+  aligned costs, source provenance, and SHA-256 integrity data without a
+  persistent decoded cache.
+
+The deterministic native-store proof covers Q2_0 and Q4_0 on both an ordinary
+matrix and an aggregated three-expert tensor. Configure the exact pinned
+library explicitly so type IDs and bytes cannot silently come from another
+GGML build:
+
+```bash
+python tools/audit_native_ggml_store.py \
+  --ggml-library /path/to/pinned/llama.cpp/build/bin/libggml-base.so \
+  --output reports/native_ggml_store_audit.json
+```
+
+This small proof establishes byte-stable chunking, geometry/cost accounting,
+atomic storage, checksummed streaming reads, and bounded decoding. It does not
+replace the pending reference-GGUF load test, real Qwen3.5-2B candidate run,
+genuine Qwen3.6-MoE block gate, or CUDA memory gates.
 
 The tensor-name audit of the local published checkpoint covers all 93,625
 source tensors: 93,275 text tensors, 333 vision tensors, and 17 MTP tensors,

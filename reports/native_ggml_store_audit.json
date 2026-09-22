@@ -1,0 +1,119 @@
+{
+  "alignment": 32,
+  "atomic_index_publication": true,
+  "atomic_payload_publication": true,
+  "caller_owned_decode_buffer": true,
+  "candidate_count": 4,
+  "candidate_types": [
+    "Q2_0",
+    "Q4_0"
+  ],
+  "candidates": [
+    {
+      "aligned_gguf_bytes": 192,
+      "block_size": 64,
+      "chunked_bytes_equal_direct_native_call": true,
+      "errors": {
+        "max_absolute_error": 1.4275494813919067,
+        "mean_absolute_error": 0.35726744695623186,
+        "mean_signed_error": -0.0010727667164852999,
+        "relative_frobenius_error": 0.3644769390896305,
+        "rmse": 0.47549993780871
+      },
+      "ggml_type": "Q2_0",
+      "gguf_shape": [
+        64,
+        9
+      ],
+      "payload_bytes": 162,
+      "row_count": 9,
+      "row_size": 18,
+      "sha256": "aae105e81511c6a73ec81f8d75ab505180fd291bfbd975a910e90cf2bd5b76a7",
+      "tensor": "blk.0.attn_q.weight",
+      "type_size": 18
+    },
+    {
+      "aligned_gguf_bytes": 352,
+      "block_size": 32,
+      "chunked_bytes_equal_direct_native_call": true,
+      "errors": {
+        "max_absolute_error": 0.17601871490478516,
+        "mean_absolute_error": 0.045975484294710135,
+        "mean_signed_error": -0.00382750796133122,
+        "relative_frobenius_error": 0.047226995282061646,
+        "rmse": 0.06161276863113189
+      },
+      "ggml_type": "Q4_0",
+      "gguf_shape": [
+        64,
+        9
+      ],
+      "payload_bytes": 324,
+      "row_count": 9,
+      "row_size": 36,
+      "sha256": "f9533535108c310849b4c2c75cfa043a5bbd9c7fd01759b1f584813885741591",
+      "tensor": "blk.0.attn_q.weight",
+      "type_size": 18
+    },
+    {
+      "aligned_gguf_bytes": 384,
+      "block_size": 64,
+      "chunked_bytes_equal_direct_native_call": true,
+      "errors": {
+        "max_absolute_error": 0.9895736575126648,
+        "mean_absolute_error": 0.21619674091458105,
+        "mean_signed_error": -0.0021858230422713816,
+        "relative_frobenius_error": 0.3617542087115764,
+        "rmse": 0.30528142113541257
+      },
+      "ggml_type": "Q2_0",
+      "gguf_shape": [
+        64,
+        7,
+        3
+      ],
+      "payload_bytes": 378,
+      "row_count": 21,
+      "row_size": 18,
+      "sha256": "e41909556b8b87896452c55e2235fe33566e9e06d8203766411973feb8872109",
+      "tensor": "blk.0.ffn_gate_exps.weight",
+      "type_size": 18
+    },
+    {
+      "aligned_gguf_bytes": 768,
+      "block_size": 32,
+      "chunked_bytes_equal_direct_native_call": true,
+      "errors": {
+        "max_absolute_error": 0.12475383281707764,
+        "mean_absolute_error": 0.028029498470416348,
+        "mean_signed_error": -0.0003700725568965676,
+        "relative_frobenius_error": 0.044894049645772094,
+        "rmse": 0.03788572170368917
+      },
+      "ggml_type": "Q4_0",
+      "gguf_shape": [
+        64,
+        7,
+        3
+      ],
+      "payload_bytes": 756,
+      "row_count": 21,
+      "row_size": 36,
+      "sha256": "7ee01a9c3f95ec6ef5be39aae1dd08e8098659e57322653ae8489aecfa0ce5f3",
+      "tensor": "blk.0.ffn_gate_exps.weight",
+      "type_size": 18
+    }
+  ],
+  "elapsed_seconds": 0.02678795496467501,
+  "ggml_library": {
+    "path": "/home/christian/projects/gsq-rco-moe/experiment/build-cpu/bin/libggml-base.so.0.24.0",
+    "sha256": "25104b01380a2f8f47fbb0ab97d81ea01c94752f76d50afe304b9a313628b9f6"
+  },
+  "peak_process_rss_bytes": 33710080,
+  "persistent_decoded_cache": false,
+  "schema": 1,
+  "scope": "deterministic ordinary and aggregated-expert tensors; this is not a real-model or CUDA memory gate",
+  "status": "pass",
+  "temporary_files_after_finalize": [],
+  "tensor_count": 2
+}
