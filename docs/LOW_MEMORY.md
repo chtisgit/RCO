@@ -209,6 +209,55 @@ python tools/audit_dense_oracle.py \
   --report-output reports/qwen35_2b_dense_oracle.json
 ```
 
+## Complete Qwen3.5-2B native candidate block
+
+Block 0 now has a complete canonical native-candidate database. The
+transform-aware row source in `src/qwen35_native.py` reads only the safetensors
+row runs required for the next output chunk and implements the pinned
+converter's grouped-to-tiled value-head order for QKV, gate, alpha/beta, and
+output projections. Its unequal-key/value-head unit test exercises the
+nontrivial permutation even though the 2B checkpoint's equal head counts make
+that transform an identity for this particular model.
+
+`reports/qwen35_2b_block0_native_candidates.json` accounts for all 14 canonical
+block tensors: eight searched matrices and six explicit copy tensors. Each
+searched matrix has exact Q2_0 and Q4_0 alternatives, for 16 candidates and
+49,600,512 payload bytes. The retained local store is
+`data/qwen35_2b_block0_native` at the workspace root and is intentionally not
+versioned.
+
+The audit independently creates a block-only safetensors checkpoint and runs
+the pinned llama.cpp converter over it in F32. For every decision group, the
+streamed transformed rows equal that reference tensor exactly, and chunked
+native quantization produces the same bytes as a single native quantization of
+the converter output. Every payload is then checksum-verified and decoded into
+a caller-owned buffer with recorded maximum, mean, RMSE, and relative
+Frobenius errors. The streaming generator uses 16-row chunks and never exceeds
+393,216 dense chunk bytes. The audit's approximately 1.69 GiB peak RSS includes
+the intentionally non-streaming full-block reference construction and must not
+be attributed to candidate generation or counted as a CUDA gate.
+
+Reproduce this milestone into a new, nonexistent store directory with:
+
+```bash
+python tools/audit_qwen35_2b_native_block.py \
+  --model-dir /path/to/Qwen3.5-2B-Base \
+  --manifest reports/qwen35_2b_gguf_manifest.json \
+  --identity reports/qwen35_2b_identity.json \
+  --llama-cpp /path/to/pinned/llama.cpp \
+  --ggml-library /path/to/llama-build/bin/libggml-base.so \
+  --store-output /path/to/new/qwen35_2b_block0_native \
+  --temporary-parent /path/to/nvme/staging \
+  --rows-per-chunk 16 \
+  --output reports/qwen35_2b_block0_native_candidates.json
+```
+
+This proves complete block candidate generation, transformation fidelity, and
+bounded source reads. The next numerical gate must install selected candidates
+into the retained block-0 oracle and measure block-output error. CPU/CUDA
+matmul-kernel coverage, a genuine routed 35B block, and full-model generation
+remain separate requirements.
+
 The tensor-name audit of the local published checkpoint covers all 93,625
 source tensors: 93,275 text tensors, 333 vision tensors, and 17 MTP tensors,
 with zero unknown names. The recorded audit is

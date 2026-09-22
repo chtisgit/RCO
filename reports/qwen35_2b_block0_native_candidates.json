@@ -1,0 +1,747 @@
+{
+  "block": {
+    "canonical_tensor_count": 14,
+    "complete_manifest_coverage": true,
+    "copied": [
+      {
+        "converter_transforms": [
+          "strip_language_model_namespace",
+          "add_one_to_norm"
+        ],
+        "copy_reason": "not_a_matrix",
+        "ggml_type": "F32",
+        "gguf_shape": [
+          2048
+        ],
+        "source_tensor": "model.language_model.layers.0.input_layernorm.weight",
+        "tensor": "blk.0.attn_norm.weight"
+      },
+      {
+        "converter_transforms": [
+          "strip_language_model_namespace",
+          "reorder_value_heads",
+          "negative_exponential"
+        ],
+        "copy_reason": "not_a_weight_tensor",
+        "ggml_type": "F32",
+        "gguf_shape": [
+          16
+        ],
+        "source_tensor": "model.language_model.layers.0.linear_attn.A_log",
+        "tensor": "blk.0.ssm_a"
+      },
+      {
+        "converter_transforms": [
+          "strip_language_model_namespace",
+          "reorder_value_heads",
+          "squeeze_conv1d"
+        ],
+        "copy_reason": "row_width_not_q2_0_aligned",
+        "ggml_type": "F32",
+        "gguf_shape": [
+          4,
+          6144
+        ],
+        "source_tensor": "model.language_model.layers.0.linear_attn.conv1d.weight",
+        "tensor": "blk.0.ssm_conv1d.weight"
+      },
+      {
+        "converter_transforms": [
+          "strip_language_model_namespace",
+          "reorder_value_heads",
+          "rename_dt_bias"
+        ],
+        "copy_reason": "not_a_weight_tensor",
+        "ggml_type": "F32",
+        "gguf_shape": [
+          16
+        ],
+        "source_tensor": "model.language_model.layers.0.linear_attn.dt_bias",
+        "tensor": "blk.0.ssm_dt.bias"
+      },
+      {
+        "converter_transforms": [
+          "strip_language_model_namespace"
+        ],
+        "copy_reason": "not_a_matrix",
+        "ggml_type": "F32",
+        "gguf_shape": [
+          128
+        ],
+        "source_tensor": "model.language_model.layers.0.linear_attn.norm.weight",
+        "tensor": "blk.0.ssm_norm.weight"
+      },
+      {
+        "converter_transforms": [
+          "strip_language_model_namespace",
+          "add_one_to_norm"
+        ],
+        "copy_reason": "not_a_matrix",
+        "ggml_type": "F32",
+        "gguf_shape": [
+          2048
+        ],
+        "source_tensor": "model.language_model.layers.0.post_attention_layernorm.weight",
+        "tensor": "blk.0.post_attention_norm.weight"
+      }
+    ],
+    "copied_tensor_count": 6,
+    "index": 0,
+    "searched_tensor_count": 8
+  },
+  "candidate_store": {
+    "candidate_count": 16,
+    "candidate_types": [
+      "Q2_0",
+      "Q4_0"
+    ],
+    "candidates": [
+      {
+        "aligned_gguf_bytes": 9216,
+        "converter_transforms": [
+          "strip_language_model_namespace",
+          "reorder_value_heads"
+        ],
+        "ggml_type": "Q2_0",
+        "ggml_type_id": 42,
+        "gguf_shape": [
+          2048,
+          16
+        ],
+        "payload_bytes": 9216,
+        "sha256": "6618097fc0f2ff59699251ab4f09de7c91bd652df13b7ce91bd2b0621c1e5617",
+        "source_tensor": "model.language_model.layers.0.linear_attn.in_proj_a.weight",
+        "tensor": "blk.0.ssm_alpha.weight"
+      },
+      {
+        "aligned_gguf_bytes": 18432,
+        "converter_transforms": [
+          "strip_language_model_namespace",
+          "reorder_value_heads"
+        ],
+        "ggml_type": "Q4_0",
+        "ggml_type_id": 2,
+        "gguf_shape": [
+          2048,
+          16
+        ],
+        "payload_bytes": 18432,
+        "sha256": "3f95046270877d55618ab0e02b99ee22b81cb49fbb476b7fecd95c21b1255137",
+        "source_tensor": "model.language_model.layers.0.linear_attn.in_proj_a.weight",
+        "tensor": "blk.0.ssm_alpha.weight"
+      },
+      {
+        "aligned_gguf_bytes": 9216,
+        "converter_transforms": [
+          "strip_language_model_namespace",
+          "reorder_value_heads"
+        ],
+        "ggml_type": "Q2_0",
+        "ggml_type_id": 42,
+        "gguf_shape": [
+          2048,
+          16
+        ],
+        "payload_bytes": 9216,
+        "sha256": "edbcdda88e7d92a770b92071b073487a8a5c60f63679935c6911f7d569f04cbb",
+        "source_tensor": "model.language_model.layers.0.linear_attn.in_proj_b.weight",
+        "tensor": "blk.0.ssm_beta.weight"
+      },
+      {
+        "aligned_gguf_bytes": 18432,
+        "converter_transforms": [
+          "strip_language_model_namespace",
+          "reorder_value_heads"
+        ],
+        "ggml_type": "Q4_0",
+        "ggml_type_id": 2,
+        "gguf_shape": [
+          2048,
+          16
+        ],
+        "payload_bytes": 18432,
+        "sha256": "2d5ac642c5e21091cbd2e2d185c0bfdd018e94f8c18cadcb28232a27b80b7b56",
+        "source_tensor": "model.language_model.layers.0.linear_attn.in_proj_b.weight",
+        "tensor": "blk.0.ssm_beta.weight"
+      },
+      {
+        "aligned_gguf_bytes": 3538944,
+        "converter_transforms": [
+          "strip_language_model_namespace",
+          "reorder_value_heads"
+        ],
+        "ggml_type": "Q2_0",
+        "ggml_type_id": 42,
+        "gguf_shape": [
+          2048,
+          6144
+        ],
+        "payload_bytes": 3538944,
+        "sha256": "b2c20ce551ac4b6decf782f7d8ebb9a845c5638fef1a8b4a95bece9b7f6b88c1",
+        "source_tensor": "model.language_model.layers.0.linear_attn.in_proj_qkv.weight",
+        "tensor": "blk.0.attn_qkv.weight"
+      },
+      {
+        "aligned_gguf_bytes": 7077888,
+        "converter_transforms": [
+          "strip_language_model_namespace",
+          "reorder_value_heads"
+        ],
+        "ggml_type": "Q4_0",
+        "ggml_type_id": 2,
+        "gguf_shape": [
+          2048,
+          6144
+        ],
+        "payload_bytes": 7077888,
+        "sha256": "f81bb88cac9fd6cc5ed24c08e2d958a8afa0a240927c02eafdcd376e63a15428",
+        "source_tensor": "model.language_model.layers.0.linear_attn.in_proj_qkv.weight",
+        "tensor": "blk.0.attn_qkv.weight"
+      },
+      {
+        "aligned_gguf_bytes": 1179648,
+        "converter_transforms": [
+          "strip_language_model_namespace",
+          "reorder_value_heads"
+        ],
+        "ggml_type": "Q2_0",
+        "ggml_type_id": 42,
+        "gguf_shape": [
+          2048,
+          2048
+        ],
+        "payload_bytes": 1179648,
+        "sha256": "ea71668da40036ca7dbc229876e0af6d1e563f832117a762028754a48681517c",
+        "source_tensor": "model.language_model.layers.0.linear_attn.in_proj_z.weight",
+        "tensor": "blk.0.attn_gate.weight"
+      },
+      {
+        "aligned_gguf_bytes": 2359296,
+        "converter_transforms": [
+          "strip_language_model_namespace",
+          "reorder_value_heads"
+        ],
+        "ggml_type": "Q4_0",
+        "ggml_type_id": 2,
+        "gguf_shape": [
+          2048,
+          2048
+        ],
+        "payload_bytes": 2359296,
+        "sha256": "689d122a2762e941575203c44c570a4b28a5923f08ecd982f6fdc287de43fe9f",
+        "source_tensor": "model.language_model.layers.0.linear_attn.in_proj_z.weight",
+        "tensor": "blk.0.attn_gate.weight"
+      },
+      {
+        "aligned_gguf_bytes": 1179648,
+        "converter_transforms": [
+          "strip_language_model_namespace",
+          "reorder_value_heads"
+        ],
+        "ggml_type": "Q2_0",
+        "ggml_type_id": 42,
+        "gguf_shape": [
+          2048,
+          2048
+        ],
+        "payload_bytes": 1179648,
+        "sha256": "7fa91508817983e6cc10a268b0de7331f1fbbe4cafe7fe3c524cf2da95a789e7",
+        "source_tensor": "model.language_model.layers.0.linear_attn.out_proj.weight",
+        "tensor": "blk.0.ssm_out.weight"
+      },
+      {
+        "aligned_gguf_bytes": 2359296,
+        "converter_transforms": [
+          "strip_language_model_namespace",
+          "reorder_value_heads"
+        ],
+        "ggml_type": "Q4_0",
+        "ggml_type_id": 2,
+        "gguf_shape": [
+          2048,
+          2048
+        ],
+        "payload_bytes": 2359296,
+        "sha256": "0be012e8676ed2f279ccc03a9b645ebd1328ee3e2bf13bd01e1e2227be9b92cd",
+        "source_tensor": "model.language_model.layers.0.linear_attn.out_proj.weight",
+        "tensor": "blk.0.ssm_out.weight"
+      },
+      {
+        "aligned_gguf_bytes": 3538944,
+        "converter_transforms": [
+          "strip_language_model_namespace"
+        ],
+        "ggml_type": "Q2_0",
+        "ggml_type_id": 42,
+        "gguf_shape": [
+          6144,
+          2048
+        ],
+        "payload_bytes": 3538944,
+        "sha256": "d23c836bcee3624edfdf63bf8bdc2e431477925153168b5b567f98de85ef26c7",
+        "source_tensor": "model.language_model.layers.0.mlp.down_proj.weight",
+        "tensor": "blk.0.ffn_down.weight"
+      },
+      {
+        "aligned_gguf_bytes": 7077888,
+        "converter_transforms": [
+          "strip_language_model_namespace"
+        ],
+        "ggml_type": "Q4_0",
+        "ggml_type_id": 2,
+        "gguf_shape": [
+          6144,
+          2048
+        ],
+        "payload_bytes": 7077888,
+        "sha256": "1b04fd3088f4195db61967d653c9dc10ca2a8fc129863a340ae9b689fa42189e",
+        "source_tensor": "model.language_model.layers.0.mlp.down_proj.weight",
+        "tensor": "blk.0.ffn_down.weight"
+      },
+      {
+        "aligned_gguf_bytes": 3538944,
+        "converter_transforms": [
+          "strip_language_model_namespace"
+        ],
+        "ggml_type": "Q2_0",
+        "ggml_type_id": 42,
+        "gguf_shape": [
+          2048,
+          6144
+        ],
+        "payload_bytes": 3538944,
+        "sha256": "229aa99084a2956a2e0ff46024561dc6bf57a79ad7157cd70e369a96a5dffdaf",
+        "source_tensor": "model.language_model.layers.0.mlp.gate_proj.weight",
+        "tensor": "blk.0.ffn_gate.weight"
+      },
+      {
+        "aligned_gguf_bytes": 7077888,
+        "converter_transforms": [
+          "strip_language_model_namespace"
+        ],
+        "ggml_type": "Q4_0",
+        "ggml_type_id": 2,
+        "gguf_shape": [
+          2048,
+          6144
+        ],
+        "payload_bytes": 7077888,
+        "sha256": "e6ae52072f2b60d38a31b3568aed59eb322129e63d90ff661a901e0101493871",
+        "source_tensor": "model.language_model.layers.0.mlp.gate_proj.weight",
+        "tensor": "blk.0.ffn_gate.weight"
+      },
+      {
+        "aligned_gguf_bytes": 3538944,
+        "converter_transforms": [
+          "strip_language_model_namespace"
+        ],
+        "ggml_type": "Q2_0",
+        "ggml_type_id": 42,
+        "gguf_shape": [
+          2048,
+          6144
+        ],
+        "payload_bytes": 3538944,
+        "sha256": "7f98c4d8d681a503c93ff2d254677ff68ece176da6363c8befc4fed4edf56ae6",
+        "source_tensor": "model.language_model.layers.0.mlp.up_proj.weight",
+        "tensor": "blk.0.ffn_up.weight"
+      },
+      {
+        "aligned_gguf_bytes": 7077888,
+        "converter_transforms": [
+          "strip_language_model_namespace"
+        ],
+        "ggml_type": "Q4_0",
+        "ggml_type_id": 2,
+        "gguf_shape": [
+          2048,
+          6144
+        ],
+        "payload_bytes": 7077888,
+        "sha256": "d82261a2046e423b6f213865a7fa37e87397b2d312173485683c5647f05b7096",
+        "source_tensor": "model.language_model.layers.0.mlp.up_proj.weight",
+        "tensor": "blk.0.ffn_up.weight"
+      }
+    ],
+    "chunk_count": 3076,
+    "index": "/home/christian/projects/gsq-rco-moe/data/qwen35_2b_block0_native/native-candidate-index.json",
+    "max_dense_chunk_bytes": 393216,
+    "max_source_rows_per_chunk": 16,
+    "path": "/home/christian/projects/gsq-rco-moe/data/qwen35_2b_block0_native",
+    "rows_per_chunk": 16,
+    "searched_tensor_count": 8,
+    "total_aligned_gguf_bytes": 49600512,
+    "total_payload_bytes": 49600512
+  },
+  "elapsed_seconds": 24.012941128981765,
+  "ggml_library": {
+    "path": "/home/christian/projects/gsq-rco-moe/experiment/build-cpu/bin/libggml-base.so.0.24.0",
+    "sha256": "25104b01380a2f8f47fbb0ab97d81ea01c94752f76d50afe304b9a313628b9f6"
+  },
+  "llama_cpp": {
+    "path": "/home/christian/projects/gsq-rco-moe/repos/llama.cpp",
+    "revision": "911f6cdc8ab8a530b2bee09ee61471a6f3178eeb"
+  },
+  "peak_process_rss_bytes": 1817202688,
+  "reference_conversion": {
+    "all_names_and_shapes_match_manifest": true,
+    "bytes": 246201600,
+    "checkpoint_bytes": 140534130,
+    "sha256": "ba816d6ff84b1208c657de61e64077c8b7dac703e9decf2330a5a44e90364e7f",
+    "source_logical_bytes": 117629536,
+    "source_tensor_count": 14,
+    "tensor_count": 14
+  },
+  "schema": 1,
+  "scope": "complete canonical Qwen3.5-2B transformer block 0 candidate database; this is not a full-model, 35B, CUDA, or kernel gate",
+  "source": {
+    "model_dir": "/home/christian/projects/gsq-rco-moe/data/qwen35_2b_base",
+    "repo_id": "Qwen/Qwen3.5-2B-Base",
+    "revision": "b1485b2fa6dfa1287294f269f5fb618e03d52d7c",
+    "weight_sha256": "928acbf11878c32185bbd863514d191769285065ab9ea14fbfe431303f5fdf2d"
+  },
+  "status": "pass",
+  "validation": {
+    "all_chunked_candidates_equal_quantized_converter_tensors": true,
+    "all_streamed_transforms_equal_pinned_converter": true,
+    "candidate_count": 16,
+    "candidates": [
+      {
+        "aligned_gguf_bytes": 9216,
+        "chunked_candidate_equals_quantized_converter_tensor": true,
+        "errors": {
+          "max_absolute_error": 0.08251953125,
+          "mean_absolute_error": 0.01725583134361841,
+          "relative_frobenius_error": 0.7232376175684445,
+          "rmse": 0.02123015552108491
+        },
+        "ggml_type": "Q2_0",
+        "ggml_type_id": 42,
+        "gguf_shape": [
+          2048,
+          16
+        ],
+        "payload_bytes": 9216,
+        "sha256": "6618097fc0f2ff59699251ab4f09de7c91bd652df13b7ce91bd2b0621c1e5617",
+        "source_tensor": "model.language_model.layers.0.linear_attn.in_proj_a.weight",
+        "streamed_transform_equals_pinned_converter": true,
+        "tensor": "blk.0.ssm_alpha.weight"
+      },
+      {
+        "aligned_gguf_bytes": 18432,
+        "chunked_candidate_equals_quantized_converter_tensor": true,
+        "errors": {
+          "max_absolute_error": 0.013916015625,
+          "mean_absolute_error": 0.0020918938764680206,
+          "relative_frobenius_error": 0.08855972889686671,
+          "rmse": 0.002599611485512461
+        },
+        "ggml_type": "Q4_0",
+        "ggml_type_id": 2,
+        "gguf_shape": [
+          2048,
+          16
+        ],
+        "payload_bytes": 18432,
+        "sha256": "3f95046270877d55618ab0e02b99ee22b81cb49fbb476b7fecd95c21b1255137",
+        "source_tensor": "model.language_model.layers.0.linear_attn.in_proj_a.weight",
+        "streamed_transform_equals_pinned_converter": true,
+        "tensor": "blk.0.ssm_alpha.weight"
+      },
+      {
+        "aligned_gguf_bytes": 9216,
+        "chunked_candidate_equals_quantized_converter_tensor": true,
+        "errors": {
+          "max_absolute_error": 0.059326171875,
+          "mean_absolute_error": 0.007883889404297406,
+          "relative_frobenius_error": 0.7590627757482925,
+          "rmse": 0.010189389041573078
+        },
+        "ggml_type": "Q2_0",
+        "ggml_type_id": 42,
+        "gguf_shape": [
+          2048,
+          16
+        ],
+        "payload_bytes": 9216,
+        "sha256": "edbcdda88e7d92a770b92071b073487a8a5c60f63679935c6911f7d569f04cbb",
+        "source_tensor": "model.language_model.layers.0.linear_attn.in_proj_b.weight",
+        "streamed_transform_equals_pinned_converter": true,
+        "tensor": "blk.0.ssm_beta.weight"
+      },
+      {
+        "aligned_gguf_bytes": 18432,
+        "chunked_candidate_equals_quantized_converter_tensor": true,
+        "errors": {
+          "max_absolute_error": 0.00732421875,
+          "mean_absolute_error": 0.001012398897842104,
+          "relative_frobenius_error": 0.09881326911196335,
+          "rmse": 0.001326434220751887
+        },
+        "ggml_type": "Q4_0",
+        "ggml_type_id": 2,
+        "gguf_shape": [
+          2048,
+          16
+        ],
+        "payload_bytes": 18432,
+        "sha256": "2d5ac642c5e21091cbd2e2d185c0bfdd018e94f8c18cadcb28232a27b80b7b56",
+        "source_tensor": "model.language_model.layers.0.linear_attn.in_proj_b.weight",
+        "streamed_transform_equals_pinned_converter": true,
+        "tensor": "blk.0.ssm_beta.weight"
+      },
+      {
+        "aligned_gguf_bytes": 3538944,
+        "chunked_candidate_equals_quantized_converter_tensor": true,
+        "errors": {
+          "max_absolute_error": 0.193359375,
+          "mean_absolute_error": 0.00872749201287163,
+          "relative_frobenius_error": 0.7308205993913804,
+          "rmse": 0.010821087854712873
+        },
+        "ggml_type": "Q2_0",
+        "ggml_type_id": 42,
+        "gguf_shape": [
+          2048,
+          6144
+        ],
+        "payload_bytes": 3538944,
+        "sha256": "b2c20ce551ac4b6decf782f7d8ebb9a845c5638fef1a8b4a95bece9b7f6b88c1",
+        "source_tensor": "model.language_model.layers.0.linear_attn.in_proj_qkv.weight",
+        "streamed_transform_equals_pinned_converter": true,
+        "tensor": "blk.0.attn_qkv.weight"
+      },
+      {
+        "aligned_gguf_bytes": 7077888,
+        "chunked_candidate_equals_quantized_converter_tensor": true,
+        "errors": {
+          "max_absolute_error": 0.0242919921875,
+          "mean_absolute_error": 0.0010642228766978637,
+          "relative_frobenius_error": 0.09082349510775785,
+          "rmse": 0.0013448020220716346
+        },
+        "ggml_type": "Q4_0",
+        "ggml_type_id": 2,
+        "gguf_shape": [
+          2048,
+          6144
+        ],
+        "payload_bytes": 7077888,
+        "sha256": "f81bb88cac9fd6cc5ed24c08e2d958a8afa0a240927c02eafdcd376e63a15428",
+        "source_tensor": "model.language_model.layers.0.linear_attn.in_proj_qkv.weight",
+        "streamed_transform_equals_pinned_converter": true,
+        "tensor": "blk.0.attn_qkv.weight"
+      },
+      {
+        "aligned_gguf_bytes": 1179648,
+        "chunked_candidate_equals_quantized_converter_tensor": true,
+        "errors": {
+          "max_absolute_error": 0.1044921875,
+          "mean_absolute_error": 0.008416344487850419,
+          "relative_frobenius_error": 0.7271729102748876,
+          "rmse": 0.010208420590658516
+        },
+        "ggml_type": "Q2_0",
+        "ggml_type_id": 42,
+        "gguf_shape": [
+          2048,
+          2048
+        ],
+        "payload_bytes": 1179648,
+        "sha256": "ea71668da40036ca7dbc229876e0af6d1e563f832117a762028754a48681517c",
+        "source_tensor": "model.language_model.layers.0.linear_attn.in_proj_z.weight",
+        "streamed_transform_equals_pinned_converter": true,
+        "tensor": "blk.0.attn_gate.weight"
+      },
+      {
+        "aligned_gguf_bytes": 2359296,
+        "chunked_candidate_equals_quantized_converter_tensor": true,
+        "errors": {
+          "max_absolute_error": 0.0228271484375,
+          "mean_absolute_error": 0.001027911685705457,
+          "relative_frobenius_error": 0.09041546634083583,
+          "rmse": 0.001269297983004986
+        },
+        "ggml_type": "Q4_0",
+        "ggml_type_id": 2,
+        "gguf_shape": [
+          2048,
+          2048
+        ],
+        "payload_bytes": 2359296,
+        "sha256": "689d122a2762e941575203c44c570a4b28a5923f08ecd982f6fdc287de43fe9f",
+        "source_tensor": "model.language_model.layers.0.linear_attn.in_proj_z.weight",
+        "streamed_transform_equals_pinned_converter": true,
+        "tensor": "blk.0.attn_gate.weight"
+      },
+      {
+        "aligned_gguf_bytes": 1179648,
+        "chunked_candidate_equals_quantized_converter_tensor": true,
+        "errors": {
+          "max_absolute_error": 0.1767578125,
+          "mean_absolute_error": 0.006960856653601036,
+          "relative_frobenius_error": 0.7166143038106056,
+          "rmse": 0.008641059673496083
+        },
+        "ggml_type": "Q2_0",
+        "ggml_type_id": 42,
+        "gguf_shape": [
+          2048,
+          2048
+        ],
+        "payload_bytes": 1179648,
+        "sha256": "7fa91508817983e6cc10a268b0de7331f1fbbe4cafe7fe3c524cf2da95a789e7",
+        "source_tensor": "model.language_model.layers.0.linear_attn.out_proj.weight",
+        "streamed_transform_equals_pinned_converter": true,
+        "tensor": "blk.0.ssm_out.weight"
+      },
+      {
+        "aligned_gguf_bytes": 2359296,
+        "chunked_candidate_equals_quantized_converter_tensor": true,
+        "errors": {
+          "max_absolute_error": 0.0267333984375,
+          "mean_absolute_error": 0.0008750660307817043,
+          "relative_frobenius_error": 0.09205883787836255,
+          "rmse": 0.001110061447768522
+        },
+        "ggml_type": "Q4_0",
+        "ggml_type_id": 2,
+        "gguf_shape": [
+          2048,
+          2048
+        ],
+        "payload_bytes": 2359296,
+        "sha256": "0be012e8676ed2f279ccc03a9b645ebd1328ee3e2bf13bd01e1e2227be9b92cd",
+        "source_tensor": "model.language_model.layers.0.linear_attn.out_proj.weight",
+        "streamed_transform_equals_pinned_converter": true,
+        "tensor": "blk.0.ssm_out.weight"
+      },
+      {
+        "aligned_gguf_bytes": 3538944,
+        "chunked_candidate_equals_quantized_converter_tensor": true,
+        "errors": {
+          "max_absolute_error": 0.10400390625,
+          "mean_absolute_error": 0.005014609113016696,
+          "relative_frobenius_error": 0.7218356835681926,
+          "rmse": 0.0059866249996465126
+        },
+        "ggml_type": "Q2_0",
+        "ggml_type_id": 42,
+        "gguf_shape": [
+          6144,
+          2048
+        ],
+        "payload_bytes": 3538944,
+        "sha256": "d23c836bcee3624edfdf63bf8bdc2e431477925153168b5b567f98de85ef26c7",
+        "source_tensor": "model.language_model.layers.0.mlp.down_proj.weight",
+        "streamed_transform_equals_pinned_converter": true,
+        "tensor": "blk.0.ffn_down.weight"
+      },
+      {
+        "aligned_gguf_bytes": 7077888,
+        "chunked_candidate_equals_quantized_converter_tensor": true,
+        "errors": {
+          "max_absolute_error": 0.0194091796875,
+          "mean_absolute_error": 0.000602366654232675,
+          "relative_frobenius_error": 0.08780424827785796,
+          "rmse": 0.0007282143565097595
+        },
+        "ggml_type": "Q4_0",
+        "ggml_type_id": 2,
+        "gguf_shape": [
+          6144,
+          2048
+        ],
+        "payload_bytes": 7077888,
+        "sha256": "1b04fd3088f4195db61967d653c9dc10ca2a8fc129863a340ae9b689fa42189e",
+        "source_tensor": "model.language_model.layers.0.mlp.down_proj.weight",
+        "streamed_transform_equals_pinned_converter": true,
+        "tensor": "blk.0.ffn_down.weight"
+      },
+      {
+        "aligned_gguf_bytes": 3538944,
+        "chunked_candidate_equals_quantized_converter_tensor": true,
+        "errors": {
+          "max_absolute_error": 0.06005859375,
+          "mean_absolute_error": 0.006038843798775205,
+          "relative_frobenius_error": 0.7207710278529675,
+          "rmse": 0.007220650959095273
+        },
+        "ggml_type": "Q2_0",
+        "ggml_type_id": 42,
+        "gguf_shape": [
+          2048,
+          6144
+        ],
+        "payload_bytes": 3538944,
+        "sha256": "229aa99084a2956a2e0ff46024561dc6bf57a79ad7157cd70e369a96a5dffdaf",
+        "source_tensor": "model.language_model.layers.0.mlp.gate_proj.weight",
+        "streamed_transform_equals_pinned_converter": true,
+        "tensor": "blk.0.ffn_gate.weight"
+      },
+      {
+        "aligned_gguf_bytes": 7077888,
+        "chunked_candidate_equals_quantized_converter_tensor": true,
+        "errors": {
+          "max_absolute_error": 0.011474609375,
+          "mean_absolute_error": 0.000722970832984777,
+          "relative_frobenius_error": 0.08717199415242427,
+          "rmse": 0.0008732850223710032
+        },
+        "ggml_type": "Q4_0",
+        "ggml_type_id": 2,
+        "gguf_shape": [
+          2048,
+          6144
+        ],
+        "payload_bytes": 7077888,
+        "sha256": "e6ae52072f2b60d38a31b3568aed59eb322129e63d90ff661a901e0101493871",
+        "source_tensor": "model.language_model.layers.0.mlp.gate_proj.weight",
+        "streamed_transform_equals_pinned_converter": true,
+        "tensor": "blk.0.ffn_gate.weight"
+      },
+      {
+        "aligned_gguf_bytes": 3538944,
+        "chunked_candidate_equals_quantized_converter_tensor": true,
+        "errors": {
+          "max_absolute_error": 0.041748046875,
+          "mean_absolute_error": 0.004979191219650475,
+          "relative_frobenius_error": 0.7198383891983182,
+          "rmse": 0.0059305265804289655
+        },
+        "ggml_type": "Q2_0",
+        "ggml_type_id": 42,
+        "gguf_shape": [
+          2048,
+          6144
+        ],
+        "payload_bytes": 3538944,
+        "sha256": "7f98c4d8d681a503c93ff2d254677ff68ece176da6363c8befc4fed4edf56ae6",
+        "source_tensor": "model.language_model.layers.0.mlp.up_proj.weight",
+        "streamed_transform_equals_pinned_converter": true,
+        "tensor": "blk.0.ffn_up.weight"
+      },
+      {
+        "aligned_gguf_bytes": 7077888,
+        "chunked_candidate_equals_quantized_converter_tensor": true,
+        "errors": {
+          "max_absolute_error": 0.007110595703125,
+          "mean_absolute_error": 0.0005966423540720462,
+          "relative_frobenius_error": 0.08695175369497075,
+          "rmse": 0.0007163686936414105
+        },
+        "ggml_type": "Q4_0",
+        "ggml_type_id": 2,
+        "gguf_shape": [
+          2048,
+          6144
+        ],
+        "payload_bytes": 7077888,
+        "sha256": "d82261a2046e423b6f213865a7fa37e87397b2d312173485683c5647f05b7096",
+        "source_tensor": "model.language_model.layers.0.mlp.up_proj.weight",
+        "streamed_transform_equals_pinned_converter": true,
+        "tensor": "blk.0.ffn_up.weight"
+      }
+    ]
+  }
+}
