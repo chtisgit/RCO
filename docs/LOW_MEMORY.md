@@ -69,6 +69,41 @@ atomic storage, checksummed streaming reads, and bounded decoding. It does not
 replace the pending reference-GGUF load test, real Qwen3.5-2B candidate run,
 genuine Qwen3.6-MoE block gate, or CUDA memory gates.
 
+## Qwen3.5-2B dense oracle
+
+The primary development checkpoint is pinned to
+`Qwen/Qwen3.5-2B-Base` revision
+`b1485b2fa6dfa1287294f269f5fb618e03d52d7c`. The single safetensors shard is
+4,548,221,488 bytes and has SHA-256
+`928acbf11878c32185bbd863514d191769285065ab9ea14fbfe431303f5fdf2d`.
+All twelve downloaded files carry that same Hub revision in their local
+metadata, and the independently calculated shard hash matches its published
+LFS identity.
+
+`reports/qwen35_2b_identity.json` is the authoritative metadata-only inventory.
+It verifies the index against the shard and records every text tensor's name,
+category, dtype, shape, element count, logical bytes, and source shard. The
+checkpoint contains 632 tensors and 4,548,144,832 logical bytes. The text-only
+scope contains 320 tensors and 3,763,655,360 logical bytes; 297 vision and 15
+MTP tensors are explicitly omitted. The text configuration has 24 decoder
+layers—18 linear-attention and 6 full-attention layers—and a 248,320-token
+vocabulary.
+
+Reproduce the identity gate without materializing any tensor payload:
+
+```bash
+python tools/audit_model_identity.py \
+  --model-dir /path/to/Qwen3.5-2B-Base \
+  --repo-id Qwen/Qwen3.5-2B-Base \
+  --revision b1485b2fa6dfa1287294f269f5fb618e03d52d7c \
+  --weight-sha256 928acbf11878c32185bbd863514d191769285065ab9ea14fbfe431303f5fdf2d \
+  --output reports/qwen35_2b_identity.json
+```
+
+This passes the acquisition and immutable-inventory portion of the small-oracle
+gate. Canonical GGUF mapping, dense calibration-loss reproduction, and retained
+block numerical comparison remain separate milestones.
+
 The tensor-name audit of the local published checkpoint covers all 93,625
 source tensors: 93,275 text tensors, 333 vision tensors, and 17 MTP tensors,
 with zero unknown names. The recorded audit is

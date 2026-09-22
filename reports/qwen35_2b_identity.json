@@ -1,0 +1,3857 @@
+{
+  "category_counts": {
+    "embedding": 1,
+    "linear_attention": 162,
+    "mtp": 15,
+    "normalization": 49,
+    "ordinary_text": 72,
+    "self_attention": 36,
+    "vision": 297
+  },
+  "config": {
+    "architecture": "Qwen3_5ForConditionalGeneration",
+    "dtype": "bfloat16",
+    "hidden_size": 2048,
+    "intermediate_size": 6144,
+    "layer_type_counts": {
+      "full_attention": 6,
+      "linear_attention": 18
+    },
+    "model_type": "qwen3_5",
+    "num_hidden_layers": 24,
+    "text_model_type": "qwen3_5_text",
+    "tie_word_embeddings": true,
+    "vocab_size": 248320
+  },
+  "files": [
+    {
+      "bytes": 1570,
+      "hub_etag": "52373fe24473b1aa44333d318f578ae6bf04b49b",
+      "path": ".gitattributes",
+      "sha256": "34448b82c17d60fec9b65b1f093c115ddbaadc04beb1b0140b6bfed2e012a930"
+    },
+    {
+      "bytes": 11343,
+      "hub_etag": "1d5180a42f1c3383ba7c7bd0a50f0837ef0168df",
+      "path": "LICENSE",
+      "sha256": "50cbab8a892c5f2993b8c7351a99182507472def3b1374558308605d99b86b32"
+    },
+    {
+      "bytes": 3721,
+      "hub_etag": "f89cd1b857c5300003c202ec1c9fe47ffb34dcbd",
+      "path": "README.md",
+      "sha256": "50ca45b87d976d9850de95ad00e76fba77e105c2cdef1093b8e3bb261d9a1787"
+    },
+    {
+      "bytes": 2908,
+      "hub_etag": "d30a15be1bbfd610f58ad80f1fbeb6778f58a80f",
+      "path": "config.json",
+      "sha256": "ed1c1723241f23f7f4e23430759cbd7dcfb4103cbdfe052bfe7626b57c2615b4"
+    },
+    {
+      "bytes": 3353259,
+      "hub_etag": "a494e019ca1502219fd0128658b979e5f05ae8e8",
+      "path": "merges.txt",
+      "sha256": "a9d356d7bdf1ef4949e3e748e95b8e10ad9d4e2e838eddc38a0a7b6b94d1db8d"
+    },
+    {
+      "bytes": 4548221488,
+      "hub_etag": "928acbf11878c32185bbd863514d191769285065ab9ea14fbfe431303f5fdf2d",
+      "path": "model.safetensors-00001-of-00001.safetensors",
+      "sha256": "928acbf11878c32185bbd863514d191769285065ab9ea14fbfe431303f5fdf2d"
+    },
+    {
+      "bytes": 64460,
+      "hub_etag": "10fd4fbf87dc5e198b28d9e0598c70a9780b72c1",
+      "path": "model.safetensors.index.json",
+      "sha256": "74d2ddfe79f10f35b27b498632f02b97b60dd9ec39b35d7c5a890c399284e319"
+    },
+    {
+      "bytes": 390,
+      "hub_etag": "2ea84a437d448ff71b08df68fdd949d5cc4ebb64",
+      "path": "preprocessor_config.json",
+      "sha256": "27225450ac9c6529872ee1924fcb0962ff5634834f817040f444118116f4e516"
+    },
+    {
+      "bytes": 12807196,
+      "hub_etag": "fe000e3ed39ed12b8d2481d527d44f93c65d37e87645d2dcc80d1bf9d50d2927",
+      "path": "tokenizer.json",
+      "sha256": "fe000e3ed39ed12b8d2481d527d44f93c65d37e87645d2dcc80d1bf9d50d2927"
+    },
+    {
+      "bytes": 16712,
+      "hub_etag": "34e1f7a59c40a7a4197ce3dbb242b94dc5bef1dd",
+      "path": "tokenizer_config.json",
+      "sha256": "e611fbccc7c29ef3b1cafb1cb7ea548d189968632901d678fd62be68c47885de"
+    },
+    {
+      "bytes": 386,
+      "hub_etag": "37900b3ff9295e1aa7e211378466356b52e64e55",
+      "path": "video_preprocessor_config.json",
+      "sha256": "d039cd7d88b3502a99edd455496b75b44ecf7dd3b3669748bafac37e6cecc085"
+    },
+    {
+      "bytes": 6722759,
+      "hub_etag": "0aa0ce0658d60ac4a5d609f4eadb0e8e43514176",
+      "path": "vocab.json",
+      "sha256": "ce99b4cb2983d118806ce0a8b777a35b093e2000a503ebde25853284c9dfa003"
+    }
+  ],
+  "logical_weight_bytes": 4548144832,
+  "model_dir": "/home/christian/projects/gsq-rco-moe/data/qwen35_2b_base",
+  "omitted_tensor_count": 312,
+  "repo_id": "Qwen/Qwen3.5-2B-Base",
+  "revision": "b1485b2fa6dfa1287294f269f5fb618e03d52d7c",
+  "schema": 1,
+  "shard_count": 1,
+  "status": "pass",
+  "tensor_count": 632,
+  "text_inventory": [
+    {
+      "category": "embedding",
+      "dtype": "BF16",
+      "logical_bytes": 1017118720,
+      "name": "model.language_model.embed_tokens.weight",
+      "numel": 508559360,
+      "shape": [
+        248320,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.0.input_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 64,
+      "name": "model.language_model.layers.0.linear_attn.A_log",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 49152,
+      "name": "model.language_model.layers.0.linear_attn.conv1d.weight",
+      "numel": 24576,
+      "shape": [
+        6144,
+        1,
+        4
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 32,
+      "name": "model.language_model.layers.0.linear_attn.dt_bias",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.0.linear_attn.in_proj_a.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.0.linear_attn.in_proj_b.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.0.linear_attn.in_proj_qkv.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.0.linear_attn.in_proj_z.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 512,
+      "name": "model.language_model.layers.0.linear_attn.norm.weight",
+      "numel": 128,
+      "shape": [
+        128
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.0.linear_attn.out_proj.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.0.mlp.down_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        2048,
+        6144
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.0.mlp.gate_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.0.mlp.up_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.0.post_attention_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.1.input_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 64,
+      "name": "model.language_model.layers.1.linear_attn.A_log",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 49152,
+      "name": "model.language_model.layers.1.linear_attn.conv1d.weight",
+      "numel": 24576,
+      "shape": [
+        6144,
+        1,
+        4
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 32,
+      "name": "model.language_model.layers.1.linear_attn.dt_bias",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.1.linear_attn.in_proj_a.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.1.linear_attn.in_proj_b.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.1.linear_attn.in_proj_qkv.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.1.linear_attn.in_proj_z.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 512,
+      "name": "model.language_model.layers.1.linear_attn.norm.weight",
+      "numel": 128,
+      "shape": [
+        128
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.1.linear_attn.out_proj.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.1.mlp.down_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        2048,
+        6144
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.1.mlp.gate_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.1.mlp.up_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.1.post_attention_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.10.input_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 64,
+      "name": "model.language_model.layers.10.linear_attn.A_log",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 49152,
+      "name": "model.language_model.layers.10.linear_attn.conv1d.weight",
+      "numel": 24576,
+      "shape": [
+        6144,
+        1,
+        4
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 32,
+      "name": "model.language_model.layers.10.linear_attn.dt_bias",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.10.linear_attn.in_proj_a.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.10.linear_attn.in_proj_b.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.10.linear_attn.in_proj_qkv.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.10.linear_attn.in_proj_z.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 512,
+      "name": "model.language_model.layers.10.linear_attn.norm.weight",
+      "numel": 128,
+      "shape": [
+        128
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.10.linear_attn.out_proj.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.10.mlp.down_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        2048,
+        6144
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.10.mlp.gate_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.10.mlp.up_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.10.post_attention_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.11.input_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.11.mlp.down_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        2048,
+        6144
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.11.mlp.gate_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.11.mlp.up_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.11.post_attention_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 512,
+      "name": "model.language_model.layers.11.self_attn.k_norm.weight",
+      "numel": 256,
+      "shape": [
+        256
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 2097152,
+      "name": "model.language_model.layers.11.self_attn.k_proj.weight",
+      "numel": 1048576,
+      "shape": [
+        512,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.11.self_attn.o_proj.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 512,
+      "name": "model.language_model.layers.11.self_attn.q_norm.weight",
+      "numel": 256,
+      "shape": [
+        256
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 16777216,
+      "name": "model.language_model.layers.11.self_attn.q_proj.weight",
+      "numel": 8388608,
+      "shape": [
+        4096,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 2097152,
+      "name": "model.language_model.layers.11.self_attn.v_proj.weight",
+      "numel": 1048576,
+      "shape": [
+        512,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.12.input_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 64,
+      "name": "model.language_model.layers.12.linear_attn.A_log",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 49152,
+      "name": "model.language_model.layers.12.linear_attn.conv1d.weight",
+      "numel": 24576,
+      "shape": [
+        6144,
+        1,
+        4
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 32,
+      "name": "model.language_model.layers.12.linear_attn.dt_bias",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.12.linear_attn.in_proj_a.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.12.linear_attn.in_proj_b.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.12.linear_attn.in_proj_qkv.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.12.linear_attn.in_proj_z.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 512,
+      "name": "model.language_model.layers.12.linear_attn.norm.weight",
+      "numel": 128,
+      "shape": [
+        128
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.12.linear_attn.out_proj.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.12.mlp.down_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        2048,
+        6144
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.12.mlp.gate_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.12.mlp.up_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.12.post_attention_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.13.input_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 64,
+      "name": "model.language_model.layers.13.linear_attn.A_log",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 49152,
+      "name": "model.language_model.layers.13.linear_attn.conv1d.weight",
+      "numel": 24576,
+      "shape": [
+        6144,
+        1,
+        4
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 32,
+      "name": "model.language_model.layers.13.linear_attn.dt_bias",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.13.linear_attn.in_proj_a.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.13.linear_attn.in_proj_b.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.13.linear_attn.in_proj_qkv.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.13.linear_attn.in_proj_z.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 512,
+      "name": "model.language_model.layers.13.linear_attn.norm.weight",
+      "numel": 128,
+      "shape": [
+        128
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.13.linear_attn.out_proj.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.13.mlp.down_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        2048,
+        6144
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.13.mlp.gate_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.13.mlp.up_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.13.post_attention_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.14.input_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 64,
+      "name": "model.language_model.layers.14.linear_attn.A_log",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 49152,
+      "name": "model.language_model.layers.14.linear_attn.conv1d.weight",
+      "numel": 24576,
+      "shape": [
+        6144,
+        1,
+        4
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 32,
+      "name": "model.language_model.layers.14.linear_attn.dt_bias",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.14.linear_attn.in_proj_a.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.14.linear_attn.in_proj_b.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.14.linear_attn.in_proj_qkv.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.14.linear_attn.in_proj_z.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 512,
+      "name": "model.language_model.layers.14.linear_attn.norm.weight",
+      "numel": 128,
+      "shape": [
+        128
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.14.linear_attn.out_proj.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.14.mlp.down_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        2048,
+        6144
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.14.mlp.gate_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.14.mlp.up_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.14.post_attention_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.15.input_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.15.mlp.down_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        2048,
+        6144
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.15.mlp.gate_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.15.mlp.up_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.15.post_attention_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 512,
+      "name": "model.language_model.layers.15.self_attn.k_norm.weight",
+      "numel": 256,
+      "shape": [
+        256
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 2097152,
+      "name": "model.language_model.layers.15.self_attn.k_proj.weight",
+      "numel": 1048576,
+      "shape": [
+        512,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.15.self_attn.o_proj.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 512,
+      "name": "model.language_model.layers.15.self_attn.q_norm.weight",
+      "numel": 256,
+      "shape": [
+        256
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 16777216,
+      "name": "model.language_model.layers.15.self_attn.q_proj.weight",
+      "numel": 8388608,
+      "shape": [
+        4096,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 2097152,
+      "name": "model.language_model.layers.15.self_attn.v_proj.weight",
+      "numel": 1048576,
+      "shape": [
+        512,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.16.input_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 64,
+      "name": "model.language_model.layers.16.linear_attn.A_log",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 49152,
+      "name": "model.language_model.layers.16.linear_attn.conv1d.weight",
+      "numel": 24576,
+      "shape": [
+        6144,
+        1,
+        4
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 32,
+      "name": "model.language_model.layers.16.linear_attn.dt_bias",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.16.linear_attn.in_proj_a.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.16.linear_attn.in_proj_b.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.16.linear_attn.in_proj_qkv.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.16.linear_attn.in_proj_z.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 512,
+      "name": "model.language_model.layers.16.linear_attn.norm.weight",
+      "numel": 128,
+      "shape": [
+        128
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.16.linear_attn.out_proj.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.16.mlp.down_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        2048,
+        6144
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.16.mlp.gate_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.16.mlp.up_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.16.post_attention_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.17.input_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 64,
+      "name": "model.language_model.layers.17.linear_attn.A_log",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 49152,
+      "name": "model.language_model.layers.17.linear_attn.conv1d.weight",
+      "numel": 24576,
+      "shape": [
+        6144,
+        1,
+        4
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 32,
+      "name": "model.language_model.layers.17.linear_attn.dt_bias",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.17.linear_attn.in_proj_a.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.17.linear_attn.in_proj_b.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.17.linear_attn.in_proj_qkv.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.17.linear_attn.in_proj_z.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 512,
+      "name": "model.language_model.layers.17.linear_attn.norm.weight",
+      "numel": 128,
+      "shape": [
+        128
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.17.linear_attn.out_proj.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.17.mlp.down_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        2048,
+        6144
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.17.mlp.gate_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.17.mlp.up_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.17.post_attention_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.18.input_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 64,
+      "name": "model.language_model.layers.18.linear_attn.A_log",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 49152,
+      "name": "model.language_model.layers.18.linear_attn.conv1d.weight",
+      "numel": 24576,
+      "shape": [
+        6144,
+        1,
+        4
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 32,
+      "name": "model.language_model.layers.18.linear_attn.dt_bias",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.18.linear_attn.in_proj_a.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.18.linear_attn.in_proj_b.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.18.linear_attn.in_proj_qkv.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.18.linear_attn.in_proj_z.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 512,
+      "name": "model.language_model.layers.18.linear_attn.norm.weight",
+      "numel": 128,
+      "shape": [
+        128
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.18.linear_attn.out_proj.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.18.mlp.down_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        2048,
+        6144
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.18.mlp.gate_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.18.mlp.up_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.18.post_attention_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.19.input_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.19.mlp.down_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        2048,
+        6144
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.19.mlp.gate_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.19.mlp.up_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.19.post_attention_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 512,
+      "name": "model.language_model.layers.19.self_attn.k_norm.weight",
+      "numel": 256,
+      "shape": [
+        256
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 2097152,
+      "name": "model.language_model.layers.19.self_attn.k_proj.weight",
+      "numel": 1048576,
+      "shape": [
+        512,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.19.self_attn.o_proj.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 512,
+      "name": "model.language_model.layers.19.self_attn.q_norm.weight",
+      "numel": 256,
+      "shape": [
+        256
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 16777216,
+      "name": "model.language_model.layers.19.self_attn.q_proj.weight",
+      "numel": 8388608,
+      "shape": [
+        4096,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 2097152,
+      "name": "model.language_model.layers.19.self_attn.v_proj.weight",
+      "numel": 1048576,
+      "shape": [
+        512,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.2.input_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 64,
+      "name": "model.language_model.layers.2.linear_attn.A_log",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 49152,
+      "name": "model.language_model.layers.2.linear_attn.conv1d.weight",
+      "numel": 24576,
+      "shape": [
+        6144,
+        1,
+        4
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 32,
+      "name": "model.language_model.layers.2.linear_attn.dt_bias",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.2.linear_attn.in_proj_a.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.2.linear_attn.in_proj_b.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.2.linear_attn.in_proj_qkv.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.2.linear_attn.in_proj_z.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 512,
+      "name": "model.language_model.layers.2.linear_attn.norm.weight",
+      "numel": 128,
+      "shape": [
+        128
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.2.linear_attn.out_proj.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.2.mlp.down_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        2048,
+        6144
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.2.mlp.gate_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.2.mlp.up_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.2.post_attention_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.20.input_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 64,
+      "name": "model.language_model.layers.20.linear_attn.A_log",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 49152,
+      "name": "model.language_model.layers.20.linear_attn.conv1d.weight",
+      "numel": 24576,
+      "shape": [
+        6144,
+        1,
+        4
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 32,
+      "name": "model.language_model.layers.20.linear_attn.dt_bias",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.20.linear_attn.in_proj_a.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.20.linear_attn.in_proj_b.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.20.linear_attn.in_proj_qkv.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.20.linear_attn.in_proj_z.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 512,
+      "name": "model.language_model.layers.20.linear_attn.norm.weight",
+      "numel": 128,
+      "shape": [
+        128
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.20.linear_attn.out_proj.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.20.mlp.down_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        2048,
+        6144
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.20.mlp.gate_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.20.mlp.up_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.20.post_attention_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.21.input_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 64,
+      "name": "model.language_model.layers.21.linear_attn.A_log",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 49152,
+      "name": "model.language_model.layers.21.linear_attn.conv1d.weight",
+      "numel": 24576,
+      "shape": [
+        6144,
+        1,
+        4
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 32,
+      "name": "model.language_model.layers.21.linear_attn.dt_bias",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.21.linear_attn.in_proj_a.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.21.linear_attn.in_proj_b.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.21.linear_attn.in_proj_qkv.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.21.linear_attn.in_proj_z.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 512,
+      "name": "model.language_model.layers.21.linear_attn.norm.weight",
+      "numel": 128,
+      "shape": [
+        128
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.21.linear_attn.out_proj.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.21.mlp.down_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        2048,
+        6144
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.21.mlp.gate_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.21.mlp.up_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.21.post_attention_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.22.input_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 64,
+      "name": "model.language_model.layers.22.linear_attn.A_log",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 49152,
+      "name": "model.language_model.layers.22.linear_attn.conv1d.weight",
+      "numel": 24576,
+      "shape": [
+        6144,
+        1,
+        4
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 32,
+      "name": "model.language_model.layers.22.linear_attn.dt_bias",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.22.linear_attn.in_proj_a.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.22.linear_attn.in_proj_b.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.22.linear_attn.in_proj_qkv.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.22.linear_attn.in_proj_z.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 512,
+      "name": "model.language_model.layers.22.linear_attn.norm.weight",
+      "numel": 128,
+      "shape": [
+        128
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.22.linear_attn.out_proj.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.22.mlp.down_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        2048,
+        6144
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.22.mlp.gate_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.22.mlp.up_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.22.post_attention_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.23.input_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.23.mlp.down_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        2048,
+        6144
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.23.mlp.gate_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.23.mlp.up_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.23.post_attention_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 512,
+      "name": "model.language_model.layers.23.self_attn.k_norm.weight",
+      "numel": 256,
+      "shape": [
+        256
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 2097152,
+      "name": "model.language_model.layers.23.self_attn.k_proj.weight",
+      "numel": 1048576,
+      "shape": [
+        512,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.23.self_attn.o_proj.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 512,
+      "name": "model.language_model.layers.23.self_attn.q_norm.weight",
+      "numel": 256,
+      "shape": [
+        256
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 16777216,
+      "name": "model.language_model.layers.23.self_attn.q_proj.weight",
+      "numel": 8388608,
+      "shape": [
+        4096,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 2097152,
+      "name": "model.language_model.layers.23.self_attn.v_proj.weight",
+      "numel": 1048576,
+      "shape": [
+        512,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.3.input_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.3.mlp.down_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        2048,
+        6144
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.3.mlp.gate_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.3.mlp.up_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.3.post_attention_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 512,
+      "name": "model.language_model.layers.3.self_attn.k_norm.weight",
+      "numel": 256,
+      "shape": [
+        256
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 2097152,
+      "name": "model.language_model.layers.3.self_attn.k_proj.weight",
+      "numel": 1048576,
+      "shape": [
+        512,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.3.self_attn.o_proj.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 512,
+      "name": "model.language_model.layers.3.self_attn.q_norm.weight",
+      "numel": 256,
+      "shape": [
+        256
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 16777216,
+      "name": "model.language_model.layers.3.self_attn.q_proj.weight",
+      "numel": 8388608,
+      "shape": [
+        4096,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 2097152,
+      "name": "model.language_model.layers.3.self_attn.v_proj.weight",
+      "numel": 1048576,
+      "shape": [
+        512,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.4.input_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 64,
+      "name": "model.language_model.layers.4.linear_attn.A_log",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 49152,
+      "name": "model.language_model.layers.4.linear_attn.conv1d.weight",
+      "numel": 24576,
+      "shape": [
+        6144,
+        1,
+        4
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 32,
+      "name": "model.language_model.layers.4.linear_attn.dt_bias",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.4.linear_attn.in_proj_a.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.4.linear_attn.in_proj_b.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.4.linear_attn.in_proj_qkv.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.4.linear_attn.in_proj_z.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 512,
+      "name": "model.language_model.layers.4.linear_attn.norm.weight",
+      "numel": 128,
+      "shape": [
+        128
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.4.linear_attn.out_proj.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.4.mlp.down_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        2048,
+        6144
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.4.mlp.gate_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.4.mlp.up_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.4.post_attention_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.5.input_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 64,
+      "name": "model.language_model.layers.5.linear_attn.A_log",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 49152,
+      "name": "model.language_model.layers.5.linear_attn.conv1d.weight",
+      "numel": 24576,
+      "shape": [
+        6144,
+        1,
+        4
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 32,
+      "name": "model.language_model.layers.5.linear_attn.dt_bias",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.5.linear_attn.in_proj_a.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.5.linear_attn.in_proj_b.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.5.linear_attn.in_proj_qkv.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.5.linear_attn.in_proj_z.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 512,
+      "name": "model.language_model.layers.5.linear_attn.norm.weight",
+      "numel": 128,
+      "shape": [
+        128
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.5.linear_attn.out_proj.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.5.mlp.down_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        2048,
+        6144
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.5.mlp.gate_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.5.mlp.up_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.5.post_attention_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.6.input_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 64,
+      "name": "model.language_model.layers.6.linear_attn.A_log",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 49152,
+      "name": "model.language_model.layers.6.linear_attn.conv1d.weight",
+      "numel": 24576,
+      "shape": [
+        6144,
+        1,
+        4
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 32,
+      "name": "model.language_model.layers.6.linear_attn.dt_bias",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.6.linear_attn.in_proj_a.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.6.linear_attn.in_proj_b.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.6.linear_attn.in_proj_qkv.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.6.linear_attn.in_proj_z.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 512,
+      "name": "model.language_model.layers.6.linear_attn.norm.weight",
+      "numel": 128,
+      "shape": [
+        128
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.6.linear_attn.out_proj.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.6.mlp.down_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        2048,
+        6144
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.6.mlp.gate_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.6.mlp.up_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.6.post_attention_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.7.input_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.7.mlp.down_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        2048,
+        6144
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.7.mlp.gate_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.7.mlp.up_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.7.post_attention_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 512,
+      "name": "model.language_model.layers.7.self_attn.k_norm.weight",
+      "numel": 256,
+      "shape": [
+        256
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 2097152,
+      "name": "model.language_model.layers.7.self_attn.k_proj.weight",
+      "numel": 1048576,
+      "shape": [
+        512,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.7.self_attn.o_proj.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 512,
+      "name": "model.language_model.layers.7.self_attn.q_norm.weight",
+      "numel": 256,
+      "shape": [
+        256
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 16777216,
+      "name": "model.language_model.layers.7.self_attn.q_proj.weight",
+      "numel": 8388608,
+      "shape": [
+        4096,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "self_attention",
+      "dtype": "BF16",
+      "logical_bytes": 2097152,
+      "name": "model.language_model.layers.7.self_attn.v_proj.weight",
+      "numel": 1048576,
+      "shape": [
+        512,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.8.input_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 64,
+      "name": "model.language_model.layers.8.linear_attn.A_log",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 49152,
+      "name": "model.language_model.layers.8.linear_attn.conv1d.weight",
+      "numel": 24576,
+      "shape": [
+        6144,
+        1,
+        4
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 32,
+      "name": "model.language_model.layers.8.linear_attn.dt_bias",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.8.linear_attn.in_proj_a.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.8.linear_attn.in_proj_b.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.8.linear_attn.in_proj_qkv.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.8.linear_attn.in_proj_z.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 512,
+      "name": "model.language_model.layers.8.linear_attn.norm.weight",
+      "numel": 128,
+      "shape": [
+        128
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.8.linear_attn.out_proj.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.8.mlp.down_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        2048,
+        6144
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.8.mlp.gate_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.8.mlp.up_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.8.post_attention_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.9.input_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 64,
+      "name": "model.language_model.layers.9.linear_attn.A_log",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 49152,
+      "name": "model.language_model.layers.9.linear_attn.conv1d.weight",
+      "numel": 24576,
+      "shape": [
+        6144,
+        1,
+        4
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 32,
+      "name": "model.language_model.layers.9.linear_attn.dt_bias",
+      "numel": 16,
+      "shape": [
+        16
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.9.linear_attn.in_proj_a.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 65536,
+      "name": "model.language_model.layers.9.linear_attn.in_proj_b.weight",
+      "numel": 32768,
+      "shape": [
+        16,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.9.linear_attn.in_proj_qkv.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.9.linear_attn.in_proj_z.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "F32",
+      "logical_bytes": 512,
+      "name": "model.language_model.layers.9.linear_attn.norm.weight",
+      "numel": 128,
+      "shape": [
+        128
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "linear_attention",
+      "dtype": "BF16",
+      "logical_bytes": 8388608,
+      "name": "model.language_model.layers.9.linear_attn.out_proj.weight",
+      "numel": 4194304,
+      "shape": [
+        2048,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.9.mlp.down_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        2048,
+        6144
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.9.mlp.gate_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "ordinary_text",
+      "dtype": "BF16",
+      "logical_bytes": 25165824,
+      "name": "model.language_model.layers.9.mlp.up_proj.weight",
+      "numel": 12582912,
+      "shape": [
+        6144,
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.layers.9.post_attention_layernorm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    },
+    {
+      "category": "normalization",
+      "dtype": "BF16",
+      "logical_bytes": 4096,
+      "name": "model.language_model.norm.weight",
+      "numel": 2048,
+      "shape": [
+        2048
+      ],
+      "shard": "model.safetensors-00001-of-00001.safetensors"
+    }
+  ],
+  "text_logical_weight_bytes": 3763655360,
+  "text_tensor_count": 320,
+  "unknown_tensors": []
+}
