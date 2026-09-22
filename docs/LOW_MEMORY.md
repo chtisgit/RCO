@@ -288,6 +288,55 @@ conversion needed by a bounded writer. It does not prove the old full-model
 mixed-bit assignment. The repository now pins the verified Transformers
 5.13.1 and `compressed-tensors` 0.18.0 pair.
 
+### Mixed routed-expert output incompatibility
+
+The production writer cannot yet preserve an RCO assignment that selects
+different packed widths for different routed experts. Qwen exposes its routed
+experts as two fused runtime parameters rather than individual `nn.Linear`
+modules. Transformers 5.13.1 therefore runs `DecompressExperts` before stacking
+the logical checkpoint tensors, and that conversion takes the first
+compressed-tensors config group as the quantization scheme for every expert.
+
+`tools/audit_mixed_expert_compatibility.py` proves the consequence with the
+same one-layer, two-expert model used by the positive writer audit. Expert 0 is
+packed at Q2 and expert 1 at Q4. It tests Q2-first and Q4-first config order,
+each through both meta and materialized CPU loading. All four loads fail during
+expert conversion. With Q2 selected globally, the Q4 packed rows decode at
+twice the expected logical width (`32` versus `64` in the gate/up probe). With
+Q4 selected globally, the Q2 rows decode at half width (`16` versus `32`). The
+51,842-byte checkpoint is automatically deleted; the 4.3 KiB evidence report
+is `reports/qwen35_mixed_expert_compatibility.json`.
+
+The current upstream
+[Transformers implementation](https://github.com/huggingface/transformers/blob/main/src/transformers/integrations/compressed_tensors.py)
+improves selection between an expert-wide scheme and schemes for other modules,
+but still resolves one scheme for the complete expert collection. The current
+[vLLM compressed-tensors integration](https://github.com/vllm-project/vllm/blob/main/vllm/model_executor/layers/quantization/compressed_tensors/compressed_tensors.py)
+similarly selects one quantization method for a fused `RoutedExperts` layer.
+The compressed-tensors format can describe non-uniform module schemes in
+general, but these fused-MoE integration paths do not expose an independently
+selectable module per expert.
+
+The apparent alternatives do not satisfy the project objective:
+
+- constraining every routed expert to one width removes the per-expert mixed
+  allocation that RCO is meant to optimize;
+- storing Q2 choices in Q4 containers preserves values but forfeits their
+  storage and memory savings and misstates the selected-bit budget;
+- emitting dense BF16 fake-quant experts gives up the required model-memory
+  reduction;
+- converting the GPTQ-style RCO candidates to GGUF block types requantizes the
+  weights and no longer materializes the searched candidates; and
+- patching Transformers, adding custom model code, or designing a new runtime
+  format is a substantial compatibility workaround.
+
+`require_uniform_routed_expert_bits` now provides a fail-fast preflight for any
+packed writer built on the currently verified loader. Production writer work
+is paused at this boundary rather than emitting a checkpoint that cannot load
+or silently expanding lower-bit choices. A supported per-expert scheme lookup
+and execution path, or an explicitly accepted change to the output objective,
+is required before that milestone can continue.
+
 ## Remaining work
 
 The earlier Transformers 5.7.0 meta initialization was checked against the
@@ -308,9 +357,9 @@ driver now rejects such a mismatch before starting an optimization pass.
    base checkpoint using the pinned Qwen3.6 Transformers implementation.
 2. Add a training-aware streamed backward path for pruning masks if full-model
    pruning remains in scope.
-3. Implement the production writer that streams copied and selected tensors
-   directly into bounded-size output shards, using the now-proven published
-   packed schema and tiny round-trip path.
+3. Resolve the fused-Qwen per-expert mixed-bit runtime incompatibility, then
+   implement the production writer that streams copied and selected tensors
+   directly into bounded-size output shards.
 4. Validate one complete optimization step, then a multi-step run, while
    recording CUDA allocated/reserved peaks, process RSS, disk growth, and I/O.
 5. Load the materialized checkpoint and run numerical layer comparisons and a

@@ -12,6 +12,7 @@ if torch is not None:
     from quant.compressed_layout import (
         compressed_state_from_bundle,
         pack_codes_to_int32,
+        require_uniform_routed_expert_bits,
     )
 
 
@@ -98,6 +99,22 @@ class CompressedLayoutTest(unittest.TestCase):
                 bundle = {**base, **update}
                 with self.assertRaisesRegex(ValueError, message):
                     compressed_state_from_bundle(bundle)
+
+    def test_fused_qwen_experts_require_one_packed_width(self):
+        uniform = {
+            "model.layers.0.mlp.experts.0.gate_proj": 2,
+            "model.layers.1.mlp.experts.7.down_proj": 2,
+            "model.layers.0.self_attn.q_proj": 4,
+        }
+        self.assertEqual(require_uniform_routed_expert_bits(uniform), 2)
+        self.assertIsNone(require_uniform_routed_expert_bits({
+            "model.layers.0.self_attn.q_proj": 2,
+            "model.layers.1.self_attn.o_proj": 4,
+        }))
+        mixed = dict(uniform)
+        mixed["model.layers.1.mlp.experts.7.down_proj"] = 4
+        with self.assertRaisesRegex(ValueError, "one packed bit width"):
+            require_uniform_routed_expert_bits(mixed)
 
 
 if __name__ == "__main__":

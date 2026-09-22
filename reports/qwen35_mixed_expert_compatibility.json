@@ -1,0 +1,136 @@
+{
+  "cases": [
+    {
+      "attempts": [
+        {
+          "device_map": "meta",
+          "diagnostic": [
+            "Could not match `re:.*experts\\.1\\..*` in instance of Qwen3_5MoeForCausalLM",
+            "Could not match `re:.*experts\\.0\\..*` in instance of Qwen3_5MoeForCausalLM"
+          ],
+          "exception": "We encountered some issues during automatic conversion of the weights. For details look at the `CONVERSION` entries of the above report!",
+          "exception_type": "RuntimeError",
+          "result": "failed"
+        },
+        {
+          "device_map": null,
+          "diagnostic": [
+            "Could not match `re:.*experts\\.1\\..*` in instance of Qwen3_5MoeForCausalLM",
+            "Could not match `re:.*experts\\.0\\..*` in instance of Qwen3_5MoeForCausalLM"
+          ],
+          "exception": "We encountered some issues during automatic conversion of the weights. For details look at the `CONVERSION` entries of the above report!",
+          "exception_type": "RuntimeError",
+          "result": "failed"
+        }
+      ],
+      "config_group_order": [
+        {
+          "bits": 2,
+          "expert": 0
+        },
+        {
+          "bits": 4,
+          "expert": 1
+        }
+      ],
+      "direct_conversion": {
+        "exception": "The size of tensor a (32) must match the size of tensor b (64) at non-singleton dimension 1",
+        "exception_type": "RuntimeError",
+        "result": "failed"
+      }
+    },
+    {
+      "attempts": [
+        {
+          "device_map": "meta",
+          "diagnostic": [
+            "Could not match `re:.*experts\\.1\\..*` in instance of Qwen3_5MoeForCausalLM",
+            "Could not match `re:.*experts\\.0\\..*` in instance of Qwen3_5MoeForCausalLM"
+          ],
+          "exception": "We encountered some issues during automatic conversion of the weights. For details look at the `CONVERSION` entries of the above report!",
+          "exception_type": "RuntimeError",
+          "result": "failed"
+        },
+        {
+          "device_map": null,
+          "diagnostic": [
+            "Could not match `re:.*experts\\.1\\..*` in instance of Qwen3_5MoeForCausalLM",
+            "Could not match `re:.*experts\\.0\\..*` in instance of Qwen3_5MoeForCausalLM"
+          ],
+          "exception": "We encountered some issues during automatic conversion of the weights. For details look at the `CONVERSION` entries of the above report!",
+          "exception_type": "RuntimeError",
+          "result": "failed"
+        }
+      ],
+      "config_group_order": [
+        {
+          "bits": 4,
+          "expert": 1
+        },
+        {
+          "bits": 2,
+          "expert": 0
+        }
+      ],
+      "direct_conversion": {
+        "exception": "The size of tensor a (16) must match the size of tensor b (32) at non-singleton dimension 1",
+        "exception_type": "RuntimeError",
+        "result": "failed"
+      }
+    }
+  ],
+  "checkpoint": {
+    "files": {
+      "config.json": 2567,
+      "model-00001-of-00003.safetensors": 18760,
+      "model-00002-of-00003.safetensors": 14360,
+      "model-00003-of-00003.safetensors": 13072,
+      "model.safetensors.index.json": 3083
+    },
+    "total_bytes": 51842
+  },
+  "compressed_tensors": "0.18.0",
+  "conclusion": "Transformers 5.13.1 applies one config-group bit width to the whole fused expert collection; per-expert mixed packed widths cannot be loaded by the unmodified compressed-tensors path.",
+  "elapsed_seconds": 0.10498787701362744,
+  "expert_bits": [
+    2,
+    4
+  ],
+  "group_size": 8,
+  "loader_implementation": {
+    "decompress_experts_convert_sha256": "639308c89c42fac51d51cada8fcc50434c96b956023978d6d5e16dd18a8dbeed",
+    "selects_first_config_group": true
+  },
+  "model_class": "Qwen3_5MoeForCausalLM",
+  "packed_shapes": {
+    "model.layers.0.mlp.experts.0.down_proj": [
+      32,
+      1
+    ],
+    "model.layers.0.mlp.experts.0.gate_proj": [
+      16,
+      2
+    ],
+    "model.layers.0.mlp.experts.0.up_proj": [
+      16,
+      2
+    ],
+    "model.layers.0.mlp.experts.1.down_proj": [
+      32,
+      2
+    ],
+    "model.layers.0.mlp.experts.1.gate_proj": [
+      16,
+      4
+    ],
+    "model.layers.0.mlp.experts.1.up_proj": [
+      16,
+      4
+    ]
+  },
+  "process_peak_rss_bytes": 327495680,
+  "result": "unsupported_confirmed",
+  "schema": 1,
+  "torch": "2.11.0+cpu",
+  "transformers": "5.13.1"
+}

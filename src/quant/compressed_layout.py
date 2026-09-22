@@ -3,11 +3,37 @@
 from __future__ import annotations
 
 import math
+import re
 from typing import Any, Dict
 
 import torch
 
 from quant.qparams import load_qparams, pack_qweight, unpack_qweight
+
+
+_ROUTED_EXPERT = re.compile(
+    r"(?:^|\.)mlp\.experts\.\d+\.(?:gate_proj|up_proj|down_proj)$")
+
+
+def require_uniform_routed_expert_bits(assignment: Dict[str, int]) -> int | None:
+    """Reject packed assignments the stock fused-expert loader cannot read.
+
+    Transformers 5.13.1 chooses one compressed-tensors quantization scheme for
+    the whole fused Qwen expert collection. Different packed widths have
+    different row shapes and fail during logical-expert fusion. Return the
+    common width, or ``None`` when the assignment has no routed experts.
+    """
+    selected = {
+        int(bits) for name, bits in assignment.items()
+        if _ROUTED_EXPERT.search(name)
+    }
+    if len(selected) > 1:
+        widths = ", ".join(str(bits) for bits in sorted(selected))
+        raise ValueError(
+            "unmodified Transformers 5.13.1 compressed-tensors loading "
+            "requires one packed bit width across all fused Qwen routed "
+            f"experts; assignment contains {{{widths}}}")
+    return next(iter(selected), None)
 
 
 def pack_codes_to_int32(codes: torch.Tensor, bits: int) -> torch.Tensor:
@@ -95,4 +121,5 @@ __all__ = [
     "compressed_state_from_bundle",
     "compressed_state_from_qparams",
     "pack_codes_to_int32",
+    "require_uniform_routed_expert_bits",
 ]
