@@ -279,6 +279,12 @@ def main():
 
     t1 = time.perf_counter()
     quantizer.quantize(args.bitwidth_options, args.calibration_bitwidth)
+    if dist_utils.is_dist_available_and_initialized():
+        dist.barrier()
+    if dist_utils.is_main():
+        from quant.qparams import build_qparams_index
+        index_path = build_qparams_index(args.save_dir)
+        dist_utils.print_on_main(f"Candidate index written to {index_path}")
     t2 = time.perf_counter()
     dist_utils.print_on_main(f"Quantization took {(t2 - t1)} s.")
 

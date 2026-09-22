@@ -11,7 +11,7 @@ except ModuleNotFoundError:
 
 if torch is not None:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-    from quant.qparams import dequantize_from_qparams, save_qparams
+    from quant.qparams import build_qparams_index, dequantize_from_qparams, save_qparams
     from store import LoadMode, WeightStore
 
 
@@ -37,6 +37,7 @@ class PackedWeightStoreTest(unittest.TestCase):
             save_qparams(
                 layer_path, bits=bits, qweight=codes, scales=scales,
                 zeros=zeros, perm=perm, handle=handle)
+            build_qparams_index(directory)
 
             store = WeightStore(
                 directory, mode=LoadMode.LAZY, cache=False).load()
@@ -44,10 +45,18 @@ class PackedWeightStoreTest(unittest.TestCase):
             self.assertEqual(store.get_available_bitwidths(layer_path.name), [bits])
             self.assertEqual(store.get_layer_numel(layer_path.name, bits), 8)
             self.assertGreater(store.get_layer_storage_bytes(layer_path.name, bits), 0)
+            self.assertEqual(store._verified_qparams, set())
             actual = store.get_layer_weight(layer_path.name, bits)
+            destination = torch.empty_like(actual)
+            into = store.get_layer_weight_into(
+                layer_path.name, bits, destination)
 
             expected = (scales * (codes.float() - zeros))[:, perm.argsort()]
             self.assertTrue(torch.equal(actual, expected))
+            self.assertIs(into, destination)
+            self.assertTrue(torch.equal(into, expected))
+            self.assertEqual(
+                store._verified_qparams, {(layer_path.name, bits)})
             self.assertFalse(store._index[layer_path.name][bits].loaded)
 
 

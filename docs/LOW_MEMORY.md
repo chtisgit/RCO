@@ -17,8 +17,16 @@ state to one transformer block and a small routed-expert group.
   all experts into persistent `nn.Linear` modules.
 - Each expert shares one collected input Hessian between its gate and up
   projections; they consume copies sequentially during GPTQ.
-- Qparams schema 2 stores integer codes at their actual bit width. Dense
-  fake-quant candidates are optional and disabled by default.
+- Qparams schema 3 stores integer codes at their actual bit width, records a
+  SHA-256 digest for each tensor payload, and publishes each candidate with an
+  atomic same-directory rename. Schema 1 and 2 files remain readable.
+- Candidate generation writes an atomic `candidate-index.json` with paths,
+  sizes, shapes, quantization metadata, and component checksums. WeightStore
+  uses this index for parameter counts without decoding candidate payloads.
+- Candidate dequantization works in column chunks, can target a caller-provided
+  output tensor, and restores activation-order columns without a second dense
+  candidate allocation. Dense fake-quant candidates remain optional and are
+  disabled by default.
 - `WeightStore` indexes qparams-only databases and decodes one requested tensor
   without retaining it when its cache is off.
 - KL teacher caches can store only top-k FP16 log-probabilities and int32 token

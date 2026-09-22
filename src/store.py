@@ -10,7 +10,12 @@ from enum import Enum
 
 import torch
 
-from quant.qparams import QPARAMS_SUFFIX, dequantize_from_qparams, load_qparams
+from quant.qparams import (
+    CANDIDATE_INDEX_NAME,
+    QPARAMS_SUFFIX,
+    dequantize_from_qparams,
+    load_qparams,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -27,6 +32,7 @@ class LayerData:
     metadata: Optional[Dict[str, Any]] = None
     loaded: bool = False
     source: str = "dense"
+    storage_bytes: Optional[int] = None
 
 
 class WeightStore:
@@ -38,6 +44,7 @@ class WeightStore:
         self.cache = cache
         self._index: Dict[str, Dict[int, LayerData]] = {}
         self._initialized = False
+        self._verified_qparams: set[tuple[str, int]] = set()
 
     def load(self) -> "WeightStore":
         """Initialize the weight store. Returns self for chaining."""
@@ -92,6 +99,29 @@ class WeightStore:
                     bitwidth, LayerData(loaded=False, source="qparams"))
             weight_count += len(self._index[layer_name])
 
+        index_path = self.layer_dir / CANDIDATE_INDEX_NAME
+        if index_path.exists():
+            with index_path.open() as handle:
+                candidate_index = json.load(handle)
+            if candidate_index.get("schema") != 1:
+                raise ValueError(
+                    f"Unsupported candidate index schema in {index_path}: "
+                    f"{candidate_index.get('schema')}")
+            for layer_name, candidates in candidate_index.get("layers", {}).items():
+                for bitwidth_text, metadata in candidates.items():
+                    bitwidth = int(bitwidth_text)
+                    layer_data = self._index.get(layer_name, {}).get(bitwidth)
+                    if layer_data is None or layer_data.source != "qparams":
+                        continue
+                    layer_data.metadata = {
+                        key: metadata[key]
+                        for key in (
+                            "schema", "bits", "shape", "dtype", "group_size",
+                            "sym", "perchannel", "act_order", "checksums")
+                        if key in metadata
+                    }
+                    layer_data.storage_bytes = int(metadata["file_bytes"])
+
         logger.info(f"Indexed {weight_count} weight files across {layer_count} layers")
 
     def _load_all_weights(self) -> None:
@@ -111,6 +141,7 @@ class WeightStore:
 
     def _load_single_weight(
         self, layer_name: str, bitwidth: int, source: Optional[str] = None,
+        out: Optional[torch.Tensor] = None,
     ) -> Tuple[torch.Tensor, Optional[Dict[str, Any]]]:
         """Load a single weight file from disk."""
         layer_path = self.layer_dir / layer_name
@@ -118,15 +149,18 @@ class WeightStore:
 
         source = source or self._index[layer_name][bitwidth].source
         if source == "qparams":
-            bundle = load_qparams(layer_path, bitwidth, unpack=False)
-            weight = dequantize_from_qparams(bundle)
-            perm = bundle.get("perm")
-            if perm is not None:
-                # GPTQ act-order stores columns in Hessian order. A normal
-                # nn.Linear (including a fused expert slice) expects the
-                # original input-feature order because it has no QLinear
-                # activation-permutation hook.
-                weight = weight[:, torch.argsort(perm)]
+            key = (layer_name, bitwidth)
+            bundle = load_qparams(
+                layer_path, bitwidth, unpack=False,
+                verify=key not in self._verified_qparams)
+            self._verified_qparams.add(key)
+            # GPTQ act-order stores columns in Hessian order. A normal
+            # nn.Linear (including a fused expert slice) expects the original
+            # input-feature order because it has no activation-permutation
+            # hook. Restore directly into the result to avoid a second dense
+            # candidate allocation.
+            weight = dequantize_from_qparams(
+                bundle, out=out, restore_order=True)
             metadata = {
                 key: value for key, value in bundle.items()
                 if key not in {"qweight", "qweight_packed", "scales", "zeros", "perm"}
@@ -138,6 +172,13 @@ class WeightStore:
         logger.debug(f"Loading weight: {layer_name} @ {bitwidth}-bit")
 
         weight, embedded_metadata = self._load_pth(file_path)
+        if out is not None:
+            if (out.device.type != "cpu" or out.shape != weight.shape
+                    or out.dtype != weight.dtype):
+                raise ValueError(
+                    f"out does not match dense candidate {layer_name}@{bitwidth}")
+            out.copy_(weight)
+            weight = out
         file_metadata = self._load_metadata_file(layer_path, bitwidth)
 
         metadata = {**(embedded_metadata or {}), **(file_metadata or {})} or None
@@ -205,13 +246,30 @@ class WeightStore:
 
         return weight
 
+    def get_layer_weight_into(
+        self, layer_name: str, bitwidth: int, out: torch.Tensor,
+    ) -> torch.Tensor:
+        """Decode or copy one candidate into a caller-owned CPU tensor."""
+        self._validate_access(layer_name, bitwidth)
+        layer_data = self._index[layer_name][bitwidth]
+        if self.cache and layer_data.loaded:
+            if (out.device.type != "cpu" or out.shape != layer_data.weight.shape
+                    or out.dtype != layer_data.weight.dtype):
+                raise ValueError(
+                    f"out does not match cached candidate {layer_name}@{bitwidth}")
+            out.copy_(layer_data.weight)
+            return out
+        weight, _ = self._load_single_weight(
+            layer_name, bitwidth, source=layer_data.source, out=out)
+        return weight
+
     def get_layer_metadata(self, layer_name: str, bitwidth: int) -> Optional[Dict[str, Any]]:
         """Get metadata for a layer at a specific bitwidth."""
         self._validate_access(layer_name, bitwidth)
 
         layer_data = self._index[layer_name][bitwidth]
 
-        if self.cache and layer_data.loaded:
+        if layer_data.metadata is not None:
             return layer_data.metadata
 
         if layer_data.source == "qparams":
@@ -249,6 +307,9 @@ class WeightStore:
         """Return bytes in the selected on-disk candidate file."""
         self._validate_access(layer_name, bitwidth)
         source = self._index[layer_name][bitwidth].source
+        cached_size = self._index[layer_name][bitwidth].storage_bytes
+        if cached_size is not None:
+            return cached_size
         layer_path = self.layer_dir / layer_name
         if source == "qparams":
             path = layer_path / f"{bitwidth}{QPARAMS_SUFFIX}"
@@ -296,5 +357,6 @@ class WeightStore:
     def clear(self) -> None:
         """Clear the cache and free memory."""
         self._index.clear()
+        self._verified_qparams.clear()
         self._initialized = False
         logger.info("WeightStore cleared")
