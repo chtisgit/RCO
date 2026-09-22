@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "source": "../../data/qwen36_gsq/model.safetensors.index.json",
+  "tensor_count": 93625,
+  "text_tensor_count": 93275,
+  "omitted_tensor_count": 350,
+  "category_counts": {
+    "embedding": 1,
+    "linear_attention": 450,
+    "lm_head": 3,
+    "mtp": 17,
+    "normalization": 81,
+    "routed_expert": 92160,
+    "router": 40,
+    "self_attention": 140,
+    "shared_expert": 400,
+    "vision": 333
+  },
+  "unknown_tensors": []
+}

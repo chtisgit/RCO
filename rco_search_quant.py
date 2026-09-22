@@ -16,9 +16,13 @@ from pathlib import Path
 import numpy as np
 import torch
 
-from common import cleanup_memory, get_layer_param_counts
+from common import cleanup_memory, get_input_device, get_layer_param_counts
 from data import load_calibration_data
-from metrics import compute_baseline_topk, compute_reference_log_probs
+from metrics import (
+    compute_baseline_topk,
+    compute_objective,
+    compute_reference_log_probs,
+)
 from grouping import (
     build_layer_groups,
     build_moe_per_expert_groups,
@@ -34,6 +38,7 @@ from search.quant import (
     parse_bitwidths,
     round_with_budget_dp,
 )
+from search.hard import HardCandidateModel, optimize_hard_spsa
 from store import LoadMode, WeightStore
 from unfuse import unfuse_moe_experts
 
@@ -70,6 +75,11 @@ def build_parser() -> argparse.ArgumentParser:
                         choices=['sensitivity', 'uniform'],
                         help="Alpha init: 'sensitivity' (per-group MSE), "
                              "'uniform' (same logit per option, budget-shifted)")
+    parser.add_argument('--search-mode', choices=['relaxed', 'hard-spsa'],
+                        default='relaxed',
+                        help="hard-spsa streams one selected candidate per layer; "
+                             "relaxed retains the released dense-delta method")
+    parser.add_argument('--spsa-perturbation', type=float, default=0.1)
 
     parser.add_argument('--calibration-data', type=str, default='fineweb_edu',
                         choices=['c4', 'wikitext2', 'fineweb_edu',
@@ -81,6 +91,9 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument('--calibration-seq-length', type=int, default=2048)
     parser.add_argument('--batch-size', type=int, default=4)
     parser.add_argument('--top-k', type=int, default=10)
+    parser.add_argument('--kl-topk', type=int, default=20,
+                        help="Store and optimize against only the teacher's "
+                             "top-k tokens. 0 retains the full vocabulary.")
 
     parser.add_argument('--layer-groups', type=str, default='')
     parser.add_argument('--moe-per-expert', action='store_true', default=False,
@@ -108,7 +121,7 @@ def build_parser() -> argparse.ArgumentParser:
                         help="Folder for disk offload during model load. "
                              "Required for some MoE models (Qwen3-Next).")
 
-    parser.add_argument('--weightstore-cache', type=str, default='eager',
+    parser.add_argument('--weightstore-cache', type=str, default='off',
                         choices=['off', 'lazy', 'eager'])
     parser.add_argument('--bitwidth-map', type=str, default='')
     parser.add_argument('--save-json', action='store_true', default=False)
@@ -163,8 +176,7 @@ def main(argv=None) -> int:
     n_bw = len(bitwidths)
     if args.max_memory_gb is not None and args.max_memory_gb_list is not None:
         raise ValueError("--max-memory-gb and --max-memory-gb-list are mutually exclusive")
-    if device_map is not None and n_gpus > 1:
-        gpu_total = torch.cuda.get_device_properties(0).total_memory
+    if device_map is not None and n_gpus > 0:
         if args.max_memory_gb_list is not None:
             per_gpu_list = [float(x.strip()) for x in args.max_memory_gb_list.split(',')]
             if len(per_gpu_list) != n_gpus:
@@ -178,9 +190,12 @@ def main(argv=None) -> int:
         else:
             # leave room for n_bw-1 delta copies plus ~2x activations per GPU,
             # but floor at 15% of total to keep the model off disk offload.
-            per_gpu_bytes = int(gpu_total * 0.85) // (n_bw + 3)
-            per_gpu_bytes = max(per_gpu_bytes, int(gpu_total * 0.15))
-            max_memory = {i: per_gpu_bytes for i in range(n_gpus)}
+            max_memory = {}
+            for i in range(n_gpus):
+                gpu_total = torch.cuda.get_device_properties(i).total_memory
+                per_gpu_bytes = int(gpu_total * 0.85) // (n_bw + 3)
+                per_gpu_bytes = max(per_gpu_bytes, int(gpu_total * 0.15))
+                max_memory[i] = per_gpu_bytes
     else:
         max_memory = None
 
@@ -265,53 +280,123 @@ def main(argv=None) -> int:
             layer_dir
             / f"ref_log_probs_{model_slug}_{args.calibration_data}"
               f"_{args.calibration_samples}x{args.calibration_seq_length}"
-              f"_bs{args.batch_size}_seed{args.seed}.pt"
+              f"_bs{args.batch_size}_seed{args.seed}"
+              f"_topk{args.kl_topk}.pt"
         )
         if ref_lp_path.exists():
             ref_log_probs = torch.load(str(ref_lp_path))
         else:
             ref_log_probs = compute_reference_log_probs(
-                model, calibration_data, args.batch_size
+                model, calibration_data, args.batch_size,
+                topk=args.kl_topk,
             )
+            torch.save(ref_log_probs, str(ref_lp_path))
 
-    interp = InterpolatedModel(
-        model, weight_store, bitwidths, layer_names, layer_groups,
-        param_counts, bitwidth_map=bitwidth_map,
-        cpu_deltas=args.cpu_deltas,
-    )
-    interp.setup()
-    if args.init == 'uniform':
-        interp.init_alpha_to_bits(args.target_avg_bits)
+    if args.search_mode == 'hard-spsa':
+        if len(bitwidths) != 2:
+            raise ValueError("hard-spsa currently requires exactly two bitwidths")
+        group_sizes = [
+            sum(param_counts.get(name, 0) for name in group.layer_names)
+            for group in layer_groups
+        ]
+        if not group_sizes or min(group_sizes) != max(group_sizes):
+            raise ValueError(
+                "hard-spsa currently requires equal-size groups; use "
+                "--moe-per-expert and search routed experts separately")
+        runtime = HardCandidateModel(
+            model, weight_store, layer_groups, bitwidths)
+        input_device = get_input_device(runtime.model)
+        batch_starts = list(range(0, calibration_data.size(0), args.batch_size))
+        evaluation_count = 0
+
+        def evaluate_hard(group_assignment):
+            nonlocal evaluation_count
+            runtime.apply(group_assignment)
+            # SPSA calls plus/minus consecutively. Reusing a batch for each pair
+            # removes calibration-sampling noise from the finite difference.
+            pair_index = evaluation_count // 2
+            start = batch_starts[pair_index % len(batch_starts)]
+            evaluation_count += 1
+            batch = calibration_data[start:start + args.batch_size].to(input_device)
+            batch_masks = (calibration_masks[start:start + args.batch_size].to(input_device)
+                           if calibration_masks is not None else None)
+            ref_lp = None
+            if ref_log_probs is not None:
+                ref_lp = ref_log_probs[min(
+                    start // args.batch_size, len(ref_log_probs) - 1)]
+            with torch.no_grad():
+                return compute_objective(
+                    runtime.model, batch, args.objective, ref_lp, batch_masks,
+                    topk=args.kl_topk).item()
+
+        logger.info("=" * 60)
+        logger.info("EXACT-BUDGET HARD SPSA OPTIMIZATION")
+        logger.info("=" * 60)
+        actual_choices = [get_actual_bitwidth(bw, bitwidth_map)
+                          for bw in bitwidths]
+        t_start = time.time()
+        scores, group_assignment, history = optimize_hard_spsa(
+            evaluate_hard,
+            n_groups=len(layer_groups),
+            low_bits=actual_choices[0],
+            high_bits=actual_choices[1],
+            target_bits=args.target_avg_bits,
+            n_steps=args.n_steps,
+            lr=args.lr,
+            perturbation=args.spsa_perturbation,
+            seed=args.seed,
+            log_interval=args.log_interval,
+        )
+        t_elapsed = time.time() - t_start
+        assignment = runtime.layer_assignment(group_assignment)
+        probabilities = torch.sigmoid(scores)
+        prob_dict = {}
+        for group_index, group in enumerate(layer_groups):
+            high_p = probabilities[group_index].item()
+            for name in group.layer_names:
+                prob_dict[name] = {
+                    bitwidths[0]: 1.0 - high_p,
+                    bitwidths[1]: high_p,
+                }
     else:
-        interp.init_alpha_from_sensitivity(args.target_avg_bits)
+        interp = InterpolatedModel(
+            model, weight_store, bitwidths, layer_names, layer_groups,
+            param_counts, bitwidth_map=bitwidth_map,
+            cpu_deltas=args.cpu_deltas,
+        )
+        interp.setup()
+        if args.init == 'uniform':
+            interp.init_alpha_to_bits(args.target_avg_bits)
+        else:
+            interp.init_alpha_from_sensitivity(args.target_avg_bits)
 
-    logger.info("=" * 60)
-    logger.info("PROJECTED GUMBEL-SOFTMAX OPTIMIZATION")
-    logger.info("=" * 60)
+        logger.info("=" * 60)
+        logger.info("PROJECTED GUMBEL-SOFTMAX OPTIMIZATION")
+        logger.info("=" * 60)
 
-    t_start = time.time()
-    prob_dict, history = optimize_projected_gumbel(
-        interp, calibration_data, args.target_avg_bits,
-        n_steps=args.n_steps, lr=args.lr,
-        tau_init=args.tau_init, tau_min=args.tau_min,
-        n_gumbel_samples=args.n_gumbel_samples,
-        batch_size=args.batch_size,
-        batches_per_step=args.batches_per_step,
-        masks=calibration_masks,
-        log_interval=args.log_interval,
-        objective=args.objective,
-        ref_log_probs=ref_log_probs,
-        grad_debug=args.grad_debug,
-        grad_debug_interval=args.grad_debug_interval,
-    )
-    t_elapsed = time.time() - t_start
+        t_start = time.time()
+        prob_dict, history = optimize_projected_gumbel(
+            interp, calibration_data, args.target_avg_bits,
+            n_steps=args.n_steps, lr=args.lr,
+            tau_init=args.tau_init, tau_min=args.tau_min,
+            n_gumbel_samples=args.n_gumbel_samples,
+            batch_size=args.batch_size,
+            batches_per_step=args.batches_per_step,
+            masks=calibration_masks,
+            log_interval=args.log_interval,
+            objective=args.objective,
+            ref_log_probs=ref_log_probs,
+            kl_topk=args.kl_topk,
+            grad_debug=args.grad_debug,
+            grad_debug_interval=args.grad_debug_interval,
+        )
+        t_elapsed = time.time() - t_start
+        interp.cleanup()
+        assignment = round_with_budget_dp(
+            prob_dict, param_counts, bitwidths, args.target_avg_bits,
+            layer_groups, bitwidth_map=bitwidth_map,
+        )
     logger.info(f"Optimization done in {t_elapsed:.1f}s")
-
-    interp.cleanup()
-    assignment = round_with_budget_dp(
-        prob_dict, param_counts, bitwidths, args.target_avg_bits,
-        layer_groups, bitwidth_map=bitwidth_map,
-    )
 
     total_params = sum(param_counts.get(n, 0) for n in layer_names)
     actual_avg_bits = (sum(
@@ -326,7 +411,15 @@ def main(argv=None) -> int:
 
     del model
     cleanup_memory()
-    model = load_model(args.model, device_map=device_map)
+    model = load_model(
+        args.model, device_map=device_map, max_memory=max_memory,
+        offload_folder=args.offload_folder)
+    try:
+        replaced = unfuse_moe_experts(model)
+        if replaced:
+            logger.info(f"Unfused {len(replaced)} MoE expert modules for evaluation")
+    except Exception as e:
+        logger.warning(f"Could not unfuse experts for evaluation: {e}")
 
     metrics = evaluate_assignment(
         model, weight_store, assignment,

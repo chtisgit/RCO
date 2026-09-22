@@ -19,6 +19,7 @@ from tqdm import tqdm
 
 from common import get_input_device
 from data import load_calibration_data
+from model_adapter import get_model_adapter
 from manifold import (
     project_gradient,
     retraction,
@@ -42,19 +43,22 @@ logger = logging.getLogger(__name__)
 
 def get_moe_info(model):
     """Extract MoE architecture info."""
-    c = model.config
-    return c.num_hidden_layers, c.num_experts, c.num_experts_per_tok
+    adapter = get_model_adapter(model)
+    return (adapter.num_hidden_layers, adapter.num_experts,
+            adapter.num_experts_per_tok)
 
 
-def build_ref_cache(model, data, masks, batch_size=4):
+def build_ref_cache(model, data, masks, batch_size=4, topk=0):
     """Cache reference log-probs and the calibration mask sliced per batch.
 
     Returns two parallel lists of length ceil(N / batch_size):
-        ref_log_probs: list of (B, T-1, V) float16 Tensors on CPU.
+        ref_log_probs: full tensors when topk=0, otherwise compact dictionaries
+            with (B, T-1, K) values and indices on CPU.
         ref_masks:     list of (B, T) float Tensors on CPU. Unshifted, since
                        common.compute_kl_loss applies the next-token shift.
     """
-    ref_lps = _compute_reference_log_probs(model, data, batch_size)
+    ref_lps = _compute_reference_log_probs(
+        model, data, batch_size, topk=topk)
     ref_masks = []
     n = data.size(0)
     for i in range(0, n, batch_size):
@@ -237,10 +241,10 @@ class MoEPruneWrapper:
 
 
 def install_wrappers(model, n_layers, n_experts, shared_state):
+    adapter = get_model_adapter(model)
     wrappers = []
     for l in range(n_layers):
-        w = MoEPruneWrapper(model.model.layers[l].mlp,
-                            l, n_experts, shared_state)
+        w = MoEPruneWrapper(adapter.mlp(l), l, n_experts, shared_state)
         wrappers.append(w)
     return wrappers
 
@@ -305,11 +309,12 @@ def apply_hard_pruning_mask(model, prune_mask):
     """
     hooks = []
     n_layers = prune_mask.shape[0]
+    adapter = get_model_adapter(model)
 
     for l in range(n_layers):
         if not prune_mask[l].any():
             continue
-        block = model.model.layers[l].mlp
+        block = adapter.mlp(l)
         gate = block.gate
         dev = gate.weight.device
         m = prune_mask[l].to(dev)
@@ -379,7 +384,7 @@ def remove_hooks(hooks):
 
 @torch.no_grad()
 def evaluate_with_mask(model, prune_mask, cal_data, ref_log_probs, ref_masks,
-                       batch_size=4):
+                       batch_size=4, kl_topk=0):
     """Evaluate calibration KL of the discrete mask under the deployed routing.
 
     Installs apply_hard_pruning_mask: a gate-output hook that sets pruned-expert
@@ -399,16 +404,13 @@ def evaluate_with_mask(model, prune_mask, cal_data, ref_log_probs, ref_masks,
             batch = cal_data[i:i + batch_size].to(device)
             bi = i // batch_size
             bi = min(bi, len(ref_log_probs) - 1)
-            ref_lp = ref_log_probs[bi].to(device)
-            m = ref_masks[bi][:, 1:].to(device)
-
-            logits = model(input_ids=batch).logits[:, :-1, :].contiguous().float()
-            q_lp = F.log_softmax(logits, dim=-1)
-            p = ref_lp.float().exp()
-
-            kl = (p * (ref_lp.float() - q_lp)).sum(dim=-1)
-            total_kl += (kl * m).sum().item()
-            n_answer_tok += m.sum().item()
+            ref_lp = ref_log_probs[bi]
+            ref_mask = ref_masks[bi]
+            loss = compute_kl_loss(
+                model, batch, ref_lp, mask=ref_mask, topk=kl_topk)
+            token_count = ref_mask[:, 1:].sum().item()
+            total_kl += loss.item() * token_count
+            n_answer_tok += token_count
     finally:
         remove_hooks(hooks)
 
@@ -426,6 +428,7 @@ def compute_frequency(model, data, n_layers, n_experts, top_k, batch_size=4):
     device = get_input_device(model)
     freq = torch.zeros(n_layers, n_experts)
     hooks = []
+    adapter = get_model_adapter(model)
 
     for l in range(n_layers):
         def make_hook(li, tk):
@@ -446,7 +449,7 @@ def compute_frequency(model, data, n_layers, n_experts, top_k, batch_size=4):
                 freq[li] += counts.cpu()
                 return output
             return hook_fn
-        h = model.model.layers[l].mlp.gate.register_forward_hook(make_hook(l, top_k))
+        h = adapter.mlp(l).gate.register_forward_hook(make_hook(l, top_k))
         hooks.append(h)
 
     for i in tqdm(range(0, data.size(0), batch_size), desc="Routing freq"):
@@ -472,6 +475,7 @@ def compute_router_scores(model, data, n_layers, n_experts, batch_size=4):
     device = get_input_device(model)
     scores = torch.zeros(n_layers, n_experts)
     hooks = []
+    adapter = get_model_adapter(model)
 
     for l in range(n_layers):
         def make_hook(li):
@@ -484,7 +488,7 @@ def compute_router_scores(model, data, n_layers, n_experts, batch_size=4):
                 scores[li] += full_weights.sum(dim=0).cpu()
                 return output
             return hook_fn
-        h = model.model.layers[l].mlp.gate.register_forward_hook(make_hook(l))
+        h = adapter.mlp(l).gate.register_forward_hook(make_hook(l))
         hooks.append(h)
 
     for i in tqdm(range(0, data.size(0), batch_size), desc="Router scores"):
@@ -632,7 +636,7 @@ def optimize(model, cal_data, ref_log_probs, ref_masks,
       5. Vector transport: reproject Adam moments onto new tangent plane.
     """
     N = n_layers * n_experts
-    ctrl = torch.device('cuda:0')
+    ctrl = get_input_device(model)
     costs = torch.tensor([0.0, 1.0], device=ctrl)
 
     if per_layer_budget:
@@ -799,5 +803,3 @@ def optimize(model, cal_data, ref_log_probs, ref_masks,
     final_mask = final_asgn.view(n_layers, n_experts).bool()
 
     return alpha, final_mask, history
-
-

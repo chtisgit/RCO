@@ -40,21 +40,21 @@ def parse_args():
         "--pre_block_modules",
         nargs="+",
         type=str,
-        required=True,
-        help="Names of modules before transformer blocks",
+        default=None,
+        help="Names of modules before transformer blocks. Default: model adapter.",
     )
     parser.add_argument(
         "--block_modules",
         type=str,
-        required=True,
-        help="Name of transformer modules",
+        default=None,
+        help="Name of transformer modules. Default: model adapter.",
     )
     parser.add_argument(
         "--post_block_modules",
         nargs="+",
         type=str,
-        required=True,
-        help="Names of modules after transformer blocks",
+        default=None,
+        help="Names of modules after transformer blocks. Default: model adapter.",
     )
     ## Data params
     parser.add_argument(
@@ -125,6 +125,32 @@ def parse_args():
     parser.add_argument("--cpu_offload_activations", action="store_true", help="whether to offload activations to CPU.")
     parser.add_argument("--new_eval", action="store_true", help="whether to use new evaluation setup.")
     parser.add_argument("--verbose", action="store_true", help="whether to log progress.")
+    parser.add_argument(
+        "--save_fake_quant",
+        action="store_true",
+        help="Also save dense .pth candidates for the legacy search path. "
+             "Disabled by default to keep the database packed.",
+    )
+    parser.add_argument(
+        "--expert_chunk_size",
+        type=int,
+        default=16,
+        help="Number of fused routed experts whose Hessians are collected at "
+             "once. Smaller values reduce peak VRAM.",
+    )
+    parser.add_argument(
+        "--stream_blocks",
+        action="store_true",
+        help="Instantiate on meta and load one checkpoint block at a time. "
+             "This bounds host RAM by the active block.",
+    )
+    parser.add_argument(
+        "--min_free_gb",
+        type=float,
+        default=50.0,
+        help="Stop candidate generation before free space on the output "
+             "filesystem falls below this GiB value.",
+    )
     # Save params
     parser.add_argument("--save_dir", type=str, required=True, help="where to save sparse model.")
     args = parser.parse_args()
@@ -134,12 +160,14 @@ def parse_args():
 def main():
     args = parse_args()
     # Distributed init
-    if dist.is_available():
-        dist.init_process_group(backend="nccl", init_method="env://")
+    distributed = int(os.environ.get("WORLD_SIZE", "1")) > 1
+    if distributed:
+        backend = "nccl" if torch.cuda.is_available() else "gloo"
+        dist.init_process_group(backend=backend, init_method="env://")
     world_size = dist_utils.get_world_size()
     rank = dist_utils.get_rank()
     # init device
-    device = f"cuda:{rank}"
+    device = f"cuda:{rank}" if torch.cuda.is_available() else "cpu"
     if args.dtype != "auto":
         args.dtype = getattr(torch, args.dtype)
     # init W&B logger
@@ -153,20 +181,49 @@ def main():
     except Exception:
         pass
     # Model
-    model = AutoModelForCausalLM.from_pretrained(
-        args.model_name_or_path,
-        trust_remote_code=True,
-        torch_dtype=args.dtype,
-        low_cpu_mem_usage=args.low_cpu_mem_usage,
-        attn_implementation=args.attn_implementation,
+    checkpoint_loader = None
+    if args.stream_blocks:
+        from accelerate import init_empty_weights
+        from transformers import AutoConfig
+        from checkpoint_stream import SafeTensorPrefixLoader
+
+        config = AutoConfig.from_pretrained(
+            args.model_name_or_path, trust_remote_code=True)
+        model_kwargs = {"trust_remote_code": True}
+        if args.attn_implementation is not None:
+            model_kwargs["attn_implementation"] = args.attn_implementation
+        with init_empty_weights(include_buffers=False):
+            model = AutoModelForCausalLM.from_config(config, **model_kwargs)
+        if args.dtype != "auto":
+            model.to(dtype=args.dtype)
+        checkpoint_loader = SafeTensorPrefixLoader(args.model_name_or_path)
+        model.eval()
+    else:
+        model = AutoModelForCausalLM.from_pretrained(
+            args.model_name_or_path,
+            trust_remote_code=True,
+            torch_dtype=args.dtype,
+            low_cpu_mem_usage=args.low_cpu_mem_usage,
+            attn_implementation=args.attn_implementation,
+        )
+    from model_adapter import get_model_adapter
+    adapter = get_model_adapter(model)
+    args.pre_block_modules = args.pre_block_modules or list(adapter.embedding_paths)
+    args.block_modules = args.block_modules or adapter.layers_path
+    args.post_block_modules = args.post_block_modules or list(adapter.final_module_paths)
+    dist_utils.print_on_main(
+        f"Model adapter: {adapter.family}; blocks={args.block_modules}; "
+        f"pre={args.pre_block_modules}; post={args.post_block_modules}"
     )
-    print(model)
-    if not args.cpu_offload_modules:
+    if not args.cpu_offload_modules and not args.stream_blocks:
         model = model.to(device)
     # Tokenizer
     tokenizer = AutoTokenizer.from_pretrained(args.tokenizer_name or args.model_name_or_path, use_fast=False)
     # Load calibration data
-    args.calibration_sequence_length = args.calibration_sequence_length or model.config.max_position_embeddings
+    args.calibration_sequence_length = (
+        args.calibration_sequence_length
+        or adapter.text_config.max_position_embeddings
+    )
     calibration_data = get_data(
         args.calibration_data, args.calibration_tokens, args.calibration_sequence_length, tokenizer, train=True
     )
@@ -175,7 +232,8 @@ def main():
         num_seq_per_rank = len(calibration_data) // world_size
         calibration_data = calibration_data[rank * num_seq_per_rank : (rank + 1) * num_seq_per_rank]
     calibration_data = [([], {"input_ids": input_ids}) for input_ids in calibration_data]
-    dist.barrier()
+    if dist_utils.is_dist_available_and_initialized():
+        dist.barrier()
     # Quantizer
     if args.calibration_bitwidth not in args.bitwidth_options:
         raise ValueError(f"Calibration bitwidth {args.calibration_bitwidth} is not in bitwidth_options.")
@@ -206,13 +264,18 @@ def main():
         device=device,
         cpu_offload_modules=args.cpu_offload_modules,
         cpu_offload_activations=args.cpu_offload_activations,
+        save_fake_quant=args.save_fake_quant,
+        expert_chunk_size=args.expert_chunk_size,
+        checkpoint_loader=checkpoint_loader,
+        min_free_bytes=int(args.min_free_gb * 2**30),
         verbose=args.verbose,
     )
     # Prepare save dir
     if dist_utils.is_main():
         os.makedirs(args.save_dir, exist_ok=True)
 
-    dist.barrier()
+    if dist_utils.is_dist_available_and_initialized():
+        dist.barrier()
 
     t1 = time.perf_counter()
     quantizer.quantize(args.bitwidth_options, args.calibration_bitwidth)

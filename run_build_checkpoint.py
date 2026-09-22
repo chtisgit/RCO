@@ -27,6 +27,7 @@ import torch.nn as nn
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 from common import resolve_module
+from model_adapter import get_model_adapter
 
 logging.basicConfig(
     level=logging.INFO,
@@ -634,13 +635,15 @@ def run_prune(args: argparse.Namespace) -> int:
     )
     tokenizer = AutoTokenizer.from_pretrained(args.model, trust_remote_code=True)
 
-    n_layers = model.config.num_hidden_layers
-    n_experts_attr = "num_experts" if hasattr(model.config, "num_experts") else \
-                     ("num_local_experts" if hasattr(model.config, "num_local_experts") else None)
+    adapter = get_model_adapter(model)
+    text_config = adapter.text_config
+    n_layers = adapter.num_hidden_layers
+    n_experts_attr = "num_experts" if hasattr(text_config, "num_experts") else \
+                     ("num_local_experts" if hasattr(text_config, "num_local_experts") else None)
     if n_experts_attr is None:
         raise RuntimeError("num_experts / num_local_experts not found in config.")
-    n_experts = getattr(model.config, n_experts_attr)
-    top_k = getattr(model.config, "num_experts_per_tok", None)
+    n_experts = getattr(text_config, n_experts_attr)
+    top_k = getattr(text_config, "num_experts_per_tok", None)
 
     if prune_mask.shape != (n_layers, n_experts):
         raise ValueError(
@@ -652,7 +655,7 @@ def run_prune(args: argparse.Namespace) -> int:
         for l in range(n_layers):
             if not prune_mask[l].any():
                 continue
-            mlp = _resolve_mlp_block(model.model.layers[l])
+            mlp = _resolve_mlp_block(adapter.layers[l])
             if mlp is None:
                 logger.warning(f"Layer {l} has no MoE block; skipping.")
                 continue
@@ -665,7 +668,7 @@ def run_prune(args: argparse.Namespace) -> int:
         per_layer_num_experts = []
         total_pruned = 0
         for l in range(n_layers):
-            mlp = _resolve_mlp_block(model.model.layers[l])
+            mlp = _resolve_mlp_block(adapter.layers[l])
             if mlp is None:
                 per_layer_num_experts.append(n_experts)
                 continue
@@ -685,12 +688,12 @@ def run_prune(args: argparse.Namespace) -> int:
         uniq = set(per_layer_num_experts)
         if len(uniq) == 1 and uniq.pop() != n_experts:
             new_n = per_layer_num_experts[0]
-            setattr(model.config, n_experts_attr, new_n)
-            model.config.original_num_experts = n_experts
+            setattr(text_config, n_experts_attr, new_n)
+            text_config.original_num_experts = n_experts
             logger.info(f"Uniform pruning: rewrote {n_experts_attr} {n_experts} -> {new_n}")
         elif len(uniq) > 1:
-            model.config.per_layer_num_experts = per_layer_num_experts
-            model.config.original_num_experts = n_experts
+            text_config.per_layer_num_experts = per_layer_num_experts
+            text_config.original_num_experts = n_experts
             logger.info(
                 f"Heterogeneous pruning: wrote per_layer_num_experts "
                 f"(min {min(per_layer_num_experts)}, max {max(per_layer_num_experts)}). "

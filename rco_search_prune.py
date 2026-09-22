@@ -75,6 +75,9 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument('--max-memory-per-gpu', type=int, default=None,
                         help="Max memory per GPU in GiB. None = auto.")
     parser.add_argument('--offload-folder', type=str, default=None)
+    parser.add_argument('--gradient-checkpointing', action='store_true',
+                        help="Recompute block activations during backward to "
+                             "reduce peak VRAM.")
     parser.add_argument('--seed', type=int, default=42)
     parser.add_argument('--log-interval', type=int, default=5)
     parser.add_argument('--save-json', type=str, default=None)
@@ -96,6 +99,9 @@ def main(argv=None) -> int:
     model = load_model(args.model, device_map=args.device_map,
                        max_memory=max_memory,
                        offload_folder=args.offload_folder)
+    if args.gradient_checkpointing:
+        model.gradient_checkpointing_enable(
+            gradient_checkpointing_kwargs={"use_reentrant": False})
     tokenizer = get_tokenizer(args.model)
 
     n_layers, n_experts, top_k = get_moe_info(model)
@@ -111,10 +117,10 @@ def main(argv=None) -> int:
             args.calibration_data, args.calibration_samples,
             args.calibration_seq_length, tokenizer, args.seed)
         ref_log_probs, ref_masks = build_ref_cache(
-            model, cal_data, cal_masks, args.batch_size)
+            model, cal_data, cal_masks, args.batch_size, topk=args.kl_topk)
         kl = evaluate_with_mask(
             model, prune_mask, cal_data, ref_log_probs, ref_masks,
-            args.batch_size)
+            args.batch_size, kl_topk=args.kl_topk)
         logger.info(f"KL={kl:.6f}")
         return 0
 
@@ -122,7 +128,7 @@ def main(argv=None) -> int:
         args.calibration_data, args.calibration_samples,
         args.calibration_seq_length, tokenizer, args.seed)
     ref_log_probs, ref_masks = build_ref_cache(
-        model, cal_data, cal_masks, args.batch_size)
+        model, cal_data, cal_masks, args.batch_size, topk=args.kl_topk)
 
     freq_kl = None
     if not args.skip_freq_baseline:
@@ -132,7 +138,7 @@ def main(argv=None) -> int:
             freq, n_layers, n_experts, target_budget)
         freq_kl = evaluate_with_mask(
             model, freq_mask, cal_data, ref_log_probs, ref_masks,
-            args.batch_size)
+            args.batch_size, kl_topk=args.kl_topk)
         logger.info(f"Freq uniform: KL={freq_kl:.6f}")
 
     router_scores = None
@@ -172,7 +178,8 @@ def main(argv=None) -> int:
     n_pruned = search_mask.sum().item()
     per_layer = search_mask.sum(dim=1).tolist()
     search_kl = evaluate_with_mask(
-        model, search_mask, cal_data, ref_log_probs, ref_masks, args.batch_size)
+        model, search_mask, cal_data, ref_log_probs, ref_masks,
+        args.batch_size, kl_topk=args.kl_topk)
 
     logger.info("=" * 60)
     logger.info("SUMMARY")

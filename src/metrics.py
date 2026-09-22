@@ -35,12 +35,14 @@ logger = logging.getLogger(__name__)
 
 
 @torch.no_grad()
-def compute_reference_log_probs(model, calibration_data, batch_size=4):
+def compute_reference_log_probs(model, calibration_data, batch_size=4,
+                                topk=0):
     """Cache next-token reference log-probabilities for the calibration set.
 
-    Returns:
-        list of (B, T-1, V) torch.Tensor in float16 on CPU. Position t in
-        each row holds log P(token_{t+1} | tokens_{<=t}) under the model.
+    With topk=0, returns a list of (B, T-1, V) float16 CPU tensors. With
+    topk>0, each list item is a dict containing only ``values`` (top-k
+    reference log-probabilities, float16) and ``indices`` (int32 token IDs).
+    The compact form avoids a full-vocabulary CPU cache.
     """
     logger.info("Computing reference log-probabilities...")
     device = get_input_device(model)
@@ -48,12 +50,29 @@ def compute_reference_log_probs(model, calibration_data, batch_size=4):
     n = calibration_data.size(0)
     for i in range(0, n, batch_size):
         batch = calibration_data[i:i + batch_size].to(device)
-        logits = model(input_ids=batch).logits[:, :-1, :].contiguous()
-        ref_log_probs.append(F.log_softmax(logits.float(), dim=-1).half().cpu())
-    total_tokens = sum(lp.numel() // lp.size(-1) for lp in ref_log_probs)
-    mem_mb = sum(lp.nbytes for lp in ref_log_probs) / 1e6
+        logits = model(input_ids=batch).logits[:, :-1, :].contiguous().float()
+        if topk > 0:
+            k = min(topk, logits.size(-1))
+            top_values, top_indices = logits.topk(k, dim=-1)
+            log_normalizer = logits.logsumexp(dim=-1, keepdim=True)
+            ref_log_probs.append({
+                "values": (top_values - log_normalizer).half().cpu(),
+                "indices": top_indices.to(torch.int32).cpu(),
+            })
+        else:
+            ref_log_probs.append(F.log_softmax(logits, dim=-1).half().cpu())
+        del logits
+    if topk > 0:
+        total_tokens = sum(item["values"].numel() // item["values"].size(-1)
+                           for item in ref_log_probs)
+        mem_bytes = sum(item["values"].nbytes + item["indices"].nbytes
+                        for item in ref_log_probs)
+    else:
+        total_tokens = sum(lp.numel() // lp.size(-1) for lp in ref_log_probs)
+        mem_bytes = sum(lp.nbytes for lp in ref_log_probs)
+    mem_mb = mem_bytes / 1e6
     logger.info(f"Cached reference log-probs: {len(ref_log_probs)} batches, "
-                f"{total_tokens} tokens, {mem_mb:.0f} MB")
+                f"{total_tokens} tokens, {mem_mb:.0f} MB, topk={topk}")
     return ref_log_probs
 
 
@@ -76,7 +95,13 @@ def compute_kl_loss(model, input_ids, ref_log_probs, mask=None, topk=0):
     """
     outputs = model(input_ids=input_ids)
     logits = outputs.logits[:, :-1, :].contiguous()
-    ref_lp = ref_log_probs.to(logits.device)
+    compact_reference = isinstance(ref_log_probs, dict)
+    if compact_reference:
+        ref_values = ref_log_probs["values"].to(logits.device)
+        ref_indices = ref_log_probs["indices"].to(
+            device=logits.device, dtype=torch.long)
+    else:
+        ref_lp = ref_log_probs.to(logits.device)
     shift_mask = None
     if mask is not None:
         shift_mask = mask[:, 1:].contiguous().float().to(logits.device)
@@ -88,16 +113,25 @@ def compute_kl_loss(model, input_ids, ref_log_probs, mask=None, topk=0):
 
     for t in range(0, T, chunk):
         te = min(t + chunk, T)
-        model_lp = F.log_softmax(logits[:, t:te, :].float(), dim=-1)
-        rp = ref_lp[:, t:te, :]
+        logits_chunk = logits[:, t:te, :].float()
+        if compact_reference:
+            tk_idx = ref_indices[:, t:te, :]
+            rp_k = ref_values[:, t:te, :].float()
+            model_log_z = logits_chunk.logsumexp(dim=-1, keepdim=True)
+            mp_k = logits_chunk.gather(-1, tk_idx) - model_log_z
+            rp_k_norm = rp_k - rp_k.logsumexp(dim=-1, keepdim=True)
+            kl = (rp_k_norm.exp() * (rp_k_norm - mp_k)).sum(dim=-1)
+        else:
+            model_lp = F.log_softmax(logits_chunk, dim=-1)
+            rp = ref_lp[:, t:te, :]
 
-        if topk > 0 and topk < V:
+        if not compact_reference and topk > 0 and topk < V:
             _, tk_idx = rp.topk(topk, dim=-1)
             rp_k = rp.gather(-1, tk_idx)
             mp_k = model_lp.gather(-1, tk_idx)
             rp_k_norm = rp_k - rp_k.logsumexp(dim=-1, keepdim=True)
             kl = (rp_k_norm.exp() * (rp_k_norm - mp_k)).sum(dim=-1)
-        else:
+        elif not compact_reference:
             kl = (rp.exp() * (rp - model_lp)).sum(dim=-1)
 
         if shift_mask is not None:

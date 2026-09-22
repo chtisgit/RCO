@@ -31,6 +31,7 @@ from metrics import (
     compute_objective,
     compute_reference_log_probs,
 )
+from model_adapter import get_model_adapter
 
 logger = logging.getLogger(__name__)
 
@@ -226,7 +227,7 @@ class InterpolatedModel:
         logger.info(f"  gradient_checkpointing attr: {gc_attr}, "
                     f"is_gradient_checkpointing: {gc_method}")
         try:
-            inner = self.model.model.layers[0]
+            inner = get_model_adapter(self.model).layers[0]
             logger.info(f"  layer[0].gradient_checkpointing: "
                         f"{getattr(inner, 'gradient_checkpointing', None)}")
         except Exception as e:
@@ -477,7 +478,7 @@ def budget_constrained_argmax(noisy_logits, group_param_fracs, actual_bits,
 
 
 def run_sensitivity_probe(interp, calibration_data, ref_batches, batch_size,
-                          objective, masks, input_device):
+                          objective, masks, input_device, kl_topk=0):
     """
     Compute loss with all-min-bits and all-max-bits to verify the loss landscape
     has signal. Logs the gap -- if it's near zero, the optimizer has nothing to learn.
@@ -497,7 +498,9 @@ def run_sensitivity_probe(interp, calibration_data, ref_batches, batch_size,
                 batch = calibration_data[i:i + batch_size].to(input_device)
                 batch_masks = masks[i:i + batch_size].to(input_device) if masks is not None else None
                 ref_lp = ref_batches[i // batch_size] if ref_batches else None
-                loss = compute_objective(interp.model, batch, objective, ref_lp, batch_masks)
+                loss = compute_objective(
+                    interp.model, batch, objective, ref_lp, batch_masks,
+                    topk=kl_topk)
                 total += loss.item()
                 n += 1
         interp.clear_probs_override()
@@ -590,6 +593,7 @@ def optimize_projected_gumbel(
     log_interval: int = 1,
     objective: str = 'kl',
     ref_log_probs: Optional[List[torch.Tensor]] = None,
+    kl_topk: int = 0,
     grad_debug: bool = False,
     grad_debug_interval: int = 10,
 ) -> Tuple[Dict[str, Dict[int, float]], List[dict]]:
@@ -640,7 +644,7 @@ def optimize_projected_gumbel(
         logger.info(f"[GradDebug] enabled, diagnostics every {grad_debug_interval} steps")
         run_sensitivity_probe(
             interp, calibration_data, ref_batches, batch_size,
-            objective, masks, input_device
+            objective, masks, input_device, kl_topk=kl_topk
         )
         alpha_snapshot = interp.alpha.detach().clone()
     else:
@@ -698,7 +702,8 @@ def optimize_projected_gumbel(
 
                 with torch.enable_grad():
                     loss = compute_objective(
-                        interp.model, batch, objective, ref_lp, batch_masks
+                        interp.model, batch, objective, ref_lp, batch_masks,
+                        topk=kl_topk,
                     )
                     scaled = loss / (n_bi * n_evals)
                     scaled.backward()
@@ -812,4 +817,3 @@ def evaluate_assignment(model, weight_store, assignment, calibration_data,
     }
     logger.info(f"Metrics: NLL={results['nll']:.4f}, KL={results['kl']:.6f}")
     return results
-

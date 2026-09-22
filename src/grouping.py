@@ -54,7 +54,10 @@ def build_layer_groups(
     if not group_patterns:
         return [LayerGroup(i, [name], name) for i, name in enumerate(layer_names)]
 
-    block_pattern = re.compile(r'model\.layers\.(\d+)\.')
+    # Match decoder-only paths (model.layers.N) and multimodal text wrappers
+    # (model.language_model.layers.N) without baking either prefix into group
+    # identity.
+    block_pattern = re.compile(r'(?:^|\.)layers\.(\d+)\.')
 
     block_groups: Dict[Tuple[int, int], List[str]] = {}
     ungrouped_layers: List[str] = []
@@ -124,7 +127,9 @@ def build_moe_per_expert_groups(
     Returns:
         List of LayerGroup with expert groups first, then non-expert groups.
     """
-    expert_pattern = re.compile(r'model\.layers\.(\d+)\.mlp\.experts\.(\d+)\.')
+    expert_pattern = re.compile(
+        r'(?:^|\.)layers\.(\d+)\.mlp\.experts\.(\d+)\.'
+    )
 
     expert_layers: Dict[Tuple[int, int], List[str]] = {}
     non_expert_layers: List[str] = []

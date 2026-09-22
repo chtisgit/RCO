@@ -9,6 +9,8 @@ from enum import Enum
 
 import torch
 
+from quant.qparams import QPARAMS_SUFFIX, dequantize_from_qparams, load_qparams
+
 logger = logging.getLogger(__name__)
 
 
@@ -23,6 +25,7 @@ class LayerData:
     weight: Optional[torch.Tensor] = None
     metadata: Optional[Dict[str, Any]] = None
     loaded: bool = False
+    source: str = "dense"
 
 
 class WeightStore:
@@ -64,61 +67,63 @@ class WeightStore:
             self._index[layer_name] = {}
             layer_count += 1
 
-            for file_path in layer_path.iterdir():
-                if file_path.suffix != '.pth':
+            # Prefer legacy dense candidates when both formats exist. Packed
+            # qparams-only databases are indexed without decoding payloads.
+            files = list(layer_path.iterdir())
+            for file_path in files:
+                if file_path.suffix != '.pth' or file_path.name.endswith(QPARAMS_SUFFIX):
                     continue
-
                 try:
                     bitwidth = int(file_path.stem)
                 except ValueError:
                     continue
-
-                self._index[layer_name][bitwidth] = LayerData(loaded=False)
-                weight_count += 1
+                self._index[layer_name][bitwidth] = LayerData(
+                    loaded=False, source="dense")
+            for file_path in files:
+                if not file_path.name.endswith(QPARAMS_SUFFIX):
+                    continue
+                stem = file_path.name[:-len(QPARAMS_SUFFIX)]
+                try:
+                    bitwidth = int(stem)
+                except ValueError:
+                    continue
+                self._index[layer_name].setdefault(
+                    bitwidth, LayerData(loaded=False, source="qparams"))
+            weight_count += len(self._index[layer_name])
 
         logger.info(f"Indexed {weight_count} weight files across {layer_count} layers")
 
     def _load_all_weights(self) -> None:
-        """Load all weights and metadata from disk."""
-        layer_count = 0
+        """Load all indexed weights and metadata from disk."""
+        self._scan_directory()
         weight_count = 0
-
-        for layer_path in self.layer_dir.iterdir():
-            if not layer_path.is_dir():
-                continue
-
-            layer_name = layer_path.name
-            self._index[layer_name] = {}
-            layer_count += 1
-
-            for file_path in layer_path.iterdir():
-                if file_path.suffix != '.pth':
-                    continue
-
-                try:
-                    bitwidth = int(file_path.stem)
-                except ValueError:
-                    continue
-
-                weight, embedded_metadata = self._load_pth(file_path)
-                file_metadata = self._load_metadata_file(layer_path, bitwidth)
-
-                metadata = {**(embedded_metadata or {}), **(file_metadata or {})} or None
-
-                self._index[layer_name][bitwidth] = LayerData(
-                    weight=weight,
-                    metadata=metadata,
-                    loaded=True
-                )
+        for layer_name, candidates in self._index.items():
+            for bitwidth, layer_data in candidates.items():
+                weight, metadata = self._load_single_weight(
+                    layer_name, bitwidth, source=layer_data.source)
+                layer_data.weight = weight
+                layer_data.metadata = metadata
+                layer_data.loaded = True
                 weight_count += 1
+        logger.info(
+            f"Loaded {weight_count} weight tensors across {len(self._index)} layers")
 
-        logger.info(f"Loaded {weight_count} weight tensors across {layer_count} layers")
-
-    def _load_single_weight(self, layer_name: str, bitwidth: int) -> Tuple[torch.Tensor, Optional[Dict[str, Any]]]:
+    def _load_single_weight(
+        self, layer_name: str, bitwidth: int, source: Optional[str] = None,
+    ) -> Tuple[torch.Tensor, Optional[Dict[str, Any]]]:
         """Load a single weight file from disk."""
         layer_path = self.layer_dir / layer_name
         file_path = layer_path / f"{bitwidth}.pth"
 
+        source = source or self._index[layer_name][bitwidth].source
+        if source == "qparams":
+            bundle = load_qparams(layer_path, bitwidth, unpack=False)
+            weight = dequantize_from_qparams(bundle)
+            metadata = {
+                key: value for key, value in bundle.items()
+                if key not in {"qweight", "qweight_packed", "scales", "zeros", "perm"}
+            }
+            return weight, metadata
         if not file_path.exists():
             raise FileNotFoundError(f"Weight file not found: {file_path}")
 
@@ -182,7 +187,8 @@ class WeightStore:
         if self.cache and layer_data.loaded:
             return layer_data.weight
 
-        weight, metadata = self._load_single_weight(layer_name, bitwidth)
+        weight, metadata = self._load_single_weight(
+            layer_name, bitwidth, source=layer_data.source)
 
         if self.cache:
             layer_data.weight = weight
@@ -200,7 +206,8 @@ class WeightStore:
         if self.cache and layer_data.loaded:
             return layer_data.metadata
 
-        _, metadata = self._load_single_weight(layer_name, bitwidth)
+        _, metadata = self._load_single_weight(
+            layer_name, bitwidth, source=layer_data.source)
 
         if self.cache:
             layer_data.metadata = metadata
@@ -237,7 +244,9 @@ class WeightStore:
         for layer_name in self._index:
             if bitwidth in self._index[layer_name]:
                 if not self._index[layer_name][bitwidth].loaded:
-                    weight, metadata = self._load_single_weight(layer_name, bitwidth)
+                    weight, metadata = self._load_single_weight(
+                        layer_name, bitwidth,
+                        source=self._index[layer_name][bitwidth].source)
                     self._index[layer_name][bitwidth].weight = weight
                     self._index[layer_name][bitwidth].metadata = metadata
                     self._index[layer_name][bitwidth].loaded = True

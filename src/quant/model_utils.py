@@ -16,6 +16,7 @@ from transformers.models.phi3.modeling_phi3 import Phi3DecoderLayer
 from transformers.models.mistral.modeling_mistral import MistralDecoderLayer
 
 from common import to
+from model_adapter import get_model_adapter
 
 
 ### Layer and activation getters
@@ -42,32 +43,16 @@ class Catcher(nn.Module):
 
 
 def get_layers(model: AutoModelForCausalLM):
-    if model.config.model_type in ("llama", "gemma", "gemma2", "phi3", "mistral"):
-        return model.model.layers
-    if model.config.model_type == "opt":
-        return model.model.decoder.layers
-    else:
-        raise ValueError(f"{model.config.model_type} is not supported.")
+    return get_model_adapter(model).layers
 
 
 def get_lm_head(model: AutoModelForCausalLM):
-    lm_head = nn.ModuleList()
-    if model.config.model_type in ("llama", "gemma", "gemma2", "phi3", "mistral"):
-        if model.model.norm is not None:
-            lm_head.append(model.model.norm)
-        lm_head.append(model.lm_head)
-    elif model.config.model_type == "opt":
-        if model.model.decoder.final_layer_norm is not None:
-            lm_head.append(model.model.decoder.final_layer_norm)
-        if model.model.decoder.project_out is not None:
-            lm_head.append(model.model.decoder.project_out)
-        lm_head.append(model.lm_head)
-    else:
-        raise ValueError(f"{model.config.model_type} is not supported.")
-    return lm_head
+    return nn.ModuleList(get_model_adapter(model).final_modules)
 
 
 def get_transformer_block_class(model: AutoModelForCausalLM):
+    if get_model_adapter(model).family == "qwen3_5":
+        return type(get_model_adapter(model).layers[0])
     if model.config.model_type == "llama":
         return LlamaDecoderLayer
     if model.config.model_type == "opt":
@@ -83,33 +68,33 @@ def get_transformer_block_class(model: AutoModelForCausalLM):
 
 
 def get_mlp_layer_name(model: AutoModelForCausalLM):
-    if model.config.model_type in ("llama", "mistral"):
+    if get_model_adapter(model).family in ("llama", "mistral", "qwen3_5"):
         return "mlp"
     else:
         raise ValueError(f"{model.config.model_type} is not supported.")
 
 
 def get_attn_layer_name(model: AutoModelForCausalLM):
-    if model.config.model_type in ("llama", "mistral"):
+    family = get_model_adapter(model).family
+    if family in ("llama", "mistral"):
         return "self_attn"
-    
     else:
         raise ValueError(f"{model.config.model_type} is not supported.")
 
 
 def get_lm_logits(hidden_states: torch.Tensor, model: nn.Module):
-    if model.config.model_type in ("llama", "gemma", "gemma2", "phi3", "mistral"):
-        if model.model.norm is not None:
-            hidden_states = model.model.norm(hidden_states)
-        lm_logits = model.lm_head(hidden_states)
-    elif model.config.model_type == "opt":
+    adapter = get_model_adapter(model)
+    if adapter.family == "opt":
         if model.model.decoder.final_layer_norm is not None:
             hidden_states = model.model.decoder.final_layer_norm(hidden_states)
         if model.model.decoder.project_out is not None:
             hidden_states = model.model.decoder.project_out(hidden_states)
         lm_logits = model.lm_head(hidden_states)
     else:
-        raise ValueError(f"{model.config.model_type} is not supported.")
+        norm = adapter.final_norm()
+        if norm is not None:
+            hidden_states = norm(hidden_states)
+        lm_logits = adapter.lm_head()(hidden_states)
     return lm_logits
 
 
@@ -121,10 +106,7 @@ def get_shifted_lm_logits(hidden_states: torch.Tensor, model: nn.Module, flatten
 
 
 def get_hidden_size(model: AutoModelForCausalLM):
-    if model.config.model_type in ("llama", "gemma", "gemma2", "phi3", "opt", "mistral"):
-        return model.config.hidden_size
-    else:
-        raise ValueError(f"{model.config.model_type} is not supported.")
+    return get_model_adapter(model).hidden_size
 
 
 ### Zero/Identity module utilities
@@ -209,13 +191,14 @@ class IdentityLayer(nn.Module):
 
 
 def drop_layers(model, drop_config: List[int]):
-    layers = get_layers(model)
-    attn_layer_name = get_attn_layer_name(model)
+    adapter = get_model_adapter(model)
+    layers = adapter.layers
     mlp_layer_name = get_mlp_layer_name(model)
 
     assert len(layers) == len(drop_config)
 
     for layer_id, _ in enumerate(layers):
+        attn_layer_name = adapter.attention_name(layer_id)
         # Do nothing
         if drop_config[layer_id] == "none":
             pass

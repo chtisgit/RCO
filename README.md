@@ -51,6 +51,9 @@ pip install -r requirements.txt
 
 Each top-level script (run_*.py and rco_*.py) adds src/ to sys.path on the first line of code, so you can run them directly from the repo root without an editable install.
 
+For the Qwen3.5/Qwen3.6 MoE adapter and the bounded-memory work in this fork,
+see [docs/LOW_MEMORY.md](docs/LOW_MEMORY.md).
+
 ## Repository layout
 
 ```
@@ -120,7 +123,10 @@ rco_search_quant.py and rco_search_prune.py both accept any of these names via -
 
 ### 1. Build the multi-bitwidth GPTQ database
 
-Per layer, the pipeline writes both a dequantized fake-quant tensor (<bw>.pth, consumed by the search) and a qparams sidecar (<bw>_qparams.pt: integer codes + scales + zeros + perm + meta, consumed by checkpoint packers).
+Per layer, the pipeline writes a bit-packed qparams sidecar
+(<bw>_qparams.pt: packed integer codes + scales + zeros + perm + metadata).
+Pass `--save_fake_quant` only when the legacy relaxed search also needs a dense
+dequantized <bw>.pth candidate.
 
 ```bash
 scripts/run_quantize.sh Qwen/Qwen3-8B $RCO_DATA_ROOT/qwen3_8b_db 8
@@ -204,7 +210,9 @@ Each <layer>/<bw>_qparams.pt is a torch-pickled dict:
 
 | key          | dtype / shape                              | meaning                                |
 |--------------|--------------------------------------------|----------------------------------------|
-| qweight    | uint8 [d_row, d_col]                     | integer codes, [0, 2**bits - 1]      |
+| qweight_packed | uint8 [ceil(numel*bits/8)]          | LSB-first packed integer codes       |
+| qweight_shape  | tuple[d_row, d_col]                 | logical integer-code matrix shape    |
+| qweight_numel  | int                                 | logical integer-code count           |
 | scales     | original dtype [d_row, n_groups]         | per-(row, group) scale                 |
 | zeros      | original dtype [d_row, n_groups]         | per-(row, group) zero-point            |
 | perm       | int64 [d_col] or None                  | act-order permutation, if any          |
@@ -216,7 +224,10 @@ Each <layer>/<bw>_qparams.pt is a torch-pickled dict:
 | dtype      | str                                        | original weight dtype (e.g. bfloat16)|
 | schema     | int                                        | format version                         |
 
-Reconstruction (column-permuted form): W_q = scales[:, group_idx] * (qweight - zeros[:, group_idx]), where group_idx[c] = c // group_size. See gptq.dequantize_from_qparams.
+`load_qparams(..., unpack=True)` reconstructs `qweight` for compatibility.
+Reconstruction (column-permuted form): W_q = scales[:, group_idx] *
+(qweight - zeros[:, group_idx]), where group_idx[c] = c // group_size. See
+`quant.qparams.dequantize_from_qparams`.
 
 ## Acknowledgements
 
@@ -234,4 +245,3 @@ The Cholesky-based OBQ quantization kernels in src/quant/ derive from GPTQ ([Fra
   primaryClass  = {cs.LG},
 }
 ```
-
