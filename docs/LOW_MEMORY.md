@@ -207,11 +207,11 @@ reference and cannot validate generated higher-bit candidates.
 
 The released `run_build_checkpoint.py --format compressed-tensors` is not a
 bounded-memory writer: it loads or decompresses the complete base model, applies
-quantization wrappers in memory, and then calls `save_pretrained`. Its pinned
-output stack also does not support this Qwen schema.
+quantization wrappers in memory, and then calls `save_pretrained`. The version
+pair originally pinned for that path also does not support this Qwen schema.
 
-With Transformers 5.7.0 and the repository-pinned `compressed-tensors` 0.15.0.1,
-the published GSQ checkpoint fails during model preprocessing, before tensor
+With the former Transformers 5.7.0 and `compressed-tensors` 0.15.0.1 pins, the
+published GSQ checkpoint fails during model preprocessing, before tensor
 payloads are loaded:
 
 ```text
@@ -283,15 +283,14 @@ scales with maximum absolute error `0.0`. The complete compact evidence is in
 bytes and the retained report is 2.4 KiB.
 
 This proves the logical packed-expert schema, index, sharding, and loader
-conversion needed by a bounded writer. It does not prove the old
-full-model `run_build_checkpoint.py` path is memory-safe, nor does it validate
-a full mixed-bit assignment. Repository dependency pins remain unchanged in
-this milestone so the version update and any compatibility fixes can be
-reviewed separately.
+conversion needed by a bounded writer. It does not prove the old full-model
+`run_build_checkpoint.py` path is memory-safe, nor does it validate a full
+mixed-bit assignment. The repository now pins the verified Transformers
+5.13.1 and `compressed-tensors` 0.18.0 pair.
 
 ## Remaining work
 
-Pinned Transformers 5.7.0 meta initialization has been checked against the
+The earlier Transformers 5.7.0 meta initialization was checked against the
 local Qwen3.6 config. It creates `Qwen3_5MoeForConditionalGeneration`, resolves
 40 text layers with a 30 linear-attention / 10 full-attention split, keeps all
 35,107,181,936 parameters on meta, and retained only 164 bytes of runtime

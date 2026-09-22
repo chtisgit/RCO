@@ -1,4 +1,5 @@
-# Exact versions verified to work with the released RCO pipeline.
+# Exact versions verified with the RCO unit suite and Qwen3.5-MoE packed
+# checkpoint audits.
 #
 # Pinning matters: the mask-application hook in src/search/prune.py
 # (apply_hard_pruning_mask) detects the gate-return signature dynamically and
@@ -7,16 +8,16 @@
 # raw logits) also work via a separate code path in the same hook.
 numpy==2.3.5
 torch==2.11.0+cu126
-transformers==5.7.0
+transformers==5.13.1
 accelerate==1.13.0
 datasets==4.8.5
 tqdm==4.67.3
 
-# Only needed for run_split_checkpoint.py and run_build_checkpoint.py
-# --format compressed-tensors (database I/O against HF compressed-tensors
-# checkpoints). >=0.15 ships replace_direct_state_dict and the BaseCompressor
-# classmethod interface this code depends on.
-compressed-tensors==0.15.0.1
+# Needed for compressed checkpoint I/O and the bounded packed writer.
+# Version 0.18.0, together with Transformers 5.13.1, cleanly loads the
+# published Qwen schema and the exact tiny writer round trip. Older pinned
+# versions fail before loading this model's tensor payloads.
+compressed-tensors==0.18.0
 
 # Only needed if running lm-eval-harness benchmarks on a pruned/quantized
 # checkpoint.
