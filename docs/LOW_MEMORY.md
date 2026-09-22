@@ -173,6 +173,36 @@ assignment updates from paired scalar losses, so neither needs an activation or
 weight backward graph. Pruning masks and relaxed assignment methods still
 require a real training-aware streamed backward path.
 
+## Bounded numerical candidate validation
+
+`tools/validate_candidates.py` compares a selected assignment with its dense
+safetensors source while keeping only one source tensor and one decoded
+candidate resident. For fused Qwen experts it uses safetensors slicing to read
+only the requested expert's gate, up, or down projection rather than the full
+expert bank. Zero-bit assignments are compared with an implicit zero tensor.
+
+```bash
+python tools/validate_candidates.py \
+  --source-model /path/to/dense-qwen3.6-35b-a3b \
+  --layer-dir /path/to/rco-database \
+  --assignment /path/to/search-result.json \
+  --chunk-elements 1048576 \
+  --output candidate-validation.json
+```
+
+The bounded report includes aggregate maximum absolute error, mean absolute
+error, mean signed error, RMSE, relative Frobenius error, realized average
+selected bits, effective candidate-file bits per weight, logical bytes read,
+peak process RSS, elapsed time, and a configurable number of worst tensors.
+Error reduction uses bounded chunks, and the default report does not retain all
+per-tensor records. `--details-jsonl` explicitly enables exhaustive records;
+`--tensor` and `--max-tensors` support small bring-up runs before a complete
+scan. Candidate checksum verification remains active through `WeightStore`.
+
+This tool requires the original dense or otherwise trusted higher-precision
+checkpoint. The published two-bit GSQ checkpoint is not a substitute for that
+reference and cannot validate generated higher-bit candidates.
+
 ## Packed output compatibility gate
 
 The released `run_build_checkpoint.py --format compressed-tensors` is not a
