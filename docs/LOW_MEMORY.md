@@ -104,6 +104,37 @@ This passes the acquisition and immutable-inventory portion of the small-oracle
 gate. Canonical GGUF mapping, dense calibration-loss reproduction, and retained
 block numerical comparison remain separate milestones.
 
+The canonical mapping portion is recorded in
+`reports/qwen35_2b_gguf_manifest.json`. It pins llama.cpp revision
+`911f6cdc8ab8a530b2bee09ee61471a6f3178eeb`, maps all 320 text sources through
+its QWEN35 `TensorNameMap`, and cross-checks the result against an actual
+`convert_hf_to_gguf.py --no-mtp --dry-run`. The converter reports exactly 320
+unique final tensors, with no unmapped sources, duplicate destinations, extra
+outputs, or missing outputs.
+
+The initial Q2_0/Q4_0 policy creates 187 one-tensor decision groups. The other
+133 text tensors are copied: 79 are not matrices, 36 are non-weight state or
+bias tensors, and 18 have a row width that is not Q2_0-aligned. Every manifest
+entry records source and destination shapes/types plus required converter
+semantics such as DeltaNet value-head reordering, A-log transformation,
+convolution squeezing, and normalization offsets. The 297 vision and 15 MTP
+tensors remain intentionally omitted.
+
+Reproduce the canonical mapping gate with:
+
+```bash
+python tools/audit_gguf_mapping.py \
+  --identity-report reports/qwen35_2b_identity.json \
+  --model-dir /path/to/Qwen3.5-2B-Base \
+  --llama-cpp /path/to/pinned/llama.cpp \
+  --llama-revision 911f6cdc8ab8a530b2bee09ee61471a6f3178eeb \
+  --output reports/qwen35_2b_gguf_manifest.json
+```
+
+This establishes canonical names and initial decision groups; it does not yet
+prove Q2_0/Q4_0 CPU and CUDA kernel support for every selected geometry or the
+byte-level transformed candidate path.
+
 The tensor-name audit of the local published checkpoint covers all 93,625
 source tensors: 93,275 text tensors, 333 vision tensors, and 17 MTP tensors,
 with zero unknown names. The recorded audit is
