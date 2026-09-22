@@ -1,0 +1,586 @@
+{
+  "all_equal": true,
+  "case_count": 48,
+  "cases": [
+    {
+      "bits": 1,
+      "equal": true,
+      "packed_shape": [
+        1,
+        1
+      ],
+      "shape": [
+        1,
+        1
+      ]
+    },
+    {
+      "bits": 1,
+      "equal": true,
+      "packed_shape": [
+        3,
+        1
+      ],
+      "shape": [
+        3,
+        17
+      ]
+    },
+    {
+      "bits": 1,
+      "equal": true,
+      "packed_shape": [
+        2,
+        1
+      ],
+      "shape": [
+        2,
+        31
+      ]
+    },
+    {
+      "bits": 1,
+      "equal": true,
+      "packed_shape": [
+        4,
+        1
+      ],
+      "shape": [
+        4,
+        32
+      ]
+    },
+    {
+      "bits": 1,
+      "equal": true,
+      "packed_shape": [
+        3,
+        2
+      ],
+      "shape": [
+        3,
+        33
+      ]
+    },
+    {
+      "bits": 1,
+      "equal": true,
+      "packed_shape": [
+        2,
+        3
+      ],
+      "shape": [
+        2,
+        67
+      ]
+    },
+    {
+      "bits": 2,
+      "equal": true,
+      "packed_shape": [
+        1,
+        1
+      ],
+      "shape": [
+        1,
+        1
+      ]
+    },
+    {
+      "bits": 2,
+      "equal": true,
+      "packed_shape": [
+        3,
+        2
+      ],
+      "shape": [
+        3,
+        17
+      ]
+    },
+    {
+      "bits": 2,
+      "equal": true,
+      "packed_shape": [
+        2,
+        2
+      ],
+      "shape": [
+        2,
+        31
+      ]
+    },
+    {
+      "bits": 2,
+      "equal": true,
+      "packed_shape": [
+        4,
+        2
+      ],
+      "shape": [
+        4,
+        32
+      ]
+    },
+    {
+      "bits": 2,
+      "equal": true,
+      "packed_shape": [
+        3,
+        3
+      ],
+      "shape": [
+        3,
+        33
+      ]
+    },
+    {
+      "bits": 2,
+      "equal": true,
+      "packed_shape": [
+        2,
+        5
+      ],
+      "shape": [
+        2,
+        67
+      ]
+    },
+    {
+      "bits": 3,
+      "equal": true,
+      "packed_shape": [
+        1,
+        1
+      ],
+      "shape": [
+        1,
+        1
+      ]
+    },
+    {
+      "bits": 3,
+      "equal": true,
+      "packed_shape": [
+        3,
+        2
+      ],
+      "shape": [
+        3,
+        17
+      ]
+    },
+    {
+      "bits": 3,
+      "equal": true,
+      "packed_shape": [
+        2,
+        3
+      ],
+      "shape": [
+        2,
+        31
+      ]
+    },
+    {
+      "bits": 3,
+      "equal": true,
+      "packed_shape": [
+        4,
+        3
+      ],
+      "shape": [
+        4,
+        32
+      ]
+    },
+    {
+      "bits": 3,
+      "equal": true,
+      "packed_shape": [
+        3,
+        4
+      ],
+      "shape": [
+        3,
+        33
+      ]
+    },
+    {
+      "bits": 3,
+      "equal": true,
+      "packed_shape": [
+        2,
+        7
+      ],
+      "shape": [
+        2,
+        67
+      ]
+    },
+    {
+      "bits": 4,
+      "equal": true,
+      "packed_shape": [
+        1,
+        1
+      ],
+      "shape": [
+        1,
+        1
+      ]
+    },
+    {
+      "bits": 4,
+      "equal": true,
+      "packed_shape": [
+        3,
+        3
+      ],
+      "shape": [
+        3,
+        17
+      ]
+    },
+    {
+      "bits": 4,
+      "equal": true,
+      "packed_shape": [
+        2,
+        4
+      ],
+      "shape": [
+        2,
+        31
+      ]
+    },
+    {
+      "bits": 4,
+      "equal": true,
+      "packed_shape": [
+        4,
+        4
+      ],
+      "shape": [
+        4,
+        32
+      ]
+    },
+    {
+      "bits": 4,
+      "equal": true,
+      "packed_shape": [
+        3,
+        5
+      ],
+      "shape": [
+        3,
+        33
+      ]
+    },
+    {
+      "bits": 4,
+      "equal": true,
+      "packed_shape": [
+        2,
+        9
+      ],
+      "shape": [
+        2,
+        67
+      ]
+    },
+    {
+      "bits": 5,
+      "equal": true,
+      "packed_shape": [
+        1,
+        1
+      ],
+      "shape": [
+        1,
+        1
+      ]
+    },
+    {
+      "bits": 5,
+      "equal": true,
+      "packed_shape": [
+        3,
+        3
+      ],
+      "shape": [
+        3,
+        17
+      ]
+    },
+    {
+      "bits": 5,
+      "equal": true,
+      "packed_shape": [
+        2,
+        5
+      ],
+      "shape": [
+        2,
+        31
+      ]
+    },
+    {
+      "bits": 5,
+      "equal": true,
+      "packed_shape": [
+        4,
+        5
+      ],
+      "shape": [
+        4,
+        32
+      ]
+    },
+    {
+      "bits": 5,
+      "equal": true,
+      "packed_shape": [
+        3,
+        6
+      ],
+      "shape": [
+        3,
+        33
+      ]
+    },
+    {
+      "bits": 5,
+      "equal": true,
+      "packed_shape": [
+        2,
+        11
+      ],
+      "shape": [
+        2,
+        67
+      ]
+    },
+    {
+      "bits": 6,
+      "equal": true,
+      "packed_shape": [
+        1,
+        1
+      ],
+      "shape": [
+        1,
+        1
+      ]
+    },
+    {
+      "bits": 6,
+      "equal": true,
+      "packed_shape": [
+        3,
+        4
+      ],
+      "shape": [
+        3,
+        17
+      ]
+    },
+    {
+      "bits": 6,
+      "equal": true,
+      "packed_shape": [
+        2,
+        6
+      ],
+      "shape": [
+        2,
+        31
+      ]
+    },
+    {
+      "bits": 6,
+      "equal": true,
+      "packed_shape": [
+        4,
+        6
+      ],
+      "shape": [
+        4,
+        32
+      ]
+    },
+    {
+      "bits": 6,
+      "equal": true,
+      "packed_shape": [
+        3,
+        7
+      ],
+      "shape": [
+        3,
+        33
+      ]
+    },
+    {
+      "bits": 6,
+      "equal": true,
+      "packed_shape": [
+        2,
+        13
+      ],
+      "shape": [
+        2,
+        67
+      ]
+    },
+    {
+      "bits": 7,
+      "equal": true,
+      "packed_shape": [
+        1,
+        1
+      ],
+      "shape": [
+        1,
+        1
+      ]
+    },
+    {
+      "bits": 7,
+      "equal": true,
+      "packed_shape": [
+        3,
+        4
+      ],
+      "shape": [
+        3,
+        17
+      ]
+    },
+    {
+      "bits": 7,
+      "equal": true,
+      "packed_shape": [
+        2,
+        7
+      ],
+      "shape": [
+        2,
+        31
+      ]
+    },
+    {
+      "bits": 7,
+      "equal": true,
+      "packed_shape": [
+        4,
+        7
+      ],
+      "shape": [
+        4,
+        32
+      ]
+    },
+    {
+      "bits": 7,
+      "equal": true,
+      "packed_shape": [
+        3,
+        8
+      ],
+      "shape": [
+        3,
+        33
+      ]
+    },
+    {
+      "bits": 7,
+      "equal": true,
+      "packed_shape": [
+        2,
+        15
+      ],
+      "shape": [
+        2,
+        67
+      ]
+    },
+    {
+      "bits": 8,
+      "equal": true,
+      "packed_shape": [
+        1,
+        1
+      ],
+      "shape": [
+        1,
+        1
+      ]
+    },
+    {
+      "bits": 8,
+      "equal": true,
+      "packed_shape": [
+        3,
+        5
+      ],
+      "shape": [
+        3,
+        17
+      ]
+    },
+    {
+      "bits": 8,
+      "equal": true,
+      "packed_shape": [
+        2,
+        8
+      ],
+      "shape": [
+        2,
+        31
+      ]
+    },
+    {
+      "bits": 8,
+      "equal": true,
+      "packed_shape": [
+        4,
+        8
+      ],
+      "shape": [
+        4,
+        32
+      ]
+    },
+    {
+      "bits": 8,
+      "equal": true,
+      "packed_shape": [
+        3,
+        9
+      ],
+      "shape": [
+        3,
+        33
+      ]
+    },
+    {
+      "bits": 8,
+      "equal": true,
+      "packed_shape": [
+        2,
+        17
+      ],
+      "shape": [
+        2,
+        67
+      ]
+    }
+  ],
+  "compressed_tensors": "0.18.0",
+  "packed_sha256": "52fa4665be292b12ef802d70dd7646b211dff7e8958a0229f09dd805afb30a87",
+  "schema": 1,
+  "seed": 23
+}

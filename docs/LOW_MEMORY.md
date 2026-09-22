@@ -243,6 +243,27 @@ published logical packed layout, first on a tiny synthetic checkpoint, and must
 pass this clean meta-load round trip before repository pins change or a full
 materialized load is attempted.
 
+The candidate-to-output mapping is also proven for symmetric candidates with
+activation ordering disabled, which is the initial low-memory configuration.
+RCO stores unsigned codes with zero point `2^(bits-1)` and reconstructs
+`scale * (code - zero)`. Compressed-tensors interprets signed codes, adds the
+same offset before packing, and reconstructs `scale * signed_code`. Codes and
+scales therefore transfer without requantization. The only storage transform
+restarts the little-endian bitstream at each row's INT32 boundary:
+
+```text
+RCO qweight + symmetric zero  ->  compressed-tensors weight_packed (INT32)
+RCO scales                    ->  compressed-tensors weight_scale
+RCO logical shape             ->  compressed-tensors weight_shape (INT64)
+```
+
+`src/quant/compressed_layout.py` implements this mapping and rejects asymmetric
+zero points or activation-order permutations rather than guessing a target
+layout. `tools/audit_compressed_packing.py` compares its output byte-for-byte
+with compressed-tensors 0.18.0. All 48 combinations spanning bit widths 1–8
+and aligned/unaligned row lengths match; the evidence is in
+`reports/qwen35_packing_compatibility.json`.
+
 ## Remaining work
 
 Pinned Transformers 5.7.0 meta initialization has been checked against the
