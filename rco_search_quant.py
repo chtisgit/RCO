@@ -569,6 +569,27 @@ def main(argv=None) -> int:
             stream_memory['checkpoint_tensor_bytes_read'] / 2**30,
             stream_memory['candidate_storage_bytes_read'] / 2**30,
         )
+        logger.info(
+            "Slowest streamed evaluation: total %.3fs; checkpoint load %.3fs, "
+            "candidate decode/install %.3fs, block forward %.3fs, "
+            "loss %.3fs, release %.3fs",
+            stream_memory['total_seconds'],
+            stream_memory['checkpoint_load_seconds'],
+            stream_memory['candidate_decode_seconds'],
+            stream_memory['block_forward_seconds'],
+            stream_memory['loss_seconds'],
+            stream_memory['checkpoint_release_seconds'],
+        )
+        if stream_memory['cuda_max_reserved']:
+            logger.info(
+                "Per-phase CUDA reserved peaks: load %.3f GiB, decode %.3f "
+                "GiB, forward %.3f GiB, loss %.3f GiB, release %.3f GiB",
+                stream_memory['cuda_load_max_reserved'] / 2**30,
+                stream_memory['cuda_decode_max_reserved'] / 2**30,
+                stream_memory['cuda_forward_max_reserved'] / 2**30,
+                stream_memory['cuda_loss_max_reserved'] / 2**30,
+                stream_memory['cuda_release_max_reserved'] / 2**30,
+            )
     else:
         del model
         cleanup_memory()

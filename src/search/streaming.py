@@ -17,6 +17,7 @@ import gc
 import logging
 import re
 import resource
+import time
 from dataclasses import dataclass
 from typing import Any, Optional, Sequence
 
@@ -126,6 +127,80 @@ class StreamingMemoryStats:
     process_peak_rss: int = 0
     checkpoint_tensor_bytes_read: int = 0
     candidate_storage_bytes_read: int = 0
+    checkpoint_load_seconds: float = 0.0
+    candidate_decode_seconds: float = 0.0
+    block_forward_seconds: float = 0.0
+    loss_seconds: float = 0.0
+    checkpoint_release_seconds: float = 0.0
+    total_seconds: float = 0.0
+    cuda_load_max_allocated: int = 0
+    cuda_load_max_reserved: int = 0
+    cuda_decode_max_allocated: int = 0
+    cuda_decode_max_reserved: int = 0
+    cuda_forward_max_allocated: int = 0
+    cuda_forward_max_reserved: int = 0
+    cuda_loss_max_allocated: int = 0
+    cuda_loss_max_reserved: int = 0
+    cuda_release_max_allocated: int = 0
+    cuda_release_max_reserved: int = 0
+
+
+_PHASE_FIELDS = {
+    "load": (
+        "checkpoint_load_seconds",
+        "cuda_load_max_allocated",
+        "cuda_load_max_reserved",
+    ),
+    "decode": (
+        "candidate_decode_seconds",
+        "cuda_decode_max_allocated",
+        "cuda_decode_max_reserved",
+    ),
+    "forward": (
+        "block_forward_seconds",
+        "cuda_forward_max_allocated",
+        "cuda_forward_max_reserved",
+    ),
+    "loss": (
+        "loss_seconds",
+        "cuda_loss_max_allocated",
+        "cuda_loss_max_reserved",
+    ),
+    "release": (
+        "checkpoint_release_seconds",
+        "cuda_release_max_allocated",
+        "cuda_release_max_reserved",
+    ),
+}
+
+
+def _start_phase(device: torch.device) -> float:
+    if device.type == "cuda":
+        torch.cuda.synchronize(device)
+        torch.cuda.reset_peak_memory_stats(device)
+    return time.perf_counter()
+
+
+def _finish_phase(
+    stats: StreamingMemoryStats,
+    phase: str,
+    device: torch.device,
+    started: float,
+) -> None:
+    duration_field, allocated_field, reserved_field = _PHASE_FIELDS[phase]
+    if device.type == "cuda":
+        torch.cuda.synchronize(device)
+    setattr(stats, duration_field,
+            getattr(stats, duration_field) + time.perf_counter() - started)
+    if device.type == "cuda":
+        allocated = torch.cuda.max_memory_allocated(device)
+        reserved = torch.cuda.max_memory_reserved(device)
+        setattr(stats, allocated_field,
+                max(getattr(stats, allocated_field), allocated))
+        setattr(stats, reserved_field,
+                max(getattr(stats, reserved_field), reserved))
+        stats.cuda_max_allocated = max(stats.cuda_max_allocated, allocated)
+        stats.cuda_max_reserved = max(stats.cuda_max_reserved, reserved)
 
 
 @dataclass(frozen=True)
@@ -179,43 +254,53 @@ class _StreamingBlock(nn.Module):
         stats = object.__getattribute__(self, "_stats")
         loaded = False
         try:
-            block_bytes = loader.load_prefix(
-                model, self.path, device=self.device)
+            phase_started = _start_phase(self.device)
+            try:
+                block_bytes = loader.load_prefix(
+                    model, self.path, device=self.device)
+            finally:
+                _finish_phase(stats, "load", self.device, phase_started)
             loaded = True
             stats.loaded_blocks += 1
             stats.max_block_bytes = max(stats.max_block_bytes, block_bytes)
             stats.checkpoint_tensor_bytes_read += block_bytes
 
-            for name, bitwidth in self.selected:
-                if bitwidth == 0:
-                    candidate = _zero_candidate(model, name)
-                else:
-                    if hasattr(store, "get_layer_storage_bytes"):
-                        stats.candidate_storage_bytes_read += (
-                            store.get_layer_storage_bytes(name, bitwidth))
-                    candidate = store.get_layer_weight(name, bitwidth)
-                stats.max_candidate_bytes = max(
-                    stats.max_candidate_bytes, _tensor_bytes(candidate))
-                _copy_candidate(model, name, candidate)
-                del candidate
+            phase_started = _start_phase(self.device)
+            try:
+                for name, bitwidth in self.selected:
+                    if bitwidth == 0:
+                        candidate = _zero_candidate(model, name)
+                    else:
+                        if hasattr(store, "get_layer_storage_bytes"):
+                            stats.candidate_storage_bytes_read += (
+                                store.get_layer_storage_bytes(name, bitwidth))
+                        candidate = store.get_layer_weight(name, bitwidth)
+                    stats.max_candidate_bytes = max(
+                        stats.max_candidate_bytes, _tensor_bytes(candidate))
+                    _copy_candidate(model, name, candidate)
+                    del candidate
+            finally:
+                _finish_phase(stats, "decode", self.device, phase_started)
 
-            output = self.module(*args, **kwargs)
+            phase_started = _start_phase(self.device)
+            try:
+                output = self.module(*args, **kwargs)
+            finally:
+                _finish_phase(stats, "forward", self.device, phase_started)
             stats.process_peak_rss = max(
                 stats.process_peak_rss, _process_peak_rss_bytes())
-            if self.device.type == "cuda":
-                stats.cuda_max_allocated = max(
-                    stats.cuda_max_allocated,
-                    torch.cuda.max_memory_allocated(self.device))
-                stats.cuda_max_reserved = max(
-                    stats.cuda_max_reserved,
-                    torch.cuda.max_memory_reserved(self.device))
             return output
         finally:
             if loaded:
-                loader.release_prefix(model, self.path)
-            gc.collect()
-            if self.device.type == "cuda":
-                torch.cuda.empty_cache()
+                phase_started = _start_phase(self.device)
+                try:
+                    loader.release_prefix(model, self.path)
+                    gc.collect()
+                    if self.device.type == "cuda":
+                        torch.cuda.empty_cache()
+                finally:
+                    _finish_phase(
+                        stats, "release", self.device, phase_started)
 
 
 def _zero_candidate(model: nn.Module, name: str) -> torch.Tensor:
@@ -398,6 +483,7 @@ class StreamingHardCausalEvaluator:
         if input_ids.ndim != 2:
             raise ValueError("input_ids must have shape [batch, sequence]")
         stats = StreamingMemoryStats(process_peak_rss=_process_peak_rss_bytes())
+        evaluation_started = time.perf_counter()
         if self.device.type == "cuda":
             torch.cuda.reset_peak_memory_stats(self.device)
 
@@ -406,21 +492,26 @@ class StreamingHardCausalEvaluator:
         originals = list(layers)
         loaded_prefixes: list[str] = []
         try:
-            self.checkpoint_loader.move_runtime_buffers(self.model, self.device)
-            for path in self.adapter.embedding_paths:
-                stats.checkpoint_tensor_bytes_read += (
-                    self.checkpoint_loader.load_prefix(
-                        self.model, path, device=self.device)
-                )
-                loaded_prefixes.append(path)
-            for path in self.adapter.final_module_paths:
-                if path == "lm_head":
-                    continue
-                stats.checkpoint_tensor_bytes_read += (
-                    self.checkpoint_loader.load_prefix(
-                        self.model, path, device=self.device)
-                )
-                loaded_prefixes.append(path)
+            phase_started = _start_phase(self.device)
+            try:
+                self.checkpoint_loader.move_runtime_buffers(
+                    self.model, self.device)
+                for path in self.adapter.embedding_paths:
+                    stats.checkpoint_tensor_bytes_read += (
+                        self.checkpoint_loader.load_prefix(
+                            self.model, path, device=self.device)
+                    )
+                    loaded_prefixes.append(path)
+                for path in self.adapter.final_module_paths:
+                    if path == "lm_head":
+                        continue
+                    stats.checkpoint_tensor_bytes_read += (
+                        self.checkpoint_loader.load_prefix(
+                            self.model, path, device=self.device)
+                    )
+                    loaded_prefixes.append(path)
+            finally:
+                _finish_phase(stats, "load", self.device, phase_started)
 
             for index, module in enumerate(originals):
                 path = f"{self.adapter.layers_path}.{index}"
@@ -444,36 +535,44 @@ class StreamingHardCausalEvaluator:
             output = self.adapter.text_model(**model_kwargs)
             hidden_states = _extract_hidden(output)
 
-            stats.checkpoint_tensor_bytes_read += (
-                self.checkpoint_loader.load_prefix(
-                    self.model, "lm_head", device=self.device)
-            )
+            phase_started = _start_phase(self.device)
+            try:
+                stats.checkpoint_tensor_bytes_read += (
+                    self.checkpoint_loader.load_prefix(
+                        self.model, "lm_head", device=self.device)
+                )
+            finally:
+                _finish_phase(stats, "load", self.device, phase_started)
             loaded_prefixes.append("lm_head")
-            loss, token_count = chunked_causal_cross_entropy(
-                hidden_states,
-                input_ids.to(self.device),
-                self.adapter.lm_head(),
-                loss_mask=(loss_mask.to(self.device)
-                           if loss_mask is not None else None),
-                vocab_chunk_size=self.vocab_chunk_size,
-            )
+            phase_started = _start_phase(self.device)
+            try:
+                loss, token_count = chunked_causal_cross_entropy(
+                    hidden_states,
+                    input_ids.to(self.device),
+                    self.adapter.lm_head(),
+                    loss_mask=(loss_mask.to(self.device)
+                               if loss_mask is not None else None),
+                    vocab_chunk_size=self.vocab_chunk_size,
+                )
+            finally:
+                _finish_phase(stats, "loss", self.device, phase_started)
             value = float(loss.item())
             stats.process_peak_rss = max(
                 stats.process_peak_rss, _process_peak_rss_bytes())
-            if self.device.type == "cuda":
-                stats.cuda_max_allocated = torch.cuda.max_memory_allocated(
-                    self.device)
-                stats.cuda_max_reserved = torch.cuda.max_memory_reserved(
-                    self.device)
             return StreamingEvaluation(value, token_count, stats)
         finally:
             for index, module in enumerate(originals):
                 layers[index] = module
-            for path in reversed(loaded_prefixes):
-                self.checkpoint_loader.release_prefix(self.model, path)
-            gc.collect()
-            if self.device.type == "cuda":
-                torch.cuda.empty_cache()
+            phase_started = _start_phase(self.device)
+            try:
+                for path in reversed(loaded_prefixes):
+                    self.checkpoint_loader.release_prefix(self.model, path)
+                gc.collect()
+                if self.device.type == "cuda":
+                    torch.cuda.empty_cache()
+            finally:
+                _finish_phase(stats, "release", self.device, phase_started)
+                stats.total_seconds = time.perf_counter() - evaluation_started
 
 
 __all__ = [

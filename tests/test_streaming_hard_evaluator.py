@@ -148,6 +148,21 @@ class StreamingHardEvaluatorTest(unittest.TestCase):
         self.assertEqual(result.token_count, 3)
         self.assertEqual(result.memory.loaded_blocks, 2)
         self.assertGreater(result.memory.max_block_bytes, 0)
+        self.assertGreater(result.memory.checkpoint_load_seconds, 0.0)
+        self.assertGreater(result.memory.candidate_decode_seconds, 0.0)
+        self.assertGreater(result.memory.block_forward_seconds, 0.0)
+        self.assertGreater(result.memory.loss_seconds, 0.0)
+        self.assertGreater(result.memory.checkpoint_release_seconds, 0.0)
+        self.assertGreaterEqual(
+            result.memory.total_seconds,
+            result.memory.checkpoint_load_seconds
+            + result.memory.candidate_decode_seconds
+            + result.memory.block_forward_seconds
+            + result.memory.loss_seconds
+            + result.memory.checkpoint_release_seconds,
+        )
+        self.assertEqual(result.memory.cuda_max_allocated, 0)
+        self.assertEqual(result.memory.cuda_load_max_reserved, 0)
         self.assertEqual(
             store.calls,
             [

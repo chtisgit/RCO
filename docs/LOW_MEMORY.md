@@ -162,7 +162,11 @@ selected searched weights. One dense decoder block and one decoded candidate
 are active at a time; the output head is resident while exact CE streams its
 vocabulary rows. Each run records the maximum materialized block and candidate,
 CUDA allocated/reserved peaks, process peak RSS, and logical checkpoint and
-candidate bytes read per evaluation.
+candidate bytes read per evaluation. It also records wall time and separate
+CUDA allocated/reserved high-water marks for checkpoint loading, candidate
+decode/installation, block forward, chunked loss, and checkpoint release. CUDA
+timings synchronize at phase boundaries for measurement accuracy; this adds
+profiling overhead and should be considered when interpreting throughput.
 
 This mode is intentionally inference-only. Both hard estimators obtain
 assignment updates from paired scalar losses, so neither needs an activation or
