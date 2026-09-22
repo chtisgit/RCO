@@ -135,6 +135,34 @@ This establishes canonical names and initial decision groups; it does not yet
 prove Q2_0/Q4_0 CPU and CUDA kernel support for every selected geometry or the
 byte-level transformed candidate path.
 
+The dense numerical portion of the small-oracle gate is also established on
+the Transformers torch fallback for Gated DeltaNet. With the fixed 32-token
+sequence recorded in `reports/qwen35_2b_dense_oracle.json`, two consecutive
+full-model passes produce an exactly equal causal loss of
+`5.655152320861816`. A second fresh process reproduces the same loss and every
+tensor digest.
+
+`reports/qwen35_2b_block0_oracle.safetensors` retains the exact BF16 layer-0
+input and output, each shaped `[1, 32, 2048]`, plus the input token IDs and
+canonical metadata. Its byte-reproducible SHA-256 is
+`63bce45d5a6e0e38adeef3ff7a32a48a2e5c772ce93b91dcb92d4fb1af156545`.
+The audit ran with Transformers 5.13.1 and a CUDA-12.4 PyTorch 2.6.0 build on
+CPU because NVIDIA device nodes disappeared before execution. It peaked at
+approximately 4.23 GiB RSS. This is valid dense-loss/block numerical evidence,
+but it is not an RTX VRAM gate or a fast-kernel reference.
+
+Reproduce it with a compatible Transformers environment:
+
+```bash
+python tools/audit_dense_oracle.py \
+  --model-dir /path/to/Qwen3.5-2B-Base \
+  --revision b1485b2fa6dfa1287294f269f5fb618e03d52d7c \
+  --device cpu \
+  --sequence-length 32 \
+  --oracle-output reports/qwen35_2b_block0_oracle.safetensors \
+  --report-output reports/qwen35_2b_dense_oracle.json
+```
+
 The tensor-name audit of the local published checkpoint covers all 93,625
 source tensors: 93,275 text tensors, 333 vision tensors, and 17 MTP tensors,
 with zero unknown names. The recorded audit is

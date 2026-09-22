@@ -1,0 +1,125 @@
+{
+  "calibration": {
+    "exactly_reproducible": true,
+    "input_ids": [
+      20166,
+      54802,
+      2581,
+      10853,
+      1902,
+      20480,
+      279,
+      1558,
+      16050,
+      1345,
+      9976,
+      1132,
+      799,
+      23776,
+      2424,
+      18394,
+      506,
+      264,
+      854,
+      13,
+      1061,
+      8097,
+      11316,
+      369,
+      279,
+      1167,
+      16451,
+      18,
+      13,
+      20,
+      27044,
+      36367
+    ],
+    "losses": [
+      5.655152320861816,
+      5.655152320861816
+    ],
+    "sequence_length": 32,
+    "text": "Native GGML candidates must preserve the model objective while keeping only one decoder block resident at a time. This fixed sentence is the Qwen3.5 dense calibration oracle."
+  },
+  "environment": {
+    "cuda": {
+      "allocated_peak_bytes": null,
+      "available": false,
+      "device_count": 0,
+      "reserved_peak_bytes": null
+    },
+    "device": "cpu",
+    "python": "3.13.5",
+    "torch": "2.6.0+cu124",
+    "torch_cuda": "12.4",
+    "transformers": "5.13.1"
+  },
+  "memory": {
+    "initial_rss_bytes": 474910720,
+    "peak_process_rss_bytes": 4532989952,
+    "rss_after_load_bytes": 717709312
+  },
+  "model": {
+    "class": "Qwen3_5ForConditionalGeneration",
+    "hidden_size": 2048,
+    "parameter_count": 2213241664,
+    "text_layer_count": 24
+  },
+  "oracle": {
+    "bytes": 263043,
+    "metadata": {
+      "calibration_text": "Native GGML candidates must preserve the model objective while keeping only one decoder block resident at a time. This fixed sentence is the Qwen3.5 dense calibration oracle.",
+      "layer": "0",
+      "loss": "5.655152320861816",
+      "repo_id": "Qwen/Qwen3.5-2B-Base",
+      "revision": "b1485b2fa6dfa1287294f269f5fb618e03d52d7c"
+    },
+    "path": "reports/qwen35_2b_block0_oracle.safetensors",
+    "sha256": "63bce45d5a6e0e38adeef3ff7a32a48a2e5c772ce93b91dcb92d4fb1af156545",
+    "tensors": {
+      "block_input": {
+        "dtype": "bfloat16",
+        "sha256": "f01ed8cae33462d0c5f31df2f1360f4290b7ba3bb30952666ba91b37f47f7787",
+        "shape": [
+          1,
+          32,
+          2048
+        ]
+      },
+      "block_output": {
+        "dtype": "bfloat16",
+        "sha256": "2378c1a4e6d9bf3cc85c8103ba68ea14b1de02b9c6fb1bc43546fe630ead60c1",
+        "shape": [
+          1,
+          32,
+          2048
+        ]
+      },
+      "input_ids": {
+        "dtype": "int64",
+        "sha256": "9ed5e995780441ed949c5652a6887da61ee5df8131dbd2db8e96557e31a4fdf2",
+        "shape": [
+          1,
+          32
+        ]
+      }
+    }
+  },
+  "schema": 1,
+  "scope": "dense full-model causal loss and layer-0 numerical oracle",
+  "source": {
+    "model_dir": "/home/christian/projects/gsq-rco-moe/data/qwen35_2b_base",
+    "repo_id": "Qwen/Qwen3.5-2B-Base",
+    "revision": "b1485b2fa6dfa1287294f269f5fb618e03d52d7c"
+  },
+  "status": "pass",
+  "timing": {
+    "forward_seconds": [
+      4.642011639953125,
+      4.807660625025164
+    ],
+    "load_seconds": 0.29531411302741617,
+    "total_seconds": 10.538701626006514
+  }
+}
