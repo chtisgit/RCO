@@ -191,10 +191,154 @@ def optimize_hard_spsa(
     return scores.detach(), final_assignment, history
 
 
+def sample_plackett_luce_assignment(
+    scores: torch.Tensor,
+    n_high: int,
+    *,
+    uniforms: Optional[torch.Tensor] = None,
+) -> tuple[torch.Tensor, torch.Tensor]:
+    """Sample an exact-cardinality assignment and return its log probability.
+
+    Gumbel top-k samples an ordered Plackett-Luce draw without replacement.
+    The evaluator only consumes the resulting unordered assignment, while the
+    ordered draw supplies an exact, differentiable log probability for the
+    REINFORCE estimator. Computation and persistent state are O(n_groups).
+    """
+    if scores.ndim != 1:
+        raise ValueError("scores must be one-dimensional")
+    if not 0 <= n_high <= scores.numel():
+        raise ValueError("n_high is outside the assignment size")
+    if uniforms is None:
+        uniforms = torch.rand_like(scores)
+    elif uniforms.shape != scores.shape:
+        raise ValueError(
+            f"uniforms has shape {uniforms.shape}, expected {scores.shape}")
+    tiny = torch.finfo(scores.dtype).eps
+    uniforms = uniforms.to(device=scores.device, dtype=scores.dtype).clamp(
+        tiny, 1.0 - tiny)
+    gumbels = -torch.log(-torch.log(uniforms))
+    assignment = torch.zeros_like(scores, dtype=torch.long)
+    if n_high == 0:
+        return assignment, scores.sum() * 0.0
+
+    selected = torch.topk(
+        scores.detach() + gumbels, n_high, sorted=True).indices
+    assignment[selected] = 1
+
+    # For the sampled order, P(i_t) = exp(score_i_t) / sum_remaining exp(score).
+    # A detached common shift keeps exponentials finite without changing the
+    # probability or its gradient. Cumulative subtraction avoids an O(N*K)
+    # mask or dynamic candidate tensor.
+    shift = scores.detach().max()
+    weights = torch.exp(scores - shift)
+    selected_weights = weights[selected]
+    removed_before = torch.cat((
+        torch.zeros(1, dtype=weights.dtype, device=weights.device),
+        torch.cumsum(selected_weights[:-1], dim=0),
+    ))
+    denominators = (weights.sum() - removed_before).clamp_min(
+        torch.finfo(weights.dtype).tiny)
+    log_probability = (
+        scores[selected] - shift - torch.log(denominators)).sum()
+    return assignment, log_probability
+
+
+def optimize_hard_reinforce(
+    evaluate: Callable[[torch.Tensor], float],
+    *,
+    n_groups: int,
+    low_bits: float,
+    high_bits: float,
+    target_bits: float,
+    n_steps: int = 100,
+    lr: float = 0.05,
+    baseline_decay: float = 0.9,
+    seed: int = 42,
+    initial_scores: Optional[torch.Tensor] = None,
+    log_interval: int = 10,
+) -> tuple[torch.Tensor, torch.Tensor, list[dict]]:
+    """Optimize exact-budget choices with paired antithetic REINFORCE draws."""
+    if n_steps < 1:
+        raise ValueError("n_steps must be positive")
+    if not 0.0 <= baseline_decay < 1.0:
+        raise ValueError("baseline_decay must lie in [0, 1)")
+    n_high = high_choice_count(
+        n_groups, low_bits, high_bits, target_bits)
+    if initial_scores is None:
+        scores = torch.zeros(n_groups, dtype=torch.float32)
+    else:
+        if initial_scores.shape != (n_groups,):
+            raise ValueError(
+                f"initial_scores has shape {initial_scores.shape}, expected "
+                f"({n_groups},)")
+        scores = initial_scores.detach().to(dtype=torch.float32).clone()
+    scores.requires_grad_(True)
+    optimizer = torch.optim.Adam([scores], lr=lr)
+    generator = torch.Generator(device=scores.device)
+    generator.manual_seed(seed)
+    baseline = None
+    history = []
+
+    for step in range(n_steps):
+        uniforms = torch.rand(
+            scores.shape, generator=generator, device=scores.device,
+            dtype=scores.dtype)
+        plus, log_probability_plus = sample_plackett_luce_assignment(
+            scores, n_high, uniforms=uniforms)
+        minus, log_probability_minus = sample_plackett_luce_assignment(
+            scores, n_high, uniforms=1.0 - uniforms)
+        loss_plus = float(evaluate(plus))
+        loss_minus = float(evaluate(minus))
+        if not torch.isfinite(torch.tensor([loss_plus, loss_minus])).all():
+            raise FloatingPointError(
+                f"non-finite evaluator loss at step {step}: "
+                f"{loss_plus}, {loss_minus}")
+
+        pair_mean = 0.5 * (loss_plus + loss_minus)
+        if baseline is None:
+            baseline = pair_mean
+        objective = 0.5 * (
+            (loss_plus - baseline) * log_probability_plus
+            + (loss_minus - baseline) * log_probability_minus
+        )
+        optimizer.zero_grad(set_to_none=True)
+        objective.backward()
+        gradient_norm = scores.grad.norm().item()
+        optimizer.step()
+        baseline = (
+            baseline_decay * baseline + (1.0 - baseline_decay) * pair_mean)
+
+        chosen = plus if loss_plus <= loss_minus else minus
+        entry = {
+            "step": step,
+            "loss_plus": loss_plus,
+            "loss_minus": loss_minus,
+            "best_loss": min(loss_plus, loss_minus),
+            "baseline": baseline,
+            "gradient_norm": gradient_norm,
+            "n_high": int(chosen.sum().item()),
+            "realized_bits": realized_average_bits(
+                chosen, low_bits, high_bits),
+        }
+        history.append(entry)
+        if step % log_interval == 0 or step == n_steps - 1:
+            logger.info(
+                "[Hard REINFORCE %d] loss+=%.6f loss-=%.6f "
+                "baseline=%.6f grad=%.5f bits=%.4f",
+                step, loss_plus, loss_minus, baseline, gradient_norm,
+                entry["realized_bits"],
+            )
+
+    final_assignment = exact_budget_assignment(scores.detach(), n_high)
+    return scores.detach(), final_assignment, history
+
+
 __all__ = [
     "HardCandidateModel",
     "exact_budget_assignment",
     "high_choice_count",
     "optimize_hard_spsa",
+    "optimize_hard_reinforce",
     "realized_average_bits",
+    "sample_plackett_luce_assignment",
 ]

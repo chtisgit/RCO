@@ -16,8 +16,10 @@ if torch is not None:
         HardCandidateModel,
         exact_budget_assignment,
         high_choice_count,
+        optimize_hard_reinforce,
         optimize_hard_spsa,
         realized_average_bits,
+        sample_plackett_luce_assignment,
     )
 
 
@@ -79,6 +81,39 @@ class HardSearchTest(unittest.TestCase):
         self.assertEqual(realized_average_bits(assignment, 2.0, 4.0), 3.0)
         self.assertEqual(assignment.tolist(), [1, 1, 0, 0])
         self.assertTrue(all(item["n_high"] == 2 for item in history))
+
+    def test_plackett_luce_sample_has_exact_budget_and_score_gradient(self):
+        scores = torch.tensor(
+            [0.2, -0.4, 1.0, 0.5], requires_grad=True)
+        assignment, log_probability = sample_plackett_luce_assignment(
+            scores, 2, uniforms=torch.tensor([0.1, 0.8, 0.4, 0.6]))
+        self.assertEqual(int(assignment.sum()), 2)
+        log_probability.backward()
+        self.assertIsNotNone(scores.grad)
+        self.assertTrue(torch.isfinite(scores.grad).all())
+        self.assertGreater(scores.grad.norm().item(), 0.0)
+
+    def test_reinforce_preserves_budget_and_learns_synthetic_choice(self):
+        importance = torch.tensor([8.0, 4.0, 2.0, 1.0])
+
+        def evaluate(assignment):
+            return float((importance * (1 - assignment.float())).sum())
+
+        _, assignment, history = optimize_hard_reinforce(
+            evaluate,
+            n_groups=4,
+            low_bits=2.0,
+            high_bits=4.0,
+            target_bits=3.0,
+            n_steps=160,
+            lr=0.08,
+            baseline_decay=0.9,
+            seed=7,
+            log_interval=200,
+        )
+        self.assertEqual(assignment.tolist(), [1, 1, 0, 0])
+        self.assertTrue(all(item["n_high"] == 2 for item in history))
+        self.assertTrue(all(item["realized_bits"] == 3.0 for item in history))
 
 
 if __name__ == "__main__":

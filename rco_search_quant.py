@@ -39,7 +39,11 @@ from search.quant import (
     parse_bitwidths,
     round_with_budget_dp,
 )
-from search.hard import HardCandidateModel, optimize_hard_spsa
+from search.hard import (
+    HardCandidateModel,
+    optimize_hard_reinforce,
+    optimize_hard_spsa,
+)
 from search.streaming import StreamingHardCausalEvaluator
 from store import LoadMode, WeightStore
 from unfuse import unfuse_moe_experts
@@ -77,14 +81,20 @@ def build_parser() -> argparse.ArgumentParser:
                         choices=['sensitivity', 'uniform'],
                         help="Alpha init: 'sensitivity' (per-group MSE), "
                              "'uniform' (same logit per option, budget-shifted)")
-    parser.add_argument('--search-mode', choices=['relaxed', 'hard-spsa'],
+    parser.add_argument('--search-mode',
+                        choices=['relaxed', 'hard-spsa', 'hard-reinforce'],
                         default='relaxed',
-                        help="hard-spsa streams one selected candidate per layer; "
-                             "relaxed retains the released dense-delta method")
+                        help="Hard modes evaluate one exact-budget assignment "
+                             "at a time; relaxed retains the released "
+                             "dense-delta method")
     parser.add_argument('--spsa-perturbation', type=float, default=0.1)
     parser.add_argument(
+        '--reinforce-baseline-decay', type=float, default=0.9,
+        help="Exponential moving-average decay for hard-REINFORCE loss "
+             "baseline (must be in [0, 1)).")
+    parser.add_argument(
         '--stream-hard-eval', action='store_true', default=False,
-        help="Run hard-SPSA CE evaluations through a meta model that loads "
+        help="Run hard-search CE evaluations through a meta model that loads "
              "one checkpoint block and one selected candidate at a time.")
     parser.add_argument(
         '--vocab-chunk-size', type=int, default=8192,
@@ -156,8 +166,9 @@ def main(argv=None) -> int:
     if len(bitwidths) < 2:
         raise SystemExit("Need at least 2 distinct bitwidths")
     if args.stream_hard_eval:
-        if args.search_mode != 'hard-spsa':
-            raise SystemExit("--stream-hard-eval requires --search-mode hard-spsa")
+        if args.search_mode not in {'hard-spsa', 'hard-reinforce'}:
+            raise SystemExit(
+                "--stream-hard-eval requires a hard search mode")
         if args.objective != 'ce':
             raise SystemExit(
                 "--stream-hard-eval currently implements the exact CE objective")
@@ -166,6 +177,8 @@ def main(argv=None) -> int:
                 "--stream-hard-eval is inference-only and does not use gradient checkpointing")
         if args.vocab_chunk_size < 1:
             raise SystemExit("--vocab-chunk-size must be positive")
+    if not 0.0 <= args.reinforce_baseline_decay < 1.0:
+        raise SystemExit("--reinforce-baseline-decay must lie in [0, 1)")
 
     torch.manual_seed(args.seed)
     np.random.seed(args.seed)
@@ -185,9 +198,12 @@ def main(argv=None) -> int:
     group_hash = (hashlib.md5(args.layer_groups.encode()).hexdigest()[:8]
                   if args.layer_groups.strip() else "nogrp")
     bw_tag = "-".join(str(b) for b in bitwidths)
-    search_tag = (
-        "stream_hard_spsa" if args.stream_hard_eval
-        else "projected_gumbel")
+    if args.stream_hard_eval:
+        search_tag = f"stream_{args.search_mode.replace('-', '_')}"
+    elif args.search_mode == 'relaxed':
+        search_tag = "projected_gumbel"
+    else:
+        search_tag = args.search_mode.replace('-', '_')
     out_stem = (
         f"{search_tag}_{args.objective}_bw{bw_tag}"
         f"_target{args.target_avg_bits}"
@@ -342,16 +358,16 @@ def main(argv=None) -> int:
             )
             torch.save(ref_log_probs, str(ref_lp_path))
 
-    if args.search_mode == 'hard-spsa':
+    if args.search_mode in {'hard-spsa', 'hard-reinforce'}:
         if len(bitwidths) != 2:
-            raise ValueError("hard-spsa currently requires exactly two bitwidths")
+            raise ValueError("hard search currently requires exactly two bitwidths")
         group_sizes = [
             sum(param_counts.get(name, 0) for name in group.layer_names)
             for group in layer_groups
         ]
         if not group_sizes or min(group_sizes) != max(group_sizes):
             raise ValueError(
-                "hard-spsa currently requires equal-size groups; use "
+                "hard search currently requires equal-size groups; use "
                 "--moe-per-expert and search routed experts separately")
         if args.stream_hard_eval:
             stream_device = torch.device(
@@ -376,8 +392,9 @@ def main(argv=None) -> int:
 
         def evaluate_hard(group_assignment):
             nonlocal evaluation_count, stream_memory
-            # SPSA calls plus/minus consecutively. Reusing a batch for each pair
-            # removes calibration-sampling noise from the finite difference.
+            # Both hard estimators evaluate paired assignments consecutively.
+            # Reusing a batch within each pair removes calibration-sampling
+            # noise from their loss comparison.
             pair_index = evaluation_count // 2
             start = batch_starts[pair_index % len(batch_starts)]
             evaluation_count += 1
@@ -410,23 +427,35 @@ def main(argv=None) -> int:
                     topk=args.kl_topk).item()
 
         logger.info("=" * 60)
-        logger.info("EXACT-BUDGET HARD SPSA OPTIMIZATION")
+        logger.info(
+            "EXACT-BUDGET HARD %s OPTIMIZATION",
+            "SPSA" if args.search_mode == 'hard-spsa' else "REINFORCE")
         logger.info("=" * 60)
         actual_choices = [get_actual_bitwidth(bw, bitwidth_map)
                           for bw in bitwidths]
         t_start = time.time()
-        scores, group_assignment, history = optimize_hard_spsa(
-            evaluate_hard,
-            n_groups=len(layer_groups),
-            low_bits=actual_choices[0],
-            high_bits=actual_choices[1],
-            target_bits=args.target_avg_bits,
-            n_steps=args.n_steps,
-            lr=args.lr,
-            perturbation=args.spsa_perturbation,
-            seed=args.seed,
-            log_interval=args.log_interval,
-        )
+        optimizer_args = {
+            'n_groups': len(layer_groups),
+            'low_bits': actual_choices[0],
+            'high_bits': actual_choices[1],
+            'target_bits': args.target_avg_bits,
+            'n_steps': args.n_steps,
+            'lr': args.lr,
+            'seed': args.seed,
+            'log_interval': args.log_interval,
+        }
+        if args.search_mode == 'hard-reinforce':
+            scores, group_assignment, history = optimize_hard_reinforce(
+                evaluate_hard,
+                baseline_decay=args.reinforce_baseline_decay,
+                **optimizer_args,
+            )
+        else:
+            scores, group_assignment, history = optimize_hard_spsa(
+                evaluate_hard,
+                perturbation=args.spsa_perturbation,
+                **optimizer_args,
+            )
         t_elapsed = time.time() - t_start
         assignment = runtime.layer_assignment(group_assignment)
         probabilities = torch.sigmoid(scores)
@@ -595,8 +624,11 @@ def main(argv=None) -> int:
             'n_groups': len(layer_groups),
             'config': {
                 'n_steps': args.n_steps, 'lr': args.lr,
+                'search_mode': args.search_mode,
                 'tau_init': args.tau_init, 'tau_min': args.tau_min,
                 'n_gumbel_samples': args.n_gumbel_samples,
+                'spsa_perturbation': args.spsa_perturbation,
+                'reinforce_baseline_decay': args.reinforce_baseline_decay,
             },
             'loss_history': history,
         }

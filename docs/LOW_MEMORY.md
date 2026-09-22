@@ -32,9 +32,10 @@ state to one transformer block and a small routed-expert group.
 - KL teacher caches can store only top-k FP16 log-probabilities and int32 token
   indices. Candidate normalization uses `logsumexp` without constructing a
   full FP32 log-softmax tensor.
-- The hard SPSA search core evaluates exact-budget two-choice assignments and
-  retains no candidate deltas or model-weight autograd graph.
-- `--stream-hard-eval` runs hard-SPSA cross-entropy evaluation through a meta
+- The hard-search core offers paired SPSA and antithetic REINFORCE estimators.
+  Both evaluate exact-budget two-choice assignments and retain no candidate
+  deltas or model-weight autograd graph.
+- `--stream-hard-eval` runs hard-search cross-entropy evaluation through a meta
   model. Lightweight block wrappers preserve the canonical Transformers
   forward loop, including its per-layer hybrid-attention masks and rotary
   inputs, while loading and releasing each decoder block on demand.
@@ -100,10 +101,10 @@ KL.
 
 ## Hard assignment search
 
-`rco_search_quant.py --search-mode hard-spsa` avoids persistent BF16 candidate
-deltas. The current hard path supports exactly two bitwidths and equal-size
-groups. That matches routed-expert groups when every group contains one
-expert's gate, up, and down projections:
+`rco_search_quant.py` provides `hard-spsa` and `hard-reinforce` modes that avoid
+persistent BF16 candidate deltas. The current hard path supports exactly two
+bitwidths and equal-size groups. That matches routed-expert groups when every
+group contains one expert's gate, up, and down projections:
 
 ```text
 --search-mode hard-spsa --moe-per-expert --bitwidths 2,4
@@ -112,6 +113,20 @@ expert's gate, up, and down projections:
 Each SPSA step evaluates a plus/minus assignment pair on the same calibration
 batch. Every assignment selects an exact number of high-bit groups, and the
 driver rejects targets that the group count cannot represent exactly.
+
+The REINFORCE alternative samples an ordered Plackett-Luce draw with Gumbel
+top-k, so every stochastic assignment also has the exact required number of
+high-bit groups. It evaluates antithetic `u` and `1-u` samples on the same
+batch, uses an exponential moving loss baseline, and backpropagates only
+through the small vector of group scores. Select it with:
+
+```text
+--search-mode hard-reinforce --reinforce-baseline-decay 0.9
+```
+
+Neither estimator has yet been compared on the real 35B calibration loss.
+Record convergence and loss variance for both with the same seed and batches
+before choosing a default for a production run.
 
 For the inference-only cross-entropy bring-up, the full-model RAM floor is
 removed with `--stream-hard-eval`:
@@ -144,10 +159,10 @@ vocabulary rows. Each run records the maximum materialized block and candidate,
 CUDA allocated/reserved peaks, process peak RSS, and logical checkpoint and
 candidate bytes read per evaluation.
 
-This mode is intentionally inference-only. SPSA obtains assignment updates
-from paired scalar losses, so it needs no activation or weight backward graph.
-Pruning masks and any future relaxed assignment method still require a real
-training-aware streamed backward path.
+This mode is intentionally inference-only. Both hard estimators obtain
+assignment updates from paired scalar losses, so neither needs an activation or
+weight backward graph. Pruning masks and relaxed assignment methods still
+require a real training-aware streamed backward path.
 
 ## Packed output compatibility gate
 
