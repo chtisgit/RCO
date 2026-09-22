@@ -22,6 +22,31 @@
         "model.language_model.layers.0.mlp.experts.down_proj"
       ],
       "remaining_schema_issue": "The pinned Transformers model still exposes fused expert parameters, while the published compressed checkpoint index contains per-expert gate_proj, up_proj, and down_proj packed tensors."
+    },
+    {
+      "transformers": "5.13.1",
+      "compressed_tensors": "0.18.0",
+      "torch": "2.11.0+cpu",
+      "operation": "AutoModelForImageTextToText.from_pretrained with device_map=meta and output_loading_info=True",
+      "result": "loaded with clean loading information",
+      "model_class": "Qwen3_5MoeForConditionalGeneration",
+      "quantizer_class": "CompressedTensorsHfQuantizer",
+      "checkpoint_index_tensor_count": 93625,
+      "parameter_count": 33683169638,
+      "parameter_devices": [
+        "meta"
+      ],
+      "resident_parameter_bytes": 0,
+      "missing_keys": [],
+      "unexpected_keys": [],
+      "mismatched_keys": [],
+      "error_msgs": [],
+      "process_peak_rss_bytes": 894894080,
+      "elapsed_seconds": 25.970189445943106,
+      "layer_0_expert_state_keys": [
+        "model.language_model.layers.0.mlp.experts.gate_up_proj",
+        "model.language_model.layers.0.mlp.experts.down_proj"
+      ]
     }
   ],
   "published_checkpoint_dense_schema_audit": {
@@ -30,10 +55,10 @@
     "missing_dense_names": 331,
     "unexpected_compressed_names": 92913
   },
-  "decision": "Do not implement or emit a compressed-tensors checkpoint until a loader/version combination proves the exact Qwen fused-expert and hybrid-attention schema. Do not patch third-party loader internals as part of the low-memory pipeline.",
-  "unblocked_alternatives": [
-    "Validate a newer Transformers and compressed-tensors pair in isolation before changing repository pins.",
-    "Choose another runtime container only if it can represent the selected RCO candidates without silently requantizing them.",
-    "Use a dense base checkpoint for the existing block-streamed evaluator and candidate-generation gates."
+  "decision": "The published compressed-tensors schema is cleanly loadable with Transformers 5.13.1 and compressed-tensors 0.18.0, so the input/runtime schema gate is passed for that pair. Implement the bounded writer against the published logical packed schema and require a clean meta-load round trip before changing repository pins or attempting a materialized runtime load. Do not patch third-party loader internals.",
+  "next_actions": [
+    "Derive and test the exact tensor-level output layout from the published checkpoint metadata and loader implementation.",
+    "Write a tiny synthetic packed checkpoint and require a clean Transformers 5.13.1 plus compressed-tensors 0.18.0 meta-load round trip before scaling the writer.",
+    "Keep the dense-base requirement for candidate generation and numerical validation separate from packed-output schema compatibility."
   ]
 }

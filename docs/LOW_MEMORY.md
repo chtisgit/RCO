@@ -207,8 +207,8 @@ reference and cannot validate generated higher-bit candidates.
 
 The released `run_build_checkpoint.py --format compressed-tensors` is not a
 bounded-memory writer: it loads or decompresses the complete base model, applies
-quantization wrappers in memory, and then calls `save_pretrained`. More
-critically, its pinned output stack does not currently support this Qwen schema.
+quantization wrappers in memory, and then calls `save_pretrained`. Its pinned
+output stack also does not support this Qwen schema.
 
 With Transformers 5.7.0 and the repository-pinned `compressed-tensors` 0.15.0.1,
 the published GSQ checkpoint fails during model preprocessing, before tensor
@@ -220,19 +220,28 @@ ValueError: Quantization of module type Qwen3_5MoeGatedDeltaNet is not supported
 
 Stable `compressed-tensors` 0.18.0 adds arbitrary-module configuration support
 and successfully applies the published quantization config to a meta skeleton.
-That change alone does not establish checkpoint compatibility under pinned
+That change alone did not establish checkpoint compatibility under pinned
 Transformers 5.7.0: the skeleton retains fused expert state keys
 `experts.gate_up_proj` and `experts.down_proj`, whereas the published packed
 checkpoint contains per-expert `gate_proj`, `up_proj`, and `down_proj` tensors.
 
-The evidence is recorded in
-`reports/qwen35_compressed_tensors_compatibility.json`. A tensor-level packed
-writer is paused at this gate. Emitting a guessed schema would risk producing a
-small checkpoint that silently leaves experts uninitialized or cannot load.
-The next implementation should begin only after a Transformers and
-`compressed-tensors` version pair loads this exact fused-expert and hybrid
-attention layout without patches, or after another target format proves it can
-represent the selected qparams without requantization.
+An isolated Transformers 5.13.1 plus `compressed-tensors` 0.18.0 environment
+passes the same gate. The normal `AutoModelForImageTextToText.from_pretrained`
+path loads the exact 93,625-tensor published checkpoint onto `meta` as
+`Qwen3_5MoeForConditionalGeneration` with `CompressedTensorsHfQuantizer`.
+Loading information contains zero missing, unexpected, mismatched, or error
+entries; all 33,683,169,638 resulting parameters remain on `meta`, resident
+parameter bytes are zero, and the audit peaks at 894,894,080 bytes RSS. This
+proves the loader's logical packed-expert to fused-runtime schema mapping for
+that version pair without patching third-party code.
+
+`tools/audit_compressed_compatibility.py` reproduces the clean meta-load check,
+and the version history is recorded in
+`reports/qwen35_compressed_tensors_compatibility.json`. The input/runtime schema
+gate is now passed for the newer pair. The bounded writer should target the
+published logical packed layout, first on a tiny synthetic checkpoint, and must
+pass this clean meta-load round trip before repository pins change or a full
+materialized load is attempted.
 
 ## Remaining work
 
@@ -254,9 +263,9 @@ driver now rejects such a mismatch before starting an optimization pass.
    base checkpoint using the pinned Qwen3.6 Transformers implementation.
 2. Add a training-aware streamed backward path for pruning masks if full-model
    pruning remains in scope.
-3. Resolve the packed runtime schema gate, then remove the remaining full-model
-   dependency from final checkpoint building by writing selected tensors
-   directly into bounded-size output shards.
+3. Derive the published packed tensor layout and prove a tiny writer round trip
+   with Transformers 5.13.1 plus `compressed-tensors` 0.18.0, then write
+   selected tensors directly into bounded-size output shards.
 4. Validate one complete optimization step, then a multi-step run, while
    recording CUDA allocated/reserved peaks, process RSS, disk growth, and I/O.
 5. Load the materialized checkpoint and run numerical layer comparisons and a
