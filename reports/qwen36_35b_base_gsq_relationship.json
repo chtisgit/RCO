@@ -1,0 +1,59 @@
+{
+  "canonical_inventory": {
+    "exact_name_and_shape_match": true,
+    "extra": [],
+    "fused_gate_up_source_views": 80,
+    "gguf_path": "/home/christian/projects/gsq-rco-moe/results/Qwen3.6-35B-A3B-GSQ-hybrid.gguf",
+    "gguf_sha256": "8e50912f5d0703401ca21b09deb2ee8a84d03536ade6fb44815fcb40a0b03596",
+    "missing": [],
+    "shape_mismatches": [],
+    "tensor_count": 733
+  },
+  "claim_limits": {
+    "bf16_is_higher_precision_candidate_source": true,
+    "dense_and_quantized_values_equal": false,
+    "gsq_is_dense_candidate_source": false
+  },
+  "conclusion": "The pinned BF16 checkpoint is the base model declared by the GSQ release and has the same text architecture and canonical GGUF inventory. This establishes source compatibility and lineage, not numerical equality between dense and quantized weights.",
+  "config": {
+    "ignored_top_level_keys": [
+      "quantization_config",
+      "transformers_version"
+    ],
+    "normalized_exact_match": true
+  },
+  "dense_base": {
+    "canonical_tensors": 733,
+    "repo_id": "Qwen/Qwen3.6-35B-A3B",
+    "revision": "995ad96eacd98c81ed38be0c5b274b04031597b0",
+    "text_source_tensors": 693
+  },
+  "gguf_metadata": {
+    "general.architecture": "qwen35moe",
+    "qwen35moe.block_count": 40,
+    "qwen35moe.embedding_length": 2048,
+    "qwen35moe.expert_count": 256,
+    "qwen35moe.expert_feed_forward_length": 512,
+    "qwen35moe.expert_used_count": 8
+  },
+  "gsq_release": {
+    "audit_path": "../../results/full_model_metrics.json",
+    "declared_base_model": "Qwen/Qwen3.6-35B-A3B",
+    "declared_relation": "quantized",
+    "revision": "543019cbe7d10f6d2e78d4017606a42bd50ea7e9"
+  },
+  "schema": 1,
+  "status": "pass",
+  "text_assets": {
+    "exact_hash_match": true,
+    "files": {
+      "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259",
+      "configuration.json": "c1b09db419119513247e9b8b912c4b9897106c9b20c6cada7e107d993c5435eb",
+      "generation_config.json": "e70c136c1b78ddc1fb0905bac8e733a4dc448d4f852a5dd75143fffc70be550e",
+      "merges.txt": "a9d356d7bdf1ef4949e3e748e95b8e10ad9d4e2e838eddc38a0a7b6b94d1db8d",
+      "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+      "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+      "vocab.json": "ce99b4cb2983d118806ce0a8b777a35b093e2000a503ebde25853284c9dfa003"
+    }
+  }
+}

@@ -61,6 +61,13 @@ class GGUFManifestTest(unittest.TestCase):
             "model.layers.2.linear_attn.dt_proj.bias",
         )
 
+    def test_normalizes_suffixless_fused_expert_down_projection(self):
+        self.assertEqual(
+            canonical_source_name(
+                "model.language_model.layers.2.mlp.experts.down_proj"),
+            "model.layers.2.mlp.experts.down_proj.weight",
+        )
+
     def test_rejects_converter_output_without_source(self):
         identity = {
             "repo_id": "test", "revision": "x",
@@ -77,7 +84,52 @@ class GGUFManifestTest(unittest.TestCase):
             build_gguf_manifest(
                 identity, converter, lambda _: None, llama_cpp_revision="y")
 
+    def test_expands_fused_moe_gate_up_into_two_canonical_tensors(self):
+        identity = {
+            "repo_id": "Qwen/test-moe",
+            "revision": "revision",
+            "text_inventory": [{
+                "name": "model.language_model.layers.0.mlp.experts.gate_up_proj",
+                "shard": "model.safetensors",
+                "category": "routed_expert",
+                "dtype": "BF16",
+                "shape": [3, 8, 16],
+            }],
+            "category_counts": {"routed_expert": 1, "vision": 0, "mtp": 0},
+        }
+        converter = {
+            "blk.0.ffn_gate_exps.weight": {
+                "source_dtype": "bfloat16", "ggml_type": "BF16",
+                "gguf_shape": [16, 4, 3],
+            },
+            "blk.0.ffn_up_exps.weight": {
+                "source_dtype": "bfloat16", "ggml_type": "BF16",
+                "gguf_shape": [16, 4, 3],
+            },
+        }
+        names = {
+            "model.layers.0.mlp.experts.gate_proj.weight": (
+                "blk.0.ffn_gate_exps.weight"),
+            "model.layers.0.mlp.experts.up_proj.weight": (
+                "blk.0.ffn_up_exps.weight"),
+        }
+        report = build_gguf_manifest(
+            identity, converter, names.get, llama_cpp_revision="test")
+        self.assertEqual(report["source_text_tensor_count"], 1)
+        self.assertEqual(report["canonical_tensor_count"], 2)
+        self.assertEqual(report["coverage"]["mapped_source_tensors"], 1)
+        self.assertEqual(report["coverage"]["mapped_canonical_tensors"], 2)
+        self.assertEqual(
+            [entry["source_view"] for entry in report["entries"]],
+            [
+                {"axis": 1, "start": 0, "stop": 4},
+                {"axis": 1, "start": 4, "stop": 8},
+            ],
+        )
+        self.assertTrue(all(
+            "split_fused_gate_up" in entry["converter_transforms"]
+            for entry in report["entries"]))
+
 
 if __name__ == "__main__":
     unittest.main()
-

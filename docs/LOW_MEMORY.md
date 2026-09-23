@@ -298,6 +298,84 @@ This completes the dense 2B candidate-block numerical oracle. It does not
 establish an acceptable Q2 quality threshold, end-to-end loss, CUDA kernels,
 or the genuine routed-expert 35B gate.
 
+## Qwen3.6-35B-A3B dense source and canonical relationship
+
+The production BF16 source is now pinned to `Qwen/Qwen3.6-35B-A3B` revision
+`995ad96eacd98c81ed38be0c5b274b04031597b0`. The complete local snapshot has
+26 safetensors shards and 40 top-level files. The identity audit hashes every
+file, verifies all 27 SHA-256 Hub identities (the 26 Xet/LFS shards plus one
+large tokenizer asset), checks the shard index against the physical tensors,
+and validates the declared logical size exactly.
+
+`reports/qwen36_35b_base_identity.json` records 1,045 source tensors and
+71,903,645,408 logical bytes. The text-only scope has 693 tensors and
+69,321,221,376 logical bytes; 333 vision and 19 MTP tensors are explicitly
+omitted. The inventory includes all 40 layers, with 80 fused routed-expert
+source tensors, 160 shared-expert tensors, 40 routers, and the complete hybrid
+attention stack. Reproduce the fail-closed identity audit with:
+
+```bash
+python tools/audit_model_identity.py \
+  --model-dir /path/to/Qwen3.6-35B-A3B \
+  --repo-id Qwen/Qwen3.6-35B-A3B \
+  --revision 995ad96eacd98c81ed38be0c5b274b04031597b0 \
+  --output reports/qwen36_35b_base_identity.json
+```
+
+The official dense MoE checkpoint stores one fused `gate_up_proj` tensor and
+one suffixless fused `down_proj` tensor per layer. The canonical mapper models
+each gate/up half as an explicit source view and normalizes the down projection
+to the `.weight` name expected by pinned llama.cpp. It then cross-checks every
+result against an actual BF16 `convert_hf_to_gguf.py --no-mtp --dry-run` at
+llama.cpp revision `911f6cdc8ab8a530b2bee09ee61471a6f3178eeb`.
+
+`reports/qwen36_35b_base_gguf_manifest.json` proves that all 693 text sources
+map to exactly 733 unique canonical QWEN35MOE tensors. The 40 fused gate/up
+sources expand to 80 canonical source views. The initial native Q2_0/Q4_0
+policy defines 512 one-tensor decision groups and 221 copy tensors, with no
+unmapped source, extra converter output, missing output, or duplicate
+destination. Reproduce it with:
+
+```bash
+python tools/audit_gguf_mapping.py \
+  --identity-report reports/qwen36_35b_base_identity.json \
+  --model-dir /path/to/Qwen3.6-35B-A3B \
+  --llama-cpp /path/to/pinned/llama.cpp \
+  --llama-revision 911f6cdc8ab8a530b2bee09ee61471a6f3178eeb \
+  --output reports/qwen36_35b_base_gguf_manifest.json
+```
+
+Finally, `reports/qwen36_35b_base_gsq_relationship.json` links this exact
+dense source to the published GSQ release without claiming that their weight
+values are equal. It verifies the GSQ model card's `base_model` and
+`base_model_relation: quantized` declarations, exact normalized model-config
+equality, and exact hashes for seven shared text/tokenizer assets. It compares
+all 733 dense canonical destination names and shapes with the actual proven
+GSQ hybrid GGUF and validates its 40-layer, 256-expert, 8-active-expert
+metadata. The comparison has zero missing, extra, or shape-mismatched tensors;
+the hybrid GGUF SHA-256 is
+`8e50912f5d0703401ca21b09deb2ee8a84d03536ade6fb44815fcb40a0b03596`.
+
+```bash
+python tools/audit_qwen36_base_gsq_relationship.py \
+  --base-identity reports/qwen36_35b_base_identity.json \
+  --base-manifest reports/qwen36_35b_base_gguf_manifest.json \
+  --base-dir /path/to/Qwen3.6-35B-A3B \
+  --gsq-dir /path/to/Qwen3.6-35B-A3B-GSQ \
+  --gsq-audit /path/to/results/full_model_metrics.json \
+  --gsq-gguf /path/to/results/Qwen3.6-35B-A3B-GSQ-hybrid.gguf \
+  --llama-cpp /path/to/pinned/llama.cpp \
+  --output reports/qwen36_35b_base_gsq_relationship.json
+```
+
+This completes the production-source identity, full canonical mapping,
+decision-group definition, and BF16/GSQ relationship portions of the Phase 1
+gate. It does not yet establish a genuine 35B block numerical oracle, native
+candidate bytes for every routed-expert geometry, CUDA execution, or the
+full-model output gate. BF16 remains the authoritative source for new native
+higher-precision candidates; the GSQ checkpoint is only a quantized lineage
+and low-bit provenance source.
+
 The tensor-name audit of the local published checkpoint covers all 93,625
 source tensors: 93,275 text tensors, 333 vision tensors, and 17 MTP tensors,
 with zero unknown names. The recorded audit is

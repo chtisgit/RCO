@@ -17,6 +17,8 @@ _CONVERTER_TENSOR = re.compile(
 def canonical_source_name(source_name: str) -> str:
     """Apply the name-only normalization used by the pinned converter."""
     name = source_name.replace("language_model.", "")
+    if name.endswith(".mlp.experts.down_proj"):
+        name += ".weight"
     if name.endswith(".linear_attn.dt_bias"):
         name = name.removesuffix(".dt_bias") + ".dt_proj.bias"
     return name
@@ -95,38 +97,68 @@ def build_gguf_manifest(
     """Map every text tensor and require exact agreement with dry-run output."""
     entries = []
     destinations = set()
+    mapped_sources = set()
     for source in identity_report["text_inventory"]:
         normalized = canonical_source_name(source["name"])
-        destination = map_name(normalized)
-        if destination is None:
-            raise ValueError(f"cannot map source tensor {source['name']}")
-        if destination in destinations:
-            raise ValueError(f"multiple sources map to GGUF tensor {destination}")
-        destinations.add(destination)
-        try:
-            converter = converter_records[destination]
-        except KeyError as error:
-            raise ValueError(
-                f"mapped GGUF tensor {destination} was not emitted by converter"
-            ) from error
-        entry = {
-            "source_name": source["name"],
-            "source_shard": source["shard"],
-            "source_category": source["category"],
-            "source_dtype": source["dtype"],
-            "source_shape": source["shape"],
-            "normalized_source_name": normalized,
-            "destination_name": destination,
-            "destination_ggml_type": converter["ggml_type"],
-            "destination_gguf_shape": converter["gguf_shape"],
-            "converter_transforms": converter_transforms(source["name"]),
-        }
-        eligible, reason = candidate_eligibility(entry)
-        entry["rco_search"] = eligible
-        entry["decision_group"] = destination if eligible else None
-        entry["candidate_types"] = ["Q2_0", "Q4_0"] if eligible else []
-        entry["copy_reason"] = reason
-        entries.append(entry)
+        expansions: list[tuple[str, dict[str, int] | None, list[int], list[str]]]
+        if normalized.endswith(".mlp.experts.gate_up_proj"):
+            shape = [int(value) for value in source["shape"]]
+            if len(shape) != 3 or shape[1] % 2:
+                raise ValueError(
+                    f"invalid fused gate/up shape for {source['name']}: {shape}")
+            intermediate = shape[1] // 2
+            expansions = []
+            for projection, start, stop in (
+                ("gate_proj", 0, intermediate),
+                ("up_proj", intermediate, shape[1]),
+            ):
+                virtual_name = normalized.removesuffix(
+                    "gate_up_proj") + projection + ".weight"
+                expansions.append((
+                    virtual_name,
+                    {"axis": 1, "start": start, "stop": stop},
+                    [shape[0], intermediate, shape[2]],
+                    ["split_fused_gate_up"],
+                ))
+        else:
+            expansions = [(normalized, None, list(source["shape"]), [])]
+
+        for mapped_name, source_view, candidate_shape, extra_transforms in expansions:
+            destination = map_name(mapped_name)
+            if destination is None:
+                raise ValueError(
+                    f"cannot map source tensor {source['name']} as {mapped_name}")
+            if destination in destinations:
+                raise ValueError(f"multiple sources map to GGUF tensor {destination}")
+            destinations.add(destination)
+            mapped_sources.add(source["name"])
+            try:
+                converter = converter_records[destination]
+            except KeyError as error:
+                raise ValueError(
+                    f"mapped GGUF tensor {destination} was not emitted by converter"
+                ) from error
+            entry = {
+                "source_name": source["name"],
+                "source_shard": source["shard"],
+                "source_category": source["category"],
+                "source_dtype": source["dtype"],
+                "source_shape": source["shape"],
+                "source_view": source_view,
+                "candidate_source_shape": candidate_shape,
+                "normalized_source_name": mapped_name,
+                "destination_name": destination,
+                "destination_ggml_type": converter["ggml_type"],
+                "destination_gguf_shape": converter["gguf_shape"],
+                "converter_transforms": (
+                    converter_transforms(source["name"]) + extra_transforms),
+            }
+            eligible, reason = candidate_eligibility(entry)
+            entry["rco_search"] = eligible
+            entry["decision_group"] = destination if eligible else None
+            entry["candidate_types"] = ["Q2_0", "Q4_0"] if eligible else []
+            entry["copy_reason"] = reason
+            entries.append(entry)
 
     converter_destinations = set(converter_records)
     missing_sources = sorted(converter_destinations - destinations)
@@ -136,6 +168,11 @@ def build_gguf_manifest(
             f"source/converter coverage mismatch: {len(missing_sources)} outputs "
             f"without sources, {len(missing_outputs)} sources without outputs"
         )
+    expected_sources = {item["name"] for item in identity_report["text_inventory"]}
+    missing_source_tensors = sorted(expected_sources - mapped_sources)
+    if missing_source_tensors:
+        raise ValueError(
+            f"text sources were not mapped: {missing_source_tensors[:8]}")
     searched = [entry for entry in entries if entry["rco_search"]]
     copied = [entry for entry in entries if not entry["rco_search"]]
     omitted = (
@@ -152,7 +189,7 @@ def build_gguf_manifest(
         "llama_cpp_revision": llama_cpp_revision,
         "architecture": "qwen35",
         "candidate_types": ["Q2_0", "Q4_0"],
-        "source_text_tensor_count": len(entries),
+        "source_text_tensor_count": len(expected_sources),
         "canonical_tensor_count": len(converter_records),
         "searched_tensor_count": len(searched),
         "copied_tensor_count": len(copied),
@@ -161,13 +198,16 @@ def build_gguf_manifest(
         "unique_destination_count": len(destinations),
         "coverage": {
             "mapped": len(entries),
+            "mapped_source_tensors": len(mapped_sources),
+            "mapped_canonical_tensors": len(entries),
             "unmapped": 0,
             "duplicate_destinations": 0,
             "converter_outputs_without_sources": 0,
             "sources_without_converter_outputs": 0,
         },
         "source_category_counts": dict(sorted(Counter(
-            entry["source_category"] for entry in entries).items())),
+            source["category"] for source in identity_report["text_inventory"]
+        ).items())),
         "copy_reason_counts": dict(sorted(Counter(
             entry["copy_reason"] for entry in copied).items())),
         "entries": entries,

@@ -60,7 +60,12 @@ def main() -> None:
 
     identity = json.loads(args.identity_report.read_text())
     block_count = int(identity["config"]["num_hidden_layers"])
-    tensor_map = gguf.get_tensor_name_map(gguf.MODEL_ARCH.QWEN35, block_count)
+    architecture = (
+        gguf.MODEL_ARCH.QWEN35MOE
+        if identity["config"]["model_type"] == "qwen3_5_moe"
+        else gguf.MODEL_ARCH.QWEN35
+    )
+    tensor_map = gguf.get_tensor_name_map(architecture, block_count)
     manifest = build_gguf_manifest(
         identity,
         converter_records,
@@ -68,6 +73,7 @@ def main() -> None:
             key=name, try_suffixes=(".weight", ".bias")),
         llama_cpp_revision=actual_revision,
     )
+    manifest["architecture"] = architecture.name.lower()
     reported_command = list(command)
     reported_command[reported_command.index(str(output_path))] = "<temporary>/dry-run.gguf"
     manifest["converter_dry_run"] = {

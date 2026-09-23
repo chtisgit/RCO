@@ -82,7 +82,22 @@ class ModelIdentityTest(unittest.TestCase):
                     expected_weight_sha256="0" * 64,
                 )
 
+    def test_rejects_file_that_disagrees_with_sha256_hub_identity(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            revision, _ = self._fixture(root)
+            metadata = (
+                root / ".cache" / "huggingface" / "download"
+                / "config.json.metadata"
+            )
+            metadata.write_text(f"{revision}\n{'0' * 64}\n0\n")
+            with self.assertRaisesRegex(ValueError, "Hub LFS/Xet identity"):
+                audit_qwen_checkpoint_identity(
+                    root,
+                    repo_id="Qwen/test",
+                    expected_revision=revision,
+                )
+
 
 if __name__ == "__main__":
     unittest.main()
-

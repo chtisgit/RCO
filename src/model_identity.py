@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import re
 from collections import Counter
 from pathlib import Path
 from typing import Any
@@ -107,11 +108,20 @@ def audit_qwen_checkpoint_identity(
     file_records = []
     for filename in top_level_files:
         path = root / filename
+        sha256 = sha256_file(path)
+        etag = etags[filename]
+        etag_is_sha256 = re.fullmatch(r"[0-9a-f]{64}", etag) is not None
+        if etag_is_sha256 and sha256 != etag:
+            raise ValueError(
+                f"downloaded file {filename} has SHA-256 {sha256}, "
+                f"but Hub LFS/Xet identity is {etag}")
         file_records.append({
             "path": filename,
             "bytes": path.stat().st_size,
-            "sha256": sha256_file(path),
-            "hub_etag": etags[filename],
+            "sha256": sha256,
+            "hub_etag": etag,
+            "hub_etag_is_sha256": etag_is_sha256,
+            "hub_etag_matches_sha256": sha256 == etag if etag_is_sha256 else None,
         })
     if expected_weight_sha256 is not None:
         if len(shard_names) != 1:
@@ -198,7 +208,12 @@ def audit_qwen_checkpoint_identity(
             "tie_word_embeddings": config.get("tie_word_embeddings"),
             "hidden_size": text_config.get("hidden_size"),
             "intermediate_size": text_config.get("intermediate_size"),
+            "moe_intermediate_size": text_config.get("moe_intermediate_size"),
+            "shared_expert_intermediate_size": text_config.get(
+                "shared_expert_intermediate_size"),
             "num_hidden_layers": text_config.get("num_hidden_layers"),
+            "num_experts": text_config.get("num_experts"),
+            "num_experts_per_tok": text_config.get("num_experts_per_tok"),
             "vocab_size": text_config.get("vocab_size"),
             "layer_type_counts": dict(sorted(Counter(layer_types).items())),
         },
@@ -214,4 +229,3 @@ def audit_qwen_checkpoint_identity(
         "unknown_tensors": unknown,
         "text_inventory": text_inventory,
     }
-
