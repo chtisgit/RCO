@@ -168,15 +168,19 @@ class SafetensorGGUFRowSource:
         if not entry.get("rco_search"):
             raise ValueError(f"entry is not a decision group: {entry['destination_name']}")
         source_shape = tuple(int(value) for value in entry["source_shape"])
-        if len(source_shape) != 2:
-            raise ValueError(f"searched source is not a matrix: {source_shape}")
-        expected_gguf_shape = tuple(reversed(source_shape))
+        candidate_shape = tuple(int(value) for value in entry.get(
+            "candidate_source_shape", source_shape))
+        if len(source_shape) not in {2, 3}:
+            raise ValueError(
+                f"searched source is not a matrix or expert stack: {source_shape}")
+        expected_gguf_shape = tuple(reversed(candidate_shape))
         if tuple(entry["destination_gguf_shape"]) != expected_gguf_shape:
             raise ValueError(
                 f"source/destination shape mismatch for {entry['source_name']}")
         unknown_transforms = set(entry["converter_transforms"]) - {
             "strip_language_model_namespace",
             "reorder_value_heads",
+            "split_fused_gate_up",
         }
         if unknown_transforms:
             raise ValueError(
@@ -184,10 +188,35 @@ class SafetensorGGUFRowSource:
                 f"{sorted(unknown_transforms)}")
 
         source_name = entry["source_name"]
-        row_order, column_order = matrix_permutations(
-            entry["normalized_source_name"], source_shape, self.geometry)
-        if row_order is None:
-            row_order = np.arange(source_shape[0], dtype=np.int64)
+        if len(source_shape) == 2:
+            if entry.get("source_view") is not None:
+                raise ValueError(f"2D source has an unexpected view: {source_name}")
+            row_order, column_order = matrix_permutations(
+                entry["normalized_source_name"], source_shape, self.geometry)
+            if row_order is None:
+                row_order = np.arange(source_shape[0], dtype=np.int64)
+        else:
+            row_order = column_order = None
+            source_view = entry.get("source_view")
+            if source_view is None:
+                view_start, view_stop = 0, source_shape[1]
+            else:
+                if source_view.get("axis") != 1:
+                    raise ValueError(
+                        f"unsupported expert source view for {source_name}: "
+                        f"{source_view}")
+                view_start = int(source_view["start"])
+                view_stop = int(source_view["stop"])
+            if not 0 <= view_start < view_stop <= source_shape[1]:
+                raise ValueError(
+                    f"invalid expert source view for {source_name}: "
+                    f"{view_start}:{view_stop}")
+            if candidate_shape != (
+                source_shape[0], view_stop - view_start, source_shape[2]
+            ):
+                raise ValueError(
+                    f"candidate source shape differs for {source_name}: "
+                    f"{candidate_shape}")
         shard = self.model_dir / entry["source_shard"]
         if not shard.is_file():
             raise FileNotFoundError(shard)
@@ -201,24 +230,49 @@ class SafetensorGGUFRowSource:
                 raise ValueError(
                     f"safetensors shape changed for {source_name}: "
                     f"{tuple(tensor_slice.get_shape())} != {source_shape}")
-            for output_start in range(0, source_shape[0], rows_per_chunk):
-                output_stop = min(output_start + rows_per_chunk, source_shape[0])
-                indices = row_order[output_start:output_stop]
-                pieces = [
-                    tensor_slice[start:stop]
-                    for start, stop in _contiguous_runs(indices)
-                ]
-                rows = pieces[0] if len(pieces) == 1 else torch.cat(pieces, dim=0)
-                if column_order is not None:
-                    order = torch.from_numpy(column_order)
-                    rows = rows.index_select(1, order)
+            if len(source_shape) == 2:
+                chunk_specs = (
+                    (None, output_start, min(
+                        output_start + rows_per_chunk, source_shape[0]))
+                    for output_start in range(0, source_shape[0], rows_per_chunk)
+                )
+            else:
+                chunk_specs = (
+                    (expert, output_start, min(
+                        output_start + rows_per_chunk, view_stop - view_start))
+                    for expert in range(source_shape[0])
+                    for output_start in range(
+                        0, view_stop - view_start, rows_per_chunk)
+                )
+            for expert, output_start, output_stop in chunk_specs:
+                if expert is None:
+                    indices = row_order[output_start:output_stop]
+                    pieces = [
+                        tensor_slice[start:stop]
+                        for start, stop in _contiguous_runs(indices)
+                    ]
+                    rows = (
+                        pieces[0] if len(pieces) == 1
+                        else torch.cat(pieces, dim=0))
+                    if column_order is not None:
+                        order = torch.from_numpy(column_order)
+                        rows = rows.index_select(1, order)
+                    source_row_count = len(indices)
+                else:
+                    rows = tensor_slice[
+                        expert,
+                        view_start + output_start:view_start + output_stop,
+                        :,
+                    ]
+                    source_row_count = output_stop - output_start
                 output = rows.to(dtype=torch.float32).contiguous().numpy()
                 if stats is not None:
                     stats["chunk_count"] = stats.get("chunk_count", 0) + 1
                     stats["max_dense_chunk_bytes"] = max(
                         stats.get("max_dense_chunk_bytes", 0), output.nbytes)
                     stats["max_source_rows_per_chunk"] = max(
-                        stats.get("max_source_rows_per_chunk", 0), len(indices))
+                        stats.get("max_source_rows_per_chunk", 0),
+                        source_row_count)
                 yield output
 
 
@@ -257,6 +311,7 @@ def generate_native_block_candidates(
                 provenance={
                     "source_tensor": entry["source_name"],
                     "source_shard": entry["source_shard"],
+                    "source_view": entry.get("source_view"),
                     "converter_transforms": entry["converter_transforms"],
                     "rows_per_chunk": rows_per_chunk,
                 },

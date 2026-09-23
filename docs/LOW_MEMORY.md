@@ -410,6 +410,57 @@ This closes the Phase 1 one-block dense path for the genuine target. It is not
 candidate-generation evidence, and the CPU fallback does not pass any CUDA
 kernel or VRAM gate.
 
+## Complete Qwen3.6-35B native candidate block
+
+The BF16-derived native candidate rung now covers every eligible tensor in the
+genuine first routed-expert block. `SafetensorGGUFRowSource` streams official
+three-dimensional fused expert tensors in canonical expert-major row order,
+including explicit gate/up views into `gate_up_proj` and the complete
+suffixless `down_proj`. Synthetic tests independently verify gate, up, and
+down values and ordering without materializing an expert stack.
+
+`reports/qwen36_35b_block0_native_candidates.json` accounts for all 19
+canonical block tensors: 13 searched tensors and six explicit copy tensors.
+Each searched tensor has exact Q2_0 and Q4_0 alternatives, yielding 26
+candidates and 710,997,696 payload bytes. The retained local store is
+`data/qwen36_35b_block0_native` at the workspace root and is intentionally not
+versioned.
+
+Generation uses 16-row chunks with a maximum 262,144-byte dense FP32 chunk.
+Every published payload is then checksum-verified, read independently in
+bounded row chunks, compared byte-for-byte with a fresh native quantization,
+decoded through pinned GGML, and evaluated against its BF16 source with full
+maximum, mean, signed-mean, RMSE, and relative-Frobenius metrics. Validation
+scratch never exceeds 2,097,152 bytes. The complete audit reads the two exact
+source shards recorded in the report, finishes below 895 MiB peak RSS, and
+publishes its index atomically only after all 26 validations pass.
+
+The audit also inventories all 512 model-wide decision groups. Their eleven
+distinct GGUF shapes use only three row widths (512, 2048, and 4096); pinned
+GGML CPU quantize/dequantize round trips pass for Q2_0 and Q4_0 at every width,
+and exact payload costs are recorded for every complete shape. This is codec
+and storage coverage, not a matrix-multiplication or CUDA-kernel claim. CUDA
+remains explicitly `not_run_cuda_initialization_failed` in the report.
+
+```bash
+python tools/audit_qwen36_35b_native_block.py \
+  --model-dir /path/to/Qwen3.6-35B-A3B \
+  --identity reports/qwen36_35b_base_identity.json \
+  --manifest reports/qwen36_35b_base_gguf_manifest.json \
+  --llama-cpp /path/to/pinned/llama.cpp \
+  --ggml-library /path/to/llama-build/bin/libggml-base.so \
+  --store-output /path/to/new/qwen36_35b_block0_native \
+  --temporary-parent /path/to/nvme/staging \
+  --rows-per-chunk 16 \
+  --validation-rows-per-chunk 16 \
+  --output reports/qwen36_35b_block0_native_candidates.json
+```
+
+This passes the BF16-derived, genuine-block candidate generation and bounded
+CPU codec gates. Installing complete assignments into the retained dense
+oracle, importing the authentic GSQ-derived low-bit candidate, exercising
+llama.cpp matrix multiplication, and CUDA validation remain separate work.
+
 The tensor-name audit of the local published checkpoint covers all 93,625
 source tensors: 93,275 text tensors, 333 vision tensors, and 17 MTP tensors,
 with zero unknown names. The recorded audit is

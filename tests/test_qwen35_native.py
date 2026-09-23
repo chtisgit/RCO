@@ -106,6 +106,82 @@ class Qwen35NativeTest(unittest.TestCase):
             self.assertEqual(stats["max_source_rows_per_chunk"], 2)
             self.assertEqual(stats["max_dense_chunk_bytes"], 2 * 8 * 4)
 
+    def test_row_source_streams_fused_expert_views_in_canonical_order(self):
+        geometry = {
+            "linear_num_key_heads": 2,
+            "linear_num_value_heads": 2,
+            "linear_key_head_dim": 2,
+            "linear_value_head_dim": 2,
+        }
+        gate_up_name = "model.language_model.layers.0.mlp.experts.gate_up_proj"
+        down_name = "model.language_model.layers.0.mlp.experts.down_proj"
+        gate_up = torch.arange(
+            3 * 8 * 4, dtype=torch.bfloat16).reshape(3, 8, 4)
+        down = torch.arange(
+            3 * 6 * 4, dtype=torch.bfloat16).reshape(3, 6, 4) + 1000
+        with tempfile.TemporaryDirectory() as directory_name:
+            directory = Path(directory_name)
+            (directory / "config.json").write_text(
+                __import__("json").dumps({"text_config": geometry}))
+            save_file(
+                {gate_up_name: gate_up, down_name: down},
+                directory / "model.safetensors")
+            common = {
+                "rco_search": True,
+                "source_name": gate_up_name,
+                "source_shape": [3, 8, 4],
+                "source_shard": "model.safetensors",
+                "converter_transforms": [
+                    "strip_language_model_namespace", "split_fused_gate_up"],
+            }
+            gate_entry = {
+                **common,
+                "normalized_source_name": (
+                    "model.layers.0.mlp.experts.gate_proj.weight"),
+                "source_view": {"axis": 1, "start": 0, "stop": 4},
+                "candidate_source_shape": [3, 4, 4],
+                "destination_gguf_shape": [4, 4, 3],
+                "destination_name": "blk.0.ffn_gate_exps.weight",
+            }
+            up_entry = {
+                **common,
+                "normalized_source_name": (
+                    "model.layers.0.mlp.experts.up_proj.weight"),
+                "source_view": {"axis": 1, "start": 4, "stop": 8},
+                "candidate_source_shape": [3, 4, 4],
+                "destination_gguf_shape": [4, 4, 3],
+                "destination_name": "blk.0.ffn_up_exps.weight",
+            }
+            down_entry = {
+                "rco_search": True,
+                "source_name": down_name,
+                "normalized_source_name": (
+                    "model.layers.0.mlp.experts.down_proj.weight"),
+                "source_shape": [3, 6, 4],
+                "candidate_source_shape": [3, 6, 4],
+                "source_view": None,
+                "destination_gguf_shape": [4, 6, 3],
+                "source_shard": "model.safetensors",
+                "converter_transforms": ["strip_language_model_namespace"],
+                "destination_name": "blk.0.ffn_down_exps.weight",
+            }
+            source = SafetensorGGUFRowSource(directory)
+            stats = {}
+            actual_gate = np.concatenate(list(source.iter_rows(
+                gate_entry, rows_per_chunk=2, stats=stats)))
+            actual_up = np.concatenate(list(source.iter_rows(
+                up_entry, rows_per_chunk=2, stats=stats)))
+            actual_down = np.concatenate(list(source.iter_rows(
+                down_entry, rows_per_chunk=2, stats=stats)))
+            np.testing.assert_array_equal(
+                actual_gate, gate_up[:, :4, :].float().numpy().reshape(-1, 4))
+            np.testing.assert_array_equal(
+                actual_up, gate_up[:, 4:, :].float().numpy().reshape(-1, 4))
+            np.testing.assert_array_equal(
+                actual_down, down.float().numpy().reshape(-1, 4))
+            self.assertEqual(stats["max_source_rows_per_chunk"], 2)
+            self.assertEqual(stats["max_dense_chunk_bytes"], 2 * 4 * 4)
+
 
 if __name__ == "__main__":
     unittest.main()
