@@ -461,6 +461,55 @@ CPU codec gates. Installing complete assignments into the retained dense
 oracle, importing the authentic GSQ-derived low-bit candidate, exercising
 llama.cpp matrix multiplication, and CUDA validation remain separate work.
 
+Complete candidate installation and numerical comparison now pass as recorded
+in `reports/qwen36_35b_block0_native_output.json`. The native store exposes a
+checksummed decoded-row iterator, so no complete FP32 candidate is allocated.
+Ordinary value-head permutations are restored directly into their target rows
+or columns, while fused gate/up/down chunks overwrite only their canonical
+expert/source views. The largest decoded FP32 chunk is 262,144 bytes and the
+largest BF16 install buffer is 131,072 bytes.
+
+Before each assignment, the audit reloads the exact 1,685,401,984-byte dense
+block, retains all six copy-only tensors, and overwrites all 13 decision
+groups. The direct dense block first reproduces the retained oracle exactly.
+Three complete assignments then run twice with bit-identical finite outputs,
+and a second process reproduces all three output hashes:
+
+- uniform Q4_0: 473,998,464 payload bytes and relative block-output Frobenius
+  error `0.12647789524236974`;
+- uniform Q2_0: 236,999,232 payload bytes and relative error
+  `0.5741061967995075`; and
+- alternating Q2_0/Q4_0: 390,961,728 payload bytes and relative error
+  `0.5045100533778869`.
+
+The report retains exact assignments, payload hashes and costs, output hashes,
+maximum/mean/signed-mean/RMSE/relative-Frobenius/cosine metrics, prefix schema,
+and release evidence. The CPU audit peaks at 2,359,668,736 bytes RSS and
+releases the complete block back to `meta`.
+
+```bash
+python tools/audit_qwen36_35b_native_block_output.py \
+  --model-dir /path/to/Qwen3.6-35B-A3B \
+  --identity reports/qwen36_35b_base_identity.json \
+  --manifest reports/qwen36_35b_base_gguf_manifest.json \
+  --oracle reports/qwen36_35b_block0_oracle.safetensors \
+  --store /path/to/qwen36_35b_block0_native \
+  --ggml-library /path/to/llama-build/bin/libggml-base.so \
+  --device cpu \
+  --rows-per-chunk 16 \
+  --expected-output-sha256 \
+    uniform_q2_0=48fdf3a0b904ccf392198ed93773ea10d46baae163dd84264d2ab9be722c5f24 \
+  --expected-output-sha256 \
+    uniform_q4_0=97f5229bafcdb1c46dad2755afc98ab535400332885d4852e4426c57066884f6 \
+  --expected-output-sha256 \
+    alternating_q2_0_q4_0=c28824f4dae3d53eb3e751d0a4a48856787161ca52ea6d38fea2fc19dda3cbfb \
+  --output reports/qwen36_35b_block0_native_output.json
+```
+
+This completes the BF16-derived genuine-block numerical rung. It does not set
+an acceptable Q2 quality threshold, import the authentic GSQ candidate,
+exercise llama.cpp matrix multiplication, or pass CUDA/VRAM gates.
+
 The tensor-name audit of the local published checkpoint covers all 93,625
 source tensors: 93,275 text tensors, 333 vision tensors, and 17 MTP tensors,
 with zero unknown names. The recorded audit is

@@ -243,8 +243,6 @@ class NativeCandidateStore:
     ) -> np.ndarray:
         """Decode through a read-only mmap into a caller-provided array."""
         metadata = self.metadata(tensor_name, ggml_type)
-        type_name = str(metadata["ggml_type_name"])
-        path = self._verify(tensor_name, type_name, metadata)
         expected_shape = tuple(reversed(metadata["gguf_shape"]))
         if out.dtype != np.float32 or out.shape != expected_shape or not out.flags.c_contiguous:
             raise ValueError(
@@ -252,22 +250,45 @@ class NativeCandidateStore:
         if rows_per_chunk <= 0:
             raise ValueError("rows_per_chunk must be positive")
         rows = out.reshape(-1, metadata["row_width"])
+        for start, decoded in self.iter_decoded_rows(
+            tensor_name, ggml_type, rows_per_chunk=rows_per_chunk,
+        ):
+            np.copyto(rows[start:start + decoded.shape[0]], decoded)
+        return out
+
+    def iter_decoded_rows(
+        self,
+        tensor_name: str,
+        ggml_type: GGMLType | int,
+        *,
+        rows_per_chunk: int = 16,
+    ) -> Iterator[tuple[int, np.ndarray]]:
+        """Yield bounded decoded FP32 row chunks and their flat row offsets."""
+        if rows_per_chunk <= 0:
+            raise ValueError("rows_per_chunk must be positive")
+        metadata = self.metadata(tensor_name, ggml_type)
+        type_name = str(metadata["ggml_type_name"])
+        path = self._verify(tensor_name, type_name, metadata)
+        row_width = int(metadata["row_width"])
+        row_count = int(metadata["row_count"])
         row_size = int(metadata["row_size"])
         with path.open("rb") as handle:
             with mmap.mmap(handle.fileno(), 0, access=mmap.ACCESS_READ) as payload:
                 view = memoryview(payload)
                 try:
-                    for start in range(0, rows.shape[0], rows_per_chunk):
-                        stop = min(start + rows_per_chunk, rows.shape[0])
+                    for start in range(0, row_count, rows_per_chunk):
+                        stop = min(start + rows_per_chunk, row_count)
                         packed = view[start * row_size:stop * row_size]
                         try:
+                            decoded = np.empty(
+                                (stop - start, row_width), dtype=np.float32)
                             self.codec.dequantize_rows_into(
-                                packed, ggml_type, rows[start:stop])
+                                packed, ggml_type, decoded)
                         finally:
                             packed.release()
+                        yield start, decoded
                 finally:
                     view.release()
-        return out
 
     def iter_payload(
         self,

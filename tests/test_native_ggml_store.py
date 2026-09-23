@@ -100,6 +100,17 @@ class NativeGGMLStoreTest(unittest.TestCase):
             self.assertTrue(np.isfinite(experts_out).all())
             self.assertEqual(len(store._verified), 2)
 
+            streamed = list(store.iter_decoded_rows(
+                "blk.0.ffn_gate_exps.weight", GGMLType.Q4_0,
+                rows_per_chunk=5))
+            self.assertEqual([start for start, _ in streamed], [0, 5, 10])
+            self.assertTrue(all(chunk.shape[0] <= 5 for _, chunk in streamed))
+            np.testing.assert_array_equal(
+                np.concatenate([chunk for _, chunk in streamed]).reshape(
+                    experts.shape),
+                experts_out,
+            )
+
             copied = b"".join(store.iter_payload(
                 "blk.0.ffn_gate_exps.weight", GGMLType.Q4_0,
                 chunk_bytes=7))
