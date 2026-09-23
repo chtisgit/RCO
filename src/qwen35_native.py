@@ -105,6 +105,35 @@ def matrix_permutations(
     return row_order, column_order
 
 
+def restore_source_matrix(
+    canonical: np.ndarray,
+    source_name: str,
+    geometry: Qwen35LinearAttentionGeometry,
+    *,
+    out: np.ndarray | None = None,
+) -> np.ndarray:
+    """Undo canonical GGUF head ordering into a caller-owned HF matrix."""
+    value = np.asarray(canonical)
+    if value.ndim != 2:
+        raise ValueError(f"canonical matrix must be 2D, got {value.shape}")
+    if out is None:
+        out = np.empty_like(value)
+    if out.shape != value.shape or out.dtype != value.dtype or not out.flags.c_contiguous:
+        raise ValueError(
+            f"out must be C-contiguous {value.dtype} with shape {value.shape}")
+    row_order, column_order = matrix_permutations(
+        source_name, value.shape, geometry)
+    if row_order is None and column_order is None:
+        np.copyto(out, value)
+    elif row_order is not None and column_order is None:
+        out[row_order] = value
+    elif row_order is None and column_order is not None:
+        out[:, column_order] = value
+    else:
+        out[np.ix_(row_order, column_order)] = value
+    return out
+
+
 def _contiguous_runs(indices: np.ndarray) -> Iterator[tuple[int, int]]:
     if indices.ndim != 1 or not len(indices):
         raise ValueError("row indices must be a non-empty vector")

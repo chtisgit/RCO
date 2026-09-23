@@ -21,6 +21,7 @@ from qwen35_native import (
     SafetensorGGUFRowSource,
     _reordered_head_indices,
     matrix_permutations,
+    restore_source_matrix,
 )
 
 
@@ -40,6 +41,16 @@ class Qwen35NativeTest(unittest.TestCase):
         self.assertIsNone(qkv_columns)
         np.testing.assert_array_equal(qkv_rows[:12], np.arange(12))
         np.testing.assert_array_equal(qkv_rows[12:], 12 + expected_v)
+        qkv_source = np.arange(20 * 5, dtype=np.float32).reshape(20, 5)
+        qkv_canonical = qkv_source[qkv_rows]
+        np.testing.assert_array_equal(
+            restore_source_matrix(
+                qkv_canonical,
+                "model.layers.0.linear_attn.in_proj_qkv.weight",
+                geometry,
+            ),
+            qkv_source,
+        )
 
         out_rows, out_columns = matrix_permutations(
             "model.layers.0.linear_attn.out_proj.weight",
@@ -48,6 +59,17 @@ class Qwen35NativeTest(unittest.TestCase):
         )
         self.assertIsNone(out_rows)
         np.testing.assert_array_equal(out_columns, expected_v)
+
+        source = np.arange(5 * 8, dtype=np.float32).reshape(5, 8)
+        canonical = source[:, expected_v]
+        restored = np.empty_like(source)
+        self.assertIs(restore_source_matrix(
+            canonical,
+            "model.layers.0.linear_attn.out_proj.weight",
+            geometry,
+            out=restored,
+        ), restored)
+        np.testing.assert_array_equal(restored, source)
 
     def test_row_source_reads_bounded_runs_and_reorders_columns(self):
         geometry = {

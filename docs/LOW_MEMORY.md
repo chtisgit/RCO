@@ -258,6 +258,46 @@ into the retained block-0 oracle and measure block-output error. CPU/CUDA
 matmul-kernel coverage, a genuine routed 35B block, and full-model generation
 remain separate requirements.
 
+That 2B numerical block gate is now recorded in
+`reports/qwen35_2b_block0_native_output.json`. A meta-instantiated Transformers
+block loads exactly 117,629,248 BF16 checkpoint bytes, and its direct dense
+forward reproduces the retained block-0 oracle bit-for-bit. Native candidate
+evaluation decodes every selected canonical GGUF payload through pinned GGML,
+undoes value-head ordering back into the Hugging Face layout, installs all
+eight decision groups, and retains the six copy-only tensors from the dense
+block.
+
+Three complete assignments run twice with bit-identical, finite BF16 outputs:
+
+- uniform Q4_0: relative block-output Frobenius error `0.15615076165037167`;
+- uniform Q2_0: relative error `1.2237737652528997`; and
+- alternating Q2_0/Q4_0: relative error `0.8788811960769464`.
+
+The report records maximum, mean, RMSE, signed-mean, relative-Frobenius, and
+cosine metrics plus exact payload/aligned costs and every installed candidate
+hash. Decoding has no persistent cache; the largest decoded and inverse-
+transformed FP32 buffers are 50,331,648 bytes each, and the largest BF16 install
+buffer is 25,165,824 bytes. The complete CPU audit peaks at 763,424,768 bytes
+RSS and releases the block back to `meta` afterward.
+
+Reproduce it with:
+
+```bash
+python tools/audit_qwen35_2b_native_block_output.py \
+  --model-dir /path/to/Qwen3.5-2B-Base \
+  --oracle reports/qwen35_2b_block0_oracle.safetensors \
+  --manifest reports/qwen35_2b_gguf_manifest.json \
+  --identity reports/qwen35_2b_identity.json \
+  --store /path/to/qwen35_2b_block0_native \
+  --ggml-library /path/to/llama-build/bin/libggml-base.so \
+  --device cpu \
+  --output reports/qwen35_2b_block0_native_output.json
+```
+
+This completes the dense 2B candidate-block numerical oracle. It does not
+establish an acceptable Q2 quality threshold, end-to-end loss, CUDA kernels,
+or the genuine routed-expert 35B gate.
+
 The tensor-name audit of the local published checkpoint covers all 93,625
 source tensors: 93,275 text tensors, 333 vision tensors, and 17 MTP tensors,
 with zero unknown names. The recorded audit is
