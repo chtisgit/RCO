@@ -196,15 +196,17 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
     codec = GGMLNativeCodec(args.ggml_library.resolve(strict=True))
     store = NativeCandidateStore(args.store.resolve(strict=True), codec)
     tensor_names = sorted(store.index["tensors"])
-    if len(tensor_names) != 13:
-        raise RuntimeError(f"expected 13 genuine block candidates, got {len(tensor_names)}")
+    if len(tensor_names) != args.expected_candidate_tensors:
+        raise RuntimeError(
+            f"expected {args.expected_candidate_tensors} block candidates, "
+            f"got {len(tensor_names)}")
     gguf = import_pinned_gguf(llama_cpp / "gguf-py")
     parent = args.temporary_parent.resolve()
     parent.mkdir(parents=True, exist_ok=True)
     runs = []
     for label, selected_type in ASSIGNMENTS.items():
         with tempfile.TemporaryDirectory(
-            prefix=f"rco-qwen36-{label}-", dir=parent,
+            prefix=f"rco-native-{label}-", dir=parent,
         ) as directory_name:
             directory = Path(directory_name)
             output = directory / f"qwen36-block0-{label}.gguf"
@@ -222,7 +224,10 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
             model_sha256 = _sha256_file(output)
             model_bytes = output.stat().st_size
             probe = _run_probe(args.llama_probe.resolve(strict=True), output)
-            if probe["layer_count"] != 40 or probe["embedding_length"] != 2048:
+            if (
+                probe["layer_count"] != args.expected_layers
+                or probe["embedding_length"] != args.expected_embedding
+            ):
                 raise RuntimeError(f"probe loaded unexpected model geometry: {probe}")
             generation = _run_generation(
                 args.llama_executable.resolve(strict=True), output, directory)
@@ -241,11 +246,16 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
         "schema": 1,
         "status": "pass",
         "scope": (
-            "uniform Q2_0 and uniform Q4_0 assignments for all 13 eligible "
-            "tensors in genuine Qwen3.6-35B-A3B block 0, copied unchanged into "
-            "complete temporary GGUFs and exercised by unmodified llama.cpp on "
-            "CPU; CUDA execution and end-to-end quality are not claimed"
+            f"uniform Q2_0 and uniform Q4_0 assignments for all "
+            f"{len(tensor_names)} eligible tensors in {args.scope_label}, copied "
+            "unchanged into complete temporary GGUFs and exercised by "
+            "unmodified llama.cpp on CPU; CUDA execution and end-to-end quality "
+            "are not claimed"
         ),
+        "expected_model_geometry": {
+            "embedding_length": args.expected_embedding,
+            "layer_count": args.expected_layers,
+        },
         "llama_cpp": {
             "path": str(llama_cpp),
             "revision": revision,
@@ -284,6 +294,13 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--llama-executable", type=Path, required=True)
     parser.add_argument("--temporary-parent", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--expected-candidate-tensors", type=int, default=13)
+    parser.add_argument("--expected-layers", type=int, default=40)
+    parser.add_argument("--expected-embedding", type=int, default=2048)
+    parser.add_argument(
+        "--scope-label",
+        default="genuine Qwen3.6-35B-A3B block 0",
+    )
     return parser
 
 

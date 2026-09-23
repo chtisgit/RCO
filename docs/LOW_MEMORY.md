@@ -253,10 +253,8 @@ python tools/audit_qwen35_2b_native_block.py \
 ```
 
 This proves complete block candidate generation, transformation fidelity, and
-bounded source reads. The next numerical gate must install selected candidates
-into the retained block-0 oracle and measure block-output error. CPU/CUDA
-matmul-kernel coverage, a genuine routed 35B block, and full-model generation
-remain separate requirements.
+bounded source reads. Candidate installation, runtime execution, the genuine
+routed 35B block, and CUDA remain separate evidence below.
 
 That 2B numerical block gate is now recorded in
 `reports/qwen35_2b_block0_native_output.json`. A meta-instantiated Transformers
@@ -297,6 +295,49 @@ python tools/audit_qwen35_2b_native_block_output.py \
 This completes the dense 2B candidate-block numerical oracle. It does not
 establish an acceptable Q2 quality threshold, end-to-end loss, CUDA kernels,
 or the genuine routed-expert 35B gate.
+
+The CPU runtime half of the 2B gate is retained in
+`reports/qwen35_2b_block0_native_gguf_runtime.json`. Pinned llama.cpp converts
+the immutable dense checkpoint to a 3,775,708,864-byte BF16 text GGUF with
+SHA-256
+`caa3c359d2dbf6f63639b98a5018d469358b88b23982ae74a85378b1d585be95`.
+The generalized native-GGUF audit then writes two complete temporary models:
+one selects Q2_0 for all eight eligible block-0 tensors and the other selects
+Q4_0 for all eight. It verifies the 16,533,504 and 33,067,008 selected payload
+bytes directly against the store after serialization.
+
+Both 320-tensor outputs pass the strict pinned model loader and complete stock
+llama.cpp CPU generation. Their hashes are
+`74a6adf1e4d66cc2dfd275a6ca72c1b81d75b7d090fcc60993e53b02631a63e6`
+and `7215ea4779cb0077eea984d25ebbebaff189be8a8c3573ae4608ca237d7766de`.
+The Q4_0 run generates `Hello.`; the deliberately low-quality uniform-Q2_0
+assignment generates different text but completes inference successfully.
+This is kernel/format evidence, not an assertion that uniform Q2_0 meets a
+quality threshold. The two-run audit takes 85.49 seconds and peaks at
+4,640,272,384 bytes RSS.
+
+Use the same audit tool with explicit small-model geometry:
+
+```bash
+python tools/audit_qwen36_35b_native_gguf_runtime.py \
+  --reference /path/to/Qwen3.5-2B-Base-BF16-text.gguf \
+  --reference-sha256 \
+    caa3c359d2dbf6f63639b98a5018d469358b88b23982ae74a85378b1d585be95 \
+  --store /path/to/qwen35_2b_block0_native \
+  --llama-cpp /path/to/pinned/llama.cpp \
+  --ggml-library /path/to/cpu/libggml-base.so \
+  --llama-probe /path/to/llama-model-probe \
+  --llama-executable /path/to/llama \
+  --temporary-parent /path/to/nvme/staging \
+  --output reports/qwen35_2b_block0_native_gguf_runtime.json \
+  --expected-candidate-tensors 8 \
+  --expected-layers 24 \
+  --expected-embedding 2048 \
+  --scope-label 'complete Qwen3.5-2B-Base block 0'
+```
+
+Together with the genuine 35B runtime audit below, this completes CPU execution
+coverage for the initial Q2_0/Q4_0 candidate set. CUDA coverage remains open.
 
 ## Qwen3.6-35B-A3B dense source and canonical relationship
 
