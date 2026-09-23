@@ -562,6 +562,47 @@ import and genuine-block numerical portions of the native-candidate gate. It
 does not prove llama.cpp matrix multiplication, CUDA execution, or acceptable
 end-to-end model quality.
 
+## Genuine-block native GGUF CPU runtime
+
+`reports/qwen36_35b_block0_native_gguf_runtime.json` closes the CPU execution
+part of that remaining kernel gate. The audit starts from the immutable proven
+hybrid GGUF, writes one complete temporary model with all 13 eligible layer-0
+tensors selected as Q2_0, and repeats with all 13 selected as Q4_0. It copies
+candidate payloads directly from the production-policy store through
+`write_selected_native_gguf`; neither run decodes or requantizes a selected
+payload while writing.
+
+After each write, the pinned GGUF reader verifies every selected type, shape,
+byte count, alignment, and SHA-256 against the store. The resulting 733-tensor
+models then pass the strict external llama model loader and generate `Hello`
+through the unmodified pinned `llama cli` CPU runtime. The Q2_0 and Q4_0 runs
+preserve 236,999,232 and 473,998,464 selected payload bytes respectively. Their
+complete temporary-model hashes are
+`3211ba512c5fdfc2fcf3a6c7de373e26bea0210a1c469d071ffed03a61a6e6fb`
+and `d2934f1012be289b492c9123257744aa6287ec259b91aa27829ce24436c078ea`.
+
+```bash
+python tools/audit_qwen36_35b_native_gguf_runtime.py \
+  --reference /path/to/Qwen3.6-35B-A3B-GSQ-hybrid.gguf \
+  --reference-sha256 \
+    8e50912f5d0703401ca21b09deb2ee8a84d03536ade6fb44815fcb40a0b03596 \
+  --store /path/to/qwen36_35b_block0_native_gsq \
+  --llama-cpp /path/to/pinned/llama.cpp \
+  --ggml-library /path/to/cpu/libggml-base.so \
+  --llama-probe /path/to/llama-model-probe \
+  --llama-executable /path/to/llama \
+  --temporary-parent /path/to/nvme/staging \
+  --output reports/qwen36_35b_block0_native_gguf_runtime.json
+```
+
+The audit took 424.59 seconds. Peak process and child RSS were
+12,930,052,096 and 13,118,967,808 bytes because the current correctness-first
+GGUF writer and validators memory-map and touch the complete reference/output.
+That stays within the available host RAM but is not the Phase 6 streaming
+writer result; bounded-copy output construction remains open. Both CPU runs
+also recorded the current system-wide CUDA initialization failure, so this
+report makes no CUDA or RTX memory-gate claim.
+
 The tensor-name audit of the local published checkpoint covers all 93,625
 source tensors: 93,275 text tensors, 333 vision tensors, and 17 MTP tensors,
 with zero unknown names. The recorded audit is
