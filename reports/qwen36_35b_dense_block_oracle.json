@@ -1,0 +1,145 @@
+{
+  "calibration": {
+    "input_ids": [
+      32,
+      59056,
+      9575,
+      54802,
+      2581,
+      2624,
+      13205,
+      799,
+      21333,
+      69764,
+      6009,
+      2424,
+      18394,
+      1345,
+      660,
+      975
+    ],
+    "input_sha256": "18ed6cc7c652b3ba9cc115b3d1d6b8f4e10107ad01a7fd8fd35a8de133ecccba",
+    "output_sha256": "b7c2467f0bd2c3abb8c3fabf69dad2dcf0ef20885baaea80cd1bf9eecc006485",
+    "sequence_length": 16,
+    "text": "A bounded native GGML search keeps one genuine routed expert block resident while all other Qwen weights remain on disk."
+  },
+  "environment": {
+    "cuda": {
+      "allocated_peak_bytes": 0,
+      "available": false,
+      "device_count": 0,
+      "reserved_peak_bytes": 0
+    },
+    "device": "cpu",
+    "python": "3.13.5",
+    "torch": "2.6.0+cu124",
+    "torch_cuda": "12.4",
+    "transformers": "5.13.1"
+  },
+  "memory": {
+    "initial_rss_bytes": 475635712,
+    "peak_process_rss_bytes": 1267003392
+  },
+  "model": {
+    "active_experts": 8,
+    "class": "Qwen3_5MoeForConditionalGeneration",
+    "expert_count": 256,
+    "hidden_size": 2048,
+    "text_layer_count": 40
+  },
+  "oracle": {
+    "bytes": 131797,
+    "metadata": {
+      "attention_implementation": "eager",
+      "calibration_text": "A bounded native GGML search keeps one genuine routed expert block resident while all other Qwen weights remain on disk.",
+      "layer": "0",
+      "repo_id": "Qwen/Qwen3.6-35B-A3B",
+      "revision": "995ad96eacd98c81ed38be0c5b274b04031597b0"
+    },
+    "path": "reports/qwen36_35b_block0_oracle.safetensors",
+    "sha256": "cdfa89b09c5eb6001ec0cedcfaf7a49c1a2798cc0cee0b6178ef58c77bf12f5e",
+    "tensors": {
+      "block_input": {
+        "dtype": "bfloat16",
+        "sha256": "18ed6cc7c652b3ba9cc115b3d1d6b8f4e10107ad01a7fd8fd35a8de133ecccba",
+        "shape": [
+          1,
+          16,
+          2048
+        ]
+      },
+      "block_output": {
+        "dtype": "bfloat16",
+        "sha256": "b7c2467f0bd2c3abb8c3fabf69dad2dcf0ef20885baaea80cd1bf9eecc006485",
+        "shape": [
+          1,
+          16,
+          2048
+        ]
+      },
+      "input_ids": {
+        "dtype": "int64",
+        "sha256": "045bc604707a3b6644ecee801dcefbd9ba8756c3920a5df90bcff505f88c9cef",
+        "shape": [
+          1,
+          16
+        ]
+      }
+    }
+  },
+  "reproducibility": {
+    "exact_output_equality": true,
+    "finite": true,
+    "independent_process_byte_match": true,
+    "independent_process_oracle_sha256": "cdfa89b09c5eb6001ec0cedcfaf7a49c1a2798cc0cee0b6178ef58c77bf12f5e",
+    "output_sha256": "b7c2467f0bd2c3abb8c3fabf69dad2dcf0ef20885baaea80cd1bf9eecc006485",
+    "passes": 2
+  },
+  "schema": 1,
+  "scope": "genuine Qwen3.6-35B-A3B layer-0 BF16 numerical oracle with only the embedding or one transformer block resident at a time",
+  "source": {
+    "model_dir": "/home/christian/projects/gsq-rco-moe/data/qwen36_35b_base",
+    "repo_id": "Qwen/Qwen3.6-35B-A3B",
+    "revision": "995ad96eacd98c81ed38be0c5b274b04031597b0"
+  },
+  "status": "pass",
+  "streaming": {
+    "block": {
+      "index": 0,
+      "prefix": "model.language_model.layers.0",
+      "released_bytes": 1685401984,
+      "released_to_meta": true,
+      "resident_bf16_bytes": 1685401984,
+      "schema": {
+        "checkpoint_count": 18,
+        "expected_count": 18,
+        "missing": [],
+        "prefix": "model.language_model.layers.0",
+        "unexpected": []
+      },
+      "source_tensor_count": 18
+    },
+    "embedding": {
+      "prefix": "model.language_model.embed_tokens",
+      "released_bytes": 1017118720,
+      "resident_bf16_bytes": 1017118720,
+      "schema": {
+        "checkpoint_count": 1,
+        "expected_count": 1,
+        "missing": [],
+        "prefix": "model.language_model.embed_tokens",
+        "unexpected": []
+      }
+    },
+    "simultaneous_embedding_and_block_residency": false
+  },
+  "timing": {
+    "block_load_seconds": 0.0042803509859368205,
+    "forward_seconds": [
+      0.10985356202581897,
+      0.0979031550232321
+    ],
+    "model_init_seconds": 0.46697925799526274,
+    "total_seconds": 1.5416945120086893
+  }
+}

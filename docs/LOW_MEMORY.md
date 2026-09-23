@@ -376,6 +376,40 @@ full-model output gate. BF16 remains the authoritative source for new native
 higher-precision candidates; the GSQ checkpoint is only a quantized lineage
 and low-bit provenance source.
 
+The final Phase 1 numerical rung is now retained separately in
+`reports/qwen36_35b_block0_oracle.safetensors` and
+`reports/qwen36_35b_dense_block_oracle.json`. The audit instantiates the
+complete 40-layer, 256-expert model on `meta`, materializes the real embedding
+and block 0 sequentially, and releases each prefix back to `meta`. Embedding
+and block weights never coexist as resident streamed prefixes.
+
+The exact dense embedding payload is 1,017,118,720 bytes. The genuine routed
+block contains 18 source tensors and 1,685,401,984 BF16 bytes. A fixed 16-token
+sequence produces BF16 input and output tensors shaped `[1, 16, 2048]`; two
+passes are bit-identical and finite. A second fresh process reproduced the
+complete 131,797-byte oracle byte-for-byte at SHA-256
+`cdfa89b09c5eb6001ec0cedcfaf7a49c1a2798cc0cee0b6178ef58c77bf12f5e`.
+The retained output tensor hash is
+`b7c2467f0bd2c3abb8c3fabf69dad2dcf0ef20885baaea80cd1bf9eecc006485`.
+The CPU run used the Transformers torch fallback, peaked at 1,267,003,392
+bytes RSS, and released the complete block afterward.
+
+```bash
+python tools/audit_qwen36_35b_dense_block.py \
+  --model-dir /path/to/Qwen3.6-35B-A3B \
+  --identity reports/qwen36_35b_base_identity.json \
+  --device cpu \
+  --sequence-length 16 \
+  --expected-oracle-sha256 \
+    cdfa89b09c5eb6001ec0cedcfaf7a49c1a2798cc0cee0b6178ef58c77bf12f5e \
+  --oracle-output reports/qwen36_35b_block0_oracle.safetensors \
+  --report-output reports/qwen36_35b_dense_block_oracle.json
+```
+
+This closes the Phase 1 one-block dense path for the genuine target. It is not
+candidate-generation evidence, and the CPU fallback does not pass any CUDA
+kernel or VRAM gate.
+
 The tensor-name audit of the local published checkpoint covers all 93,625
 source tensors: 93,275 text tensors, 333 vision tensors, and 17 MTP tensors,
 with zero unknown names. The recorded audit is
