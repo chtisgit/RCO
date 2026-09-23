@@ -14,7 +14,8 @@ fast constrained sampler rather than silently approximating the budget.
 from __future__ import annotations
 
 import logging
-from typing import Callable, Optional
+import math
+from typing import Callable, Optional, Sequence
 
 import torch
 
@@ -104,6 +105,187 @@ def realized_average_bits(assignment: torch.Tensor, low_bits: float,
         [low_bits, high_bits], dtype=torch.float64,
         device=assignment.device)
     return choices[assignment.long()].mean().item()
+
+
+def _cost_vectors(
+    low_costs: Sequence[int] | torch.Tensor,
+    high_costs: Sequence[int] | torch.Tensor,
+) -> tuple[list[int], list[int]]:
+    low = [int(value) for value in low_costs]
+    high = [int(value) for value in high_costs]
+    if not low or len(low) != len(high):
+        raise ValueError("cost vectors must be non-empty and have equal length")
+    if any(value < 0 for value in low):
+        raise ValueError("low costs must be non-negative")
+    if any(high_value <= low_value for low_value, high_value in zip(low, high)):
+        raise ValueError("every high cost must exceed its low cost")
+    return low, high
+
+
+def _normalized_cost_problem(
+    low_costs: Sequence[int] | torch.Tensor,
+    high_costs: Sequence[int] | torch.Tensor,
+    target_cost: int,
+) -> tuple[list[int], int, int]:
+    low, high = _cost_vectors(low_costs, high_costs)
+    base = sum(low)
+    residual = int(target_cost) - base
+    increments = [high_value - low_value
+                  for low_value, high_value in zip(low, high)]
+    divisor = math.gcd(*increments)
+    if residual < 0 or residual > sum(increments) or residual % divisor:
+        raise ValueError(
+            f"target cost {target_cost} is not reachable from candidate costs")
+    return [value // divisor for value in increments], residual // divisor, base
+
+
+def realized_cost(
+    assignment: torch.Tensor,
+    low_costs: Sequence[int] | torch.Tensor,
+    high_costs: Sequence[int] | torch.Tensor,
+) -> int:
+    """Return the exact serialized cost of a binary assignment."""
+    low, high = _cost_vectors(low_costs, high_costs)
+    if assignment.shape != (len(low),):
+        raise ValueError(
+            f"assignment has shape {assignment.shape}, expected ({len(low)},)")
+    choices = assignment.detach().to(device="cpu", dtype=torch.long).tolist()
+    if any(choice not in (0, 1) for choice in choices):
+        raise ValueError("assignment choices must be 0 or 1")
+    return sum((high[index] if choice else low[index])
+               for index, choice in enumerate(choices))
+
+
+def exact_cost_assignment(
+    scores: torch.Tensor,
+    low_costs: Sequence[int] | torch.Tensor,
+    high_costs: Sequence[int] | torch.Tensor,
+    target_cost: int,
+) -> torch.Tensor:
+    """Maximize high-choice scores under an exact serialized-byte budget."""
+    if scores.ndim != 1:
+        raise ValueError("scores must be one-dimensional")
+    increments, target, _ = _normalized_cost_problem(
+        low_costs, high_costs, target_cost)
+    if len(increments) != scores.numel():
+        raise ValueError("cost vectors and scores must have equal length")
+
+    # A sparse multiple-choice knapsack keeps only exactly reachable costs.
+    # Parent maps are retained for deterministic backtracking. Equal-score
+    # ties preserve the low choice, so results are stable across runs.
+    states = {0: 0.0}
+    parents: list[dict[int, int]] = []
+    detached = scores.detach().to(device="cpu", dtype=torch.float64)
+    for index, increment in enumerate(increments):
+        next_states = dict(states)
+        choices = {cost: 0 for cost in states}
+        advantage = float(detached[index])
+        for cost, value in states.items():
+            new_cost = cost + increment
+            if new_cost > target:
+                continue
+            candidate = value + advantage
+            if new_cost not in next_states or candidate > next_states[new_cost]:
+                next_states[new_cost] = candidate
+                choices[new_cost] = 1
+        states = next_states
+        parents.append(choices)
+    if target not in states:
+        raise ValueError(
+            f"target cost {target_cost} has no exact candidate assignment")
+
+    result = torch.zeros_like(scores, dtype=torch.long)
+    remaining = target
+    for index in range(scores.numel() - 1, -1, -1):
+        choice = parents[index][remaining]
+        result[index] = choice
+        if choice:
+            remaining -= increments[index]
+    if remaining != 0:
+        raise RuntimeError("exact-cost assignment backtracking failed")
+    return result
+
+
+def sample_exact_cost_assignment(
+    scores: torch.Tensor,
+    low_costs: Sequence[int] | torch.Tensor,
+    high_costs: Sequence[int] | torch.Tensor,
+    target_cost: int,
+    *,
+    uniforms: Optional[torch.Tensor] = None,
+) -> tuple[torch.Tensor, torch.Tensor]:
+    """Sample an exact-cost assignment and its differentiable log probability.
+
+    The distribution is proportional to ``exp(sum(scores[high]))`` over only
+    the assignments that exactly meet ``target_cost``. A suffix log-partition
+    dynamic program provides exact sequential conditionals without enumerating
+    candidate combinations.
+    """
+    if scores.ndim != 1:
+        raise ValueError("scores must be one-dimensional")
+    increments, target, _ = _normalized_cost_problem(
+        low_costs, high_costs, target_cost)
+    if len(increments) != scores.numel():
+        raise ValueError("cost vectors and scores must have equal length")
+    if uniforms is None:
+        uniforms = torch.rand_like(scores)
+    elif uniforms.shape != scores.shape:
+        raise ValueError(
+            f"uniforms has shape {uniforms.shape}, expected {scores.shape}")
+    uniforms = uniforms.detach().to(device=scores.device, dtype=scores.dtype)
+
+    zero = scores.sum() * 0.0
+    suffix: list[dict[int, torch.Tensor]] = [dict() for _ in range(
+        scores.numel() + 1)]
+    suffix[-1] = {0: zero}
+    for index in range(scores.numel() - 1, -1, -1):
+        current: dict[int, torch.Tensor] = {}
+        for cost, log_weight in suffix[index + 1].items():
+            if cost in current:
+                current[cost] = torch.logaddexp(current[cost], log_weight)
+            else:
+                current[cost] = log_weight
+            high_cost = cost + increments[index]
+            if high_cost <= target:
+                high_weight = log_weight + scores[index]
+                if high_cost in current:
+                    current[high_cost] = torch.logaddexp(
+                        current[high_cost], high_weight)
+                else:
+                    current[high_cost] = high_weight
+        suffix[index] = current
+    if target not in suffix[0]:
+        raise ValueError(
+            f"target cost {target_cost} has no exact candidate assignment")
+
+    assignment = torch.zeros_like(scores, dtype=torch.long)
+    log_probability = zero
+    remaining = target
+    for index, increment in enumerate(increments):
+        low_weight = suffix[index + 1].get(remaining)
+        high_suffix = suffix[index + 1].get(remaining - increment)
+        high_weight = (
+            None if high_suffix is None else scores[index] + high_suffix)
+        if low_weight is None:
+            choose_high = True
+            total = high_weight
+        elif high_weight is None:
+            choose_high = False
+            total = low_weight
+        else:
+            total = torch.logaddexp(low_weight, high_weight)
+            probability_high = torch.exp(high_weight - total).detach()
+            choose_high = bool(uniforms[index] < probability_high)
+        chosen_weight = high_weight if choose_high else low_weight
+        if chosen_weight is None or total is None:
+            raise RuntimeError("exact-cost sampler reached an infeasible state")
+        log_probability = log_probability + chosen_weight - total
+        if choose_high:
+            assignment[index] = 1
+            remaining -= increment
+    if remaining != 0:
+        raise RuntimeError("exact-cost sampler did not meet its target")
+    return assignment, log_probability
 
 
 def optimize_hard_spsa(
@@ -333,12 +515,180 @@ def optimize_hard_reinforce(
     return scores.detach(), final_assignment, history
 
 
+def optimize_cost_spsa(
+    evaluate: Callable[[torch.Tensor], float],
+    *,
+    low_costs: Sequence[int] | torch.Tensor,
+    high_costs: Sequence[int] | torch.Tensor,
+    target_cost: int,
+    n_steps: int = 100,
+    lr: float = 0.05,
+    perturbation: float = 0.1,
+    seed: int = 42,
+    initial_scores: Optional[torch.Tensor] = None,
+    log_interval: int = 10,
+) -> tuple[torch.Tensor, torch.Tensor, list[dict]]:
+    """Optimize hard choices at an exact, nonuniform serialized-byte cost."""
+    low, high = _cost_vectors(low_costs, high_costs)
+    n_groups = len(low)
+    # Fail before invoking an expensive evaluator if the target is impossible.
+    exact_cost_assignment(torch.zeros(n_groups), low, high, target_cost)
+    if n_steps < 1:
+        raise ValueError("n_steps must be positive")
+    if perturbation <= 0:
+        raise ValueError("perturbation must be positive")
+    if initial_scores is None:
+        scores = torch.zeros(n_groups, dtype=torch.float32)
+    else:
+        if initial_scores.shape != (n_groups,):
+            raise ValueError(
+                f"initial_scores has shape {initial_scores.shape}, expected "
+                f"({n_groups},)")
+        scores = initial_scores.detach().to(dtype=torch.float32).clone()
+    scores.requires_grad_(True)
+    optimizer = torch.optim.Adam([scores], lr=lr)
+    generator = torch.Generator(device=scores.device)
+    generator.manual_seed(seed)
+    history = []
+
+    for step in range(n_steps):
+        delta = torch.empty_like(scores).bernoulli_(0.5, generator=generator)
+        delta.mul_(2).sub_(1)
+        plus = exact_cost_assignment(
+            scores.detach() + perturbation * delta,
+            low, high, target_cost)
+        minus = exact_cost_assignment(
+            scores.detach() - perturbation * delta,
+            low, high, target_cost)
+        loss_plus = float(evaluate(plus))
+        loss_minus = float(evaluate(minus))
+        if not torch.isfinite(torch.tensor([loss_plus, loss_minus])).all():
+            raise FloatingPointError(
+                f"non-finite evaluator loss at step {step}: "
+                f"{loss_plus}, {loss_minus}")
+        gradient = ((loss_plus - loss_minus) / (2.0 * perturbation)) * delta
+        optimizer.zero_grad(set_to_none=True)
+        scores.grad = gradient
+        optimizer.step()
+        chosen = plus if loss_plus <= loss_minus else minus
+        entry = {
+            "step": step,
+            "loss_plus": loss_plus,
+            "loss_minus": loss_minus,
+            "best_loss": min(loss_plus, loss_minus),
+            "gradient_norm": gradient.norm().item(),
+            "n_high": int(chosen.sum().item()),
+            "realized_cost": realized_cost(chosen, low, high),
+        }
+        history.append(entry)
+        if step % log_interval == 0 or step == n_steps - 1:
+            logger.info(
+                "[Cost SPSA %d] loss+=%.6f loss-=%.6f grad=%.5f cost=%d",
+                step, loss_plus, loss_minus, entry["gradient_norm"],
+                entry["realized_cost"],
+            )
+    final_assignment = exact_cost_assignment(
+        scores.detach(), low, high, target_cost)
+    return scores.detach(), final_assignment, history
+
+
+def optimize_cost_reinforce(
+    evaluate: Callable[[torch.Tensor], float],
+    *,
+    low_costs: Sequence[int] | torch.Tensor,
+    high_costs: Sequence[int] | torch.Tensor,
+    target_cost: int,
+    n_steps: int = 100,
+    lr: float = 0.05,
+    baseline_decay: float = 0.9,
+    seed: int = 42,
+    initial_scores: Optional[torch.Tensor] = None,
+    log_interval: int = 10,
+) -> tuple[torch.Tensor, torch.Tensor, list[dict]]:
+    """Optimize exact-cost choices with paired antithetic REINFORCE draws."""
+    low, high = _cost_vectors(low_costs, high_costs)
+    n_groups = len(low)
+    exact_cost_assignment(torch.zeros(n_groups), low, high, target_cost)
+    if n_steps < 1:
+        raise ValueError("n_steps must be positive")
+    if not 0.0 <= baseline_decay < 1.0:
+        raise ValueError("baseline_decay must lie in [0, 1)")
+    if initial_scores is None:
+        scores = torch.zeros(n_groups, dtype=torch.float32)
+    else:
+        if initial_scores.shape != (n_groups,):
+            raise ValueError(
+                f"initial_scores has shape {initial_scores.shape}, expected "
+                f"({n_groups},)")
+        scores = initial_scores.detach().to(dtype=torch.float32).clone()
+    scores.requires_grad_(True)
+    optimizer = torch.optim.Adam([scores], lr=lr)
+    generator = torch.Generator(device=scores.device)
+    generator.manual_seed(seed)
+    baseline = None
+    history = []
+
+    for step in range(n_steps):
+        uniforms = torch.rand(
+            scores.shape, generator=generator, device=scores.device,
+            dtype=scores.dtype)
+        plus, log_probability_plus = sample_exact_cost_assignment(
+            scores, low, high, target_cost, uniforms=uniforms)
+        minus, log_probability_minus = sample_exact_cost_assignment(
+            scores, low, high, target_cost, uniforms=1.0 - uniforms)
+        loss_plus = float(evaluate(plus))
+        loss_minus = float(evaluate(minus))
+        if not torch.isfinite(torch.tensor([loss_plus, loss_minus])).all():
+            raise FloatingPointError(
+                f"non-finite evaluator loss at step {step}: "
+                f"{loss_plus}, {loss_minus}")
+        pair_mean = 0.5 * (loss_plus + loss_minus)
+        if baseline is None:
+            baseline = pair_mean
+        objective = 0.5 * (
+            (loss_plus - baseline) * log_probability_plus
+            + (loss_minus - baseline) * log_probability_minus)
+        optimizer.zero_grad(set_to_none=True)
+        objective.backward()
+        gradient_norm = scores.grad.norm().item()
+        optimizer.step()
+        baseline = (
+            baseline_decay * baseline + (1.0 - baseline_decay) * pair_mean)
+        chosen = plus if loss_plus <= loss_minus else minus
+        entry = {
+            "step": step,
+            "loss_plus": loss_plus,
+            "loss_minus": loss_minus,
+            "best_loss": min(loss_plus, loss_minus),
+            "baseline": baseline,
+            "gradient_norm": gradient_norm,
+            "n_high": int(chosen.sum().item()),
+            "realized_cost": realized_cost(chosen, low, high),
+        }
+        history.append(entry)
+        if step % log_interval == 0 or step == n_steps - 1:
+            logger.info(
+                "[Cost REINFORCE %d] loss+=%.6f loss-=%.6f "
+                "baseline=%.6f grad=%.5f cost=%d",
+                step, loss_plus, loss_minus, baseline, gradient_norm,
+                entry["realized_cost"],
+            )
+    final_assignment = exact_cost_assignment(
+        scores.detach(), low, high, target_cost)
+    return scores.detach(), final_assignment, history
+
+
 __all__ = [
     "HardCandidateModel",
     "exact_budget_assignment",
+    "exact_cost_assignment",
     "high_choice_count",
+    "optimize_cost_reinforce",
+    "optimize_cost_spsa",
     "optimize_hard_spsa",
     "optimize_hard_reinforce",
     "realized_average_bits",
+    "realized_cost",
+    "sample_exact_cost_assignment",
     "sample_plackett_luce_assignment",
 ]

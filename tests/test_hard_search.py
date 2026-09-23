@@ -15,10 +15,15 @@ if torch is not None:
     from search.hard import (
         HardCandidateModel,
         exact_budget_assignment,
+        exact_cost_assignment,
         high_choice_count,
+        optimize_cost_reinforce,
+        optimize_cost_spsa,
         optimize_hard_reinforce,
         optimize_hard_spsa,
         realized_average_bits,
+        realized_cost,
+        sample_exact_cost_assignment,
         sample_plackett_luce_assignment,
     )
 
@@ -56,6 +61,56 @@ class HardSearchTest(unittest.TestCase):
     def test_unrealizable_budget_is_rejected(self):
         with self.assertRaisesRegex(ValueError, "cannot be realized exactly"):
             high_choice_count(3, 2.0, 4.0, 3.0)
+
+    def test_exact_nonuniform_cost_assignment(self):
+        low = [10, 10, 10, 10]
+        high = [11, 12, 13, 14]
+        scores = torch.tensor([5.0, 1.0, 4.0, 2.0])
+        assignment = exact_cost_assignment(scores, low, high, target_cost=45)
+        self.assertEqual(assignment.tolist(), [1, 0, 0, 1])
+        self.assertEqual(realized_cost(assignment, low, high), 45)
+        with self.assertRaisesRegex(ValueError, "not reachable|no exact"):
+            exact_cost_assignment(scores, low, high, target_cost=40 + 11)
+
+    def test_exact_cost_sample_has_budget_and_score_gradient(self):
+        low = [10, 10, 10, 10]
+        high = [11, 12, 13, 14]
+        scores = torch.tensor(
+            [0.2, -0.4, 1.0, 0.5], requires_grad=True)
+        assignment, log_probability = sample_exact_cost_assignment(
+            scores, low, high, target_cost=45,
+            uniforms=torch.tensor([0.1, 0.8, 0.4, 0.6]))
+        self.assertEqual(realized_cost(assignment, low, high), 45)
+        log_probability.backward()
+        self.assertIsNotNone(scores.grad)
+        self.assertTrue(torch.isfinite(scores.grad).all())
+        self.assertGreater(scores.grad.norm().item(), 0.0)
+
+    def test_cost_optimizers_preserve_exact_nonuniform_budget(self):
+        low = [10, 10, 10, 10]
+        high = [11, 12, 13, 14]
+        importance = torch.tensor([8.0, 1.0, 2.0, 7.0])
+
+        def evaluate(assignment):
+            return float((importance * (1 - assignment.float())).sum())
+
+        for optimizer, steps in (
+            (optimize_cost_spsa, 5),
+            (optimize_cost_reinforce, 5),
+        ):
+            _, assignment, history = optimizer(
+                evaluate,
+                low_costs=low,
+                high_costs=high,
+                target_cost=45,
+                n_steps=steps,
+                lr=0.1,
+                seed=7,
+                log_interval=steps + 1,
+            )
+            self.assertEqual(realized_cost(assignment, low, high), 45)
+            self.assertTrue(all(item["realized_cost"] == 45
+                                for item in history))
 
     def test_spsa_preserves_budget_and_improves_synthetic_choice(self):
         # The optimum selects high precision for groups 0 and 1. The objective

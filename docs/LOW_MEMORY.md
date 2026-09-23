@@ -730,6 +730,19 @@ Neither estimator has yet been compared on the real 35B calibration loss.
 Record convergence and loss variance for both with the same seed and batches
 before choosing a default for a production run.
 
+The native-GGUF path cannot use equal group counts as a proxy for its budget:
+tensor sizes differ, and Q2_0/Q4_0 costs include their actual block scales and
+alignment. `search.hard.exact_cost_assignment` therefore solves a sparse exact
+multiple-choice knapsack over per-candidate serialized byte costs.
+`sample_exact_cost_assignment` uses a suffix log-partition dynamic program to
+sample only exactly feasible assignments and returns their differentiable log
+probabilities. `optimize_cost_spsa` and `optimize_cost_reinforce` expose these
+operations to paired hard search. Every evaluation and final assignment is
+checked against the exact integer-byte target; an unreachable target fails
+before model evaluation. The older CLI path above remains the equal-size
+legacy interface until the native candidate store is wired into the full-model
+driver.
+
 For the inference-only cross-entropy bring-up, the full-model RAM floor is
 removed with `--stream-hard-eval`:
 
