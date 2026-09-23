@@ -726,10 +726,6 @@ through the small vector of group scores. Select it with:
 --search-mode hard-reinforce --reinforce-baseline-decay 0.9
 ```
 
-Neither estimator has yet been compared on the real 35B calibration loss.
-Record convergence and loss variance for both with the same seed and batches
-before choosing a default for a production run.
-
 The native-GGUF path cannot use equal group counts as a proxy for its budget:
 tensor sizes differ, and Q2_0/Q4_0 costs include their actual block scales and
 alignment. `search.hard.exact_cost_assignment` therefore solves a sparse exact
@@ -742,6 +738,49 @@ checked against the exact integer-byte target; an unreachable target fails
 before model evaluation. The older CLI path above remains the equal-size
 legacy interface until the native candidate store is wired into the full-model
 driver.
+
+`reports/qwen36_35b_block0_hard_search.json` supplies the controlled genuine-
+model comparison. It streams four independently tokenized 16-token calibration
+texts through the real dense embedding and block 0; the first batch reproduces
+the retained oracle bit-for-bit. At an exact 315,169,344-byte selected-candidate
+target, there are 36 feasible assignments. The audit evaluates all 36, records
+their complete block normalized-MSE landscape, and reproduces the global
+optimum after traversing every other assignment. Its optimum has normalized
+MSE `0.11889813207786598` (relative Frobenius error
+`0.344816084424532`) and output SHA-256
+`a3de42a5c55d127f74d4fe2a594ceefa5108e1b5ada2a3a6109b68d24fe6dbfa`.
+
+SPSA and antithetic REINFORCE then run for 100 steps over matched seeds 0–19
+against that identical cached real-model landscape. Every one of their 8,000
+scalar evaluations (4,000 pairs) meets the exact integer-byte target. SPSA
+reaches the
+exhaustive optimum in 7/20 runs; REINFORCE reaches it in 19/20. Their returned
+best-incumbent median losses are `0.1196484408321559` and
+`0.11889813207786598`, and population variances are
+`9.149102632887156e-7` and `2.0791051533637335e-8`. REINFORCE explores a wider
+raw loss distribution, but converges to markedly better and less variable
+incumbents. It is therefore the default estimator for the next production
+trials; this block result is not an end-to-end quality claim.
+
+```bash
+python tools/audit_qwen36_35b_hard_search.py \
+  --model-dir /path/to/Qwen3.6-35B-A3B \
+  --identity reports/qwen36_35b_base_identity.json \
+  --manifest reports/qwen36_35b_base_gguf_manifest.json \
+  --oracle reports/qwen36_35b_block0_oracle.safetensors \
+  --store /path/to/qwen36_35b_block0_native_gsq \
+  --ggml-library /path/to/cpu/libggml-base.so \
+  --target-cost 315169344 \
+  --steps 100 --seed-start 0 --seed-count 20 \
+  --learning-rate 0.1 --perturbation 0.25 --baseline-decay 0.9 \
+  --output reports/qwen36_35b_block0_hard_search.json
+```
+
+The exhaustive model portion takes 100.25 seconds; the complete audit takes
+134.16 seconds and peaks at 2,565,668,864 bytes RSS. Candidate installation
+retains the established 262,144-byte decoded and 131,072-byte BF16 chunk
+bounds. The exact-cost full-model driver integration and its one-step memory
+gate remain open.
 
 For the inference-only cross-entropy bring-up, the full-model RAM floor is
 removed with `--stream-hard-eval`:

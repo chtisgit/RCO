@@ -550,6 +550,8 @@ def optimize_cost_spsa(
     generator = torch.Generator(device=scores.device)
     generator.manual_seed(seed)
     history = []
+    incumbent_loss = float("inf")
+    incumbent_assignment = None
 
     for step in range(n_steps):
         delta = torch.empty_like(scores).bernoulli_(0.5, generator=generator)
@@ -571,11 +573,16 @@ def optimize_cost_spsa(
         scores.grad = gradient
         optimizer.step()
         chosen = plus if loss_plus <= loss_minus else minus
+        chosen_loss = min(loss_plus, loss_minus)
+        if chosen_loss < incumbent_loss:
+            incumbent_loss = chosen_loss
+            incumbent_assignment = chosen.clone()
         entry = {
             "step": step,
             "loss_plus": loss_plus,
             "loss_minus": loss_minus,
             "best_loss": min(loss_plus, loss_minus),
+            "incumbent_loss": incumbent_loss,
             "gradient_norm": gradient.norm().item(),
             "n_high": int(chosen.sum().item()),
             "realized_cost": realized_cost(chosen, low, high),
@@ -587,9 +594,9 @@ def optimize_cost_spsa(
                 step, loss_plus, loss_minus, entry["gradient_norm"],
                 entry["realized_cost"],
             )
-    final_assignment = exact_cost_assignment(
-        scores.detach(), low, high, target_cost)
-    return scores.detach(), final_assignment, history
+    if incumbent_assignment is None:
+        raise RuntimeError("cost SPSA completed without an evaluated assignment")
+    return scores.detach(), incumbent_assignment, history
 
 
 def optimize_cost_reinforce(
@@ -627,6 +634,8 @@ def optimize_cost_reinforce(
     generator.manual_seed(seed)
     baseline = None
     history = []
+    incumbent_loss = float("inf")
+    incumbent_assignment = None
 
     for step in range(n_steps):
         uniforms = torch.rand(
@@ -655,11 +664,16 @@ def optimize_cost_reinforce(
         baseline = (
             baseline_decay * baseline + (1.0 - baseline_decay) * pair_mean)
         chosen = plus if loss_plus <= loss_minus else minus
+        chosen_loss = min(loss_plus, loss_minus)
+        if chosen_loss < incumbent_loss:
+            incumbent_loss = chosen_loss
+            incumbent_assignment = chosen.clone()
         entry = {
             "step": step,
             "loss_plus": loss_plus,
             "loss_minus": loss_minus,
             "best_loss": min(loss_plus, loss_minus),
+            "incumbent_loss": incumbent_loss,
             "baseline": baseline,
             "gradient_norm": gradient_norm,
             "n_high": int(chosen.sum().item()),
@@ -673,9 +687,10 @@ def optimize_cost_reinforce(
                 step, loss_plus, loss_minus, baseline, gradient_norm,
                 entry["realized_cost"],
             )
-    final_assignment = exact_cost_assignment(
-        scores.detach(), low, high, target_cost)
-    return scores.detach(), final_assignment, history
+    if incumbent_assignment is None:
+        raise RuntimeError(
+            "cost REINFORCE completed without an evaluated assignment")
+    return scores.detach(), incumbent_assignment, history
 
 
 __all__ = [

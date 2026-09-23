@@ -112,6 +112,33 @@ class HardSearchTest(unittest.TestCase):
             self.assertTrue(all(item["realized_cost"] == 45
                                 for item in history))
 
+    def test_cost_optimizers_return_best_evaluated_incumbent(self):
+        low = [10, 10, 10, 10]
+        high = [11, 12, 13, 14]
+        importance = torch.tensor([8.0, 1.0, 2.0, 7.0])
+        for optimizer in (optimize_cost_spsa, optimize_cost_reinforce):
+            observed = {}
+
+            def evaluate(assignment):
+                loss = float((importance * (1 - assignment.float())).sum())
+                observed[tuple(assignment.tolist())] = loss
+                return loss
+
+            _, assignment, history = optimizer(
+                evaluate,
+                low_costs=low,
+                high_costs=high,
+                target_cost=45,
+                n_steps=8,
+                lr=0.1,
+                seed=3,
+                log_interval=20,
+            )
+            self.assertEqual(observed[tuple(assignment.tolist())],
+                             min(observed.values()))
+            self.assertEqual(history[-1]["incumbent_loss"],
+                             min(observed.values()))
+
     def test_spsa_preserves_budget_and_improves_synthetic_choice(self):
         # The optimum selects high precision for groups 0 and 1. The objective
         # is deliberately discrete, like a streamed model evaluation.
