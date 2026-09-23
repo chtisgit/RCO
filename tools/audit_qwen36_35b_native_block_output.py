@@ -268,7 +268,9 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
     codec = GGMLNativeCodec(args.ggml_library)
     store_path = args.store.resolve(strict=True)
     store = NativeCandidateStore(store_path, codec)
-    if store.index["source"]["revision"] != identity["revision"]:
+    store_revision = store.index["source"].get(
+        "revision", store.index["source"].get("dense_revision"))
+    if store_revision != identity["revision"]:
         raise RuntimeError("candidate store and checkpoint revisions differ")
     if store.index["tensor_count"] != len(entries):
         raise RuntimeError("candidate store does not cover every block group")
@@ -424,6 +426,7 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
         },
         "candidate_store": {
             "path": str(store_path),
+            "source": store.index["source"],
             "index_sha256": _sha256_file(
                 store_path / "native-candidate-index.json"),
             "persistent_decoded_cache": False,

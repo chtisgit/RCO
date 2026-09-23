@@ -510,6 +510,58 @@ This completes the BF16-derived genuine-block numerical rung. It does not set
 an acceptable Q2 quality threshold, import the authentic GSQ candidate,
 exercise llama.cpp matrix multiplication, or pass CUDA/VRAM gates.
 
+## Authentic GSQ-derived routed Q2_0 candidates
+
+The production block policy now has a separate direct-import path for the
+published low-bit source. `src/gsq_q2.py` reads one logical expert triplet at a
+time, unpacks the exact two-bit integer lanes, and emits stock Q2_0 blocks via
+`q_q2 = 3 - q_gsq` and `d = FP16(-scale)`, duplicating each group-128 scale for
+the two group-64 Q2_0 blocks. It never invokes a floating-point weight
+quantizer.
+
+A GGUF tensor can expose only one Q2_0 payload. The production-policy store at
+`data/qwen36_35b_block0_native_gsq` therefore uses authentic GSQ-derived Q2_0
+for the three routed projection tensors, retains BF16-derived Q2_0 for the ten
+other searched tensors, and retains BF16-derived Q4_0 for all thirteen. The
+original all-BF16-derived store remains intact as comparison evidence.
+
+`reports/qwen36_35b_block0_gsq_import.json` audits all 768 layer-0 expert
+projections and all 6,291,456 source scale groups. Every stock Q2_0 decode is
+bit-exact against the mapped GSQ value. The observed maximum error against the
+published source is exactly the accepted
+`5.960464477539063e-8` bound. All three aggregated routed payloads are also
+byte-for-byte identical to the corresponding tensors in the proven
+`Qwen3.6-35B-A3B-GSQ-hybrid.gguf`; their hashes are retained individually.
+Every non-imported candidate is an exact hash-preserving copy from the
+BF16-derived store. The resulting 26-candidate store remains 710,997,696
+payload bytes and the import audit peaks at 1,504,808,960 bytes RSS.
+
+```bash
+python tools/audit_qwen36_35b_gsq_block_import.py \
+  --gsq-dir /path/to/Qwen3.6-35B-A3B-GSQ \
+  --gsq-audit /path/to/results/full_model_metrics.json \
+  --acceptance /path/to/results/scale_error_acceptance.json \
+  --manifest reports/qwen36_35b_base_gguf_manifest.json \
+  --relationship reports/qwen36_35b_base_gsq_relationship.json \
+  --base-store /path/to/qwen36_35b_block0_native \
+  --store-output /path/to/new/qwen36_35b_block0_native_gsq \
+  --gsq-gguf /path/to/results/Qwen3.6-35B-A3B-GSQ-hybrid.gguf \
+  --llama-cpp /path/to/pinned/llama.cpp \
+  --ggml-library /path/to/llama-build/bin/libggml-base.so \
+  --temporary-parent /path/to/nvme/staging \
+  --output reports/qwen36_35b_block0_gsq_import.json
+```
+
+`reports/qwen36_35b_block0_gsq_native_output.json` repeats complete block
+evaluation with that production-policy store. Uniform authentic/derived Q2_0
+has relative output error `0.5607835252206417`, the alternating assignment has
+error `0.5033222782579743`, and unchanged uniform Q4_0 retains
+`0.12647789524236974`. All three output hashes reproduce across fresh
+processes; peak CPU RSS is 2,370,060,288 bytes. This closes the authentic GSQ
+import and genuine-block numerical portions of the native-candidate gate. It
+does not prove llama.cpp matrix multiplication, CUDA execution, or acceptable
+end-to-end model quality.
+
 The tensor-name audit of the local published checkpoint covers all 93,625
 source tensors: 93,275 text tensors, 333 vision tensors, and 17 MTP tensors,
 with zero unknown names. The recorded audit is
