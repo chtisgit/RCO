@@ -986,6 +986,43 @@ or silently expanding lower-bit choices. A supported per-expert scheme lookup
 and execution path, or an explicitly accepted change to the output objective,
 is required before that milestone can continue.
 
+## Native full-model exact-byte evaluation
+
+`src/native_runtime.py` maps canonical GGUF candidate names back to their
+checkpoint parameters and installs Q2_0/Q4_0 rows directly into the currently
+resident Transformers block. It restores the pinned converter's linear-
+attention head permutations and writes routed gate/up views into fused expert
+storage without materializing a complete dense candidate. The streamed hard
+evaluator now routes canonical names by block, accounts for selected packed
+bytes and bounded decode/install chunks, and releases partially loaded prefixes
+if an I/O or device transfer fails. Synthetic matrix, expert-view, and complete
+streaming tests cover this path.
+
+`reports/qwen36_35b_native_full_step.json` records the first end-to-end use of
+that adapter on the genuine Qwen3.6-35B-A3B text stack. Two same-seed,
+one-step antithetic REINFORCE runs each evaluate both samples, for four complete
+40-layer forward passes. Only the 13 block-0 decisions have native candidates
+at this stage; the other blocks remain streamed BF16, so this is the required
+full-model execution proof but not a substitute for the future 512-group
+database.
+
+Every evaluation uses exact full-vocabulary causal cross-entropy over seven
+next-token targets and realizes the exact 315,169,344-byte aligned candidate
+budget. The paired assignments `0000100001011` and `1000000110100` produce
+losses `10.090235710144043` and `9.915270805358887`. Both assignments, losses,
+updated scores, and the selected incumbent reproduce exactly in the second
+run. Each evaluation streams all 40 blocks and reads 69,321,221,376 checkpoint
+tensor bytes. The maximum resident block is 1,685,401,984 bytes, the largest
+decoded/install chunk is 262,144 bytes, and process peak RSS is 2,455,117,824
+bytes. The four evaluations complete in 747.4 seconds on CPU.
+
+CUDA remains an environment gate, not evidence inferred from the CPU run. The
+host driver can enumerate the idle RTX 3060 through `nvidia-smi` after restoring
+its missing device nodes, but the CUDA driver API still returns error 999 from
+`cuInit`; PyTorch 2.6.0+cu124 therefore exposes no usable CUDA device. The
+retained report records zero CUDA allocation/reservation and does not claim the
+RTX memory gate.
+
 ## Remaining work
 
 The earlier Transformers 5.7.0 meta initialization was checked against the
@@ -1002,17 +1039,18 @@ source: only the embedding and final-norm prefixes match the dense model
 schema, while packed/scale/shape tensors replace ordinary dense weights. The
 driver now rejects such a mismatch before starting an optimization pass.
 
-1. Validate one complete streamed block and then all blocks against a dense
-   base checkpoint using the pinned Qwen3.6 Transformers implementation.
-2. Add a training-aware streamed backward path for pruning masks if full-model
-   pruning remains in scope.
-3. Resolve the fused-Qwen per-expert mixed-bit runtime incompatibility, then
-   implement the production writer that streams copied and selected tensors
-   directly into bounded-size output shards.
-4. Validate one complete optimization step, then a multi-step run, while
-   recording CUDA allocated/reserved peaks, process RSS, disk growth, and I/O.
-5. Load the materialized checkpoint and run numerical layer comparisons and a
-   short generation test.
+1. Run the short multi-step full-model experiment, then decide from its loss,
+   variance, wall-time, and I/O whether Phase 5's relaxed streamed backward is
+   justified.
+2. Generate the complete native candidate database for all eligible blocks;
+   the current full-model proof intentionally varies only block 0.
+3. Run the one-step and multi-step memory gates on the RTX 3060 after the CUDA
+   driver API can initialize successfully.
+4. Implement the bounded GGUF writer, copy every selected native payload
+   without requantization, and validate its assignment manifest byte-for-byte.
+5. Load the completed text-only GGUF in unmodified pinned llama.cpp, run
+   numerical layer checks and short CPU generation, then repeat with partial
+   CUDA offload.
 
 The standard test suite uses only tiny synthetic tensors and produces no model
 artifacts:

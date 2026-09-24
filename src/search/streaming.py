@@ -256,11 +256,14 @@ class _StreamingBlock(nn.Module):
         try:
             phase_started = _start_phase(self.device)
             try:
+                # ``release_prefix`` is safe for tensors that are still meta.
+                # Mark the prefix first so a mid-shard I/O/device failure does
+                # not strand the tensors already materialized by load_prefix.
+                loaded = True
                 block_bytes = loader.load_prefix(
                     model, self.path, device=self.device)
             finally:
                 _finish_phase(stats, "load", self.device, phase_started)
-            loaded = True
             stats.loaded_blocks += 1
             stats.max_block_bytes = max(stats.max_block_bytes, block_bytes)
             stats.checkpoint_tensor_bytes_read += block_bytes
@@ -270,15 +273,30 @@ class _StreamingBlock(nn.Module):
                 for name, bitwidth in self.selected:
                     if bitwidth == 0:
                         candidate = _zero_candidate(model, name)
+                        stats.max_candidate_bytes = max(
+                            stats.max_candidate_bytes, _tensor_bytes(candidate))
+                        _copy_candidate(model, name, candidate)
+                        del candidate
+                    elif hasattr(store, "install_layer_weight"):
+                        if hasattr(store, "get_layer_storage_bytes"):
+                            stats.candidate_storage_bytes_read += (
+                                store.get_layer_storage_bytes(name, bitwidth))
+                        install = store.install_layer_weight(
+                            model, name, bitwidth)
+                        stats.max_candidate_bytes = max(
+                            stats.max_candidate_bytes,
+                            int(install["max_decoded_fp32_bytes"]),
+                            int(install["max_install_bf16_bytes"]),
+                        )
                     else:
                         if hasattr(store, "get_layer_storage_bytes"):
                             stats.candidate_storage_bytes_read += (
                                 store.get_layer_storage_bytes(name, bitwidth))
                         candidate = store.get_layer_weight(name, bitwidth)
-                    stats.max_candidate_bytes = max(
-                        stats.max_candidate_bytes, _tensor_bytes(candidate))
-                    _copy_candidate(model, name, candidate)
-                    del candidate
+                        stats.max_candidate_bytes = max(
+                            stats.max_candidate_bytes, _tensor_bytes(candidate))
+                        _copy_candidate(model, name, candidate)
+                        del candidate
             finally:
                 _finish_phase(stats, "decode", self.device, phase_started)
 
@@ -434,8 +452,14 @@ class StreamingHardCausalEvaluator:
             for name in group.layer_names:
                 if name in result:
                     raise ValueError(f"Candidate {name!r} appears in two groups")
-                if not any(name.startswith(prefix + ".")
-                           for prefix in block_prefixes):
+                if hasattr(self.weight_store, "block_index"):
+                    block_index = self.weight_store.block_index(name)
+                    if not 0 <= block_index < len(block_prefixes):
+                        raise ValueError(
+                            f"Candidate {name!r} has invalid block index "
+                            f"{block_index}")
+                elif not any(name.startswith(prefix + ".")
+                             for prefix in block_prefixes):
                     raise ValueError(
                         f"Candidate {name!r} is outside the decoder blocks")
                 result[name] = group_index
@@ -463,6 +487,10 @@ class StreamingHardCausalEvaluator:
         selected = self.layer_assignment(assignment)
         by_block = {index: [] for index in range(len(self.adapter.layers))}
         for name, bitwidth in selected.items():
+            if hasattr(self.weight_store, "block_index"):
+                by_block[self.weight_store.block_index(name)].append(
+                    (name, bitwidth))
+                continue
             for index in range(len(self.adapter.layers)):
                 prefix = f"{self.adapter.layers_path}.{index}."
                 if name.startswith(prefix):
@@ -497,19 +525,19 @@ class StreamingHardCausalEvaluator:
                 self.checkpoint_loader.move_runtime_buffers(
                     self.model, self.device)
                 for path in self.adapter.embedding_paths:
+                    loaded_prefixes.append(path)
                     stats.checkpoint_tensor_bytes_read += (
                         self.checkpoint_loader.load_prefix(
                             self.model, path, device=self.device)
                     )
-                    loaded_prefixes.append(path)
                 for path in self.adapter.final_module_paths:
                     if path == "lm_head":
                         continue
+                    loaded_prefixes.append(path)
                     stats.checkpoint_tensor_bytes_read += (
                         self.checkpoint_loader.load_prefix(
                             self.model, path, device=self.device)
                     )
-                    loaded_prefixes.append(path)
             finally:
                 _finish_phase(stats, "load", self.device, phase_started)
 
@@ -537,13 +565,13 @@ class StreamingHardCausalEvaluator:
 
             phase_started = _start_phase(self.device)
             try:
+                loaded_prefixes.append("lm_head")
                 stats.checkpoint_tensor_bytes_read += (
                     self.checkpoint_loader.load_prefix(
                         self.model, "lm_head", device=self.device)
                 )
             finally:
                 _finish_phase(stats, "load", self.device, phase_started)
-            loaded_prefixes.append("lm_head")
             phase_started = _start_phase(self.device)
             try:
                 loss, token_count = chunked_causal_cross_entropy(

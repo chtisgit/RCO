@@ -77,6 +77,29 @@ class StreamingHardEvaluatorTest(unittest.TestCase):
             self.calls.append((name, bits))
             return self.candidates[(name, bits)].clone()
 
+    class InstallingStore:
+        cache = False
+
+        def __init__(self, candidates):
+            self.candidates = candidates
+            self.calls = []
+
+        def block_index(self, name):
+            return int(name.split(".")[1])
+
+        def get_layer_storage_bytes(self, name, bits):
+            return 10 * bits
+
+        def install_layer_weight(self, model, name, bits):
+            self.calls.append((name, bits))
+            index = self.block_index(name)
+            target = model.model.layers[index].proj.weight
+            target.copy_(self.candidates[(name, bits)])
+            return {
+                "max_decoded_fp32_bytes": 36,
+                "max_install_bf16_bytes": 18,
+            }
+
     def test_chunked_ce_matches_full_logits_and_mask(self):
         torch.manual_seed(1)
         hidden = torch.randn(2, 5, 3)
@@ -201,6 +224,46 @@ class StreamingHardEvaluatorTest(unittest.TestCase):
             model.experts.gate_up_proj[1, 2:], torch.full((2, 3), 2.0)))
         self.assertTrue(torch.equal(
             model.experts.down_proj[1], torch.full((3, 2), 3.0)))
+
+    def test_routes_canonical_names_to_bounded_install_store(self):
+        torch.manual_seed(3)
+        dense = self.Model()
+        state = {name: value.detach().clone()
+                 for name, value in dense.state_dict().items()}
+        candidates = {
+            ("blk.0.proj.weight", 2): 0.25 * torch.eye(3),
+            ("blk.0.proj.weight", 4): 0.50 * torch.eye(3),
+            ("blk.1.proj.weight", 2): 0.75 * torch.eye(3),
+            ("blk.1.proj.weight", 4): 1.00 * torch.eye(3),
+        }
+        groups = [
+            LayerGroup(0, ["blk.0.proj.weight"], "block0"),
+            LayerGroup(1, ["blk.1.proj.weight"], "block1"),
+        ]
+        assignment = torch.tensor([1, 0])
+        input_ids = torch.tensor([[1, 2, 3, 4]])
+
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            save_file(state, root / "model.safetensors")
+            store = self.InstallingStore(candidates)
+            evaluator = StreamingHardCausalEvaluator(
+                self.Model(device="meta"),
+                SafeTensorPrefixLoader(root),
+                store,
+                groups,
+                [2, 4],
+                device="cpu",
+                vocab_chunk_size=3,
+            )
+            result = evaluator.evaluate(input_ids, assignment)
+
+        self.assertEqual(store.calls, [
+            ("blk.0.proj.weight", 4),
+            ("blk.1.proj.weight", 2),
+        ])
+        self.assertEqual(result.memory.candidate_storage_bytes_read, 60)
+        self.assertEqual(result.memory.max_candidate_bytes, 36)
 
 
 if __name__ == "__main__":
