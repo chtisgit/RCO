@@ -136,6 +136,52 @@ class NativeGGMLStoreTest(unittest.TestCase):
                     "blk.0.proj.weight", GGMLType.Q4_0,
                     np.empty_like(values))
 
+    def test_resume_reuses_verified_candidates_and_extends_index(self):
+        values = np.linspace(-1.0, 1.0, 3 * 64, dtype=np.float32).reshape(3, 64)
+        source = {"model": "synthetic", "revision": "resume-fixture"}
+        provenance = {"source_tensor": "model.layers.0.proj.weight"}
+        with tempfile.TemporaryDirectory() as directory:
+            writer = NativeCandidateStoreWriter(
+                directory, self.codec, source=source)
+            q2 = writer.quantize_array(
+                "blk.0.proj.weight", GGMLType.Q2_0, values,
+                provenance=provenance)
+            writer.finalize()
+
+            with self.assertRaises(FileExistsError):
+                NativeCandidateStoreWriter(
+                    directory, self.codec, source=source)
+            with self.assertRaisesRegex(ValueError, "source differs"):
+                NativeCandidateStoreWriter(
+                    directory, self.codec, source={"model": "other"},
+                    resume=True)
+
+            resumed = NativeCandidateStoreWriter(
+                directory, self.codec, source=source, resume=True)
+            self.assertEqual(resumed.resumed_candidate_count, 1)
+
+            def must_not_iterate():
+                raise AssertionError("verified resumed payload was regenerated")
+                yield b""
+
+            reused = resumed.write_packed_chunks(
+                "blk.0.proj.weight", GGMLType.Q2_0, [64, 3],
+                must_not_iterate(), provenance=provenance)
+            self.assertEqual(reused, q2)
+            self.assertEqual(resumed.reused_candidate_count, 1)
+            self.assertEqual(resumed.written_candidate_count, 0)
+            resumed.quantize_array(
+                "blk.0.proj.weight", GGMLType.Q4_0, values,
+                provenance=provenance)
+            resumed.finalize()
+            self.assertEqual(resumed.written_candidate_count, 1)
+
+            store = NativeCandidateStore(directory, self.codec)
+            self.assertEqual(store.index["tensor_count"], 1)
+            self.assertEqual(store.index["candidate_count"], 2)
+            self.assertEqual(
+                store.metadata("blk.0.proj.weight", GGMLType.Q2_0), q2)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -57,6 +57,7 @@ class NativeCandidateStoreWriter:
         *,
         source: dict[str, Any],
         alignment: int = 32,
+        resume: bool = False,
     ):
         self.root = Path(root)
         self.codec = codec
@@ -65,6 +66,36 @@ class NativeCandidateStoreWriter:
         _align_up(0, alignment)
         self.root.mkdir(parents=True, exist_ok=True)
         self._entries: dict[str, dict[str, Any]] = {}
+        self.resumed_candidate_count = 0
+        self.reused_candidate_count = 0
+        self.written_candidate_count = 0
+        index_path = self.root / NATIVE_CANDIDATE_INDEX
+        if index_path.exists():
+            if not resume:
+                raise FileExistsError(
+                    f"candidate store index already exists: {index_path}")
+            with index_path.open(encoding="utf-8") as handle:
+                index = json.load(handle)
+            expected_generator = {
+                "library_path": str(self.codec.library_path),
+                "library_sha256": self.codec.library_sha256,
+            }
+            if index.get("schema") != NATIVE_CANDIDATE_SCHEMA:
+                raise ValueError("resumed candidate store schema differs")
+            if index.get("format") != "native-ggml-candidates":
+                raise ValueError("resumed candidate store format differs")
+            if int(index.get("alignment", -1)) != self.alignment:
+                raise ValueError("resumed candidate store alignment differs")
+            if index.get("source") != self.source:
+                raise ValueError("resumed candidate store source differs")
+            if index.get("generator") != expected_generator:
+                raise ValueError("resumed candidate store generator differs")
+            entries = index.get("tensors")
+            if not isinstance(entries, dict):
+                raise ValueError("resumed candidate store has no tensor index")
+            self._entries = entries
+            self.resumed_candidate_count = sum(
+                len(candidates) for candidates in entries.values())
 
     def _payload_path(self, tensor_name: str, type_name: str) -> Path:
         if not tensor_name or tensor_name in {".", ".."}:
@@ -92,6 +123,39 @@ class NativeCandidateStoreWriter:
         type_name = str(geometry["ggml_type_name"])
         destination = self._payload_path(tensor_name, type_name)
         destination.parent.mkdir(parents=True, exist_ok=True)
+        existing = self._entries.get(tensor_name, {}).get(type_name)
+        if existing is not None:
+            expected = {
+                "gguf_shape": list(shape),
+                "row_width": row_width,
+                "row_count": row_count,
+                "payload_bytes": payload_bytes,
+                "aligned_gguf_bytes": _align_up(payload_bytes, self.alignment),
+                "alignment": self.alignment,
+                "byte_order": "little-endian-native-ggml",
+                "provenance": dict(provenance),
+                "path": destination.relative_to(self.root).as_posix(),
+            }
+            for field, value in expected.items():
+                if existing.get(field) != value:
+                    raise ValueError(
+                        f"resumed candidate {tensor_name}/{type_name} has "
+                        f"different {field}")
+            digest = hashlib.sha256()
+            size = 0
+            with destination.open("rb") as handle:
+                while chunk := handle.read(8 << 20):
+                    digest.update(chunk)
+                    size += len(chunk)
+            if size != payload_bytes:
+                raise ValueError(
+                    f"resumed candidate size mismatch at {destination}")
+            if digest.hexdigest() != existing.get("sha256"):
+                raise ValueError(
+                    f"resumed candidate checksum mismatch at {destination}")
+            self.reused_candidate_count += 1
+            return dict(existing)
+
         descriptor, temporary_name = tempfile.mkstemp(
             prefix=f".{destination.name}.", suffix=".tmp", dir=destination.parent)
         temporary = Path(temporary_name)
@@ -140,6 +204,7 @@ class NativeCandidateStoreWriter:
             "provenance": dict(provenance),
         }
         self._entries.setdefault(tensor_name, {})[type_name] = entry
+        self.written_candidate_count += 1
         return entry
 
     def quantize_array(
