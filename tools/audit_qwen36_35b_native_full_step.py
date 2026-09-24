@@ -206,17 +206,43 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
         }
         runs.append(run)
 
-    reference = runs[0]
-    reproducible = all(
-        run["scores"] == reference["scores"]
-        and run["selected_assignment"] == reference["selected_assignment"]
-        and [item["assignment"] for item in run["evaluations"]]
-        == [item["assignment"] for item in reference["evaluations"]]
-        and [item["loss"] for item in run["evaluations"]]
-        == [item["loss"] for item in reference["evaluations"]]
-        for run in runs[1:]
+    reference_report = None
+    reference_path = None
+    if args.reference_report is not None:
+        reference_path = args.reference_report.resolve(strict=True)
+        reference_report = _load_json(reference_path)
+        if (
+            reference_report["source"]["revision"] != identity["revision"]
+            or reference_report["calibration"]["input_ids"]
+            != input_ids.tolist()[0]
+            or reference_report["candidate_store"]["target_cost"]
+            != args.target_cost
+            or reference_report["search"]["seed"] != args.seed
+            or reference_report["search"]["steps_per_run"] != args.steps
+        ):
+            raise RuntimeError(
+                "reference report does not describe the same search problem")
+        reference = reference_report["search"]["runs"][0]
+        runs_to_compare = runs
+    else:
+        reference = runs[0]
+        runs_to_compare = runs[1:]
+
+    def _matches_reference(run: dict[str, Any]) -> bool:
+        return (
+            run["scores"] == reference["scores"]
+            and run["selected_assignment"] == reference["selected_assignment"]
+            and [item["assignment"] for item in run["evaluations"]]
+            == [item["assignment"] for item in reference["evaluations"]]
+            and [item["loss"] for item in run["evaluations"]]
+            == [item["loss"] for item in reference["evaluations"]]
+        )
+
+    reproducible = (
+        None if not runs_to_compare
+        else all(_matches_reference(run) for run in runs_to_compare)
     )
-    if args.repeat_runs > 1 and not reproducible:
+    if reproducible is False:
         raise RuntimeError("same-seed full-model runs were not reproducible")
     all_evaluations = [
         evaluation for run in runs for evaluation in run["evaluations"]
@@ -227,6 +253,14 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
     if any(item["memory"]["loaded_blocks"] != 40
            for item in all_evaluations):
         raise RuntimeError("full-model evaluation did not stream all 40 blocks")
+    losses = [item["loss"] for item in all_evaluations]
+    distinct_assignments = sorted({
+        item["assignment_bits"] for item in all_evaluations
+    })
+    gradient_norms = [
+        float(step["gradient_norm"])
+        for run in runs for step in run["history"]
+    ]
 
     cuda_available = torch.cuda.is_available()
     cuda = {
@@ -296,10 +330,20 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
             "all_assignments_exact_cost": all(
                 item["realized_aligned_gguf_bytes"] == args.target_cost
                 for item in all_evaluations),
-            "distinct_evaluated_assignments": sorted({
-                item["assignment_bits"] for item in all_evaluations
-            }),
+            "distinct_evaluated_assignments": distinct_assignments,
+            "distinct_evaluated_assignment_count": len(distinct_assignments),
+            "minimum_evaluated_loss": min(losses),
+            "maximum_evaluated_loss": max(losses),
+            "mean_evaluated_loss": sum(losses) / len(losses),
+            "nonzero_gradient_step_count": sum(
+                value > 0.0 for value in gradient_norms),
             "same_seed_reproducible": reproducible,
+            "reproducibility_reference": (
+                None if reference_path is None else {
+                    "path": str(reference_path),
+                    "sha256": _sha256_file(reference_path),
+                }
+            ),
             "runs": runs,
         },
         "memory": {
@@ -342,6 +386,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--seed", type=int, default=7)
     parser.add_argument("--learning-rate", type=float, default=0.1)
     parser.add_argument("--baseline-decay", type=float, default=0.9)
+    parser.add_argument("--reference-report", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     return parser
 

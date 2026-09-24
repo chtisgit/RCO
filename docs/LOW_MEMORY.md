@@ -1023,6 +1023,41 @@ its missing device nodes, but the CUDA driver API still returns error 999 from
 retained report records zero CUDA allocation/reservation and does not claim the
 RTX memory gate.
 
+### Short full-model search and Phase 5 decision
+
+`reports/qwen36_35b_native_short_search.json` extends the same seed and
+objective to three REINFORCE steps (six complete model evaluations).
+`reports/qwen36_35b_native_short_search_repeat.json` is an independent replay
+that names and hashes the first report as its comparison reference. The audit
+requires identical assignments, scalar losses, final score vector, and selected
+incumbent; the entire trajectory reproduces exactly.
+
+All three steps have nonzero gradients and all six evaluations remain at the
+exact 315,169,344-byte budget. Five distinct assignments are exercised. The
+best observed loss improves on step 1's incumbent from `9.915270805358887` to
+`9.846053123474121` on step 2 and `9.695976257324219` on step 3, a 2.21%
+reduction from the first incumbent. The earlier block-MSE global optimum,
+`0001000010101`, is sampled twice and reproducibly gives the worse end-to-end
+loss `10.079442024230957`; this confirms that the complete causal-LM objective
+provides information not available from the block surrogate alone.
+
+Each run reads 415,927,328,256 checkpoint tensor bytes and 1,891,016,064
+selected candidate bytes. The original and replay take 853.4 and 889.4 seconds
+wall time, with median evaluation times 145.8 and 147.5 seconds. Peak RSS is
+2,435,145,728 and 2,453,704,704 bytes, the resident-block maximum remains
+1,685,401,984 bytes, and the candidate-chunk maximum remains 262,144 bytes.
+The six-loss population variance is `0.021618132055790638`; this is assignment
+quality variation, not calibration noise, because every loss reproduces.
+
+These results, together with the genuine-block landscape where REINFORCE found
+the global optimum in 19/20 seeds, satisfy the current hard-search quality
+criterion: feasible assignments respond to loss, the incumbent improves at
+each full-model step, memory is bounded, and the trajectory is deterministic.
+Phase 5 therefore does not implement the substantially more complex relaxed
+streamed backward now. Revisit that fallback only if the complete 512-group
+search stalls or fails a later quality target. The immediate next production
+work is full candidate-database generation.
+
 ## Remaining work
 
 The earlier Transformers 5.7.0 meta initialization was checked against the
@@ -1039,16 +1074,13 @@ source: only the embedding and final-norm prefixes match the dense model
 schema, while packed/scale/shape tensors replace ordinary dense weights. The
 driver now rejects such a mismatch before starting an optimization pass.
 
-1. Run the short multi-step full-model experiment, then decide from its loss,
-   variance, wall-time, and I/O whether Phase 5's relaxed streamed backward is
-   justified.
-2. Generate the complete native candidate database for all eligible blocks;
+1. Generate the complete native candidate database for all eligible blocks;
    the current full-model proof intentionally varies only block 0.
-3. Run the one-step and multi-step memory gates on the RTX 3060 after the CUDA
+2. Run the one-step and multi-step memory gates on the RTX 3060 after the CUDA
    driver API can initialize successfully.
-4. Implement the bounded GGUF writer, copy every selected native payload
+3. Implement the bounded GGUF writer, copy every selected native payload
    without requantization, and validate its assignment manifest byte-for-byte.
-5. Load the completed text-only GGUF in unmodified pinned llama.cpp, run
+4. Load the completed text-only GGUF in unmodified pinned llama.cpp, run
    numerical layer checks and short CPU generation, then repeat with partial
    CUDA offload.
 
