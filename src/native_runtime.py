@@ -15,6 +15,10 @@ from qwen35_native import Qwen35LinearAttentionGeometry, matrix_permutations
 
 
 _BLOCK_NAME = re.compile(r"^blk\.(\d+)\.")
+_GLOBAL_LOCATIONS = {
+    "token_embd.weight": "embedding",
+    "output.weight": "lm_head",
+}
 
 
 class NativeManifestWeightStore:
@@ -47,13 +51,26 @@ class NativeManifestWeightStore:
             raise ValueError(
                 "manifest does not map every native candidate-store tensor")
 
-    def block_index(self, name: str) -> int:
+    def candidate_location(self, name: str) -> int | str:
+        """Return the streamed lifetime in which a candidate is installed."""
         if name not in self.entries:
             raise KeyError(f"unknown native candidate {name!r}")
         match = _BLOCK_NAME.match(name)
-        if match is None:
+        if match is not None:
+            return int(match.group(1))
+        try:
+            return _GLOBAL_LOCATIONS[name]
+        except KeyError as error:
+            raise ValueError(
+                f"candidate has no supported streaming location: {name}"
+            ) from error
+
+    def block_index(self, name: str) -> int:
+        """Return a decoder-block index for block-local candidates."""
+        location = self.candidate_location(name)
+        if not isinstance(location, int):
             raise ValueError(f"candidate is outside a canonical block: {name}")
-        return int(match.group(1))
+        return location
 
     @staticmethod
     def _type(bitwidth: int) -> GGMLType:

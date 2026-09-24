@@ -265,6 +265,97 @@ class StreamingHardEvaluatorTest(unittest.TestCase):
         self.assertEqual(result.memory.candidate_storage_bytes_read, 60)
         self.assertEqual(result.memory.max_candidate_bytes, 36)
 
+    def test_streams_embedding_and_lm_head_candidates_at_their_lifetimes(self):
+        class GlobalStore(self.InstallingStore):
+            def candidate_location(self, name):
+                if name == "token_embd.weight":
+                    return "embedding"
+                if name == "output.weight":
+                    return "lm_head"
+                return self.block_index(name)
+
+            def install_layer_weight(self, model, name, bits):
+                self.calls.append((name, bits))
+                if name == "token_embd.weight":
+                    target = model.model.embed_tokens.weight
+                elif name == "output.weight":
+                    target = model.lm_head.weight
+                else:
+                    index = self.block_index(name)
+                    target = model.model.layers[index].proj.weight
+                target.copy_(self.candidates[(name, bits)])
+                return {
+                    "max_decoded_fp32_bytes": target.numel() * 4,
+                    "max_install_bf16_bytes": target.numel() * 2,
+                }
+
+        torch.manual_seed(4)
+        dense = self.Model()
+        state = {name: value.detach().clone()
+                 for name, value in dense.state_dict().items()}
+        candidates = {
+            ("token_embd.weight", 2): torch.full((7, 3), 0.125),
+            ("token_embd.weight", 4): torch.arange(21).reshape(7, 3) / 20,
+            ("blk.0.proj.weight", 2): 0.25 * torch.eye(3),
+            ("blk.0.proj.weight", 4): 0.50 * torch.eye(3),
+            ("blk.1.proj.weight", 2): 0.75 * torch.eye(3),
+            ("blk.1.proj.weight", 4): 1.00 * torch.eye(3),
+            ("output.weight", 2): torch.arange(21).reshape(7, 3) / 10,
+            ("output.weight", 4): torch.full((7, 3), 0.25),
+        }
+        groups = [
+            LayerGroup(0, ["token_embd.weight"], "embedding"),
+            LayerGroup(1, ["blk.0.proj.weight"], "block0"),
+            LayerGroup(2, ["blk.1.proj.weight"], "block1"),
+            LayerGroup(3, ["output.weight"], "lm_head"),
+        ]
+        assignment = torch.tensor([1, 0, 1, 0])
+        input_ids = torch.tensor([[1, 2, 3, 4]])
+
+        expected_model = self.Model()
+        expected_model.load_state_dict(state)
+        expected_model.model.embed_tokens.weight.data.copy_(
+            candidates[("token_embd.weight", 4)])
+        expected_model.model.layers[0].proj.weight.data.copy_(
+            candidates[("blk.0.proj.weight", 2)])
+        expected_model.model.layers[1].proj.weight.data.copy_(
+            candidates[("blk.1.proj.weight", 4)])
+        expected_model.lm_head.weight.data.copy_(
+            candidates[("output.weight", 2)])
+        with torch.no_grad():
+            hidden = expected_model.model(input_ids).last_hidden_state
+            expected = F.cross_entropy(
+                expected_model.lm_head(hidden[:, :-1]).reshape(-1, 7),
+                input_ids[:, 1:].reshape(-1))
+
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            save_file(state, root / "model.safetensors")
+            store = GlobalStore(candidates)
+            meta_model = self.Model(device="meta")
+            evaluator = StreamingHardCausalEvaluator(
+                meta_model,
+                SafeTensorPrefixLoader(root),
+                store,
+                groups,
+                [2, 4],
+                device="cpu",
+                vocab_chunk_size=3,
+            )
+            result = evaluator.evaluate(input_ids, assignment)
+
+        self.assertAlmostEqual(result.loss, expected.item(), places=6)
+        self.assertEqual(store.calls, [
+            ("token_embd.weight", 4),
+            ("blk.0.proj.weight", 2),
+            ("blk.1.proj.weight", 4),
+            ("output.weight", 2),
+        ])
+        self.assertEqual(result.memory.candidate_storage_bytes_read, 120)
+        self.assertEqual(result.memory.max_candidate_bytes, 84)
+        self.assertEqual(meta_model.model.embed_tokens.weight.device.type, "meta")
+        self.assertEqual(meta_model.lm_head.weight.device.type, "meta")
+
 
 if __name__ == "__main__":
     unittest.main()

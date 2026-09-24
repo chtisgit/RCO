@@ -87,11 +87,13 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
     entries = sorted((
         entry for entry in manifest["entries"]
         if entry.get("rco_search")
-        and entry["destination_name"].startswith("blk.0.")
+        and (args.all_groups
+             or entry["destination_name"].startswith("blk.0."))
     ), key=lambda entry: entry["destination_name"])
-    if len(entries) != 13:
+    expected_groups = 512 if args.all_groups else 13
+    if len(entries) != expected_groups:
         raise RuntimeError(
-            f"expected 13 block-0 decision groups, found {len(entries)}")
+            f"expected {expected_groups} decision groups, found {len(entries)}")
 
     codec = GGMLNativeCodec(args.ggml_library.resolve(strict=True))
     packed_store = NativeCandidateStore(store_path, codec)
@@ -217,6 +219,7 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
             != input_ids.tolist()[0]
             or reference_report["candidate_store"]["target_cost"]
             != args.target_cost
+            or reference_report["candidate_store"]["tensor_names"] != names
             or reference_report["search"]["seed"] != args.seed
             or reference_report["search"]["steps_per_run"] != args.steps
         ):
@@ -277,9 +280,13 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
         "scope": (
             "exact-byte antithetic REINFORCE through the complete 40-layer "
             "Qwen3.6-35B-A3B text stack, with native Q2_0/Q4_0 choices for "
-            "the 13 block-0 tensors and dense BF16 weights for all remaining "
-            "tensors; this does not represent the not-yet-generated full "
-            "512-group candidate database"
+            + (
+                "all 512 searchable tensors, including the embedding and "
+                "output matrices"
+                if args.all_groups else
+                "the 13 block-0 tensors and dense BF16 weights for all "
+                "remaining tensors"
+            )
         ),
         "source": {
             "repo_id": identity["repo_id"],
@@ -310,6 +317,7 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
             "index_sha256": _sha256_file(
                 store_path / "native-candidate-index.json"),
             "tensor_names": names,
+            "tensor_count": len(names),
             "low_type": GGMLType.Q2_0.name,
             "high_type": GGMLType.Q4_0.name,
             "low_aligned_costs": low_costs,
@@ -375,6 +383,9 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--identity", type=Path, required=True)
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--store", type=Path, required=True)
+    parser.add_argument(
+        "--all-groups", action="store_true",
+        help="search all 512 production groups instead of the block-0 rung")
     parser.add_argument("--ggml-library", type=Path, required=True)
     parser.add_argument("--target-cost", type=int, required=True)
     parser.add_argument("--device", choices=("cpu", "cuda"), default="cpu")

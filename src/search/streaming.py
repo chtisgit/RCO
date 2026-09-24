@@ -270,33 +270,8 @@ class _StreamingBlock(nn.Module):
 
             phase_started = _start_phase(self.device)
             try:
-                for name, bitwidth in self.selected:
-                    if bitwidth == 0:
-                        candidate = _zero_candidate(model, name)
-                        stats.max_candidate_bytes = max(
-                            stats.max_candidate_bytes, _tensor_bytes(candidate))
-                        _copy_candidate(model, name, candidate)
-                        del candidate
-                    elif hasattr(store, "install_layer_weight"):
-                        if hasattr(store, "get_layer_storage_bytes"):
-                            stats.candidate_storage_bytes_read += (
-                                store.get_layer_storage_bytes(name, bitwidth))
-                        install = store.install_layer_weight(
-                            model, name, bitwidth)
-                        stats.max_candidate_bytes = max(
-                            stats.max_candidate_bytes,
-                            int(install["max_decoded_fp32_bytes"]),
-                            int(install["max_install_bf16_bytes"]),
-                        )
-                    else:
-                        if hasattr(store, "get_layer_storage_bytes"):
-                            stats.candidate_storage_bytes_read += (
-                                store.get_layer_storage_bytes(name, bitwidth))
-                        candidate = store.get_layer_weight(name, bitwidth)
-                        stats.max_candidate_bytes = max(
-                            stats.max_candidate_bytes, _tensor_bytes(candidate))
-                        _copy_candidate(model, name, candidate)
-                        del candidate
+                _install_selected_candidates(
+                    model, store, self.selected, stats)
             finally:
                 _finish_phase(stats, "decode", self.device, phase_started)
 
@@ -343,6 +318,42 @@ def _zero_candidate(model: nn.Module, name: str) -> torch.Tensor:
         start = 0 if projection == "gate_proj" else split
         target = experts.gate_up_proj[index, start:start + split]
     return torch.zeros(target.shape, dtype=target.dtype, device="cpu")
+
+
+@torch.no_grad()
+def _install_selected_candidates(
+    model: nn.Module,
+    store: Any,
+    selected: Sequence[tuple[str, int]],
+    stats: StreamingMemoryStats,
+) -> None:
+    """Install one location's choices while accounting bounded store I/O."""
+    for name, bitwidth in selected:
+        if bitwidth == 0:
+            candidate = _zero_candidate(model, name)
+            stats.max_candidate_bytes = max(
+                stats.max_candidate_bytes, _tensor_bytes(candidate))
+            _copy_candidate(model, name, candidate)
+            del candidate
+        elif hasattr(store, "install_layer_weight"):
+            if hasattr(store, "get_layer_storage_bytes"):
+                stats.candidate_storage_bytes_read += (
+                    store.get_layer_storage_bytes(name, bitwidth))
+            install = store.install_layer_weight(model, name, bitwidth)
+            stats.max_candidate_bytes = max(
+                stats.max_candidate_bytes,
+                int(install["max_decoded_fp32_bytes"]),
+                int(install["max_install_bf16_bytes"]),
+            )
+        else:
+            if hasattr(store, "get_layer_storage_bytes"):
+                stats.candidate_storage_bytes_read += (
+                    store.get_layer_storage_bytes(name, bitwidth))
+            candidate = store.get_layer_weight(name, bitwidth)
+            stats.max_candidate_bytes = max(
+                stats.max_candidate_bytes, _tensor_bytes(candidate))
+            _copy_candidate(model, name, candidate)
+            del candidate
 
 
 def chunked_causal_cross_entropy(
@@ -452,7 +463,21 @@ class StreamingHardCausalEvaluator:
             for name in group.layer_names:
                 if name in result:
                     raise ValueError(f"Candidate {name!r} appears in two groups")
-                if hasattr(self.weight_store, "block_index"):
+                if hasattr(self.weight_store, "candidate_location"):
+                    location = self.weight_store.candidate_location(name)
+                    if isinstance(location, int) and not (
+                        0 <= location < len(block_prefixes)
+                    ):
+                        raise ValueError(
+                            f"Candidate {name!r} has invalid block index "
+                            f"{location}")
+                    if not isinstance(location, int) and location not in {
+                        "embedding", "lm_head",
+                    }:
+                        raise ValueError(
+                            f"Candidate {name!r} has invalid streaming "
+                            f"location {location!r}")
+                elif hasattr(self.weight_store, "block_index"):
                     block_index = self.weight_store.block_index(name)
                     if not 0 <= block_index < len(block_prefixes):
                         raise ValueError(
@@ -481,12 +506,30 @@ class StreamingHardCausalEvaluator:
             result[name] = self.bitwidths[choice]
         return result
 
-    def _selected_by_block(
+    def _selected_by_location(
         self, assignment: torch.Tensor,
-    ) -> dict[int, list[tuple[str, int]]]:
+    ) -> tuple[
+        dict[int, list[tuple[str, int]]],
+        list[tuple[str, int]],
+        list[tuple[str, int]],
+    ]:
         selected = self.layer_assignment(assignment)
         by_block = {index: [] for index in range(len(self.adapter.layers))}
+        embedding: list[tuple[str, int]] = []
+        lm_head: list[tuple[str, int]] = []
         for name, bitwidth in selected.items():
+            if hasattr(self.weight_store, "candidate_location"):
+                location = self.weight_store.candidate_location(name)
+                if isinstance(location, int):
+                    by_block[location].append((name, bitwidth))
+                elif location == "embedding":
+                    embedding.append((name, bitwidth))
+                elif location == "lm_head":
+                    lm_head.append((name, bitwidth))
+                else:  # Guarded by _index_groups; retain a local invariant.
+                    raise RuntimeError(
+                        f"unsupported candidate location {location!r}")
+                continue
             if hasattr(self.weight_store, "block_index"):
                 by_block[self.weight_store.block_index(name)].append(
                     (name, bitwidth))
@@ -496,7 +539,7 @@ class StreamingHardCausalEvaluator:
                 if name.startswith(prefix):
                     by_block[index].append((name, bitwidth))
                     break
-        return by_block
+        return by_block, embedding, lm_head
 
     @torch.inference_mode()
     def evaluate(
@@ -515,7 +558,8 @@ class StreamingHardCausalEvaluator:
         if self.device.type == "cuda":
             torch.cuda.reset_peak_memory_stats(self.device)
 
-        selected = self._selected_by_block(assignment)
+        selected, embedding_selected, lm_head_selected = (
+            self._selected_by_location(assignment))
         layers = self.adapter.layers
         originals = list(layers)
         loaded_prefixes: list[str] = []
@@ -530,6 +574,18 @@ class StreamingHardCausalEvaluator:
                         self.checkpoint_loader.load_prefix(
                             self.model, path, device=self.device)
                     )
+                if embedding_selected:
+                    decode_started = _start_phase(self.device)
+                    try:
+                        _install_selected_candidates(
+                            self.model,
+                            self.weight_store,
+                            embedding_selected,
+                            stats,
+                        )
+                    finally:
+                        _finish_phase(
+                            stats, "decode", self.device, decode_started)
                 for path in self.adapter.final_module_paths:
                     if path == "lm_head":
                         continue
@@ -572,6 +628,17 @@ class StreamingHardCausalEvaluator:
                 )
             finally:
                 _finish_phase(stats, "load", self.device, phase_started)
+            if lm_head_selected:
+                phase_started = _start_phase(self.device)
+                try:
+                    _install_selected_candidates(
+                        self.model,
+                        self.weight_store,
+                        lm_head_selected,
+                        stats,
+                    )
+                finally:
+                    _finish_phase(stats, "decode", self.device, phase_started)
             phase_started = _start_phase(self.device)
             try:
                 loss, token_count = chunked_causal_cross_entropy(

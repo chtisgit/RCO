@@ -86,6 +86,62 @@ class HardSearchTest(unittest.TestCase):
         self.assertTrue(torch.isfinite(scores.grad).all())
         self.assertGreater(scores.grad.norm().item(), 0.0)
 
+    def test_cost_class_sampler_preserves_exact_distribution_gradient(self):
+        size = 64
+        selected_count = 20
+        low = [10] * size
+        high = [11] * size
+        scores = torch.zeros(size, requires_grad=True)
+        uniforms = torch.linspace(0.01, 0.99, size)
+        assignment, log_probability = sample_exact_cost_assignment(
+            scores,
+            low,
+            high,
+            target_cost=sum(low) + selected_count,
+            uniforms=uniforms,
+        )
+        self.assertEqual(int(assignment.sum()), selected_count)
+        log_probability.backward()
+        expected = assignment.float() - selected_count / size
+        self.assertTrue(torch.allclose(scores.grad, expected, atol=1e-6))
+
+    def test_cost_class_projection_matches_countwise_global_optimum(self):
+        torch.manual_seed(9)
+        scores = torch.randn(64)
+        low = [100] * 64
+        increments = [1] * 32 + [3] * 32
+        high = [base + increment
+                for base, increment in zip(low, increments)]
+        target_increment = 40
+        assignment = exact_cost_assignment(
+            scores, low, high, sum(low) + target_increment)
+
+        best_value = -float("inf")
+        best_counts = None
+        for first_count in range(33):
+            remainder = target_increment - first_count
+            if remainder < 0 or remainder % 3:
+                continue
+            second_count = remainder // 3
+            if second_count > 32:
+                continue
+            value = (
+                scores[:32].topk(first_count).values.sum()
+                + scores[32:].topk(second_count).values.sum()
+            ).item()
+            if value > best_value:
+                best_value = value
+                best_counts = (first_count, second_count)
+
+        self.assertEqual(realized_cost(assignment, low, high),
+                         sum(low) + target_increment)
+        self.assertEqual(
+            (int(assignment[:32].sum()), int(assignment[32:].sum())),
+            best_counts,
+        )
+        self.assertAlmostEqual(
+            float(scores[assignment.bool()].sum()), best_value, places=5)
+
     def test_cost_optimizers_preserve_exact_nonuniform_budget(self):
         low = [10, 10, 10, 10]
         high = [11, 12, 13, 14]

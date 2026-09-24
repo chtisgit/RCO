@@ -5,10 +5,10 @@ receives one exact-budget candidate assignment at a time, which lets a caller
 stream only the selected packed weights through a model runner.  No dense
 candidate mixtures or autograd graph through model weights are required.
 
-The first implementation supports two bitwidths and equal-size groups.  That is
-the routed-expert use case: each group contains the same gate/up/down shapes and
-therefore has the same parameter count.  Supporting unequal groups requires a
-fast constrained sampler rather than silently approximating the budget.
+Two-choice searches may use unequal serialized costs. Small problems use a
+sparse per-item dynamic program; production-scale problems with repeated tensor
+geometries collapse into bounded cost classes while retaining the exact global
+budget distribution and its score gradient.
 """
 
 from __future__ import annotations
@@ -17,6 +17,7 @@ import logging
 import math
 from typing import Callable, Optional, Sequence
 
+import numpy as np
 import torch
 
 from common import get_layer_weights, set_layer_weights
@@ -139,6 +140,317 @@ def _normalized_cost_problem(
     return [value // divisor for value in increments], residual // divisor, base
 
 
+def _cost_classes(increments: Sequence[int]) -> list[tuple[int, list[int]]]:
+    grouped: dict[int, list[int]] = {}
+    for index, increment in enumerate(increments):
+        grouped.setdefault(increment, []).append(index)
+    return sorted(grouped.items(), reverse=True)
+
+
+def _use_class_knapsack(increments: Sequence[int]) -> bool:
+    """Select the scalable path only when repeated costs make it worthwhile."""
+    return len(increments) >= 64 and len(set(increments)) <= 16
+
+
+def _extend_class_dp(
+    previous: np.ndarray,
+    previous_gcd: int,
+    weight: int,
+    values: np.ndarray,
+    target: int,
+    *,
+    maximize: bool,
+) -> tuple[np.ndarray, int, np.ndarray | None]:
+    """Add one bounded cost class to a compressed dense dynamic program."""
+    new_gcd = weight if previous_gcd == 0 else math.gcd(previous_gcd, weight)
+    previous_stride = 0 if previous_gcd == 0 else previous_gcd // new_gcd
+    previous_max = 0 if previous_gcd == 0 else (
+        (len(previous) - 1) * previous_gcd)
+    maximum = min(target, previous_max + (len(values) - 1) * weight)
+    result = np.full(maximum // new_gcd + 1, -np.inf, dtype=np.float64)
+    parent = (
+        np.full(len(result), -1, dtype=np.int16) if maximize else None)
+    old_indices = (
+        np.zeros(1, dtype=np.int64) if previous_gcd == 0 else
+        np.arange(len(previous), dtype=np.int64) * previous_stride)
+    for count, value in enumerate(values):
+        offset = count * weight // new_gcd
+        stop = np.searchsorted(old_indices, len(result) - offset)
+        if stop == 0:
+            break
+        positions = old_indices[:stop] + offset
+        candidate = previous[:stop] + value
+        if maximize:
+            assert parent is not None
+            better = candidate > result[positions]
+            result[positions[better]] = candidate[better]
+            parent[positions[better]] = count
+        else:
+            result[positions] = np.logaddexp(result[positions], candidate)
+    return result, new_gcd, parent
+
+
+def _class_exact_cost_assignment(
+    scores: torch.Tensor,
+    increments: Sequence[int],
+    target: int,
+) -> torch.Tensor:
+    """Exact max-score projection using bounded repeated-cost classes."""
+    classes = _cost_classes(increments)
+    detached = scores.detach().to(device="cpu", dtype=torch.float64).tolist()
+    dp = np.array([0.0], dtype=np.float64)
+    divisor = 0
+    stages = []
+    ranked_classes: list[list[int]] = []
+    for weight, indices in classes:
+        ranked = sorted(indices, key=lambda index: (-detached[index], index))
+        values = np.zeros(len(ranked) + 1, dtype=np.float64)
+        if ranked:
+            values[1:] = np.cumsum([detached[index] for index in ranked])
+        old_divisor = divisor
+        dp, divisor, parent = _extend_class_dp(
+            dp, divisor, weight, values, target, maximize=True)
+        stages.append((old_divisor, divisor, weight, parent))
+        ranked_classes.append(ranked)
+    if target % divisor or target // divisor >= len(dp):
+        raise ValueError("target cost has no exact candidate assignment")
+    state = target
+    result = torch.zeros_like(scores, dtype=torch.long)
+    for stage_index in range(len(classes) - 1, -1, -1):
+        old_divisor, divisor, weight, parent = stages[stage_index]
+        assert parent is not None
+        count = int(parent[state // divisor])
+        if count < 0:
+            raise ValueError("target cost has no exact candidate assignment")
+        for index in ranked_classes[stage_index][:count]:
+            result[index] = 1
+        state -= count * weight
+        if old_divisor and state % old_divisor:
+            raise RuntimeError("class knapsack backtracking lost alignment")
+    if state != 0:
+        raise RuntimeError("class knapsack backtracking failed")
+    return result
+
+
+def _log_elementary_symmetric(scores: torch.Tensor) -> torch.Tensor:
+    """Return log elementary-symmetric sums for every subset cardinality."""
+    zero = scores.sum() * 0.0
+    values = torch.stack((zero,))
+    for score in scores:
+        excluded = torch.cat((values, values.new_full((1,), -torch.inf)))
+        included = torch.cat((values.new_full((1,), -torch.inf), values + score))
+        values = torch.logaddexp(excluded, included)
+    return values
+
+
+def _lookup_class_dp(values: np.ndarray, divisor: int, cost: int) -> float:
+    if cost < 0:
+        return -math.inf
+    if divisor == 0:
+        return float(values[0]) if cost == 0 else -math.inf
+    if cost % divisor:
+        return -math.inf
+    index = cost // divisor
+    return float(values[index]) if index < len(values) else -math.inf
+
+
+def _logsumexp_numpy(values: np.ndarray) -> float:
+    maximum = float(np.max(values))
+    if not math.isfinite(maximum):
+        return -math.inf
+    return maximum + math.log(float(np.exp(values - maximum).sum()))
+
+
+def _class_count_posterior(
+    prefix: tuple[np.ndarray, int],
+    suffix: tuple[np.ndarray, int],
+    weight: int,
+    class_values: np.ndarray,
+    target: int,
+    log_partition: float,
+) -> np.ndarray:
+    """Return P(class cardinality=k | exact total cost)."""
+    prefix_values, prefix_gcd = prefix
+    suffix_values, suffix_gcd = suffix
+    if prefix_gcd == 0:
+        prefix_costs = np.zeros(1, dtype=np.int64)
+    else:
+        prefix_costs = (
+            np.arange(len(prefix_values), dtype=np.int64) * prefix_gcd)
+    log_numerators = np.full(len(class_values), -np.inf, dtype=np.float64)
+    for count, class_value in enumerate(class_values):
+        remaining = target - prefix_costs - count * weight
+        if suffix_gcd == 0:
+            valid = remaining == 0
+            suffix_indices = np.zeros(len(remaining), dtype=np.int64)
+        else:
+            valid = (remaining >= 0) & (remaining % suffix_gcd == 0)
+            suffix_indices = np.where(valid, remaining // suffix_gcd, 0)
+            valid &= suffix_indices < len(suffix_values)
+        if not np.any(valid):
+            continue
+        terms = (
+            prefix_values[valid]
+            + suffix_values[suffix_indices[valid]]
+            + class_value
+        )
+        log_numerators[count] = _logsumexp_numpy(terms)
+    posterior = np.exp(log_numerators - log_partition)
+    posterior /= posterior.sum()
+    return posterior
+
+
+def _sample_class_subset(
+    scores: np.ndarray,
+    count: int,
+    uniforms: np.ndarray,
+) -> np.ndarray:
+    """Sample a product-weighted fixed-cardinality subset exactly."""
+    size = len(scores)
+    result = np.zeros(size, dtype=np.int64)
+    if count == 0:
+        return result
+    if count == size:
+        result.fill(1)
+        return result
+    suffix = np.full((size + 1, count + 1), -np.inf, dtype=np.float64)
+    suffix[size, 0] = 0.0
+    for index in range(size - 1, -1, -1):
+        suffix[index, 0] = 0.0
+        maximum = min(count, size - index)
+        suffix[index, 1:maximum + 1] = np.logaddexp(
+            suffix[index + 1, 1:maximum + 1],
+            scores[index] + suffix[index + 1, :maximum],
+        )
+    remaining = count
+    for index in range(size - 1):
+        if remaining == 0:
+            break
+        if remaining == size - index:
+            result[index:] = 1
+            remaining = 0
+            break
+        log_high = scores[index] + suffix[index + 1, remaining - 1]
+        probability = math.exp(log_high - suffix[index, remaining])
+        if uniforms[index] < probability:
+            result[index] = 1
+            remaining -= 1
+    if remaining:
+        result[-1] = 1
+        remaining -= 1
+    if remaining:
+        raise RuntimeError("fixed-cardinality subset sampler failed")
+    return result
+
+
+def _sample_class_exact_cost_assignment(
+    scores: torch.Tensor,
+    increments: Sequence[int],
+    target: int,
+    uniforms: torch.Tensor,
+) -> tuple[torch.Tensor, torch.Tensor]:
+    """Scale exact Gibbs sampling through repeated serialized-cost classes."""
+    classes = _cost_classes(increments)
+    class_log_values = [
+        _log_elementary_symmetric(scores[indices])
+        for _, indices in classes
+    ]
+    detached_values = [
+        values.detach().to(device="cpu", dtype=torch.float64).numpy()
+        for values in class_log_values
+    ]
+
+    suffix: list[tuple[np.ndarray, int]] = [
+        (np.array([0.0]), 0) for _ in range(len(classes) + 1)]
+    for class_index in range(len(classes) - 1, -1, -1):
+        weight, _ = classes[class_index]
+        next_values, next_gcd = suffix[class_index + 1]
+        values, divisor, _ = _extend_class_dp(
+            next_values,
+            next_gcd,
+            weight,
+            detached_values[class_index],
+            target,
+            maximize=False,
+        )
+        suffix[class_index] = (values, divisor)
+    log_partition = _lookup_class_dp(*suffix[0], target)
+    if not math.isfinite(log_partition):
+        raise ValueError("target cost has no exact candidate assignment")
+
+    prefix: list[tuple[np.ndarray, int]] = [
+        (np.array([0.0]), 0)]
+    for class_index, (weight, _) in enumerate(classes):
+        previous_values, previous_gcd = prefix[-1]
+        values, divisor, _ = _extend_class_dp(
+            previous_values,
+            previous_gcd,
+            weight,
+            detached_values[class_index],
+            target,
+            maximize=False,
+        )
+        prefix.append((values, divisor))
+
+    uniform_values = uniforms.detach().to(
+        device="cpu", dtype=torch.float64).numpy()
+    remaining = target
+    counts: list[int] = []
+    for class_index, (weight, _) in enumerate(classes):
+        conditional = np.full(
+            len(detached_values[class_index]), -np.inf, dtype=np.float64)
+        for count, class_value in enumerate(detached_values[class_index]):
+            rest = _lookup_class_dp(
+                *suffix[class_index + 1], remaining - count * weight)
+            conditional[count] = class_value + rest
+        normalization = _logsumexp_numpy(conditional)
+        probabilities = np.exp(conditional - normalization)
+        cumulative = np.cumsum(probabilities)
+        count = min(
+            int(np.searchsorted(
+                cumulative, uniform_values[class_index], side="right")),
+            len(probabilities) - 1,
+        )
+        counts.append(count)
+        remaining -= count * weight
+    if remaining != 0:
+        raise RuntimeError("class-count sampler did not meet its target")
+
+    assignment = torch.zeros_like(scores, dtype=torch.long)
+    cursor = len(classes)
+    detached_scores = scores.detach().to(
+        device="cpu", dtype=torch.float64).numpy()
+    for (_, indices), count in zip(classes, counts):
+        class_uniforms = uniform_values[cursor:cursor + len(indices) - 1]
+        cursor += len(indices) - 1
+        chosen = _sample_class_subset(
+            detached_scores[indices], count, class_uniforms)
+        for local_index, choice in enumerate(chosen):
+            if choice:
+                assignment[indices[local_index]] = 1
+    if cursor != scores.numel():
+        raise RuntimeError("class sampler did not consume its uniform draws")
+
+    log_z = scores.sum() * 0.0 + log_partition
+    for class_index, (weight, _) in enumerate(classes):
+        posterior = _class_count_posterior(
+            prefix[class_index],
+            suffix[class_index + 1],
+            weight,
+            detached_values[class_index],
+            target,
+            log_partition,
+        )
+        probability = torch.from_numpy(posterior).to(
+            device=scores.device, dtype=scores.dtype)
+        values = class_log_values[class_index]
+        log_z = log_z + torch.dot(
+            probability, values - values.detach())
+    log_probability = (
+        scores[assignment.to(dtype=torch.bool)].sum() - log_z)
+    return assignment, log_probability
+
+
 def realized_cost(
     assignment: torch.Tensor,
     low_costs: Sequence[int] | torch.Tensor,
@@ -169,6 +481,8 @@ def exact_cost_assignment(
         low_costs, high_costs, target_cost)
     if len(increments) != scores.numel():
         raise ValueError("cost vectors and scores must have equal length")
+    if _use_class_knapsack(increments):
+        return _class_exact_cost_assignment(scores, increments, target)
 
     # A sparse multiple-choice knapsack keeps only exactly reachable costs.
     # Parent maps are retained for deterministic backtracking. Equal-score
@@ -233,6 +547,9 @@ def sample_exact_cost_assignment(
         raise ValueError(
             f"uniforms has shape {uniforms.shape}, expected {scores.shape}")
     uniforms = uniforms.detach().to(device=scores.device, dtype=scores.dtype)
+    if _use_class_knapsack(increments):
+        return _sample_class_exact_cost_assignment(
+            scores, increments, target, uniforms)
 
     zero = scores.sum() * 0.0
     suffix: list[dict[int, torch.Tensor]] = [dict() for _ in range(

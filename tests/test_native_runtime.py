@@ -46,6 +46,8 @@ class NativeManifestWeightStoreTest(unittest.TestCase):
             super().__init__()
             self.model = nn.Module()
             self.model.language_model = nn.Module()
+            self.model.language_model.embed_tokens = nn.Embedding(
+                7, 4, dtype=torch.bfloat16)
             self.model.language_model.layers = nn.ModuleList([nn.Module()])
             layer = self.model.language_model.layers[0]
             layer.linear_attn = nn.Module()
@@ -59,6 +61,8 @@ class NativeManifestWeightStoreTest(unittest.TestCase):
                 "gate_up_proj",
                 nn.Parameter(torch.zeros(2, 6, 4, dtype=torch.bfloat16)),
             )
+            self.lm_head = nn.Linear(
+                4, 7, bias=False, dtype=torch.bfloat16)
 
     def test_installs_permuted_matrices_and_fused_expert_views_in_chunks(self):
         geometry = Qwen35LinearAttentionGeometry(2, 4, 3, 2)
@@ -160,6 +164,61 @@ class NativeManifestWeightStoreTest(unittest.TestCase):
         self.assertEqual(qkv_stats["max_install_bf16_bytes"], 4 * 5 * 2)
         self.assertEqual(expert_stats["max_decoded_fp32_bytes"], 4 * 4 * 4)
         self.assertEqual(expert_stats["max_install_bf16_bytes"], 3 * 4 * 2)
+
+    def test_routes_and_installs_embedding_and_output_candidates(self):
+        embedding = np.arange(7 * 4, dtype=np.float32).reshape(7, 4)
+        output = embedding + 100
+        candidates = {
+            "token_embd.weight": embedding,
+            "output.weight": output,
+        }
+        manifest = {"entries": [
+            {
+                "rco_search": True,
+                "destination_name": "token_embd.weight",
+                "source_name": "model.language_model.embed_tokens.weight",
+                "normalized_source_name": "model.embed_tokens.weight",
+                "source_shape": [7, 4],
+            },
+            {
+                "rco_search": True,
+                "destination_name": "output.weight",
+                "source_name": "lm_head.weight",
+                "normalized_source_name": "lm_head.weight",
+                "source_shape": [7, 4],
+            },
+        ]}
+
+        with tempfile.TemporaryDirectory() as directory_name:
+            directory = Path(directory_name)
+            (directory / "config.json").write_text(json.dumps({
+                "text_config": {
+                    "linear_num_key_heads": 2,
+                    "linear_num_value_heads": 4,
+                    "linear_key_head_dim": 3,
+                    "linear_value_head_dim": 2,
+                },
+            }))
+            adapter = NativeManifestWeightStore(
+                self.CandidateStore(candidates), manifest, directory,
+                rows_per_chunk=3,
+            )
+            model = self.Model()
+            adapter.install_layer_weight(model, "token_embd.weight", 2)
+            adapter.install_layer_weight(model, "output.weight", 4)
+
+        self.assertEqual(
+            adapter.candidate_location("token_embd.weight"), "embedding")
+        self.assertEqual(
+            adapter.candidate_location("output.weight"), "lm_head")
+        with self.assertRaisesRegex(ValueError, "outside a canonical block"):
+            adapter.block_index("output.weight")
+        np.testing.assert_array_equal(
+            model.model.language_model.embed_tokens.weight.detach().float(),
+            embedding,
+        )
+        np.testing.assert_array_equal(
+            model.lm_head.weight.detach().float(), output)
 
 
 if __name__ == "__main__":
