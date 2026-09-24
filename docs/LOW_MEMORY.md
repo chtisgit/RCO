@@ -1058,6 +1058,39 @@ streamed backward now. Revisit that fallback only if the complete 512-group
 search stalls or fails a later quality target. The immediate next production
 work is full candidate-database generation.
 
+### Complete production candidate database
+
+`tools/audit_qwen36_35b_native_database.py` builds the complete text-model
+database under the production provenance policy. It checkpoints one manifest
+unit at a time into the resumable store, enforces a configurable free-space
+floor, and publishes the final directory with a same-filesystem atomic rename
+only after every payload independently validates. The manifest contains 512
+decision groups and two candidates per group: 510 block tensors plus
+`token_embd.weight` and `output.weight`.
+
+The published store is `data/qwen36_35b_native/`; its retained evidence is
+`reports/qwen36_35b_native_database.json`. It contains 1,024 candidates and
+29,243,911,680 payload bytes: 9,747,970,560 Q2_0 bytes and 19,495,941,120
+Q4_0 bytes. The store index SHA-256 is
+`29078a0b396fdbde828ea2a0f052a4714fb0c73c008125d2c65b8fb16aa1b316`.
+No staging directory or temporary payload remains after publication.
+
+All 120 routed-expert Q2_0 aggregates come directly from the authentic GSQ
+codes and scales; they are not requantized from BF16. The other 904 candidates
+use the exact matching BF16 checkpoint. Independent validation re-quantizes
+every BF16 candidate, remaps every GSQ expert, checks each stock Q2_0 decode,
+and verifies stored hashes. The observed GSQ maximum weight error is exactly
+the accepted `5.960464477539063e-8` bound. All 26 block-0 hashes also match the
+previously proven production-policy store byte-for-byte.
+
+Fresh generation takes 1,809.1 seconds and complete independent validation
+takes 1,992.3 seconds; total elapsed time is 3,802.2 seconds. Both phases
+process 2,112,960 bounded BF16 row chunks. The largest dense chunk is 262,144
+bytes, validation scratch peaks at 2,097,152 bytes, and whole-process peak RSS
+is 1,163,456,512 bytes. Free space moves from 385,985,282,048 to
+356,823,990,272 bytes, never approaching the enforced 100 GiB floor. This
+closes the full candidate-generation portion of the production gate on CPU.
+
 ## Remaining work
 
 The earlier Transformers 5.7.0 meta initialization was checked against the
@@ -1074,8 +1107,8 @@ source: only the embedding and final-norm prefixes match the dense model
 schema, while packed/scale/shape tensors replace ordinary dense weights. The
 driver now rejects such a mismatch before starting an optimization pass.
 
-1. Generate the complete native candidate database for all eligible blocks;
-   the current full-model proof intentionally varies only block 0.
+1. Extend canonical streaming to the embedding and output groups, then run a
+   production search over all 512 decisions and retain its selected assignment.
 2. Run the one-step and multi-step memory gates on the RTX 3060 after the CUDA
    driver API can initialize successfully.
 3. Implement the bounded GGUF writer, copy every selected native payload
