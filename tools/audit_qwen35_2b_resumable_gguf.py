@@ -54,6 +54,20 @@ def _sha256_array(value: Any) -> str:
     return digest.hexdigest()
 
 
+def _sha256_range(path: Path, offset: int, size: int) -> str:
+    digest = hashlib.sha256()
+    remaining = size
+    with path.open("rb") as handle:
+        handle.seek(offset)
+        while remaining:
+            chunk = handle.read(min(16 << 20, remaining))
+            if not chunk:
+                raise RuntimeError(f"output is truncated at byte {handle.tell()}")
+            digest.update(chunk)
+            remaining -= len(chunk)
+    return digest.hexdigest()
+
+
 def _atomic_json(path: Path, value: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     descriptor, temporary_name = tempfile.mkstemp(
@@ -115,7 +129,8 @@ def _validate_output(
         absolute_offset = int(tensor.data_offset)
         if absolute_offset != int(record["data_offset"]):
             raise RuntimeError(f"output offset differs for {tensor.name}")
-        actual_hash = _sha256_array(tensor.data)
+        actual_hash = _sha256_range(
+            output, absolute_offset, int(tensor.n_bytes))
         if actual_hash != record["sha256"]:
             raise RuntimeError(f"output payload differs for {tensor.name}")
         if absolute_offset % int(reader.alignment):
