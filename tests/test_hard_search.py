@@ -195,6 +195,28 @@ class HardSearchTest(unittest.TestCase):
             self.assertEqual(history[-1]["incumbent_loss"],
                              min(observed.values()))
 
+    def test_cost_reinforce_continuation_preserves_better_incumbent(self):
+        low = [10, 10, 10, 10]
+        high = [11, 12, 13, 14]
+        incumbent = torch.tensor([1, 0, 0, 1])
+
+        def evaluate(assignment):
+            return 2.0 + float(assignment.sum())
+
+        _, selected, history = optimize_cost_reinforce(
+            evaluate,
+            low_costs=low,
+            high_costs=high,
+            target_cost=45,
+            n_steps=3,
+            seed=11,
+            initial_incumbent_assignment=incumbent,
+            initial_incumbent_loss=1.0,
+            log_interval=10,
+        )
+        self.assertTrue(torch.equal(selected, incumbent))
+        self.assertTrue(all(item["incumbent_loss"] == 1.0 for item in history))
+
     def test_spsa_preserves_budget_and_improves_synthetic_choice(self):
         # The optimum selects high precision for groups 0 and 1. The objective
         # is deliberately discrete, like a streamed model evaluation.

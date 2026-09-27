@@ -151,6 +151,41 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
             f"calibration text produced only {input_ids.shape[1]} tokens")
     input_ids = input_ids[:, :args.sequence_length].contiguous()
 
+    initial_scores = None
+    initial_incumbent_assignment = None
+    initial_incumbent_loss = None
+    initialization = None
+    if args.initial_report is not None:
+        initial_path = args.initial_report.resolve(strict=True)
+        initial_report = _load_json(initial_path)
+        if (
+            initial_report["source"]["revision"] != identity["revision"]
+            or initial_report["calibration"]["input_ids"]
+            != input_ids.tolist()[0]
+            or initial_report["candidate_store"]["tensor_names"] != names
+            or initial_report["candidate_store"]["target_cost"]
+            != args.target_cost
+        ):
+            raise RuntimeError(
+                "initial report does not describe the same search problem")
+        initial_run = initial_report["search"]["runs"][0]
+        initial_scores = torch.tensor(
+            initial_run["scores"], dtype=torch.float32)
+        initial_incumbent_assignment = torch.tensor(
+            initial_run["selected_assignment"], dtype=torch.long)
+        initial_incumbent_loss = float(initial_run.get(
+            "selected_assignment_loss",
+            initial_report["search"]["minimum_evaluated_loss"],
+        ))
+        initialization = {
+            "path": str(initial_path),
+            "sha256": _sha256_file(initial_path),
+            "score_count": len(initial_run["scores"]),
+            "incumbent_assignment_bits": initial_run[
+                "selected_assignment_bits"],
+            "incumbent_loss": initial_incumbent_loss,
+        }
+
     runs = []
     for run_index in range(args.repeat_runs):
         evaluations = []
@@ -192,6 +227,9 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
             lr=args.learning_rate,
             baseline_decay=args.baseline_decay,
             seed=args.seed,
+            initial_scores=initial_scores,
+            initial_incumbent_assignment=initial_incumbent_assignment,
+            initial_incumbent_loss=initial_incumbent_loss,
             log_interval=args.steps + 1,
         )
         run = {
@@ -203,6 +241,8 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
             "selected_assignment": assignment.tolist(),
             "selected_assignment_cost": realized_cost(
                 assignment, low_costs, high_costs),
+            "selected_assignment_loss": float(
+                history[-1]["incumbent_loss"]),
             "history": history,
             "evaluations": evaluations,
         }
@@ -222,6 +262,8 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
             or reference_report["candidate_store"]["tensor_names"] != names
             or reference_report["search"]["seed"] != args.seed
             or reference_report["search"]["steps_per_run"] != args.steps
+            or reference_report["search"].get("initialization")
+            != initialization
         ):
             raise RuntimeError(
                 "reference report does not describe the same search problem")
@@ -235,6 +277,13 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
         return (
             run["scores"] == reference["scores"]
             and run["selected_assignment"] == reference["selected_assignment"]
+            and run["selected_assignment_loss"]
+            == reference.get(
+                "selected_assignment_loss",
+                reference_report["search"]["minimum_evaluated_loss"]
+                if reference_report is not None else min(
+                    item["loss"] for item in reference["evaluations"])
+            )
             and [item["assignment"] for item in run["evaluations"]]
             == [item["assignment"] for item in reference["evaluations"]]
             and [item["loss"] for item in run["evaluations"]]
@@ -257,6 +306,12 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
            for item in all_evaluations):
         raise RuntimeError("full-model evaluation did not stream all 40 blocks")
     losses = [item["loss"] for item in all_evaluations]
+    minimum_new_loss = min(losses)
+    minimum_overall_loss = min(
+        minimum_new_loss,
+        initial_incumbent_loss
+        if initial_incumbent_loss is not None else float("inf"),
+    )
     distinct_assignments = sorted({
         item["assignment_bits"] for item in all_evaluations
     })
@@ -334,13 +389,15 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
             "repeat_runs": args.repeat_runs,
             "learning_rate": args.learning_rate,
             "baseline_decay": args.baseline_decay,
+            "initialization": initialization,
             "evaluation_count": len(all_evaluations),
             "all_assignments_exact_cost": all(
                 item["realized_aligned_gguf_bytes"] == args.target_cost
                 for item in all_evaluations),
             "distinct_evaluated_assignments": distinct_assignments,
             "distinct_evaluated_assignment_count": len(distinct_assignments),
-            "minimum_evaluated_loss": min(losses),
+            "minimum_evaluated_loss": minimum_overall_loss,
+            "minimum_new_evaluated_loss": minimum_new_loss,
             "maximum_evaluated_loss": max(losses),
             "mean_evaluated_loss": sum(losses) / len(losses),
             "nonzero_gradient_step_count": sum(
@@ -398,6 +455,9 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--learning-rate", type=float, default=0.1)
     parser.add_argument("--baseline-decay", type=float, default=0.9)
     parser.add_argument("--reference-report", type=Path)
+    parser.add_argument(
+        "--initial-report", type=Path,
+        help="continue from a prior report's scores and best incumbent")
     parser.add_argument("--output", type=Path, required=True)
     return parser
 

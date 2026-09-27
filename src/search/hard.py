@@ -927,6 +927,8 @@ def optimize_cost_reinforce(
     baseline_decay: float = 0.9,
     seed: int = 42,
     initial_scores: Optional[torch.Tensor] = None,
+    initial_incumbent_assignment: Optional[torch.Tensor] = None,
+    initial_incumbent_loss: Optional[float] = None,
     log_interval: int = 10,
 ) -> tuple[torch.Tensor, torch.Tensor, list[dict]]:
     """Optimize exact-cost choices with paired antithetic REINFORCE draws."""
@@ -951,8 +953,25 @@ def optimize_cost_reinforce(
     generator.manual_seed(seed)
     baseline = None
     history = []
-    incumbent_loss = float("inf")
-    incumbent_assignment = None
+    if ((initial_incumbent_assignment is None)
+            != (initial_incumbent_loss is None)):
+        raise ValueError(
+            "initial incumbent assignment and loss must be provided together")
+    if initial_incumbent_assignment is None:
+        incumbent_loss = float("inf")
+        incumbent_assignment = None
+    else:
+        if initial_incumbent_assignment.shape != (n_groups,):
+            raise ValueError(
+                "initial incumbent assignment has the wrong shape")
+        if realized_cost(
+            initial_incumbent_assignment, low, high,
+        ) != int(target_cost):
+            raise ValueError("initial incumbent does not meet the exact budget")
+        incumbent_loss = float(initial_incumbent_loss)
+        if not math.isfinite(incumbent_loss):
+            raise ValueError("initial incumbent loss must be finite")
+        incumbent_assignment = initial_incumbent_assignment.detach().clone()
 
     for step in range(n_steps):
         uniforms = torch.rand(
