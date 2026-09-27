@@ -1093,6 +1093,22 @@ closes the full candidate-generation portion of the production gate on CPU.
 
 ## Remaining work
 
+The restartable bounded-copy writer is implemented in `src/native_gguf.py`.
+`reports/qwen35_2b_resumable_native_gguf.json` proves interruption/resume,
+complete byte validation, strict loading, and CPU generation on the 320-tensor
+2B development model. `reports/qwen36_35b_resumable_native_gguf.json` repeats
+the gate for the selected 733-tensor production model: 512 native payloads and
+221 explicit copy payloads validate exactly, construction peaks at 1.24 GiB
+RSS with an 8 MiB copy chunk, and unmodified pinned llama.cpp loads and
+executes the result. The retained local artifact is
+`results/Qwen3.6-35B-A3B-RCO-Q2Q4-text.gguf`, SHA-256
+`b663d6696cb1bed802c5c579940a095a175bf0106df7919db16ad58432538037`.
+
+The short production sample executes but is not yet release quality. The RTX
+3060 is also still unusable through the CUDA driver API despite appearing idle
+in `nvidia-smi`; the 2026-09-27 PyTorch recheck fails a one-element allocation
+with `CUDA unknown error`.
+
 The earlier Transformers 5.7.0 meta initialization was checked against the
 local Qwen3.6 config. It creates `Qwen3_5MoeForConditionalGeneration`, resolves
 40 text layers with a 30 linear-attention / 10 full-attention split, keeps all
@@ -1107,15 +1123,13 @@ source: only the embedding and final-norm prefixes match the dense model
 schema, while packed/scale/shape tensors replace ordinary dense weights. The
 driver now rejects such a mismatch before starting an optimization pass.
 
-1. Extend canonical streaming to the embedding and output groups, then run a
-   production search over all 512 decisions and retain its selected assignment.
+1. Extend the improving 512-group hard search beyond its initial three steps
+   and require an explicit generation/perplexity quality gate; use the Phase 5
+   relaxed-backward fallback if the longer hard run stalls or remains poor.
 2. Run the one-step and multi-step memory gates on the RTX 3060 after the CUDA
    driver API can initialize successfully.
-3. Implement the bounded GGUF writer, copy every selected native payload
-   without requantization, and validate its assignment manifest byte-for-byte.
-4. Load the completed text-only GGUF in unmodified pinned llama.cpp, run
-   numerical layer checks and short CPU generation, then repeat with partial
-   CUDA offload.
+3. Repeat the completed production GGUF's CPU load/generation with partial CUDA
+   offload after the same driver issue is repaired.
 
 The standard test suite uses only tiny synthetic tensors and produces no model
 artifacts:
