@@ -79,7 +79,8 @@ def _git_revision(repository: Path) -> str:
 
 def _mixed_assignment(report: dict[str, Any]) -> dict[str, GGMLType]:
     matches = [
-        item for item in report["assignments"] if item["name"] == "mixed"]
+        item for item in report["assignments"]
+        if item["name"] == "alternating_q2_0_q4_0"]
     if len(matches) != 1:
         raise ValueError("assignment report has no unique mixed assignment")
     return {
@@ -110,7 +111,8 @@ def _validate_output(
             raise RuntimeError(f"output shape differs for {tensor.name}")
         if int(tensor.n_bytes) != int(record["payload_bytes"]):
             raise RuntimeError(f"output size differs for {tensor.name}")
-        absolute_offset = int(reader.data_offset) + int(tensor.data_offset)
+        # GGUFReader exposes Tensor.data_offset as an absolute file offset.
+        absolute_offset = int(tensor.data_offset)
         if absolute_offset != int(record["data_offset"]):
             raise RuntimeError(f"output offset differs for {tensor.name}")
         actual_hash = _sha256_array(tensor.data)

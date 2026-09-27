@@ -1,0 +1,240 @@
+{
+  "assignment": {
+    "choices": {
+      "blk.0.attn_gate.weight": "Q4_0",
+      "blk.0.attn_qkv.weight": "Q2_0",
+      "blk.0.ffn_down.weight": "Q4_0",
+      "blk.0.ffn_gate.weight": "Q2_0",
+      "blk.0.ffn_up.weight": "Q4_0",
+      "blk.0.ssm_alpha.weight": "Q2_0",
+      "blk.0.ssm_beta.weight": "Q4_0",
+      "blk.0.ssm_out.weight": "Q2_0"
+    },
+    "source_path": "/home/christian/projects/gsq-rco-moe/repos/RCO/reports/qwen35_2b_block0_native_output.json",
+    "source_sha256": "0d64b794ff37548634def6fb54a59513d30e06f9e493d9ddff113e67f50f05fd"
+  },
+  "candidate_store": {
+    "candidate_count": 16,
+    "index_sha256": "bc366ecaaa500223dddce7c7855382b01323a9638ec73dab9b11adc216ab9824",
+    "path": "/home/christian/projects/gsq-rco-moe/data/qwen35_2b_block0_native",
+    "tensor_count": 8
+  },
+  "elapsed_seconds": 56.754584993002936,
+  "environment": {
+    "ggml_library": "/home/christian/projects/gsq-rco-moe/experiment/build-cpu/bin/libggml-base.so.0.24.0",
+    "ggml_library_sha256": "25104b01380a2f8f47fbb0ab97d81ea01c94752f76d50afe304b9a313628b9f6",
+    "llama_cpp_path": "/home/christian/projects/gsq-rco-moe/repos/llama.cpp",
+    "llama_cpp_revision": "911f6cdc8ab8a530b2bee09ee61471a6f3178eeb",
+    "python": "3.12.13"
+  },
+  "interruption_and_resume": {
+    "incomplete_output_not_published": true,
+    "interrupted_after_tensor_count": 160,
+    "interrupted_completed_tensor_count": 160,
+    "interrupted_seconds": 15.297205628012307,
+    "interrupted_status": "incomplete",
+    "plan_sha256": "372d291dec21038971af3f4235867a820b457196b94a6fd73bb9db8db3288f41",
+    "resume_seconds": 18.20570928894449,
+    "resume_status": "complete"
+  },
+  "output": {
+    "bytes": 3682937536,
+    "max_copy_chunk_bytes": 8388608,
+    "path": "/home/christian/projects/gsq-rco-moe/results/Qwen3.5-2B-RCO-mixed-text.gguf",
+    "sha256": "4b0c65175ffdf19d4adfe4eecab079802b18b602d4247fd8ede87d64629a2ee8",
+    "validation": {
+      "alignment": 32,
+      "all_offsets_aligned": true,
+      "all_payloads_exact": true,
+      "copied_reference_tensor_count": 312,
+      "payload_bytes": 3671976192,
+      "selected": [
+        {
+          "data_offset": 1028186688,
+          "ggml_type": "Q2_0",
+          "ggml_type_id": 42,
+          "gguf_shape": [
+            2048,
+            16
+          ],
+          "payload_bytes": 9216,
+          "sha256": "6618097fc0f2ff59699251ab4f09de7c91bd652df13b7ce91bd2b0621c1e5617",
+          "tensor": "blk.0.ssm_alpha.weight"
+        },
+        {
+          "data_offset": 1028195904,
+          "ggml_type": "Q4_0",
+          "ggml_type_id": 2,
+          "gguf_shape": [
+            2048,
+            16
+          ],
+          "payload_bytes": 18432,
+          "sha256": "2d5ac642c5e21091cbd2e2d185c0bfdd018e94f8c18cadcb28232a27b80b7b56",
+          "tensor": "blk.0.ssm_beta.weight"
+        },
+        {
+          "data_offset": 1028214336,
+          "ggml_type": "Q2_0",
+          "ggml_type_id": 42,
+          "gguf_shape": [
+            2048,
+            6144
+          ],
+          "payload_bytes": 3538944,
+          "sha256": "b2c20ce551ac4b6decf782f7d8ebb9a845c5638fef1a8b4a95bece9b7f6b88c1",
+          "tensor": "blk.0.attn_qkv.weight"
+        },
+        {
+          "data_offset": 1031753280,
+          "ggml_type": "Q4_0",
+          "ggml_type_id": 2,
+          "gguf_shape": [
+            2048,
+            2048
+          ],
+          "payload_bytes": 2359296,
+          "sha256": "689d122a2762e941575203c44c570a4b28a5923f08ecd982f6fdc287de43fe9f",
+          "tensor": "blk.0.attn_gate.weight"
+        },
+        {
+          "data_offset": 1034113088,
+          "ggml_type": "Q2_0",
+          "ggml_type_id": 42,
+          "gguf_shape": [
+            2048,
+            2048
+          ],
+          "payload_bytes": 1179648,
+          "sha256": "7fa91508817983e6cc10a268b0de7331f1fbbe4cafe7fe3c524cf2da95a789e7",
+          "tensor": "blk.0.ssm_out.weight"
+        },
+        {
+          "data_offset": 1035292736,
+          "ggml_type": "Q4_0",
+          "ggml_type_id": 2,
+          "gguf_shape": [
+            6144,
+            2048
+          ],
+          "payload_bytes": 7077888,
+          "sha256": "1b04fd3088f4195db61967d653c9dc10ca2a8fc129863a340ae9b689fa42189e",
+          "tensor": "blk.0.ffn_down.weight"
+        },
+        {
+          "data_offset": 1042370624,
+          "ggml_type": "Q2_0",
+          "ggml_type_id": 42,
+          "gguf_shape": [
+            2048,
+            6144
+          ],
+          "payload_bytes": 3538944,
+          "sha256": "229aa99084a2956a2e0ff46024561dc6bf57a79ad7157cd70e369a96a5dffdaf",
+          "tensor": "blk.0.ffn_gate.weight"
+        },
+        {
+          "data_offset": 1045909568,
+          "ggml_type": "Q4_0",
+          "ggml_type_id": 2,
+          "gguf_shape": [
+            2048,
+            6144
+          ],
+          "payload_bytes": 7077888,
+          "sha256": "d82261a2046e423b6f213865a7fa37e87397b2d312173485683c5647f05b7096",
+          "tensor": "blk.0.ffn_up.weight"
+        }
+      ],
+      "selected_tensor_count": 8,
+      "tensor_count": 320
+    },
+    "validation_seconds": 17.796312864054926
+  },
+  "peak_child_rss_bytes": 4550049792,
+  "peak_process_rss_bytes": 4550049792,
+  "reference": {
+    "bytes": 3775708864,
+    "path": "/home/christian/projects/gsq-rco-moe/results/Qwen3.5-2B-Base-BF16-text.gguf",
+    "sha256": "caa3c359d2dbf6f63639b98a5018d469358b88b23982ae74a85378b1d585be95"
+  },
+  "schema": 1,
+  "scope": "restartable bounded-copy construction of a complete text-only Qwen3.5-2B GGUF with the proven mixed block-0 native assignment, complete byte-level inventory validation, and unmodified pinned llama.cpp CPU load and generation",
+  "status": "pass",
+  "unmodified_llama_cpp_cpu_generation": {
+    "command": [
+      "/home/christian/projects/gsq-rco-moe/experiment/build-cuda/bin/llama",
+      "cli",
+      "--model",
+      "/home/christian/projects/gsq-rco-moe/results/Qwen3.5-2B-RCO-mixed-text.gguf",
+      "--ctx-size",
+      "512",
+      "--predict",
+      "4",
+      "--batch-size",
+      "32",
+      "--ubatch-size",
+      "32",
+      "--threads",
+      "4",
+      "--threads-batch",
+      "4",
+      "--temp",
+      "0",
+      "--seed",
+      "20260927",
+      "--log-verbosity",
+      "4",
+      "--fit",
+      "off",
+      "--no-warmup",
+      "--reasoning",
+      "off",
+      "--single-turn",
+      "--simple-io",
+      "--color",
+      "off",
+      "--device",
+      "none",
+      "--gpu-layers",
+      "0",
+      "--no-op-offload",
+      "--prompt",
+      "Reply with exactly one word: Hello.",
+      "--output-file",
+      "/home/christian/projects/gsq-rco-moe/results/qwen35-2b-generated.txt"
+    ],
+    "cuda_initialization_failed_before_cpu_only_run": true,
+    "elapsed_seconds": 1.9818596569821239,
+    "exit_status": 0,
+    "generated_text": "User:\nReply with exactly one word: Hello.\n\nAssistant:\nHello.\n\n",
+    "loader_and_execution_evidence": [
+      "0.00.420.920 I print_info: arch                  = qwen35",
+      "0.00.420.927 I print_info: n_layer               = 24",
+      "0.00.420.927 I print_info: n_layer_all           = 24",
+      "0.00.714.126 I load_tensors:   CPU_Mapped model buffer size =  3501.87 MiB",
+      "0.00.714.129 I load_tensors:   CPU_REPACK model buffer size =    15.77 MiB",
+      "0.00.769.124 I sched_reserve:        CPU compute buffer size =     4.67 MiB",
+      "0.01.744.839 I slot print_timing: id  0 | task 0 | prompt eval time =     432.79 ms /    20 tokens (   21.64 ms per token,    46.21 tokens per second)",
+      "0.01.744.842 I slot print_timing: id  0 | task 0 |        eval time =     196.19 ms /     3 tokens (   98.10 ms per token,    10.19 tokens per second)"
+    ],
+    "stderr_sha256": "a14b0ec7d716df3e54d91c83a673f2b00fd099c687e9c51878fd8769069694fd",
+    "stdout_sha256": "dc345cb5a8b5b650350c24b4a339ea0daaf24d60bf7735397ed0ae4641f8f3de"
+  },
+  "unmodified_llama_cpp_model_load": {
+    "description": "qwen35 2B BF16",
+    "elapsed_seconds": 1.0693603890249506,
+    "embedding_length": 2048,
+    "layer_count": 24,
+    "loaded_tensor_types": {
+      "bf16": 179,
+      "f32": 133,
+      "q2_0": 4,
+      "q4_0": 4
+    },
+    "model_bytes": 3671976192,
+    "parameter_count": 1881825088,
+    "status": "pass",
+    "stderr_sha256": "02d27403621ec5542c042396b35da0401918d291a6798f56e83f427f7a17be06"
+  }
+}
