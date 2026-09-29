@@ -12,7 +12,7 @@ from __future__ import annotations
 
 from contextlib import contextmanager
 from dataclasses import dataclass
-from typing import Any, Iterable, Protocol
+from typing import Any, Callable, Iterable, Protocol
 
 import torch
 import torch.nn as nn
@@ -304,6 +304,20 @@ class RelaxedLinearBinding:
     stats: StreamingRelaxedLinearStats
 
 
+@dataclass(frozen=True)
+class RelaxedExpertsBinding:
+    """Bind one fused Qwen expert collection to three candidate groups."""
+
+    module_path: str
+    gate_group_index: int
+    up_group_index: int
+    down_group_index: int
+    source_factory: Callable[[str, int], RelaxedLinearRowSource]
+    gate_stats: StreamingRelaxedLinearStats
+    up_stats: StreamingRelaxedLinearStats
+    down_stats: StreamingRelaxedLinearStats
+
+
 @dataclass
 class CheckpointedRelaxedBlockStats:
     """Materialization telemetry for a checkpointed streamed block."""
@@ -364,6 +378,95 @@ def _patch_relaxed_linears(
                 del module.forward
 
 
+@contextmanager
+def _patch_relaxed_experts(
+    model: nn.Module,
+    logits: torch.Tensor,
+    bindings: tuple[RelaxedExpertsBinding, ...],
+):
+    restored = []
+    try:
+        for binding in bindings:
+            group_indices = (
+                binding.gate_group_index,
+                binding.up_group_index,
+                binding.down_group_index,
+            )
+            if any(not 0 <= index < logits.shape[0] for index in group_indices):
+                raise IndexError("expert group index is outside logits")
+            module = model.get_submodule(binding.module_path)
+            required = (
+                "num_experts", "hidden_dim", "intermediate_dim", "act_fn")
+            if any(not hasattr(module, name) for name in required):
+                raise TypeError(
+                    f"{binding.module_path!r} is not a supported fused expert "
+                    "collection")
+            had_instance_forward = "forward" in module.__dict__
+            instance_forward = module.__dict__.get("forward")
+            restored.append((module, had_instance_forward, instance_forward))
+
+            def relaxed_experts_forward(
+                hidden_states: torch.Tensor,
+                top_k_index: torch.Tensor,
+                top_k_weights: torch.Tensor,
+                *,
+                _binding: RelaxedExpertsBinding = binding,
+                _module: nn.Module = module,
+            ) -> torch.Tensor:
+                final_hidden_states = torch.zeros_like(hidden_states)
+                with torch.no_grad():
+                    expert_mask = F.one_hot(
+                        top_k_index, num_classes=_module.num_experts)
+                    expert_mask = expert_mask.permute(2, 1, 0)
+                    expert_hit = torch.greater(
+                        expert_mask.sum(dim=(-1, -2)), 0).nonzero()
+
+                for raw_expert_index in expert_hit:
+                    expert_index = int(raw_expert_index[0].item())
+                    if expert_index == _module.num_experts:
+                        continue
+                    top_k_pos, token_index = torch.where(
+                        expert_mask[expert_index])
+                    current_state = hidden_states[token_index]
+                    gate = streaming_relaxed_linear(
+                        current_state,
+                        logits[_binding.gate_group_index],
+                        _binding.source_factory("gate", expert_index),
+                        stats=_binding.gate_stats,
+                    )
+                    up = streaming_relaxed_linear(
+                        current_state,
+                        logits[_binding.up_group_index],
+                        _binding.source_factory("up", expert_index),
+                        stats=_binding.up_stats,
+                    )
+                    current_hidden_states = _module.act_fn(gate) * up
+                    current_hidden_states = streaming_relaxed_linear(
+                        current_hidden_states,
+                        logits[_binding.down_group_index],
+                        _binding.source_factory("down", expert_index),
+                        stats=_binding.down_stats,
+                    )
+                    current_hidden_states = (
+                        current_hidden_states
+                        * top_k_weights[token_index, top_k_pos, None])
+                    final_hidden_states.index_add_(
+                        0,
+                        token_index,
+                        current_hidden_states.to(final_hidden_states.dtype),
+                    )
+                return final_hidden_states
+
+            module.forward = relaxed_experts_forward
+        yield
+    finally:
+        for module, had_instance_forward, instance_forward in reversed(restored):
+            if had_instance_forward:
+                module.forward = instance_forward
+            else:
+                del module.forward
+
+
 class CheckpointedStreamingRelaxedBlock(nn.Module):
     """Reload one block for forward and checkpoint recomputation/backward.
 
@@ -383,6 +486,7 @@ class CheckpointedStreamingRelaxedBlock(nn.Module):
         checkpoint_loader: Any,
         logits: torch.Tensor,
         bindings: Iterable[RelaxedLinearBinding],
+        expert_bindings: Iterable[RelaxedExpertsBinding] = (),
         device: torch.device | str,
         stats: CheckpointedRelaxedBlockStats | None = None,
     ) -> None:
@@ -394,6 +498,7 @@ class CheckpointedStreamingRelaxedBlock(nn.Module):
         object.__setattr__(self, "_checkpoint_loader", checkpoint_loader)
         object.__setattr__(self, "_logits", logits)
         object.__setattr__(self, "_bindings", tuple(bindings))
+        object.__setattr__(self, "_expert_bindings", tuple(expert_bindings))
         object.__setattr__(
             self,
             "_streaming_stats",
@@ -423,6 +528,7 @@ class CheckpointedStreamingRelaxedBlock(nn.Module):
         model = object.__getattribute__(self, "_root_model")
         loader = object.__getattribute__(self, "_checkpoint_loader")
         bindings = object.__getattribute__(self, "_bindings")
+        expert_bindings = object.__getattribute__(self, "_expert_bindings")
         stats = object.__getattribute__(self, "_streaming_stats")
         loaded = False
         try:
@@ -435,7 +541,10 @@ class CheckpointedStreamingRelaxedBlock(nn.Module):
             stats.checkpoint_bytes_read += block_bytes
             stats.max_materialized_block_bytes = max(
                 stats.max_materialized_block_bytes, block_bytes)
-            with _patch_relaxed_linears(model, logits, bindings):
+            with (
+                _patch_relaxed_linears(model, logits, bindings),
+                _patch_relaxed_experts(model, logits, expert_bindings),
+            ):
                 return self.module(hidden_states, *remaining_args, **kwargs)
         finally:
             if loaded:
@@ -461,6 +570,7 @@ __all__ = [
     "CheckpointedRelaxedBlockStats",
     "CheckpointedStreamingRelaxedBlock",
     "DenseDeltaRowSource",
+    "RelaxedExpertsBinding",
     "RelaxedLinearBinding",
     "RelaxedLinearRowSource",
     "StreamingRelaxedLinearStats",

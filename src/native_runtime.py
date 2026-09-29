@@ -210,6 +210,7 @@ class NativeManifestRelaxedLinearSource:
         alternative_types: tuple[GGMLType | int, ...],
         geometry: Qwen35LinearAttentionGeometry,
         rows_per_chunk: int = 16,
+        expert_index: int | None = None,
     ) -> None:
         if rows_per_chunk <= 0:
             raise ValueError("rows_per_chunk must be positive")
@@ -220,10 +221,36 @@ class NativeManifestRelaxedLinearSource:
         source_shape = tuple(int(value) for value in entry["source_shape"])
         candidate_shape = tuple(int(value) for value in entry.get(
             "candidate_source_shape", source_shape))
-        if len(source_shape) != 2 or candidate_shape != source_shape:
+        if len(candidate_shape) == 2:
+            if candidate_shape != source_shape or expert_index is not None:
+                raise ValueError(
+                    "2-D relaxed source shape or expert index differs")
+            out_features, in_features = candidate_shape
+            flat_row_indices = None
+        elif len(candidate_shape) == 3:
+            if expert_index is None:
+                raise ValueError("3-D relaxed source requires an expert index")
+            experts, out_features, in_features = candidate_shape
+            source_view = entry.get("source_view")
+            if source_view is None:
+                expected_candidate_shape = source_shape
+            else:
+                if source_view.get("axis") != 1 or len(source_shape) != 3:
+                    raise ValueError("unsupported relaxed expert source view")
+                view_start = int(source_view["start"])
+                view_stop = int(source_view["stop"])
+                expected_candidate_shape = (
+                    source_shape[0], view_stop - view_start, source_shape[2])
+            if candidate_shape != expected_candidate_shape:
+                raise ValueError("expert candidate/source-view shape differs")
+            if not 0 <= expert_index < experts:
+                raise IndexError("expert index is outside the candidate tensor")
+            flat_row_indices = (
+                expert_index * out_features
+                + np.arange(out_features, dtype=np.int64))
+        else:
             raise ValueError(
-                "relaxed linear source currently requires one complete 2-D "
-                "manifest matrix")
+                "relaxed linear source requires a 2-D matrix or 3-D expert stack")
         self.store = store
         self.entry = dict(entry)
         self.tensor_name = str(entry["destination_name"])
@@ -235,20 +262,27 @@ class NativeManifestRelaxedLinearSource:
         if len(set(self.alternative_types)) != len(self.alternative_types):
             raise ValueError("alternative types must be unique")
         self.rows_per_chunk = int(rows_per_chunk)
-        self.out_features, self.in_features = source_shape
+        self.out_features = out_features
+        self.in_features = in_features
         self.alternative_count = len(self.alternative_types)
         self.stats = NativeRelaxedSourceStats()
+        self.expert_index = expert_index
 
-        row_order, self._column_order = matrix_permutations(
-            str(entry["normalized_source_name"]), source_shape, geometry)
-        self._column_transform_multiplier = (
-            1 if self._column_order is None else 2)
-        if row_order is None:
-            self._source_to_canonical_rows = None
+        if len(candidate_shape) == 2:
+            row_order, self._column_order = matrix_permutations(
+                str(entry["normalized_source_name"]), source_shape, geometry)
+            self._column_transform_multiplier = (
+                1 if self._column_order is None else 2)
+            if row_order is None:
+                self._source_to_canonical_rows = None
+            else:
+                inverse = np.empty_like(row_order)
+                inverse[row_order] = np.arange(len(row_order), dtype=np.int64)
+                self._source_to_canonical_rows = inverse
         else:
-            inverse = np.empty_like(row_order)
-            inverse[row_order] = np.arange(len(row_order), dtype=np.int64)
-            self._source_to_canonical_rows = inverse
+            self._column_order = None
+            self._column_transform_multiplier = 1
+            self._source_to_canonical_rows = flat_row_indices
 
         expected_gguf_shape = list(reversed(candidate_shape))
         for candidate_type in (

@@ -17,6 +17,7 @@ from search.relaxed import (
     CheckpointedRelaxedBlockStats,
     CheckpointedStreamingRelaxedBlock,
     DenseDeltaRowSource,
+    RelaxedExpertsBinding,
     RelaxedLinearBinding,
     StreamingRelaxedLinearStats,
     streaming_relaxed_linear,
@@ -252,6 +253,169 @@ class StreamingRelaxedLinearTest(unittest.TestCase):
             and stats.forward_alternative_passes == 2
             and stats.backward_alternative_passes == 1
             for stats in linear_stats
+        ))
+
+    def test_checkpointed_fused_experts_match_dense_relaxation(self):
+        class Experts(nn.Module):
+            def __init__(self, device="cpu"):
+                super().__init__()
+                self.num_experts = 3
+                self.hidden_dim = 4
+                self.intermediate_dim = 5
+                self.gate_up_proj = nn.Parameter(torch.randn(
+                    3, 10, 4, dtype=torch.float64, device=device))
+                self.down_proj = nn.Parameter(torch.randn(
+                    3, 4, 5, dtype=torch.float64, device=device))
+                self.act_fn = F.silu
+
+            def forward(self, hidden_states, top_k_index, top_k_weights):
+                final = torch.zeros_like(hidden_states)
+                mask = F.one_hot(
+                    top_k_index, num_classes=self.num_experts).permute(2, 1, 0)
+                for expert_index in range(self.num_experts):
+                    top_k_pos, token_index = torch.where(mask[expert_index])
+                    current = hidden_states[token_index]
+                    gate, up = F.linear(
+                        current, self.gate_up_proj[expert_index]).chunk(2, -1)
+                    current = F.silu(gate) * up
+                    current = F.linear(current, self.down_proj[expert_index])
+                    current = current * top_k_weights[
+                        token_index, top_k_pos, None]
+                    final.index_add_(0, token_index, current)
+                return final
+
+        class Block(nn.Module):
+            def __init__(self, device="cpu"):
+                super().__init__()
+                self.experts = Experts(device=device)
+
+            def forward(self, hidden, *, top_k_index, top_k_weights):
+                return hidden + self.experts(
+                    hidden, top_k_index, top_k_weights)
+
+        class Model(nn.Module):
+            def __init__(self, device="cpu"):
+                super().__init__()
+                self.blocks = nn.ModuleList([Block(device=device)])
+
+        torch.manual_seed(47)
+        checkpoint_model = Model()
+        state = {
+            name: value.detach().clone()
+            for name, value in checkpoint_model.state_dict().items()
+        }
+        gate_reference = torch.randn(3, 5, 4, dtype=torch.float64)
+        up_reference = torch.randn(3, 5, 4, dtype=torch.float64)
+        down_reference = torch.randn(3, 4, 5, dtype=torch.float64)
+        references = {
+            "gate": gate_reference,
+            "up": up_reference,
+            "down": down_reference,
+        }
+        alternatives = {
+            name: value + 0.2 * torch.randn_like(value)
+            for name, value in references.items()
+        }
+        input_values = torch.randn(6, 4, dtype=torch.float64)
+        top_k_index = torch.tensor([
+            [0, 1], [1, 2], [2, 0], [0, 2], [1, 0], [2, 1],
+        ])
+        top_k_weights = torch.tensor([
+            [0.7, 0.3], [0.6, 0.4], [0.8, 0.2],
+            [0.55, 0.45], [0.65, 0.35], [0.75, 0.25],
+        ], dtype=torch.float64)
+        initial_logits = torch.tensor([
+            [0.2, -0.1], [-0.4, 0.3], [0.5, -0.2],
+        ], dtype=torch.float64)
+
+        dense_input = input_values.clone().requires_grad_(True)
+        dense_logits = initial_logits.clone().requires_grad_(True)
+        probabilities = torch.softmax(dense_logits, dim=-1)[:, 0]
+        mixed = {
+            name: reference + probabilities[index] * (
+                alternatives[name] - reference)
+            for index, (name, reference) in enumerate(references.items())
+        }
+        dense_expert_output = torch.zeros_like(dense_input)
+        expert_mask = F.one_hot(top_k_index, num_classes=3).permute(2, 1, 0)
+        for expert_index in range(3):
+            top_k_pos, token_index = torch.where(expert_mask[expert_index])
+            current = dense_input[token_index]
+            gate = F.linear(current, mixed["gate"][expert_index])
+            up = F.linear(current, mixed["up"][expert_index])
+            current = F.silu(gate) * up
+            current = F.linear(current, mixed["down"][expert_index])
+            current = current * top_k_weights[token_index, top_k_pos, None]
+            dense_expert_output.index_add_(0, token_index, current)
+        dense_output = dense_input + dense_expert_output
+        dense_loss = dense_output.square().mean()
+        dense_loss.backward()
+
+        with tempfile.TemporaryDirectory() as directory_name:
+            directory = Path(directory_name)
+            save_file(state, directory / "model.safetensors")
+            loader = SafeTensorPrefixLoader(directory)
+            streamed_model = Model(device="meta")
+            streamed_logits = initial_logits.clone().requires_grad_(True)
+            operation_stats = {
+                name: StreamingRelaxedLinearStats() for name in references
+            }
+
+            def source_factory(projection, expert_index):
+                return DenseDeltaRowSource(
+                    references[projection][expert_index],
+                    [alternatives[projection][expert_index]],
+                    rows_per_chunk=2,
+                )
+
+            block_stats = CheckpointedRelaxedBlockStats()
+            wrapper = CheckpointedStreamingRelaxedBlock(
+                streamed_model.blocks[0],
+                model=streamed_model,
+                path="blocks.0",
+                checkpoint_loader=loader,
+                logits=streamed_logits,
+                bindings=[],
+                expert_bindings=[RelaxedExpertsBinding(
+                    module_path="blocks.0.experts",
+                    gate_group_index=0,
+                    up_group_index=1,
+                    down_group_index=2,
+                    source_factory=source_factory,
+                    gate_stats=operation_stats["gate"],
+                    up_stats=operation_stats["up"],
+                    down_stats=operation_stats["down"],
+                )],
+                device="cpu",
+                stats=block_stats,
+            )
+            streamed_model.blocks[0] = wrapper
+            streamed_input = input_values.clone().requires_grad_(True)
+            streamed_output = wrapper(
+                streamed_input,
+                top_k_index=top_k_index,
+                top_k_weights=top_k_weights,
+            )
+            self.assertEqual(
+                wrapper.module.experts.gate_up_proj.device.type, "meta")
+            streamed_loss = streamed_output.square().mean()
+            streamed_loss.backward()
+            self.assertEqual(
+                wrapper.module.experts.gate_up_proj.device.type, "meta")
+
+        self.assertTrue(torch.allclose(
+            streamed_output, dense_output, atol=1e-12, rtol=1e-12))
+        self.assertTrue(torch.allclose(
+            streamed_input.grad, dense_input.grad, atol=1e-12, rtol=1e-12))
+        self.assertTrue(torch.allclose(
+            streamed_logits.grad, dense_logits.grad,
+            atol=1e-12, rtol=1e-12))
+        self.assertEqual(block_stats.load_passes, 2)
+        self.assertEqual(block_stats.release_passes, 2)
+        self.assertTrue(all(
+            stats.forward_reference_passes == 6
+            and stats.backward_reference_passes == 3
+            for stats in operation_stats.values()
         ))
 
 

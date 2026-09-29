@@ -365,6 +365,51 @@ class NativeManifestWeightStoreTest(unittest.TestCase):
                     3 * 3 * reference.shape[1] * 4,
                 )
 
+    def test_streams_one_native_expert_view_without_decoding_the_stack(self):
+        geometry = Qwen35LinearAttentionGeometry(2, 4, 3, 2)
+        reference = np.arange(
+            3 * 2 * 4, dtype=np.float32).reshape(3, 2, 4) / 9
+        alternative = reference + np.linspace(
+            -0.2, 0.2, reference.size, dtype=np.float32,
+        ).reshape(reference.shape)
+        name = "blk.0.ffn_gate_exps.weight"
+        store = self.RelaxedCandidateStore({
+            (name, GGMLType.Q4_0): reference,
+            (name, GGMLType.Q2_0): alternative,
+        })
+        source = NativeManifestRelaxedLinearSource(
+            store,
+            {
+                "rco_search": True,
+                "destination_name": name,
+                "normalized_source_name": (
+                    "model.layers.0.mlp.experts.gate_proj.weight"),
+                "source_shape": [3, 4, 4],
+                "candidate_source_shape": [3, 2, 4],
+                "source_view": {"axis": 1, "start": 0, "stop": 2},
+            },
+            reference_type=GGMLType.Q4_0,
+            alternative_types=(GGMLType.Q2_0,),
+            geometry=geometry,
+            rows_per_chunk=1,
+            expert_index=1,
+        )
+
+        decoded_reference = np.concatenate([
+            rows for _, rows in source.iter_reference_rows()
+        ])
+        decoded_delta = np.concatenate([
+            rows for _, rows in source.iter_delta_rows(0)
+        ])
+        np.testing.assert_array_equal(decoded_reference, reference[1])
+        np.testing.assert_allclose(
+            decoded_delta, alternative[1] - reference[1],
+            atol=0.0, rtol=0.0)
+        self.assertEqual(source.in_features, 4)
+        self.assertEqual(source.out_features, 2)
+        self.assertEqual(source.expert_index, 1)
+        self.assertLessEqual(source.stats.max_resident_decoded_bytes, 2 * 4 * 4)
+
 
 if __name__ == "__main__":
     unittest.main()
