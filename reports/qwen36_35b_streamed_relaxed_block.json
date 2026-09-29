@@ -1,0 +1,968 @@
+{
+  "block_schema": {
+    "checkpoint_count": 18,
+    "expected_count": 18,
+    "missing": [],
+    "prefix": "model.language_model.layers.0",
+    "unexpected": []
+  },
+  "candidate_store": {
+    "alternative_type": "Q2_0",
+    "decision_count": 13,
+    "expert_policy": "decode only routed expert slices from aggregated payloads",
+    "index_sha256": "dc92993a988d24fd9b6de1af5d46a221ad025abc6aec4bf5b6791e5ac39305cd",
+    "path": "/home/christian/projects/gsq-rco-moe/data/qwen36_35b_block0_native_gsq",
+    "reference_type": "Q4_0",
+    "rows_per_chunk": 16
+  },
+  "elapsed_seconds": 51.24442996305879,
+  "environment": {
+    "cuda": {
+      "allocated_peak_bytes": 0,
+      "available": false,
+      "built_version": "12.1",
+      "reserved_peak_bytes": 0
+    },
+    "device": "cpu",
+    "python": "3.12.13",
+    "torch": "2.5.1+cu121",
+    "transformers": "5.13.1"
+  },
+  "initial_logits": [
+    [
+      -0.800000011920929,
+      -0.7360000014305115
+    ],
+    [
+      -0.671999990940094,
+      -0.6079999804496765
+    ],
+    [
+      -0.5440000295639038,
+      -0.47999998927116394
+    ],
+    [
+      -0.41600000858306885,
+      -0.35199999809265137
+    ],
+    [
+      -0.2879999876022339,
+      -0.2239999771118164
+    ],
+    [
+      -0.15999998152256012,
+      -0.09599997848272324
+    ],
+    [
+      -0.03199997544288635,
+      0.03199997544288635
+    ],
+    [
+      0.09599997848272324,
+      0.15999998152256012
+    ],
+    [
+      0.2239999771118164,
+      0.2879999876022339
+    ],
+    [
+      0.35199999809265137,
+      0.41600000858306885
+    ],
+    [
+      0.47999998927116394,
+      0.5440000295639038
+    ],
+    [
+      0.6079999804496765,
+      0.671999990940094
+    ],
+    [
+      0.7360000014305115,
+      0.800000011920929
+    ]
+  ],
+  "memory": {
+    "max_cuda_allocated_bytes": 0,
+    "max_cuda_reserved_bytes": 0,
+    "max_materialized_block_bytes": 1685401984,
+    "max_materialized_linear_chunk_bytes": 131072,
+    "max_native_source_working_set_bytes": 786432,
+    "peak_process_rss_bytes": 559906816
+  },
+  "oracle": {
+    "metadata": {
+      "attention_implementation": "eager",
+      "calibration_text": "A bounded native GGML search keeps one genuine routed expert block resident while all other Qwen weights remain on disk.",
+      "layer": "0",
+      "repo_id": "Qwen/Qwen3.6-35B-A3B",
+      "revision": "995ad96eacd98c81ed38be0c5b274b04031597b0"
+    },
+    "objective": "mean squared error against retained dense block output",
+    "path": "/home/christian/projects/gsq-rco-moe/repos/RCO/reports/qwen36_35b_block0_oracle.safetensors",
+    "sha256": "cdfa89b09c5eb6001ec0cedcfaf7a49c1a2798cc0cee0b6178ef58c77bf12f5e"
+  },
+  "runs": [
+    {
+      "assignment_gradient": [
+        [
+          4.500150680541992e-06,
+          -4.500150680541992e-06
+        ],
+        [
+          3.1441450119018555e-06,
+          -3.129243850708008e-06
+        ],
+        [
+          1.9669532775878906e-05,
+          -1.9669532775878906e-05
+        ],
+        [
+          -4.33551576861646e-08,
+          4.3327190724085085e-08
+        ],
+        [
+          1.3082603800285142e-07,
+          -1.3113526620145421e-07
+        ],
+        [
+          9.89530235528946e-09,
+          -9.953510016202927e-09
+        ],
+        [
+          -4.6100467443466187e-08,
+          4.6100467443466187e-08
+        ],
+        [
+          5.574552233156282e-07,
+          -5.565620995184872e-07
+        ],
+        [
+          9.313225746154785e-07,
+          -9.313225746154785e-07
+        ],
+        [
+          8.568167686462402e-07,
+          -8.568167686462402e-07
+        ],
+        [
+          5.289912223815918e-07,
+          -5.327165126800537e-07
+        ],
+        [
+          1.1771917343139648e-06,
+          -1.1771917343139648e-06
+        ],
+        [
+          -1.955777406692505e-07,
+          1.94646418094635e-07
+        ]
+      ],
+      "assignment_gradient_sha256": "7d281c6caca722cb7f3de688277dd641562971c67c811179aeb47e60326b33f4",
+      "block_stats": {
+        "checkpoint_bytes_read": 3370803968,
+        "load_passes": 2,
+        "max_materialized_block_bytes": 1685401984,
+        "release_passes": 2
+      },
+      "elapsed_seconds": 28.2231631889008,
+      "expert_native_source_stats": {
+        "alternative_passes": 702,
+        "alternative_payload_bytes_read": 207028224,
+        "max_resident_decoded_bytes": 262144,
+        "reference_passes": 702,
+        "reference_payload_bytes_read": 828112896,
+        "source_instance_count": 468,
+        "unique_expert_count": 78,
+        "unique_expert_indices": [
+          1,
+          2,
+          4,
+          5,
+          8,
+          11,
+          13,
+          18,
+          19,
+          22,
+          23,
+          29,
+          33,
+          36,
+          37,
+          38,
+          40,
+          41,
+          48,
+          49,
+          56,
+          59,
+          62,
+          65,
+          67,
+          69,
+          70,
+          72,
+          75,
+          76,
+          78,
+          80,
+          86,
+          87,
+          88,
+          92,
+          101,
+          110,
+          111,
+          112,
+          117,
+          120,
+          121,
+          124,
+          131,
+          134,
+          136,
+          139,
+          144,
+          148,
+          153,
+          154,
+          157,
+          159,
+          162,
+          172,
+          174,
+          177,
+          185,
+          187,
+          188,
+          191,
+          192,
+          194,
+          195,
+          199,
+          206,
+          207,
+          212,
+          217,
+          218,
+          220,
+          223,
+          231,
+          234,
+          237,
+          238,
+          254
+        ]
+      },
+      "expert_operation_stats": {
+        "down": {
+          "backward_alternative_bytes": 163577856,
+          "backward_alternative_passes": 78,
+          "backward_reference_bytes": 163577856,
+          "backward_reference_passes": 78,
+          "forward_alternative_bytes": 327155712,
+          "forward_alternative_passes": 156,
+          "forward_reference_bytes": 327155712,
+          "forward_reference_passes": 156,
+          "max_materialized_chunk_bytes": 16384
+        },
+        "gate": {
+          "backward_alternative_bytes": 163577856,
+          "backward_alternative_passes": 78,
+          "backward_reference_bytes": 163577856,
+          "backward_reference_passes": 78,
+          "forward_alternative_bytes": 327155712,
+          "forward_alternative_passes": 156,
+          "forward_reference_bytes": 327155712,
+          "forward_reference_passes": 156,
+          "max_materialized_chunk_bytes": 65536
+        },
+        "up": {
+          "backward_alternative_bytes": 163577856,
+          "backward_alternative_passes": 78,
+          "backward_reference_bytes": 163577856,
+          "backward_reference_passes": 78,
+          "forward_alternative_bytes": 327155712,
+          "forward_alternative_passes": 156,
+          "forward_reference_bytes": 327155712,
+          "forward_reference_passes": 156,
+          "max_materialized_chunk_bytes": 65536
+        }
+      },
+      "group_gradient_norms": [
+        6.364174168993486e-06,
+        4.4359680941852275e-06,
+        2.781692091957666e-05,
+        6.129367591256596e-08,
+        1.8523475375786802e-07,
+        1.403529026333672e-08,
+        6.519590556308685e-08,
+        7.877294478930708e-07,
+        1.3170890724722994e-06,
+        1.211721951221989e-06,
+        7.507453574362444e-07,
+        1.6648004930175375e-06,
+        2.759309438715718e-07
+      ],
+      "input_gradient_finite": true,
+      "input_gradient_sha256": "12c8ef7f8c170146747a3b611f802349b1434c548cd7b86fb00d45cde9f1cacc",
+      "loss": 4.223174983053468e-05,
+      "max_materialized_linear_chunk_bytes": 131072,
+      "max_native_source_working_set_bytes": 786432,
+      "nonzero_group_gradient_count": 13,
+      "output_finite": true,
+      "output_sha256": "699a7b1e0eaa7d86ddfae7be74fa8ce10a54f2c82642052842129b62aefad7c8",
+      "packed_payload_bytes_read": 1192743360,
+      "persistent_candidates": [
+        {
+          "linear_stats": {
+            "backward_alternative_bytes": 33554432,
+            "backward_alternative_passes": 1,
+            "backward_reference_bytes": 33554432,
+            "backward_reference_passes": 1,
+            "forward_alternative_bytes": 67108864,
+            "forward_alternative_passes": 2,
+            "forward_reference_bytes": 67108864,
+            "forward_reference_passes": 2,
+            "max_materialized_chunk_bytes": 65536
+          },
+          "native_source_stats": {
+            "alternative_passes": 3,
+            "alternative_payload_bytes_read": 14155776,
+            "max_resident_decoded_bytes": 262144,
+            "reference_passes": 3,
+            "reference_payload_bytes_read": 56623104
+          },
+          "tensor": "blk.0.attn_qkv.weight"
+        },
+        {
+          "linear_stats": {
+            "backward_alternative_bytes": 16777216,
+            "backward_alternative_passes": 1,
+            "backward_reference_bytes": 16777216,
+            "backward_reference_passes": 1,
+            "forward_alternative_bytes": 33554432,
+            "forward_alternative_passes": 2,
+            "forward_reference_bytes": 33554432,
+            "forward_reference_passes": 2,
+            "max_materialized_chunk_bytes": 65536
+          },
+          "native_source_stats": {
+            "alternative_passes": 3,
+            "alternative_payload_bytes_read": 7077888,
+            "max_resident_decoded_bytes": 262144,
+            "reference_passes": 3,
+            "reference_payload_bytes_read": 28311552
+          },
+          "tensor": "blk.0.attn_gate.weight"
+        },
+        {
+          "linear_stats": {
+            "backward_alternative_bytes": 16777216,
+            "backward_alternative_passes": 1,
+            "backward_reference_bytes": 16777216,
+            "backward_reference_passes": 1,
+            "forward_alternative_bytes": 33554432,
+            "forward_alternative_passes": 2,
+            "forward_reference_bytes": 33554432,
+            "forward_reference_passes": 2,
+            "max_materialized_chunk_bytes": 131072
+          },
+          "native_source_stats": {
+            "alternative_passes": 3,
+            "alternative_payload_bytes_read": 7077888,
+            "max_resident_decoded_bytes": 786432,
+            "reference_passes": 3,
+            "reference_payload_bytes_read": 28311552
+          },
+          "tensor": "blk.0.ssm_out.weight"
+        },
+        {
+          "linear_stats": {
+            "backward_alternative_bytes": 131072,
+            "backward_alternative_passes": 1,
+            "backward_reference_bytes": 131072,
+            "backward_reference_passes": 1,
+            "forward_alternative_bytes": 262144,
+            "forward_alternative_passes": 2,
+            "forward_reference_bytes": 262144,
+            "forward_reference_passes": 2,
+            "max_materialized_chunk_bytes": 65536
+          },
+          "native_source_stats": {
+            "alternative_passes": 3,
+            "alternative_payload_bytes_read": 55296,
+            "max_resident_decoded_bytes": 262144,
+            "reference_passes": 3,
+            "reference_payload_bytes_read": 221184
+          },
+          "tensor": "blk.0.ssm_alpha.weight"
+        },
+        {
+          "linear_stats": {
+            "backward_alternative_bytes": 131072,
+            "backward_alternative_passes": 1,
+            "backward_reference_bytes": 131072,
+            "backward_reference_passes": 1,
+            "forward_alternative_bytes": 262144,
+            "forward_alternative_passes": 2,
+            "forward_reference_bytes": 262144,
+            "forward_reference_passes": 2,
+            "max_materialized_chunk_bytes": 65536
+          },
+          "native_source_stats": {
+            "alternative_passes": 3,
+            "alternative_payload_bytes_read": 55296,
+            "max_resident_decoded_bytes": 262144,
+            "reference_passes": 3,
+            "reference_payload_bytes_read": 221184
+          },
+          "tensor": "blk.0.ssm_beta.weight"
+        },
+        {
+          "linear_stats": {
+            "backward_alternative_bytes": 2097152,
+            "backward_alternative_passes": 1,
+            "backward_reference_bytes": 2097152,
+            "backward_reference_passes": 1,
+            "forward_alternative_bytes": 4194304,
+            "forward_alternative_passes": 2,
+            "forward_reference_bytes": 4194304,
+            "forward_reference_passes": 2,
+            "max_materialized_chunk_bytes": 16384
+          },
+          "native_source_stats": {
+            "alternative_passes": 3,
+            "alternative_payload_bytes_read": 884736,
+            "max_resident_decoded_bytes": 65536,
+            "reference_passes": 3,
+            "reference_payload_bytes_read": 3538944
+          },
+          "tensor": "blk.0.ffn_down_shexp.weight"
+        },
+        {
+          "linear_stats": {
+            "backward_alternative_bytes": 2097152,
+            "backward_alternative_passes": 1,
+            "backward_reference_bytes": 2097152,
+            "backward_reference_passes": 1,
+            "forward_alternative_bytes": 4194304,
+            "forward_alternative_passes": 2,
+            "forward_reference_bytes": 4194304,
+            "forward_reference_passes": 2,
+            "max_materialized_chunk_bytes": 65536
+          },
+          "native_source_stats": {
+            "alternative_passes": 3,
+            "alternative_payload_bytes_read": 884736,
+            "max_resident_decoded_bytes": 262144,
+            "reference_passes": 3,
+            "reference_payload_bytes_read": 3538944
+          },
+          "tensor": "blk.0.ffn_gate_shexp.weight"
+        },
+        {
+          "linear_stats": {
+            "backward_alternative_bytes": 2097152,
+            "backward_alternative_passes": 1,
+            "backward_reference_bytes": 2097152,
+            "backward_reference_passes": 1,
+            "forward_alternative_bytes": 4194304,
+            "forward_alternative_passes": 2,
+            "forward_reference_bytes": 4194304,
+            "forward_reference_passes": 2,
+            "max_materialized_chunk_bytes": 65536
+          },
+          "native_source_stats": {
+            "alternative_passes": 3,
+            "alternative_payload_bytes_read": 884736,
+            "max_resident_decoded_bytes": 262144,
+            "reference_passes": 3,
+            "reference_payload_bytes_read": 3538944
+          },
+          "tensor": "blk.0.ffn_up_shexp.weight"
+        },
+        {
+          "linear_stats": {
+            "backward_alternative_bytes": 4096,
+            "backward_alternative_passes": 1,
+            "backward_reference_bytes": 4096,
+            "backward_reference_passes": 1,
+            "forward_alternative_bytes": 8192,
+            "forward_alternative_passes": 2,
+            "forward_reference_bytes": 8192,
+            "forward_reference_passes": 2,
+            "max_materialized_chunk_bytes": 4096
+          },
+          "native_source_stats": {
+            "alternative_passes": 3,
+            "alternative_payload_bytes_read": 1728,
+            "max_resident_decoded_bytes": 16384,
+            "reference_passes": 3,
+            "reference_payload_bytes_read": 6912
+          },
+          "tensor": "blk.0.ffn_gate_inp_shexp.weight"
+        },
+        {
+          "linear_stats": {
+            "backward_alternative_bytes": 1048576,
+            "backward_alternative_passes": 1,
+            "backward_reference_bytes": 1048576,
+            "backward_reference_passes": 1,
+            "forward_alternative_bytes": 2097152,
+            "forward_alternative_passes": 2,
+            "forward_reference_bytes": 2097152,
+            "forward_reference_passes": 2,
+            "max_materialized_chunk_bytes": 65536
+          },
+          "native_source_stats": {
+            "alternative_passes": 3,
+            "alternative_payload_bytes_read": 442368,
+            "max_resident_decoded_bytes": 262144,
+            "reference_passes": 3,
+            "reference_payload_bytes_read": 1769472
+          },
+          "tensor": "blk.0.ffn_gate_inp.weight"
+        }
+      ]
+    },
+    {
+      "assignment_gradient": [
+        [
+          4.500150680541992e-06,
+          -4.500150680541992e-06
+        ],
+        [
+          3.1441450119018555e-06,
+          -3.129243850708008e-06
+        ],
+        [
+          1.9669532775878906e-05,
+          -1.9669532775878906e-05
+        ],
+        [
+          -4.33551576861646e-08,
+          4.3327190724085085e-08
+        ],
+        [
+          1.3082603800285142e-07,
+          -1.3113526620145421e-07
+        ],
+        [
+          9.89530235528946e-09,
+          -9.953510016202927e-09
+        ],
+        [
+          -4.6100467443466187e-08,
+          4.6100467443466187e-08
+        ],
+        [
+          5.574552233156282e-07,
+          -5.565620995184872e-07
+        ],
+        [
+          9.313225746154785e-07,
+          -9.313225746154785e-07
+        ],
+        [
+          8.568167686462402e-07,
+          -8.568167686462402e-07
+        ],
+        [
+          5.289912223815918e-07,
+          -5.327165126800537e-07
+        ],
+        [
+          1.1771917343139648e-06,
+          -1.1771917343139648e-06
+        ],
+        [
+          -1.955777406692505e-07,
+          1.94646418094635e-07
+        ]
+      ],
+      "assignment_gradient_sha256": "7d281c6caca722cb7f3de688277dd641562971c67c811179aeb47e60326b33f4",
+      "block_stats": {
+        "checkpoint_bytes_read": 3370803968,
+        "load_passes": 2,
+        "max_materialized_block_bytes": 1685401984,
+        "release_passes": 2
+      },
+      "elapsed_seconds": 21.447812239057384,
+      "expert_native_source_stats": {
+        "alternative_passes": 702,
+        "alternative_payload_bytes_read": 207028224,
+        "max_resident_decoded_bytes": 262144,
+        "reference_passes": 702,
+        "reference_payload_bytes_read": 828112896,
+        "source_instance_count": 468,
+        "unique_expert_count": 78,
+        "unique_expert_indices": [
+          1,
+          2,
+          4,
+          5,
+          8,
+          11,
+          13,
+          18,
+          19,
+          22,
+          23,
+          29,
+          33,
+          36,
+          37,
+          38,
+          40,
+          41,
+          48,
+          49,
+          56,
+          59,
+          62,
+          65,
+          67,
+          69,
+          70,
+          72,
+          75,
+          76,
+          78,
+          80,
+          86,
+          87,
+          88,
+          92,
+          101,
+          110,
+          111,
+          112,
+          117,
+          120,
+          121,
+          124,
+          131,
+          134,
+          136,
+          139,
+          144,
+          148,
+          153,
+          154,
+          157,
+          159,
+          162,
+          172,
+          174,
+          177,
+          185,
+          187,
+          188,
+          191,
+          192,
+          194,
+          195,
+          199,
+          206,
+          207,
+          212,
+          217,
+          218,
+          220,
+          223,
+          231,
+          234,
+          237,
+          238,
+          254
+        ]
+      },
+      "expert_operation_stats": {
+        "down": {
+          "backward_alternative_bytes": 163577856,
+          "backward_alternative_passes": 78,
+          "backward_reference_bytes": 163577856,
+          "backward_reference_passes": 78,
+          "forward_alternative_bytes": 327155712,
+          "forward_alternative_passes": 156,
+          "forward_reference_bytes": 327155712,
+          "forward_reference_passes": 156,
+          "max_materialized_chunk_bytes": 16384
+        },
+        "gate": {
+          "backward_alternative_bytes": 163577856,
+          "backward_alternative_passes": 78,
+          "backward_reference_bytes": 163577856,
+          "backward_reference_passes": 78,
+          "forward_alternative_bytes": 327155712,
+          "forward_alternative_passes": 156,
+          "forward_reference_bytes": 327155712,
+          "forward_reference_passes": 156,
+          "max_materialized_chunk_bytes": 65536
+        },
+        "up": {
+          "backward_alternative_bytes": 163577856,
+          "backward_alternative_passes": 78,
+          "backward_reference_bytes": 163577856,
+          "backward_reference_passes": 78,
+          "forward_alternative_bytes": 327155712,
+          "forward_alternative_passes": 156,
+          "forward_reference_bytes": 327155712,
+          "forward_reference_passes": 156,
+          "max_materialized_chunk_bytes": 65536
+        }
+      },
+      "group_gradient_norms": [
+        6.364174168993486e-06,
+        4.4359680941852275e-06,
+        2.781692091957666e-05,
+        6.129367591256596e-08,
+        1.8523475375786802e-07,
+        1.403529026333672e-08,
+        6.519590556308685e-08,
+        7.877294478930708e-07,
+        1.3170890724722994e-06,
+        1.211721951221989e-06,
+        7.507453574362444e-07,
+        1.6648004930175375e-06,
+        2.759309438715718e-07
+      ],
+      "input_gradient_finite": true,
+      "input_gradient_sha256": "12c8ef7f8c170146747a3b611f802349b1434c548cd7b86fb00d45cde9f1cacc",
+      "loss": 4.223174983053468e-05,
+      "max_materialized_linear_chunk_bytes": 131072,
+      "max_native_source_working_set_bytes": 786432,
+      "nonzero_group_gradient_count": 13,
+      "output_finite": true,
+      "output_sha256": "699a7b1e0eaa7d86ddfae7be74fa8ce10a54f2c82642052842129b62aefad7c8",
+      "packed_payload_bytes_read": 1192743360,
+      "persistent_candidates": [
+        {
+          "linear_stats": {
+            "backward_alternative_bytes": 33554432,
+            "backward_alternative_passes": 1,
+            "backward_reference_bytes": 33554432,
+            "backward_reference_passes": 1,
+            "forward_alternative_bytes": 67108864,
+            "forward_alternative_passes": 2,
+            "forward_reference_bytes": 67108864,
+            "forward_reference_passes": 2,
+            "max_materialized_chunk_bytes": 65536
+          },
+          "native_source_stats": {
+            "alternative_passes": 3,
+            "alternative_payload_bytes_read": 14155776,
+            "max_resident_decoded_bytes": 262144,
+            "reference_passes": 3,
+            "reference_payload_bytes_read": 56623104
+          },
+          "tensor": "blk.0.attn_qkv.weight"
+        },
+        {
+          "linear_stats": {
+            "backward_alternative_bytes": 16777216,
+            "backward_alternative_passes": 1,
+            "backward_reference_bytes": 16777216,
+            "backward_reference_passes": 1,
+            "forward_alternative_bytes": 33554432,
+            "forward_alternative_passes": 2,
+            "forward_reference_bytes": 33554432,
+            "forward_reference_passes": 2,
+            "max_materialized_chunk_bytes": 65536
+          },
+          "native_source_stats": {
+            "alternative_passes": 3,
+            "alternative_payload_bytes_read": 7077888,
+            "max_resident_decoded_bytes": 262144,
+            "reference_passes": 3,
+            "reference_payload_bytes_read": 28311552
+          },
+          "tensor": "blk.0.attn_gate.weight"
+        },
+        {
+          "linear_stats": {
+            "backward_alternative_bytes": 16777216,
+            "backward_alternative_passes": 1,
+            "backward_reference_bytes": 16777216,
+            "backward_reference_passes": 1,
+            "forward_alternative_bytes": 33554432,
+            "forward_alternative_passes": 2,
+            "forward_reference_bytes": 33554432,
+            "forward_reference_passes": 2,
+            "max_materialized_chunk_bytes": 131072
+          },
+          "native_source_stats": {
+            "alternative_passes": 3,
+            "alternative_payload_bytes_read": 7077888,
+            "max_resident_decoded_bytes": 786432,
+            "reference_passes": 3,
+            "reference_payload_bytes_read": 28311552
+          },
+          "tensor": "blk.0.ssm_out.weight"
+        },
+        {
+          "linear_stats": {
+            "backward_alternative_bytes": 131072,
+            "backward_alternative_passes": 1,
+            "backward_reference_bytes": 131072,
+            "backward_reference_passes": 1,
+            "forward_alternative_bytes": 262144,
+            "forward_alternative_passes": 2,
+            "forward_reference_bytes": 262144,
+            "forward_reference_passes": 2,
+            "max_materialized_chunk_bytes": 65536
+          },
+          "native_source_stats": {
+            "alternative_passes": 3,
+            "alternative_payload_bytes_read": 55296,
+            "max_resident_decoded_bytes": 262144,
+            "reference_passes": 3,
+            "reference_payload_bytes_read": 221184
+          },
+          "tensor": "blk.0.ssm_alpha.weight"
+        },
+        {
+          "linear_stats": {
+            "backward_alternative_bytes": 131072,
+            "backward_alternative_passes": 1,
+            "backward_reference_bytes": 131072,
+            "backward_reference_passes": 1,
+            "forward_alternative_bytes": 262144,
+            "forward_alternative_passes": 2,
+            "forward_reference_bytes": 262144,
+            "forward_reference_passes": 2,
+            "max_materialized_chunk_bytes": 65536
+          },
+          "native_source_stats": {
+            "alternative_passes": 3,
+            "alternative_payload_bytes_read": 55296,
+            "max_resident_decoded_bytes": 262144,
+            "reference_passes": 3,
+            "reference_payload_bytes_read": 221184
+          },
+          "tensor": "blk.0.ssm_beta.weight"
+        },
+        {
+          "linear_stats": {
+            "backward_alternative_bytes": 2097152,
+            "backward_alternative_passes": 1,
+            "backward_reference_bytes": 2097152,
+            "backward_reference_passes": 1,
+            "forward_alternative_bytes": 4194304,
+            "forward_alternative_passes": 2,
+            "forward_reference_bytes": 4194304,
+            "forward_reference_passes": 2,
+            "max_materialized_chunk_bytes": 16384
+          },
+          "native_source_stats": {
+            "alternative_passes": 3,
+            "alternative_payload_bytes_read": 884736,
+            "max_resident_decoded_bytes": 65536,
+            "reference_passes": 3,
+            "reference_payload_bytes_read": 3538944
+          },
+          "tensor": "blk.0.ffn_down_shexp.weight"
+        },
+        {
+          "linear_stats": {
+            "backward_alternative_bytes": 2097152,
+            "backward_alternative_passes": 1,
+            "backward_reference_bytes": 2097152,
+            "backward_reference_passes": 1,
+            "forward_alternative_bytes": 4194304,
+            "forward_alternative_passes": 2,
+            "forward_reference_bytes": 4194304,
+            "forward_reference_passes": 2,
+            "max_materialized_chunk_bytes": 65536
+          },
+          "native_source_stats": {
+            "alternative_passes": 3,
+            "alternative_payload_bytes_read": 884736,
+            "max_resident_decoded_bytes": 262144,
+            "reference_passes": 3,
+            "reference_payload_bytes_read": 3538944
+          },
+          "tensor": "blk.0.ffn_gate_shexp.weight"
+        },
+        {
+          "linear_stats": {
+            "backward_alternative_bytes": 2097152,
+            "backward_alternative_passes": 1,
+            "backward_reference_bytes": 2097152,
+            "backward_reference_passes": 1,
+            "forward_alternative_bytes": 4194304,
+            "forward_alternative_passes": 2,
+            "forward_reference_bytes": 4194304,
+            "forward_reference_passes": 2,
+            "max_materialized_chunk_bytes": 65536
+          },
+          "native_source_stats": {
+            "alternative_passes": 3,
+            "alternative_payload_bytes_read": 884736,
+            "max_resident_decoded_bytes": 262144,
+            "reference_passes": 3,
+            "reference_payload_bytes_read": 3538944
+          },
+          "tensor": "blk.0.ffn_up_shexp.weight"
+        },
+        {
+          "linear_stats": {
+            "backward_alternative_bytes": 4096,
+            "backward_alternative_passes": 1,
+            "backward_reference_bytes": 4096,
+            "backward_reference_passes": 1,
+            "forward_alternative_bytes": 8192,
+            "forward_alternative_passes": 2,
+            "forward_reference_bytes": 8192,
+            "forward_reference_passes": 2,
+            "max_materialized_chunk_bytes": 4096
+          },
+          "native_source_stats": {
+            "alternative_passes": 3,
+            "alternative_payload_bytes_read": 1728,
+            "max_resident_decoded_bytes": 16384,
+            "reference_passes": 3,
+            "reference_payload_bytes_read": 6912
+          },
+          "tensor": "blk.0.ffn_gate_inp_shexp.weight"
+        },
+        {
+          "linear_stats": {
+            "backward_alternative_bytes": 1048576,
+            "backward_alternative_passes": 1,
+            "backward_reference_bytes": 1048576,
+            "backward_reference_passes": 1,
+            "forward_alternative_bytes": 2097152,
+            "forward_alternative_passes": 2,
+            "forward_reference_bytes": 2097152,
+            "forward_reference_passes": 2,
+            "max_materialized_chunk_bytes": 65536
+          },
+          "native_source_stats": {
+            "alternative_passes": 3,
+            "alternative_payload_bytes_read": 442368,
+            "max_resident_decoded_bytes": 262144,
+            "reference_passes": 3,
+            "reference_payload_bytes_read": 1769472
+          },
+          "tensor": "blk.0.ffn_gate_inp.weight"
+        }
+      ]
+    }
+  ],
+  "same_seed_reproducible": true,
+  "schema": 1,
+  "scope": "reproducible relaxed forward/backward through the complete genuine Qwen3.6-35B-A3B layer 0 with 13 native decisions, routed expert slice streaming, and checkpoint reload; this is not yet a complete 40-layer search or CUDA gate",
+  "source": {
+    "identity_path": "/home/christian/projects/gsq-rco-moe/repos/RCO/reports/qwen36_35b_base_identity.json",
+    "identity_sha256": "8cb4f43292711faab2ac6cbc06c2f28acce9b362fa2f91a12662cc0f6d71713e",
+    "manifest_path": "/home/christian/projects/gsq-rco-moe/repos/RCO/reports/qwen36_35b_base_gguf_manifest.json",
+    "manifest_sha256": "16439bf49b91e737641e4534c6192c787d44729f359cc6bd65cba2f09d3bb10b",
+    "model_dir": "/home/christian/projects/gsq-rco-moe/data/qwen36_35b_base",
+    "repo_id": "Qwen/Qwen3.6-35B-A3B",
+    "revision": "995ad96eacd98c81ed38be0c5b274b04031597b0"
+  },
+  "status": "pass"
+}
