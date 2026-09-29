@@ -19,6 +19,8 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.utils.checkpoint import checkpoint
 
+from manifold import project_gradient, retraction, vector_transport
+
 
 class RelaxedLinearRowSource(Protocol):
     """External row source used by :func:`streaming_relaxed_linear`.
@@ -71,6 +73,105 @@ class StreamingRelaxedLinearStats:
     def _record_pass(self, phase: str, kind: str) -> None:
         field = f"{phase}_{kind}_passes"
         setattr(self, field, getattr(self, field) + 1)
+
+
+def _serialized_cost_problem(
+    logits: torch.Tensor,
+    low_costs: Iterable[int],
+    high_costs: Iterable[int],
+    target_cost: int | None = None,
+) -> tuple[int, torch.Tensor, float, int | None]:
+    low = tuple(int(value) for value in low_costs)
+    high = tuple(int(value) for value in high_costs)
+    if logits.ndim != 2 or logits.shape[1] != 2:
+        raise ValueError("serialized-cost logits must have shape [groups, 2]")
+    if not low or len(low) != len(high) or len(low) != logits.shape[0]:
+        raise ValueError("serialized cost vectors must match the logit groups")
+    if any(value < 0 for value in low):
+        raise ValueError("low serialized costs must be non-negative")
+    increments = tuple(
+        high_value - low_value
+        for low_value, high_value in zip(low, high)
+    )
+    if any(value <= 0 for value in increments):
+        raise ValueError("every high serialized cost must exceed its low cost")
+    base = sum(low)
+    residual = None if target_cost is None else int(target_cost) - base
+    if residual is not None and not 0 <= residual <= sum(increments):
+        raise ValueError("target serialized cost is outside candidate bounds")
+    scale = float(max(increments))
+    normalized = torch.zeros(
+        logits.shape, device=logits.device, dtype=logits.dtype)
+    normalized[:, 1] = torch.as_tensor(
+        increments, device=logits.device, dtype=logits.dtype) / scale
+    return base, normalized, scale, residual
+
+
+def expected_serialized_cost(
+    logits: torch.Tensor,
+    low_costs: Iterable[int],
+    high_costs: Iterable[int],
+) -> float:
+    """Return the relaxed expected bytes for per-group low/high choices."""
+    low = tuple(int(value) for value in low_costs)
+    high = tuple(int(value) for value in high_costs)
+    base, _, _, _ = _serialized_cost_problem(logits, low, high)
+    probabilities = torch.softmax(logits.detach().double(), dim=-1)[:, 1]
+    increments = torch.as_tensor(
+        [high_value - low_value
+         for low_value, high_value in zip(low, high)],
+        device=probabilities.device,
+        dtype=torch.float64,
+    )
+    return float(base + torch.dot(probabilities, increments).item())
+
+
+def project_serialized_cost_gradient_(
+    logits: torch.Tensor,
+    low_costs: Iterable[int],
+    high_costs: Iterable[int],
+) -> tuple[float, float, float]:
+    """Project ``logits.grad`` onto the exact-byte budget tangent plane."""
+    if logits.grad is None:
+        raise ValueError("serialized-cost logits have no gradient")
+    _, normalized, _, _ = _serialized_cost_problem(
+        logits, low_costs, high_costs)
+    return project_gradient(logits, normalized)
+
+
+def retract_serialized_cost_(
+    logits: torch.Tensor,
+    low_costs: Iterable[int],
+    high_costs: Iterable[int],
+    target_cost: int,
+    *,
+    tolerance_bytes: float = 4096.0,
+) -> float:
+    """Retract relaxed logits to a nonuniform serialized-byte constraint."""
+    if tolerance_bytes <= 0:
+        raise ValueError("serialized-cost tolerance must be positive")
+    _, normalized, scale, residual = _serialized_cost_problem(
+        logits, low_costs, high_costs, target_cost)
+    assert residual is not None
+    retraction(
+        logits,
+        normalized,
+        residual / scale,
+        tol=tolerance_bytes / scale,
+    )
+    return expected_serialized_cost(logits, low_costs, high_costs)
+
+
+def transport_serialized_cost_momentum_(
+    optimizer: torch.optim.Optimizer,
+    logits: torch.Tensor,
+    low_costs: Iterable[int],
+    high_costs: Iterable[int],
+) -> None:
+    """Project Adam's first moment onto the updated exact-byte tangent."""
+    _, normalized, _, _ = _serialized_cost_problem(
+        logits, low_costs, high_costs)
+    vector_transport(optimizer, logits, normalized)
 
 
 def _validated_rows(
@@ -1007,7 +1108,11 @@ __all__ = [
     "RelaxedLinearRowSource",
     "RelaxedRouterBinding",
     "StreamingRelaxedLinearStats",
+    "expected_serialized_cost",
+    "project_serialized_cost_gradient_",
+    "retract_serialized_cost_",
     "streaming_relaxed_causal_cross_entropy",
     "streaming_relaxed_embedding",
     "streaming_relaxed_linear",
+    "transport_serialized_cost_momentum_",
 ]

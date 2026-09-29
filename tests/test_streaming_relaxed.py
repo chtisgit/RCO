@@ -21,13 +21,62 @@ from search.relaxed import (
     RelaxedLinearBinding,
     RelaxedRouterBinding,
     StreamingRelaxedLinearStats,
+    expected_serialized_cost,
+    project_serialized_cost_gradient_,
+    retract_serialized_cost_,
     streaming_relaxed_causal_cross_entropy,
     streaming_relaxed_embedding,
     streaming_relaxed_linear,
+    transport_serialized_cost_momentum_,
 )
 
 
 class StreamingRelaxedLinearTest(unittest.TestCase):
+    def test_nonuniform_serialized_cost_manifold(self):
+        low = [100, 200, 300, 400]
+        high = [140, 280, 460, 720]
+        target = 1260
+        logits = torch.tensor([
+            [0.4, -0.2], [-0.3, 0.7], [0.2, 0.1], [-0.8, 0.5],
+        ], requires_grad=True)
+        achieved = retract_serialized_cost_(
+            logits, low, high, target, tolerance_bytes=1e-4)
+        self.assertAlmostEqual(achieved, target, places=3)
+        self.assertAlmostEqual(
+            expected_serialized_cost(logits, low, high), target, places=3)
+
+        loss = (logits * torch.tensor([
+            [0.7, -0.4], [0.1, 0.6], [-0.8, 0.2], [0.5, -0.3],
+        ])).sum()
+        loss.backward()
+        _, raw_norm, projected_norm = project_serialized_cost_gradient_(
+            logits, low, high)
+        self.assertGreater(raw_norm, projected_norm)
+        probabilities = torch.softmax(logits.detach(), dim=-1)
+        increments = torch.tensor(
+            [high_value - low_value
+             for low_value, high_value in zip(low, high)],
+            dtype=logits.dtype,
+        )
+        normal = torch.zeros_like(logits)
+        normal[:, 0] = -probabilities[:, 0] * probabilities[:, 1] * increments
+        normal[:, 1] = probabilities[:, 0] * probabilities[:, 1] * increments
+        self.assertLess(abs(float((logits.grad * normal).sum())), 1e-4)
+
+        optimizer = torch.optim.Adam([logits], lr=0.05)
+        optimizer.step()
+        before = expected_serialized_cost(logits, low, high)
+        self.assertGreater(abs(before - target), 1e-3)
+        achieved = retract_serialized_cost_(
+            logits, low, high, target, tolerance_bytes=1e-4)
+        transport_serialized_cost_momentum_(optimizer, logits, low, high)
+        self.assertAlmostEqual(achieved, target, places=3)
+        moment = optimizer.state[logits]["exp_avg"]
+        probabilities = torch.softmax(logits.detach(), dim=-1)
+        normal[:, 0] = -probabilities[:, 0] * probabilities[:, 1] * increments
+        normal[:, 1] = probabilities[:, 0] * probabilities[:, 1] * increments
+        self.assertLess(abs(float((moment * normal).sum())), 1e-4)
+
     def test_sparse_embedding_matches_dense_relaxation_and_gradients(self):
         torch.manual_seed(23)
         dtype = torch.float64
