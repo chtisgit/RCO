@@ -1,16 +1,23 @@
+import tempfile
 import unittest
 
 import torch
+import torch.nn as nn
 import torch.nn.functional as F
+from safetensors.torch import save_file
 
 from pathlib import Path
 import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
+from checkpoint_stream import SafeTensorPrefixLoader
 from search.quant import WeightInterpolation
 from search.relaxed import (
+    CheckpointedRelaxedBlockStats,
+    CheckpointedStreamingRelaxedBlock,
     DenseDeltaRowSource,
+    RelaxedLinearBinding,
     StreamingRelaxedLinearStats,
     streaming_relaxed_linear,
 )
@@ -117,6 +124,135 @@ class StreamingRelaxedLinearTest(unittest.TestCase):
         output.sum().backward()
 
         self.assertTrue(torch.equal(bias.grad, torch.full_like(bias, 2.0)))
+
+    def test_checkpointed_blocks_reload_and_match_dense_model_gradients(self):
+        class Block(nn.Module):
+            def __init__(self, device="cpu"):
+                super().__init__()
+                self.norm = nn.LayerNorm(4, dtype=torch.float64, device=device)
+                self.proj = nn.Linear(
+                    4, 4, bias=True, dtype=torch.float64, device=device)
+
+            def forward(self, hidden_states):
+                return hidden_states + torch.tanh(
+                    self.proj(self.norm(hidden_states)))
+
+        class Model(nn.Module):
+            def __init__(self, device="cpu"):
+                super().__init__()
+                self.layers = nn.ModuleList([
+                    Block(device=device), Block(device=device)])
+
+            def forward(self, hidden_states):
+                for layer in self.layers:
+                    hidden_states = layer(hidden_states)
+                return hidden_states
+
+        torch.manual_seed(43)
+        checkpoint_model = Model()
+        state = {
+            name: value.detach().clone()
+            for name, value in checkpoint_model.state_dict().items()
+        }
+        references = [
+            state[f"layers.{index}.proj.weight"]
+            + 0.1 * torch.randn_like(state[f"layers.{index}.proj.weight"])
+            for index in range(2)
+        ]
+        alternatives = [
+            reference + 0.2 * torch.randn_like(reference)
+            for reference in references
+        ]
+        input_values = torch.randn(2, 3, 4, dtype=torch.float64)
+        initial_logits = torch.tensor(
+            [[0.4, -0.2], [-0.3, 0.7]], dtype=torch.float64)
+
+        dense_model = Model()
+        dense_model.load_state_dict(state)
+        dense_logits = initial_logits.clone().requires_grad_(True)
+        for index, layer in enumerate(dense_model.layers):
+            layer.proj.weight.data.copy_(references[index])
+            torch.nn.utils.parametrize.register_parametrization(
+                layer.proj,
+                "weight",
+                WeightInterpolation(
+                    [alternatives[index] - references[index]],
+                    dense_logits,
+                    index,
+                ),
+            )
+        dense_input = input_values.clone().requires_grad_(True)
+        dense_output = dense_model(dense_input)
+        dense_loss = dense_output.square().mean()
+        dense_loss.backward()
+
+        with tempfile.TemporaryDirectory() as directory_name:
+            directory = Path(directory_name)
+            save_file(state, directory / "model.safetensors")
+            loader = SafeTensorPrefixLoader(directory)
+            streamed_model = Model(device="meta")
+            streamed_logits = initial_logits.clone().requires_grad_(True)
+            block_stats = []
+            linear_stats = []
+            originals = list(streamed_model.layers)
+            for index, block in enumerate(originals):
+                block_stat = CheckpointedRelaxedBlockStats()
+                linear_stat = StreamingRelaxedLinearStats()
+                block_stats.append(block_stat)
+                linear_stats.append(linear_stat)
+                streamed_model.layers[index] = (
+                    CheckpointedStreamingRelaxedBlock(
+                        block,
+                        model=streamed_model,
+                        path=f"layers.{index}",
+                        checkpoint_loader=loader,
+                        logits=streamed_logits,
+                        bindings=[RelaxedLinearBinding(
+                            module_path=f"layers.{index}.proj",
+                            group_index=index,
+                            source=DenseDeltaRowSource(
+                                references[index],
+                                [alternatives[index]],
+                                rows_per_chunk=2,
+                            ),
+                            stats=linear_stat,
+                        )],
+                        device="cpu",
+                        stats=block_stat,
+                    )
+                )
+
+            streamed_input = input_values.clone().requires_grad_(True)
+            streamed_output = streamed_model(streamed_input)
+            self.assertTrue(all(
+                wrapper.module.proj.weight.device.type == "meta"
+                for wrapper in streamed_model.layers
+            ))
+            streamed_loss = streamed_output.square().mean()
+            streamed_loss.backward()
+            self.assertTrue(all(
+                wrapper.module.proj.weight.device.type == "meta"
+                for wrapper in streamed_model.layers
+            ))
+
+        self.assertTrue(torch.allclose(
+            streamed_output, dense_output, atol=1e-12, rtol=1e-12))
+        self.assertTrue(torch.allclose(
+            streamed_loss, dense_loss, atol=1e-12, rtol=1e-12))
+        self.assertTrue(torch.allclose(
+            streamed_input.grad, dense_input.grad, atol=1e-12, rtol=1e-12))
+        self.assertTrue(torch.allclose(
+            streamed_logits.grad, dense_logits.grad,
+            atol=1e-12, rtol=1e-12))
+        self.assertTrue(all(stats.load_passes == 2 for stats in block_stats))
+        self.assertTrue(all(stats.release_passes == 2 for stats in block_stats))
+        self.assertTrue(all(
+            stats.forward_reference_passes == 2
+            and stats.backward_reference_passes == 1
+            and stats.forward_alternative_passes == 2
+            and stats.backward_alternative_passes == 1
+            for stats in linear_stats
+        ))
 
 
 if __name__ == "__main__":
