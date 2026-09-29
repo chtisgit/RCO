@@ -318,6 +318,16 @@ class RelaxedExpertsBinding:
     down_stats: StreamingRelaxedLinearStats
 
 
+@dataclass(frozen=True)
+class RelaxedRouterBinding:
+    """Bind a fused Qwen top-k router's direct weight parameter."""
+
+    module_path: str
+    group_index: int
+    source: RelaxedLinearRowSource
+    stats: StreamingRelaxedLinearStats
+
+
 @dataclass
 class CheckpointedRelaxedBlockStats:
     """Materialization telemetry for a checkpointed streamed block."""
@@ -467,6 +477,63 @@ def _patch_relaxed_experts(
                 del module.forward
 
 
+@contextmanager
+def _patch_relaxed_routers(
+    model: nn.Module,
+    logits: torch.Tensor,
+    bindings: tuple[RelaxedRouterBinding, ...],
+):
+    restored = []
+    try:
+        for binding in bindings:
+            if not 0 <= binding.group_index < logits.shape[0]:
+                raise IndexError("router group index is outside logits")
+            module = model.get_submodule(binding.module_path)
+            required = ("top_k", "num_experts", "hidden_dim")
+            if any(not hasattr(module, name) for name in required):
+                raise TypeError(
+                    f"{binding.module_path!r} is not a supported top-k router")
+            if (
+                binding.source.in_features != module.hidden_dim
+                or binding.source.out_features != module.num_experts
+            ):
+                raise ValueError("router row source shape differs")
+            had_instance_forward = "forward" in module.__dict__
+            instance_forward = module.__dict__.get("forward")
+            restored.append((module, had_instance_forward, instance_forward))
+
+            def relaxed_router_forward(
+                hidden_states: torch.Tensor,
+                *,
+                _binding: RelaxedRouterBinding = binding,
+                _module: nn.Module = module,
+            ):
+                hidden_states = hidden_states.reshape(-1, _module.hidden_dim)
+                router_logits = streaming_relaxed_linear(
+                    hidden_states,
+                    logits[_binding.group_index],
+                    _binding.source,
+                    stats=_binding.stats,
+                )
+                router_probabilities = F.softmax(
+                    router_logits, dtype=torch.float, dim=-1)
+                router_top_value, router_indices = torch.topk(
+                    router_probabilities, _module.top_k, dim=-1)
+                router_top_value /= router_top_value.sum(
+                    dim=-1, keepdim=True)
+                router_scores = router_top_value.to(router_logits.dtype)
+                return router_logits, router_scores, router_indices
+
+            module.forward = relaxed_router_forward
+        yield
+    finally:
+        for module, had_instance_forward, instance_forward in reversed(restored):
+            if had_instance_forward:
+                module.forward = instance_forward
+            else:
+                del module.forward
+
+
 class CheckpointedStreamingRelaxedBlock(nn.Module):
     """Reload one block for forward and checkpoint recomputation/backward.
 
@@ -487,6 +554,7 @@ class CheckpointedStreamingRelaxedBlock(nn.Module):
         logits: torch.Tensor,
         bindings: Iterable[RelaxedLinearBinding],
         expert_bindings: Iterable[RelaxedExpertsBinding] = (),
+        router_bindings: Iterable[RelaxedRouterBinding] = (),
         device: torch.device | str,
         stats: CheckpointedRelaxedBlockStats | None = None,
     ) -> None:
@@ -499,6 +567,7 @@ class CheckpointedStreamingRelaxedBlock(nn.Module):
         object.__setattr__(self, "_logits", logits)
         object.__setattr__(self, "_bindings", tuple(bindings))
         object.__setattr__(self, "_expert_bindings", tuple(expert_bindings))
+        object.__setattr__(self, "_router_bindings", tuple(router_bindings))
         object.__setattr__(
             self,
             "_streaming_stats",
@@ -529,6 +598,7 @@ class CheckpointedStreamingRelaxedBlock(nn.Module):
         loader = object.__getattribute__(self, "_checkpoint_loader")
         bindings = object.__getattribute__(self, "_bindings")
         expert_bindings = object.__getattribute__(self, "_expert_bindings")
+        router_bindings = object.__getattribute__(self, "_router_bindings")
         stats = object.__getattribute__(self, "_streaming_stats")
         loaded = False
         try:
@@ -544,6 +614,7 @@ class CheckpointedStreamingRelaxedBlock(nn.Module):
             with (
                 _patch_relaxed_linears(model, logits, bindings),
                 _patch_relaxed_experts(model, logits, expert_bindings),
+                _patch_relaxed_routers(model, logits, router_bindings),
             ):
                 return self.module(hidden_states, *remaining_args, **kwargs)
         finally:
@@ -573,6 +644,7 @@ __all__ = [
     "RelaxedExpertsBinding",
     "RelaxedLinearBinding",
     "RelaxedLinearRowSource",
+    "RelaxedRouterBinding",
     "StreamingRelaxedLinearStats",
     "streaming_relaxed_linear",
 ]

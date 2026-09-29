@@ -19,6 +19,7 @@ from search.relaxed import (
     DenseDeltaRowSource,
     RelaxedExpertsBinding,
     RelaxedLinearBinding,
+    RelaxedRouterBinding,
     StreamingRelaxedLinearStats,
     streaming_relaxed_linear,
 )
@@ -417,6 +418,100 @@ class StreamingRelaxedLinearTest(unittest.TestCase):
             and stats.backward_reference_passes == 3
             for stats in operation_stats.values()
         ))
+
+    def test_checkpointed_direct_weight_router_matches_dense_relaxation(self):
+        class Router(nn.Module):
+            def __init__(self, device="cpu"):
+                super().__init__()
+                self.top_k = 2
+                self.num_experts = 3
+                self.hidden_dim = 4
+                self.weight = nn.Parameter(torch.randn(
+                    3, 4, dtype=torch.float64, device=device))
+
+            def forward(self, hidden_states):
+                hidden_states = hidden_states.reshape(-1, self.hidden_dim)
+                router_logits = F.linear(hidden_states, self.weight)
+                probabilities = F.softmax(router_logits, dtype=torch.float, dim=-1)
+                values, indices = torch.topk(probabilities, self.top_k, dim=-1)
+                values /= values.sum(dim=-1, keepdim=True)
+                return router_logits, values.to(router_logits.dtype), indices
+
+        class Block(nn.Module):
+            def __init__(self, device="cpu"):
+                super().__init__()
+                self.router = Router(device=device)
+
+            def forward(self, hidden):
+                logits, scores, _ = self.router(hidden)
+                return logits + scores.sum(dim=-1, keepdim=True)
+
+        class Model(nn.Module):
+            def __init__(self, device="cpu"):
+                super().__init__()
+                self.blocks = nn.ModuleList([Block(device=device)])
+
+        torch.manual_seed(53)
+        checkpoint_model = Model()
+        state = {
+            name: value.detach().clone()
+            for name, value in checkpoint_model.state_dict().items()
+        }
+        reference = torch.randn(3, 4, dtype=torch.float64)
+        alternative = reference + 0.1 * torch.randn_like(reference)
+        input_values = torch.randn(2, 3, 4, dtype=torch.float64)
+        initial_logits = torch.tensor([[0.3, -0.4]], dtype=torch.float64)
+
+        dense_input = input_values.clone().requires_grad_(True)
+        dense_logits = initial_logits.clone().requires_grad_(True)
+        probability = torch.softmax(dense_logits[0], dim=0)[0]
+        mixed = reference + probability * (alternative - reference)
+        router_logits = F.linear(dense_input.reshape(-1, 4), mixed)
+        probabilities = F.softmax(router_logits, dtype=torch.float, dim=-1)
+        scores, _ = torch.topk(probabilities, 2, dim=-1)
+        scores /= scores.sum(dim=-1, keepdim=True)
+        dense_output = router_logits + scores.to(
+            router_logits.dtype).sum(dim=-1, keepdim=True)
+        dense_loss = dense_output.square().mean()
+        dense_loss.backward()
+
+        with tempfile.TemporaryDirectory() as directory_name:
+            directory = Path(directory_name)
+            save_file(state, directory / "model.safetensors")
+            streamed_model = Model(device="meta")
+            streamed_logits = initial_logits.clone().requires_grad_(True)
+            stats = StreamingRelaxedLinearStats()
+            wrapper = CheckpointedStreamingRelaxedBlock(
+                streamed_model.blocks[0],
+                model=streamed_model,
+                path="blocks.0",
+                checkpoint_loader=SafeTensorPrefixLoader(directory),
+                logits=streamed_logits,
+                bindings=[],
+                router_bindings=[RelaxedRouterBinding(
+                    module_path="blocks.0.router",
+                    group_index=0,
+                    source=DenseDeltaRowSource(
+                        reference, [alternative], rows_per_chunk=2),
+                    stats=stats,
+                )],
+                device="cpu",
+            )
+            streamed_model.blocks[0] = wrapper
+            streamed_input = input_values.clone().requires_grad_(True)
+            streamed_output = wrapper(streamed_input)
+            streamed_loss = streamed_output.square().mean()
+            streamed_loss.backward()
+
+        self.assertTrue(torch.allclose(
+            streamed_output, dense_output, atol=1e-12, rtol=1e-12))
+        self.assertTrue(torch.allclose(
+            streamed_input.grad, dense_input.grad, atol=1e-12, rtol=1e-12))
+        self.assertTrue(torch.allclose(
+            streamed_logits.grad, dense_logits.grad,
+            atol=1e-12, rtol=1e-12))
+        self.assertEqual(stats.forward_reference_passes, 2)
+        self.assertEqual(stats.backward_reference_passes, 1)
 
 
 if __name__ == "__main__":

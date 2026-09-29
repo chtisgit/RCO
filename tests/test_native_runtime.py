@@ -52,8 +52,11 @@ class NativeManifestWeightStoreTest(unittest.TestCase):
 
         def metadata(self, name, candidate_type):
             values = self.candidates[(name, GGMLType(candidate_type))]
+            payload_bytes = values.nbytes // 4
+            row_count = int(np.prod(values.shape[:-1]))
             return {
-                "payload_bytes": values.nbytes // 4,
+                "payload_bytes": payload_bytes,
+                "row_size": payload_bytes // row_count,
                 "gguf_shape": list(reversed(values.shape)),
             }
 
@@ -409,6 +412,16 @@ class NativeManifestWeightStoreTest(unittest.TestCase):
         self.assertEqual(source.out_features, 2)
         self.assertEqual(source.expert_index, 1)
         self.assertLessEqual(source.stats.max_resident_decoded_bytes, 2 * 4 * 4)
+        expert_payload_bytes = source.out_features * (
+            store.metadata(name, GGMLType.Q4_0)["row_size"])
+        self.assertEqual(
+            source.stats.reference_payload_bytes_read,
+            2 * expert_payload_bytes,
+        )
+        self.assertEqual(
+            source.stats.alternative_payload_bytes_read,
+            expert_payload_bytes,
+        )
 
 
 if __name__ == "__main__":

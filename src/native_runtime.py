@@ -295,8 +295,10 @@ class NativeManifestRelaxedLinearSource:
                     f"{candidate_type.name}")
 
     def _payload_bytes(self, candidate_type: GGMLType) -> int:
-        return int(self.store.metadata(
-            self.tensor_name, candidate_type)["payload_bytes"])
+        metadata = self.store.metadata(self.tensor_name, candidate_type)
+        if self.expert_index is None:
+            return int(metadata["payload_bytes"])
+        return self.out_features * int(metadata["row_size"])
 
     def _iter_type(self, candidate_type: GGMLType):
         if self._source_to_canonical_rows is None:
