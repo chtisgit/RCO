@@ -21,11 +21,136 @@ from search.relaxed import (
     RelaxedLinearBinding,
     RelaxedRouterBinding,
     StreamingRelaxedLinearStats,
+    streaming_relaxed_causal_cross_entropy,
+    streaming_relaxed_embedding,
     streaming_relaxed_linear,
 )
 
 
 class StreamingRelaxedLinearTest(unittest.TestCase):
+    def test_sparse_embedding_matches_dense_relaxation_and_gradients(self):
+        torch.manual_seed(23)
+        dtype = torch.float64
+        reference = torch.randn(11, 5, dtype=dtype)
+        alternatives = [
+            reference + 0.15 * torch.randn_like(reference),
+            reference + 0.35 * torch.randn_like(reference),
+        ]
+        input_ids = torch.tensor([[7, 2, 7, 4], [2, 9, 4, 2]])
+        upstream = torch.randn(2, 4, 5, dtype=dtype)
+        initial_logits = torch.tensor([0.3, -0.6, 0.1], dtype=dtype)
+
+        dense_logits = initial_logits.clone().requires_grad_(True)
+        probabilities = torch.softmax(dense_logits, dim=0)
+        dense_weight = reference.clone()
+        for index, alternative in enumerate(alternatives):
+            dense_weight = dense_weight + probabilities[index] * (
+                alternative - reference)
+        dense_output = F.embedding(input_ids, dense_weight)
+        dense_loss = (dense_output * upstream).sum()
+        dense_loss.backward()
+
+        streamed_logits = initial_logits.clone().requires_grad_(True)
+        source = DenseDeltaRowSource(
+            reference, alternatives, rows_per_chunk=2)
+        stats = StreamingRelaxedLinearStats()
+        streamed_output = streaming_relaxed_embedding(
+            input_ids, streamed_logits, source, stats=stats)
+        streamed_loss = (streamed_output * upstream).sum()
+        streamed_loss.backward()
+
+        self.assertTrue(torch.allclose(
+            streamed_output, dense_output, atol=1e-12, rtol=1e-12))
+        self.assertTrue(torch.allclose(
+            streamed_logits.grad, dense_logits.grad,
+            atol=1e-12, rtol=1e-12))
+        self.assertEqual(stats.forward_reference_passes, 1)
+        self.assertEqual(stats.forward_alternative_passes, 2)
+        self.assertEqual(stats.backward_reference_passes, 0)
+        self.assertEqual(stats.backward_alternative_passes, 2)
+        unique_rows = input_ids.unique().numel()
+        expected_bytes = unique_rows * reference.shape[1] * reference.element_size()
+        self.assertEqual(stats.forward_reference_bytes, expected_bytes)
+        self.assertEqual(stats.forward_alternative_bytes, 2 * expected_bytes)
+
+    def test_sparse_embedding_can_emit_model_dtype_from_float_logits(self):
+        reference = torch.arange(24, dtype=torch.float32).reshape(6, 4)
+        source = DenseDeltaRowSource(
+            reference, [reference + 1], rows_per_chunk=2)
+        logits = torch.tensor([0.2, -0.1], dtype=torch.float32,
+                              requires_grad=True)
+        output = streaming_relaxed_embedding(
+            torch.tensor([[1, 3]]), logits, source, dtype=torch.bfloat16)
+        self.assertEqual(output.dtype, torch.bfloat16)
+        output.float().sum().backward()
+        self.assertEqual(logits.grad.dtype, torch.float32)
+
+    def test_streamed_causal_ce_matches_dense_loss_and_gradients(self):
+        torch.manual_seed(27)
+        dtype = torch.float64
+        reference = torch.randn(13, 5, dtype=dtype)
+        alternatives = [
+            reference + 0.1 * torch.randn_like(reference),
+            reference + 0.25 * torch.randn_like(reference),
+        ]
+        initial_hidden = torch.randn(2, 5, 5, dtype=dtype)
+        labels = torch.tensor([
+            [1, 8, 2, 11, 4],
+            [3, 6, 9, 5, 12],
+        ])
+        loss_mask = torch.tensor([
+            [False, True, False, True, True],
+            [False, False, True, True, False],
+        ])
+        initial_logits = torch.tensor([-0.2, 0.5, 0.1], dtype=dtype)
+
+        dense_hidden = initial_hidden.clone().requires_grad_(True)
+        dense_logits = initial_logits.clone().requires_grad_(True)
+        probabilities = torch.softmax(dense_logits, dim=0)
+        dense_weight = reference.clone()
+        for index, alternative in enumerate(alternatives):
+            dense_weight = dense_weight + probabilities[index] * (
+                alternative - reference)
+        full_logits = F.linear(dense_hidden[:, :-1], dense_weight)
+        active = loss_mask[:, 1:].reshape(-1)
+        dense_loss = F.cross_entropy(
+            full_logits.reshape(-1, reference.shape[0])[active],
+            labels[:, 1:].reshape(-1)[active],
+        )
+        dense_loss.backward()
+
+        streamed_hidden = initial_hidden.clone().requires_grad_(True)
+        streamed_logits = initial_logits.clone().requires_grad_(True)
+        stats = StreamingRelaxedLinearStats()
+        streamed_loss, token_count = streaming_relaxed_causal_cross_entropy(
+            streamed_hidden,
+            labels,
+            streamed_logits,
+            DenseDeltaRowSource(
+                reference, alternatives, rows_per_chunk=3),
+            loss_mask=loss_mask,
+            stats=stats,
+        )
+        streamed_loss.backward()
+
+        self.assertEqual(token_count, int(active.sum()))
+        self.assertTrue(torch.allclose(
+            streamed_loss, dense_loss, atol=1e-12, rtol=1e-12))
+        self.assertTrue(torch.allclose(
+            streamed_hidden.grad, dense_hidden.grad,
+            atol=1e-12, rtol=1e-12))
+        self.assertTrue(torch.allclose(
+            streamed_logits.grad, dense_logits.grad,
+            atol=1e-12, rtol=1e-12))
+        self.assertEqual(stats.forward_reference_passes, 1)
+        self.assertEqual(stats.backward_reference_passes, 1)
+        self.assertEqual(stats.forward_alternative_passes, 2)
+        self.assertEqual(stats.backward_alternative_passes, 2)
+        self.assertEqual(
+            stats.max_materialized_chunk_bytes,
+            3 * reference.shape[1] * reference.element_size(),
+        )
+
     def test_matches_released_dense_loss_and_gradients(self):
         torch.manual_seed(29)
         dtype = torch.float64

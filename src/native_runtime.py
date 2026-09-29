@@ -323,6 +323,73 @@ class NativeManifestRelaxedLinearSource:
                 del decoded
             yield start, restored
 
+    def _read_type_rows(
+        self, candidate_type: GGMLType, row_indices: np.ndarray,
+    ) -> np.ndarray:
+        indices = np.asarray(row_indices, dtype=np.int64)
+        if indices.ndim != 1 or len(indices) == 0:
+            raise ValueError("row indices must be a non-empty vector")
+        if np.any(indices < 0) or np.any(indices >= self.out_features):
+            raise IndexError("requested source row is out of range")
+        if self.expert_index is not None:
+            canonical_indices = (
+                self.expert_index * self.out_features + indices)
+        elif self._source_to_canonical_rows is not None:
+            canonical_indices = self._source_to_canonical_rows[indices]
+        else:
+            canonical_indices = indices
+        chunks = self.store.iter_decoded_row_indices(
+            self.tensor_name,
+            candidate_type,
+            canonical_indices,
+            rows_per_chunk=min(self.rows_per_chunk, len(indices)),
+        )
+        decoded = np.concatenate([rows for _, rows in chunks])
+        if self._column_order is None:
+            return decoded
+        restored = np.empty_like(decoded)
+        restored[:, self._column_order] = decoded
+        return restored
+
+    def read_reference_rows(self, row_indices: Any) -> np.ndarray:
+        indices = np.asarray(row_indices, dtype=np.int64)
+        self.stats.reference_passes += 1
+        metadata = self.store.metadata(self.tensor_name, self.reference_type)
+        self.stats.reference_payload_bytes_read += (
+            len(indices) * int(metadata["row_size"]))
+        reference = self._read_type_rows(self.reference_type, indices)
+        self.stats.max_resident_decoded_bytes = max(
+            self.stats.max_resident_decoded_bytes,
+            self._column_transform_multiplier * reference.nbytes,
+        )
+        return reference
+
+    def read_delta_rows(
+        self, alternative_index: int, row_indices: Any,
+    ) -> np.ndarray:
+        if not 0 <= alternative_index < self.alternative_count:
+            raise IndexError("alternative index is out of range")
+        indices = np.asarray(row_indices, dtype=np.int64)
+        alternative_type = self.alternative_types[alternative_index]
+        reference_metadata = self.store.metadata(
+            self.tensor_name, self.reference_type)
+        alternative_metadata = self.store.metadata(
+            self.tensor_name, alternative_type)
+        self.stats.alternative_passes += 1
+        self.stats.reference_payload_bytes_read += (
+            len(indices) * int(reference_metadata["row_size"]))
+        self.stats.alternative_payload_bytes_read += (
+            len(indices) * int(alternative_metadata["row_size"]))
+        alternative = self._read_type_rows(alternative_type, indices)
+        reference = self._read_type_rows(self.reference_type, indices)
+        self.stats.max_resident_decoded_bytes = max(
+            self.stats.max_resident_decoded_bytes,
+            (self._column_transform_multiplier + 1)
+            * max(alternative.nbytes, reference.nbytes),
+        )
+        alternative -= reference
+        return alternative
+
     def iter_reference_rows(self):
         self.stats.reference_passes += 1
         self.stats.reference_payload_bytes_read += self._payload_bytes(

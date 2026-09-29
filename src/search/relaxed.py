@@ -40,6 +40,12 @@ class RelaxedLinearRowSource(Protocol):
     ) -> Iterable[tuple[int, Any]]:
         """Yield alternative-minus-reference row chunks."""
 
+    def read_reference_rows(self, row_indices: Any) -> Any:
+        """Read selected reference rows in the caller's order."""
+
+    def read_delta_rows(self, alternative_index: int, row_indices: Any) -> Any:
+        """Read selected alternative-minus-reference rows."""
+
 
 @dataclass
 class StreamingRelaxedLinearStats:
@@ -255,6 +261,350 @@ def streaming_relaxed_linear(
         input_tensor, logits, bias, source, stats)
 
 
+class _StreamingRelaxedEmbedding(torch.autograd.Function):
+    @staticmethod
+    def forward(
+        ctx,
+        input_ids: torch.Tensor,
+        logits: torch.Tensor,
+        source: RelaxedLinearRowSource,
+        stats: StreamingRelaxedLinearStats,
+        output_dtype: torch.dtype,
+    ) -> torch.Tensor:
+        if input_ids.dtype not in {
+            torch.int8, torch.int16, torch.int32, torch.int64, torch.uint8,
+        }:
+            raise TypeError("embedding indices must have an integer dtype")
+        if logits.ndim != 1 or logits.numel() != source.alternative_count + 1:
+            raise ValueError(
+                f"logits must have shape ({source.alternative_count + 1},)")
+        flat_ids = input_ids.detach().to(device="cpu", dtype=torch.long).reshape(-1)
+        unique_ids, inverse = torch.unique(
+            flat_ids, sorted=True, return_inverse=True)
+        if len(unique_ids) == 0:
+            raise ValueError("embedding input is empty")
+        if int(unique_ids[0]) < 0 or int(unique_ids[-1]) >= source.out_features:
+            raise IndexError("embedding index is out of range")
+        device = input_ids.device
+        dtype = output_dtype
+        probabilities = torch.softmax(
+            logits.to(device=device, dtype=dtype), dim=0)
+
+        stats._record_pass("forward", "reference")
+        reference = torch.as_tensor(
+            source.read_reference_rows(unique_ids.numpy()),
+        ).to(device=device, dtype=dtype)
+        stats._record("forward", "reference", reference)
+        mixed = reference.clone()
+        for alternative_index in range(source.alternative_count):
+            stats._record_pass("forward", "alternative")
+            delta = torch.as_tensor(source.read_delta_rows(
+                alternative_index, unique_ids.numpy()),
+            ).to(device=device, dtype=dtype)
+            stats._record("forward", "alternative", delta)
+            mixed.add_(delta * probabilities[alternative_index])
+        output = mixed[inverse.to(device=device)].reshape(
+            *input_ids.shape, source.in_features)
+        ctx.source = source
+        ctx.stats = stats
+        ctx.logits_device = logits.device
+        ctx.logits_dtype = logits.dtype
+        ctx.save_for_backward(
+            unique_ids, inverse, probabilities)
+        return output
+
+    @staticmethod
+    def backward(ctx, grad_output: torch.Tensor):
+        unique_ids, inverse, probabilities = ctx.saved_tensors
+        source = ctx.source
+        stats = ctx.stats
+        flattened_gradient = grad_output.reshape(-1, source.in_features)
+        accumulated = torch.zeros(
+            len(unique_ids),
+            source.in_features,
+            device=grad_output.device,
+            dtype=grad_output.dtype,
+        )
+        accumulated.index_add_(
+            0, inverse.to(device=grad_output.device), flattened_gradient)
+        probability_gradients = []
+        for alternative_index in range(source.alternative_count):
+            stats._record_pass("backward", "alternative")
+            delta = torch.as_tensor(source.read_delta_rows(
+                alternative_index, unique_ids.numpy()),
+            ).to(device=grad_output.device, dtype=grad_output.dtype)
+            stats._record("backward", "alternative", delta)
+            probability_gradients.append((accumulated * delta).sum())
+        probability_gradients.append(grad_output.new_zeros(()))
+        d_probability = torch.stack(probability_gradients)
+        probabilities = probabilities.to(
+            device=grad_output.device, dtype=grad_output.dtype)
+        grad_logits = probabilities * (
+            d_probability - (probabilities * d_probability).sum())
+        return (
+            None,
+            grad_logits.to(
+                device=ctx.logits_device, dtype=ctx.logits_dtype),
+            None,
+            None,
+            None,
+        )
+
+
+def streaming_relaxed_embedding(
+    input_ids: torch.Tensor,
+    logits: torch.Tensor,
+    source: RelaxedLinearRowSource,
+    *,
+    dtype: torch.dtype | None = None,
+    stats: StreamingRelaxedLinearStats | None = None,
+) -> torch.Tensor:
+    """Embed token IDs while reading only their native candidate rows."""
+    if stats is None:
+        stats = StreamingRelaxedLinearStats()
+    if dtype is None:
+        dtype = logits.dtype
+    return _StreamingRelaxedEmbedding.apply(
+        input_ids, logits, source, stats, dtype)
+
+
+def _mixed_row_chunks(
+    source: RelaxedLinearRowSource,
+    probabilities: torch.Tensor,
+    *,
+    device: torch.device,
+    dtype: torch.dtype,
+    phase: str,
+    stats: StreamingRelaxedLinearStats,
+):
+    stats._record_pass(phase, "reference")
+    reference_rows = iter(_validated_rows(
+        source.iter_reference_rows(),
+        source=source,
+        device=device,
+        dtype=dtype,
+        phase=phase,
+        kind="reference",
+        stats=stats,
+    ))
+    delta_rows = []
+    for alternative_index in range(source.alternative_count):
+        stats._record_pass(phase, "alternative")
+        delta_rows.append(iter(_validated_rows(
+            source.iter_delta_rows(alternative_index),
+            source=source,
+            device=device,
+            dtype=dtype,
+            phase=phase,
+            kind="alternative",
+            stats=stats,
+        )))
+    for start, stop, reference in reference_rows:
+        deltas = []
+        mixed = reference.clone()
+        for alternative_index, rows in enumerate(delta_rows):
+            try:
+                delta_start, delta_stop, delta = next(rows)
+            except StopIteration as error:
+                raise ValueError("alternative rows ended before reference") from error
+            if delta_start != start or delta_stop != stop:
+                raise ValueError("reference and alternative row chunks differ")
+            mixed.add_(delta * probabilities[alternative_index])
+            deltas.append(delta)
+        yield start, stop, mixed, deltas
+    for rows in delta_rows:
+        try:
+            next(rows)
+        except StopIteration:
+            continue
+        raise ValueError("alternative rows extend beyond reference")
+
+
+class _StreamingRelaxedCausalCrossEntropy(torch.autograd.Function):
+    @staticmethod
+    def forward(
+        ctx,
+        hidden_states: torch.Tensor,
+        labels: torch.Tensor,
+        logits: torch.Tensor,
+        active_indices: torch.Tensor,
+        source: RelaxedLinearRowSource,
+        stats: StreamingRelaxedLinearStats,
+    ) -> torch.Tensor:
+        if hidden_states.ndim != 3 or labels.ndim != 2:
+            raise ValueError("expected hidden [B,S,H] and labels [B,S]")
+        if hidden_states.shape[:2] != labels.shape:
+            raise ValueError("hidden-state and label shapes differ")
+        if hidden_states.shape[-1] != source.in_features:
+            raise ValueError("output row source width differs from hidden size")
+        if logits.ndim != 1 or logits.numel() != source.alternative_count + 1:
+            raise ValueError(
+                f"logits must have shape ({source.alternative_count + 1},)")
+        shifted_hidden = hidden_states[:, :-1].reshape(
+            -1, hidden_states.shape[-1])
+        shifted_labels = labels[:, 1:].reshape(-1).to(
+            device=hidden_states.device, dtype=torch.long)
+        active = active_indices.to(device=hidden_states.device, dtype=torch.long)
+        selected_hidden = shifted_hidden.index_select(0, active)
+        selected_labels = shifted_labels.index_select(0, active)
+        if torch.any(selected_labels < 0) or torch.any(
+            selected_labels >= source.out_features
+        ):
+            raise IndexError("selected causal target is outside the vocabulary")
+        accumulation_dtype = (
+            torch.float64
+            if hidden_states.dtype == torch.float64
+            else torch.float32
+        )
+        probabilities = torch.softmax(
+            logits.to(device=hidden_states.device, dtype=hidden_states.dtype),
+            dim=0,
+        )
+        normalizer = None
+        target_logits = torch.zeros(
+            len(active), device=hidden_states.device,
+            dtype=accumulation_dtype)
+        for start, stop, mixed, _ in _mixed_row_chunks(
+            source,
+            probabilities,
+            device=hidden_states.device,
+            dtype=hidden_states.dtype,
+            phase="forward",
+            stats=stats,
+        ):
+            chunk_logits = F.linear(selected_hidden, mixed).to(
+                dtype=accumulation_dtype)
+            chunk_lse = torch.logsumexp(chunk_logits, dim=-1)
+            normalizer = (
+                chunk_lse if normalizer is None
+                else torch.logaddexp(normalizer, chunk_lse))
+            in_chunk = (selected_labels >= start) & (selected_labels < stop)
+            if torch.any(in_chunk):
+                target_logits[in_chunk] = chunk_logits[
+                    in_chunk, selected_labels[in_chunk] - start]
+        loss = (normalizer - target_logits).mean()
+        ctx.source = source
+        ctx.stats = stats
+        ctx.hidden_shape = hidden_states.shape
+        ctx.logits_device = logits.device
+        ctx.logits_dtype = logits.dtype
+        ctx.accumulation_dtype = accumulation_dtype
+        ctx.save_for_backward(
+            selected_hidden,
+            selected_labels,
+            active_indices.detach().to(device="cpu", dtype=torch.long),
+            probabilities,
+            normalizer,
+        )
+        return loss
+
+    @staticmethod
+    def backward(ctx, grad_loss: torch.Tensor):
+        (selected_hidden, selected_labels, active_indices,
+         probabilities, normalizer) = ctx.saved_tensors
+        source = ctx.source
+        stats = ctx.stats
+        selected_gradient = torch.zeros_like(selected_hidden)
+        probability_gradients = [
+            selected_hidden.new_zeros(())
+            for _ in range(source.alternative_count)
+        ]
+        scale = grad_loss.to(
+            device=selected_hidden.device, dtype=ctx.accumulation_dtype,
+        ) / len(selected_labels)
+        for start, stop, mixed, deltas in _mixed_row_chunks(
+            source,
+            probabilities,
+            device=selected_hidden.device,
+            dtype=selected_hidden.dtype,
+            phase="backward",
+            stats=stats,
+        ):
+            chunk_logits = F.linear(selected_hidden, mixed).to(
+                dtype=ctx.accumulation_dtype)
+            d_logits = torch.exp(chunk_logits - normalizer[:, None])
+            in_chunk = (selected_labels >= start) & (selected_labels < stop)
+            if torch.any(in_chunk):
+                d_logits[
+                    in_chunk, selected_labels[in_chunk] - start] -= 1.0
+            d_logits.mul_(scale)
+            d_values = d_logits.to(dtype=selected_hidden.dtype)
+            selected_gradient.add_(F.linear(
+                d_values, mixed.transpose(0, 1)))
+            for alternative_index, delta in enumerate(deltas):
+                delta_output = F.linear(selected_hidden, delta).to(
+                    dtype=ctx.accumulation_dtype)
+                probability_gradients[alternative_index].add_(
+                    (d_logits * delta_output).sum().to(
+                        dtype=selected_hidden.dtype))
+
+        probability_gradients.append(selected_hidden.new_zeros(()))
+        d_probability = torch.stack(probability_gradients)
+        centered = d_probability - (probabilities * d_probability).sum()
+        grad_logits = probabilities * centered
+        shifted_gradient = torch.zeros(
+            ctx.hidden_shape[0] * (ctx.hidden_shape[1] - 1),
+            ctx.hidden_shape[2],
+            device=selected_hidden.device,
+            dtype=selected_hidden.dtype,
+        )
+        shifted_gradient.index_copy_(
+            0,
+            active_indices.to(device=selected_hidden.device),
+            selected_gradient,
+        )
+        grad_hidden = torch.zeros(
+            ctx.hidden_shape,
+            device=selected_hidden.device,
+            dtype=selected_hidden.dtype,
+        )
+        grad_hidden[:, :-1] = shifted_gradient.reshape(
+            ctx.hidden_shape[0], ctx.hidden_shape[1] - 1, ctx.hidden_shape[2])
+        return (
+            grad_hidden,
+            None,
+            grad_logits.to(
+                device=ctx.logits_device, dtype=ctx.logits_dtype),
+            None,
+            None,
+            None,
+        )
+
+
+def streaming_relaxed_causal_cross_entropy(
+    hidden_states: torch.Tensor,
+    labels: torch.Tensor,
+    logits: torch.Tensor,
+    source: RelaxedLinearRowSource,
+    *,
+    loss_mask: torch.Tensor | None = None,
+    stats: StreamingRelaxedLinearStats | None = None,
+) -> tuple[torch.Tensor, int]:
+    """Exact causal CE with native mixed output rows streamed in chunks."""
+    if hidden_states.ndim != 3 or labels.ndim != 2:
+        raise ValueError("expected hidden [B,S,H] and labels [B,S]")
+    shifted_count = labels[:, 1:].numel()
+    if shifted_count == 0:
+        raise ValueError("causal cross-entropy requires at least two tokens")
+    if loss_mask is None:
+        active_indices = torch.arange(shifted_count, dtype=torch.long)
+    else:
+        if loss_mask.shape != labels.shape:
+            raise ValueError("loss mask and labels must have the same shape")
+        active_indices = torch.nonzero(
+            loss_mask[:, 1:].reshape(-1).to(device="cpu", dtype=torch.bool),
+            as_tuple=False,
+        ).flatten()
+    token_count = len(active_indices)
+    if token_count == 0:
+        raise ValueError("loss mask selects no next-token targets")
+    if stats is None:
+        stats = StreamingRelaxedLinearStats()
+    loss = _StreamingRelaxedCausalCrossEntropy.apply(
+        hidden_states, labels, logits, active_indices, source, stats)
+    return loss, token_count
+
+
 class DenseDeltaRowSource:
     """Dense oracle source for equivalence tests, not production storage."""
 
@@ -292,6 +642,17 @@ class DenseDeltaRowSource:
         for start in range(0, self.out_features, self.rows_per_chunk):
             stop = min(start + self.rows_per_chunk, self.out_features)
             yield start, candidate[start:stop] - self.reference[start:stop]
+
+    def read_reference_rows(self, row_indices: Any):
+        return self.reference[torch.as_tensor(row_indices, dtype=torch.long)]
+
+    def read_delta_rows(self, alternative_index: int, row_indices: Any):
+        if not 0 <= alternative_index < self.alternative_count:
+            raise IndexError("alternative index is out of range")
+        indices = torch.as_tensor(row_indices, dtype=torch.long)
+        return (
+            self.alternatives[alternative_index][indices]
+            - self.reference[indices])
 
 
 @dataclass(frozen=True)
@@ -646,5 +1007,7 @@ __all__ = [
     "RelaxedLinearRowSource",
     "RelaxedRouterBinding",
     "StreamingRelaxedLinearStats",
+    "streaming_relaxed_causal_cross_entropy",
+    "streaming_relaxed_embedding",
     "streaming_relaxed_linear",
 ]

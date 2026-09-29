@@ -334,6 +334,20 @@ class NativeManifestWeightStoreTest(unittest.TestCase):
                 np.testing.assert_allclose(
                     restored_delta, alternative - reference,
                     atol=0.0, rtol=0.0)
+                selected_rows = np.asarray([
+                    reference.shape[0] - 1, 0,
+                    min(1, reference.shape[0] - 1),
+                ])
+                np.testing.assert_array_equal(
+                    source.read_reference_rows(selected_rows),
+                    reference[selected_rows],
+                )
+                np.testing.assert_allclose(
+                    source.read_delta_rows(0, selected_rows),
+                    alternative[selected_rows] - reference[selected_rows],
+                    atol=0.0,
+                    rtol=0.0,
+                )
 
                 torch.manual_seed(41)
                 values = torch.randn(
