@@ -111,6 +111,19 @@ class NativeGGMLStoreTest(unittest.TestCase):
                 experts_out,
             )
 
+            indices = [4, 0, 1, 3, 2]
+            reordered = list(store.iter_decoded_row_indices(
+                "blk.0.attn_q.weight",
+                GGMLType.Q2_0,
+                indices,
+                rows_per_chunk=2,
+            ))
+            self.assertEqual([start for start, _ in reordered], [0, 2, 4])
+            np.testing.assert_array_equal(
+                np.concatenate([chunk for _, chunk in reordered]),
+                ordinary_out[indices],
+            )
+
             copied = b"".join(store.iter_payload(
                 "blk.0.ffn_gate_exps.weight", GGMLType.Q4_0,
                 chunk_bytes=7))

@@ -16,8 +16,13 @@ except ImportError:
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from native_runtime import NativeManifestWeightStore
+from native_runtime import (
+    NativeManifestRelaxedLinearSource,
+    NativeManifestWeightStore,
+)
+from quant.ggml_native import GGMLType
 from qwen35_native import Qwen35LinearAttentionGeometry, matrix_permutations
+from search.relaxed import streaming_relaxed_linear
 
 
 @unittest.skipUnless(DEPENDENCIES_AVAILABLE, "PyTorch is not installed")
@@ -40,6 +45,38 @@ class NativeManifestWeightStoreTest(unittest.TestCase):
                 -1, self.candidates[name].shape[-1])
             for start in range(0, len(rows), rows_per_chunk):
                 yield start, rows[start:start + rows_per_chunk].copy()
+
+    class RelaxedCandidateStore:
+        def __init__(self, candidates):
+            self.candidates = candidates
+
+        def metadata(self, name, candidate_type):
+            values = self.candidates[(name, GGMLType(candidate_type))]
+            return {
+                "payload_bytes": values.nbytes // 4,
+                "gguf_shape": list(reversed(values.shape)),
+            }
+
+        def iter_decoded_rows(
+            self, name, candidate_type, *, rows_per_chunk,
+        ):
+            rows = self.candidates[
+                (name, GGMLType(candidate_type))].reshape(
+                    -1, self.candidates[
+                        (name, GGMLType(candidate_type))].shape[-1])
+            for start in range(0, len(rows), rows_per_chunk):
+                yield start, rows[start:start + rows_per_chunk].copy()
+
+        def iter_decoded_row_indices(
+            self, name, candidate_type, row_indices, *, rows_per_chunk,
+        ):
+            rows = self.candidates[
+                (name, GGMLType(candidate_type))].reshape(
+                    -1, self.candidates[
+                        (name, GGMLType(candidate_type))].shape[-1])
+            selected = rows[np.asarray(row_indices)]
+            for start in range(0, len(selected), rows_per_chunk):
+                yield start, selected[start:start + rows_per_chunk].copy()
 
     class Model(nn.Module if DEPENDENCIES_AVAILABLE else object):
         def __init__(self):
@@ -219,6 +256,114 @@ class NativeManifestWeightStoreTest(unittest.TestCase):
         )
         np.testing.assert_array_equal(
             model.lm_head.weight.detach().float(), output)
+
+    def test_streams_native_relaxed_deltas_in_hf_matrix_order(self):
+        geometry = Qwen35LinearAttentionGeometry(2, 4, 3, 2)
+        qkv_reference = (
+            np.arange(20 * 5, dtype=np.float32).reshape(20, 5) / 19)
+        qkv_alternative = qkv_reference + np.linspace(
+            -0.25, 0.25, qkv_reference.size, dtype=np.float32,
+        ).reshape(qkv_reference.shape)
+        qkv_rows, _ = matrix_permutations(
+            "model.layers.0.linear_attn.in_proj_qkv.weight",
+            qkv_reference.shape,
+            geometry,
+        )
+
+        out_reference = (
+            np.arange(3 * 8, dtype=np.float32).reshape(3, 8) / 7)
+        out_alternative = out_reference + np.linspace(
+            0.3, -0.3, out_reference.size, dtype=np.float32,
+        ).reshape(out_reference.shape)
+        _, out_columns = matrix_permutations(
+            "model.layers.0.linear_attn.out_proj.weight",
+            out_reference.shape,
+            geometry,
+        )
+
+        fixtures = [
+            (
+                "blk.0.ssm_qkv.weight",
+                "model.layers.0.linear_attn.in_proj_qkv.weight",
+                qkv_reference,
+                qkv_alternative,
+                qkv_reference[qkv_rows],
+                qkv_alternative[qkv_rows],
+            ),
+            (
+                "blk.0.ssm_out.weight",
+                "model.layers.0.linear_attn.out_proj.weight",
+                out_reference,
+                out_alternative,
+                out_reference[:, out_columns],
+                out_alternative[:, out_columns],
+            ),
+        ]
+
+        for (name, normalized_name, reference, alternative,
+             canonical_reference, canonical_alternative) in fixtures:
+            with self.subTest(name=name):
+                store = self.RelaxedCandidateStore({
+                    (name, GGMLType.Q4_0): canonical_reference,
+                    (name, GGMLType.Q2_0): canonical_alternative,
+                })
+                source = NativeManifestRelaxedLinearSource(
+                    store,
+                    {
+                        "rco_search": True,
+                        "destination_name": name,
+                        "normalized_source_name": normalized_name,
+                        "source_shape": list(reference.shape),
+                    },
+                    reference_type=GGMLType.Q4_0,
+                    alternative_types=(GGMLType.Q2_0,),
+                    geometry=geometry,
+                    rows_per_chunk=3,
+                )
+                restored_reference = np.concatenate([
+                    rows for _, rows in source.iter_reference_rows()
+                ])
+                restored_delta = np.concatenate([
+                    rows for _, rows in source.iter_delta_rows(0)
+                ])
+                np.testing.assert_array_equal(
+                    restored_reference, reference)
+                np.testing.assert_allclose(
+                    restored_delta, alternative - reference,
+                    atol=0.0, rtol=0.0)
+
+                torch.manual_seed(41)
+                values = torch.randn(
+                    2, reference.shape[1], requires_grad=True)
+                logits = torch.tensor(
+                    [0.3, -0.2], requires_grad=True)
+                output = streaming_relaxed_linear(values, logits, source)
+                loss = output.square().mean()
+                loss.backward()
+
+                dense_values = values.detach().clone().requires_grad_(True)
+                dense_logits = logits.detach().clone().requires_grad_(True)
+                probability = torch.softmax(dense_logits, dim=0)[0]
+                mixed = torch.from_numpy(reference) + probability * (
+                    torch.from_numpy(alternative)
+                    - torch.from_numpy(reference))
+                dense_output = torch.nn.functional.linear(
+                    dense_values, mixed)
+                dense_loss = dense_output.square().mean()
+                dense_loss.backward()
+
+                self.assertTrue(torch.allclose(
+                    output, dense_output, atol=1e-5, rtol=1e-5))
+                self.assertTrue(torch.allclose(
+                    values.grad, dense_values.grad, atol=1e-5, rtol=1e-5))
+                self.assertTrue(torch.allclose(
+                    logits.grad, dense_logits.grad, atol=1e-5, rtol=1e-5))
+                self.assertGreater(source.stats.reference_payload_bytes_read, 0)
+                self.assertGreater(source.stats.alternative_payload_bytes_read, 0)
+                self.assertLessEqual(
+                    source.stats.max_resident_decoded_bytes,
+                    3 * 3 * reference.shape[1] * 4,
+                )
 
 
 if __name__ == "__main__":

@@ -4,9 +4,11 @@ from __future__ import annotations
 
 import math
 import re
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Mapping
 
+import numpy as np
 import torch
 
 from native_store import NativeCandidateStore
@@ -179,4 +181,150 @@ class NativeManifestWeightStore:
         }
 
 
-__all__ = ["NativeManifestWeightStore"]
+@dataclass
+class NativeRelaxedSourceStats:
+    """Packed-I/O and decoded working-set accounting for one row source."""
+
+    reference_passes: int = 0
+    alternative_passes: int = 0
+    reference_payload_bytes_read: int = 0
+    alternative_payload_bytes_read: int = 0
+    max_resident_decoded_bytes: int = 0
+
+
+class NativeManifestRelaxedLinearSource:
+    """Stream one manifest matrix's native candidates in HF linear order.
+
+    The reference is normally the highest native type and alternatives are the
+    lower native types.  Deltas are formed from aligned decoded row chunks and
+    released by the consumer immediately.  Row/column converter permutations
+    are inverted without materializing a complete candidate matrix.
+    """
+
+    def __init__(
+        self,
+        store: NativeCandidateStore,
+        entry: Mapping[str, Any],
+        *,
+        reference_type: GGMLType | int,
+        alternative_types: tuple[GGMLType | int, ...],
+        geometry: Qwen35LinearAttentionGeometry,
+        rows_per_chunk: int = 16,
+    ) -> None:
+        if rows_per_chunk <= 0:
+            raise ValueError("rows_per_chunk must be positive")
+        if not alternative_types:
+            raise ValueError("at least one alternative type is required")
+        if not entry.get("rco_search"):
+            raise ValueError("manifest entry is not searchable")
+        source_shape = tuple(int(value) for value in entry["source_shape"])
+        candidate_shape = tuple(int(value) for value in entry.get(
+            "candidate_source_shape", source_shape))
+        if len(source_shape) != 2 or candidate_shape != source_shape:
+            raise ValueError(
+                "relaxed linear source currently requires one complete 2-D "
+                "manifest matrix")
+        self.store = store
+        self.entry = dict(entry)
+        self.tensor_name = str(entry["destination_name"])
+        self.reference_type = GGMLType(reference_type)
+        self.alternative_types = tuple(
+            GGMLType(value) for value in alternative_types)
+        if self.reference_type in self.alternative_types:
+            raise ValueError("reference type also appears as an alternative")
+        if len(set(self.alternative_types)) != len(self.alternative_types):
+            raise ValueError("alternative types must be unique")
+        self.rows_per_chunk = int(rows_per_chunk)
+        self.out_features, self.in_features = source_shape
+        self.alternative_count = len(self.alternative_types)
+        self.stats = NativeRelaxedSourceStats()
+
+        row_order, self._column_order = matrix_permutations(
+            str(entry["normalized_source_name"]), source_shape, geometry)
+        self._column_transform_multiplier = (
+            1 if self._column_order is None else 2)
+        if row_order is None:
+            self._source_to_canonical_rows = None
+        else:
+            inverse = np.empty_like(row_order)
+            inverse[row_order] = np.arange(len(row_order), dtype=np.int64)
+            self._source_to_canonical_rows = inverse
+
+        expected_gguf_shape = list(reversed(candidate_shape))
+        for candidate_type in (
+            self.reference_type, *self.alternative_types,
+        ):
+            metadata = store.metadata(self.tensor_name, candidate_type)
+            if metadata["gguf_shape"] != expected_gguf_shape:
+                raise ValueError(
+                    f"candidate shape changed for {self.tensor_name}/"
+                    f"{candidate_type.name}")
+
+    def _payload_bytes(self, candidate_type: GGMLType) -> int:
+        return int(self.store.metadata(
+            self.tensor_name, candidate_type)["payload_bytes"])
+
+    def _iter_type(self, candidate_type: GGMLType):
+        if self._source_to_canonical_rows is None:
+            rows = self.store.iter_decoded_rows(
+                self.tensor_name,
+                candidate_type,
+                rows_per_chunk=self.rows_per_chunk,
+            )
+        else:
+            rows = self.store.iter_decoded_row_indices(
+                self.tensor_name,
+                candidate_type,
+                self._source_to_canonical_rows,
+                rows_per_chunk=self.rows_per_chunk,
+            )
+        for start, decoded in rows:
+            if self._column_order is None:
+                restored = decoded
+            else:
+                restored = np.empty_like(decoded)
+                restored[:, self._column_order] = decoded
+                del decoded
+            yield start, restored
+
+    def iter_reference_rows(self):
+        self.stats.reference_passes += 1
+        self.stats.reference_payload_bytes_read += self._payload_bytes(
+            self.reference_type)
+        for start, reference in self._iter_type(self.reference_type):
+            self.stats.max_resident_decoded_bytes = max(
+                self.stats.max_resident_decoded_bytes,
+                self._column_transform_multiplier * reference.nbytes,
+            )
+            yield start, reference
+
+    def iter_delta_rows(self, alternative_index: int):
+        if not 0 <= alternative_index < self.alternative_count:
+            raise IndexError("alternative index is out of range")
+        alternative_type = self.alternative_types[alternative_index]
+        self.stats.alternative_passes += 1
+        self.stats.alternative_payload_bytes_read += self._payload_bytes(
+            alternative_type)
+        self.stats.reference_payload_bytes_read += self._payload_bytes(
+            self.reference_type)
+        alternatives = self._iter_type(alternative_type)
+        references = self._iter_type(self.reference_type)
+        for (start, alternative), (reference_start, reference) in zip(
+            alternatives, references, strict=True,
+        ):
+            if start != reference_start or alternative.shape != reference.shape:
+                raise RuntimeError("native reference/alternative chunks differ")
+            self.stats.max_resident_decoded_bytes = max(
+                self.stats.max_resident_decoded_bytes,
+                (self._column_transform_multiplier + 1)
+                * max(alternative.nbytes, reference.nbytes),
+            )
+            alternative -= reference
+            yield start, alternative
+
+
+__all__ = [
+    "NativeManifestRelaxedLinearSource",
+    "NativeManifestWeightStore",
+    "NativeRelaxedSourceStats",
+]

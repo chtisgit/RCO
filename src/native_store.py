@@ -355,6 +355,69 @@ class NativeCandidateStore:
                 finally:
                     view.release()
 
+    def iter_decoded_row_indices(
+        self,
+        tensor_name: str,
+        ggml_type: GGMLType | int,
+        row_indices: Iterable[int],
+        *,
+        rows_per_chunk: int = 16,
+    ) -> Iterator[tuple[int, np.ndarray]]:
+        """Yield decoded rows in a caller-selected order with bounded scratch.
+
+        Native GGML rows have fixed byte offsets.  This permits inverse
+        converter permutations to be applied without decoding a complete
+        matrix or retaining a full reordered candidate.
+        """
+        if rows_per_chunk <= 0:
+            raise ValueError("rows_per_chunk must be positive")
+        metadata = self.metadata(tensor_name, ggml_type)
+        type_name = str(metadata["ggml_type_name"])
+        path = self._verify(tensor_name, type_name, metadata)
+        row_width = int(metadata["row_width"])
+        row_count = int(metadata["row_count"])
+        row_size = int(metadata["row_size"])
+        indices = np.asarray(tuple(int(value) for value in row_indices), dtype=np.int64)
+        if indices.ndim != 1 or len(indices) == 0:
+            raise ValueError("row_indices must be a non-empty vector")
+        if np.any(indices < 0) or np.any(indices >= row_count):
+            raise IndexError("row index is outside the candidate tensor")
+
+        with path.open("rb") as handle:
+            with mmap.mmap(handle.fileno(), 0, access=mmap.ACCESS_READ) as payload:
+                view = memoryview(payload)
+                try:
+                    for output_start in range(0, len(indices), rows_per_chunk):
+                        selected = indices[
+                            output_start:output_start + rows_per_chunk]
+                        decoded = np.empty(
+                            (len(selected), row_width), dtype=np.float32)
+                        run_output_start = 0
+                        while run_output_start < len(selected):
+                            run_output_stop = run_output_start + 1
+                            while (
+                                run_output_stop < len(selected)
+                                and selected[run_output_stop]
+                                == selected[run_output_stop - 1] + 1
+                            ):
+                                run_output_stop += 1
+                            first_row = int(selected[run_output_start])
+                            last_row = int(selected[run_output_stop - 1]) + 1
+                            packed = view[
+                                first_row * row_size:last_row * row_size]
+                            try:
+                                self.codec.dequantize_rows_into(
+                                    packed,
+                                    ggml_type,
+                                    decoded[run_output_start:run_output_stop],
+                                )
+                            finally:
+                                packed.release()
+                            run_output_start = run_output_stop
+                        yield output_start, decoded
+                finally:
+                    view.release()
+
     def iter_payload(
         self,
         tensor_name: str,
