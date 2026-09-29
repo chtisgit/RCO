@@ -1,0 +1,554 @@
+{
+  "block_schema": {
+    "checkpoint_count": 14,
+    "expected_count": 14,
+    "missing": [],
+    "prefix": "model.language_model.layers.0",
+    "unexpected": []
+  },
+  "candidate_store": {
+    "alternative_type": "Q2_0",
+    "decision_count": 8,
+    "index_sha256": "bc366ecaaa500223dddce7c7855382b01323a9638ec73dab9b11adc216ab9824",
+    "path": "/home/christian/projects/gsq-rco-moe/data/qwen35_2b_block0_native",
+    "reference_type": "Q4_0",
+    "rows_per_chunk": 16
+  },
+  "comparison": {
+    "assignment_gradient": {
+      "cosine_similarity": 0.9999415874481201,
+      "max_absolute_error": 2.303655492141843e-06,
+      "relative_frobenius_error": 0.011343414895236492,
+      "rmse": 1.1700080904120114e-06
+    },
+    "input_gradient": {
+      "cosine_similarity": 0.9992823600769043,
+      "max_absolute_error": 5.7220458984375e-06,
+      "relative_frobenius_error": 0.03782949596643448,
+      "rmse": 3.285207412773161e-07
+    },
+    "loss_absolute_error": 1.1071097105741501e-07,
+    "output": {
+      "cosine_similarity": 0.9999687075614929,
+      "max_absolute_error": 0.015625,
+      "relative_frobenius_error": 0.007783627137541771,
+      "rmse": 0.00036661673220805824
+    }
+  },
+  "dense_reference": {
+    "assignment_gradient_sha256": "ca8116b7cc116493d3c28c3b82fc73983c1505bdc90069c61180aca3caa2b26d",
+    "candidates": [
+      {
+        "delta_bytes": 65536,
+        "reference_bytes": 65536,
+        "tensor": "blk.0.ssm_alpha.weight"
+      },
+      {
+        "delta_bytes": 65536,
+        "reference_bytes": 65536,
+        "tensor": "blk.0.ssm_beta.weight"
+      },
+      {
+        "delta_bytes": 25165824,
+        "reference_bytes": 25165824,
+        "tensor": "blk.0.attn_qkv.weight"
+      },
+      {
+        "delta_bytes": 8388608,
+        "reference_bytes": 8388608,
+        "tensor": "blk.0.attn_gate.weight"
+      },
+      {
+        "delta_bytes": 8388608,
+        "reference_bytes": 8388608,
+        "tensor": "blk.0.ssm_out.weight"
+      },
+      {
+        "delta_bytes": 25165824,
+        "reference_bytes": 25165824,
+        "tensor": "blk.0.ffn_down.weight"
+      },
+      {
+        "delta_bytes": 25165824,
+        "reference_bytes": 25165824,
+        "tensor": "blk.0.ffn_gate.weight"
+      },
+      {
+        "delta_bytes": 25165824,
+        "reference_bytes": 25165824,
+        "tensor": "blk.0.ffn_up.weight"
+      }
+    ],
+    "elapsed_seconds": 11.087289451970719,
+    "input_gradient_sha256": "914ee65f662832e99df7903c75bce9718bb01d1761c6b436f67379efcc58b9d7",
+    "loss": 0.0005168848438188434,
+    "output_sha256": "ef78b6ec49da20db40409bd2628afcf9de49e28465f7990ff256232f517941a1",
+    "persistent_delta_bytes": 117571584,
+    "resident_block_bytes": 117629536
+  },
+  "elapsed_seconds": 37.323406349984,
+  "environment": {
+    "cuda_available": false,
+    "device": "cpu",
+    "python": "3.12.13",
+    "torch": "2.5.1+cu121",
+    "transformers": "5.13.1"
+  },
+  "initial_logits": [
+    [
+      -0.6000000238418579,
+      -0.5200000405311584
+    ],
+    [
+      -0.4399999976158142,
+      -0.36000001430511475
+    ],
+    [
+      -0.2800000011920929,
+      -0.19999998807907104
+    ],
+    [
+      -0.11999998986721039,
+      -0.039999984204769135
+    ],
+    [
+      0.039999984204769135,
+      0.11999998986721039
+    ],
+    [
+      0.19999998807907104,
+      0.2800000011920929
+    ],
+    [
+      0.36000001430511475,
+      0.4399999976158142
+    ],
+    [
+      0.5200000405311584,
+      0.6000000238418579
+    ]
+  ],
+  "memory": {
+    "dense_persistent_delta_bytes": 117571584,
+    "dense_resident_block_bytes": 117629536,
+    "streamed_max_materialized_weight_chunk_bytes": 196608,
+    "streamed_max_native_source_working_set_bytes": 786432,
+    "streamed_packed_payload_bytes_read": 248002560,
+    "streamed_peak_process_rss_bytes": 526016512,
+    "total_peak_after_dense_reference_bytes": 1194418176
+  },
+  "oracle": {
+    "metadata": {
+      "calibration_text": "Native GGML candidates must preserve the model objective while keeping only one decoder block resident at a time. This fixed sentence is the Qwen3.5 dense calibration oracle.",
+      "layer": "0",
+      "loss": "5.655152320861816",
+      "repo_id": "Qwen/Qwen3.5-2B-Base",
+      "revision": "b1485b2fa6dfa1287294f269f5fb618e03d52d7c"
+    },
+    "path": "/home/christian/projects/gsq-rco-moe/repos/RCO/reports/qwen35_2b_block0_oracle.safetensors",
+    "sha256": "63bce45d5a6e0e38adeef3ff7a32a48a2e5c772ce93b91dcb92d4fb1af156545"
+  },
+  "same_seed_reproducible": true,
+  "schema": 1,
+  "scope": "complete Qwen3.5-2B layer-0 streamed relaxed forward/backward against released dense interpolation on eight native Q2_0/Q4_0 decisions; this is not yet the fused-expert 35B or CUDA gate",
+  "source": {
+    "identity_path": "/home/christian/projects/gsq-rco-moe/repos/RCO/reports/qwen35_2b_identity.json",
+    "identity_sha256": "470a00612636cf3ba588eadce9dec5c6902703890891130571c972d5fdc51427",
+    "manifest_path": "/home/christian/projects/gsq-rco-moe/repos/RCO/reports/qwen35_2b_gguf_manifest.json",
+    "manifest_sha256": "f12b1c32b97ce069fab99f0cd76a791435796ed347088de97ff76c5285692476",
+    "model_dir": "/home/christian/projects/gsq-rco-moe/data/qwen35_2b_base",
+    "repo_id": "Qwen/Qwen3.5-2B-Base",
+    "revision": "b1485b2fa6dfa1287294f269f5fb618e03d52d7c"
+  },
+  "status": "pass",
+  "streamed": {
+    "assignment_gradient_sha256": "6ba6671d16eb2b8ce4d87c6aa4fa420c15ef7195772671975365e8ff00e077e7",
+    "block_stats": {
+      "checkpoint_bytes_read": 235259072,
+      "load_passes": 2,
+      "max_materialized_block_bytes": 117629536,
+      "release_passes": 2
+    },
+    "candidates": [
+      {
+        "linear_stats": {
+          "backward_alternative_bytes": 65536,
+          "backward_alternative_passes": 1,
+          "backward_reference_bytes": 65536,
+          "backward_reference_passes": 1,
+          "forward_alternative_bytes": 131072,
+          "forward_alternative_passes": 2,
+          "forward_reference_bytes": 131072,
+          "forward_reference_passes": 2,
+          "max_materialized_chunk_bytes": 65536
+        },
+        "native_source_stats": {
+          "alternative_passes": 3,
+          "alternative_payload_bytes_read": 27648,
+          "max_resident_decoded_bytes": 262144,
+          "reference_passes": 3,
+          "reference_payload_bytes_read": 110592
+        },
+        "source_tensor": "model.language_model.layers.0.linear_attn.in_proj_a.weight",
+        "tensor": "blk.0.ssm_alpha.weight"
+      },
+      {
+        "linear_stats": {
+          "backward_alternative_bytes": 65536,
+          "backward_alternative_passes": 1,
+          "backward_reference_bytes": 65536,
+          "backward_reference_passes": 1,
+          "forward_alternative_bytes": 131072,
+          "forward_alternative_passes": 2,
+          "forward_reference_bytes": 131072,
+          "forward_reference_passes": 2,
+          "max_materialized_chunk_bytes": 65536
+        },
+        "native_source_stats": {
+          "alternative_passes": 3,
+          "alternative_payload_bytes_read": 27648,
+          "max_resident_decoded_bytes": 262144,
+          "reference_passes": 3,
+          "reference_payload_bytes_read": 110592
+        },
+        "source_tensor": "model.language_model.layers.0.linear_attn.in_proj_b.weight",
+        "tensor": "blk.0.ssm_beta.weight"
+      },
+      {
+        "linear_stats": {
+          "backward_alternative_bytes": 25165824,
+          "backward_alternative_passes": 1,
+          "backward_reference_bytes": 25165824,
+          "backward_reference_passes": 1,
+          "forward_alternative_bytes": 50331648,
+          "forward_alternative_passes": 2,
+          "forward_reference_bytes": 50331648,
+          "forward_reference_passes": 2,
+          "max_materialized_chunk_bytes": 65536
+        },
+        "native_source_stats": {
+          "alternative_passes": 3,
+          "alternative_payload_bytes_read": 10616832,
+          "max_resident_decoded_bytes": 262144,
+          "reference_passes": 3,
+          "reference_payload_bytes_read": 42467328
+        },
+        "source_tensor": "model.language_model.layers.0.linear_attn.in_proj_qkv.weight",
+        "tensor": "blk.0.attn_qkv.weight"
+      },
+      {
+        "linear_stats": {
+          "backward_alternative_bytes": 8388608,
+          "backward_alternative_passes": 1,
+          "backward_reference_bytes": 8388608,
+          "backward_reference_passes": 1,
+          "forward_alternative_bytes": 16777216,
+          "forward_alternative_passes": 2,
+          "forward_reference_bytes": 16777216,
+          "forward_reference_passes": 2,
+          "max_materialized_chunk_bytes": 65536
+        },
+        "native_source_stats": {
+          "alternative_passes": 3,
+          "alternative_payload_bytes_read": 3538944,
+          "max_resident_decoded_bytes": 262144,
+          "reference_passes": 3,
+          "reference_payload_bytes_read": 14155776
+        },
+        "source_tensor": "model.language_model.layers.0.linear_attn.in_proj_z.weight",
+        "tensor": "blk.0.attn_gate.weight"
+      },
+      {
+        "linear_stats": {
+          "backward_alternative_bytes": 8388608,
+          "backward_alternative_passes": 1,
+          "backward_reference_bytes": 8388608,
+          "backward_reference_passes": 1,
+          "forward_alternative_bytes": 16777216,
+          "forward_alternative_passes": 2,
+          "forward_reference_bytes": 16777216,
+          "forward_reference_passes": 2,
+          "max_materialized_chunk_bytes": 65536
+        },
+        "native_source_stats": {
+          "alternative_passes": 3,
+          "alternative_payload_bytes_read": 3538944,
+          "max_resident_decoded_bytes": 393216,
+          "reference_passes": 3,
+          "reference_payload_bytes_read": 14155776
+        },
+        "source_tensor": "model.language_model.layers.0.linear_attn.out_proj.weight",
+        "tensor": "blk.0.ssm_out.weight"
+      },
+      {
+        "linear_stats": {
+          "backward_alternative_bytes": 25165824,
+          "backward_alternative_passes": 1,
+          "backward_reference_bytes": 25165824,
+          "backward_reference_passes": 1,
+          "forward_alternative_bytes": 50331648,
+          "forward_alternative_passes": 2,
+          "forward_reference_bytes": 50331648,
+          "forward_reference_passes": 2,
+          "max_materialized_chunk_bytes": 196608
+        },
+        "native_source_stats": {
+          "alternative_passes": 3,
+          "alternative_payload_bytes_read": 10616832,
+          "max_resident_decoded_bytes": 786432,
+          "reference_passes": 3,
+          "reference_payload_bytes_read": 42467328
+        },
+        "source_tensor": "model.language_model.layers.0.mlp.down_proj.weight",
+        "tensor": "blk.0.ffn_down.weight"
+      },
+      {
+        "linear_stats": {
+          "backward_alternative_bytes": 25165824,
+          "backward_alternative_passes": 1,
+          "backward_reference_bytes": 25165824,
+          "backward_reference_passes": 1,
+          "forward_alternative_bytes": 50331648,
+          "forward_alternative_passes": 2,
+          "forward_reference_bytes": 50331648,
+          "forward_reference_passes": 2,
+          "max_materialized_chunk_bytes": 65536
+        },
+        "native_source_stats": {
+          "alternative_passes": 3,
+          "alternative_payload_bytes_read": 10616832,
+          "max_resident_decoded_bytes": 262144,
+          "reference_passes": 3,
+          "reference_payload_bytes_read": 42467328
+        },
+        "source_tensor": "model.language_model.layers.0.mlp.gate_proj.weight",
+        "tensor": "blk.0.ffn_gate.weight"
+      },
+      {
+        "linear_stats": {
+          "backward_alternative_bytes": 25165824,
+          "backward_alternative_passes": 1,
+          "backward_reference_bytes": 25165824,
+          "backward_reference_passes": 1,
+          "forward_alternative_bytes": 50331648,
+          "forward_alternative_passes": 2,
+          "forward_reference_bytes": 50331648,
+          "forward_reference_passes": 2,
+          "max_materialized_chunk_bytes": 65536
+        },
+        "native_source_stats": {
+          "alternative_passes": 3,
+          "alternative_payload_bytes_read": 10616832,
+          "max_resident_decoded_bytes": 262144,
+          "reference_passes": 3,
+          "reference_payload_bytes_read": 42467328
+        },
+        "source_tensor": "model.language_model.layers.0.mlp.up_proj.weight",
+        "tensor": "blk.0.ffn_up.weight"
+      }
+    ],
+    "elapsed_seconds": 11.952214648015797,
+    "input_gradient_sha256": "763d7a63eca691d9f210074935fa82ca13e32510e8eb702eccfc7717e9def9dd",
+    "loss": 0.000516774132847786,
+    "output_sha256": "17350ad47653a8d60b3ed4aa30b87c074f6f1f01ff9909e150a8cec342f9b220"
+  },
+  "streamed_repeat": {
+    "assignment_gradient_sha256": "6ba6671d16eb2b8ce4d87c6aa4fa420c15ef7195772671975365e8ff00e077e7",
+    "block_stats": {
+      "checkpoint_bytes_read": 235259072,
+      "load_passes": 2,
+      "max_materialized_block_bytes": 117629536,
+      "release_passes": 2
+    },
+    "candidates": [
+      {
+        "linear_stats": {
+          "backward_alternative_bytes": 65536,
+          "backward_alternative_passes": 1,
+          "backward_reference_bytes": 65536,
+          "backward_reference_passes": 1,
+          "forward_alternative_bytes": 131072,
+          "forward_alternative_passes": 2,
+          "forward_reference_bytes": 131072,
+          "forward_reference_passes": 2,
+          "max_materialized_chunk_bytes": 65536
+        },
+        "native_source_stats": {
+          "alternative_passes": 3,
+          "alternative_payload_bytes_read": 27648,
+          "max_resident_decoded_bytes": 262144,
+          "reference_passes": 3,
+          "reference_payload_bytes_read": 110592
+        },
+        "source_tensor": "model.language_model.layers.0.linear_attn.in_proj_a.weight",
+        "tensor": "blk.0.ssm_alpha.weight"
+      },
+      {
+        "linear_stats": {
+          "backward_alternative_bytes": 65536,
+          "backward_alternative_passes": 1,
+          "backward_reference_bytes": 65536,
+          "backward_reference_passes": 1,
+          "forward_alternative_bytes": 131072,
+          "forward_alternative_passes": 2,
+          "forward_reference_bytes": 131072,
+          "forward_reference_passes": 2,
+          "max_materialized_chunk_bytes": 65536
+        },
+        "native_source_stats": {
+          "alternative_passes": 3,
+          "alternative_payload_bytes_read": 27648,
+          "max_resident_decoded_bytes": 262144,
+          "reference_passes": 3,
+          "reference_payload_bytes_read": 110592
+        },
+        "source_tensor": "model.language_model.layers.0.linear_attn.in_proj_b.weight",
+        "tensor": "blk.0.ssm_beta.weight"
+      },
+      {
+        "linear_stats": {
+          "backward_alternative_bytes": 25165824,
+          "backward_alternative_passes": 1,
+          "backward_reference_bytes": 25165824,
+          "backward_reference_passes": 1,
+          "forward_alternative_bytes": 50331648,
+          "forward_alternative_passes": 2,
+          "forward_reference_bytes": 50331648,
+          "forward_reference_passes": 2,
+          "max_materialized_chunk_bytes": 65536
+        },
+        "native_source_stats": {
+          "alternative_passes": 3,
+          "alternative_payload_bytes_read": 10616832,
+          "max_resident_decoded_bytes": 262144,
+          "reference_passes": 3,
+          "reference_payload_bytes_read": 42467328
+        },
+        "source_tensor": "model.language_model.layers.0.linear_attn.in_proj_qkv.weight",
+        "tensor": "blk.0.attn_qkv.weight"
+      },
+      {
+        "linear_stats": {
+          "backward_alternative_bytes": 8388608,
+          "backward_alternative_passes": 1,
+          "backward_reference_bytes": 8388608,
+          "backward_reference_passes": 1,
+          "forward_alternative_bytes": 16777216,
+          "forward_alternative_passes": 2,
+          "forward_reference_bytes": 16777216,
+          "forward_reference_passes": 2,
+          "max_materialized_chunk_bytes": 65536
+        },
+        "native_source_stats": {
+          "alternative_passes": 3,
+          "alternative_payload_bytes_read": 3538944,
+          "max_resident_decoded_bytes": 262144,
+          "reference_passes": 3,
+          "reference_payload_bytes_read": 14155776
+        },
+        "source_tensor": "model.language_model.layers.0.linear_attn.in_proj_z.weight",
+        "tensor": "blk.0.attn_gate.weight"
+      },
+      {
+        "linear_stats": {
+          "backward_alternative_bytes": 8388608,
+          "backward_alternative_passes": 1,
+          "backward_reference_bytes": 8388608,
+          "backward_reference_passes": 1,
+          "forward_alternative_bytes": 16777216,
+          "forward_alternative_passes": 2,
+          "forward_reference_bytes": 16777216,
+          "forward_reference_passes": 2,
+          "max_materialized_chunk_bytes": 65536
+        },
+        "native_source_stats": {
+          "alternative_passes": 3,
+          "alternative_payload_bytes_read": 3538944,
+          "max_resident_decoded_bytes": 393216,
+          "reference_passes": 3,
+          "reference_payload_bytes_read": 14155776
+        },
+        "source_tensor": "model.language_model.layers.0.linear_attn.out_proj.weight",
+        "tensor": "blk.0.ssm_out.weight"
+      },
+      {
+        "linear_stats": {
+          "backward_alternative_bytes": 25165824,
+          "backward_alternative_passes": 1,
+          "backward_reference_bytes": 25165824,
+          "backward_reference_passes": 1,
+          "forward_alternative_bytes": 50331648,
+          "forward_alternative_passes": 2,
+          "forward_reference_bytes": 50331648,
+          "forward_reference_passes": 2,
+          "max_materialized_chunk_bytes": 196608
+        },
+        "native_source_stats": {
+          "alternative_passes": 3,
+          "alternative_payload_bytes_read": 10616832,
+          "max_resident_decoded_bytes": 786432,
+          "reference_passes": 3,
+          "reference_payload_bytes_read": 42467328
+        },
+        "source_tensor": "model.language_model.layers.0.mlp.down_proj.weight",
+        "tensor": "blk.0.ffn_down.weight"
+      },
+      {
+        "linear_stats": {
+          "backward_alternative_bytes": 25165824,
+          "backward_alternative_passes": 1,
+          "backward_reference_bytes": 25165824,
+          "backward_reference_passes": 1,
+          "forward_alternative_bytes": 50331648,
+          "forward_alternative_passes": 2,
+          "forward_reference_bytes": 50331648,
+          "forward_reference_passes": 2,
+          "max_materialized_chunk_bytes": 65536
+        },
+        "native_source_stats": {
+          "alternative_passes": 3,
+          "alternative_payload_bytes_read": 10616832,
+          "max_resident_decoded_bytes": 262144,
+          "reference_passes": 3,
+          "reference_payload_bytes_read": 42467328
+        },
+        "source_tensor": "model.language_model.layers.0.mlp.gate_proj.weight",
+        "tensor": "blk.0.ffn_gate.weight"
+      },
+      {
+        "linear_stats": {
+          "backward_alternative_bytes": 25165824,
+          "backward_alternative_passes": 1,
+          "backward_reference_bytes": 25165824,
+          "backward_reference_passes": 1,
+          "forward_alternative_bytes": 50331648,
+          "forward_alternative_passes": 2,
+          "forward_reference_bytes": 50331648,
+          "forward_reference_passes": 2,
+          "max_materialized_chunk_bytes": 65536
+        },
+        "native_source_stats": {
+          "alternative_passes": 3,
+          "alternative_payload_bytes_read": 10616832,
+          "max_resident_decoded_bytes": 262144,
+          "reference_passes": 3,
+          "reference_payload_bytes_read": 42467328
+        },
+        "source_tensor": "model.language_model.layers.0.mlp.up_proj.weight",
+        "tensor": "blk.0.ffn_up.weight"
+      }
+    ],
+    "elapsed_seconds": 11.976345452014357,
+    "input_gradient_sha256": "763d7a63eca691d9f210074935fa82ca13e32510e8eb702eccfc7717e9def9dd",
+    "loss": 0.000516774132847786,
+    "output_sha256": "17350ad47653a8d60b3ed4aa30b87c074f6f1f01ff9909e150a8cec342f9b220"
+  },
+  "tolerance_pass": true,
+  "tolerances": {
+    "assignment_gradient_relative_frobenius_error": 0.05,
+    "input_gradient_relative_frobenius_error": 0.05,
+    "loss_absolute_error": 0.001,
+    "minimum_gradient_cosine_similarity": 0.999,
+    "output_relative_frobenius_error": 0.02
+  }
+}
