@@ -1,0 +1,227 @@
+{
+  "all_cases_pass": true,
+  "cases": [
+    {
+      "dense_delta_bytes_avoided": 2288,
+      "dense_loss": 8.81238842010498,
+      "dtype": "float64",
+      "errors": {
+        "assignment_gradient_max_abs": 0.0,
+        "bias_gradient_max_abs": 0.0,
+        "input_gradient_max_abs": 0.0,
+        "loss_abs": 0.0,
+        "output_max_abs": 0.0
+      },
+      "result_sha256": "d9acc166c562ba50b11c19d121c290a665e38a27b15ddbe6e2d6d3033c4a985b",
+      "rows_per_chunk": 1,
+      "saved_tensor_bytes": 904,
+      "saved_tensor_count": 2,
+      "saved_tensor_shapes": [
+        [
+          2,
+          5,
+          11
+        ],
+        [
+          3
+        ]
+      ],
+      "seed": 101,
+      "shape": {
+        "alternatives": 2,
+        "batch": 2,
+        "in_features": 11,
+        "out_features": 13,
+        "sequence": 5
+      },
+      "stats": {
+        "backward_alternative_bytes": 2288,
+        "backward_alternative_passes": 2,
+        "backward_reference_bytes": 1144,
+        "backward_reference_passes": 1,
+        "forward_alternative_bytes": 2288,
+        "forward_alternative_passes": 2,
+        "forward_reference_bytes": 1144,
+        "forward_reference_passes": 1,
+        "max_materialized_chunk_bytes": 88
+      },
+      "status": "pass",
+      "streamed_loss": 8.81238842010498,
+      "tolerance": 1e-10
+    },
+    {
+      "dense_delta_bytes_avoided": 2288,
+      "dense_loss": 13.047955513000488,
+      "dtype": "float64",
+      "errors": {
+        "assignment_gradient_max_abs": 0.0,
+        "bias_gradient_max_abs": 0.0,
+        "input_gradient_max_abs": 0.0,
+        "loss_abs": 0.0,
+        "output_max_abs": 0.0
+      },
+      "result_sha256": "ab3817e4501953ea110e3b8f44132568009197f21c73d243a383b482bc5cf6ee",
+      "rows_per_chunk": 4,
+      "saved_tensor_bytes": 904,
+      "saved_tensor_count": 2,
+      "saved_tensor_shapes": [
+        [
+          2,
+          5,
+          11
+        ],
+        [
+          3
+        ]
+      ],
+      "seed": 103,
+      "shape": {
+        "alternatives": 2,
+        "batch": 2,
+        "in_features": 11,
+        "out_features": 13,
+        "sequence": 5
+      },
+      "stats": {
+        "backward_alternative_bytes": 2288,
+        "backward_alternative_passes": 2,
+        "backward_reference_bytes": 1144,
+        "backward_reference_passes": 1,
+        "forward_alternative_bytes": 2288,
+        "forward_alternative_passes": 2,
+        "forward_reference_bytes": 1144,
+        "forward_reference_passes": 1,
+        "max_materialized_chunk_bytes": 352
+      },
+      "status": "pass",
+      "streamed_loss": 13.047955513000488,
+      "tolerance": 1e-10
+    },
+    {
+      "dense_delta_bytes_avoided": 1144,
+      "dense_loss": 10.290205955505371,
+      "dtype": "float32",
+      "errors": {
+        "assignment_gradient_max_abs": 1.1175870895385742e-08,
+        "bias_gradient_max_abs": 2.9802322387695312e-08,
+        "input_gradient_max_abs": 8.940696716308594e-08,
+        "loss_abs": 1.9073486328125e-06,
+        "output_max_abs": 1.430511474609375e-06
+      },
+      "result_sha256": "e17ef6df478a022eceb84328b052638a584039ea61073edf65042f8ecff8b320",
+      "rows_per_chunk": 3,
+      "saved_tensor_bytes": 452,
+      "saved_tensor_count": 2,
+      "saved_tensor_shapes": [
+        [
+          2,
+          5,
+          11
+        ],
+        [
+          3
+        ]
+      ],
+      "seed": 107,
+      "shape": {
+        "alternatives": 2,
+        "batch": 2,
+        "in_features": 11,
+        "out_features": 13,
+        "sequence": 5
+      },
+      "stats": {
+        "backward_alternative_bytes": 1144,
+        "backward_alternative_passes": 2,
+        "backward_reference_bytes": 572,
+        "backward_reference_passes": 1,
+        "forward_alternative_bytes": 1144,
+        "forward_alternative_passes": 2,
+        "forward_reference_bytes": 572,
+        "forward_reference_passes": 1,
+        "max_materialized_chunk_bytes": 132
+      },
+      "status": "pass",
+      "streamed_loss": 10.290204048156738,
+      "tolerance": 2e-06
+    },
+    {
+      "dense_delta_bytes_avoided": 572,
+      "dense_loss": 13.220836639404297,
+      "dtype": "bfloat16",
+      "errors": {
+        "assignment_gradient_max_abs": 0.000244140625,
+        "bias_gradient_max_abs": 0.001953125,
+        "input_gradient_max_abs": 0.0078125,
+        "loss_abs": 0.01568317413330078,
+        "output_max_abs": 0.03125
+      },
+      "result_sha256": "3bc7148367e00664c7f529c5e4570811e95d87255b26a5ab4d16d1c15feb7370",
+      "rows_per_chunk": 2,
+      "saved_tensor_bytes": 226,
+      "saved_tensor_count": 2,
+      "saved_tensor_shapes": [
+        [
+          2,
+          5,
+          11
+        ],
+        [
+          3
+        ]
+      ],
+      "seed": 109,
+      "shape": {
+        "alternatives": 2,
+        "batch": 2,
+        "in_features": 11,
+        "out_features": 13,
+        "sequence": 5
+      },
+      "stats": {
+        "backward_alternative_bytes": 572,
+        "backward_alternative_passes": 2,
+        "backward_reference_bytes": 286,
+        "backward_reference_passes": 1,
+        "forward_alternative_bytes": 572,
+        "forward_alternative_passes": 2,
+        "forward_reference_bytes": 286,
+        "forward_reference_passes": 1,
+        "max_materialized_chunk_bytes": 44
+      },
+      "status": "pass",
+      "streamed_loss": 13.236519813537598,
+      "tolerance": 0.04
+    }
+  ],
+  "environment": {
+    "device": "cpu",
+    "python": "3.12.13",
+    "torch": "2.5.1+cu121"
+  },
+  "limitations": [
+    "This gate uses a dense oracle row source, not native GGML files.",
+    "It validates one parametrized linear operation, not block reload or a complete model backward pass.",
+    "CUDA memory and kernel behavior remain untested while CUDA initialization is unavailable."
+  ],
+  "memory_invariant": {
+    "autograd_saved_values": "linear input and softmax probabilities",
+    "candidate_or_delta_saved_by_autograd": false,
+    "largest_materialized_weight_chunk_bytes": 352,
+    "maximum_autograd_saved_tensor_bytes": 904,
+    "maximum_dense_delta_bytes_avoided": 2288,
+    "source_reread_in_backward": true
+  },
+  "reference": "released search.quant.WeightInterpolation",
+  "same_seed_reproducible": true,
+  "schema": 1,
+  "scope": "tiny linear dense-equivalence gate for the Phase 5 streamed relaxed-backward fallback",
+  "status": "pass",
+  "worst_errors": {
+    "assignment_gradient_max_abs": 0.000244140625,
+    "bias_gradient_max_abs": 0.001953125,
+    "input_gradient_max_abs": 0.0078125,
+    "loss_abs": 0.01568317413330078,
+    "output_max_abs": 0.03125
+  }
+}
