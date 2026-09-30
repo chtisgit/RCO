@@ -1,0 +1,63 @@
+{
+  "candidate": {
+    "assignment_cost_bytes": 12997294272,
+    "assignment_sha256": "97e3bca23f1179792cc4dc2bc6abc2ae612efbbcac6e29e54726b6d8be21a3fa",
+    "candidate_store_index_sha256": "29078a0b396fdbde828ea2a0f052a4714fb0c73c008125d2c65b8fb16aa1b316",
+    "independent_hard_replay": true,
+    "label": "relaxed-step-1",
+    "model_revision": "995ad96eacd98c81ed38be0c5b274b04031597b0",
+    "search_calibration_sha256": [
+      "e7a805adb097f87ed731343942480d04635478b7913bc314475f365de3a6080d"
+    ],
+    "target_cost_bytes": 12997294272
+  },
+  "generation": {
+    "assertions_passed": 0,
+    "assertions_total": 0,
+    "deterministic_repeat": false,
+    "empty_output_count": null,
+    "invalid_utf8_count": null,
+    "nonfinite_run_count": null,
+    "prompt_count": 0,
+    "prompt_manifest_sha256": null,
+    "replacement_character_count": null,
+    "status": "not_run"
+  },
+  "heldout_corpus": {
+    "document_count": 0,
+    "predicted_token_count": 0,
+    "sha256": null,
+    "status": "not_acquired",
+    "strata": []
+  },
+  "perplexity": {
+    "bf16_mean_nll": null,
+    "candidate_mean_nll": null,
+    "nonfinite_token_count": null,
+    "objective": null,
+    "paired_candidate_minus_incumbent_ci95_upper": null,
+    "repeat_candidate_mean_nll": null,
+    "repeat_token_sequence_sha256": null,
+    "status": "not_run",
+    "token_sequence_sha256": null
+  },
+  "runtime": {
+    "cuda_diagnostics": {
+      "cu_init_error": "CUDA_ERROR_UNKNOWN",
+      "cu_init_status": 999,
+      "driver_version": "550.163.01",
+      "free_memory_mib": 12037,
+      "llama_cpp_cuda_initialization": "failed: unknown error",
+      "nvml_visible": true,
+      "reset_status": "insufficient_permissions"
+    },
+    "cuda_kernel_matrix_pass": false,
+    "cuda_multi_step_pass": false,
+    "cuda_one_step_pass": false,
+    "max_cuda_reserved_bytes": null,
+    "partial_cuda_offload_pass": false,
+    "unmodified_llama_cpp": true
+  },
+  "schema": 1,
+  "status": "incomplete"
+}
