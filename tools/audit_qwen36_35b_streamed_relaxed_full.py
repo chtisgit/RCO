@@ -33,6 +33,7 @@ from native_runtime import NativeManifestRelaxedLinearSource
 from native_store import NativeCandidateStore
 from quant.ggml_native import GGMLNativeCodec, GGMLType
 from qwen35_native import Qwen35LinearAttentionGeometry
+from search.hard import exact_cost_assignment, realized_cost
 from search.relaxed import (
     CheckpointedRelaxedBlockStats,
     CheckpointedStreamingRelaxedBlock,
@@ -40,8 +41,12 @@ from search.relaxed import (
     RelaxedLinearBinding,
     RelaxedRouterBinding,
     StreamingRelaxedLinearStats,
+    expected_serialized_cost,
+    project_serialized_cost_gradient_,
+    retract_serialized_cost_,
     streaming_relaxed_causal_cross_entropy,
     streaming_relaxed_embedding,
+    transport_serialized_cost_momentum_,
 )
 
 
@@ -90,11 +95,27 @@ def _instantiate_model(model_dir: Path):
     return model
 
 
-def _initial_logits(group_count: int, device: torch.device) -> torch.Tensor:
-    return torch.linspace(
-        -0.8, 0.8, steps=group_count * 2,
-        dtype=torch.float32, device=device,
-    ).reshape(group_count, 2).requires_grad_(True)
+def _initial_logits(
+    group_count: int,
+    device: torch.device,
+    *,
+    low_costs: list[int] | None = None,
+    high_costs: list[int] | None = None,
+    target_cost: int | None = None,
+) -> torch.Tensor:
+    if target_cost is None:
+        return torch.linspace(
+            -0.8, 0.8, steps=group_count * 2,
+            dtype=torch.float32, device=device,
+        ).reshape(group_count, 2).requires_grad_(True)
+    if low_costs is None or high_costs is None:
+        raise ValueError("budgeted initialization requires candidate costs")
+    logits = torch.zeros(
+        group_count, 2, dtype=torch.float32, device=device,
+        requires_grad=True)
+    retract_serialized_cost_(
+        logits, low_costs, high_costs, target_cost)
+    return logits
 
 
 def _block_index(destination: str) -> int | None:
@@ -186,11 +207,34 @@ def _run_once(
     input_ids: torch.Tensor,
     device: torch.device,
     rows_per_chunk: int,
+    low_costs: list[int],
+    high_costs: list[int],
+    target_cost: int | None,
+    learning_rate: float,
 ) -> dict[str, Any]:
     model = _instantiate_model(model_dir)
     adapter = get_model_adapter(model)
     geometry = Qwen35LinearAttentionGeometry.from_model_dir(model_dir)
-    logits = _initial_logits(len(entries), device)
+    logits = _initial_logits(
+        len(entries),
+        device,
+        low_costs=low_costs,
+        high_costs=high_costs,
+        target_cost=target_cost,
+    )
+    initial_logits = logits.detach().cpu().tolist()
+    initial_expected_cost = expected_serialized_cost(
+        logits, low_costs, high_costs)
+    optimizer = (
+        torch.optim.Adam([logits], lr=learning_rate)
+        if target_cost is not None else None
+    )
+    budget_tolerance_bytes = 4096.0
+    if (
+        target_cost is not None
+        and abs(initial_expected_cost - target_cost) > budget_tolerance_bytes
+    ):
+        raise RuntimeError("initial relaxed distribution missed byte budget")
     group_by_destination = {
         entry["destination_name"]: index
         for index, entry in enumerate(entries)
@@ -356,27 +400,84 @@ def _run_once(
         raise RuntimeError("one or more decoder blocks remained materialized")
     if logits.grad is None or not torch.isfinite(logits.grad).all():
         raise RuntimeError("full-model assignment gradient is invalid")
-    gradient_norms = logits.grad.float().norm(dim=1)
+    raw_gradient = logits.grad.detach().clone()
+    gradient_norms = raw_gradient.float().norm(dim=1)
     nonzero_count = int(torch.count_nonzero(gradient_norms).item())
-    if nonzero_count != len(entries):
-        zero_destinations = [
-            entries[index]["destination_name"]
-            for index, value in enumerate(gradient_norms)
-            if value == 0
-        ]
-        raise RuntimeError(
-            f"{len(entries) - nonzero_count} decisions have zero gradient: "
-            f"{zero_destinations[:8]}")
+    zero_gradient_destinations = [
+        entries[index]["destination_name"]
+        for index, value in enumerate(gradient_norms)
+        if value == 0
+    ]
+    if nonzero_count == 0:
+        raise RuntimeError("full-model assignment gradient is identically zero")
+
+    optimization = None
+    if optimizer is not None:
+        projection_coefficient, raw_norm, projected_norm = (
+            project_serialized_cost_gradient_(
+                logits, low_costs, high_costs))
+        projected_gradient = logits.grad.detach().clone()
+        optimizer.step()
+        expected_cost_before_retraction = expected_serialized_cost(
+            logits, low_costs, high_costs)
+        assert target_cost is not None
+        expected_cost_after_retraction = retract_serialized_cost_(
+            logits,
+            low_costs,
+            high_costs,
+            target_cost,
+            tolerance_bytes=budget_tolerance_bytes,
+        )
+        transport_serialized_cost_momentum_(
+            optimizer, logits, low_costs, high_costs)
+        if (
+            not torch.isfinite(projected_gradient).all()
+            or projected_norm <= 0.0
+            or projected_norm > raw_norm + 1e-6
+        ):
+            raise RuntimeError("serialized-cost gradient projection is invalid")
+        if abs(
+            expected_cost_after_retraction - target_cost
+        ) > budget_tolerance_bytes:
+            raise RuntimeError("relaxed update missed serialized-byte budget")
+        scores = (logits[:, 1] - logits[:, 0]).detach()
+        assignment = exact_cost_assignment(
+            scores, low_costs, high_costs, target_cost)
+        exact_cost = realized_cost(assignment, low_costs, high_costs)
+        if exact_cost != target_cost:
+            raise RuntimeError("relaxed step did not project an exact assignment")
+        optimization = {
+            "optimizer": "adam",
+            "learning_rate": learning_rate,
+            "target_aligned_gguf_bytes": target_cost,
+            "expected_budget_tolerance_bytes": budget_tolerance_bytes,
+            "initial_expected_bytes": initial_expected_cost,
+            "projection_coefficient": projection_coefficient,
+            "raw_gradient_norm": raw_norm,
+            "projected_gradient_norm": projected_norm,
+            "projected_gradient_sha256": tensor_sha256(projected_gradient),
+            "projected_gradient": projected_gradient.cpu().tolist(),
+            "expected_bytes_before_retraction": (
+                expected_cost_before_retraction),
+            "expected_bytes_after_retraction": expected_cost_after_retraction,
+            "updated_logits_sha256": tensor_sha256(logits),
+            "updated_logits": logits.detach().cpu().tolist(),
+            "projected_assignment": assignment.tolist(),
+            "projected_assignment_bits": "".join(
+                str(int(value)) for value in assignment.tolist()),
+            "projected_assignment_cost": exact_cost,
+        }
 
     native_stats = _aggregate_native_stats(native_sources)
     run = {
         "loss": float(loss.item()),
         "token_count": token_count,
         "hidden_state_sha256": tensor_sha256(hidden_states),
-        "assignment_gradient_sha256": tensor_sha256(logits.grad),
-        "assignment_gradient": logits.grad.detach().cpu().tolist(),
+        "assignment_gradient_sha256": tensor_sha256(raw_gradient),
+        "assignment_gradient": raw_gradient.cpu().tolist(),
         "group_gradient_norms": gradient_norms.detach().cpu().tolist(),
         "nonzero_group_gradient_count": nonzero_count,
+        "zero_gradient_destinations": zero_gradient_destinations,
         "all_gradients_finite": bool(torch.isfinite(logits.grad).all()),
         "elapsed_seconds": elapsed,
         "final_norm_checkpoint_bytes": final_norm_bytes,
@@ -398,6 +499,8 @@ def _run_once(
             })
             for block_index in range(len(originals))
         },
+        "optimization": optimization,
+        "initial_logits": initial_logits,
     }
     for index, module in enumerate(originals):
         adapter.layers[index] = module
@@ -436,6 +539,24 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
         entry["destination_name"] for entry in entries
     }:
         raise RuntimeError("candidate store does not exactly cover decisions")
+    names = [entry["destination_name"] for entry in entries]
+    low_costs = [
+        int(store.metadata(name, GGMLType.Q2_0)["aligned_gguf_bytes"])
+        for name in names
+    ]
+    high_costs = [
+        int(store.metadata(name, GGMLType.Q4_0)["aligned_gguf_bytes"])
+        for name in names
+    ]
+    if args.target_cost is not None:
+        # Fail before model I/O if the requested discrete release budget is
+        # not reachable by the production candidates.
+        exact_cost_assignment(
+            torch.zeros(len(entries)),
+            low_costs,
+            high_costs,
+            args.target_cost,
+        )
 
     loader = SafeTensorPrefixLoader(model_dir)
     schema_model = _instantiate_model(model_dir)
@@ -467,7 +588,12 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
         input_ids=input_ids,
         device=device,
         rows_per_chunk=args.rows_per_chunk,
+        low_costs=low_costs,
+        high_costs=high_costs,
+        target_cost=args.target_cost,
+        learning_rate=args.learning_rate,
     )
+    initial_logits = run.pop("initial_logits")
     reference = None
     reproducible = None
     if args.reference_report is not None:
@@ -481,6 +607,10 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
             != _sha256_file(store_path / "native-candidate-index.json")
             or reference_report["candidate_store"]["rows_per_chunk"]
             != args.rows_per_chunk
+            or reference_report["candidate_store"].get("target_cost")
+            != args.target_cost
+            or reference_report.get("optimization", {}).get("learning_rate")
+            != (args.learning_rate if args.target_cost is not None else None)
         ):
             raise RuntimeError("reference report describes a different run")
         reference = {
@@ -488,14 +618,20 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
             "sha256": _sha256_file(reference_path),
         }
         reference_run = reference_report["run"]
-        reproducible = all(run[key] == reference_run[key] for key in (
+        comparison_keys = (
             "loss",
             "token_count",
             "hidden_state_sha256",
             "assignment_gradient_sha256",
             "assignment_gradient",
             "group_gradient_norms",
-        ))
+        )
+        reproducible = all(
+            run[key] == reference_run[key] for key in comparison_keys)
+        if args.target_cost is not None:
+            reproducible = (
+                reproducible
+                and run["optimization"] == reference_run.get("optimization"))
         if not reproducible:
             raise RuntimeError("full-model relaxed backward did not reproduce")
 
@@ -518,7 +654,14 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
             "one complete relaxed forward/backward through all 40 "
             "Qwen3.6-35B-A3B text blocks and all 512 native Q2_0/Q4_0 "
             "decisions, including sparse embedding and streamed exact output "
-            "loss; this proves the gradient path, not optimizer quality or CUDA"
+            "loss"
+            + (
+                ", followed by one exact-byte-manifold Adam update and exact "
+                "discrete projection"
+                if args.target_cost is not None else ""
+            )
+            + "; this proves the complete CPU gradient path, not converged "
+            "optimizer quality or CUDA"
         ),
         "source": {
             "repo_id": identity["repo_id"],
@@ -537,6 +680,9 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
             "reference_type": GGMLType.Q4_0.name,
             "alternative_type": GGMLType.Q2_0.name,
             "rows_per_chunk": args.rows_per_chunk,
+            "uniform_low_cost": sum(low_costs),
+            "uniform_high_cost": sum(high_costs),
+            "target_cost": args.target_cost,
         },
         "calibration": {
             "text": CALIBRATION_TEXT,
@@ -552,8 +698,11 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
             "cuda": cuda,
         },
         "block_schema": block_schemas,
-        "initial_logits": _initial_logits(
-            len(entries), torch.device("cpu")).detach().tolist(),
+        "initial_logits": initial_logits,
+        "optimization": {
+            "learning_rate": (
+                args.learning_rate if args.target_cost is not None else None),
+        },
         "run": run,
         "reproducibility_reference": reference,
         "same_seed_reproducible": reproducible,
@@ -584,6 +733,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--device", choices=("cpu", "cuda"), default="cpu")
     parser.add_argument("--sequence-length", type=int, default=4)
     parser.add_argument("--rows-per-chunk", type=int, default=16)
+    parser.add_argument("--target-cost", type=int)
+    parser.add_argument("--learning-rate", type=float, default=0.05)
     parser.add_argument("--reference-report", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     return parser
@@ -593,6 +744,8 @@ def main() -> None:
     args = build_parser().parse_args()
     if args.sequence_length < 2:
         raise ValueError("sequence length must be at least two")
+    if args.learning_rate <= 0:
+        raise ValueError("learning rate must be positive")
     report = audit(args)
     _atomic_json(args.output, report)
     print(json.dumps({
