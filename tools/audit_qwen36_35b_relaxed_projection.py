@@ -168,11 +168,45 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
     if input_ids.tolist()[0] != step["calibration"]["input_ids"]:
         raise RuntimeError("hard evaluation tokens differ from relaxed step")
 
+    reference = None
+    reference_hard_evaluation = None
+    if args.reference_report is not None:
+        reference_path = args.reference_report.resolve(strict=True)
+        reference_report = _load_json(reference_path)
+        if (
+            reference_report["source"]["revision"] != identity["revision"]
+            or reference_report["candidate_store"]["index_sha256"]
+            != store_index_sha256
+            or reference_report["relaxed_step"]["sha256"]
+            != _sha256_file(step_path)
+            or reference_report["relaxed_step"]["assignment"]
+            != assignment.tolist()
+            or reference_report["calibration"]["input_ids"]
+            != input_ids.tolist()[0]
+            or reference_report["calibration"]["vocab_chunk_size"]
+            != args.vocab_chunk_size
+        ):
+            raise RuntimeError("reference report describes a different hard run")
+        reference = {
+            "path": str(reference_path),
+            "sha256": _sha256_file(reference_path),
+        }
+        reference_hard_evaluation = reference_report["hard_evaluation"]
+
     evaluation = evaluator.evaluate(input_ids, assignment)
     if evaluation.token_count != args.sequence_length - 1:
         raise RuntimeError("hard evaluation returned the wrong token count")
     if evaluation.memory.loaded_blocks != 40:
         raise RuntimeError("hard evaluation did not stream all decoder blocks")
+    reproducible = None
+    if reference_hard_evaluation is not None:
+        reproducible = (
+            evaluation.loss == reference_hard_evaluation["loss"]
+            and evaluation.token_count
+            == reference_hard_evaluation["token_count"]
+        )
+        if not reproducible:
+            raise RuntimeError("hard projected assignment did not reproduce")
     cuda = {
         "available": torch.cuda.is_available(),
         "built_version": torch.version.cuda,
@@ -181,7 +215,7 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
     }
     if device.type == "cuda":
         cuda["device_name"] = torch.cuda.get_device_name(device)
-    return {
+    report = {
         "schema": 1,
         "status": "pass",
         "scope": (
@@ -227,6 +261,8 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
             "token_count": evaluation.token_count,
             "memory": asdict(evaluation.memory),
         },
+        "reproducibility_reference": reference,
+        "same_assignment_reproducible": reproducible,
         "environment": {
             "python": platform.python_version(),
             "torch": torch.__version__,
@@ -238,6 +274,7 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
             int(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss) * 1024),
         "elapsed_seconds": time.perf_counter() - started,
     }
+    return report
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -252,6 +289,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--sequence-length", type=int, default=4)
     parser.add_argument("--vocab-chunk-size", type=int, default=8192)
     parser.add_argument("--rows-per-chunk", type=int, default=16)
+    parser.add_argument("--reference-report", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     return parser
 
