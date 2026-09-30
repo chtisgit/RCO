@@ -44,6 +44,7 @@ from search.relaxed import (
     expected_serialized_cost,
     project_serialized_cost_gradient_,
     retract_serialized_cost_,
+    restore_adam_after_first_serialized_cost_step_,
     streaming_relaxed_causal_cross_entropy,
     streaming_relaxed_embedding,
     transport_serialized_cost_momentum_,
@@ -102,7 +103,15 @@ def _initial_logits(
     low_costs: list[int] | None = None,
     high_costs: list[int] | None = None,
     target_cost: int | None = None,
+    retained_values: list[list[float]] | None = None,
 ) -> torch.Tensor:
+    if retained_values is not None:
+        logits = torch.tensor(
+            retained_values, dtype=torch.float32, device=device,
+            requires_grad=True)
+        if logits.shape != (group_count, 2):
+            raise ValueError("retained logits have the wrong shape")
+        return logits
     if target_cost is None:
         return torch.linspace(
             -0.8, 0.8, steps=group_count * 2,
@@ -211,6 +220,8 @@ def _run_once(
     high_costs: list[int],
     target_cost: int | None,
     learning_rate: float,
+    retained_logits: list[list[float]] | None,
+    retained_optimizer_state: dict[str, Any] | None,
 ) -> dict[str, Any]:
     model = _instantiate_model(model_dir)
     adapter = get_model_adapter(model)
@@ -221,6 +232,7 @@ def _run_once(
         low_costs=low_costs,
         high_costs=high_costs,
         target_cost=target_cost,
+        retained_values=retained_logits,
     )
     initial_logits = logits.detach().cpu().tolist()
     initial_expected_cost = expected_serialized_cost(
@@ -229,6 +241,40 @@ def _run_once(
         torch.optim.Adam([logits], lr=learning_rate)
         if target_cost is not None else None
     )
+    if retained_optimizer_state is not None:
+        if optimizer is None:
+            raise ValueError("retained Adam state requires a byte target")
+        if "first_projected_gradient" in retained_optimizer_state:
+            restore_adam_after_first_serialized_cost_step_(
+                optimizer,
+                logits,
+                torch.tensor(
+                    retained_optimizer_state["first_projected_gradient"],
+                    dtype=logits.dtype,
+                    device=logits.device,
+                ),
+                low_costs,
+                high_costs,
+            )
+        else:
+            state = optimizer.state[logits]
+            state["step"] = torch.tensor(
+                float(retained_optimizer_state["step"]))
+            state["exp_avg"] = torch.tensor(
+                retained_optimizer_state["exp_avg"],
+                dtype=logits.dtype,
+                device=logits.device,
+            )
+            state["exp_avg_sq"] = torch.tensor(
+                retained_optimizer_state["exp_avg_sq"],
+                dtype=logits.dtype,
+                device=logits.device,
+            )
+            if (
+                state["exp_avg"].shape != logits.shape
+                or state["exp_avg_sq"].shape != logits.shape
+            ):
+                raise ValueError("retained Adam moments have the wrong shape")
     budget_tolerance_bytes = 4096.0
     if (
         target_cost is not None
@@ -446,6 +492,7 @@ def _run_once(
         exact_cost = realized_cost(assignment, low_costs, high_costs)
         if exact_cost != target_cost:
             raise RuntimeError("relaxed step did not project an exact assignment")
+        optimizer_state = optimizer.state[logits]
         optimization = {
             "optimizer": "adam",
             "learning_rate": learning_rate,
@@ -466,6 +513,15 @@ def _run_once(
             "projected_assignment_bits": "".join(
                 str(int(value)) for value in assignment.tolist()),
             "projected_assignment_cost": exact_cost,
+            "optimizer_state": {
+                "step": int(optimizer_state["step"].item()),
+                "exp_avg_sha256": tensor_sha256(optimizer_state["exp_avg"]),
+                "exp_avg_sq_sha256": tensor_sha256(
+                    optimizer_state["exp_avg_sq"]),
+                "exp_avg": optimizer_state["exp_avg"].detach().cpu().tolist(),
+                "exp_avg_sq": optimizer_state[
+                    "exp_avg_sq"].detach().cpu().tolist(),
+            },
         }
 
     native_stats = _aggregate_native_stats(native_sources)
@@ -580,6 +636,50 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
         raise RuntimeError("calibration text is shorter than requested sequence")
     input_ids = input_ids[:, :args.sequence_length].contiguous()
 
+    retained_logits = None
+    retained_optimizer_state = None
+    initialization = None
+    if args.initial_step_report is not None:
+        if args.target_cost is None:
+            raise ValueError("relaxed continuation requires a target cost")
+        initial_path = args.initial_step_report.resolve(strict=True)
+        initial_report = _load_json(initial_path)
+        initial_optimization = initial_report["run"].get("optimization")
+        if not isinstance(initial_optimization, dict):
+            raise RuntimeError("initial report has no relaxed optimizer step")
+        if (
+            initial_report["source"]["revision"] != identity["revision"]
+            or initial_report["candidate_store"]["index_sha256"]
+            != _sha256_file(store_path / "native-candidate-index.json")
+            or initial_report["candidate_store"].get("target_cost")
+            != args.target_cost
+            or initial_report["calibration"]["input_ids"]
+            != input_ids.tolist()[0]
+            or initial_report.get("optimization", {}).get("learning_rate")
+            != args.learning_rate
+        ):
+            raise RuntimeError("initial report describes a different relaxed run")
+        retained_logits = initial_optimization["updated_logits"]
+        if "optimizer_state" in initial_optimization:
+            retained_optimizer_state = initial_optimization["optimizer_state"]
+            restoration = "retained_adam_state"
+        else:
+            retained_optimizer_state = {
+                "first_projected_gradient": initial_optimization[
+                    "projected_gradient"],
+            }
+            restoration = "closed_form_first_step"
+        initialization = {
+            "path": str(initial_path),
+            "sha256": _sha256_file(initial_path),
+            "updated_logits_sha256": initial_optimization[
+                "updated_logits_sha256"],
+            "completed_optimizer_steps": int(
+                initial_optimization.get("optimizer_state", {}).get(
+                    "step", 1)),
+            "optimizer_restoration": restoration,
+        }
+
     run = _run_once(
         model_dir=model_dir,
         loader=loader,
@@ -592,6 +692,8 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
         high_costs=high_costs,
         target_cost=args.target_cost,
         learning_rate=args.learning_rate,
+        retained_logits=retained_logits,
+        retained_optimizer_state=retained_optimizer_state,
     )
     initial_logits = run.pop("initial_logits")
     reference = None
@@ -611,6 +713,7 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
             != args.target_cost
             or reference_report.get("optimization", {}).get("learning_rate")
             != (args.learning_rate if args.target_cost is not None else None)
+            or reference_report.get("initialization") != initialization
         ):
             raise RuntimeError("reference report describes a different run")
         reference = {
@@ -703,6 +806,7 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
             "learning_rate": (
                 args.learning_rate if args.target_cost is not None else None),
         },
+        "initialization": initialization,
         "run": run,
         "reproducibility_reference": reference,
         "same_seed_reproducible": reproducible,
@@ -735,6 +839,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--rows-per-chunk", type=int, default=16)
     parser.add_argument("--target-cost", type=int)
     parser.add_argument("--learning-rate", type=float, default=0.05)
+    parser.add_argument("--initial-step-report", type=Path)
     parser.add_argument("--reference-report", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     return parser
