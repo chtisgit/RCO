@@ -174,6 +174,49 @@ def transport_serialized_cost_momentum_(
     vector_transport(optimizer, logits, normalized)
 
 
+def restore_adam_after_first_serialized_cost_step_(
+    optimizer: torch.optim.Adam,
+    logits: torch.Tensor,
+    first_projected_gradient: torch.Tensor,
+    low_costs: Iterable[int],
+    high_costs: Iterable[int],
+) -> None:
+    """Restore Adam state after one retained, transported relaxed step.
+
+    A first Adam step has closed-form moments.  This permits a report that
+    retains its projected gradient and updated logits to resume without
+    pickling optimizer internals.  The first moment is transported onto the
+    tangent plane at the supplied updated logits exactly as in the live step.
+    """
+    if first_projected_gradient.shape != logits.shape:
+        raise ValueError("retained Adam gradient and logits shapes differ")
+    groups = [
+        group for group in optimizer.param_groups
+        if any(parameter is logits for parameter in group["params"])
+    ]
+    if len(groups) != 1:
+        raise ValueError("optimizer must contain the relaxed logits once")
+    if optimizer.state.get(logits):
+        raise ValueError("Adam state is already initialized")
+    group = groups[0]
+    beta1, beta2 = group["betas"]
+    gradient = first_projected_gradient.detach().to(
+        device=logits.device, dtype=logits.dtype)
+    if not torch.isfinite(gradient).all():
+        raise ValueError("retained Adam gradient is not finite")
+    state = optimizer.state[logits]
+    state["step"] = torch.tensor(1.0)
+    state["exp_avg"] = torch.zeros_like(gradient)
+    state["exp_avg"].lerp_(gradient, 1.0 - beta1)
+    state["exp_avg_sq"] = torch.zeros_like(gradient)
+    state["exp_avg_sq"].mul_(beta2).addcmul_(
+        gradient, gradient, value=1.0 - beta2)
+    if group.get("amsgrad", False):
+        state["max_exp_avg_sq"] = state["exp_avg_sq"].clone()
+    transport_serialized_cost_momentum_(
+        optimizer, logits, low_costs, high_costs)
+
+
 def _validated_rows(
     rows: Iterable[tuple[int, Any]],
     *,
@@ -1111,6 +1154,7 @@ __all__ = [
     "expected_serialized_cost",
     "project_serialized_cost_gradient_",
     "retract_serialized_cost_",
+    "restore_adam_after_first_serialized_cost_step_",
     "streaming_relaxed_causal_cross_entropy",
     "streaming_relaxed_embedding",
     "streaming_relaxed_linear",

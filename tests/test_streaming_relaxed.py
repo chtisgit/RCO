@@ -24,6 +24,7 @@ from search.relaxed import (
     expected_serialized_cost,
     project_serialized_cost_gradient_,
     retract_serialized_cost_,
+    restore_adam_after_first_serialized_cost_step_,
     streaming_relaxed_causal_cross_entropy,
     streaming_relaxed_embedding,
     streaming_relaxed_linear,
@@ -32,6 +33,71 @@ from search.relaxed import (
 
 
 class StreamingRelaxedLinearTest(unittest.TestCase):
+    def test_restored_adam_matches_uninterrupted_second_step(self):
+        low = [100, 200, 300]
+        high = [160, 320, 540]
+        target = 980
+        initial = torch.tensor([
+            [0.2, -0.3], [-0.4, 0.6], [0.1, 0.5],
+        ])
+        first_gradient = torch.tensor([
+            [0.3, -0.2], [-0.7, 0.5], [0.4, -0.1],
+        ])
+        second_gradient = torch.tensor([
+            [-0.2, 0.8], [0.6, -0.3], [-0.5, 0.2],
+        ])
+
+        uninterrupted = initial.clone().requires_grad_(True)
+        retract_serialized_cost_(
+            uninterrupted, low, high, target, tolerance_bytes=1e-4)
+        first_gradient = first_gradient.clone()
+        uninterrupted.grad = first_gradient.clone()
+        project_serialized_cost_gradient_(uninterrupted, low, high)
+        first_projected = uninterrupted.grad.detach().clone()
+        live_optimizer = torch.optim.Adam([uninterrupted], lr=0.05)
+        live_optimizer.step()
+        retract_serialized_cost_(
+            uninterrupted, low, high, target, tolerance_bytes=1e-4)
+        transport_serialized_cost_momentum_(
+            live_optimizer, uninterrupted, low, high)
+
+        resumed = uninterrupted.detach().clone().requires_grad_(True)
+        resumed_optimizer = torch.optim.Adam([resumed], lr=0.05)
+        restore_adam_after_first_serialized_cost_step_(
+            resumed_optimizer,
+            resumed,
+            first_projected,
+            low,
+            high,
+        )
+        self.assertTrue(torch.equal(
+            resumed_optimizer.state[resumed]["exp_avg"],
+            live_optimizer.state[uninterrupted]["exp_avg"],
+        ))
+        self.assertTrue(torch.equal(
+            resumed_optimizer.state[resumed]["exp_avg_sq"],
+            live_optimizer.state[uninterrupted]["exp_avg_sq"],
+        ))
+
+        for parameter, optimizer in (
+            (uninterrupted, live_optimizer),
+            (resumed, resumed_optimizer),
+        ):
+            parameter.grad = second_gradient.clone()
+            project_serialized_cost_gradient_(parameter, low, high)
+            optimizer.step()
+            retract_serialized_cost_(
+                parameter, low, high, target, tolerance_bytes=1e-4)
+            transport_serialized_cost_momentum_(
+                optimizer, parameter, low, high)
+
+        self.assertTrue(torch.equal(resumed, uninterrupted))
+        for name in ("step", "exp_avg", "exp_avg_sq"):
+            self.assertTrue(torch.equal(
+                resumed_optimizer.state[resumed][name],
+                live_optimizer.state[uninterrupted][name],
+            ))
+
     def test_nonuniform_serialized_cost_manifold(self):
         low = [100, 200, 300, 400]
         high = [140, 280, 460, 720]
