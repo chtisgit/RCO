@@ -2,10 +2,10 @@
   "authorized_for_final_gguf_construction": false,
   "checks": {
     "candidate_identity_pinned": true,
-    "cuda_kernel_matrix": false,
-    "cuda_multi_step_memory": false,
-    "cuda_one_step_memory": false,
-    "cuda_reserved_below_limit": false,
+    "cuda_kernel_matrix": true,
+    "cuda_multi_step_memory": true,
+    "cuda_one_step_memory": true,
+    "cuda_reserved_below_limit": true,
     "exact_byte_target": true,
     "finite_exact_full_vocabulary_nll": false,
     "generation_assertions_pass": false,
@@ -20,7 +20,7 @@
     "minimum_generation_prompts": false,
     "minimum_predicted_tokens": false,
     "paired_nll_improves_incumbent": false,
-    "partial_cuda_offload": false,
+    "partial_cuda_offload": true,
     "perplexity_ratio_to_bf16": false,
     "perplexity_reproduced": false,
     "unmodified_llama_cpp": true
@@ -40,12 +40,7 @@
     "generation_manifest_pinned",
     "generation_assertions_pass",
     "generation_reproduced",
-    "generation_is_well_formed",
-    "cuda_kernel_matrix",
-    "cuda_one_step_memory",
-    "cuda_multi_step_memory",
-    "cuda_reserved_below_limit",
-    "partial_cuda_offload"
+    "generation_is_well_formed"
   ],
   "measurements": {
     "bf16_perplexity": null,

@@ -43,19 +43,60 @@
   },
   "runtime": {
     "cuda_diagnostics": {
-      "cu_init_error": "CUDA_ERROR_UNKNOWN",
-      "cu_init_status": 999,
+      "cu_init_error": null,
+      "cu_init_status": 0,
+      "device_name": "NVIDIA GeForce RTX 3060",
       "driver_version": "550.163.01",
-      "free_memory_mib": 12037,
-      "llama_cpp_cuda_initialization": "failed: unknown error",
+      "free_memory_mib": 11929,
+      "llama_cpp_cuda_initialization": "pass: CUDA0",
       "nvml_visible": true,
-      "reset_status": "insufficient_permissions"
+      "pytorch": "2.5.1+cu121",
+      "recovery": "host reboot",
+      "torch_cuda": "12.1"
     },
-    "cuda_kernel_matrix_pass": false,
-    "cuda_multi_step_pass": false,
-    "cuda_one_step_pass": false,
-    "max_cuda_reserved_bytes": null,
-    "partial_cuda_offload_pass": false,
+    "cuda_kernel_matrix_evidence": [
+      {
+        "path": "reports/qwen35_2b_block0_native_output_cuda.json",
+        "sha256": "07b7ed0e84d2beac2c0746b72435a63958947afc9028d4e2aab05c6502b2e669"
+      },
+      {
+        "path": "reports/qwen36_35b_block0_native_output_cuda.json",
+        "sha256": "76bbffe2434d961682da699715184101fa0eb268ba1ca0120542cd208c3d3d92"
+      },
+      {
+        "path": "reports/qwen36_35b_block0_native_output_cuda_repeat.json",
+        "sha256": "e8e660fa68a03483ad8b9c929ef9b0fd98affb5e29f2ce5c34f8bee756c078b3"
+      }
+    ],
+    "cuda_kernel_matrix_pass": true,
+    "cuda_multi_step_evidence": [
+      {
+        "path": "reports/qwen36_35b_native_multistep_cuda.json",
+        "sha256": "82552fa6e26b0505e48a2771b34bbcd5d5d0c389f21f601afb1a1f060c2954b3"
+      },
+      {
+        "path": "reports/qwen36_35b_native_multistep_cuda_repeat.json",
+        "sha256": "f935418c215ad7de06ebe61ff109dd947e6f4e693491a44f26ead6dd95f15660"
+      }
+    ],
+    "cuda_multi_step_pass": true,
+    "cuda_one_step_evidence": [
+      {
+        "path": "reports/qwen36_35b_native_full_step_cuda.json",
+        "sha256": "45bd8028b43ab3751e0276fdbb14bc5236cb5f1ecc0d57c838d158857f68d380"
+      },
+      {
+        "path": "reports/qwen36_35b_native_full_step_cuda_repeat.json",
+        "sha256": "a65fafe923336075744e122107dc099d62214b4b9db5a1905d5064c6f41d331e"
+      }
+    ],
+    "cuda_one_step_pass": true,
+    "max_cuda_reserved_bytes": 4422893568,
+    "partial_cuda_offload_evidence": {
+      "path": "reports/qwen36_35b_partial_cuda_offload.json",
+      "sha256": "acf5d352cd4b3f331477f1e1627e31bce182b82f009d1fb36236d3c6223c16c4"
+    },
+    "partial_cuda_offload_pass": true,
     "unmodified_llama_cpp": true
   },
   "schema": 1,
