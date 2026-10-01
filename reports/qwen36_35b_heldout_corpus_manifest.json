@@ -1,0 +1,2115 @@
+{
+  "canonical_manifest": {
+    "corpus": {
+      "bytes": 444537,
+      "path": "/home/christian/projects/gsq-rco-moe/data/qwen36_release_corpus/corpus.jsonl",
+      "sha256": "682cf10c9cdb7c900359be2d2356c6d88713ef7e38674b9cdbd1c0c3b8c5e0a8"
+    },
+    "document_count": 100,
+    "documents": [
+      {
+        "content_bytes": 4935,
+        "content_sha256": "06c3850f66d22dd08bbe82b6c603d6ed9254d712c5753496522426c3593d5e61",
+        "id": "general-gutenberg-1342",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "project_gutenberg",
+          "license": "public domain work; Gutenberg wrapper removed",
+          "license_file": "licenses/project-gutenberg-permission.html",
+          "title": "Pride and Prejudice",
+          "url": "https://www.gutenberg.org/cache/epub/1342/pg1342.txt"
+        },
+        "stratum": "general",
+        "token_count": 1050,
+        "token_ids_sha256": "697ca081ba0ed5d13cf6919e5712013a4060ffd503d6861a53e6e9241a956f70"
+      },
+      {
+        "content_bytes": 4351,
+        "content_sha256": "95048a7f50bc25a7c9a8b5e92ea82261ab4af476f6482a12c7d2c4b1d326315a",
+        "id": "general-gutenberg-84",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "project_gutenberg",
+          "license": "public domain work; Gutenberg wrapper removed",
+          "license_file": "licenses/project-gutenberg-permission.html",
+          "title": "Frankenstein",
+          "url": "https://www.gutenberg.org/cache/epub/84/pg84.txt"
+        },
+        "stratum": "general",
+        "token_count": 1050,
+        "token_ids_sha256": "7258f7e82ba6b823591716760943f547ce1d0a2e8c0a4aba9eba482229deda65"
+      },
+      {
+        "content_bytes": 4254,
+        "content_sha256": "0620f931783fb24ae65b919ae3464595f4949db850111cc758f9ca9e4e1a423b",
+        "id": "general-gutenberg-11",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "project_gutenberg",
+          "license": "public domain work; Gutenberg wrapper removed",
+          "license_file": "licenses/project-gutenberg-permission.html",
+          "title": "Alice's Adventures in Wonderland",
+          "url": "https://www.gutenberg.org/cache/epub/11/pg11.txt"
+        },
+        "stratum": "general",
+        "token_count": 1050,
+        "token_ids_sha256": "cda02205aa69f86d6583a47d21fa5a0d83c2acc775547423ee13942836877bc3"
+      },
+      {
+        "content_bytes": 4393,
+        "content_sha256": "7e7dbb0861e9eae47e5dd04468ec0487e6d1454c4deaaa02e1afc964019743bb",
+        "id": "general-gutenberg-1661",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "project_gutenberg",
+          "license": "public domain work; Gutenberg wrapper removed",
+          "license_file": "licenses/project-gutenberg-permission.html",
+          "title": "The Adventures of Sherlock Holmes",
+          "url": "https://www.gutenberg.org/cache/epub/1661/pg1661.txt"
+        },
+        "stratum": "general",
+        "token_count": 1050,
+        "token_ids_sha256": "efc1aaa6252ee6a6b3adc7f3ae65dbeb02ed11be066d77d363d931100027fa9b"
+      },
+      {
+        "content_bytes": 4440,
+        "content_sha256": "5815a686c12404df3d07e4c81bcea937b7e032cbdf247452f4589f1045703739",
+        "id": "general-gutenberg-98",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "project_gutenberg",
+          "license": "public domain work; Gutenberg wrapper removed",
+          "license_file": "licenses/project-gutenberg-permission.html",
+          "title": "A Tale of Two Cities",
+          "url": "https://www.gutenberg.org/cache/epub/98/pg98.txt"
+        },
+        "stratum": "general",
+        "token_count": 1050,
+        "token_ids_sha256": "613db02c6562d76233fd7153aca5294fd149753d5dfaf52d0809514273efae68"
+      },
+      {
+        "content_bytes": 2946,
+        "content_sha256": "bba223616b47916d2a320e222a7d5abb06afcecd5bc41a4e1964ae28b3cae15b",
+        "id": "general-gutenberg-2701",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "project_gutenberg",
+          "license": "public domain work; Gutenberg wrapper removed",
+          "license_file": "licenses/project-gutenberg-permission.html",
+          "title": "Moby Dick",
+          "url": "https://www.gutenberg.org/cache/epub/2701/pg2701.txt"
+        },
+        "stratum": "general",
+        "token_count": 1050,
+        "token_ids_sha256": "ea3a6164601cd659b57fc85ae0286288d5e8088da36a8206250d08b613fd6f31"
+      },
+      {
+        "content_bytes": 4008,
+        "content_sha256": "a91217fdd67d57698d79f241d79c2e15ea83395010e5ab8aca1a3ef709965782",
+        "id": "general-gutenberg-74",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "project_gutenberg",
+          "license": "public domain work; Gutenberg wrapper removed",
+          "license_file": "licenses/project-gutenberg-permission.html",
+          "title": "The Adventures of Tom Sawyer",
+          "url": "https://www.gutenberg.org/cache/epub/74/pg74.txt"
+        },
+        "stratum": "general",
+        "token_count": 1050,
+        "token_ids_sha256": "5c4920579d6fd3ef7d2734149256e16e188298233d68adedfedfe388338d5ac8"
+      },
+      {
+        "content_bytes": 3793,
+        "content_sha256": "1a2e0f7ee36e3b3fa71332b9d1a11895bcd3c3463ac85aec7c2141ebfc2577d5",
+        "id": "general-gutenberg-76",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "project_gutenberg",
+          "license": "public domain work; Gutenberg wrapper removed",
+          "license_file": "licenses/project-gutenberg-permission.html",
+          "title": "Adventures of Huckleberry Finn",
+          "url": "https://www.gutenberg.org/cache/epub/76/pg76.txt"
+        },
+        "stratum": "general",
+        "token_count": 1050,
+        "token_ids_sha256": "fc6bbb530b80b0da7fb26eaa5a45ebddff00fb2b98edc5e72e10c3624c562065"
+      },
+      {
+        "content_bytes": 4465,
+        "content_sha256": "1c0ad9854b490d86d7039b5183de375797cfa3bac4d64ba3d64570d9458396f6",
+        "id": "general-gutenberg-345",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "project_gutenberg",
+          "license": "public domain work; Gutenberg wrapper removed",
+          "license_file": "licenses/project-gutenberg-permission.html",
+          "title": "Dracula",
+          "url": "https://www.gutenberg.org/cache/epub/345/pg345.txt"
+        },
+        "stratum": "general",
+        "token_count": 1050,
+        "token_ids_sha256": "44492266444aadf56be81d40cf359c395d81dbae55e0b6aceef8d49066450476"
+      },
+      {
+        "content_bytes": 4405,
+        "content_sha256": "39af8c487eb1213114aeea96b036b4e48375a1408816b55a33f0cd3b50794e0d",
+        "id": "general-gutenberg-5200",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "project_gutenberg",
+          "license": "public domain work; Gutenberg wrapper removed",
+          "license_file": "licenses/project-gutenberg-permission.html",
+          "title": "Metamorphosis",
+          "url": "https://www.gutenberg.org/cache/epub/5200/pg5200.txt"
+        },
+        "stratum": "general",
+        "token_count": 1050,
+        "token_ids_sha256": "404afbe28f7da2ebb557c2adbe2442b498d6bfb42afb6f65032f5a9070404a29"
+      },
+      {
+        "content_bytes": 4330,
+        "content_sha256": "51408a05eb062ade3eef3c93ea9fd221206036bf0f4438e76bfad1ebf8cbe436",
+        "id": "general-gutenberg-1952",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "project_gutenberg",
+          "license": "public domain work; Gutenberg wrapper removed",
+          "license_file": "licenses/project-gutenberg-permission.html",
+          "title": "The Yellow Wallpaper",
+          "url": "https://www.gutenberg.org/cache/epub/1952/pg1952.txt"
+        },
+        "stratum": "general",
+        "token_count": 1050,
+        "token_ids_sha256": "b526b57043e60bb551ff04b146928fdb765f56eefaf3881586de53867806781d"
+      },
+      {
+        "content_bytes": 3909,
+        "content_sha256": "ea8942550a074e60421f81f10cde37f87c29d663d2be705e14e43b2289ee19a9",
+        "id": "general-gutenberg-46",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "project_gutenberg",
+          "license": "public domain work; Gutenberg wrapper removed",
+          "license_file": "licenses/project-gutenberg-permission.html",
+          "title": "A Christmas Carol",
+          "url": "https://www.gutenberg.org/cache/epub/46/pg46.txt"
+        },
+        "stratum": "general",
+        "token_count": 1050,
+        "token_ids_sha256": "b1684ca00d77e57026ecf7f83d10545f4532f85e62a2c88018607ce96cb05bb0"
+      },
+      {
+        "content_bytes": 4411,
+        "content_sha256": "7e40f15965eb39fe8845561bd499ea5602f2520986f367c53e96feb8efaebf79",
+        "id": "general-gutenberg-174",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "project_gutenberg",
+          "license": "public domain work; Gutenberg wrapper removed",
+          "license_file": "licenses/project-gutenberg-permission.html",
+          "title": "The Picture of Dorian Gray",
+          "url": "https://www.gutenberg.org/cache/epub/174/pg174.txt"
+        },
+        "stratum": "general",
+        "token_count": 1050,
+        "token_ids_sha256": "253fddd623e3d57262c48e99f1838825e14b0d049a84bf0b9f58bc78388cc24a"
+      },
+      {
+        "content_bytes": 3975,
+        "content_sha256": "dc0cdfc55088b703bc17b3e2440d39dcc2b3af9de67b209b077ec33bee54d210",
+        "id": "general-gutenberg-1400",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "project_gutenberg",
+          "license": "public domain work; Gutenberg wrapper removed",
+          "license_file": "licenses/project-gutenberg-permission.html",
+          "title": "Great Expectations",
+          "url": "https://www.gutenberg.org/cache/epub/1400/pg1400.txt"
+        },
+        "stratum": "general",
+        "token_count": 1050,
+        "token_ids_sha256": "0ac5ad093512b2870041b883246b07aa87a6d1a7be8c465e30d156713844a21b"
+      },
+      {
+        "content_bytes": 4130,
+        "content_sha256": "81aaa7f2e54ac66dc710770e2670f0dc05cd35c6cb2bf2bd26cae15b3d4e55f2",
+        "id": "general-gutenberg-1260",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "project_gutenberg",
+          "license": "public domain work; Gutenberg wrapper removed",
+          "license_file": "licenses/project-gutenberg-permission.html",
+          "title": "Jane Eyre",
+          "url": "https://www.gutenberg.org/cache/epub/1260/pg1260.txt"
+        },
+        "stratum": "general",
+        "token_count": 1050,
+        "token_ids_sha256": "a74fbbec86f34ec9b771f6affb2d7f70fb4061348ece686cb0f81783070932bf"
+      },
+      {
+        "content_bytes": 4343,
+        "content_sha256": "11fe97f1d9e711eb16edae31279bb68cb88b001680046da8429215ee5b564727",
+        "id": "general-gutenberg-768",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "project_gutenberg",
+          "license": "public domain work; Gutenberg wrapper removed",
+          "license_file": "licenses/project-gutenberg-permission.html",
+          "title": "Wuthering Heights",
+          "url": "https://www.gutenberg.org/cache/epub/768/pg768.txt"
+        },
+        "stratum": "general",
+        "token_count": 1050,
+        "token_ids_sha256": "6556814a7ce05d781253f08a24f01dc4b8a83c8eef6444e71a567b5780916419"
+      },
+      {
+        "content_bytes": 3688,
+        "content_sha256": "33eeba8d567f8ce55f1a4565b79db8d592745ded8966598b53c440f3307b2aa6",
+        "id": "general-gutenberg-4300",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "project_gutenberg",
+          "license": "public domain work; Gutenberg wrapper removed",
+          "license_file": "licenses/project-gutenberg-permission.html",
+          "title": "Ulysses",
+          "url": "https://www.gutenberg.org/cache/epub/4300/pg4300.txt"
+        },
+        "stratum": "general",
+        "token_count": 1050,
+        "token_ids_sha256": "5544a300c8ac4908ac3893fe0dcc013a1743b69e4bd33fbcec727663db7e020c"
+      },
+      {
+        "content_bytes": 3485,
+        "content_sha256": "66f9dfa765c80e25b53d250e1925f9b15749c706b87e858a7d76c2a36b2743c9",
+        "id": "general-gutenberg-1232",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "project_gutenberg",
+          "license": "public domain work; Gutenberg wrapper removed",
+          "license_file": "licenses/project-gutenberg-permission.html",
+          "title": "The Prince",
+          "url": "https://www.gutenberg.org/cache/epub/1232/pg1232.txt"
+        },
+        "stratum": "general",
+        "token_count": 1050,
+        "token_ids_sha256": "14068b576817725feb16b3998a243ec35faf854538fb8d21a84e629571adbee2"
+      },
+      {
+        "content_bytes": 4505,
+        "content_sha256": "9df33087a22ad9b485ff302053715bc06a6740cbb7dd6198ca53c3029d14aaf9",
+        "id": "general-gutenberg-1080",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "project_gutenberg",
+          "license": "public domain work; Gutenberg wrapper removed",
+          "license_file": "licenses/project-gutenberg-permission.html",
+          "title": "A Modest Proposal",
+          "url": "https://www.gutenberg.org/cache/epub/1080/pg1080.txt"
+        },
+        "stratum": "general",
+        "token_count": 1050,
+        "token_ids_sha256": "5007b4677dc5bd15e22859b52240ff4b97608f2c9c21f57831e4982443f5ff1d"
+      },
+      {
+        "content_bytes": 3569,
+        "content_sha256": "abd97e2b2e3b04b76111239d5c1ee189915d53ea64daf1ae98bbb7ef85dc24db",
+        "id": "general-gutenberg-2591",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "project_gutenberg",
+          "license": "public domain work; Gutenberg wrapper removed",
+          "license_file": "licenses/project-gutenberg-permission.html",
+          "title": "Grimms' Fairy Tales",
+          "url": "https://www.gutenberg.org/cache/epub/2591/pg2591.txt"
+        },
+        "stratum": "general",
+        "token_count": 1050,
+        "token_ids_sha256": "1a8b055b7b99621a6109ced1f31a988e840a727300bdbcab541ab2c75b47ace6"
+      },
+      {
+        "content_bytes": 4017,
+        "content_sha256": "e397e9111771609a3b3cd47227990b242039357330f7cf989b88cfb51f8c1793",
+        "id": "general-gutenberg-2600",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "project_gutenberg",
+          "license": "public domain work; Gutenberg wrapper removed",
+          "license_file": "licenses/project-gutenberg-permission.html",
+          "title": "War and Peace",
+          "url": "https://www.gutenberg.org/cache/epub/2600/pg2600.txt"
+        },
+        "stratum": "general",
+        "token_count": 1050,
+        "token_ids_sha256": "71b99403bf9137980f9047118b12778a275bb414beed4119ff7a20fcb8e755d1"
+      },
+      {
+        "content_bytes": 3274,
+        "content_sha256": "43ce031efa8bbef393b54d197d1496fcef2d90b18df1b3221c69bc64a8247797",
+        "id": "general-gutenberg-6130",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "project_gutenberg",
+          "license": "public domain work; Gutenberg wrapper removed",
+          "license_file": "licenses/project-gutenberg-permission.html",
+          "title": "The Iliad",
+          "url": "https://www.gutenberg.org/cache/epub/6130/pg6130.txt"
+        },
+        "stratum": "general",
+        "token_count": 1050,
+        "token_ids_sha256": "32e1ec7c9d1ee70a34d2dfa5b211c0af28cd94b7b5582452d60b4382a8291344"
+      },
+      {
+        "content_bytes": 4398,
+        "content_sha256": "5ee160f4aea433e90751de4fda6d5d5e7eacc946d9ee9d52403435938d654807",
+        "id": "general-gutenberg-1497",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "project_gutenberg",
+          "license": "public domain work; Gutenberg wrapper removed",
+          "license_file": "licenses/project-gutenberg-permission.html",
+          "title": "The Republic",
+          "url": "https://www.gutenberg.org/cache/epub/1497/pg1497.txt"
+        },
+        "stratum": "general",
+        "token_count": 1050,
+        "token_ids_sha256": "549a8ebc6038751564cae4f1ffc6190b0f86ce5d2837b55b09550c4d24118e17"
+      },
+      {
+        "content_bytes": 3999,
+        "content_sha256": "5167167775f3d49e8ccdf8c486ab6077f314ae01f8380862b59f7eeeaca2da78",
+        "id": "general-gutenberg-160",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "project_gutenberg",
+          "license": "public domain work; Gutenberg wrapper removed",
+          "license_file": "licenses/project-gutenberg-permission.html",
+          "title": "The Awakening",
+          "url": "https://www.gutenberg.org/cache/epub/160/pg160.txt"
+        },
+        "stratum": "general",
+        "token_count": 1050,
+        "token_ids_sha256": "46bac7c00ff95fbc0a07c5294ebf25f3943fec2864490d49e2e84f863712b51d"
+      },
+      {
+        "content_bytes": 3787,
+        "content_sha256": "aeb0e4c70cbf4006247ac99e48c8cc8fe945eb8f5b518fbfe18ad5ddf19637e2",
+        "id": "general-gutenberg-514",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "project_gutenberg",
+          "license": "public domain work; Gutenberg wrapper removed",
+          "license_file": "licenses/project-gutenberg-permission.html",
+          "title": "Little Women",
+          "url": "https://www.gutenberg.org/cache/epub/514/pg514.txt"
+        },
+        "stratum": "general",
+        "token_count": 1050,
+        "token_ids_sha256": "fcc982e9491c7e19c122289c6337da2d4722cf222e85cf24972069dacde9b478"
+      },
+      {
+        "content_bytes": 4288,
+        "content_sha256": "af5a3e37d6083461287926852fdfc0b6f748017ca10fdaf75f6315265a2dbc41",
+        "id": "knowledge-wikipedia-775",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Quantum+mechanics%7CPhotosynthesis%7CFrench+Revolution%7CDNA%7CPlate+tectonics%7CRoman+Empire%7CCompiler%7CBlack+hole%7CPeriodic+table%7CSupply+and+demand%7CRenaissance%7CImmune+system%7CAlgorithm%7CSolar+System%7CWorld+War+I&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "en",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 775,
+          "revision_id": 1376037819,
+          "revision_timestamp": "2026-09-21T17:18:33Z",
+          "title": "Algorithm",
+          "url": "https://en.wikipedia.org/wiki/Algorithm?oldid=1376037819"
+        },
+        "stratum": "knowledge",
+        "token_count": 1050,
+        "token_ids_sha256": "3116a9716fad938ea4afe24a3ea9e58c241ec3f3369c29a6e5e6ce7b07b2481d"
+      },
+      {
+        "content_bytes": 3448,
+        "content_sha256": "ea1d3a437b2d4446e7a37c27232749b4019bb188a5224f3f4e124273c8709dbd",
+        "id": "knowledge-wikipedia-4650",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Quantum+mechanics%7CPhotosynthesis%7CFrench+Revolution%7CDNA%7CPlate+tectonics%7CRoman+Empire%7CCompiler%7CBlack+hole%7CPeriodic+table%7CSupply+and+demand%7CRenaissance%7CImmune+system%7CAlgorithm%7CSolar+System%7CWorld+War+I&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "en",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 4650,
+          "revision_id": 1377553102,
+          "revision_timestamp": "2026-09-30T00:07:55Z",
+          "title": "Black hole",
+          "url": "https://en.wikipedia.org/wiki/Black_hole?oldid=1377553102"
+        },
+        "stratum": "knowledge",
+        "token_count": 1050,
+        "token_ids_sha256": "7253fb99a4a669e601d98eb487a07c58fd671dd547b1a5450cffee3c2b836831"
+      },
+      {
+        "content_bytes": 4119,
+        "content_sha256": "18b59f42f94f6a2927d66915c20d3ea78d32663276f3d3d45ff8824870372c14",
+        "id": "knowledge-wikipedia-5739",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Quantum+mechanics%7CPhotosynthesis%7CFrench+Revolution%7CDNA%7CPlate+tectonics%7CRoman+Empire%7CCompiler%7CBlack+hole%7CPeriodic+table%7CSupply+and+demand%7CRenaissance%7CImmune+system%7CAlgorithm%7CSolar+System%7CWorld+War+I&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "en",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 5739,
+          "revision_id": 1373605841,
+          "revision_timestamp": "2026-09-06T21:38:00Z",
+          "title": "Compiler",
+          "url": "https://en.wikipedia.org/wiki/Compiler?oldid=1373605841"
+        },
+        "stratum": "knowledge",
+        "token_count": 1050,
+        "token_ids_sha256": "02a011151eee4888da92a740bcf216afffc970bdd3e677688d704452ea4919a8"
+      },
+      {
+        "content_bytes": 3444,
+        "content_sha256": "5e3aeb2ea8f0cb04c2bce8eb41d80bd0116f5e3f32c88e32b30c1f5a40454a66",
+        "id": "knowledge-wikipedia-7955",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Quantum+mechanics%7CPhotosynthesis%7CFrench+Revolution%7CDNA%7CPlate+tectonics%7CRoman+Empire%7CCompiler%7CBlack+hole%7CPeriodic+table%7CSupply+and+demand%7CRenaissance%7CImmune+system%7CAlgorithm%7CSolar+System%7CWorld+War+I&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "en",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 7955,
+          "revision_id": 1374720238,
+          "revision_timestamp": "2026-09-13T19:03:31Z",
+          "title": "DNA",
+          "url": "https://en.wikipedia.org/wiki/DNA?oldid=1374720238"
+        },
+        "stratum": "knowledge",
+        "token_count": 1050,
+        "token_ids_sha256": "4f560c9e5061cb9b3650adcf77140e94b626567ab8d95ed46422945472f91a38"
+      },
+      {
+        "content_bytes": 3803,
+        "content_sha256": "0ec5357b82342af59cbe6d672e4a55707f220ac56c3d37942065c1d4b4bae184",
+        "id": "knowledge-wikipedia-11188",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Quantum+mechanics%7CPhotosynthesis%7CFrench+Revolution%7CDNA%7CPlate+tectonics%7CRoman+Empire%7CCompiler%7CBlack+hole%7CPeriodic+table%7CSupply+and+demand%7CRenaissance%7CImmune+system%7CAlgorithm%7CSolar+System%7CWorld+War+I&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "en",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 11188,
+          "revision_id": 1376576100,
+          "revision_timestamp": "2026-09-25T01:18:13Z",
+          "title": "French Revolution",
+          "url": "https://en.wikipedia.org/wiki/French_Revolution?oldid=1376576100"
+        },
+        "stratum": "knowledge",
+        "token_count": 1050,
+        "token_ids_sha256": "a81dca43fa0c6bb7c041d98f9eaba6e07b3229556484548a5c4bac64ca1a15cc"
+      },
+      {
+        "content_bytes": 4267,
+        "content_sha256": "359c7fc61e795378f7a8636748a53e52a6ee03d765b213b69a93aafef5d23b7f",
+        "id": "knowledge-wikipedia-14958",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Quantum+mechanics%7CPhotosynthesis%7CFrench+Revolution%7CDNA%7CPlate+tectonics%7CRoman+Empire%7CCompiler%7CBlack+hole%7CPeriodic+table%7CSupply+and+demand%7CRenaissance%7CImmune+system%7CAlgorithm%7CSolar+System%7CWorld+War+I&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "en",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 14958,
+          "revision_id": 1375442429,
+          "revision_timestamp": "2026-09-17T20:18:46Z",
+          "title": "Immune system",
+          "url": "https://en.wikipedia.org/wiki/Immune_system?oldid=1375442429"
+        },
+        "stratum": "knowledge",
+        "token_count": 1050,
+        "token_ids_sha256": "866d77ba0be8a1eadd4db1e9be98473131919253700da397797c650977bb08ed"
+      },
+      {
+        "content_bytes": 4623,
+        "content_sha256": "3976347a1c20da4c54f762922e0940acd4712efd48bb68a542eb434eb0db3ee1",
+        "id": "knowledge-wikipedia-23053",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Quantum+mechanics%7CPhotosynthesis%7CFrench+Revolution%7CDNA%7CPlate+tectonics%7CRoman+Empire%7CCompiler%7CBlack+hole%7CPeriodic+table%7CSupply+and+demand%7CRenaissance%7CImmune+system%7CAlgorithm%7CSolar+System%7CWorld+War+I&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "en",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 23053,
+          "revision_id": 1375981470,
+          "revision_timestamp": "2026-09-21T07:04:39Z",
+          "title": "Periodic table",
+          "url": "https://en.wikipedia.org/wiki/Periodic_table?oldid=1375981470"
+        },
+        "stratum": "knowledge",
+        "token_count": 1050,
+        "token_ids_sha256": "fc1c454b965d08a5f818593bcb710d250de09500d054365c11cf426a4340e61c"
+      },
+      {
+        "content_bytes": 3429,
+        "content_sha256": "176ae33679ca314249bed450688ace59e9d170b2aa9612b8d2490af12a08aa71",
+        "id": "knowledge-wikipedia-24544",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Quantum+mechanics%7CPhotosynthesis%7CFrench+Revolution%7CDNA%7CPlate+tectonics%7CRoman+Empire%7CCompiler%7CBlack+hole%7CPeriodic+table%7CSupply+and+demand%7CRenaissance%7CImmune+system%7CAlgorithm%7CSolar+System%7CWorld+War+I&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "en",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 24544,
+          "revision_id": 1371284103,
+          "revision_timestamp": "2026-08-25T17:04:29Z",
+          "title": "Photosynthesis",
+          "url": "https://en.wikipedia.org/wiki/Photosynthesis?oldid=1371284103"
+        },
+        "stratum": "knowledge",
+        "token_count": 1050,
+        "token_ids_sha256": "d7c7353ac01b7074fe45bf41d40358905aa6f75358cb417c1e55d8b6f4646792"
+      },
+      {
+        "content_bytes": 2847,
+        "content_sha256": "ffe42f2771f89f19b50426bfea2e44e1b03dcbab38843a05a484955b87b3848a",
+        "id": "knowledge-wikipedia-24944",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Quantum+mechanics%7CPhotosynthesis%7CFrench+Revolution%7CDNA%7CPlate+tectonics%7CRoman+Empire%7CCompiler%7CBlack+hole%7CPeriodic+table%7CSupply+and+demand%7CRenaissance%7CImmune+system%7CAlgorithm%7CSolar+System%7CWorld+War+I&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "en",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 24944,
+          "revision_id": 1376119468,
+          "revision_timestamp": "2026-09-22T04:38:20Z",
+          "title": "Plate tectonics",
+          "url": "https://en.wikipedia.org/wiki/Plate_tectonics?oldid=1376119468"
+        },
+        "stratum": "knowledge",
+        "token_count": 1050,
+        "token_ids_sha256": "9e606d591578cc1b72e5c2dd182f03d609291ddcc6031eacde5b94de5a255430"
+      },
+      {
+        "content_bytes": 3952,
+        "content_sha256": "7329ebfe9322e5bd5fc66f0cfdecc4a0e848159e1421a082cd0d137156ad2f73",
+        "id": "knowledge-wikipedia-25202",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Quantum+mechanics%7CPhotosynthesis%7CFrench+Revolution%7CDNA%7CPlate+tectonics%7CRoman+Empire%7CCompiler%7CBlack+hole%7CPeriodic+table%7CSupply+and+demand%7CRenaissance%7CImmune+system%7CAlgorithm%7CSolar+System%7CWorld+War+I&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "en",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 25202,
+          "revision_id": 1377463988,
+          "revision_timestamp": "2026-09-29T14:37:24Z",
+          "title": "Quantum mechanics",
+          "url": "https://en.wikipedia.org/wiki/Quantum_mechanics?oldid=1377463988"
+        },
+        "stratum": "knowledge",
+        "token_count": 1050,
+        "token_ids_sha256": "8fd3b17aac2bf7c6bf5732b5ae306f1c9c8b33dc08d63946aad1e360613a9d0a"
+      },
+      {
+        "content_bytes": 3340,
+        "content_sha256": "7a8c705ac8357a2501a0e374965571ccd04ac92e3cce81d563c28bcb47813fe7",
+        "id": "knowledge-wikipedia-25507",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Quantum+mechanics%7CPhotosynthesis%7CFrench+Revolution%7CDNA%7CPlate+tectonics%7CRoman+Empire%7CCompiler%7CBlack+hole%7CPeriodic+table%7CSupply+and+demand%7CRenaissance%7CImmune+system%7CAlgorithm%7CSolar+System%7CWorld+War+I&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "en",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 25507,
+          "revision_id": 1377816269,
+          "revision_timestamp": "2026-10-01T07:38:19Z",
+          "title": "Roman Empire",
+          "url": "https://en.wikipedia.org/wiki/Roman_Empire?oldid=1377816269"
+        },
+        "stratum": "knowledge",
+        "token_count": 1050,
+        "token_ids_sha256": "1fd79674bfd5bcb380c90ab6d9220ed9d6a95907ee28aecb68900baa967bad49"
+      },
+      {
+        "content_bytes": 3526,
+        "content_sha256": "242fdd1071d152dbfa864ec48b54aae0b8c1d9176facc3dd2722e13f59c7cb39",
+        "id": "knowledge-wikipedia-25532",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Quantum+mechanics%7CPhotosynthesis%7CFrench+Revolution%7CDNA%7CPlate+tectonics%7CRoman+Empire%7CCompiler%7CBlack+hole%7CPeriodic+table%7CSupply+and+demand%7CRenaissance%7CImmune+system%7CAlgorithm%7CSolar+System%7CWorld+War+I&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "en",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 25532,
+          "revision_id": 1377861662,
+          "revision_timestamp": "2026-10-01T16:00:07Z",
+          "title": "Renaissance",
+          "url": "https://en.wikipedia.org/wiki/Renaissance?oldid=1377861662"
+        },
+        "stratum": "knowledge",
+        "token_count": 1050,
+        "token_ids_sha256": "832c6601f917b9686c4f62b9d5880d47d2a241490c031b6aa9d8933e5da1fe8f"
+      },
+      {
+        "content_bytes": 3120,
+        "content_sha256": "8f2468f6fe536ff9fd930946d71ebf845aa101d8cf0a82dd81f26bfc2057a933",
+        "id": "knowledge-wikipedia-26903",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Quantum+mechanics%7CPhotosynthesis%7CFrench+Revolution%7CDNA%7CPlate+tectonics%7CRoman+Empire%7CCompiler%7CBlack+hole%7CPeriodic+table%7CSupply+and+demand%7CRenaissance%7CImmune+system%7CAlgorithm%7CSolar+System%7CWorld+War+I&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "en",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 26903,
+          "revision_id": 1377020987,
+          "revision_timestamp": "2026-09-27T13:55:01Z",
+          "title": "Solar System",
+          "url": "https://en.wikipedia.org/wiki/Solar_System?oldid=1377020987"
+        },
+        "stratum": "knowledge",
+        "token_count": 1050,
+        "token_ids_sha256": "01f02d174f8dc804cfeb2e85b6209ac958f707370fbe8d150802d70d0603ec5f"
+      },
+      {
+        "content_bytes": 4768,
+        "content_sha256": "997c9b23fecc890ca8b67f38be582534f66dbbc23557fcdeac63b883936f9218",
+        "id": "knowledge-wikipedia-29664",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Quantum+mechanics%7CPhotosynthesis%7CFrench+Revolution%7CDNA%7CPlate+tectonics%7CRoman+Empire%7CCompiler%7CBlack+hole%7CPeriodic+table%7CSupply+and+demand%7CRenaissance%7CImmune+system%7CAlgorithm%7CSolar+System%7CWorld+War+I&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "en",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 29664,
+          "revision_id": 1375412822,
+          "revision_timestamp": "2026-09-17T16:42:39Z",
+          "title": "Supply and demand",
+          "url": "https://en.wikipedia.org/wiki/Supply_and_demand?oldid=1375412822"
+        },
+        "stratum": "knowledge",
+        "token_count": 1050,
+        "token_ids_sha256": "65eb540c5c075ed152338adece5154fc1791925ee265682683a9456d525613cb"
+      },
+      {
+        "content_bytes": 3207,
+        "content_sha256": "7b549f54cde9771415d900c2c4d88c56351c833b945344d230fdf49e0ef6e27f",
+        "id": "knowledge-wikipedia-4764461",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Quantum+mechanics%7CPhotosynthesis%7CFrench+Revolution%7CDNA%7CPlate+tectonics%7CRoman+Empire%7CCompiler%7CBlack+hole%7CPeriodic+table%7CSupply+and+demand%7CRenaissance%7CImmune+system%7CAlgorithm%7CSolar+System%7CWorld+War+I&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "en",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 4764461,
+          "revision_id": 1377736831,
+          "revision_timestamp": "2026-09-30T21:55:26Z",
+          "title": "World War I",
+          "url": "https://en.wikipedia.org/wiki/World_War_I?oldid=1377736831"
+        },
+        "stratum": "knowledge",
+        "token_count": 1050,
+        "token_ids_sha256": "f9428aee6eea22ef72937fab33c3d678901ecdfb959198713ddf9820182d63a0"
+      },
+      {
+        "content_bytes": 3727,
+        "content_sha256": "b5a1da8f289fd83ea117d007f676becd0468dbaf0459e66a81be8a92801a6e67",
+        "id": "knowledge-wikipedia-874",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Evolution%7CGeneral+relativity%7CClimate+change%7CAncient+Egypt%7CPrinting+press%7CHuman+brain%7CInternet%7CMathematics%7CElectricity%7CPhilosophy&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "en",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 874,
+          "revision_id": 1376471813,
+          "revision_timestamp": "2026-09-24T09:41:49Z",
+          "title": "Ancient Egypt",
+          "url": "https://en.wikipedia.org/wiki/Ancient_Egypt?oldid=1376471813"
+        },
+        "stratum": "knowledge",
+        "token_count": 1050,
+        "token_ids_sha256": "25be6bcd192fe462f7cc79e0778e12f965f6c5a708f323425e8f53a049a132aa"
+      },
+      {
+        "content_bytes": 3934,
+        "content_sha256": "95ff19eb6f536cf3b7c7b7d7cf386e5baaaa436ed54699f328f99975e251bf08",
+        "id": "knowledge-wikipedia-9236",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Evolution%7CGeneral+relativity%7CClimate+change%7CAncient+Egypt%7CPrinting+press%7CHuman+brain%7CInternet%7CMathematics%7CElectricity%7CPhilosophy&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "en",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 9236,
+          "revision_id": 1377532993,
+          "revision_timestamp": "2026-09-29T22:13:02Z",
+          "title": "Evolution",
+          "url": "https://en.wikipedia.org/wiki/Evolution?oldid=1377532993"
+        },
+        "stratum": "knowledge",
+        "token_count": 1050,
+        "token_ids_sha256": "63e3ee2e5524a910aefeb85f0cbc61d678046b0906784beedebba604901e0065"
+      },
+      {
+        "content_bytes": 4278,
+        "content_sha256": "9656a28073098f61e8152a5a23db6db1041daf0a786e56b25316d44a079125eb",
+        "id": "knowledge-wikipedia-9550",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Evolution%7CGeneral+relativity%7CClimate+change%7CAncient+Egypt%7CPrinting+press%7CHuman+brain%7CInternet%7CMathematics%7CElectricity%7CPhilosophy&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "en",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 9550,
+          "revision_id": 1368701770,
+          "revision_timestamp": "2026-08-10T16:18:44Z",
+          "title": "Electricity",
+          "url": "https://en.wikipedia.org/wiki/Electricity?oldid=1368701770"
+        },
+        "stratum": "knowledge",
+        "token_count": 1050,
+        "token_ids_sha256": "a6c2a0357ba270b5c723546583a4aab873af9c1cf14e2983e3217c5ea123b047"
+      },
+      {
+        "content_bytes": 4528,
+        "content_sha256": "49b271088703f723011d6becc5406b115f1e77a4e0411d2b72ee851ffcaeb24a",
+        "id": "knowledge-wikipedia-12024",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Evolution%7CGeneral+relativity%7CClimate+change%7CAncient+Egypt%7CPrinting+press%7CHuman+brain%7CInternet%7CMathematics%7CElectricity%7CPhilosophy&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "en",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 12024,
+          "revision_id": 1377692476,
+          "revision_timestamp": "2026-09-30T16:36:23Z",
+          "title": "General relativity",
+          "url": "https://en.wikipedia.org/wiki/General_relativity?oldid=1377692476"
+        },
+        "stratum": "knowledge",
+        "token_count": 1050,
+        "token_ids_sha256": "694f24c267a8cbb00e4e3012984929e871656907b01f262f31ea2ffbf4501d0b"
+      },
+      {
+        "content_bytes": 4237,
+        "content_sha256": "ddeb476f0bc9429ff615a3a69ff52985cedb2313125604f144cbe4c80ad4d6e4",
+        "id": "knowledge-wikipedia-14539",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Evolution%7CGeneral+relativity%7CClimate+change%7CAncient+Egypt%7CPrinting+press%7CHuman+brain%7CInternet%7CMathematics%7CElectricity%7CPhilosophy&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "en",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 14539,
+          "revision_id": 1376382969,
+          "revision_timestamp": "2026-09-23T21:17:05Z",
+          "title": "Internet",
+          "url": "https://en.wikipedia.org/wiki/Internet?oldid=1376382969"
+        },
+        "stratum": "knowledge",
+        "token_count": 1050,
+        "token_ids_sha256": "dcb4311a9c17f6e57736571d42e904b9f70b0ad9134d3608b27e806f1904a050"
+      },
+      {
+        "content_bytes": 3857,
+        "content_sha256": "9ca0a6c63ef36da007848b22ac7b79b7482a0eaf2550dd0390b74fdad2bac1b4",
+        "id": "knowledge-wikipedia-18831",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Evolution%7CGeneral+relativity%7CClimate+change%7CAncient+Egypt%7CPrinting+press%7CHuman+brain%7CInternet%7CMathematics%7CElectricity%7CPhilosophy&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "en",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 18831,
+          "revision_id": 1377221419,
+          "revision_timestamp": "2026-09-28T10:38:44Z",
+          "title": "Mathematics",
+          "url": "https://en.wikipedia.org/wiki/Mathematics?oldid=1377221419"
+        },
+        "stratum": "knowledge",
+        "token_count": 1050,
+        "token_ids_sha256": "a9f26812ac3631fa2dcf988bf33372ed7debd8bd5c928cc1bd7f90aab0e2a636"
+      },
+      {
+        "content_bytes": 4254,
+        "content_sha256": "865019ab0f1da863524741209f2a06e0bfe5791e44d85194e659487b020f39c0",
+        "id": "knowledge-wikipedia-23295",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Evolution%7CGeneral+relativity%7CClimate+change%7CAncient+Egypt%7CPrinting+press%7CHuman+brain%7CInternet%7CMathematics%7CElectricity%7CPhilosophy&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "en",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 23295,
+          "revision_id": 1377510723,
+          "revision_timestamp": "2026-09-29T19:49:47Z",
+          "title": "Printing press",
+          "url": "https://en.wikipedia.org/wiki/Printing_press?oldid=1377510723"
+        },
+        "stratum": "knowledge",
+        "token_count": 1050,
+        "token_ids_sha256": "fde2cf5f9542a0ce9890229aea58606396c2f4c43a6135bfb762986d65cb9594"
+      },
+      {
+        "content_bytes": 4095,
+        "content_sha256": "405ac2b6bc076a3c59c002024aa7c151b15105eca108e247b2fe72d236b9e522",
+        "id": "knowledge-wikipedia-490620",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Evolution%7CGeneral+relativity%7CClimate+change%7CAncient+Egypt%7CPrinting+press%7CHuman+brain%7CInternet%7CMathematics%7CElectricity%7CPhilosophy&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "en",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 490620,
+          "revision_id": 1377054591,
+          "revision_timestamp": "2026-09-27T18:01:55Z",
+          "title": "Human brain",
+          "url": "https://en.wikipedia.org/wiki/Human_brain?oldid=1377054591"
+        },
+        "stratum": "knowledge",
+        "token_count": 1050,
+        "token_ids_sha256": "4e1d524554fcd4f8bfe1f2518d51ad00caab71cc3e4b0aa266ea71fd599ddfc9"
+      },
+      {
+        "content_bytes": 3820,
+        "content_sha256": "6aacf8e0744af3680675854d44122e2226930c23e64d9df0c6d4cdf60fa4db9f",
+        "id": "knowledge-wikipedia-5042951",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Evolution%7CGeneral+relativity%7CClimate+change%7CAncient+Egypt%7CPrinting+press%7CHuman+brain%7CInternet%7CMathematics%7CElectricity%7CPhilosophy&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "en",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 5042951,
+          "revision_id": 1377826917,
+          "revision_timestamp": "2026-10-01T10:04:24Z",
+          "title": "Climate change",
+          "url": "https://en.wikipedia.org/wiki/Climate_change?oldid=1377826917"
+        },
+        "stratum": "knowledge",
+        "token_count": 1050,
+        "token_ids_sha256": "9ac8999d87b197b50c7a924001b396998ff468090a2ef962a7d1c51fbc9dd483"
+      },
+      {
+        "content_bytes": 4154,
+        "content_sha256": "8f45d6ee5804409d147d175df34be8f10983d65475c31f91a6e2b78bab9a8571",
+        "id": "knowledge-wikipedia-13692155",
+        "language": "en",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Evolution%7CGeneral+relativity%7CClimate+change%7CAncient+Egypt%7CPrinting+press%7CHuman+brain%7CInternet%7CMathematics%7CElectricity%7CPhilosophy&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "en",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 13692155,
+          "revision_id": 1376554573,
+          "revision_timestamp": "2026-09-24T22:22:04Z",
+          "title": "Philosophy",
+          "url": "https://en.wikipedia.org/wiki/Philosophy?oldid=1376554573"
+        },
+        "stratum": "knowledge",
+        "token_count": 1050,
+        "token_ids_sha256": "dd9281cb9f0f55120671774b12da852b5e5c10e87e80d895e6d14ae3ce752962"
+      },
+      {
+        "content_bytes": 3555,
+        "content_sha256": "8f1c27fa2c3e7797a4fc2b35a38139ff2c884b5e3967463012c32cae50f89ff3",
+        "id": "code-llama-cpp-00",
+        "language": "cpp",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "git",
+          "license": "MIT",
+          "license_file": "licenses/llama.cpp-MIT.txt",
+          "path": "src/llama-vocab.cpp",
+          "revision": "911f6cdc8ab8a530b2bee09ee61471a6f3178eeb",
+          "source_sha256": "ced5c58a753e4f5a8eb9bd14dc6d2b7d403e66c37b8f6eb7ce82b7695a740a29",
+          "url": "https://github.com/ggml-org/llama.cpp/blob/911f6cdc8ab8a530b2bee09ee61471a6f3178eeb/src/llama-vocab.cpp"
+        },
+        "stratum": "code",
+        "token_count": 1050,
+        "token_ids_sha256": "04d8b924e20b9d18b14ee99b9b3e72f3d42878dac4328a836966cb67d8ce5343"
+      },
+      {
+        "content_bytes": 3850,
+        "content_sha256": "127d63770c4fc54899b8e77e71aceafca107a34bdfb86dfc01a4d2c7ec6cf7e3",
+        "id": "code-llama-cpp-01",
+        "language": "cpp",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "git",
+          "license": "MIT",
+          "license_file": "licenses/llama.cpp-MIT.txt",
+          "path": "src/llama-model.cpp",
+          "revision": "911f6cdc8ab8a530b2bee09ee61471a6f3178eeb",
+          "source_sha256": "dbbf559cbb2d7196f92c0498a243e4552bf60fa13514aa632bb9a444c991444c",
+          "url": "https://github.com/ggml-org/llama.cpp/blob/911f6cdc8ab8a530b2bee09ee61471a6f3178eeb/src/llama-model.cpp"
+        },
+        "stratum": "code",
+        "token_count": 1050,
+        "token_ids_sha256": "3e141ea5e399530d24c99574107075b931fed79a30d287f95bbf8f562eb8cc4e"
+      },
+      {
+        "content_bytes": 3330,
+        "content_sha256": "f665f55955c46cd60e4353c6832c5f48001131250f823a9f9f70bd07854ca2fb",
+        "id": "code-llama-cpp-02",
+        "language": "cpp",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "git",
+          "license": "MIT",
+          "license_file": "licenses/llama.cpp-MIT.txt",
+          "path": "src/llama-context.cpp",
+          "revision": "911f6cdc8ab8a530b2bee09ee61471a6f3178eeb",
+          "source_sha256": "9f246c4f7268d1438c3e6f4a544cd497feffe777095eeaa1606a24a3d2f07008",
+          "url": "https://github.com/ggml-org/llama.cpp/blob/911f6cdc8ab8a530b2bee09ee61471a6f3178eeb/src/llama-context.cpp"
+        },
+        "stratum": "code",
+        "token_count": 1050,
+        "token_ids_sha256": "4aac845db281c6aa696ad759bca0badaef0f1caae163c6f7984c88432be5c36a"
+      },
+      {
+        "content_bytes": 3608,
+        "content_sha256": "a3d68bfcb2f31ac7a9f3d4d0836acdabf2f4941a302a35a473580b64e4509d59",
+        "id": "code-llama-cpp-03",
+        "language": "cpp",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "git",
+          "license": "MIT",
+          "license_file": "licenses/llama.cpp-MIT.txt",
+          "path": "src/llama-sampler.cpp",
+          "revision": "911f6cdc8ab8a530b2bee09ee61471a6f3178eeb",
+          "source_sha256": "30b739d8d2bab2c57d5bdb9d082cb115f9942d9668871501506360b55c3360a0",
+          "url": "https://github.com/ggml-org/llama.cpp/blob/911f6cdc8ab8a530b2bee09ee61471a6f3178eeb/src/llama-sampler.cpp"
+        },
+        "stratum": "code",
+        "token_count": 1050,
+        "token_ids_sha256": "0ec475143ce60304cec1fb8a3c0d16e31c2ca0ef5483e50faa9df47e22c4e98b"
+      },
+      {
+        "content_bytes": 3300,
+        "content_sha256": "18c3e3838dafe022bbb1524aacf4e963eb4ed47994e9a19e4b4386dd9f9b6ddb",
+        "id": "code-llama-cpp-04",
+        "language": "cpp",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "git",
+          "license": "MIT",
+          "license_file": "licenses/llama.cpp-MIT.txt",
+          "path": "src/llama-graph.cpp",
+          "revision": "911f6cdc8ab8a530b2bee09ee61471a6f3178eeb",
+          "source_sha256": "90f5c6f082790599124630680ba1293d702b369e9ce9088680d210b69905c8d3",
+          "url": "https://github.com/ggml-org/llama.cpp/blob/911f6cdc8ab8a530b2bee09ee61471a6f3178eeb/src/llama-graph.cpp"
+        },
+        "stratum": "code",
+        "token_count": 1050,
+        "token_ids_sha256": "8c988d32910017d5183522e04727ac98f65683c5d4c9731dd32e43683aba5fc1"
+      },
+      {
+        "content_bytes": 3466,
+        "content_sha256": "eeb324cd14883ecacaa0f51bd66ca117e35c916cc29526d09ec9c14214be3ce4",
+        "id": "code-llama-cpp-05",
+        "language": "cpp",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "git",
+          "license": "MIT",
+          "license_file": "licenses/llama.cpp-MIT.txt",
+          "path": "src/llama-kv-cache.cpp",
+          "revision": "911f6cdc8ab8a530b2bee09ee61471a6f3178eeb",
+          "source_sha256": "16b40ff274e5aed3827f0d1c13a04f4f44c4d800c4eecbb5294b04127ab213c3",
+          "url": "https://github.com/ggml-org/llama.cpp/blob/911f6cdc8ab8a530b2bee09ee61471a6f3178eeb/src/llama-kv-cache.cpp"
+        },
+        "stratum": "code",
+        "token_count": 1050,
+        "token_ids_sha256": "10116a6fb3d6655367eb0002f673e4090037c645c6c1c6c5f8272d5669d71927"
+      },
+      {
+        "content_bytes": 3067,
+        "content_sha256": "eaee054ca49fc387bb6fcdcc2f2175f928a8446e658313028e99bc6e39d31165",
+        "id": "code-llama-cpp-06",
+        "language": "cpp",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "git",
+          "license": "MIT",
+          "license_file": "licenses/llama.cpp-MIT.txt",
+          "path": "src/llama-arch.cpp",
+          "revision": "911f6cdc8ab8a530b2bee09ee61471a6f3178eeb",
+          "source_sha256": "0b380fbc29f7e757e24d0950f0119b464e7bd510c920a4c431d1469c829e4fe4",
+          "url": "https://github.com/ggml-org/llama.cpp/blob/911f6cdc8ab8a530b2bee09ee61471a6f3178eeb/src/llama-arch.cpp"
+        },
+        "stratum": "code",
+        "token_count": 1050,
+        "token_ids_sha256": "9d7c4eaa82811a8244e1c68b73850aebc7d0334bf3f43ae7d2b7d2b6b4bd033a"
+      },
+      {
+        "content_bytes": 3029,
+        "content_sha256": "5287776be882dfc2198abd087ba8815afdcbfd563d2b5b53de1916f64ec17e14",
+        "id": "code-llama-cpp-07",
+        "language": "cpp",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "git",
+          "license": "MIT",
+          "license_file": "licenses/llama.cpp-MIT.txt",
+          "path": "src/llama-model-loader.cpp",
+          "revision": "911f6cdc8ab8a530b2bee09ee61471a6f3178eeb",
+          "source_sha256": "efdb5f273bd1ab77301f2cadea1a5a804bafb28040aca033e45605a97a450242",
+          "url": "https://github.com/ggml-org/llama.cpp/blob/911f6cdc8ab8a530b2bee09ee61471a6f3178eeb/src/llama-model-loader.cpp"
+        },
+        "stratum": "code",
+        "token_count": 1050,
+        "token_ids_sha256": "3f60c61e20200ef418c652ddf48f54af10bebaaf52b693f86dc3d06b210836e6"
+      },
+      {
+        "content_bytes": 3726,
+        "content_sha256": "247668db8bf85e2b09f9dbeef9756ed7ad89e6683715f3bfe3cdae62e4af3e12",
+        "id": "code-llama-cpp-08",
+        "language": "cpp",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "git",
+          "license": "MIT",
+          "license_file": "licenses/llama.cpp-MIT.txt",
+          "path": "src/llama-quant.cpp",
+          "revision": "911f6cdc8ab8a530b2bee09ee61471a6f3178eeb",
+          "source_sha256": "a33dea76120a10b2eac8b5d81b9425dcd401e2c8ae4bb04f59b00922f0355fdd",
+          "url": "https://github.com/ggml-org/llama.cpp/blob/911f6cdc8ab8a530b2bee09ee61471a6f3178eeb/src/llama-quant.cpp"
+        },
+        "stratum": "code",
+        "token_count": 1050,
+        "token_ids_sha256": "37cfb3ca09b07db3c3800dc2e7ba7316b97f54845984d998640cd9db775e17d3"
+      },
+      {
+        "content_bytes": 3237,
+        "content_sha256": "77598bf06dc2f6c850260d0eb1046fa3ede8536671193cff4fb94610056230ad",
+        "id": "code-llama-cpp-09",
+        "language": "cpp",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "git",
+          "license": "MIT",
+          "license_file": "licenses/llama.cpp-MIT.txt",
+          "path": "src/llama-grammar.cpp",
+          "revision": "911f6cdc8ab8a530b2bee09ee61471a6f3178eeb",
+          "source_sha256": "668d8ad4bd9066551061e1ccd38c6a681a84c50ddc05ae92d565a473d1239986",
+          "url": "https://github.com/ggml-org/llama.cpp/blob/911f6cdc8ab8a530b2bee09ee61471a6f3178eeb/src/llama-grammar.cpp"
+        },
+        "stratum": "code",
+        "token_count": 1050,
+        "token_ids_sha256": "f196fbe43985d7780a2dc02d653db268441286b486ec2b2c9ec3f5886cd8293a"
+      },
+      {
+        "content_bytes": 3674,
+        "content_sha256": "e83ce1843a438e868262b92da4c26e0fdb17adf902ca30f5513217e6125cd829",
+        "id": "code-llama-cpp-10",
+        "language": "cpp",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "git",
+          "license": "MIT",
+          "license_file": "licenses/llama.cpp-MIT.txt",
+          "path": "common/arg.cpp",
+          "revision": "911f6cdc8ab8a530b2bee09ee61471a6f3178eeb",
+          "source_sha256": "6e71ad4f63c79fee81fe218ab6755ed97813ba84d179e38ae02924be1556d46e",
+          "url": "https://github.com/ggml-org/llama.cpp/blob/911f6cdc8ab8a530b2bee09ee61471a6f3178eeb/common/arg.cpp"
+        },
+        "stratum": "code",
+        "token_count": 1050,
+        "token_ids_sha256": "8ef4a1f1cd1decd7e9238380121eb8e24cb8a0884f7746bd1391b384cfb3434e"
+      },
+      {
+        "content_bytes": 3568,
+        "content_sha256": "e1487796bd740845896bd93c03fbfcf7e80f712d8c02e74d67d642749dff39e9",
+        "id": "code-llama-cpp-11",
+        "language": "cpp",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "git",
+          "license": "MIT",
+          "license_file": "licenses/llama.cpp-MIT.txt",
+          "path": "common/common.cpp",
+          "revision": "911f6cdc8ab8a530b2bee09ee61471a6f3178eeb",
+          "source_sha256": "e6eccdf376a80a3f534fc71ad7775fcac52eb6089367f1592ce1d293b147db66",
+          "url": "https://github.com/ggml-org/llama.cpp/blob/911f6cdc8ab8a530b2bee09ee61471a6f3178eeb/common/common.cpp"
+        },
+        "stratum": "code",
+        "token_count": 1050,
+        "token_ids_sha256": "cb4ee3df8afae96d960635f383194078fc3668bf8369000ce87db1bfdd5b98c5"
+      },
+      {
+        "content_bytes": 4010,
+        "content_sha256": "56228afd2d833c2cabe95f1f9819864eeabdc1049534cc7438d096db0d05c460",
+        "id": "code-llama-cpp-12",
+        "language": "cpp",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "git",
+          "license": "MIT",
+          "license_file": "licenses/llama.cpp-MIT.txt",
+          "path": "common/chat.cpp",
+          "revision": "911f6cdc8ab8a530b2bee09ee61471a6f3178eeb",
+          "source_sha256": "a226aa0cbf844490cd480bb805c458df16af8771b1ecb53a8fe608e3b2e60d3c",
+          "url": "https://github.com/ggml-org/llama.cpp/blob/911f6cdc8ab8a530b2bee09ee61471a6f3178eeb/common/chat.cpp"
+        },
+        "stratum": "code",
+        "token_count": 1050,
+        "token_ids_sha256": "bb997a0895e543d6d67acccbb205c91585b939d95a0d90cb928af054cbde116b"
+      },
+      {
+        "content_bytes": 3810,
+        "content_sha256": "01618610cbfb8ec742e3f68b1b88ba78958622658b509d37076b5ece194377c7",
+        "id": "code-llama-cpp-13",
+        "language": "cpp",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "git",
+          "license": "MIT",
+          "license_file": "licenses/llama.cpp-MIT.txt",
+          "path": "common/sampling.cpp",
+          "revision": "911f6cdc8ab8a530b2bee09ee61471a6f3178eeb",
+          "source_sha256": "f23f8d663932bfd73abac1bd5e99055fc6efb07e21ef27dd7e25af2f2da40bff",
+          "url": "https://github.com/ggml-org/llama.cpp/blob/911f6cdc8ab8a530b2bee09ee61471a6f3178eeb/common/sampling.cpp"
+        },
+        "stratum": "code",
+        "token_count": 1050,
+        "token_ids_sha256": "49fed1df1b25fa7486c73cdacad443429097161c23f0d1df9e21109e025ddb39"
+      },
+      {
+        "content_bytes": 4051,
+        "content_sha256": "6a4587b6df06dc0aa9f6ef142b7c867967a764b4e5c8295a1905ec8dc2ad54ae",
+        "id": "code-llama-cpp-14",
+        "language": "cpp",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "git",
+          "license": "MIT",
+          "license_file": "licenses/llama.cpp-MIT.txt",
+          "path": "common/json-schema-to-grammar.cpp",
+          "revision": "911f6cdc8ab8a530b2bee09ee61471a6f3178eeb",
+          "source_sha256": "4bd38802809f63810eaedc70bd94898331c093f7c6cbc520e6c89b5aaea72c09",
+          "url": "https://github.com/ggml-org/llama.cpp/blob/911f6cdc8ab8a530b2bee09ee61471a6f3178eeb/common/json-schema-to-grammar.cpp"
+        },
+        "stratum": "code",
+        "token_count": 1050,
+        "token_ids_sha256": "60ffee1bd149ee302f236f5858c9883796d126d372b51f12c43b33c0c92bded2"
+      },
+      {
+        "content_bytes": 3898,
+        "content_sha256": "912b0c7461bc8f279ae10df1619668f1f3eef105791cf8720a660f583848d013",
+        "id": "code-llama-cpp-15",
+        "language": "cpp",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "git",
+          "license": "MIT",
+          "license_file": "licenses/llama.cpp-MIT.txt",
+          "path": "common/console.cpp",
+          "revision": "911f6cdc8ab8a530b2bee09ee61471a6f3178eeb",
+          "source_sha256": "2036d837458426b3d7c456cdfdb5ace53232fd84e0e11ec3395ee7ab04f901bf",
+          "url": "https://github.com/ggml-org/llama.cpp/blob/911f6cdc8ab8a530b2bee09ee61471a6f3178eeb/common/console.cpp"
+        },
+        "stratum": "code",
+        "token_count": 1050,
+        "token_ids_sha256": "b2327f9bdb2bfc8ae420196cbbd6d90f11b3c965cb179abe2ca9b8fbafcb6bb8"
+      },
+      {
+        "content_bytes": 3558,
+        "content_sha256": "ef31a3372028cb475b6d96c52c8b64f13784bb071404c7bb116e4398b0c5b66d",
+        "id": "code-llama-cpp-16",
+        "language": "cpp",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "git",
+          "license": "MIT",
+          "license_file": "licenses/llama.cpp-MIT.txt",
+          "path": "common/speculative.cpp",
+          "revision": "911f6cdc8ab8a530b2bee09ee61471a6f3178eeb",
+          "source_sha256": "c5f070dfc9d3d1af31f92567900d6bb06a8d35fe5fcef6df7cd416be1758dbc2",
+          "url": "https://github.com/ggml-org/llama.cpp/blob/911f6cdc8ab8a530b2bee09ee61471a6f3178eeb/common/speculative.cpp"
+        },
+        "stratum": "code",
+        "token_count": 1050,
+        "token_ids_sha256": "de4b5b0a790592f5ace52bb11270c3dd9560abef2cb93d8b4279c0541f910469"
+      },
+      {
+        "content_bytes": 3690,
+        "content_sha256": "d98ae77906b146b12c7af6e02e0c7763a4885e5f08291fd6ca6c72de46540b67",
+        "id": "code-llama-cpp-17",
+        "language": "cpp",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "git",
+          "license": "MIT",
+          "license_file": "licenses/llama.cpp-MIT.txt",
+          "path": "common/peg-parser.cpp",
+          "revision": "911f6cdc8ab8a530b2bee09ee61471a6f3178eeb",
+          "source_sha256": "594680aeee74b5b35ae7193075ec78e9fdff526061eb05d17e1d823f9b51f7c7",
+          "url": "https://github.com/ggml-org/llama.cpp/blob/911f6cdc8ab8a530b2bee09ee61471a6f3178eeb/common/peg-parser.cpp"
+        },
+        "stratum": "code",
+        "token_count": 1050,
+        "token_ids_sha256": "7955ba870fb3d0e764f7d6fe3b38904f4919509978fb40f951dd53cec0dfac2c"
+      },
+      {
+        "content_bytes": 4090,
+        "content_sha256": "6cc2329204c62905c15177eb02adf5628210d22abcedc8593c4bd54615a681ca",
+        "id": "code-llama-cpp-18",
+        "language": "cpp",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "git",
+          "license": "MIT",
+          "license_file": "licenses/llama.cpp-MIT.txt",
+          "path": "common/chat-diff-analyzer.cpp",
+          "revision": "911f6cdc8ab8a530b2bee09ee61471a6f3178eeb",
+          "source_sha256": "5acb9907c78a66685e4f43327e9f700db3325fefb8991c1212d713a412469297",
+          "url": "https://github.com/ggml-org/llama.cpp/blob/911f6cdc8ab8a530b2bee09ee61471a6f3178eeb/common/chat-diff-analyzer.cpp"
+        },
+        "stratum": "code",
+        "token_count": 1050,
+        "token_ids_sha256": "b75cc5ee801a7e7cda1ee7bd269792974786fc399b3ebbec337853a03af71e6f"
+      },
+      {
+        "content_bytes": 3148,
+        "content_sha256": "9da58a100a9d6d7a68d334ced476eb37fbb8490bd01384bfdc9c65f68165dacf",
+        "id": "code-llama-cpp-19",
+        "language": "cpp",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "git",
+          "license": "MIT",
+          "license_file": "licenses/llama.cpp-MIT.txt",
+          "path": "tools/perplexity/perplexity.cpp",
+          "revision": "911f6cdc8ab8a530b2bee09ee61471a6f3178eeb",
+          "source_sha256": "b9958b81bb2c77a1f42dadeef6ddaf5abbe68d7d3bc46f509608e463f8575b6f",
+          "url": "https://github.com/ggml-org/llama.cpp/blob/911f6cdc8ab8a530b2bee09ee61471a6f3178eeb/tools/perplexity/perplexity.cpp"
+        },
+        "stratum": "code",
+        "token_count": 1050,
+        "token_ids_sha256": "5d625f955487b30f30ff1801bc08fde0619dc1c2d11115104abb9531be1da131"
+      },
+      {
+        "content_bytes": 3484,
+        "content_sha256": "28802e56c0f08ed3a8b8ca98a145341e6a82c45d15ec711a25c50873aa36c32a",
+        "id": "code-llama-cpp-20",
+        "language": "cpp",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "git",
+          "license": "MIT",
+          "license_file": "licenses/llama.cpp-MIT.txt",
+          "path": "tools/llama-bench/llama-bench.cpp",
+          "revision": "911f6cdc8ab8a530b2bee09ee61471a6f3178eeb",
+          "source_sha256": "1944ab22165852d502c47d943b46353d7c05b48caa0b56246da051fc6a062ec0",
+          "url": "https://github.com/ggml-org/llama.cpp/blob/911f6cdc8ab8a530b2bee09ee61471a6f3178eeb/tools/llama-bench/llama-bench.cpp"
+        },
+        "stratum": "code",
+        "token_count": 1050,
+        "token_ids_sha256": "09b44bc7fc1018d84843d198a781c5476a7339a7ef9588c1712ddfd448a1ad4c"
+      },
+      {
+        "content_bytes": 3381,
+        "content_sha256": "f05907f73e59fac367969d5091f11ca186748b427793ada1188b6d0df492bc9e",
+        "id": "code-llama-cpp-21",
+        "language": "cpp",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "git",
+          "license": "MIT",
+          "license_file": "licenses/llama.cpp-MIT.txt",
+          "path": "tools/imatrix/imatrix.cpp",
+          "revision": "911f6cdc8ab8a530b2bee09ee61471a6f3178eeb",
+          "source_sha256": "a56c35fe501a2b4dc4b10d55dcf0468e22b8bfd0e82987f0cec8121201d2bf5a",
+          "url": "https://github.com/ggml-org/llama.cpp/blob/911f6cdc8ab8a530b2bee09ee61471a6f3178eeb/tools/imatrix/imatrix.cpp"
+        },
+        "stratum": "code",
+        "token_count": 1050,
+        "token_ids_sha256": "5db96a1b92f0f27c42582b0a6d40019e4746558d26b9b385a3b1e7d671994028"
+      },
+      {
+        "content_bytes": 4004,
+        "content_sha256": "56fe464eace09af8562a75c931e66bebd8291336d2a3b3623caf67ed9720b198",
+        "id": "code-llama-cpp-22",
+        "language": "cpp",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "git",
+          "license": "MIT",
+          "license_file": "licenses/llama.cpp-MIT.txt",
+          "path": "tools/server/server-context.cpp",
+          "revision": "911f6cdc8ab8a530b2bee09ee61471a6f3178eeb",
+          "source_sha256": "2f5d65ce6ef0504b5c8cf55a74c68d3959c49784ba380ef836566b7a7d5fa12b",
+          "url": "https://github.com/ggml-org/llama.cpp/blob/911f6cdc8ab8a530b2bee09ee61471a6f3178eeb/tools/server/server-context.cpp"
+        },
+        "stratum": "code",
+        "token_count": 1050,
+        "token_ids_sha256": "8ed052aa0a4fdf0af2dd5e017d309ed39dd7c4c58dab10febc3725dc94f9a38f"
+      },
+      {
+        "content_bytes": 3939,
+        "content_sha256": "29969755832e9170c95e4128b7b35168565ed12b0d574669d9ce198cee9c9b9d",
+        "id": "code-llama-cpp-23",
+        "language": "cpp",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "git",
+          "license": "MIT",
+          "license_file": "licenses/llama.cpp-MIT.txt",
+          "path": "tools/server/server-models.cpp",
+          "revision": "911f6cdc8ab8a530b2bee09ee61471a6f3178eeb",
+          "source_sha256": "854db15a62e1d6e68670b36d38da7d750753ca2d0054288e2b2346e7c37bee8b",
+          "url": "https://github.com/ggml-org/llama.cpp/blob/911f6cdc8ab8a530b2bee09ee61471a6f3178eeb/tools/server/server-models.cpp"
+        },
+        "stratum": "code",
+        "token_count": 1050,
+        "token_ids_sha256": "3f11fa3eb9eb9a7a83fa385a7e1c56b3d9fecef075b9a744b4baca3f32d33a3e"
+      },
+      {
+        "content_bytes": 3732,
+        "content_sha256": "c981464a3d103f27eb09f6250b1e986c69fd0f3ead7c94287c77eca163ef677d",
+        "id": "code-llama-cpp-24",
+        "language": "cpp",
+        "predicted_token_count": 1049,
+        "source": {
+          "kind": "git",
+          "license": "MIT",
+          "license_file": "licenses/llama.cpp-MIT.txt",
+          "path": "tools/server/server-tools.cpp",
+          "revision": "911f6cdc8ab8a530b2bee09ee61471a6f3178eeb",
+          "source_sha256": "9213d2c45718bd3703a3d788b0cb7aad4d9722397f102962838fa23a123b3f4d",
+          "url": "https://github.com/ggml-org/llama.cpp/blob/911f6cdc8ab8a530b2bee09ee61471a6f3178eeb/tools/server/server-tools.cpp"
+        },
+        "stratum": "code",
+        "token_count": 1050,
+        "token_ids_sha256": "c2f2fad0d20ce877c4bb7647f8d9389050e5a87374c2aadd9123eede1ce7608c"
+      },
+      {
+        "content_bytes": 3715,
+        "content_sha256": "c19c32f94d128d1672b206bfb87c492ad4285c591b04a9d3b536b16232bb097e",
+        "id": "multilingual-de-wikipedia-1108",
+        "language": "de",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://de.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Quantenmechanik%7CPhotosynthese%7CFranz%C3%B6sische+Revolution%7CDesoxyribonukleins%C3%A4ure%7CSchwarzes+Loch&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "de",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 1108,
+          "revision_id": 270207112,
+          "revision_timestamp": "2026-09-03T18:35:05Z",
+          "title": "Desoxyribonukleinsäure",
+          "url": "https://de.wikipedia.org/wiki/Desoxyribonukleinsäure?oldid=270207112"
+        },
+        "stratum": "multilingual",
+        "token_count": 1050,
+        "token_ids_sha256": "d2f7617b000445aa83d82952d2faa555aab7ea54ca8913cdcefff4e4b634d1e5"
+      },
+      {
+        "content_bytes": 4297,
+        "content_sha256": "6acaa20a3d4a21fd83dea4f2802d38cab1282a110c07b6df63076ce84abf9735",
+        "id": "multilingual-de-wikipedia-1643",
+        "language": "de",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://de.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Quantenmechanik%7CPhotosynthese%7CFranz%C3%B6sische+Revolution%7CDesoxyribonukleins%C3%A4ure%7CSchwarzes+Loch&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "de",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 1643,
+          "revision_id": 270449345,
+          "revision_timestamp": "2026-09-13T10:16:54Z",
+          "title": "Französische Revolution",
+          "url": "https://de.wikipedia.org/wiki/Französische_Revolution?oldid=270449345"
+        },
+        "stratum": "multilingual",
+        "token_count": 1050,
+        "token_ids_sha256": "bb2e6a9a8f56848c18efe7b4618c6f90944ee674522515f4400dccaa2faeacb8"
+      },
+      {
+        "content_bytes": 4373,
+        "content_sha256": "14f43b3976d37851c63f1198d6a1bc7a95235f13eb675b1f1f1eed6f1115a385",
+        "id": "multilingual-de-wikipedia-4180",
+        "language": "de",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://de.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Quantenmechanik%7CPhotosynthese%7CFranz%C3%B6sische+Revolution%7CDesoxyribonukleins%C3%A4ure%7CSchwarzes+Loch&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "de",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 4180,
+          "revision_id": 268012468,
+          "revision_timestamp": "2026-06-17T18:13:19Z",
+          "title": "Quantenmechanik",
+          "url": "https://de.wikipedia.org/wiki/Quantenmechanik?oldid=268012468"
+        },
+        "stratum": "multilingual",
+        "token_count": 1050,
+        "token_ids_sha256": "486700466e75838be21ea8ed5a483b8306685111d66b2d8cb10f692ac8fd1880"
+      },
+      {
+        "content_bytes": 4040,
+        "content_sha256": "26195ddbb62b4ffb86679f15719a75db7b2ace85fe4e809aec1c94c7f32e67f6",
+        "id": "multilingual-de-wikipedia-7898",
+        "language": "de",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://de.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Quantenmechanik%7CPhotosynthese%7CFranz%C3%B6sische+Revolution%7CDesoxyribonukleins%C3%A4ure%7CSchwarzes+Loch&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "de",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 7898,
+          "revision_id": 269294018,
+          "revision_timestamp": "2026-08-01T20:14:50Z",
+          "title": "Schwarzes Loch",
+          "url": "https://de.wikipedia.org/wiki/Schwarzes_Loch?oldid=269294018"
+        },
+        "stratum": "multilingual",
+        "token_count": 1050,
+        "token_ids_sha256": "ff4ceb07292975d97c41520c83c1e858907b8c0e2d4e055192e1d9965373009d"
+      },
+      {
+        "content_bytes": 3851,
+        "content_sha256": "c392ebc115935840980718c9d7dc1671f0cc34ad4f94784c7e073a8bec856cb6",
+        "id": "multilingual-de-wikipedia-3327081",
+        "language": "de",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://de.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Quantenmechanik%7CPhotosynthese%7CFranz%C3%B6sische+Revolution%7CDesoxyribonukleins%C3%A4ure%7CSchwarzes+Loch&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "de",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 3327081,
+          "revision_id": 268891481,
+          "revision_timestamp": "2026-07-17T06:36:56Z",
+          "title": "Photosynthese",
+          "url": "https://de.wikipedia.org/wiki/Photosynthese?oldid=268891481"
+        },
+        "stratum": "multilingual",
+        "token_count": 1050,
+        "token_ids_sha256": "ba9043e3874cee2790144f2f35e0c6fe7e01fa483df20afb3c3dbdc17011e375"
+      },
+      {
+        "content_bytes": 3279,
+        "content_sha256": "b8d12e1e0dd1c8c6309d51c048dfb8c56119dedb556d056c988d9cc8b502a3ba",
+        "id": "multilingual-es-wikipedia-28",
+        "language": "es",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://es.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Mec%C3%A1nica+cu%C3%A1ntica%7CFotos%C3%ADntesis%7CRevoluci%C3%B3n+francesa%7C%C3%81cido+desoxirribonucleico%7CAgujero+negro&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "es",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 28,
+          "revision_id": 175439935,
+          "revision_timestamp": "2026-09-19T17:45:32Z",
+          "title": "Agujero negro",
+          "url": "https://es.wikipedia.org/wiki/Agujero_negro?oldid=175439935"
+        },
+        "stratum": "multilingual",
+        "token_count": 1050,
+        "token_ids_sha256": "69cb4462711a8ab84b41e30d17e6708563011d5dc86184ba414c8fc792fcd3f4"
+      },
+      {
+        "content_bytes": 3714,
+        "content_sha256": "e6c63bec907ab202a380f0bbf896a74fac6c6f8f3e4faa99fda1cdc596676b8a",
+        "id": "multilingual-es-wikipedia-7271",
+        "language": "es",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://es.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Mec%C3%A1nica+cu%C3%A1ntica%7CFotos%C3%ADntesis%7CRevoluci%C3%B3n+francesa%7C%C3%81cido+desoxirribonucleico%7CAgujero+negro&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "es",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 7271,
+          "revision_id": 175468140,
+          "revision_timestamp": "2026-09-21T18:51:38Z",
+          "title": "Fotosíntesis",
+          "url": "https://es.wikipedia.org/wiki/Fotosíntesis?oldid=175468140"
+        },
+        "stratum": "multilingual",
+        "token_count": 1050,
+        "token_ids_sha256": "af0e1f7e09614d00a271d83744244b6c3100dba05ad61726c57e5329a05c5a97"
+      },
+      {
+        "content_bytes": 3240,
+        "content_sha256": "4d5dc4a05f1669cbd5ff8de8aa8c67595ba80f8c0f8f8e72dadfe24145d38b41",
+        "id": "multilingual-es-wikipedia-10058",
+        "language": "es",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://es.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Mec%C3%A1nica+cu%C3%A1ntica%7CFotos%C3%ADntesis%7CRevoluci%C3%B3n+francesa%7C%C3%81cido+desoxirribonucleico%7CAgujero+negro&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "es",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 10058,
+          "revision_id": 175244878,
+          "revision_timestamp": "2026-09-07T21:42:30Z",
+          "title": "Ácido desoxirribonucleico",
+          "url": "https://es.wikipedia.org/wiki/Ácido_desoxirribonucleico?oldid=175244878"
+        },
+        "stratum": "multilingual",
+        "token_count": 1050,
+        "token_ids_sha256": "630921fee0a6b01309c402d0872745be5a0eb591e1105ab56fce7119b1c83127"
+      },
+      {
+        "content_bytes": 3459,
+        "content_sha256": "6a856f127c164fa9856870b079055c15bf42a2c84b77329272218544ea70af23",
+        "id": "multilingual-es-wikipedia-22261",
+        "language": "es",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://es.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Mec%C3%A1nica+cu%C3%A1ntica%7CFotos%C3%ADntesis%7CRevoluci%C3%B3n+francesa%7C%C3%81cido+desoxirribonucleico%7CAgujero+negro&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "es",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 22261,
+          "revision_id": 174942520,
+          "revision_timestamp": "2026-08-20T13:48:38Z",
+          "title": "Revolución francesa",
+          "url": "https://es.wikipedia.org/wiki/Revolución_francesa?oldid=174942520"
+        },
+        "stratum": "multilingual",
+        "token_count": 1050,
+        "token_ids_sha256": "1993e8b10c8e996f4d4a52ebf515d3a46b777e55ab483f2e02e026d59ea5dadf"
+      },
+      {
+        "content_bytes": 4481,
+        "content_sha256": "32b7f0d0a683c6f731c6c93e82341a17ffda207c55586c7e500fa6a043cb3bf8",
+        "id": "multilingual-es-wikipedia-221935",
+        "language": "es",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://es.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Mec%C3%A1nica+cu%C3%A1ntica%7CFotos%C3%ADntesis%7CRevoluci%C3%B3n+francesa%7C%C3%81cido+desoxirribonucleico%7CAgujero+negro&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "es",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 221935,
+          "revision_id": 175510343,
+          "revision_timestamp": "2026-09-24T16:15:31Z",
+          "title": "Mecánica cuántica",
+          "url": "https://es.wikipedia.org/wiki/Mecánica_cuántica?oldid=175510343"
+        },
+        "stratum": "multilingual",
+        "token_count": 1050,
+        "token_ids_sha256": "20961f711012ccffff5ed68933c2c22f78998e8a0c1ba826498ba1543b863bb1"
+      },
+      {
+        "content_bytes": 3998,
+        "content_sha256": "33836583a0e1127dd5772adcc3f268fac0467051951c3b0ca01d6bad2c3170a3",
+        "id": "multilingual-fr-wikipedia-1913",
+        "language": "fr",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://fr.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=M%C3%A9canique+quantique%7CPhotosynth%C3%A8se%7CR%C3%A9volution+fran%C3%A7aise%7CAcide+d%C3%A9soxyribonucl%C3%A9ique%7CTrou+noir&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "fr",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 1913,
+          "revision_id": 239179113,
+          "revision_timestamp": "2026-09-03T00:26:41Z",
+          "title": "Mécanique quantique",
+          "url": "https://fr.wikipedia.org/wiki/Mécanique_quantique?oldid=239179113"
+        },
+        "stratum": "multilingual",
+        "token_count": 1050,
+        "token_ids_sha256": "c6f0a583e91462eedb179f903e0c0d547edb84a8b08929e0e56d81c8ca35c876"
+      },
+      {
+        "content_bytes": 2797,
+        "content_sha256": "352f065fcb7dd07cb1dfbd6a69c42a5a9d3cb8abbf3cc5a38262fed32f53e52c",
+        "id": "multilingual-fr-wikipedia-6742",
+        "language": "fr",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://fr.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=M%C3%A9canique+quantique%7CPhotosynth%C3%A8se%7CR%C3%A9volution+fran%C3%A7aise%7CAcide+d%C3%A9soxyribonucl%C3%A9ique%7CTrou+noir&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "fr",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 6742,
+          "revision_id": 239907164,
+          "revision_timestamp": "2026-09-29T07:23:52Z",
+          "title": "Révolution française",
+          "url": "https://fr.wikipedia.org/wiki/Révolution_française?oldid=239907164"
+        },
+        "stratum": "multilingual",
+        "token_count": 1050,
+        "token_ids_sha256": "08d8e1f9de471bbc65bcee6f24c0ad894c3520193fdc965fc80635af5b9df2e7"
+      },
+      {
+        "content_bytes": 3915,
+        "content_sha256": "5a2222a4685808172634300f3b9a8e8627bd25730bd78435727418a899e4fe94",
+        "id": "multilingual-fr-wikipedia-8128",
+        "language": "fr",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://fr.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=M%C3%A9canique+quantique%7CPhotosynth%C3%A8se%7CR%C3%A9volution+fran%C3%A7aise%7CAcide+d%C3%A9soxyribonucl%C3%A9ique%7CTrou+noir&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "fr",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 8128,
+          "revision_id": 239861387,
+          "revision_timestamp": "2026-09-27T15:54:55Z",
+          "title": "Trou noir",
+          "url": "https://fr.wikipedia.org/wiki/Trou_noir?oldid=239861387"
+        },
+        "stratum": "multilingual",
+        "token_count": 1050,
+        "token_ids_sha256": "c2a097e1987ebeea34f44f3837e0bffc47e011e012f3f5e2578637146ca257dd"
+      },
+      {
+        "content_bytes": 3340,
+        "content_sha256": "fcfb2310ce01faf6671e8f3d52d6dae4ecb8fc23f95a1d466dcacee672268b68",
+        "id": "multilingual-fr-wikipedia-25828",
+        "language": "fr",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://fr.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=M%C3%A9canique+quantique%7CPhotosynth%C3%A8se%7CR%C3%A9volution+fran%C3%A7aise%7CAcide+d%C3%A9soxyribonucl%C3%A9ique%7CTrou+noir&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "fr",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 25828,
+          "revision_id": 238282939,
+          "revision_timestamp": "2026-08-01T15:21:38Z",
+          "title": "Photosynthèse",
+          "url": "https://fr.wikipedia.org/wiki/Photosynthèse?oldid=238282939"
+        },
+        "stratum": "multilingual",
+        "token_count": 1050,
+        "token_ids_sha256": "769eab14f6665c3625629346f8fc99d79f2a177efc34c627876025cb74ebb230"
+      },
+      {
+        "content_bytes": 3551,
+        "content_sha256": "bc822706a9ab3047e9523a48cc1c31a8de49860e1233a9b80ef12eeff3146d49",
+        "id": "multilingual-fr-wikipedia-137845",
+        "language": "fr",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://fr.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=M%C3%A9canique+quantique%7CPhotosynth%C3%A8se%7CR%C3%A9volution+fran%C3%A7aise%7CAcide+d%C3%A9soxyribonucl%C3%A9ique%7CTrou+noir&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "fr",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 137845,
+          "revision_id": 239629725,
+          "revision_timestamp": "2026-09-19T09:32:18Z",
+          "title": "Acide désoxyribonucléique",
+          "url": "https://fr.wikipedia.org/wiki/Acide_désoxyribonucléique?oldid=239629725"
+        },
+        "stratum": "multilingual",
+        "token_count": 1050,
+        "token_ids_sha256": "2c255eeca1779b395c804be0eb3ca698dd0a3cdd235e7a25c0e5dfffb2fe3338"
+      },
+      {
+        "content_bytes": 3066,
+        "content_sha256": "4d38e886a7ed0b166f366d389c4eaaa4585688c87c7692e0fedbaf00bfdd5ba5",
+        "id": "multilingual-it-wikipedia-1918",
+        "language": "it",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://it.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Meccanica+quantistica%7CFotosintesi%7CRivoluzione+francese%7CDNA%7CBuco+nero&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "it",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 1918,
+          "revision_id": 152412937,
+          "revision_timestamp": "2026-09-10T19:31:11Z",
+          "title": "Fotosintesi clorofilliana",
+          "url": "https://it.wikipedia.org/wiki/Fotosintesi_clorofilliana?oldid=152412937"
+        },
+        "stratum": "multilingual",
+        "token_count": 1050,
+        "token_ids_sha256": "3a98f6dea2b0813c6a3b76442e9a660a119789553ba9d377d84dbcf0add37437"
+      },
+      {
+        "content_bytes": 3744,
+        "content_sha256": "353ed483ed696d3aa78d49945f29f3ebb79717ef018154fff65e4f74a1297da2",
+        "id": "multilingual-it-wikipedia-2838",
+        "language": "it",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://it.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Meccanica+quantistica%7CFotosintesi%7CRivoluzione+francese%7CDNA%7CBuco+nero&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "it",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 2838,
+          "revision_id": 150994658,
+          "revision_timestamp": "2026-06-05T08:09:53Z",
+          "title": "Meccanica quantistica",
+          "url": "https://it.wikipedia.org/wiki/Meccanica_quantistica?oldid=150994658"
+        },
+        "stratum": "multilingual",
+        "token_count": 1050,
+        "token_ids_sha256": "03f1a9f82863820da4740095f49faabb01bd57ff42354c9016bc7f03f12397ca"
+      },
+      {
+        "content_bytes": 3695,
+        "content_sha256": "fb34d29c4983fa0cba55358da744f3462327f3b44d453fbbb56c0e277215060e",
+        "id": "multilingual-it-wikipedia-1330060",
+        "language": "it",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://it.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Meccanica+quantistica%7CFotosintesi%7CRivoluzione+francese%7CDNA%7CBuco+nero&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "it",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 1330060,
+          "revision_id": 152600359,
+          "revision_timestamp": "2026-09-24T20:42:40Z",
+          "title": "Buco nero",
+          "url": "https://it.wikipedia.org/wiki/Buco_nero?oldid=152600359"
+        },
+        "stratum": "multilingual",
+        "token_count": 1050,
+        "token_ids_sha256": "999f0022b5e449bdc5eba4e0bb5894cb5fc6e6f6cda10fc5e51c1191ef9ac61d"
+      },
+      {
+        "content_bytes": 3130,
+        "content_sha256": "022f5167680a12a1ce297eb8824b8ef681490a5fbb5e65fc88626b96b8c64de0",
+        "id": "multilingual-it-wikipedia-2018549",
+        "language": "it",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://it.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Meccanica+quantistica%7CFotosintesi%7CRivoluzione+francese%7CDNA%7CBuco+nero&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "it",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 2018549,
+          "revision_id": 152709452,
+          "revision_timestamp": "2026-10-01T11:38:12Z",
+          "title": "Rivoluzione francese",
+          "url": "https://it.wikipedia.org/wiki/Rivoluzione_francese?oldid=152709452"
+        },
+        "stratum": "multilingual",
+        "token_count": 1050,
+        "token_ids_sha256": "3f72d5c1830e5fba2f11b5b69999d3fc7fc6f1fd1a5dcd3b9c82745cf9ef71ee"
+      },
+      {
+        "content_bytes": 3489,
+        "content_sha256": "1d0320a4d8335e023eef7950999ceac919219e21681186339e09758adf961316",
+        "id": "multilingual-it-wikipedia-2895727",
+        "language": "it",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://it.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Meccanica+quantistica%7CFotosintesi%7CRivoluzione+francese%7CDNA%7CBuco+nero&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "it",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 2895727,
+          "revision_id": 152409746,
+          "revision_timestamp": "2026-09-10T15:13:34Z",
+          "title": "DNA",
+          "url": "https://it.wikipedia.org/wiki/DNA?oldid=152409746"
+        },
+        "stratum": "multilingual",
+        "token_count": 1050,
+        "token_ids_sha256": "81cce13a07a93736de7a88940ffab5c6f65ae4e8c0002e5d4384dcce7819d5cf"
+      },
+      {
+        "content_bytes": 3585,
+        "content_sha256": "647945ae61a07d57d4d680a53097da8c671792810f2c84263b3fe56570491618",
+        "id": "multilingual-pt-wikipedia-724",
+        "language": "pt",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://pt.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Mec%C3%A2nica+qu%C3%A2ntica%7CFotoss%C3%ADntese%7CRevolu%C3%A7%C3%A3o+Francesa%7C%C3%81cido+desoxirribonucleico%7CBuraco+negro&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "pt",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 724,
+          "revision_id": 72745897,
+          "revision_timestamp": "2026-08-02T03:47:39Z",
+          "title": "Ácido desoxirribonucleico",
+          "url": "https://pt.wikipedia.org/wiki/Ácido_desoxirribonucleico?oldid=72745897"
+        },
+        "stratum": "multilingual",
+        "token_count": 1050,
+        "token_ids_sha256": "c2c49eeed1cf57badc02ed97df2b44253317939ac07be1dddba63eb2f780e8f7"
+      },
+      {
+        "content_bytes": 3824,
+        "content_sha256": "4fb4526aff271dc447f6383ec28bbc8270b7ed344a7d703376f4426ec76c30e6",
+        "id": "multilingual-pt-wikipedia-1672",
+        "language": "pt",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://pt.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Mec%C3%A2nica+qu%C3%A2ntica%7CFotoss%C3%ADntese%7CRevolu%C3%A7%C3%A3o+Francesa%7C%C3%81cido+desoxirribonucleico%7CBuraco+negro&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "pt",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 1672,
+          "revision_id": 73037762,
+          "revision_timestamp": "2026-09-23T07:57:36Z",
+          "title": "Revolução Francesa",
+          "url": "https://pt.wikipedia.org/wiki/Revolução_Francesa?oldid=73037762"
+        },
+        "stratum": "multilingual",
+        "token_count": 1050,
+        "token_ids_sha256": "dce10ac1feb22bcaa1fa57cc4d43f13aeb3bdfa0967392c4373ce358afc3fdc0"
+      },
+      {
+        "content_bytes": 3692,
+        "content_sha256": "af9479ddb54d5121d3d5e3dc0d8e082321b1a3088946f9f43b597a52550fc4fa",
+        "id": "multilingual-pt-wikipedia-7764",
+        "language": "pt",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://pt.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Mec%C3%A2nica+qu%C3%A2ntica%7CFotoss%C3%ADntese%7CRevolu%C3%A7%C3%A3o+Francesa%7C%C3%81cido+desoxirribonucleico%7CBuraco+negro&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "pt",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 7764,
+          "revision_id": 72404364,
+          "revision_timestamp": "2026-06-09T15:56:23Z",
+          "title": "Mecânica quântica",
+          "url": "https://pt.wikipedia.org/wiki/Mecânica_quântica?oldid=72404364"
+        },
+        "stratum": "multilingual",
+        "token_count": 1050,
+        "token_ids_sha256": "9b48a6a0085021efd125e49d077433d7378b98bbca64f5f26e543bedb196ff41"
+      },
+      {
+        "content_bytes": 3758,
+        "content_sha256": "7228387ecbe8fa2bd4df8f21514d04daebcbd8381b2df53c3dc5641fa5d15b3c",
+        "id": "multilingual-pt-wikipedia-10962",
+        "language": "pt",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://pt.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Mec%C3%A2nica+qu%C3%A2ntica%7CFotoss%C3%ADntese%7CRevolu%C3%A7%C3%A3o+Francesa%7C%C3%81cido+desoxirribonucleico%7CBuraco+negro&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "pt",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 10962,
+          "revision_id": 73032270,
+          "revision_timestamp": "2026-09-22T14:33:52Z",
+          "title": "Fotossíntese",
+          "url": "https://pt.wikipedia.org/wiki/Fotossíntese?oldid=73032270"
+        },
+        "stratum": "multilingual",
+        "token_count": 1050,
+        "token_ids_sha256": "0029ff3d6a9ac8179c574a778b0c1fe301f8ba033b93388b9a75874251847c1a"
+      },
+      {
+        "content_bytes": 2985,
+        "content_sha256": "22d2fcfa78a2e9ee95d6fd2a0b87bb675829fedb8eefd04bc389b375933e3c16",
+        "id": "multilingual-pt-wikipedia-22168",
+        "language": "pt",
+        "predicted_token_count": 1049,
+        "source": {
+          "api_url": "https://pt.wikipedia.org/w/api.php?action=query&prop=revisions&redirects=1&rvprop=ids%7Ctimestamp%7Ccontent&rvslots=main&titles=Mec%C3%A2nica+qu%C3%A2ntica%7CFotoss%C3%ADntese%7CRevolu%C3%A7%C3%A3o+Francesa%7C%C3%81cido+desoxirribonucleico%7CBuraco+negro&format=json&formatversion=2",
+          "content_format": "mediawiki_wikitext",
+          "kind": "wikipedia",
+          "language": "pt",
+          "license": "CC BY-SA 4.0",
+          "license_file": "licenses/CC-BY-SA-4.0.txt",
+          "page_id": 22168,
+          "revision_id": 72587868,
+          "revision_timestamp": "2026-07-08T14:22:14Z",
+          "title": "Buraco negro",
+          "url": "https://pt.wikipedia.org/wiki/Buraco_negro?oldid=72587868"
+        },
+        "stratum": "multilingual",
+        "token_count": 1050,
+        "token_ids_sha256": "773a38b797c5709f98798cd37d11c50d805642d9acc249265caf83f9380b8de5"
+      }
+    ],
+    "licenses": [
+      {
+        "path": "/home/christian/projects/gsq-rco-moe/data/qwen36_release_corpus/licenses/project-gutenberg-permission.html",
+        "sha256": "05af69b76a7a73258650c82e6db749eba53957fd95bb857267b83a4c5754058e"
+      },
+      {
+        "path": "/home/christian/projects/gsq-rco-moe/data/qwen36_release_corpus/licenses/CC-BY-SA-4.0.txt",
+        "sha256": "28a9529c7d0bb4dc51f4bf5c116a3d16ef247a052f7591466768ddf563fd1cf5"
+      },
+      {
+        "path": "/home/christian/projects/gsq-rco-moe/data/qwen36_release_corpus/licenses/llama.cpp-MIT.txt",
+        "sha256": "94f29bbed6a22c35b992c5c6ebf0e7c92f13b836b90f36f461c9cf2f0f1d010d"
+      }
+    ],
+    "predicted_token_count": 104900,
+    "schema": 1,
+    "search_disjointness": {
+      "calibration_input_ids": [
+        32,
+        59056,
+        9575,
+        54802,
+        2581,
+        2624,
+        22327,
+        1396
+      ],
+      "calibration_report": "/home/christian/projects/gsq-rco-moe/repos/RCO/reports/qwen36_35b_native_full_step.json",
+      "calibration_sequence_absent_from_every_document": true
+    },
+    "strata": [
+      "code",
+      "general",
+      "knowledge",
+      "multilingual"
+    ],
+    "stratum_document_counts": {
+      "code": 25,
+      "general": 25,
+      "knowledge": 25,
+      "multilingual": 25
+    },
+    "token_count_per_document": 1050,
+    "token_sequence_sha256": "c507a4fde2263909429eaf04b4fb7d533945efcbd993417d51ef209737d46b6e",
+    "tokenizer": {
+      "path": "/home/christian/projects/gsq-rco-moe/data/qwen36_35b_base",
+      "tokenizer_json_sha256": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42"
+    }
+  },
+  "canonical_manifest_sha256": "dccd014fc55be379c176f87a724e1caa21292449203fc0a9dbbb2b5bae43387e",
+  "elapsed_seconds": 16.3883322019974,
+  "schema": 1,
+  "scope": "immutable, locally licensed, search-disjoint held-out corpus for Qwen3.6 release-quality evaluation",
+  "status": "pass"
+}

@@ -9,6 +9,7 @@ dist/
 
 # experiment artifacts
 results/
+data/qwen36_release_corpus/
 *.pt
 *.pth
 *.npz
