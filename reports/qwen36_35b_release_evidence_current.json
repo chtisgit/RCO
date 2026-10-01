@@ -13,15 +13,16 @@
   },
   "generation": {
     "assertions_passed": 0,
-    "assertions_total": 0,
+    "assertions_total": 32,
     "deterministic_repeat": false,
     "empty_output_count": null,
     "invalid_utf8_count": null,
     "nonfinite_run_count": null,
-    "prompt_count": 0,
-    "prompt_manifest_sha256": null,
+    "prompt_count": 32,
+    "prompt_manifest_path": "reports/qwen36_35b_generation_prompt_manifest.json",
+    "prompt_manifest_sha256": "f565d230b6599c873311e3ee525fc776cbd41822e190e148f7168acbd5f40a1f",
     "replacement_character_count": null,
-    "status": "not_run"
+    "status": "manifest_pinned_not_run"
   },
   "heldout_corpus": {
     "corpus_sha256": "682cf10c9cdb7c900359be2d2356c6d88713ef7e38674b9cdbd1c0c3b8c5e0a8",
