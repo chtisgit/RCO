@@ -17,6 +17,7 @@ if torch is not None:
     from quant.qparams import build_qparams_index, save_qparams
     from validation import (
         SafeTensorReference,
+        cross_device_tensor_match,
         load_assignment,
         tensor_error,
         validate_candidates,
@@ -61,6 +62,29 @@ class CandidateValidationTest(unittest.TestCase):
             metrics["root_mean_square_error"], (6.0 / 4.0) ** 0.5)
         self.assertAlmostEqual(
             metrics["relative_frobenius_error"], (6.0 / 30.0) ** 0.5)
+
+    def test_cross_device_match_records_tolerance_violations(self):
+        reference = torch.tensor([1.0, 10.0, 0.0])
+        candidate = torch.tensor([1.015, 10.15, 0.03])
+        result = cross_device_tensor_match(
+            reference,
+            candidate,
+            absolute_tolerance=0.01,
+            relative_tolerance=0.02,
+            chunk_elements=2,
+        )
+        self.assertEqual(result["violation_count"], 1)
+        self.assertFalse(result["within_tolerance"])
+        self.assertAlmostEqual(result["max_tolerance_excess"], 0.02, places=6)
+
+        candidate[-1] = 0.01
+        result = cross_device_tensor_match(
+            reference,
+            candidate,
+            absolute_tolerance=0.01,
+            relative_tolerance=0.02,
+        )
+        self.assertTrue(result["within_tolerance"])
 
     def test_reads_direct_and_fused_expert_sources_and_validates_sequentially(self):
         direct_name = "model.layers.0.proj"

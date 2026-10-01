@@ -109,6 +109,48 @@ def tensor_error(
         reference_sum_squared)
 
 
+def cross_device_tensor_match(
+    reference: torch.Tensor,
+    candidate: torch.Tensor,
+    *,
+    absolute_tolerance: float,
+    relative_tolerance: float,
+    chunk_elements: int = 1 << 20,
+) -> dict:
+    """Measure a cross-device result against an elementwise tolerance.
+
+    CPU reproducibility checks should continue to use exact equality. This
+    helper is for comparing outputs from different kernel implementations,
+    where BF16 reduction order can legitimately change the final low bits.
+    """
+    if absolute_tolerance < 0 or relative_tolerance < 0:
+        raise ValueError("cross-device tolerances must be non-negative")
+    metrics, _ = tensor_error(
+        reference, candidate, chunk_elements=chunk_elements)
+    ref_flat = reference.detach().cpu().reshape(-1)
+    candidate_flat = candidate.detach().cpu().reshape(-1)
+    violation_count = 0
+    max_tolerance_excess = 0.0
+    for start in range(0, ref_flat.numel(), chunk_elements):
+        stop = min(start + chunk_elements, ref_flat.numel())
+        ref = ref_flat[start:stop].float()
+        difference = candidate_flat[start:stop].float().sub(ref).abs()
+        allowed = ref.abs().mul(relative_tolerance).add(absolute_tolerance)
+        excess = difference.sub(allowed)
+        violation_count += int((excess > 0).sum())
+        if excess.numel():
+            max_tolerance_excess = max(
+                max_tolerance_excess, float(excess.max().clamp_min(0)))
+    return {
+        **metrics,
+        "absolute_tolerance": absolute_tolerance,
+        "relative_tolerance": relative_tolerance,
+        "violation_count": violation_count,
+        "max_tolerance_excess": max_tolerance_excess,
+        "within_tolerance": violation_count == 0,
+    }
+
+
 class SafeTensorReference:
     """Read one ordinary weight or one logical fused-expert slice at a time."""
 

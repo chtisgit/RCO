@@ -34,6 +34,7 @@ from qwen35_native import (
     Qwen35LinearAttentionGeometry,
     restore_source_matrix,
 )
+from validation import cross_device_tensor_match
 
 
 def _load_json(path: Path) -> dict[str, Any]:
@@ -179,8 +180,19 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
     dense_outputs = [_forward_block(block, hidden, device) for _ in range(2)]
     if not torch.equal(dense_outputs[0], dense_outputs[1]):
         raise RuntimeError("direct dense block output is not exactly reproducible")
-    if not torch.equal(dense_outputs[0].cpu(), oracle["block_output"]):
+    dense_exact = torch.equal(dense_outputs[0].cpu(), oracle["block_output"])
+    dense_cross_device = cross_device_tensor_match(
+        oracle["block_output"],
+        dense_outputs[0],
+        absolute_tolerance=args.dense_oracle_atol,
+        relative_tolerance=args.dense_oracle_rtol,
+    )
+    if device.type == "cpu" and not dense_exact:
         raise RuntimeError("direct dense block does not reproduce retained oracle")
+    if device.type == "cuda" and not dense_cross_device["within_tolerance"]:
+        raise RuntimeError(
+            "CUDA dense block differs from the retained CPU oracle beyond "
+            f"the cross-device tolerance: {dense_cross_device}")
 
     geometry = Qwen35LinearAttentionGeometry.from_model_dir(model_dir)
     entry_by_name = {entry["destination_name"]: entry for entry in entries}
@@ -277,8 +289,10 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
         "schema": 1,
         "status": "pass",
         "scope": (
-            "Qwen3.5-2B layer-0 numerical comparison for complete native "
-            "assignments; this is not an end-to-end loss, 35B, or CUDA gate"
+            "Qwen3.5-2B layer-0 numerical and memory comparison for complete "
+            "native assignments"
+            + (" on CUDA" if device.type == "cuda" else " on CPU")
+            + "; this is not an end-to-end loss or 35B gate"
         ),
         "source": {
             "repo_id": identity["repo_id"],
@@ -298,7 +312,8 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
             "bytes": oracle_path.stat().st_size,
             "sha256": _sha256_file(oracle_path),
             "metadata": oracle_metadata,
-            "dense_direct_matches_retained_oracle_exactly": True,
+            "dense_direct_matches_retained_oracle_exactly": dense_exact,
+            "dense_direct_cross_device_comparison": dense_cross_device,
             "dense_output_sha256": tensor_sha256(dense_outputs[0]),
         },
         "block": {
@@ -337,6 +352,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--ggml-library", type=Path, required=True)
     parser.add_argument("--device", choices=("cpu", "cuda"), default="cpu")
     parser.add_argument("--rows-per-chunk", type=int, default=16)
+    parser.add_argument("--dense-oracle-atol", type=float, default=0.02)
+    parser.add_argument("--dense-oracle-rtol", type=float, default=0.02)
     parser.add_argument(
         "--output", type=Path,
         default=Path("reports/qwen35_2b_block0_native_output.json"))
