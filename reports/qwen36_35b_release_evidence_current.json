@@ -24,11 +24,19 @@
     "status": "not_run"
   },
   "heldout_corpus": {
-    "document_count": 0,
-    "predicted_token_count": 0,
-    "sha256": null,
-    "status": "not_acquired",
-    "strata": []
+    "corpus_sha256": "682cf10c9cdb7c900359be2d2356c6d88713ef7e38674b9cdbd1c0c3b8c5e0a8",
+    "document_count": 100,
+    "manifest_path": "reports/qwen36_35b_heldout_corpus_manifest.json",
+    "predicted_token_count": 104900,
+    "sha256": "dccd014fc55be379c176f87a724e1caa21292449203fc0a9dbbb2b5bae43387e",
+    "status": "acquired",
+    "strata": [
+      "code",
+      "general",
+      "knowledge",
+      "multilingual"
+    ],
+    "token_sequence_sha256": "c507a4fde2263909429eaf04b4fb7d533945efcbd993417d51ef209737d46b6e"
   },
   "perplexity": {
     "bf16_mean_nll": null,
