@@ -169,6 +169,9 @@ class StreamingHardEvaluatorTest(unittest.TestCase):
         self.assertAlmostEqual(result.loss, expected.item(), places=6)
         self.assertAlmostEqual(repeated.loss, expected.item(), places=6)
         self.assertEqual(result.token_count, 3)
+        self.assertEqual(result.document_token_counts, (3,))
+        self.assertEqual(len(result.document_mean_nll), 1)
+        self.assertAlmostEqual(result.document_mean_nll[0], expected.item(), places=6)
         self.assertEqual(result.memory.loaded_blocks, 2)
         self.assertGreater(result.memory.max_block_bytes, 0)
         self.assertGreater(result.memory.checkpoint_load_seconds, 0.0)
@@ -201,6 +204,46 @@ class StreamingHardEvaluatorTest(unittest.TestCase):
             meta_model.model.layers[0].runtime_scale.device.type, "cpu")
         self.assertEqual(meta_model.model.norm.weight.device.type, "meta")
         self.assertEqual(meta_model.lm_head.weight.device.type, "meta")
+
+    def test_streams_unmodified_bf16_with_per_document_nll(self):
+        torch.manual_seed(5)
+        dense = self.Model()
+        state = {name: value.detach().clone()
+                 for name, value in dense.state_dict().items()}
+        input_ids = torch.tensor([
+            [1, 2, 3, 4],
+            [4, 3, 2, 1],
+        ])
+        with torch.no_grad():
+            hidden = dense.model(input_ids).last_hidden_state
+            losses = F.cross_entropy(
+                dense.lm_head(hidden[:, :-1]).reshape(-1, 7),
+                input_ids[:, 1:].reshape(-1), reduction="none",
+            ).reshape(2, 3)
+
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            save_file(state, root / "model.safetensors")
+            evaluator = StreamingHardCausalEvaluator(
+                self.Model(device="meta"),
+                SafeTensorPrefixLoader(root),
+                self.Store({}),
+                [],
+                [2, 4],
+                device="cpu",
+                vocab_chunk_size=3,
+            )
+            result = evaluator.evaluate(input_ids, torch.empty(0, dtype=torch.long))
+
+        self.assertAlmostEqual(result.loss, losses.mean().item(), places=6)
+        self.assertEqual(result.token_count, 6)
+        self.assertEqual(result.document_token_counts, (3, 3))
+        self.assertEqual(len(result.document_mean_nll), 2)
+        for actual, expected in zip(
+            result.document_mean_nll, losses.mean(dim=1).tolist(), strict=True,
+        ):
+            self.assertAlmostEqual(actual, expected, places=6)
+        self.assertEqual(result.memory.candidate_storage_bytes_read, 0)
 
     def test_copies_logical_experts_into_fused_storage(self):
         class FusedExperts(nn.Module):

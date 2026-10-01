@@ -210,6 +210,8 @@ class StreamingEvaluation:
     loss: float
     token_count: int
     memory: StreamingMemoryStats
+    document_mean_nll: tuple[float, ...] = ()
+    document_token_counts: tuple[int, ...] = ()
 
 
 class _StreamingBlock(nn.Module):
@@ -365,6 +367,25 @@ def chunked_causal_cross_entropy(
     vocab_chunk_size: int = 8192,
 ) -> tuple[torch.Tensor, int]:
     """Compute exact next-token CE without materializing full-vocabulary logits."""
+    loss, token_count, _, _ = _chunked_causal_cross_entropy_details(
+        hidden_states,
+        labels,
+        lm_head,
+        loss_mask=loss_mask,
+        vocab_chunk_size=vocab_chunk_size,
+    )
+    return loss, token_count
+
+
+def _chunked_causal_cross_entropy_details(
+    hidden_states: torch.Tensor,
+    labels: torch.Tensor,
+    lm_head: nn.Module,
+    *,
+    loss_mask: Optional[torch.Tensor] = None,
+    vocab_chunk_size: int = 8192,
+) -> tuple[torch.Tensor, int, tuple[float, ...], tuple[int, ...]]:
+    """Compute aggregate and per-document exact next-token cross-entropy."""
     if vocab_chunk_size < 1:
         raise ValueError("vocab_chunk_size must be positive")
     if hidden_states.ndim != 3 or labels.ndim != 2:
@@ -398,6 +419,7 @@ def chunked_causal_cross_entropy(
         del logits, chunk_lse
 
     losses = normalizer - target_logits
+    losses_by_document = losses.reshape(labels.shape[0], labels.shape[1] - 1)
     if loss_mask is not None:
         if loss_mask.shape != labels.shape:
             raise ValueError("Loss mask and labels must have the same shape")
@@ -407,10 +429,29 @@ def chunked_causal_cross_entropy(
         if token_count == 0:
             raise ValueError("Loss mask selects no next-token targets")
         loss = losses[active].mean()
+        active_by_document = active.reshape(
+            labels.shape[0], labels.shape[1] - 1)
+        document_token_counts_tensor = active_by_document.sum(dim=1)
+        if bool((document_token_counts_tensor == 0).any().item()):
+            raise ValueError("Loss mask leaves a document without targets")
+        document_sums = (
+            losses_by_document * active_by_document.to(losses.dtype)
+        ).sum(dim=1)
+        document_means = document_sums / document_token_counts_tensor
     else:
         token_count = losses.numel()
         loss = losses.mean()
-    return loss, token_count
+        document_token_counts_tensor = torch.full(
+            (labels.shape[0],), labels.shape[1] - 1,
+            dtype=torch.long, device=losses.device,
+        )
+        document_means = losses_by_document.mean(dim=1)
+    return (
+        loss,
+        token_count,
+        tuple(float(value) for value in document_means.cpu().tolist()),
+        tuple(int(value) for value in document_token_counts_tensor.cpu().tolist()),
+    )
 
 
 class StreamingHardCausalEvaluator:
@@ -488,8 +529,6 @@ class StreamingHardCausalEvaluator:
                     raise ValueError(
                         f"Candidate {name!r} is outside the decoder blocks")
                 result[name] = group_index
-        if not result:
-            raise ValueError("Streaming evaluation received no candidate layers")
         return result
 
     def layer_assignment(self, assignment: torch.Tensor) -> dict[str, int]:
@@ -641,7 +680,8 @@ class StreamingHardCausalEvaluator:
                     _finish_phase(stats, "decode", self.device, phase_started)
             phase_started = _start_phase(self.device)
             try:
-                loss, token_count = chunked_causal_cross_entropy(
+                (loss, token_count, document_mean_nll,
+                 document_token_counts) = _chunked_causal_cross_entropy_details(
                     hidden_states,
                     input_ids.to(self.device),
                     self.adapter.lm_head(),
@@ -654,7 +694,11 @@ class StreamingHardCausalEvaluator:
             value = float(loss.item())
             stats.process_peak_rss = max(
                 stats.process_peak_rss, _process_peak_rss_bytes())
-            return StreamingEvaluation(value, token_count, stats)
+            return StreamingEvaluation(
+                value, token_count, stats,
+                document_mean_nll=document_mean_nll,
+                document_token_counts=document_token_counts,
+            )
         finally:
             for index, module in enumerate(originals):
                 layers[index] = module
