@@ -565,7 +565,7 @@ def main() -> int:
         "reproducibility": report.get("reproducibility"),
         "wall_seconds_this_invocation": report["wall_seconds_this_invocation"],
     }, sort_keys=True))
-    return 0
+    return 2 if report["status"] == "fail" else 0
 
 
 if __name__ == "__main__":
