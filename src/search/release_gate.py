@@ -52,6 +52,8 @@ def evaluate_release_gate(
     repeat_nll = _finite_float(perplexity.get("repeat_candidate_mean_nll"))
     paired_ci_upper = _finite_float(
         perplexity.get("paired_candidate_minus_incumbent_ci95_upper"))
+    perplexity_ratio_lower_bound = _finite_float(
+        perplexity.get("candidate_perplexity_ratio_lower_bound"))
     finite_losses = all(value is not None for value in (
         candidate_nll, bf16_nll, repeat_nll, paired_ci_upper))
     perplexity_ratio = (
@@ -61,6 +63,12 @@ def evaluate_release_gate(
     )
     calibration_hashes = set(candidate.get("search_calibration_sha256", []))
     heldout_hash = corpus.get("sha256")
+    perplexity_failure_proven = (
+        perplexity.get("failure_proven_from_partial_candidate_evaluation") is True
+        and perplexity_ratio_lower_bound is not None
+        and perplexity_ratio_lower_bound
+        > policy.maximum_perplexity_ratio_to_bf16
+    )
 
     checks = {
         "exact_byte_target": (
@@ -159,6 +167,10 @@ def evaluate_release_gate(
             "perplexity_ratio_to_bf16": (
                 perplexity_ratio if math.isfinite(perplexity_ratio) else None
             ),
+            "candidate_perplexity_ratio_lower_bound": (
+                perplexity_ratio_lower_bound
+            ),
+            "perplexity_failure_proven": perplexity_failure_proven,
             "repeat_nll_delta": (
                 abs(candidate_nll - repeat_nll)
                 if candidate_nll is not None and repeat_nll is not None

@@ -22,7 +22,7 @@
     "prompt_manifest_path": "reports/qwen36_35b_generation_prompt_manifest.json",
     "prompt_manifest_sha256": "f565d230b6599c873311e3ee525fc776cbd41822e190e148f7168acbd5f40a1f",
     "replacement_character_count": null,
-    "status": "manifest_pinned_not_run"
+    "status": "skipped_upstream_quality_failure"
   },
   "heldout_corpus": {
     "corpus_sha256": "682cf10c9cdb7c900359be2d2356c6d88713ef7e38674b9cdbd1c0c3b8c5e0a8",
@@ -40,15 +40,26 @@
     "token_sequence_sha256": "c507a4fde2263909429eaf04b4fb7d533945efcbd993417d51ef209737d46b6e"
   },
   "perplexity": {
-    "bf16_mean_nll": null,
+    "audit_path": "reports/qwen36_35b_heldout_nll.json",
+    "audit_sha256": "90a8f15b94e92350cea518b1df53cdea30b54498eb6d9d1ab8df996b27c8ea6c",
+    "bf16_mean_nll": 0.9128365476801992,
+    "candidate_completed_document_count": 16,
+    "candidate_evaluated_token_count": 16784,
     "candidate_mean_nll": null,
-    "nonfinite_token_count": null,
-    "objective": null,
+    "candidate_mean_nll_lower_bound": 1.8466715717315674,
+    "candidate_observed_mean_nll": 11.54169750213623,
+    "candidate_perplexity_ratio_lower_bound": 2.5442477431532065,
+    "failure_proven_from_partial_candidate_evaluation": true,
+    "incumbent_mean_nll": 8.231778955459594,
+    "maximum_candidate_mean_nll": 1.0525984900553578,
+    "maximum_perplexity_ratio_to_bf16": 1.15,
+    "nonfinite_token_count": 0,
+    "objective": "exact full-vocabulary causal cross-entropy",
     "paired_candidate_minus_incumbent_ci95_upper": null,
     "repeat_candidate_mean_nll": null,
     "repeat_token_sequence_sha256": null,
-    "status": "not_run",
-    "token_sequence_sha256": null
+    "status": "fail_certified_early",
+    "token_sequence_sha256": "c507a4fde2263909429eaf04b4fb7d533945efcbd993417d51ef209737d46b6e"
   },
   "runtime": {
     "cuda_diagnostics": {
@@ -109,5 +120,5 @@
     "unmodified_llama_cpp": true
   },
   "schema": 1,
-  "status": "incomplete"
+  "status": "release_quality_failed"
 }

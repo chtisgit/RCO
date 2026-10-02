@@ -110,6 +110,24 @@ class ReleaseGateTest(unittest.TestCase):
         self.assertIn(
             "finite_exact_full_vocabulary_nll", result["failed_checks"])
 
+    def test_partial_quality_certificate_is_exposed_as_proven_failure(self):
+        evidence = _passing_evidence()
+        evidence["perplexity"].update({
+            "candidate_mean_nll": None,
+            "repeat_candidate_mean_nll": None,
+            "paired_candidate_minus_incumbent_ci95_upper": None,
+            "candidate_perplexity_ratio_lower_bound": 2.5,
+            "failure_proven_from_partial_candidate_evaluation": True,
+        })
+        result = evaluate_release_gate(evidence)
+        self.assertFalse(result["authorized_for_final_gguf_construction"])
+        self.assertTrue(result["measurements"]["perplexity_failure_proven"])
+        self.assertEqual(
+            result["measurements"]["candidate_perplexity_ratio_lower_bound"],
+            2.5,
+        )
+        self.assertIn("perplexity_ratio_to_bf16", result["failed_checks"])
+
 
 if __name__ == "__main__":
     unittest.main()

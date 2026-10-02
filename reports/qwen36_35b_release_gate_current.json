@@ -36,8 +36,10 @@
     "generation_is_well_formed"
   ],
   "measurements": {
-    "bf16_perplexity": null,
+    "bf16_perplexity": 2.491379436593314,
     "candidate_perplexity": null,
+    "candidate_perplexity_ratio_lower_bound": 2.5442477431532065,
+    "perplexity_failure_proven": true,
     "perplexity_ratio_to_bf16": null,
     "repeat_nll_delta": null
   },
