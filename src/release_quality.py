@@ -7,6 +7,54 @@ import random
 from typing import Sequence
 
 
+def partial_perplexity_ratio_certificate(
+    *,
+    baseline_mean_nll: float,
+    observed_mean_nll: Sequence[float],
+    observed_token_counts: Sequence[int],
+    total_token_count: int,
+    maximum_ratio: float,
+) -> dict[str, float | int | bool | str]:
+    """Certify failure when even zero loss on all unseen tokens cannot pass."""
+    if not math.isfinite(baseline_mean_nll) or baseline_mean_nll < 0:
+        raise ValueError("baseline mean NLL must be finite and nonnegative")
+    if len(observed_mean_nll) != len(observed_token_counts):
+        raise ValueError("observed NLL and token-count vectors must align")
+    if not observed_mean_nll:
+        raise ValueError("at least one observed result is required")
+    if any(not math.isfinite(value) or value < 0 for value in observed_mean_nll):
+        raise ValueError("observed NLLs must be finite and nonnegative")
+    if any(count <= 0 for count in observed_token_counts):
+        raise ValueError("observed token counts must be positive")
+    observed_token_count = sum(observed_token_counts)
+    if total_token_count < observed_token_count or total_token_count <= 0:
+        raise ValueError("total token count must cover all observed tokens")
+    if not math.isfinite(maximum_ratio) or maximum_ratio <= 0:
+        raise ValueError("maximum perplexity ratio must be positive and finite")
+
+    observed_nll_sum = math.fsum(
+        value * count
+        for value, count in zip(
+            observed_mean_nll, observed_token_counts, strict=True)
+    )
+    candidate_mean_nll_lower_bound = observed_nll_sum / total_token_count
+    ratio_lower_bound = math.exp(
+        candidate_mean_nll_lower_bound - baseline_mean_nll)
+    maximum_candidate_mean_nll = baseline_mean_nll + math.log(maximum_ratio)
+    return {
+        "assumption_for_unseen_tokens": "zero_nll_best_case",
+        "observed_token_count": observed_token_count,
+        "total_token_count": total_token_count,
+        "observed_nll_sum": observed_nll_sum,
+        "baseline_mean_nll": baseline_mean_nll,
+        "maximum_perplexity_ratio": maximum_ratio,
+        "maximum_candidate_mean_nll": maximum_candidate_mean_nll,
+        "candidate_mean_nll_lower_bound": candidate_mean_nll_lower_bound,
+        "candidate_perplexity_ratio_lower_bound": ratio_lower_bound,
+        "failure_proven": ratio_lower_bound > maximum_ratio,
+    }
+
+
 def weighted_mean_nll(
     document_mean_nll: Sequence[float],
     document_token_counts: Sequence[int],

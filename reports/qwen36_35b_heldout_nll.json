@@ -1,0 +1,2121 @@
+{
+  "elapsed_seconds": 9315.279256315998,
+  "environment": {
+    "cuda_available": true,
+    "cuda_built_version": "12.1",
+    "cuda_device_name": "NVIDIA GeForce RTX 3060",
+    "device": "cuda",
+    "python": "3.12.13",
+    "torch": "2.5.1+cu121",
+    "transformers": "5.13.1"
+  },
+  "peak_process_rss_bytes": 604037120,
+  "problem": {
+    "assignments": {
+      "candidate": {
+        "assignment_bits": "01000100110110100010011000000100001000100001000000000000100000111100000000100100101000010000101100001011000101010010000000110101010100010000010100001001001010100110001000010001011110000010000000010111010001100001101100001000011000010001000000000011100001100010000100000100010010010000010000010111100011011101000100001100000100101100001010110011100110001101110000100100100101111100011011010111100100000010101000000011101000000011100001111010110111101001001100001100100011000010011100010110001100101010111000010111",
+        "assignment_sha256": "97e3bca23f1179792cc4dc2bc6abc2ae612efbbcac6e29e54726b6d8be21a3fa",
+        "realized_aligned_gguf_bytes": 12997294272
+      },
+      "incumbent": {
+        "assignment_bits": "11110111011011001001010011100100101010011011001010001010101011101100111100000100001100011010110100110000001100111011000001111110000001100111111010000111110001011000101101011010000111111110100110100111111101101010110010000001010111100110110001000110010001000111010111000001001110001101001101111000100100110101000111110010100000100100001111101100001110101110000010111110000101001010010101111101101010101100111100011110100100000010010010011011010100110100001100000001010000111100110110010111011101000001101110110010",
+        "assignment_sha256": "9435a043656c1f406af731e7bf333523f19023d70f6e1d0555c054de8c00765a",
+        "realized_aligned_gguf_bytes": 12997294272
+      }
+    },
+    "batch_size": 16,
+    "candidate_report_sha256": "1634d61b2a2cb2bb0c584a8d5d54ebd71bff783a6b456125a1c22db45811fc85",
+    "candidate_store_index_sha256": "29078a0b396fdbde828ea2a0f052a4714fb0c73c008125d2c65b8fb16aa1b316",
+    "corpus_manifest_sha256": "dccd014fc55be379c176f87a724e1caa21292449203fc0a9dbbb2b5bae43387e",
+    "device": "cuda",
+    "gguf_manifest_sha256": "16439bf49b91e737641e4534c6192c787d44729f359cc6bd65cba2f09d3bb10b",
+    "identity_sha256": "8cb4f43292711faab2ac6cbc06c2f28acce9b362fa2f91a12662cc0f6d71713e",
+    "incumbent_gguf_report_sha256": "9b1f13b9a36d06a06c7483da3c9a3d1fd633877101ba0e04a5079e2be3a235d3",
+    "model_revision": "995ad96eacd98c81ed38be0c5b274b04031597b0",
+    "rows_per_chunk": 16,
+    "token_sequence_sha256": "c507a4fde2263909429eaf04b4fb7d533945efcbd993417d51ef209737d46b6e",
+    "variants": [
+      "bf16",
+      "incumbent",
+      "candidate"
+    ],
+    "vocab_chunk_size": 8192
+  },
+  "problem_sha256": "e7b7c7a3bcaecf047207c1aa9a2c131cf9148e8b874d6b056d3de1882755b32f",
+  "quality": {
+    "early_failure_certificate": {
+      "assumption_for_unseen_tokens": "zero_nll_best_case",
+      "baseline_mean_nll": 0.9128365476801992,
+      "candidate_completed_batch_count": 1,
+      "candidate_completed_document_count": 16,
+      "candidate_mean_nll_lower_bound": 1.8466715717315674,
+      "candidate_perplexity_ratio_lower_bound": 2.5442477431532065,
+      "criterion": "candidate_perplexity_ratio_to_bf16_lte_1.15",
+      "failure_proven": true,
+      "maximum_candidate_mean_nll": 1.0525984900553578,
+      "maximum_perplexity_ratio": 1.15,
+      "observed_nll_sum": 193715.84787464142,
+      "observed_token_count": 16784,
+      "proof": "causal cross-entropy is nonnegative, so assigning zero NLL to every unseen token is a valid lower bound on the final mean NLL",
+      "total_token_count": 104900
+    },
+    "failure_proven_from_partial_candidate_evaluation": true,
+    "gate": "candidate_perplexity_ratio_to_bf16_lte_1.15",
+    "nonfinite_token_count": 0,
+    "objective": "exact full-vocabulary causal cross-entropy",
+    "result": "fail"
+  },
+  "runs": {
+    "bf16": {
+      "aggregate": {
+        "document_count": 100,
+        "document_ids": [
+          "general-gutenberg-1342",
+          "general-gutenberg-84",
+          "general-gutenberg-11",
+          "general-gutenberg-1661",
+          "general-gutenberg-98",
+          "general-gutenberg-2701",
+          "general-gutenberg-74",
+          "general-gutenberg-76",
+          "general-gutenberg-345",
+          "general-gutenberg-5200",
+          "general-gutenberg-1952",
+          "general-gutenberg-46",
+          "general-gutenberg-174",
+          "general-gutenberg-1400",
+          "general-gutenberg-1260",
+          "general-gutenberg-768",
+          "general-gutenberg-4300",
+          "general-gutenberg-1232",
+          "general-gutenberg-1080",
+          "general-gutenberg-2591",
+          "general-gutenberg-2600",
+          "general-gutenberg-6130",
+          "general-gutenberg-1497",
+          "general-gutenberg-160",
+          "general-gutenberg-514",
+          "knowledge-wikipedia-775",
+          "knowledge-wikipedia-4650",
+          "knowledge-wikipedia-5739",
+          "knowledge-wikipedia-7955",
+          "knowledge-wikipedia-11188",
+          "knowledge-wikipedia-14958",
+          "knowledge-wikipedia-23053",
+          "knowledge-wikipedia-24544",
+          "knowledge-wikipedia-24944",
+          "knowledge-wikipedia-25202",
+          "knowledge-wikipedia-25507",
+          "knowledge-wikipedia-25532",
+          "knowledge-wikipedia-26903",
+          "knowledge-wikipedia-29664",
+          "knowledge-wikipedia-4764461",
+          "knowledge-wikipedia-874",
+          "knowledge-wikipedia-9236",
+          "knowledge-wikipedia-9550",
+          "knowledge-wikipedia-12024",
+          "knowledge-wikipedia-14539",
+          "knowledge-wikipedia-18831",
+          "knowledge-wikipedia-23295",
+          "knowledge-wikipedia-490620",
+          "knowledge-wikipedia-5042951",
+          "knowledge-wikipedia-13692155",
+          "code-llama-cpp-00",
+          "code-llama-cpp-01",
+          "code-llama-cpp-02",
+          "code-llama-cpp-03",
+          "code-llama-cpp-04",
+          "code-llama-cpp-05",
+          "code-llama-cpp-06",
+          "code-llama-cpp-07",
+          "code-llama-cpp-08",
+          "code-llama-cpp-09",
+          "code-llama-cpp-10",
+          "code-llama-cpp-11",
+          "code-llama-cpp-12",
+          "code-llama-cpp-13",
+          "code-llama-cpp-14",
+          "code-llama-cpp-15",
+          "code-llama-cpp-16",
+          "code-llama-cpp-17",
+          "code-llama-cpp-18",
+          "code-llama-cpp-19",
+          "code-llama-cpp-20",
+          "code-llama-cpp-21",
+          "code-llama-cpp-22",
+          "code-llama-cpp-23",
+          "code-llama-cpp-24",
+          "multilingual-de-wikipedia-1108",
+          "multilingual-de-wikipedia-1643",
+          "multilingual-de-wikipedia-4180",
+          "multilingual-de-wikipedia-7898",
+          "multilingual-de-wikipedia-3327081",
+          "multilingual-es-wikipedia-28",
+          "multilingual-es-wikipedia-7271",
+          "multilingual-es-wikipedia-10058",
+          "multilingual-es-wikipedia-22261",
+          "multilingual-es-wikipedia-221935",
+          "multilingual-fr-wikipedia-1913",
+          "multilingual-fr-wikipedia-6742",
+          "multilingual-fr-wikipedia-8128",
+          "multilingual-fr-wikipedia-25828",
+          "multilingual-fr-wikipedia-137845",
+          "multilingual-it-wikipedia-1918",
+          "multilingual-it-wikipedia-2838",
+          "multilingual-it-wikipedia-1330060",
+          "multilingual-it-wikipedia-2018549",
+          "multilingual-it-wikipedia-2895727",
+          "multilingual-pt-wikipedia-724",
+          "multilingual-pt-wikipedia-1672",
+          "multilingual-pt-wikipedia-7764",
+          "multilingual-pt-wikipedia-10962",
+          "multilingual-pt-wikipedia-22168"
+        ],
+        "document_mean_nll": [
+          0.41354048252105713,
+          0.07549452781677246,
+          0.12981587648391724,
+          0.062214527279138565,
+          0.09228057414293289,
+          0.09153234958648682,
+          1.0802189111709595,
+          1.4947148561477661,
+          0.28733450174331665,
+          0.22559791803359985,
+          0.14835700392723083,
+          0.11256670951843262,
+          0.11013896018266678,
+          0.161714568734169,
+          2.118736982345581,
+          0.8163989186286926,
+          0.5227479934692383,
+          0.406874418258667,
+          0.17694610357284546,
+          0.490987628698349,
+          0.16156984865665436,
+          1.5551660060882568,
+          0.5919446349143982,
+          0.7779686450958252,
+          0.7815228700637817,
+          1.6208853721618652,
+          1.057770848274231,
+          1.262062430381775,
+          0.885802149772644,
+          1.0297088623046875,
+          0.9048359394073486,
+          1.5455065965652466,
+          0.9281067848205566,
+          0.878275454044342,
+          0.8028351664543152,
+          1.4488420486450195,
+          1.0353285074234009,
+          1.1115952730178833,
+          1.5357093811035156,
+          1.1435306072235107,
+          1.0786516666412354,
+          1.186279296875,
+          1.2738207578659058,
+          1.049980640411377,
+          1.435265064239502,
+          1.5007284879684448,
+          1.6911673545837402,
+          0.9033121466636658,
+          1.361723780632019,
+          1.3027595281600952,
+          0.5422382354736328,
+          0.5428110361099243,
+          0.783363401889801,
+          0.39026501774787903,
+          0.7441102862358093,
+          1.0184755325317383,
+          0.3345007598400116,
+          0.35214003920555115,
+          0.8159184455871582,
+          0.39528128504753113,
+          0.8594432473182678,
+          0.5005383491516113,
+          0.7227632999420166,
+          0.49520593881607056,
+          0.5476559996604919,
+          0.7294847369194031,
+          0.8330199122428894,
+          0.4563448131084442,
+          1.0501132011413574,
+          0.49145764112472534,
+          0.44809362292289734,
+          0.9852079749107361,
+          1.2048083543777466,
+          1.084235429763794,
+          1.149527668952942,
+          1.480258584022522,
+          1.4334264993667603,
+          1.3943204879760742,
+          1.3549745082855225,
+          1.1576822996139526,
+          1.084938883781433,
+          1.2100317478179932,
+          1.1156060695648193,
+          1.3322510719299316,
+          1.5160152912139893,
+          1.0983266830444336,
+          0.7357493042945862,
+          1.456944227218628,
+          1.4157943725585938,
+          1.0423704385757446,
+          1.0304086208343506,
+          1.0762434005737305,
+          1.55608069896698,
+          1.070475459098816,
+          1.1975659132003784,
+          1.12029230594635,
+          1.348608374595642,
+          1.2581589221954346,
+          1.3865137100219727,
+          1.0727427005767822
+        ],
+        "elapsed_seconds": 2924.8628820509966,
+        "max_cuda_allocated_bytes": 6410486784,
+        "max_cuda_reserved_bytes": 9210691584,
+        "max_process_peak_rss_bytes": 3110789120,
+        "mean_nll": 0.9128365476801992,
+        "nonfinite_token_count": 0,
+        "perplexity": 2.491379436593314,
+        "predicted_token_count": 104900
+      },
+      "batches": [
+        {
+          "documents": [
+            {
+              "id": "general-gutenberg-1342",
+              "mean_nll": 0.41354048252105713,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-84",
+              "mean_nll": 0.07549452781677246,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-11",
+              "mean_nll": 0.12981587648391724,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-1661",
+              "mean_nll": 0.062214527279138565,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-98",
+              "mean_nll": 0.09228057414293289,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-2701",
+              "mean_nll": 0.09153234958648682,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-74",
+              "mean_nll": 1.0802189111709595,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-76",
+              "mean_nll": 1.4947148561477661,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-345",
+              "mean_nll": 0.28733450174331665,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-5200",
+              "mean_nll": 0.22559791803359985,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-1952",
+              "mean_nll": 0.14835700392723083,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-46",
+              "mean_nll": 0.11256670951843262,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-174",
+              "mean_nll": 0.11013896018266678,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-1400",
+              "mean_nll": 0.161714568734169,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-1260",
+              "mean_nll": 2.118736982345581,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-768",
+              "mean_nll": 0.8163989186286926,
+              "predicted_token_count": 1049
+            }
+          ],
+          "index": 0,
+          "mean_nll": 0.4637911021709442,
+          "memory": {
+            "block_forward_seconds": 12.570033049982158,
+            "candidate_decode_seconds": 0.0010224130237475038,
+            "candidate_storage_bytes_read": 0,
+            "checkpoint_load_seconds": 405.8334027069941,
+            "checkpoint_release_seconds": 4.437339164986042,
+            "checkpoint_tensor_bytes_read": 69321221376,
+            "cuda_decode_max_allocated": 2889948160,
+            "cuda_decode_max_reserved": 3053453312,
+            "cuda_forward_max_allocated": 6410486784,
+            "cuda_forward_max_reserved": 9198108672,
+            "cuda_load_max_allocated": 2889948160,
+            "cuda_load_max_reserved": 3053453312,
+            "cuda_loss_max_allocated": 3556401152,
+            "cuda_loss_max_reserved": 3978297344,
+            "cuda_max_allocated": 6410486784,
+            "cuda_max_reserved": 9198108672,
+            "cuda_release_max_allocated": 2959547392,
+            "cuda_release_max_reserved": 9198108672,
+            "loaded_blocks": 40,
+            "loss_seconds": 1.6375378230004571,
+            "max_block_bytes": 1685401984,
+            "max_candidate_bytes": 0,
+            "process_peak_rss": 3107852288,
+            "total_seconds": 425.81210674299655
+          },
+          "predicted_token_count": 16784,
+          "start_document": 0,
+          "stop_document": 16
+        },
+        {
+          "documents": [
+            {
+              "id": "general-gutenberg-4300",
+              "mean_nll": 0.5227479934692383,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-1232",
+              "mean_nll": 0.406874418258667,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-1080",
+              "mean_nll": 0.17694610357284546,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-2591",
+              "mean_nll": 0.490987628698349,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-2600",
+              "mean_nll": 0.16156984865665436,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-6130",
+              "mean_nll": 1.5551660060882568,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-1497",
+              "mean_nll": 0.5919446349143982,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-160",
+              "mean_nll": 0.7779686450958252,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-514",
+              "mean_nll": 0.7815228700637817,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-775",
+              "mean_nll": 1.6208853721618652,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-4650",
+              "mean_nll": 1.057770848274231,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-5739",
+              "mean_nll": 1.262062430381775,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-7955",
+              "mean_nll": 0.885802149772644,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-11188",
+              "mean_nll": 1.0297088623046875,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-14958",
+              "mean_nll": 0.9048359394073486,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-23053",
+              "mean_nll": 1.5455065965652466,
+              "predicted_token_count": 1049
+            }
+          ],
+          "index": 1,
+          "mean_nll": 0.860768735408783,
+          "memory": {
+            "block_forward_seconds": 14.354422903000568,
+            "candidate_decode_seconds": 0.0010127479997663613,
+            "candidate_storage_bytes_read": 0,
+            "checkpoint_load_seconds": 429.31568856600074,
+            "checkpoint_release_seconds": 4.455159713000057,
+            "checkpoint_tensor_bytes_read": 69321221376,
+            "cuda_decode_max_allocated": 2889948160,
+            "cuda_decode_max_reserved": 3053453312,
+            "cuda_forward_max_allocated": 6410486784,
+            "cuda_forward_max_reserved": 9198108672,
+            "cuda_load_max_allocated": 2889948160,
+            "cuda_load_max_reserved": 3053453312,
+            "cuda_loss_max_allocated": 3556401152,
+            "cuda_loss_max_reserved": 3978297344,
+            "cuda_max_allocated": 6410486784,
+            "cuda_max_reserved": 9198108672,
+            "cuda_release_max_allocated": 2959547392,
+            "cuda_release_max_reserved": 9198108672,
+            "loaded_blocks": 40,
+            "loss_seconds": 1.6854868429998078,
+            "max_block_bytes": 1685401984,
+            "max_candidate_bytes": 0,
+            "process_peak_rss": 3110789120,
+            "total_seconds": 451.02916018099995
+          },
+          "predicted_token_count": 16784,
+          "start_document": 16,
+          "stop_document": 32
+        },
+        {
+          "documents": [
+            {
+              "id": "knowledge-wikipedia-24544",
+              "mean_nll": 0.9281067848205566,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-24944",
+              "mean_nll": 0.878275454044342,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-25202",
+              "mean_nll": 0.8028351664543152,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-25507",
+              "mean_nll": 1.4488420486450195,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-25532",
+              "mean_nll": 1.0353285074234009,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-26903",
+              "mean_nll": 1.1115952730178833,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-29664",
+              "mean_nll": 1.5357093811035156,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-4764461",
+              "mean_nll": 1.1435306072235107,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-874",
+              "mean_nll": 1.0786516666412354,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-9236",
+              "mean_nll": 1.186279296875,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-9550",
+              "mean_nll": 1.2738207578659058,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-12024",
+              "mean_nll": 1.049980640411377,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-14539",
+              "mean_nll": 1.435265064239502,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-18831",
+              "mean_nll": 1.5007284879684448,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-23295",
+              "mean_nll": 1.6911673545837402,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-490620",
+              "mean_nll": 0.9033121466636658,
+              "predicted_token_count": 1049
+            }
+          ],
+          "index": 2,
+          "mean_nll": 1.1877142190933228,
+          "memory": {
+            "block_forward_seconds": 11.533404766000103,
+            "candidate_decode_seconds": 0.001046399000188103,
+            "candidate_storage_bytes_read": 0,
+            "checkpoint_load_seconds": 390.97287285899915,
+            "checkpoint_release_seconds": 4.469180355999697,
+            "checkpoint_tensor_bytes_read": 69321221376,
+            "cuda_decode_max_allocated": 2889183744,
+            "cuda_decode_max_reserved": 3066036224,
+            "cuda_forward_max_allocated": 6409824768,
+            "cuda_forward_max_reserved": 9210691584,
+            "cuda_load_max_allocated": 2889183744,
+            "cuda_load_max_reserved": 3066036224,
+            "cuda_loss_max_allocated": 3556794368,
+            "cuda_loss_max_reserved": 3990880256,
+            "cuda_max_allocated": 6409824768,
+            "cuda_max_reserved": 9210691584,
+            "cuda_release_max_allocated": 2958782976,
+            "cuda_release_max_reserved": 9210691584,
+            "loaded_blocks": 40,
+            "loss_seconds": 1.320899443000144,
+            "max_block_bytes": 1685401984,
+            "max_candidate_bytes": 0,
+            "process_peak_rss": 3110789120,
+            "total_seconds": 408.5321305770001
+          },
+          "predicted_token_count": 16784,
+          "start_document": 32,
+          "stop_document": 48
+        },
+        {
+          "documents": [
+            {
+              "id": "knowledge-wikipedia-5042951",
+              "mean_nll": 1.361723780632019,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-13692155",
+              "mean_nll": 1.3027595281600952,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-00",
+              "mean_nll": 0.5422382354736328,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-01",
+              "mean_nll": 0.5428110361099243,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-02",
+              "mean_nll": 0.783363401889801,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-03",
+              "mean_nll": 0.39026501774787903,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-04",
+              "mean_nll": 0.7441102862358093,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-05",
+              "mean_nll": 1.0184755325317383,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-06",
+              "mean_nll": 0.3345007598400116,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-07",
+              "mean_nll": 0.35214003920555115,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-08",
+              "mean_nll": 0.8159184455871582,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-09",
+              "mean_nll": 0.39528128504753113,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-10",
+              "mean_nll": 0.8594432473182678,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-11",
+              "mean_nll": 0.5005383491516113,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-12",
+              "mean_nll": 0.7227632999420166,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-13",
+              "mean_nll": 0.49520593881607056,
+              "predicted_token_count": 1049
+            }
+          ],
+          "index": 3,
+          "mean_nll": 0.6975961327552795,
+          "memory": {
+            "block_forward_seconds": 11.539508863000265,
+            "candidate_decode_seconds": 0.0009889599991765863,
+            "candidate_storage_bytes_read": 0,
+            "checkpoint_load_seconds": 395.2486508050001,
+            "checkpoint_release_seconds": 4.474601387999883,
+            "checkpoint_tensor_bytes_read": 69321221376,
+            "cuda_decode_max_allocated": 2889183744,
+            "cuda_decode_max_reserved": 3066036224,
+            "cuda_forward_max_allocated": 6409824768,
+            "cuda_forward_max_reserved": 9210691584,
+            "cuda_load_max_allocated": 2889183744,
+            "cuda_load_max_reserved": 3066036224,
+            "cuda_loss_max_allocated": 3556794368,
+            "cuda_loss_max_reserved": 3990880256,
+            "cuda_max_allocated": 6409824768,
+            "cuda_max_reserved": 9210691584,
+            "cuda_release_max_allocated": 2958782976,
+            "cuda_release_max_reserved": 9210691584,
+            "loaded_blocks": 40,
+            "loss_seconds": 1.042910910000046,
+            "max_block_bytes": 1685401984,
+            "max_candidate_bytes": 0,
+            "process_peak_rss": 3110789120,
+            "total_seconds": 412.58117880500004
+          },
+          "predicted_token_count": 16784,
+          "start_document": 48,
+          "stop_document": 64
+        },
+        {
+          "documents": [
+            {
+              "id": "code-llama-cpp-14",
+              "mean_nll": 0.5476559996604919,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-15",
+              "mean_nll": 0.7294847369194031,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-16",
+              "mean_nll": 0.8330199122428894,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-17",
+              "mean_nll": 0.4563448131084442,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-18",
+              "mean_nll": 1.0501132011413574,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-19",
+              "mean_nll": 0.49145764112472534,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-20",
+              "mean_nll": 0.44809362292289734,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-21",
+              "mean_nll": 0.9852079749107361,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-22",
+              "mean_nll": 1.2048083543777466,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-23",
+              "mean_nll": 1.084235429763794,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-24",
+              "mean_nll": 1.149527668952942,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-de-wikipedia-1108",
+              "mean_nll": 1.480258584022522,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-de-wikipedia-1643",
+              "mean_nll": 1.4334264993667603,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-de-wikipedia-4180",
+              "mean_nll": 1.3943204879760742,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-de-wikipedia-7898",
+              "mean_nll": 1.3549745082855225,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-de-wikipedia-3327081",
+              "mean_nll": 1.1576822996139526,
+              "predicted_token_count": 1049
+            }
+          ],
+          "index": 4,
+          "mean_nll": 0.9875382781028748,
+          "memory": {
+            "block_forward_seconds": 11.561560572999042,
+            "candidate_decode_seconds": 0.0010149260006073746,
+            "candidate_storage_bytes_read": 0,
+            "checkpoint_load_seconds": 396.0585666869988,
+            "checkpoint_release_seconds": 4.469727817000148,
+            "checkpoint_tensor_bytes_read": 69321221376,
+            "cuda_decode_max_allocated": 2889183744,
+            "cuda_decode_max_reserved": 3066036224,
+            "cuda_forward_max_allocated": 6409824768,
+            "cuda_forward_max_reserved": 9210691584,
+            "cuda_load_max_allocated": 2889183744,
+            "cuda_load_max_reserved": 3066036224,
+            "cuda_loss_max_allocated": 3556794368,
+            "cuda_loss_max_reserved": 3990880256,
+            "cuda_max_allocated": 6409824768,
+            "cuda_max_reserved": 9210691584,
+            "cuda_release_max_allocated": 2958782976,
+            "cuda_release_max_reserved": 9210691584,
+            "loaded_blocks": 40,
+            "loss_seconds": 1.0422464709999986,
+            "max_block_bytes": 1685401984,
+            "max_candidate_bytes": 0,
+            "process_peak_rss": 3110789120,
+            "total_seconds": 413.5385059219998
+          },
+          "predicted_token_count": 16784,
+          "start_document": 64,
+          "stop_document": 80
+        },
+        {
+          "documents": [
+            {
+              "id": "multilingual-es-wikipedia-28",
+              "mean_nll": 1.084938883781433,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-es-wikipedia-7271",
+              "mean_nll": 1.2100317478179932,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-es-wikipedia-10058",
+              "mean_nll": 1.1156060695648193,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-es-wikipedia-22261",
+              "mean_nll": 1.3322510719299316,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-es-wikipedia-221935",
+              "mean_nll": 1.5160152912139893,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-fr-wikipedia-1913",
+              "mean_nll": 1.0983266830444336,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-fr-wikipedia-6742",
+              "mean_nll": 0.7357493042945862,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-fr-wikipedia-8128",
+              "mean_nll": 1.456944227218628,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-fr-wikipedia-25828",
+              "mean_nll": 1.4157943725585938,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-fr-wikipedia-137845",
+              "mean_nll": 1.0423704385757446,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-it-wikipedia-1918",
+              "mean_nll": 1.0304086208343506,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-it-wikipedia-2838",
+              "mean_nll": 1.0762434005737305,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-it-wikipedia-1330060",
+              "mean_nll": 1.55608069896698,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-it-wikipedia-2018549",
+              "mean_nll": 1.070475459098816,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-it-wikipedia-2895727",
+              "mean_nll": 1.1975659132003784,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-pt-wikipedia-724",
+              "mean_nll": 1.12029230594635,
+              "predicted_token_count": 1049
+            }
+          ],
+          "index": 5,
+          "mean_nll": 1.1911933422088623,
+          "memory": {
+            "block_forward_seconds": 11.523065638001754,
+            "candidate_decode_seconds": 0.0009939960018527927,
+            "candidate_storage_bytes_read": 0,
+            "checkpoint_load_seconds": 392.1349914759994,
+            "checkpoint_release_seconds": 4.45806622299915,
+            "checkpoint_tensor_bytes_read": 69321221376,
+            "cuda_decode_max_allocated": 2889183744,
+            "cuda_decode_max_reserved": 3066036224,
+            "cuda_forward_max_allocated": 6409824768,
+            "cuda_forward_max_reserved": 9210691584,
+            "cuda_load_max_allocated": 2889183744,
+            "cuda_load_max_reserved": 3066036224,
+            "cuda_loss_max_allocated": 3556794368,
+            "cuda_loss_max_reserved": 3990880256,
+            "cuda_max_allocated": 6409824768,
+            "cuda_max_reserved": 9210691584,
+            "cuda_release_max_allocated": 2958782976,
+            "cuda_release_max_reserved": 9210691584,
+            "loaded_blocks": 40,
+            "loss_seconds": 1.044866768999782,
+            "max_block_bytes": 1685401984,
+            "max_candidate_bytes": 0,
+            "process_peak_rss": 3110789120,
+            "total_seconds": 409.36869449100004
+          },
+          "predicted_token_count": 16784,
+          "start_document": 80,
+          "stop_document": 96
+        },
+        {
+          "documents": [
+            {
+              "id": "multilingual-pt-wikipedia-1672",
+              "mean_nll": 1.348608374595642,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-pt-wikipedia-7764",
+              "mean_nll": 1.2581589221954346,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-pt-wikipedia-10962",
+              "mean_nll": 1.3865137100219727,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-pt-wikipedia-22168",
+              "mean_nll": 1.0727427005767822,
+              "predicted_token_count": 1049
+            }
+          ],
+          "index": 6,
+          "mean_nll": 1.2665059566497803,
+          "memory": {
+            "block_forward_seconds": 3.5024675860031493,
+            "candidate_decode_seconds": 0.0009899890005726775,
+            "candidate_storage_bytes_read": 0,
+            "checkpoint_load_seconds": 395.89775229499946,
+            "checkpoint_release_seconds": 4.155270248999841,
+            "checkpoint_tensor_bytes_read": 69321221376,
+            "cuda_decode_max_allocated": 2755817472,
+            "cuda_decode_max_reserved": 2896166912,
+            "cuda_forward_max_allocated": 3636583424,
+            "cuda_forward_max_reserved": 4336910336,
+            "cuda_load_max_allocated": 2755817472,
+            "cuda_load_max_reserved": 2896166912,
+            "cuda_loss_max_allocated": 2422893056,
+            "cuda_loss_max_reserved": 2577399808,
+            "cuda_max_allocated": 3636583424,
+            "cuda_max_reserved": 4336910336,
+            "cuda_release_max_allocated": 2773020672,
+            "cuda_release_max_reserved": 4336910336,
+            "loaded_blocks": 40,
+            "loss_seconds": 0.3133742899999561,
+            "max_block_bytes": 1685401984,
+            "max_candidate_bytes": 0,
+            "process_peak_rss": 3110789120,
+            "total_seconds": 404.00110533199995
+          },
+          "predicted_token_count": 4196,
+          "start_document": 96,
+          "stop_document": 100
+        }
+      ]
+    },
+    "candidate": {
+      "batches": [
+        {
+          "documents": [
+            {
+              "id": "general-gutenberg-1342",
+              "mean_nll": 11.056395530700684,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-84",
+              "mean_nll": 11.435620307922363,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-11",
+              "mean_nll": 10.39891242980957,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-1661",
+              "mean_nll": 11.075180053710938,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-98",
+              "mean_nll": 11.256811141967773,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-2701",
+              "mean_nll": 11.211350440979004,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-74",
+              "mean_nll": 14.055784225463867,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-76",
+              "mean_nll": 12.171521186828613,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-345",
+              "mean_nll": 12.026598930358887,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-5200",
+              "mean_nll": 11.04482364654541,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-1952",
+              "mean_nll": 11.828017234802246,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-46",
+              "mean_nll": 11.112486839294434,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-174",
+              "mean_nll": 11.703950881958008,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-1400",
+              "mean_nll": 10.453885078430176,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-1260",
+              "mean_nll": 11.605267524719238,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-768",
+              "mean_nll": 12.230551719665527,
+              "predicted_token_count": 1049
+            }
+          ],
+          "index": 0,
+          "mean_nll": 11.54169750213623,
+          "memory": {
+            "block_forward_seconds": 11.481322395995448,
+            "candidate_decode_seconds": 406.39241809399573,
+            "candidate_storage_bytes_read": 12997294272,
+            "checkpoint_load_seconds": 398.4093338939965,
+            "checkpoint_release_seconds": 4.4482472609997785,
+            "checkpoint_tensor_bytes_read": 69321221376,
+            "cuda_decode_max_allocated": 2890243072,
+            "cuda_decode_max_reserved": 3053453312,
+            "cuda_forward_max_allocated": 6410486784,
+            "cuda_forward_max_reserved": 9198108672,
+            "cuda_load_max_allocated": 2889948160,
+            "cuda_load_max_reserved": 3053453312,
+            "cuda_loss_max_allocated": 3556401152,
+            "cuda_loss_max_reserved": 3978297344,
+            "cuda_max_allocated": 6410486784,
+            "cuda_max_reserved": 9198108672,
+            "cuda_release_max_allocated": 2959547392,
+            "cuda_release_max_reserved": 9198108672,
+            "loaded_blocks": 40,
+            "loss_seconds": 1.1831169519991818,
+            "max_block_bytes": 1685401984,
+            "max_candidate_bytes": 262144,
+            "process_peak_rss": 3110789120,
+            "total_seconds": 817.3457567350015
+          },
+          "predicted_token_count": 16784,
+          "start_document": 0,
+          "stop_document": 16
+        }
+      ]
+    },
+    "incumbent": {
+      "aggregate": {
+        "document_count": 100,
+        "document_ids": [
+          "general-gutenberg-1342",
+          "general-gutenberg-84",
+          "general-gutenberg-11",
+          "general-gutenberg-1661",
+          "general-gutenberg-98",
+          "general-gutenberg-2701",
+          "general-gutenberg-74",
+          "general-gutenberg-76",
+          "general-gutenberg-345",
+          "general-gutenberg-5200",
+          "general-gutenberg-1952",
+          "general-gutenberg-46",
+          "general-gutenberg-174",
+          "general-gutenberg-1400",
+          "general-gutenberg-1260",
+          "general-gutenberg-768",
+          "general-gutenberg-4300",
+          "general-gutenberg-1232",
+          "general-gutenberg-1080",
+          "general-gutenberg-2591",
+          "general-gutenberg-2600",
+          "general-gutenberg-6130",
+          "general-gutenberg-1497",
+          "general-gutenberg-160",
+          "general-gutenberg-514",
+          "knowledge-wikipedia-775",
+          "knowledge-wikipedia-4650",
+          "knowledge-wikipedia-5739",
+          "knowledge-wikipedia-7955",
+          "knowledge-wikipedia-11188",
+          "knowledge-wikipedia-14958",
+          "knowledge-wikipedia-23053",
+          "knowledge-wikipedia-24544",
+          "knowledge-wikipedia-24944",
+          "knowledge-wikipedia-25202",
+          "knowledge-wikipedia-25507",
+          "knowledge-wikipedia-25532",
+          "knowledge-wikipedia-26903",
+          "knowledge-wikipedia-29664",
+          "knowledge-wikipedia-4764461",
+          "knowledge-wikipedia-874",
+          "knowledge-wikipedia-9236",
+          "knowledge-wikipedia-9550",
+          "knowledge-wikipedia-12024",
+          "knowledge-wikipedia-14539",
+          "knowledge-wikipedia-18831",
+          "knowledge-wikipedia-23295",
+          "knowledge-wikipedia-490620",
+          "knowledge-wikipedia-5042951",
+          "knowledge-wikipedia-13692155",
+          "code-llama-cpp-00",
+          "code-llama-cpp-01",
+          "code-llama-cpp-02",
+          "code-llama-cpp-03",
+          "code-llama-cpp-04",
+          "code-llama-cpp-05",
+          "code-llama-cpp-06",
+          "code-llama-cpp-07",
+          "code-llama-cpp-08",
+          "code-llama-cpp-09",
+          "code-llama-cpp-10",
+          "code-llama-cpp-11",
+          "code-llama-cpp-12",
+          "code-llama-cpp-13",
+          "code-llama-cpp-14",
+          "code-llama-cpp-15",
+          "code-llama-cpp-16",
+          "code-llama-cpp-17",
+          "code-llama-cpp-18",
+          "code-llama-cpp-19",
+          "code-llama-cpp-20",
+          "code-llama-cpp-21",
+          "code-llama-cpp-22",
+          "code-llama-cpp-23",
+          "code-llama-cpp-24",
+          "multilingual-de-wikipedia-1108",
+          "multilingual-de-wikipedia-1643",
+          "multilingual-de-wikipedia-4180",
+          "multilingual-de-wikipedia-7898",
+          "multilingual-de-wikipedia-3327081",
+          "multilingual-es-wikipedia-28",
+          "multilingual-es-wikipedia-7271",
+          "multilingual-es-wikipedia-10058",
+          "multilingual-es-wikipedia-22261",
+          "multilingual-es-wikipedia-221935",
+          "multilingual-fr-wikipedia-1913",
+          "multilingual-fr-wikipedia-6742",
+          "multilingual-fr-wikipedia-8128",
+          "multilingual-fr-wikipedia-25828",
+          "multilingual-fr-wikipedia-137845",
+          "multilingual-it-wikipedia-1918",
+          "multilingual-it-wikipedia-2838",
+          "multilingual-it-wikipedia-1330060",
+          "multilingual-it-wikipedia-2018549",
+          "multilingual-it-wikipedia-2895727",
+          "multilingual-pt-wikipedia-724",
+          "multilingual-pt-wikipedia-1672",
+          "multilingual-pt-wikipedia-7764",
+          "multilingual-pt-wikipedia-10962",
+          "multilingual-pt-wikipedia-22168"
+        ],
+        "document_mean_nll": [
+          9.158712387084961,
+          8.054427146911621,
+          8.722233772277832,
+          8.920736312866211,
+          8.116403579711914,
+          5.8058905601501465,
+          8.879416465759277,
+          8.585003852844238,
+          9.019699096679688,
+          8.639745712280273,
+          8.491461753845215,
+          8.784089088439941,
+          7.73367977142334,
+          7.711651802062988,
+          9.2616548538208,
+          9.349976539611816,
+          8.281896591186523,
+          8.693510055541992,
+          8.31533145904541,
+          8.126237869262695,
+          3.9514660835266113,
+          8.41360092163086,
+          6.928414821624756,
+          8.969985961914062,
+          9.317792892456055,
+          8.203959465026855,
+          8.2885103225708,
+          7.853726387023926,
+          7.935787200927734,
+          7.27948522567749,
+          7.994000434875488,
+          7.748523235321045,
+          7.697303295135498,
+          7.8062663078308105,
+          7.659226417541504,
+          8.089491844177246,
+          7.349196434020996,
+          7.644455909729004,
+          8.097501754760742,
+          7.19325590133667,
+          7.406959056854248,
+          7.903903961181641,
+          7.424537181854248,
+          7.794832229614258,
+          7.748643398284912,
+          8.130675315856934,
+          8.086308479309082,
+          7.920339107513428,
+          7.991892337799072,
+          7.317544460296631,
+          6.945983409881592,
+          7.04985237121582,
+          7.712889671325684,
+          6.845654010772705,
+          8.192350387573242,
+          8.369134902954102,
+          7.041544437408447,
+          7.165506839752197,
+          8.384992599487305,
+          7.125670909881592,
+          7.6053290367126465,
+          7.492656230926514,
+          6.816945552825928,
+          7.570914268493652,
+          7.017470359802246,
+          7.495760440826416,
+          8.578160285949707,
+          6.857709884643555,
+          8.37753963470459,
+          7.148370742797852,
+          7.16182279586792,
+          7.099095821380615,
+          8.520162582397461,
+          7.714365482330322,
+          7.935492992401123,
+          9.408347129821777,
+          9.851189613342285,
+          9.430870056152344,
+          9.807281494140625,
+          9.460814476013184,
+          9.069143295288086,
+          8.971457481384277,
+          9.266045570373535,
+          9.248884201049805,
+          9.261638641357422,
+          9.51964282989502,
+          7.298494815826416,
+          9.13685131072998,
+          9.022491455078125,
+          9.398964881896973,
+          8.922880172729492,
+          10.180618286132812,
+          10.29555606842041,
+          8.690759658813477,
+          9.850616455078125,
+          9.556558609008789,
+          9.553827285766602,
+          9.7672758102417,
+          10.047744750976562,
+          9.135220527648926
+        ],
+        "elapsed_seconds": 5573.07061753,
+        "max_cuda_allocated_bytes": 6410486784,
+        "max_cuda_reserved_bytes": 9210691584,
+        "max_process_peak_rss_bytes": 3110789120,
+        "mean_nll": 8.231778955459594,
+        "nonfinite_token_count": 0,
+        "perplexity": 3758.514037430137,
+        "predicted_token_count": 104900
+      },
+      "batches": [
+        {
+          "documents": [
+            {
+              "id": "general-gutenberg-1342",
+              "mean_nll": 9.158712387084961,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-84",
+              "mean_nll": 8.054427146911621,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-11",
+              "mean_nll": 8.722233772277832,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-1661",
+              "mean_nll": 8.920736312866211,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-98",
+              "mean_nll": 8.116403579711914,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-2701",
+              "mean_nll": 5.8058905601501465,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-74",
+              "mean_nll": 8.879416465759277,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-76",
+              "mean_nll": 8.585003852844238,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-345",
+              "mean_nll": 9.019699096679688,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-5200",
+              "mean_nll": 8.639745712280273,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-1952",
+              "mean_nll": 8.491461753845215,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-46",
+              "mean_nll": 8.784089088439941,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-174",
+              "mean_nll": 7.73367977142334,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-1400",
+              "mean_nll": 7.711651802062988,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-1260",
+              "mean_nll": 9.2616548538208,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-768",
+              "mean_nll": 9.349976539611816,
+              "predicted_token_count": 1049
+            }
+          ],
+          "index": 0,
+          "mean_nll": 8.452174186706543,
+          "memory": {
+            "block_forward_seconds": 11.60077576599906,
+            "candidate_decode_seconds": 442.2133116180021,
+            "candidate_storage_bytes_read": 12997294272,
+            "checkpoint_load_seconds": 395.9776652189985,
+            "checkpoint_release_seconds": 4.41168299400033,
+            "checkpoint_tensor_bytes_read": 69321221376,
+            "cuda_decode_max_allocated": 2890243072,
+            "cuda_decode_max_reserved": 3053453312,
+            "cuda_forward_max_allocated": 6410486784,
+            "cuda_forward_max_reserved": 9198108672,
+            "cuda_load_max_allocated": 2889948160,
+            "cuda_load_max_reserved": 3053453312,
+            "cuda_loss_max_allocated": 3556401152,
+            "cuda_loss_max_reserved": 3978297344,
+            "cuda_max_allocated": 6410486784,
+            "cuda_max_reserved": 9198108672,
+            "cuda_release_max_allocated": 2959547392,
+            "cuda_release_max_reserved": 9198108672,
+            "loaded_blocks": 40,
+            "loss_seconds": 1.313757398999769,
+            "max_block_bytes": 1685401984,
+            "max_candidate_bytes": 262144,
+            "process_peak_rss": 3110789120,
+            "total_seconds": 850.745520983
+          },
+          "predicted_token_count": 16784,
+          "start_document": 0,
+          "stop_document": 16
+        },
+        {
+          "documents": [
+            {
+              "id": "general-gutenberg-4300",
+              "mean_nll": 8.281896591186523,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-1232",
+              "mean_nll": 8.693510055541992,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-1080",
+              "mean_nll": 8.31533145904541,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-2591",
+              "mean_nll": 8.126237869262695,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-2600",
+              "mean_nll": 3.9514660835266113,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-6130",
+              "mean_nll": 8.41360092163086,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-1497",
+              "mean_nll": 6.928414821624756,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-160",
+              "mean_nll": 8.969985961914062,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "general-gutenberg-514",
+              "mean_nll": 9.317792892456055,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-775",
+              "mean_nll": 8.203959465026855,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-4650",
+              "mean_nll": 8.2885103225708,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-5739",
+              "mean_nll": 7.853726387023926,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-7955",
+              "mean_nll": 7.935787200927734,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-11188",
+              "mean_nll": 7.27948522567749,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-14958",
+              "mean_nll": 7.994000434875488,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-23053",
+              "mean_nll": 7.748523235321045,
+              "predicted_token_count": 1049
+            }
+          ],
+          "index": 1,
+          "mean_nll": 7.8938889503479,
+          "memory": {
+            "block_forward_seconds": 11.504034812994178,
+            "candidate_decode_seconds": 378.0190384550024,
+            "candidate_storage_bytes_read": 12997294272,
+            "checkpoint_load_seconds": 395.15925320600127,
+            "checkpoint_release_seconds": 4.4605062719965645,
+            "checkpoint_tensor_bytes_read": 69321221376,
+            "cuda_decode_max_allocated": 2889478656,
+            "cuda_decode_max_reserved": 3066036224,
+            "cuda_forward_max_allocated": 6409824768,
+            "cuda_forward_max_reserved": 9210691584,
+            "cuda_load_max_allocated": 2889183744,
+            "cuda_load_max_reserved": 3066036224,
+            "cuda_loss_max_allocated": 3556794368,
+            "cuda_loss_max_reserved": 3990880256,
+            "cuda_max_allocated": 6409824768,
+            "cuda_max_reserved": 9210691584,
+            "cuda_release_max_allocated": 2958782976,
+            "cuda_release_max_reserved": 9210691584,
+            "loaded_blocks": 40,
+            "loss_seconds": 1.1980262950000906,
+            "max_block_bytes": 1685401984,
+            "max_candidate_bytes": 262144,
+            "process_peak_rss": 3110789120,
+            "total_seconds": 786.4231657780001
+          },
+          "predicted_token_count": 16784,
+          "start_document": 16,
+          "stop_document": 32
+        },
+        {
+          "documents": [
+            {
+              "id": "knowledge-wikipedia-24544",
+              "mean_nll": 7.697303295135498,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-24944",
+              "mean_nll": 7.8062663078308105,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-25202",
+              "mean_nll": 7.659226417541504,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-25507",
+              "mean_nll": 8.089491844177246,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-25532",
+              "mean_nll": 7.349196434020996,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-26903",
+              "mean_nll": 7.644455909729004,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-29664",
+              "mean_nll": 8.097501754760742,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-4764461",
+              "mean_nll": 7.19325590133667,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-874",
+              "mean_nll": 7.406959056854248,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-9236",
+              "mean_nll": 7.903903961181641,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-9550",
+              "mean_nll": 7.424537181854248,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-12024",
+              "mean_nll": 7.794832229614258,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-14539",
+              "mean_nll": 7.748643398284912,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-18831",
+              "mean_nll": 8.130675315856934,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-23295",
+              "mean_nll": 8.086308479309082,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-490620",
+              "mean_nll": 7.920339107513428,
+              "predicted_token_count": 1049
+            }
+          ],
+          "index": 2,
+          "mean_nll": 7.747056484222412,
+          "memory": {
+            "block_forward_seconds": 11.468288410999776,
+            "candidate_decode_seconds": 381.6366858020019,
+            "candidate_storage_bytes_read": 12997294272,
+            "checkpoint_load_seconds": 396.6051740990033,
+            "checkpoint_release_seconds": 4.450837454000066,
+            "checkpoint_tensor_bytes_read": 69321221376,
+            "cuda_decode_max_allocated": 2889478656,
+            "cuda_decode_max_reserved": 3066036224,
+            "cuda_forward_max_allocated": 6409824768,
+            "cuda_forward_max_reserved": 9210691584,
+            "cuda_load_max_allocated": 2889183744,
+            "cuda_load_max_reserved": 3066036224,
+            "cuda_loss_max_allocated": 3556794368,
+            "cuda_loss_max_reserved": 3990880256,
+            "cuda_max_allocated": 6409824768,
+            "cuda_max_reserved": 9210691584,
+            "cuda_release_max_allocated": 2958782976,
+            "cuda_release_max_reserved": 9210691584,
+            "loaded_blocks": 40,
+            "loss_seconds": 1.1937236849998953,
+            "max_block_bytes": 1685401984,
+            "max_candidate_bytes": 262144,
+            "process_peak_rss": 3110789120,
+            "total_seconds": 791.9212772159999
+          },
+          "predicted_token_count": 16784,
+          "start_document": 32,
+          "stop_document": 48
+        },
+        {
+          "documents": [
+            {
+              "id": "knowledge-wikipedia-5042951",
+              "mean_nll": 7.991892337799072,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "knowledge-wikipedia-13692155",
+              "mean_nll": 7.317544460296631,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-00",
+              "mean_nll": 6.945983409881592,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-01",
+              "mean_nll": 7.04985237121582,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-02",
+              "mean_nll": 7.712889671325684,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-03",
+              "mean_nll": 6.845654010772705,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-04",
+              "mean_nll": 8.192350387573242,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-05",
+              "mean_nll": 8.369134902954102,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-06",
+              "mean_nll": 7.041544437408447,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-07",
+              "mean_nll": 7.165506839752197,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-08",
+              "mean_nll": 8.384992599487305,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-09",
+              "mean_nll": 7.125670909881592,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-10",
+              "mean_nll": 7.6053290367126465,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-11",
+              "mean_nll": 7.492656230926514,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-12",
+              "mean_nll": 6.816945552825928,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-13",
+              "mean_nll": 7.570914268493652,
+              "predicted_token_count": 1049
+            }
+          ],
+          "index": 3,
+          "mean_nll": 7.476803779602051,
+          "memory": {
+            "block_forward_seconds": 11.438604657999349,
+            "candidate_decode_seconds": 381.37456194499646,
+            "candidate_storage_bytes_read": 12997294272,
+            "checkpoint_load_seconds": 394.0115626909983,
+            "checkpoint_release_seconds": 4.442819354999301,
+            "checkpoint_tensor_bytes_read": 69321221376,
+            "cuda_decode_max_allocated": 2889478656,
+            "cuda_decode_max_reserved": 3066036224,
+            "cuda_forward_max_allocated": 6409824768,
+            "cuda_forward_max_reserved": 9210691584,
+            "cuda_load_max_allocated": 2889183744,
+            "cuda_load_max_reserved": 3066036224,
+            "cuda_loss_max_allocated": 3556794368,
+            "cuda_loss_max_reserved": 3990880256,
+            "cuda_max_allocated": 6409824768,
+            "cuda_max_reserved": 9210691584,
+            "cuda_release_max_allocated": 2958782976,
+            "cuda_release_max_reserved": 9210691584,
+            "loaded_blocks": 40,
+            "loss_seconds": 1.4598189790003744,
+            "max_block_bytes": 1685401984,
+            "max_candidate_bytes": 262144,
+            "process_peak_rss": 3110789120,
+            "total_seconds": 789.3979901899993
+          },
+          "predicted_token_count": 16784,
+          "start_document": 48,
+          "stop_document": 64
+        },
+        {
+          "documents": [
+            {
+              "id": "code-llama-cpp-14",
+              "mean_nll": 7.017470359802246,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-15",
+              "mean_nll": 7.495760440826416,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-16",
+              "mean_nll": 8.578160285949707,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-17",
+              "mean_nll": 6.857709884643555,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-18",
+              "mean_nll": 8.37753963470459,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-19",
+              "mean_nll": 7.148370742797852,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-20",
+              "mean_nll": 7.16182279586792,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-21",
+              "mean_nll": 7.099095821380615,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-22",
+              "mean_nll": 8.520162582397461,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-23",
+              "mean_nll": 7.714365482330322,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "code-llama-cpp-24",
+              "mean_nll": 7.935492992401123,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-de-wikipedia-1108",
+              "mean_nll": 9.408347129821777,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-de-wikipedia-1643",
+              "mean_nll": 9.851189613342285,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-de-wikipedia-4180",
+              "mean_nll": 9.430870056152344,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-de-wikipedia-7898",
+              "mean_nll": 9.807281494140625,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-de-wikipedia-3327081",
+              "mean_nll": 9.460814476013184,
+              "predicted_token_count": 1049
+            }
+          ],
+          "index": 4,
+          "mean_nll": 8.241528511047363,
+          "memory": {
+            "block_forward_seconds": 11.446275988004345,
+            "candidate_decode_seconds": 381.5984348000002,
+            "candidate_storage_bytes_read": 12997294272,
+            "checkpoint_load_seconds": 392.851236567004,
+            "checkpoint_release_seconds": 4.4522237050014155,
+            "checkpoint_tensor_bytes_read": 69321221376,
+            "cuda_decode_max_allocated": 2889478656,
+            "cuda_decode_max_reserved": 3066036224,
+            "cuda_forward_max_allocated": 6409824768,
+            "cuda_forward_max_reserved": 9210691584,
+            "cuda_load_max_allocated": 2889183744,
+            "cuda_load_max_reserved": 3066036224,
+            "cuda_loss_max_allocated": 3556794368,
+            "cuda_loss_max_reserved": 3990880256,
+            "cuda_max_allocated": 6409824768,
+            "cuda_max_reserved": 9210691584,
+            "cuda_release_max_allocated": 2958782976,
+            "cuda_release_max_reserved": 9210691584,
+            "loaded_blocks": 40,
+            "loss_seconds": 1.1783862299998873,
+            "max_block_bytes": 1685401984,
+            "max_candidate_bytes": 262144,
+            "process_peak_rss": 3110789120,
+            "total_seconds": 787.8619686740003
+          },
+          "predicted_token_count": 16784,
+          "start_document": 64,
+          "stop_document": 80
+        },
+        {
+          "documents": [
+            {
+              "id": "multilingual-es-wikipedia-28",
+              "mean_nll": 9.069143295288086,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-es-wikipedia-7271",
+              "mean_nll": 8.971457481384277,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-es-wikipedia-10058",
+              "mean_nll": 9.266045570373535,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-es-wikipedia-22261",
+              "mean_nll": 9.248884201049805,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-es-wikipedia-221935",
+              "mean_nll": 9.261638641357422,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-fr-wikipedia-1913",
+              "mean_nll": 9.51964282989502,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-fr-wikipedia-6742",
+              "mean_nll": 7.298494815826416,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-fr-wikipedia-8128",
+              "mean_nll": 9.13685131072998,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-fr-wikipedia-25828",
+              "mean_nll": 9.022491455078125,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-fr-wikipedia-137845",
+              "mean_nll": 9.398964881896973,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-it-wikipedia-1918",
+              "mean_nll": 8.922880172729492,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-it-wikipedia-2838",
+              "mean_nll": 10.180618286132812,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-it-wikipedia-1330060",
+              "mean_nll": 10.29555606842041,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-it-wikipedia-2018549",
+              "mean_nll": 8.690759658813477,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-it-wikipedia-2895727",
+              "mean_nll": 9.850616455078125,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-pt-wikipedia-724",
+              "mean_nll": 9.556558609008789,
+              "predicted_token_count": 1049
+            }
+          ],
+          "index": 5,
+          "mean_nll": 9.230663299560547,
+          "memory": {
+            "block_forward_seconds": 11.558368143003463,
+            "candidate_decode_seconds": 379.7577962359983,
+            "candidate_storage_bytes_read": 12997294272,
+            "checkpoint_load_seconds": 396.65890364400184,
+            "checkpoint_release_seconds": 4.458922848998554,
+            "checkpoint_tensor_bytes_read": 69321221376,
+            "cuda_decode_max_allocated": 2889478656,
+            "cuda_decode_max_reserved": 3066036224,
+            "cuda_forward_max_allocated": 6409824768,
+            "cuda_forward_max_reserved": 9210691584,
+            "cuda_load_max_allocated": 2889183744,
+            "cuda_load_max_reserved": 3066036224,
+            "cuda_loss_max_allocated": 3556794368,
+            "cuda_loss_max_reserved": 3990880256,
+            "cuda_max_allocated": 6409824768,
+            "cuda_max_reserved": 9210691584,
+            "cuda_release_max_allocated": 2958782976,
+            "cuda_release_max_reserved": 9210691584,
+            "loaded_blocks": 40,
+            "loss_seconds": 1.1711837940001715,
+            "max_block_bytes": 1685401984,
+            "max_candidate_bytes": 262144,
+            "process_peak_rss": 3110789120,
+            "total_seconds": 790.1931972020002
+          },
+          "predicted_token_count": 16784,
+          "start_document": 80,
+          "stop_document": 96
+        },
+        {
+          "documents": [
+            {
+              "id": "multilingual-pt-wikipedia-1672",
+              "mean_nll": 9.553827285766602,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-pt-wikipedia-7764",
+              "mean_nll": 9.7672758102417,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-pt-wikipedia-10962",
+              "mean_nll": 10.047744750976562,
+              "predicted_token_count": 1049
+            },
+            {
+              "id": "multilingual-pt-wikipedia-22168",
+              "mean_nll": 9.135220527648926,
+              "predicted_token_count": 1049
+            }
+          ],
+          "index": 6,
+          "mean_nll": 9.626016616821289,
+          "memory": {
+            "block_forward_seconds": 3.335095384001761,
+            "candidate_decode_seconds": 381.57837962199847,
+            "candidate_storage_bytes_read": 12997294272,
+            "checkpoint_load_seconds": 390.3154714140019,
+            "checkpoint_release_seconds": 4.139224351994926,
+            "checkpoint_tensor_bytes_read": 69321221376,
+            "cuda_decode_max_allocated": 2756112384,
+            "cuda_decode_max_reserved": 2896166912,
+            "cuda_forward_max_allocated": 3636583424,
+            "cuda_forward_max_reserved": 4336910336,
+            "cuda_load_max_allocated": 2755817472,
+            "cuda_load_max_reserved": 2896166912,
+            "cuda_loss_max_allocated": 2422893056,
+            "cuda_loss_max_reserved": 2577399808,
+            "cuda_max_allocated": 3636583424,
+            "cuda_max_reserved": 4336910336,
+            "cuda_release_max_allocated": 2773020672,
+            "cuda_release_max_reserved": 4336910336,
+            "loaded_blocks": 40,
+            "loss_seconds": 0.45021427600113384,
+            "max_block_bytes": 1685401984,
+            "max_candidate_bytes": 262144,
+            "process_peak_rss": 3110789120,
+            "total_seconds": 776.5274974870008
+          },
+          "predicted_token_count": 4196,
+          "start_document": 96,
+          "stop_document": 100
+        }
+      ]
+    }
+  },
+  "schema": 1,
+  "scope": "exact full-vocabulary causal cross-entropy on the pinned 100-document Qwen3.6 release corpus with one decoder block resident at a time",
+  "status": "fail",
+  "wall_seconds_this_invocation": 1.4174496369996632
+}

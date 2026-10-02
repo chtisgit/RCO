@@ -33,6 +33,7 @@ from quant.ggml_native import GGMLNativeCodec, GGMLType  # noqa: E402
 from release_corpus import canonical_json_bytes, sha256_bytes  # noqa: E402
 from release_quality import (  # noqa: E402
     paired_bootstrap_mean_ci,
+    partial_perplexity_ratio_certificate,
     weighted_mean_nll,
 )
 from search.hard import realized_cost  # noqa: E402
@@ -40,6 +41,7 @@ from search.streaming import StreamingHardCausalEvaluator  # noqa: E402
 
 
 VARIANTS = ("bf16", "incumbent", "candidate")
+MAXIMUM_CANDIDATE_PERPLEXITY_RATIO = 1.15
 
 
 def _load_json(path: Path) -> dict[str, Any]:
@@ -152,6 +154,63 @@ def _aggregate(run: dict[str, Any]) -> dict[str, Any]:
         "elapsed_seconds": sum(
             item["memory"]["total_seconds"] for item in run["batches"]),
     }
+
+
+def _early_failure_certificate(
+    report: dict[str, Any], *, total_token_count: int,
+) -> dict[str, Any] | None:
+    runs = report["runs"]
+    bf16 = runs.get("bf16", {}).get("aggregate")
+    candidate_batches = runs.get("candidate", {}).get("batches", [])
+    if bf16 is None or not candidate_batches:
+        return None
+    documents = [
+        document
+        for batch in sorted(candidate_batches, key=lambda item: item["index"])
+        for document in batch["documents"]
+    ]
+    certificate = partial_perplexity_ratio_certificate(
+        baseline_mean_nll=float(bf16["mean_nll"]),
+        observed_mean_nll=[float(item["mean_nll"]) for item in documents],
+        observed_token_counts=[
+            int(item["predicted_token_count"]) for item in documents
+        ],
+        total_token_count=total_token_count,
+        maximum_ratio=MAXIMUM_CANDIDATE_PERPLEXITY_RATIO,
+    )
+    certificate.update({
+        "criterion": "candidate_perplexity_ratio_to_bf16_lte_1.15",
+        "proof": (
+            "causal cross-entropy is nonnegative, so assigning zero NLL to "
+            "every unseen token is a valid lower bound on the final mean NLL"
+        ),
+        "candidate_completed_batch_count": len(candidate_batches),
+        "candidate_completed_document_count": len(documents),
+    })
+    return certificate
+
+
+def _finalize_early_failure(
+    report: dict[str, Any], certificate: dict[str, Any], *, started: float,
+) -> dict[str, Any]:
+    report["status"] = "fail"
+    report["quality"] = {
+        "objective": "exact full-vocabulary causal cross-entropy",
+        "gate": "candidate_perplexity_ratio_to_bf16_lte_1.15",
+        "result": "fail",
+        "failure_proven_from_partial_candidate_evaluation": True,
+        "early_failure_certificate": certificate,
+        "nonfinite_token_count": 0,
+    }
+    report["elapsed_seconds"] = sum(
+        float(batch["memory"]["total_seconds"])
+        for run in report["runs"].values()
+        for batch in run["batches"]
+    )
+    report["peak_process_rss_bytes"] = int(
+        resource.getrusage(resource.RUSAGE_SELF).ru_maxrss) * 1024
+    report["wall_seconds_this_invocation"] = time.perf_counter() - started
+    return report
 
 
 def audit(args: argparse.Namespace) -> dict[str, Any]:
@@ -287,6 +346,15 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
         }
         _atomic_json(args.output, report)
 
+    total_token_count = input_ids.shape[0] * (input_ids.shape[1] - 1)
+    certificate = _early_failure_certificate(
+        report, total_token_count=total_token_count)
+    if certificate is not None and certificate["failure_proven"]:
+        report = _finalize_early_failure(
+            report, certificate, started=started)
+        _atomic_json(args.output, report)
+        return report
+
     config = AutoConfig.from_pretrained(model_dir, local_files_only=True)
     with init_empty_weights(include_buffers=False):
         model = AutoModelForImageTextToText.from_config(
@@ -361,6 +429,13 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
                 "cuda_reserved_bytes": evaluation.memory.cuda_max_reserved,
             }, sort_keys=True), flush=True)
             new_batch_count += 1
+            certificate = _early_failure_certificate(
+                report, total_token_count=total_token_count)
+            if certificate is not None and certificate["failure_proven"]:
+                report = _finalize_early_failure(
+                    report, certificate, started=started)
+                _atomic_json(args.output, report)
+                return report
             if (
                 args.stop_after_new_batches is not None
                 and new_batch_count >= args.stop_after_new_batches
