@@ -1,0 +1,116 @@
+{
+  "elapsed_seconds": 993.6184922220054,
+  "environment": {
+    "python": "3.12.13",
+    "torch": "2.5.1+cu121",
+    "transformers": "5.13.1"
+  },
+  "interpretation": {
+    "uniform_q2_0_catastrophic_relative_to_bf16": true,
+    "warning": "Native results are screening evidence only because milestone 5e8d1ec failed strict native-versus-llama.cpp parity."
+  },
+  "ordering": [
+    "bf16",
+    "uniform_q2_0"
+  ],
+  "problem": {
+    "candidate_provenance_counts": {
+      "uniform_q2_0": {
+        "bf16_native_quantization": 512
+      }
+    },
+    "candidate_store_index_sha256": "29078a0b396fdbde828ea2a0f052a4714fb0c73c008125d2c65b8fb16aa1b316",
+    "controls": [
+      "bf16",
+      "uniform_q2_0"
+    ],
+    "device": "cpu",
+    "identity_sha256": "8cb4f43292711faab2ac6cbc06c2f28acce9b362fa2f91a12662cc0f6d71713e",
+    "input_ids": [
+      32,
+      59056,
+      9575,
+      54802
+    ],
+    "manifest_sha256": "16439bf49b91e737641e4534c6192c787d44729f359cc6bd65cba2f09d3bb10b",
+    "model_revision": "995ad96eacd98c81ed38be0c5b274b04031597b0",
+    "overlay_store_index_sha256s": [
+      "a9c06e013e7e2033a1588428f47a9311ec6426ecaa85cc75f836a6ba39af3bba"
+    ],
+    "rows_per_chunk": 16,
+    "vocab_chunk_size": 8192
+  },
+  "problem_sha256": "e1801112031e93ce7ad60ed1d4e86e8ce92486e409e6947b8e558e13576a00f0",
+  "results": {
+    "bf16": {
+      "assignment_bits": null,
+      "mean_nll": 11.822792053222656,
+      "memory": {
+        "block_forward_seconds": 101.04682587499701,
+        "candidate_decode_seconds": 0.0006276729764067568,
+        "candidate_storage_bytes_read": 0,
+        "checkpoint_load_seconds": 3.9907665479913703,
+        "checkpoint_release_seconds": 3.757872715985286,
+        "checkpoint_tensor_bytes_read": 69321221376,
+        "cuda_decode_max_allocated": 0,
+        "cuda_decode_max_reserved": 0,
+        "cuda_forward_max_allocated": 0,
+        "cuda_forward_max_reserved": 0,
+        "cuda_load_max_allocated": 0,
+        "cuda_load_max_reserved": 0,
+        "cuda_loss_max_allocated": 0,
+        "cuda_loss_max_reserved": 0,
+        "cuda_max_allocated": 0,
+        "cuda_max_reserved": 0,
+        "cuda_release_max_allocated": 0,
+        "cuda_release_max_reserved": 0,
+        "loaded_blocks": 40,
+        "loss_seconds": 6.000169381004525,
+        "max_block_bytes": 1685401984,
+        "max_candidate_bytes": 0,
+        "process_peak_rss": 1677373440,
+        "total_seconds": 115.05193998000323
+      },
+      "perplexity": 136324.328125,
+      "predicted_token_count": 3,
+      "realized_aligned_gguf_bytes": null
+    },
+    "uniform_q2_0": {
+      "assignment_bits": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "mean_nll": 17.02813148498535,
+      "memory": {
+        "block_forward_seconds": 6.667717331001768,
+        "candidate_decode_seconds": 857.0122650430349,
+        "candidate_storage_bytes_read": 9747970560,
+        "checkpoint_load_seconds": 12.490429037010472,
+        "checkpoint_release_seconds": 9.504428870975971,
+        "checkpoint_tensor_bytes_read": 69321221376,
+        "cuda_decode_max_allocated": 0,
+        "cuda_decode_max_reserved": 0,
+        "cuda_forward_max_allocated": 0,
+        "cuda_forward_max_reserved": 0,
+        "cuda_load_max_allocated": 0,
+        "cuda_load_max_reserved": 0,
+        "cuda_loss_max_allocated": 0,
+        "cuda_loss_max_reserved": 0,
+        "cuda_max_allocated": 0,
+        "cuda_max_reserved": 0,
+        "cuda_release_max_allocated": 0,
+        "cuda_release_max_reserved": 0,
+        "loaded_blocks": 40,
+        "loss_seconds": 1.074825244002568,
+        "max_block_bytes": 1685401984,
+        "max_candidate_bytes": 262144,
+        "process_peak_rss": 3419566080,
+        "total_seconds": 878.5665522420022
+      },
+      "perplexity": 24844116.0,
+      "predicted_token_count": 3,
+      "realized_aligned_gguf_bytes": 9747970560
+    }
+  },
+  "schema": "rco.qwen36.uniform_native_controls.v1",
+  "scope": "selected complete-model BF16 and uniform BF16-derived native Q2_0/Q4_0 controls on one fixed causal sequence",
+  "status": "complete",
+  "wall_seconds_this_invocation": 1001.3591819919966
+}

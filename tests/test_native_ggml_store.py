@@ -10,7 +10,11 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from native_store import NativeCandidateStore, NativeCandidateStoreWriter
+from native_store import (
+    NativeCandidateOverlayStore,
+    NativeCandidateStore,
+    NativeCandidateStoreWriter,
+)
 from quant.ggml_native import GGMLNativeCodec, GGMLType
 
 
@@ -194,6 +198,39 @@ class NativeGGMLStoreTest(unittest.TestCase):
             self.assertEqual(store.index["candidate_count"], 2)
             self.assertEqual(
                 store.metadata("blk.0.proj.weight", GGMLType.Q2_0), q2)
+
+    def test_overlay_replaces_one_candidate_type_only(self):
+        values = np.linspace(-1.0, 1.0, 2 * 64, dtype=np.float32).reshape(2, 64)
+        replacement = values * 0.5
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            base_writer = NativeCandidateStoreWriter(
+                root / "base", self.codec, source={"kind": "base"})
+            base_q2 = base_writer.quantize_array(
+                "blk.0.proj.weight", GGMLType.Q2_0, values,
+                provenance={"kind": "base_q2"})
+            base_q4 = base_writer.quantize_array(
+                "blk.0.proj.weight", GGMLType.Q4_0, values,
+                provenance={"kind": "base_q4"})
+            base_writer.finalize()
+            overlay_writer = NativeCandidateStoreWriter(
+                root / "overlay", self.codec, source={"kind": "overlay"})
+            overlay_q2 = overlay_writer.quantize_array(
+                "blk.0.proj.weight", GGMLType.Q2_0, replacement,
+                provenance={"kind": "replacement_q2"})
+            overlay_writer.finalize()
+
+            merged = NativeCandidateOverlayStore(
+                NativeCandidateStore(root / "base", self.codec),
+                NativeCandidateStore(root / "overlay", self.codec),
+            )
+            self.assertEqual(merged.index["tensor_count"], 1)
+            self.assertEqual(merged.index["candidate_count"], 2)
+            self.assertEqual(
+                merged.metadata("blk.0.proj.weight", GGMLType.Q2_0), overlay_q2)
+            self.assertEqual(
+                merged.metadata("blk.0.proj.weight", GGMLType.Q4_0), base_q4)
+            self.assertNotEqual(base_q2["sha256"], overlay_q2["sha256"])
 
 
 if __name__ == "__main__":

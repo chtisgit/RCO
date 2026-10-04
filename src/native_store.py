@@ -7,6 +7,7 @@ import json
 import mmap
 import os
 import tempfile
+from copy import deepcopy
 from pathlib import Path
 from typing import Any, Iterable, Iterator
 from urllib.parse import quote
@@ -434,3 +435,80 @@ class NativeCandidateStore:
         with path.open("rb") as handle:
             while chunk := handle.read(chunk_bytes):
                 yield chunk
+
+
+class NativeCandidateOverlayStore:
+    """Read candidates from a base store with exact per-type overrides.
+
+    The merged in-memory index lets existing manifest adapters see the complete
+    tensor inventory, while payload access remains delegated to the immutable
+    source store that owns each candidate.
+    """
+
+    def __init__(
+        self,
+        base: NativeCandidateStore,
+        *overlays: NativeCandidateStore,
+    ) -> None:
+        self.base = base
+        self.overlays = tuple(overlays)
+        self.codec = base.codec
+        stores = (base, *self.overlays)
+        for store in stores:
+            if store.codec.library_sha256 != self.codec.library_sha256:
+                raise ValueError("overlay stores use different GGML libraries")
+        tensors = deepcopy(base.index["tensors"])
+        self._owners: dict[tuple[str, str], NativeCandidateStore] = {
+            (name, type_name): base
+            for name, candidates in base.index["tensors"].items()
+            for type_name in candidates
+        }
+        for overlay in self.overlays:
+            for name, candidates in overlay.index["tensors"].items():
+                for type_name, metadata in candidates.items():
+                    tensors.setdefault(name, {})[type_name] = deepcopy(metadata)
+                    self._owners[(name, type_name)] = overlay
+        self.index = {
+            **deepcopy(base.index),
+            "source": {
+                "kind": "native_candidate_overlay",
+                "base": deepcopy(base.index.get("source")),
+                "overlays": [
+                    deepcopy(store.index.get("source")) for store in self.overlays
+                ],
+            },
+            "tensor_count": len(tensors),
+            "candidate_count": sum(len(values) for values in tensors.values()),
+            "tensors": tensors,
+        }
+
+    def _owner(
+        self, tensor_name: str, ggml_type: GGMLType | int,
+    ) -> NativeCandidateStore:
+        type_name = self.codec.type_name(ggml_type)
+        try:
+            return self._owners[(tensor_name, type_name)]
+        except KeyError as error:
+            raise KeyError(
+                f"candidate not found: {tensor_name}/{type_name}") from error
+
+    def metadata(
+        self, tensor_name: str, ggml_type: GGMLType | int,
+    ) -> dict[str, Any]:
+        return self._owner(tensor_name, ggml_type).metadata(tensor_name, ggml_type)
+
+    def iter_decoded_rows(self, tensor_name, ggml_type, **kwargs):
+        return self._owner(tensor_name, ggml_type).iter_decoded_rows(
+            tensor_name, ggml_type, **kwargs)
+
+    def iter_decoded_row_indices(self, tensor_name, ggml_type, row_indices, **kwargs):
+        return self._owner(tensor_name, ggml_type).iter_decoded_row_indices(
+            tensor_name, ggml_type, row_indices, **kwargs)
+
+    def iter_payload(self, tensor_name, ggml_type, **kwargs):
+        return self._owner(tensor_name, ggml_type).iter_payload(
+            tensor_name, ggml_type, **kwargs)
+
+    def decode_into(self, tensor_name, ggml_type, out, **kwargs):
+        return self._owner(tensor_name, ggml_type).decode_into(
+            tensor_name, ggml_type, out, **kwargs)
