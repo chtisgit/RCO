@@ -212,6 +212,10 @@ class StreamingEvaluation:
     memory: StreamingMemoryStats
     document_mean_nll: tuple[float, ...] = ()
     document_token_counts: tuple[int, ...] = ()
+    captured_logit_positions: tuple[int, ...] = ()
+    captured_logits: Optional[torch.Tensor] = None
+    captured_model_input: Optional[torch.Tensor] = None
+    captured_layer_outputs: tuple[torch.Tensor, ...] = ()
 
 
 class _StreamingBlock(nn.Module):
@@ -228,6 +232,10 @@ class _StreamingBlock(nn.Module):
         selected: Sequence[tuple[str, int]],
         device: torch.device,
         stats: StreamingMemoryStats,
+        capture_positions: tuple[int, ...] = (),
+        captured_layers: Optional[dict[int, torch.Tensor]] = None,
+        layer_index: int = -1,
+        checkpoint_dtype: Optional[torch.dtype] = None,
     ) -> None:
         super().__init__()
         self.module = module
@@ -238,6 +246,10 @@ class _StreamingBlock(nn.Module):
         self.selected = tuple(selected)
         self.device = device
         object.__setattr__(self, "_stats", stats)
+        self.capture_positions = capture_positions
+        object.__setattr__(self, "_captured_layers", captured_layers)
+        self.layer_index = layer_index
+        self.checkpoint_dtype = checkpoint_dtype
         self.train(module.training)
 
     def __getattr__(self, name: str) -> Any:
@@ -256,6 +268,11 @@ class _StreamingBlock(nn.Module):
         stats = object.__getattribute__(self, "_stats")
         loaded = False
         try:
+            captured_layers = object.__getattribute__(self, "_captured_layers")
+            if captured_layers is not None and self.layer_index == 0:
+                captured_layers[-1] = _extract_hidden(args[0])[
+                    0, list(self.capture_positions)
+                ].float().cpu()
             phase_started = _start_phase(self.device)
             try:
                 # ``release_prefix`` is safe for tensors that are still meta.
@@ -263,7 +280,8 @@ class _StreamingBlock(nn.Module):
                 # not strand the tensors already materialized by load_prefix.
                 loaded = True
                 block_bytes = loader.load_prefix(
-                    model, self.path, device=self.device)
+                    model, self.path, device=self.device,
+                    dtype=self.checkpoint_dtype)
             finally:
                 _finish_phase(stats, "load", self.device, phase_started)
             stats.loaded_blocks += 1
@@ -282,6 +300,11 @@ class _StreamingBlock(nn.Module):
                 output = self.module(*args, **kwargs)
             finally:
                 _finish_phase(stats, "forward", self.device, phase_started)
+            if captured_layers is not None:
+                hidden = _extract_hidden(output)
+                captured_layers[self.layer_index] = hidden[
+                    0, list(self.capture_positions)
+                ].float().cpu()
             stats.process_peak_rss = max(
                 stats.process_peak_rss, _process_peak_rss_bytes())
             return output
@@ -467,6 +490,7 @@ class StreamingHardCausalEvaluator:
         *,
         device: torch.device | str,
         vocab_chunk_size: int = 8192,
+        checkpoint_dtype: Optional[torch.dtype] = None,
     ) -> None:
         if len(bitwidths) != 2:
             raise ValueError("Streaming hard evaluation requires two bitwidths")
@@ -481,6 +505,7 @@ class StreamingHardCausalEvaluator:
         self.bitwidths = tuple(sorted(int(bits) for bits in bitwidths))
         self.device = torch.device(device)
         self.vocab_chunk_size = int(vocab_chunk_size)
+        self.checkpoint_dtype = checkpoint_dtype
         self._group_by_name = self._index_groups()
         self._validate_checkpoint_schema()
         self.model.requires_grad_(False)
@@ -588,10 +613,21 @@ class StreamingHardCausalEvaluator:
         *,
         attention_mask: Optional[torch.Tensor] = None,
         loss_mask: Optional[torch.Tensor] = None,
+        capture_logit_positions: Sequence[int] = (),
+        capture_layer_outputs: bool = False,
     ) -> StreamingEvaluation:
         """Run canonical text forward with block weights streamed on demand."""
         if input_ids.ndim != 2:
             raise ValueError("input_ids must have shape [batch, sequence]")
+        positions = tuple(int(value) for value in capture_logit_positions)
+        if positions and input_ids.shape[0] != 1:
+            raise ValueError("logit capture currently requires batch size one")
+        if capture_layer_outputs and not positions:
+            raise ValueError("layer capture requires captured logit positions")
+        if len(set(positions)) != len(positions) or any(
+            value < 0 or value >= input_ids.shape[1] for value in positions
+        ):
+            raise ValueError("logit capture positions are invalid or repeated")
         stats = StreamingMemoryStats(process_peak_rss=_process_peak_rss_bytes())
         evaluation_started = time.perf_counter()
         if self.device.type == "cuda":
@@ -602,6 +638,8 @@ class StreamingHardCausalEvaluator:
         layers = self.adapter.layers
         originals = list(layers)
         loaded_prefixes: list[str] = []
+        captured_layers: dict[int, torch.Tensor] | None = (
+            {} if capture_layer_outputs else None)
         try:
             phase_started = _start_phase(self.device)
             try:
@@ -611,7 +649,8 @@ class StreamingHardCausalEvaluator:
                     loaded_prefixes.append(path)
                     stats.checkpoint_tensor_bytes_read += (
                         self.checkpoint_loader.load_prefix(
-                            self.model, path, device=self.device)
+                            self.model, path, device=self.device,
+                            dtype=self.checkpoint_dtype)
                     )
                 if embedding_selected:
                     decode_started = _start_phase(self.device)
@@ -647,6 +686,10 @@ class StreamingHardCausalEvaluator:
                     selected=selected[index],
                     device=self.device,
                     stats=stats,
+                    capture_positions=positions,
+                    captured_layers=captured_layers,
+                    layer_index=index,
+                    checkpoint_dtype=self.checkpoint_dtype,
                 )
 
             model_kwargs = {
@@ -663,7 +706,8 @@ class StreamingHardCausalEvaluator:
                 loaded_prefixes.append("lm_head")
                 stats.checkpoint_tensor_bytes_read += (
                     self.checkpoint_loader.load_prefix(
-                        self.model, "lm_head", device=self.device)
+                        self.model, "lm_head", device=self.device,
+                        dtype=self.checkpoint_dtype)
                 )
             finally:
                 _finish_phase(stats, "load", self.device, phase_started)
@@ -678,6 +722,18 @@ class StreamingHardCausalEvaluator:
                     )
                 finally:
                     _finish_phase(stats, "decode", self.device, phase_started)
+            captured_logits = None
+            if positions:
+                phase_started = _start_phase(self.device)
+                try:
+                    selected_hidden = hidden_states[0, list(positions)]
+                    captured_logits = F.linear(
+                        selected_hidden,
+                        self.adapter.lm_head().weight,
+                        getattr(self.adapter.lm_head(), "bias", None),
+                    ).float().cpu()
+                finally:
+                    _finish_phase(stats, "loss", self.device, phase_started)
             phase_started = _start_phase(self.device)
             try:
                 (loss, token_count, document_mean_nll,
@@ -698,6 +754,15 @@ class StreamingHardCausalEvaluator:
                 value, token_count, stats,
                 document_mean_nll=document_mean_nll,
                 document_token_counts=document_token_counts,
+                captured_logit_positions=positions,
+                captured_logits=captured_logits,
+                captured_model_input=(
+                    captured_layers[-1] if captured_layers is not None else None
+                ),
+                captured_layer_outputs=(
+                    tuple(captured_layers[index] for index in range(len(originals)))
+                    if captured_layers is not None else ()
+                ),
             )
         finally:
             for index, module in enumerate(originals):

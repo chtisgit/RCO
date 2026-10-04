@@ -144,6 +144,13 @@ class StreamingHardEvaluatorTest(unittest.TestCase):
         expected_model.model.layers[1].proj.weight.data.copy_(
             candidates[("model.layers.1.proj", 2)])
         with torch.no_grad():
+            expected_hidden = expected_model.model.embed_tokens(input_ids)
+            expected_layers = []
+            for layer, scale in zip(
+                expected_model.model.layers, (1.0, 2.0), strict=True,
+            ):
+                expected_hidden = layer(expected_hidden, block_scale=scale)
+                expected_layers.append(expected_hidden[0, [0, 2]].float())
             hidden = expected_model.model(input_ids).last_hidden_state
             expected = F.cross_entropy(
                 expected_model.lm_head(hidden[:, :-1]).reshape(-1, 7),
@@ -163,7 +170,9 @@ class StreamingHardEvaluatorTest(unittest.TestCase):
                 device="cpu",
                 vocab_chunk_size=3,
             )
-            result = evaluator.evaluate(input_ids, assignment)
+            result = evaluator.evaluate(
+                input_ids, assignment, capture_logit_positions=(0, 2),
+                capture_layer_outputs=True)
             repeated = evaluator.evaluate(input_ids, assignment)
 
         self.assertAlmostEqual(result.loss, expected.item(), places=6)
@@ -172,6 +181,24 @@ class StreamingHardEvaluatorTest(unittest.TestCase):
         self.assertEqual(result.document_token_counts, (3,))
         self.assertEqual(len(result.document_mean_nll), 1)
         self.assertAlmostEqual(result.document_mean_nll[0], expected.item(), places=6)
+        self.assertEqual(result.captured_logit_positions, (0, 2))
+        self.assertTrue(torch.allclose(
+            result.captured_logits,
+            expected_model.lm_head(hidden[0, [0, 2]]).float(),
+            atol=1e-6, rtol=1e-6,
+        ))
+        self.assertIsNone(repeated.captured_logits)
+        self.assertTrue(torch.allclose(
+            result.captured_model_input,
+            expected_model.model.embed_tokens(input_ids)[0, [0, 2]].float(),
+            atol=1e-6, rtol=1e-6,
+        ))
+        self.assertEqual(len(result.captured_layer_outputs), 2)
+        for actual, expected_layer in zip(
+            result.captured_layer_outputs, expected_layers, strict=True,
+        ):
+            self.assertTrue(torch.allclose(
+                actual, expected_layer, atol=1e-6, rtol=1e-6))
         self.assertEqual(result.memory.loaded_blocks, 2)
         self.assertGreater(result.memory.max_block_bytes, 0)
         self.assertGreater(result.memory.checkpoint_load_seconds, 0.0)

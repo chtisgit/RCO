@@ -1,0 +1,1543 @@
+{
+  "artifacts": {
+    "bf16_identity": {
+      "path": "/home/christian/projects/gsq-rco-moe/repos/RCO/reports/qwen36_35b_base_identity.json",
+      "sha256": "8cb4f43292711faab2ac6cbc06c2f28acce9b362fa2f91a12662cc0f6d71713e"
+    },
+    "candidate_store": {
+      "index_sha256": "29078a0b396fdbde828ea2a0f052a4714fb0c73c008125d2c65b8fb16aa1b316",
+      "path": "/home/christian/projects/gsq-rco-moe/data/qwen36_35b_native"
+    },
+    "gguf": {
+      "bytes": 13012923264,
+      "path": "/home/christian/projects/gsq-rco-moe/results/Qwen3.6-35B-A3B-RCO-Q2Q4-text.gguf",
+      "sha256": "b663d6696cb1bed802c5c579940a095a175bf0106df7919db16ad58432538037"
+    },
+    "gguf_report": {
+      "path": "/home/christian/projects/gsq-rco-moe/repos/RCO/reports/qwen36_35b_resumable_native_gguf.json",
+      "sha256": "9b1f13b9a36d06a06c7483da3c9a3d1fd633877101ba0e04a5079e2be3a235d3"
+    },
+    "helper": {
+      "path": "/tmp/rco-gguf-logit-dump",
+      "sha256": "295032aee53de326182ed5a7e2aa2b22ec239f29b93ed12bc1eb85257fc8b9fa"
+    },
+    "layer_helper": {
+      "path": "/tmp/rco-gguf-layer-dump",
+      "sha256": "8123461e5194afa6c4c278c81a63ca1993c010636eddd22799da4f7db4b1ae27"
+    },
+    "logits": {
+      "path": "/home/christian/projects/gsq-rco-moe/repos/RCO/reports/qwen36_native_llama_logit_parity_bf16_logits.npz",
+      "sha256": "2fcd488497da7ef6f5ce84eb85a3348d55fc44df378effe89dbcc44c0c80eba5"
+    },
+    "manifest": {
+      "path": "/home/christian/projects/gsq-rco-moe/repos/RCO/reports/qwen36_35b_base_gguf_manifest.json",
+      "sha256": "16439bf49b91e737641e4534c6192c787d44729f359cc6bd65cba2f09d3bb10b"
+    }
+  },
+  "elapsed_seconds": 1367.0706175779997,
+  "environment": {
+    "device": "cpu",
+    "gpu_layers": 0,
+    "python": "3.12.13",
+    "rows_per_chunk": 16,
+    "threads": 8,
+    "torch": "2.5.1+cu121",
+    "transformers": "5.13.1",
+    "ubatch": 64
+  },
+  "first_failed_layer": 1,
+  "first_failed_position": 0,
+  "layer_states": [
+    {
+      "layer": -1,
+      "passed": true,
+      "positions": [
+        {
+          "cosine_similarity": 0.9999999999999998,
+          "maximum_absolute_error": 0.0,
+          "passed": true,
+          "position": 0,
+          "reference_rms": 0.008500724188716472,
+          "relative_rmse": 0.0,
+          "rmse": 0.0
+        },
+        {
+          "cosine_similarity": 1.0,
+          "maximum_absolute_error": 0.0,
+          "passed": true,
+          "position": 1,
+          "reference_rms": 0.015927014822877002,
+          "relative_rmse": 0.0,
+          "rmse": 0.0
+        },
+        {
+          "cosine_similarity": 0.9999999999999999,
+          "maximum_absolute_error": 0.0,
+          "passed": true,
+          "position": 2,
+          "reference_rms": 0.014282669260222825,
+          "relative_rmse": 0.0,
+          "rmse": 0.0
+        }
+      ],
+      "state": "model_input"
+    },
+    {
+      "layer": 0,
+      "passed": true,
+      "positions": [
+        {
+          "cosine_similarity": 0.9998862037594617,
+          "maximum_absolute_error": 0.0012340545654296875,
+          "passed": true,
+          "position": 0,
+          "reference_rms": 0.019451905508603567,
+          "relative_rmse": 0.01509926493368717,
+          "rmse": 0.00029370947473945414
+        },
+        {
+          "cosine_similarity": 0.9998541832521216,
+          "maximum_absolute_error": 0.0026290714740753174,
+          "passed": true,
+          "position": 1,
+          "reference_rms": 0.025313290026330554,
+          "relative_rmse": 0.01712967497058763,
+          "rmse": 0.00043360843058725995
+        },
+        {
+          "cosine_similarity": 0.9999653540398212,
+          "maximum_absolute_error": 0.0013302601873874664,
+          "passed": true,
+          "position": 2,
+          "reference_rms": 0.02312818627524818,
+          "relative_rmse": 0.008339527095366802,
+          "rmse": 0.00019287813610912278
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 1,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.999930377972332,
+          "maximum_absolute_error": 0.0017668753862380981,
+          "passed": true,
+          "position": 0,
+          "reference_rms": 0.029711499524569637,
+          "relative_rmse": 0.011871283704293028,
+          "rmse": 0.0003527136401361336
+        },
+        {
+          "cosine_similarity": 0.9998721524238237,
+          "maximum_absolute_error": 0.00225830078125,
+          "passed": true,
+          "position": 1,
+          "reference_rms": 0.029856411350261118,
+          "relative_rmse": 0.01599033074912029,
+          "rmse": 0.0004774138924724644
+        },
+        {
+          "cosine_similarity": 0.9982062257284562,
+          "maximum_absolute_error": 0.005017513409256935,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.024334041882615818,
+          "relative_rmse": 0.059891846330216825,
+          "rmse": 0.0014574106970266867
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 2,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9999665958905684,
+          "maximum_absolute_error": 0.008181571960449219,
+          "passed": true,
+          "position": 0,
+          "reference_rms": 0.056381839128642544,
+          "relative_rmse": 0.009053780708129198,
+          "rmse": 0.0005104688073917479
+        },
+        {
+          "cosine_similarity": 0.999886769267932,
+          "maximum_absolute_error": 0.002741873264312744,
+          "passed": true,
+          "position": 1,
+          "reference_rms": 0.03722964834661994,
+          "relative_rmse": 0.015137031316543806,
+          "rmse": 0.0005635463529266993
+        },
+        {
+          "cosine_similarity": 0.9986238571571262,
+          "maximum_absolute_error": 0.00717279314994812,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.0295974478253637,
+          "relative_rmse": 0.052705726996572236,
+          "rmse": 0.0015599550048789098
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 3,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9998921376308179,
+          "maximum_absolute_error": 0.004197806119918823,
+          "passed": true,
+          "position": 0,
+          "reference_rms": 0.04199855059205406,
+          "relative_rmse": 0.014811554611203677,
+          "rmse": 0.0006220638256856093
+        },
+        {
+          "cosine_similarity": 0.9998514509893134,
+          "maximum_absolute_error": 0.004177480936050415,
+          "passed": true,
+          "position": 1,
+          "reference_rms": 0.035602558924613295,
+          "relative_rmse": 0.0172883380196071,
+          "rmse": 0.0006155090730516941
+        },
+        {
+          "cosine_similarity": 0.9964324977385601,
+          "maximum_absolute_error": 0.008771524764597416,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.028965338393334858,
+          "relative_rmse": 0.0843975380732566,
+          "rmse": 0.00244460324985624
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 4,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9998630182590764,
+          "maximum_absolute_error": 0.0030922293663024902,
+          "passed": true,
+          "position": 0,
+          "reference_rms": 0.04111740602027766,
+          "relative_rmse": 0.016664967791625133,
+          "rmse": 0.0006852202470031005
+        },
+        {
+          "cosine_similarity": 0.9998497097763444,
+          "maximum_absolute_error": 0.0026344358921051025,
+          "passed": true,
+          "position": 1,
+          "reference_rms": 0.039005920436959614,
+          "relative_rmse": 0.017420700338189706,
+          "rmse": 0.0006795104513475431
+        },
+        {
+          "cosine_similarity": 0.9946697408075785,
+          "maximum_absolute_error": 0.018368959426879883,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.030878942987526442,
+          "relative_rmse": 0.10312183410257462,
+          "rmse": 0.0031842932360225617
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 5,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9998725846187158,
+          "maximum_absolute_error": 0.0034680068492889404,
+          "passed": true,
+          "position": 0,
+          "reference_rms": 0.04507596039576015,
+          "relative_rmse": 0.01610266981626045,
+          "rmse": 0.0007258433069037585
+        },
+        {
+          "cosine_similarity": 0.9998287654245306,
+          "maximum_absolute_error": 0.00337064266204834,
+          "passed": true,
+          "position": 1,
+          "reference_rms": 0.0426357811163089,
+          "relative_rmse": 0.01868653496242626,
+          "rmse": 0.0007967150144802596
+        },
+        {
+          "cosine_similarity": 0.9883092765009976,
+          "maximum_absolute_error": 0.01861334592103958,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.03146896634329458,
+          "relative_rmse": 0.15293069747759855,
+          "rmse": 0.004812570971779114
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 6,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9999634261047624,
+          "maximum_absolute_error": 0.030982494354248047,
+          "passed": true,
+          "position": 0,
+          "reference_rms": 0.23309494979965523,
+          "relative_rmse": 0.009620808404882011,
+          "rmse": 0.0022425618521680736
+        },
+        {
+          "cosine_similarity": 0.9998216306624096,
+          "maximum_absolute_error": 0.011405706405639648,
+          "passed": true,
+          "position": 1,
+          "reference_rms": 0.04639281682032567,
+          "relative_rmse": 0.019209918776651576,
+          "rmse": 0.0008912022429385312
+        },
+        {
+          "cosine_similarity": 0.9867513028361508,
+          "maximum_absolute_error": 0.03150784969329834,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.03455613119576117,
+          "relative_rmse": 0.1624643773297959,
+          "rmse": 0.0056141403376460735
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 7,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9998628698128187,
+          "maximum_absolute_error": 0.017834186553955078,
+          "passed": true,
+          "position": 0,
+          "reference_rms": 0.1502393459484279,
+          "relative_rmse": 0.017235130437197658,
+          "rmse": 0.002589394724220418
+        },
+        {
+          "cosine_similarity": 0.9997295972241002,
+          "maximum_absolute_error": 0.013302743434906006,
+          "passed": true,
+          "position": 1,
+          "reference_rms": 0.045018223908097864,
+          "relative_rmse": 0.023256152441814927,
+          "rmse": 0.0010469506778664813
+        },
+        {
+          "cosine_similarity": 0.9823783223785243,
+          "maximum_absolute_error": 0.021132447756826878,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.0332427044375685,
+          "relative_rmse": 0.18866391016211367,
+          "rmse": 0.006271698603555121
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 8,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9998335434247608,
+          "maximum_absolute_error": 0.032414913177490234,
+          "passed": true,
+          "position": 0,
+          "reference_rms": 0.1364005499334464,
+          "relative_rmse": 0.019134400391298625,
+          "rmse": 0.002609942736019885
+        },
+        {
+          "cosine_similarity": 0.9997498517920574,
+          "maximum_absolute_error": 0.004097440745681524,
+          "passed": true,
+          "position": 1,
+          "reference_rms": 0.04954848594244524,
+          "relative_rmse": 0.0224378985656803,
+          "rmse": 0.0011117639016596226
+        },
+        {
+          "cosine_similarity": 0.9793947968644153,
+          "maximum_absolute_error": 0.034036874771118164,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.036159216526595934,
+          "relative_rmse": 0.2042017977619389,
+          "rmse": 0.0073837770203941016
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 9,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9998431177928132,
+          "maximum_absolute_error": 0.025666236877441406,
+          "passed": true,
+          "position": 0,
+          "reference_rms": 0.1348126688879737,
+          "relative_rmse": 0.01858613202485147,
+          "rmse": 0.0025056460625744654
+        },
+        {
+          "cosine_similarity": 0.9986999777465906,
+          "maximum_absolute_error": 0.00977247953414917,
+          "passed": false,
+          "position": 1,
+          "reference_rms": 0.051663568661929,
+          "relative_rmse": 0.05128719091662432,
+          "rmse": 0.002649679309398482
+        },
+        {
+          "cosine_similarity": 0.9758547703431518,
+          "maximum_absolute_error": 0.03070133551955223,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.03944757766522309,
+          "relative_rmse": 0.22071188783274812,
+          "rmse": 0.008706549336920338
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 10,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9999792074418806,
+          "maximum_absolute_error": 0.1026763916015625,
+          "passed": true,
+          "position": 0,
+          "reference_rms": 0.6735524953073299,
+          "relative_rmse": 0.00756523191844483,
+          "rmse": 0.005095580836247174
+        },
+        {
+          "cosine_similarity": 0.9980334749674266,
+          "maximum_absolute_error": 0.012015133164823055,
+          "passed": false,
+          "position": 1,
+          "reference_rms": 0.05674852825013096,
+          "relative_rmse": 0.06310001821906604,
+          "rmse": 0.003580833166488447
+        },
+        {
+          "cosine_similarity": 0.9745732674670197,
+          "maximum_absolute_error": 0.03632610663771629,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.04607559117721158,
+          "relative_rmse": 0.22613529438386745,
+          "rmse": 0.010419317374769466
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 11,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9999765425406476,
+          "maximum_absolute_error": 0.14685821533203125,
+          "passed": true,
+          "position": 0,
+          "reference_rms": 0.7003141369202486,
+          "relative_rmse": 0.008347150429249231,
+          "rmse": 0.005845627448603158
+        },
+        {
+          "cosine_similarity": 0.9976193104139618,
+          "maximum_absolute_error": 0.028151392936706543,
+          "passed": false,
+          "position": 1,
+          "reference_rms": 0.056522798523612326,
+          "relative_rmse": 0.06974679810655574,
+          "rmse": 0.003942284217043916
+        },
+        {
+          "cosine_similarity": 0.9554734254444818,
+          "maximum_absolute_error": 0.29817575216293335,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.04889673669934178,
+          "relative_rmse": 0.29562130827553035,
+          "rmse": 0.014454917273463555
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 12,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9999747587129733,
+          "maximum_absolute_error": 0.20708656311035156,
+          "passed": true,
+          "position": 0,
+          "reference_rms": 0.7142124117576643,
+          "relative_rmse": 0.009505786775106304,
+          "rmse": 0.006789150898302784
+        },
+        {
+          "cosine_similarity": 0.9973089844224067,
+          "maximum_absolute_error": 0.04802018404006958,
+          "passed": false,
+          "position": 1,
+          "reference_rms": 0.056530197762297285,
+          "relative_rmse": 0.07460097720497073,
+          "rmse": 0.004217207994657628
+        },
+        {
+          "cosine_similarity": 0.9602299039598858,
+          "maximum_absolute_error": 0.2353353500366211,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.052312616784244474,
+          "relative_rmse": 0.2792681201419056,
+          "rmse": 0.014609246149039853
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 13,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9999766106317529,
+          "maximum_absolute_error": 0.1990947723388672,
+          "passed": true,
+          "position": 0,
+          "reference_rms": 0.7141364771393013,
+          "relative_rmse": 0.009319387609702811,
+          "rmse": 0.00665531463668882
+        },
+        {
+          "cosine_similarity": 0.9970444041921345,
+          "maximum_absolute_error": 0.03540915250778198,
+          "passed": false,
+          "position": 1,
+          "reference_rms": 0.05884883510994159,
+          "relative_rmse": 0.07820651366598583,
+          "rmse": 0.004602362227252994
+        },
+        {
+          "cosine_similarity": 0.963521061734059,
+          "maximum_absolute_error": 0.2787759304046631,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.0550602781700235,
+          "relative_rmse": 0.26788953806841825,
+          "rmse": 0.014750072484886209
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 14,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9999775919543195,
+          "maximum_absolute_error": 0.1400623321533203,
+          "passed": true,
+          "position": 0,
+          "reference_rms": 0.7177640450522699,
+          "relative_rmse": 0.00814590745022926,
+          "rmse": 0.005846839482097975
+        },
+        {
+          "cosine_similarity": 0.9970509553111605,
+          "maximum_absolute_error": 0.056368112564086914,
+          "passed": false,
+          "position": 1,
+          "reference_rms": 0.05865442083033338,
+          "relative_rmse": 0.07848973973160002,
+          "rmse": 0.004603770225080605
+        },
+        {
+          "cosine_similarity": 0.9721521711549613,
+          "maximum_absolute_error": 0.20220088958740234,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.0596334747704303,
+          "relative_rmse": 0.23502271996509436,
+          "rmse": 0.01401522144151636
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 15,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9999753737387528,
+          "maximum_absolute_error": 0.11204147338867188,
+          "passed": true,
+          "position": 0,
+          "reference_rms": 0.7295653116115522,
+          "relative_rmse": 0.007871107512020385,
+          "rmse": 0.005742487004735182
+        },
+        {
+          "cosine_similarity": 0.9967771696538713,
+          "maximum_absolute_error": 0.04584689438343048,
+          "passed": false,
+          "position": 1,
+          "reference_rms": 0.058041511584676575,
+          "relative_rmse": 0.08153554814699568,
+          "rmse": 0.004732446462336805
+        },
+        {
+          "cosine_similarity": 0.9653933457197226,
+          "maximum_absolute_error": 0.11524772644042969,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.055983110661001693,
+          "relative_rmse": 0.26306469486165535,
+          "rmse": 0.014727179923442694
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 16,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9999756276574312,
+          "maximum_absolute_error": 0.1335277557373047,
+          "passed": true,
+          "position": 0,
+          "reference_rms": 0.7282825711750912,
+          "relative_rmse": 0.008115438605569786,
+          "rmse": 0.00591033249387796
+        },
+        {
+          "cosine_similarity": 0.9971415231716991,
+          "maximum_absolute_error": 0.06469869613647461,
+          "passed": false,
+          "position": 1,
+          "reference_rms": 0.06266610338323532,
+          "relative_rmse": 0.07788321104653441,
+          "rmse": 0.00488063735526046
+        },
+        {
+          "cosine_similarity": 0.9672024337177965,
+          "maximum_absolute_error": 0.08332222700119019,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.05871096559007336,
+          "relative_rmse": 0.25642360224597677,
+          "rmse": 0.015054877287946201
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 17,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9999753038679268,
+          "maximum_absolute_error": 0.13028907775878906,
+          "passed": true,
+          "position": 0,
+          "reference_rms": 0.7279832371377745,
+          "relative_rmse": 0.00794189247865172,
+          "rmse": 0.0057815645956090225
+        },
+        {
+          "cosine_similarity": 0.99624620339587,
+          "maximum_absolute_error": 0.07293733954429626,
+          "passed": false,
+          "position": 1,
+          "reference_rms": 0.06094290964980351,
+          "relative_rmse": 0.08923696716735713,
+          "rmse": 0.005438360427502728
+        },
+        {
+          "cosine_similarity": 0.9632148694789409,
+          "maximum_absolute_error": 0.07167437672615051,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.055250952471614954,
+          "relative_rmse": 0.2720916250833375,
+          "rmse": 0.015033321445403957
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 18,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9999755142547334,
+          "maximum_absolute_error": 0.07246780395507812,
+          "passed": true,
+          "position": 0,
+          "reference_rms": 0.731648857912378,
+          "relative_rmse": 0.007262193771492657,
+          "rmse": 0.0053133757788509876
+        },
+        {
+          "cosine_similarity": 0.9955047225582412,
+          "maximum_absolute_error": 0.06782931089401245,
+          "passed": false,
+          "position": 1,
+          "reference_rms": 0.06350885042011824,
+          "relative_rmse": 0.09703236859655656,
+          "rmse": 0.006162414183108489
+        },
+        {
+          "cosine_similarity": 0.96862673674722,
+          "maximum_absolute_error": 0.06187723018229008,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.05916616283572562,
+          "relative_rmse": 0.2520589990042592,
+          "rmse": 0.014913363779296003
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 19,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9999751926952694,
+          "maximum_absolute_error": 0.03896832466125488,
+          "passed": true,
+          "position": 0,
+          "reference_rms": 0.7377283583072448,
+          "relative_rmse": 0.007109691070396035,
+          "rmse": 0.005245020721434945
+        },
+        {
+          "cosine_similarity": 0.9952432674552195,
+          "maximum_absolute_error": 0.07554960250854492,
+          "passed": false,
+          "position": 1,
+          "reference_rms": 0.060823528104783496,
+          "relative_rmse": 0.09996138767689812,
+          "rmse": 0.006080004272758972
+        },
+        {
+          "cosine_similarity": 0.9635760945955537,
+          "maximum_absolute_error": 0.06652683764696121,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.05889576925226526,
+          "relative_rmse": 0.27097626700311483,
+          "rmse": 0.015959355694255672
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 20,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9999755945666545,
+          "maximum_absolute_error": 0.04293537139892578,
+          "passed": true,
+          "position": 0,
+          "reference_rms": 0.7360426066938542,
+          "relative_rmse": 0.007065434035457189,
+          "rmse": 0.005200460484881387
+        },
+        {
+          "cosine_similarity": 0.9960925397249021,
+          "maximum_absolute_error": 0.01968546211719513,
+          "passed": false,
+          "position": 1,
+          "reference_rms": 0.06257090114886481,
+          "relative_rmse": 0.0896354345829704,
+          "rmse": 0.005608569916726578
+        },
+        {
+          "cosine_similarity": 0.9605208340101561,
+          "maximum_absolute_error": 0.10072177648544312,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.06085308458718709,
+          "relative_rmse": 0.2799322659691227,
+          "rmse": 0.01703474185970198
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 21,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9999718038436176,
+          "maximum_absolute_error": 0.11358833312988281,
+          "passed": true,
+          "position": 0,
+          "reference_rms": 0.734220754283208,
+          "relative_rmse": 0.007890127457619286,
+          "rmse": 0.005793095333323882
+        },
+        {
+          "cosine_similarity": 0.9954587768742841,
+          "maximum_absolute_error": 0.02300296537578106,
+          "passed": false,
+          "position": 1,
+          "reference_rms": 0.06695896936534326,
+          "relative_rmse": 0.0960514972738695,
+          "rmse": 0.006431509263456379
+        },
+        {
+          "cosine_similarity": 0.9680127950344959,
+          "maximum_absolute_error": 0.06912046018987894,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.07232092203576676,
+          "relative_rmse": 0.25175030552298316,
+          "rmse": 0.018206814218208127
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 22,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9999583937659895,
+          "maximum_absolute_error": 0.2283477783203125,
+          "passed": true,
+          "position": 0,
+          "reference_rms": 0.7371001025170341,
+          "relative_rmse": 0.010140278967246133,
+          "rmse": 0.0074744006663084485
+        },
+        {
+          "cosine_similarity": 0.996501762249113,
+          "maximum_absolute_error": 0.02979901432991028,
+          "passed": false,
+          "position": 1,
+          "reference_rms": 0.07674607516012323,
+          "relative_rmse": 0.08430684203815343,
+          "rmse": 0.00647021923557276
+        },
+        {
+          "cosine_similarity": 0.9694244534201751,
+          "maximum_absolute_error": 0.08285284042358398,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.07729588971090161,
+          "relative_rmse": 0.24662438437196238,
+          "rmse": 0.01906305121443421
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 23,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9999550419279903,
+          "maximum_absolute_error": 0.3166637420654297,
+          "passed": true,
+          "position": 0,
+          "reference_rms": 0.7473177831409055,
+          "relative_rmse": 0.011908113427048802,
+          "rmse": 0.008899144927692561
+        },
+        {
+          "cosine_similarity": 0.9951717857188519,
+          "maximum_absolute_error": 0.028760544955730438,
+          "passed": false,
+          "position": 1,
+          "reference_rms": 0.07527580619496,
+          "relative_rmse": 0.09855225057694693,
+          "rmse": 0.0074186001145073914
+        },
+        {
+          "cosine_similarity": 0.9661969012104081,
+          "maximum_absolute_error": 0.09733846038579941,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.08152033521533679,
+          "relative_rmse": 0.26007621053023156,
+          "rmse": 0.02120149986395898
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 24,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9999536098519033,
+          "maximum_absolute_error": 0.3339500427246094,
+          "passed": true,
+          "position": 0,
+          "reference_rms": 0.7494084433686848,
+          "relative_rmse": 0.012270893710291183,
+          "rmse": 0.009195911354171901
+        },
+        {
+          "cosine_similarity": 0.9951929939432526,
+          "maximum_absolute_error": 0.029151901602745056,
+          "passed": false,
+          "position": 1,
+          "reference_rms": 0.07462444698759337,
+          "relative_rmse": 0.09831247188982929,
+          "rmse": 0.007336513846761829
+        },
+        {
+          "cosine_similarity": 0.966473724494609,
+          "maximum_absolute_error": 0.1161494255065918,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.0843325284786463,
+          "relative_rmse": 0.2597416895949198,
+          "rmse": 0.021904673434855276
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 25,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9999550157030309,
+          "maximum_absolute_error": 0.3601970672607422,
+          "passed": true,
+          "position": 0,
+          "reference_rms": 0.7480087346996552,
+          "relative_rmse": 0.01286845521209354,
+          "rmse": 0.009625716900737272
+        },
+        {
+          "cosine_similarity": 0.9951375524416597,
+          "maximum_absolute_error": 0.07163417339324951,
+          "passed": false,
+          "position": 1,
+          "reference_rms": 0.0762984767470264,
+          "relative_rmse": 0.09941774021715097,
+          "rmse": 0.007585422140200205
+        },
+        {
+          "cosine_similarity": 0.963178579301516,
+          "maximum_absolute_error": 0.11301765590906143,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.08376993774584916,
+          "relative_rmse": 0.2700976438058886,
+          "rmse": 0.02262606280691983
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 26,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9999633126385042,
+          "maximum_absolute_error": 0.31584739685058594,
+          "passed": true,
+          "position": 0,
+          "reference_rms": 0.7489408726480581,
+          "relative_rmse": 0.011847740719629836,
+          "rmse": 0.008873257273467501
+        },
+        {
+          "cosine_similarity": 0.994712850283291,
+          "maximum_absolute_error": 0.11633193492889404,
+          "passed": false,
+          "position": 1,
+          "reference_rms": 0.08021855470035834,
+          "relative_rmse": 0.10396425455725557,
+          "rmse": 0.008339862241083185
+        },
+        {
+          "cosine_similarity": 0.9638552394935344,
+          "maximum_absolute_error": 0.11847129836678505,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.08567293619433068,
+          "relative_rmse": 0.26778114032513,
+          "rmse": 0.022941596549119973
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 27,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9999417277876318,
+          "maximum_absolute_error": 0.2873210906982422,
+          "passed": true,
+          "position": 0,
+          "reference_rms": 0.7471486452019624,
+          "relative_rmse": 0.01297549929410443,
+          "rmse": 0.009694626718409144
+        },
+        {
+          "cosine_similarity": 0.9946609028059469,
+          "maximum_absolute_error": 0.07548552751541138,
+          "passed": false,
+          "position": 1,
+          "reference_rms": 0.0799948544338026,
+          "relative_rmse": 0.10397185891541122,
+          "rmse": 0.00831721371915018
+        },
+        {
+          "cosine_similarity": 0.9652361498582404,
+          "maximum_absolute_error": 0.12175088003277779,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.09054749887951694,
+          "relative_rmse": 0.2625689522611209,
+          "rmse": 0.02377496191065978
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 28,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9999308284305092,
+          "maximum_absolute_error": 0.35465049743652344,
+          "passed": true,
+          "position": 0,
+          "reference_rms": 0.7431852026312326,
+          "relative_rmse": 0.01495167522137735,
+          "rmse": 0.011111863779075705
+        },
+        {
+          "cosine_similarity": 0.9960029744400605,
+          "maximum_absolute_error": 0.03807371109724045,
+          "passed": false,
+          "position": 1,
+          "reference_rms": 0.0942009392870401,
+          "relative_rmse": 0.08972498510813386,
+          "rmse": 0.008452177874701894
+        },
+        {
+          "cosine_similarity": 0.9658105747894358,
+          "maximum_absolute_error": 0.12722954899072647,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.09061336104182953,
+          "relative_rmse": 0.26003163928412726,
+          "rmse": 0.023562340812751405
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 29,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9999254696442768,
+          "maximum_absolute_error": 0.3681163787841797,
+          "passed": true,
+          "position": 0,
+          "reference_rms": 0.7428366692427449,
+          "relative_rmse": 0.015200629707455131,
+          "rmse": 0.01129158514227829
+        },
+        {
+          "cosine_similarity": 0.9945449438378041,
+          "maximum_absolute_error": 0.039191603660583496,
+          "passed": false,
+          "position": 1,
+          "reference_rms": 0.08372849821193679,
+          "relative_rmse": 0.1046707701662491,
+          "rmse": 0.008763926392706834
+        },
+        {
+          "cosine_similarity": 0.9581995047859984,
+          "maximum_absolute_error": 0.151382714509964,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.08421998265434,
+          "relative_rmse": 0.2875398348018779,
+          "rmse": 0.024216599899445943
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 30,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9999310586009275,
+          "maximum_absolute_error": 0.3458900451660156,
+          "passed": true,
+          "position": 0,
+          "reference_rms": 0.7400335047434954,
+          "relative_rmse": 0.014656267805144863,
+          "rmse": 0.01084612923030061
+        },
+        {
+          "cosine_similarity": 0.9956279082240891,
+          "maximum_absolute_error": 0.03557482361793518,
+          "passed": false,
+          "position": 1,
+          "reference_rms": 0.0922537341377129,
+          "relative_rmse": 0.09384592872536411,
+          "rmse": 0.008657637358536495
+        },
+        {
+          "cosine_similarity": 0.9663298736937765,
+          "maximum_absolute_error": 0.1732526570558548,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.09875144301926715,
+          "relative_rmse": 0.25742713677165496,
+          "rmse": 0.025421301228519176
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 31,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9995207021688287,
+          "maximum_absolute_error": 0.16705322265625,
+          "passed": true,
+          "position": 0,
+          "reference_rms": 0.3341780386662958,
+          "relative_rmse": 0.03155110277210865,
+          "rmse": 0.010543685642141998
+        },
+        {
+          "cosine_similarity": 0.9941221887999064,
+          "maximum_absolute_error": 0.035462990403175354,
+          "passed": false,
+          "position": 1,
+          "reference_rms": 0.09282890747559967,
+          "relative_rmse": 0.10881043234113798,
+          "rmse": 0.010100753556175495
+        },
+        {
+          "cosine_similarity": 0.9694155379197351,
+          "maximum_absolute_error": 0.16269239410758018,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.11143561545807693,
+          "relative_rmse": 0.24625932168974607,
+          "rmse": 0.027442059074785405
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 32,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9989506963990308,
+          "maximum_absolute_error": 0.1453080177307129,
+          "passed": false,
+          "position": 0,
+          "reference_rms": 0.34308399119599314,
+          "relative_rmse": 0.04623981808632466,
+          "rmse": 0.015864141341232933
+        },
+        {
+          "cosine_similarity": 0.9917765152684884,
+          "maximum_absolute_error": 0.043537676334381104,
+          "passed": false,
+          "position": 1,
+          "reference_rms": 0.09689222108039419,
+          "relative_rmse": 0.12843919146186492,
+          "rmse": 0.012444758534510093
+        },
+        {
+          "cosine_similarity": 0.9670781524680241,
+          "maximum_absolute_error": 0.18325252830982208,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.11332817538606534,
+          "relative_rmse": 0.25575769299614426,
+          "rmse": 0.02898455268820249
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 33,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9983076864348447,
+          "maximum_absolute_error": 0.16332578659057617,
+          "passed": false,
+          "position": 0,
+          "reference_rms": 0.34488333671570226,
+          "relative_rmse": 0.05894870608558663,
+          "rmse": 0.02033042644987034
+        },
+        {
+          "cosine_similarity": 0.9917324334281467,
+          "maximum_absolute_error": 0.1273171305656433,
+          "passed": false,
+          "position": 1,
+          "reference_rms": 0.10465320085046047,
+          "relative_rmse": 0.12934721875136096,
+          "rmse": 0.013536600463434625
+        },
+        {
+          "cosine_similarity": 0.9624253673557974,
+          "maximum_absolute_error": 0.18143566697835922,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.11704290607655654,
+          "relative_rmse": 0.2717478765470501,
+          "rmse": 0.03180616119120007
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 34,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9978769720544032,
+          "maximum_absolute_error": 0.1542491912841797,
+          "passed": false,
+          "position": 0,
+          "reference_rms": 0.36565691152852975,
+          "relative_rmse": 0.06611991505193218,
+          "rmse": 0.024177203928418267
+        },
+        {
+          "cosine_similarity": 0.9961482608992812,
+          "maximum_absolute_error": 0.24240779876708984,
+          "passed": false,
+          "position": 1,
+          "reference_rms": 0.17019993419298346,
+          "relative_rmse": 0.09695841785080839,
+          "rmse": 0.01650231633766338
+        },
+        {
+          "cosine_similarity": 0.9797364384439865,
+          "maximum_absolute_error": 0.14961883425712585,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.17917582593073583,
+          "relative_rmse": 0.20073666353461989,
+          "rmse": 0.03596715748339574
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 35,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9962321717412903,
+          "maximum_absolute_error": 0.15605998039245605,
+          "passed": false,
+          "position": 0,
+          "reference_rms": 0.4244483768651468,
+          "relative_rmse": 0.0884671700101721,
+          "rmse": 0.03754974671667054
+        },
+        {
+          "cosine_similarity": 0.9881790208784755,
+          "maximum_absolute_error": 0.0747075304389,
+          "passed": false,
+          "position": 1,
+          "reference_rms": 0.1252903856778181,
+          "relative_rmse": 0.1580456082424971,
+          "rmse": 0.01980159521138781
+        },
+        {
+          "cosine_similarity": 0.9570366541703869,
+          "maximum_absolute_error": 0.14887642860412598,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.13833891117584257,
+          "relative_rmse": 0.2911064320718855,
+          "rmse": 0.04027134684910902
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 36,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9953594087321318,
+          "maximum_absolute_error": 0.15598392486572266,
+          "passed": false,
+          "position": 0,
+          "reference_rms": 0.43075755845497227,
+          "relative_rmse": 0.09818399629486757,
+          "rmse": 0.0422934985233292
+        },
+        {
+          "cosine_similarity": 0.9855883105718105,
+          "maximum_absolute_error": 0.28369808197021484,
+          "passed": false,
+          "position": 1,
+          "reference_rms": 0.14160108910462368,
+          "relative_rmse": 0.17236389486079776,
+          "rmse": 0.024406915234603813
+        },
+        {
+          "cosine_similarity": 0.9590222948506469,
+          "maximum_absolute_error": 0.2657644748687744,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.15163860042089153,
+          "relative_rmse": 0.28488038148709416,
+          "rmse": 0.04319886233607261
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 37,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9953264739722348,
+          "maximum_absolute_error": 0.1583143174648285,
+          "passed": false,
+          "position": 0,
+          "reference_rms": 0.44333787799228014,
+          "relative_rmse": 0.09793191642395518,
+          "rmse": 0.04341692801511362
+        },
+        {
+          "cosine_similarity": 0.9880864816330359,
+          "maximum_absolute_error": 0.1332874298095703,
+          "passed": false,
+          "position": 1,
+          "reference_rms": 0.16494011716561502,
+          "relative_rmse": 0.1580005095199907,
+          "rmse": 0.026060622552454137
+        },
+        {
+          "cosine_similarity": 0.962113494089523,
+          "maximum_absolute_error": 0.1934518814086914,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.17252487492974175,
+          "relative_rmse": 0.2740775449724643,
+          "rmse": 0.04728519416742507
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 38,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9943740460375451,
+          "maximum_absolute_error": 0.1859135627746582,
+          "passed": false,
+          "position": 0,
+          "reference_rms": 0.4416548348256217,
+          "relative_rmse": 0.10716732543400039,
+          "rmse": 0.04733096741325708
+        },
+        {
+          "cosine_similarity": 0.9926294057566161,
+          "maximum_absolute_error": 0.10462462902069092,
+          "passed": false,
+          "position": 1,
+          "reference_rms": 0.22980945286149965,
+          "relative_rmse": 0.12542000273851955,
+          "rmse": 0.028822702207226967
+        },
+        {
+          "cosine_similarity": 0.9756168511714501,
+          "maximum_absolute_error": 0.6097989082336426,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.25158840409816524,
+          "relative_rmse": 0.21960079221359585,
+          "rmse": 0.055249012851711375
+        }
+      ],
+      "state": "layer_output"
+    },
+    {
+      "layer": 39,
+      "passed": false,
+      "positions": [
+        {
+          "cosine_similarity": 0.9941142344305463,
+          "maximum_absolute_error": 0.17391014099121094,
+          "passed": false,
+          "position": 0,
+          "reference_rms": 0.46576154053664787,
+          "relative_rmse": 0.11071247009927272,
+          "rmse": 0.051565610630054826
+        },
+        {
+          "cosine_similarity": 0.993781811613993,
+          "maximum_absolute_error": 0.5761308670043945,
+          "passed": false,
+          "position": 1,
+          "reference_rms": 0.3076964747497254,
+          "relative_rmse": 0.12380022645104058,
+          "rmse": 0.03809289325220289
+        },
+        {
+          "cosine_similarity": 0.965175307320929,
+          "maximum_absolute_error": 1.194980800151825,
+          "passed": false,
+          "position": 2,
+          "reference_rms": 0.3522443734828092,
+          "relative_rmse": 0.26210373164473866,
+          "rmse": 0.09232456474070731
+        }
+      ],
+      "state": "layer_output"
+    }
+  ],
+  "native": {
+    "loss": 13.816496849060059,
+    "memory": {
+      "block_forward_seconds": 6.81739134198142,
+      "candidate_decode_seconds": 1201.6640737599955,
+      "candidate_storage_bytes_read": 12997294272,
+      "checkpoint_load_seconds": 15.33213905599041,
+      "checkpoint_release_seconds": 9.399538274996303,
+      "checkpoint_tensor_bytes_read": 69321221376,
+      "cuda_decode_max_allocated": 0,
+      "cuda_decode_max_reserved": 0,
+      "cuda_forward_max_allocated": 0,
+      "cuda_forward_max_reserved": 0,
+      "cuda_load_max_allocated": 0,
+      "cuda_load_max_reserved": 0,
+      "cuda_loss_max_allocated": 0,
+      "cuda_loss_max_reserved": 0,
+      "cuda_max_allocated": 0,
+      "cuda_max_reserved": 0,
+      "cuda_release_max_allocated": 0,
+      "cuda_release_max_reserved": 0,
+      "loaded_blocks": 40,
+      "loss_seconds": 2.1568904320010915,
+      "max_block_bytes": 1685401984,
+      "max_candidate_bytes": 262144,
+      "process_peak_rss": 3541430272,
+      "total_seconds": 1227.2051158600007
+    },
+    "token_count": 3
+  },
+  "positions": [
+    {
+      "cosine_similarity": 0.9943583726961672,
+      "llama_target_nll": 16.254302046036813,
+      "llama_top1_token": 450,
+      "maximum_absolute_error": 1.2529330253601074,
+      "mean_absolute_error": 0.18611940533812288,
+      "native_target_nll": 16.565568652764984,
+      "native_top1_token": 450,
+      "passed": false,
+      "position": 0,
+      "rmse": 0.23433089771929105,
+      "target_token": 59056,
+      "top10_overlap_count": 8,
+      "top1_agreement": true
+    },
+    {
+      "cosine_similarity": 0.9926486046020261,
+      "llama_target_nll": 10.855683656629054,
+      "llama_top1_token": 321,
+      "maximum_absolute_error": 1.4558080434799194,
+      "mean_absolute_error": 0.2627700769907494,
+      "native_target_nll": 10.809330213802058,
+      "native_top1_token": 321,
+      "passed": false,
+      "position": 1,
+      "rmse": 0.3188017202639161,
+      "target_token": 9575,
+      "top10_overlap_count": 8,
+      "top1_agreement": true
+    },
+    {
+      "cosine_similarity": 0.970389566278362,
+      "llama_target_nll": 13.789396012861783,
+      "llama_top1_token": 220,
+      "maximum_absolute_error": 2.7214404344558716,
+      "mean_absolute_error": 0.4336077255311916,
+      "native_target_nll": 14.070684521160024,
+      "native_top1_token": 220,
+      "passed": false,
+      "position": 2,
+      "rmse": 0.5480308741944759,
+      "target_token": 54802,
+      "top10_overlap_count": 8,
+      "top1_agreement": true
+    }
+  ],
+  "schema": "rco.qwen36.native_llama_logit_parity.v1",
+  "scope": "existing BF16-derived Q2_0/Q4_0 prototype assignment",
+  "status": "fail",
+  "thresholds_declared_before_production_measurement": {
+    "maximum_layer_relative_rmse": 0.05,
+    "maximum_position_mean_absolute_error": 0.15,
+    "maximum_position_rmse": 0.25,
+    "minimum_layer_cosine_similarity": 0.999,
+    "minimum_position_cosine_similarity": 0.999,
+    "require_top1_agreement": true
+  },
+  "tokens": {
+    "input_ids": [
+      32,
+      59056,
+      9575,
+      54802
+    ],
+    "text": "A bounded native GG"
+  }
+}
