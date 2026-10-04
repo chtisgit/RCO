@@ -1,0 +1,163 @@
+{
+  "admitted_on_fixed_screen": [
+    "routed_gate_q4",
+    "routed_up_q4"
+  ],
+  "problem": {
+    "baseline_logits_key": "native",
+    "baseline_logits_sha256": "405f8c4f7905bd86793357e2e35e2ed7c9b63afca25d46699f2ea2fb9437b4c9",
+    "controls": [
+      "routed_gate_q4",
+      "routed_up_q4",
+      "routed_down_q4"
+    ],
+    "input_ids": [
+      32,
+      59056,
+      9575,
+      54802
+    ],
+    "nll_problem_sha256": "4f9130c27e23c43aaa29062c23ca6d0c6e920cb8c4345e2e793ed81d2e8503be",
+    "thresholds": {
+      "maximum_position_relative_rmse": 0.2,
+      "minimum_position_cosine_similarity": 0.98,
+      "minimum_top1_agreement_fraction": 0.6666666666666666
+    }
+  },
+  "problem_sha256": "98df1083c663f181c1a46ef85171ad48b8a2c02cb4d4dfd42357a768667e284d",
+  "results": {
+    "routed_down_q4": {
+      "admitted_on_fixed_screen": false,
+      "maximum_position_relative_rmse": 0.24214269577417977,
+      "minimum_position_cosine_similarity": 0.9776096758717165,
+      "nll_bounded_by_plus_0_5": true,
+      "passed": false,
+      "positions": [
+        {
+          "candidate_top1": 220,
+          "cosine_similarity": 0.9936452950802996,
+          "mean_absolute_error": 0.30337130172074933,
+          "position": 0,
+          "reference_rms": 3.230572090142963,
+          "reference_top1": 13,
+          "relative_rmse": 0.11867306611291609,
+          "rmse": 0.38338189523607735,
+          "top1_agrees": false
+        },
+        {
+          "candidate_top1": 13094,
+          "cosine_similarity": 0.9879741118184904,
+          "mean_absolute_error": 0.3838695935261695,
+          "position": 1,
+          "reference_rms": 3.098265959841396,
+          "reference_top1": 13094,
+          "relative_rmse": 0.15669748332059144,
+          "rmse": 0.48549047856500344,
+          "top1_agrees": true
+        },
+        {
+          "candidate_top1": 709,
+          "cosine_similarity": 0.9776096758717165,
+          "mean_absolute_error": 0.53702746204523,
+          "position": 2,
+          "reference_rms": 2.774683096538986,
+          "reference_top1": 709,
+          "relative_rmse": 0.24214269577417977,
+          "rmse": 0.6718692449149988,
+          "top1_agrees": true
+        }
+      ],
+      "top1_agreement_fraction": 0.6666666666666666
+    },
+    "routed_gate_q4": {
+      "admitted_on_fixed_screen": true,
+      "maximum_position_relative_rmse": 0.12169816963514346,
+      "minimum_position_cosine_similarity": 0.9931258201569514,
+      "nll_bounded_by_plus_0_5": true,
+      "passed": true,
+      "positions": [
+        {
+          "candidate_top1": 25,
+          "cosine_similarity": 0.9982239764920792,
+          "mean_absolute_error": 0.156581582716959,
+          "position": 0,
+          "reference_rms": 3.230572090142963,
+          "reference_top1": 13,
+          "relative_rmse": 0.061132815685516886,
+          "rmse": 0.19749396814548478,
+          "top1_agrees": false
+        },
+        {
+          "candidate_top1": 13094,
+          "cosine_similarity": 0.9941702387874352,
+          "mean_absolute_error": 0.26395646143109375,
+          "position": 1,
+          "reference_rms": 3.098265959841396,
+          "reference_top1": 13094,
+          "relative_rmse": 0.10798666862550359,
+          "rmse": 0.33457141951907066,
+          "top1_agrees": true
+        },
+        {
+          "candidate_top1": 709,
+          "cosine_similarity": 0.9931258201569514,
+          "mean_absolute_error": 0.2678497974976859,
+          "position": 2,
+          "reference_rms": 2.774683096538986,
+          "reference_top1": 709,
+          "relative_rmse": 0.12169816963514346,
+          "rmse": 0.3376738541663667,
+          "top1_agrees": true
+        }
+      ],
+      "top1_agreement_fraction": 0.6666666666666666
+    },
+    "routed_up_q4": {
+      "admitted_on_fixed_screen": true,
+      "maximum_position_relative_rmse": 0.14384440946136245,
+      "minimum_position_cosine_similarity": 0.9909620686794035,
+      "nll_bounded_by_plus_0_5": true,
+      "passed": true,
+      "positions": [
+        {
+          "candidate_top1": 13,
+          "cosine_similarity": 0.9954287926733939,
+          "mean_absolute_error": 0.26227941141384603,
+          "position": 0,
+          "reference_rms": 3.230572090142963,
+          "reference_top1": 13,
+          "relative_rmse": 0.10172256999412135,
+          "rmse": 0.32862209556062244,
+          "top1_agrees": true
+        },
+        {
+          "candidate_top1": 13094,
+          "cosine_similarity": 0.9909620686794035,
+          "mean_absolute_error": 0.36329844423819374,
+          "position": 1,
+          "reference_rms": 3.098265959841396,
+          "reference_top1": 13094,
+          "relative_rmse": 0.14384440946136245,
+          "rmse": 0.44566823734762695,
+          "top1_agrees": true
+        },
+        {
+          "candidate_top1": 709,
+          "cosine_similarity": 0.9946585943871419,
+          "mean_absolute_error": 0.23393759407419903,
+          "position": 2,
+          "reference_rms": 2.774683096538986,
+          "reference_top1": 709,
+          "relative_rmse": 0.10554802986305542,
+          "rmse": 0.292862334334012,
+          "top1_agrees": true
+        }
+      ],
+      "top1_agreement_fraction": 1.0
+    }
+  },
+  "schema": "rco.qwen36.gsq_upgrade_logits.v1",
+  "scope": "full-vocabulary native logit drift for genuine upgrades relative to the authentic GSQ native replay",
+  "status": "complete",
+  "warning": "These are native fixed-sequence drift bounds, not release proof. Pinned-llama.cpp replay and held-out gates remain mandatory."
+}

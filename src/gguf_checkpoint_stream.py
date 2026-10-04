@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from collections import defaultdict
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any, Iterable, Optional
 
 import numpy as np
 import torch
@@ -99,6 +99,7 @@ class GGUFManifestPrefixLoader:
         *,
         gguf_python: str | Path,
         ggml_library: str | Path,
+        dense_override_sources: Iterable[str] = (),
         rows_per_chunk: int = 16,
     ) -> None:
         if rows_per_chunk <= 0:
@@ -108,6 +109,7 @@ class GGUFManifestPrefixLoader:
         self.tensors = {tensor.name: tensor for tensor in self.reader.tensors}
         self.geometry = Qwen35LinearAttentionGeometry.from_model_dir(model_dir)
         self.native_codec = GGMLNativeCodec(ggml_library)
+        self.dense_loader = SafeTensorPrefixLoader(model_dir)
         self.rows_per_chunk = rows_per_chunk
         self.by_source: dict[str, list[dict[str, Any]]] = defaultdict(list)
         for entry in manifest["entries"]:
@@ -115,6 +117,13 @@ class GGUFManifestPrefixLoader:
             if destination not in self.tensors:
                 raise KeyError(f"GGUF tensor is absent: {destination}")
             self.by_source[entry["source_name"]].append(entry)
+        self.dense_override_sources = frozenset(dense_override_sources)
+        unknown_overrides = sorted(
+            self.dense_override_sources - set(self.by_source))
+        if unknown_overrides:
+            raise KeyError(
+                f"dense override sources are absent from manifest: "
+                f"{unknown_overrides[:8]}")
         self.weight_map = {name: "gguf" for name in self.by_source}
         self.max_decoded_chunk_bytes = 0
 
@@ -238,6 +247,23 @@ class GGUFManifestPrefixLoader:
             if any(tuple(entry["source_shape"]) != source_shape for entry in entries):
                 raise ValueError(f"manifest source shape differs for {name}")
             target_dtype = self._target_dtype(model, name, dtype)
+            if name in self.dense_override_sources:
+                from safetensors import safe_open
+
+                shard_path = (
+                    self.dense_loader.root / self.dense_loader.weight_map[name])
+                with safe_open(
+                    shard_path, framework="pt", device="cpu",
+                ) as handle:
+                    value = handle.get_tensor(name)
+                if tuple(value.shape) != source_shape:
+                    raise ValueError(
+                        f"dense override shape differs for {name}: "
+                        f"{tuple(value.shape)} != {source_shape}")
+                value = value.to(device=device, dtype=target_dtype)
+                SafeTensorPrefixLoader._set_tensor(model, name, value)
+                resident_bytes += value.numel() * value.element_size()
+                continue
             target = torch.empty(source_shape, dtype=target_dtype, device=device)
             SafeTensorPrefixLoader._set_tensor(model, name, target)
             resident_bytes += target.numel() * target.element_size()

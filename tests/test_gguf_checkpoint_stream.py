@@ -1,12 +1,21 @@
 import sys
+import tempfile
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 
 import numpy as np
+import torch
+import torch.nn as nn
+from safetensors.torch import save_file
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from gguf_checkpoint_stream import _restore_conv1d, _restore_vector
+from gguf_checkpoint_stream import (
+    GGUFManifestPrefixLoader,
+    _restore_conv1d,
+    _restore_vector,
+)
 from qwen35_native import Qwen35LinearAttentionGeometry, _reordered_head_indices
 
 
@@ -64,6 +73,33 @@ class GGUFCheckpointStreamTest(unittest.TestCase):
         }
         np.testing.assert_array_equal(
             _restore_conv1d(canonical, entry, self.geometry), source)
+
+    def test_dense_override_loads_exact_safetensor_without_gguf_decode(self):
+        class Model(nn.Module):
+            def __init__(self):
+                super().__init__()
+                self.layer = nn.Linear(3, 2, bias=False)
+
+        expected = torch.tensor(
+            [[1.0, -2.0, 3.0], [4.0, 5.0, -6.0]], dtype=torch.bfloat16)
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            shard = root / "model.safetensors"
+            save_file({"layer.weight": expected}, shard)
+            loader = GGUFManifestPrefixLoader.__new__(
+                GGUFManifestPrefixLoader)
+            loader.by_source = {"layer.weight": [{"source_shape": [2, 3]}]}
+            loader.weight_map = {"layer.weight": "gguf"}
+            loader.dense_override_sources = frozenset({"layer.weight"})
+            loader.dense_loader = SimpleNamespace(
+                root=root, weight_map={"layer.weight": shard.name})
+
+            model = Model()
+            loaded_bytes = loader.load_prefix(
+                model, "layer", torch.device("cpu"), dtype=torch.bfloat16)
+
+        self.assertEqual(loaded_bytes, expected.numel() * expected.element_size())
+        torch.testing.assert_close(model.layer.weight, expected, rtol=0, atol=0)
 
 
 if __name__ == "__main__":

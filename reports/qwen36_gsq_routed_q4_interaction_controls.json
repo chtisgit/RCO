@@ -1,0 +1,128 @@
+{
+  "admitted_on_fixed_screen": [
+    "routed_gate_up_q4"
+  ],
+  "authentic_gsq_reused_from": {
+    "path": "/home/christian/projects/gsq-rco-moe/repos/RCO/reports/qwen36_gsq_upgrade_controls.json",
+    "problem_sha256": "f0bd422c115056052437025b64cbe90880b2c8b4ee91b30635ea41843285fdf1"
+  },
+  "environment": {
+    "python": "3.12.13",
+    "torch": "2.5.1+cu121",
+    "transformers": "5.13.1"
+  },
+  "policy_inventory": {
+    "mandatory_floor_count": 141,
+    "mandatory_floor_type_counts": {
+      "BF16": 61,
+      "F32": 80
+    },
+    "q2_to_q4_upgrade_count": 120,
+    "q8_to_bf16_upgrade_count": 251,
+    "retain_payload_count": 512
+  },
+  "problem": {
+    "candidate_store_index_sha256": "29078a0b396fdbde828ea2a0f052a4714fb0c73c008125d2c65b8fb16aa1b316",
+    "controls": [
+      "routed_gate_up_q4"
+    ],
+    "dense_revision": "995ad96eacd98c81ed38be0c5b274b04031597b0",
+    "device": "cpu",
+    "gguf_sha256": "8e50912f5d0703401ca21b09deb2ee8a84d03536ade6fb44815fcb40a0b03596",
+    "identity_sha256": "8cb4f43292711faab2ac6cbc06c2f28acce9b362fa2f91a12662cc0f6d71713e",
+    "input_ids": [
+      32,
+      59056,
+      9575,
+      54802
+    ],
+    "manifest_sha256": "16439bf49b91e737641e4534c6192c787d44729f359cc6bd65cba2f09d3bb10b",
+    "original_searchable_type_counts": {
+      "BF16": 61,
+      "F32": 80,
+      "Q2_0": 120,
+      "Q8_0": 251
+    },
+    "rows_per_chunk": 16,
+    "vocab_chunk_size": 8192
+  },
+  "problem_sha256": "eece3067f87a9e04ea73d0a537d5ae7be454369597574807e6cfd05943d3f57d",
+  "ranking_by_delta_mean_nll": [
+    "routed_gate_up_q4"
+  ],
+  "results": {
+    "authentic_gsq": {
+      "max_decoded_chunk_bytes": 262144,
+      "mean_nll": 12.132878303527832,
+      "memory": {
+        "block_forward_seconds": 6.6691064259794075,
+        "candidate_decode_seconds": 0.0004352609539637342,
+        "candidate_storage_bytes_read": 0,
+        "checkpoint_load_seconds": 269.5834362159367,
+        "checkpoint_release_seconds": 34.39018630399369,
+        "checkpoint_tensor_bytes_read": 69321225472,
+        "cuda_decode_max_allocated": 0,
+        "cuda_decode_max_reserved": 0,
+        "cuda_forward_max_allocated": 0,
+        "cuda_forward_max_reserved": 0,
+        "cuda_load_max_allocated": 0,
+        "cuda_load_max_reserved": 0,
+        "cuda_loss_max_allocated": 0,
+        "cuda_loss_max_reserved": 0,
+        "cuda_max_allocated": 0,
+        "cuda_max_reserved": 0,
+        "cuda_release_max_allocated": 0,
+        "cuda_release_max_reserved": 0,
+        "loaded_blocks": 40,
+        "loss_seconds": 0.7529536340007326,
+        "max_block_bytes": 1685401984,
+        "max_candidate_bytes": 0,
+        "process_peak_rss": 16702984192,
+        "total_seconds": 311.69090983500064
+      },
+      "predicted_token_count": 3
+    },
+    "routed_gate_up_q4": {
+      "bounded_by_plus_0_5_nll": true,
+      "delta_mean_nll_from_authentic_gsq": -0.22311115264892578,
+      "dense_override_source_count": 0,
+      "dense_override_tensor_count": 0,
+      "improves_fixed_screen": true,
+      "max_decoded_chunk_bytes": 262144,
+      "mean_nll": 11.909767150878906,
+      "memory": {
+        "block_forward_seconds": 6.6694674649625085,
+        "candidate_decode_seconds": 158.70057963897125,
+        "candidate_storage_bytes_read": 12079595520,
+        "checkpoint_load_seconds": 275.40460941102356,
+        "checkpoint_release_seconds": 34.409822000030545,
+        "checkpoint_tensor_bytes_read": 69321225472,
+        "cuda_decode_max_allocated": 0,
+        "cuda_decode_max_reserved": 0,
+        "cuda_forward_max_allocated": 0,
+        "cuda_forward_max_reserved": 0,
+        "cuda_load_max_allocated": 0,
+        "cuda_load_max_reserved": 0,
+        "cuda_loss_max_allocated": 0,
+        "cuda_loss_max_reserved": 0,
+        "cuda_max_allocated": 0,
+        "cuda_max_reserved": 0,
+        "cuda_release_max_allocated": 0,
+        "cuda_release_max_reserved": 0,
+        "loaded_blocks": 40,
+        "loss_seconds": 1.7541080549999606,
+        "max_block_bytes": 1685401984,
+        "max_candidate_bytes": 131072,
+        "process_peak_rss": 13162627072,
+        "total_seconds": 477.1334267159982
+      },
+      "predicted_token_count": 3,
+      "routed_q4_tensor_count": 80
+    }
+  },
+  "schema": "rco.qwen36.gsq_upgrade_controls.v1",
+  "scope": "complete-model native screens that preserve the untouched GSQ hybrid and apply only genuine BF16-derived precision upgrades",
+  "status": "complete",
+  "wall_seconds_this_invocation": 513.1581399870047,
+  "warning": "Admission here is provisional native screening only. Search and final release still require pinned-llama.cpp replay and held-out gates."
+}

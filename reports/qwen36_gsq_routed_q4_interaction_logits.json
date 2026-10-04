@@ -1,0 +1,74 @@
+{
+  "admitted_on_fixed_screen": [
+    "routed_gate_up_q4"
+  ],
+  "problem": {
+    "baseline_logits_key": "native",
+    "baseline_logits_sha256": "405f8c4f7905bd86793357e2e35e2ed7c9b63afca25d46699f2ea2fb9437b4c9",
+    "controls": [
+      "routed_gate_up_q4"
+    ],
+    "input_ids": [
+      32,
+      59056,
+      9575,
+      54802
+    ],
+    "nll_problem_sha256": "eece3067f87a9e04ea73d0a537d5ae7be454369597574807e6cfd05943d3f57d",
+    "thresholds": {
+      "maximum_position_relative_rmse": 0.2,
+      "minimum_position_cosine_similarity": 0.98,
+      "minimum_top1_agreement_fraction": 0.6666666666666666
+    }
+  },
+  "problem_sha256": "8a647d094044f030bf9ca1d6ef8394e1f0b43590cb172b1da395f47dfb8f22fb",
+  "results": {
+    "routed_gate_up_q4": {
+      "admitted_on_fixed_screen": true,
+      "maximum_position_relative_rmse": 0.17772078781697678,
+      "minimum_position_cosine_similarity": 0.9855371964068014,
+      "nll_bounded_by_plus_0_5": true,
+      "passed": true,
+      "positions": [
+        {
+          "candidate_top1": 25,
+          "cosine_similarity": 0.9960294358952998,
+          "mean_absolute_error": 0.22823111044960673,
+          "position": 0,
+          "reference_rms": 3.230572090142963,
+          "reference_top1": 13,
+          "relative_rmse": 0.08917695184527497,
+          "rmse": 0.2880925717153683,
+          "top1_agrees": false
+        },
+        {
+          "candidate_top1": 13094,
+          "cosine_similarity": 0.9855371964068014,
+          "mean_absolute_error": 0.44620779940196,
+          "position": 1,
+          "reference_rms": 3.098265959841396,
+          "reference_top1": 13094,
+          "relative_rmse": 0.17772078781697678,
+          "rmse": 0.5506262672495347,
+          "top1_agrees": true
+        },
+        {
+          "candidate_top1": 709,
+          "cosine_similarity": 0.991383626927691,
+          "mean_absolute_error": 0.28837348029987175,
+          "position": 2,
+          "reference_rms": 2.774683096538986,
+          "reference_top1": 709,
+          "relative_rmse": 0.1310976003866062,
+          "rmse": 0.36375429578953905,
+          "top1_agrees": true
+        }
+      ],
+      "top1_agreement_fraction": 0.6666666666666666
+    }
+  },
+  "schema": "rco.qwen36.gsq_upgrade_logits.v1",
+  "scope": "full-vocabulary native logit drift for genuine upgrades relative to the authentic GSQ native replay",
+  "status": "complete",
+  "warning": "These are native fixed-sequence drift bounds, not release proof. Pinned-llama.cpp replay and held-out gates remain mandatory."
+}
