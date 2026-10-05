@@ -97,7 +97,7 @@ class Qwen36RuntimeProvenanceTest(unittest.TestCase):
             self.assertEqual(
                 first["ggml_shared_library_sha256"],
                 hashlib.sha256(b"ggml-v1").hexdigest())
-            self.assertTrue(first["rco_revision"])
+            self.assertTrue(first["rco_implementation_revision"])
             self.assertTrue(first["rco_implementation_sha256"])
             self.assertTrue(first["environment"]["python"])
             self.assertIn("torch", first["environment"]["packages"])

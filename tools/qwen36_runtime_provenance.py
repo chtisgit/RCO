@@ -113,10 +113,15 @@ def runtime_provenance(
         relative: sha256_file(repository / relative)
         for relative in implementation_files
     }
-    revision = subprocess.run(
-        ["git", "rev-parse", "HEAD"], cwd=repository, check=True,
+    implementation_revision = subprocess.run(
+        [
+            "git", "log", "-1", "--format=%H", "--",
+            *implementation_files,
+        ], cwd=repository, check=True,
         text=True, capture_output=True,
     ).stdout.strip()
+    if not implementation_revision:
+        raise RuntimeError("implementation files have no committed revision")
     implementation_sha256 = _json_sha256(implementation_hashes)
     gguf_files = _gguf_python_hashes(gguf_python)
     return {
@@ -124,7 +129,7 @@ def runtime_provenance(
         "ggml_shared_library_sha256": sha256_file(ggml_library),
         "gguf_python_files": gguf_files,
         "gguf_python_sha256": _json_sha256(gguf_files),
-        "rco_revision": revision,
+        "rco_implementation_revision": implementation_revision,
         "rco_implementation_files": implementation_hashes,
         "rco_implementation_sha256": implementation_sha256,
     }
