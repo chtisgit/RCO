@@ -354,6 +354,9 @@ def _install_selected_candidates(
 ) -> None:
     """Install one location's choices while accounting bounded store I/O."""
     for name, bitwidth in selected:
+        if (hasattr(store, "is_retain_choice")
+                and store.is_retain_choice(name, bitwidth)):
+            continue
         if bitwidth == 0:
             candidate = _zero_candidate(model, name)
             stats.max_candidate_bytes = max(

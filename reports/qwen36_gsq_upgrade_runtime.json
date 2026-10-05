@@ -1,0 +1,234 @@
+{
+  "logit_thresholds": {
+    "maximum_position_relative_rmse": 0.2,
+    "minimum_position_cosine_similarity": 0.98,
+    "minimum_top1_agreement_fraction": 0.6666666666666666
+  },
+  "problem": {
+    "baseline_controls_sha256": "5c0a235b97d96639b7618cd23ee77ff730065d2c34d63b8e61182ff5099be574",
+    "baseline_logits_sha256": "405f8c4f7905bd86793357e2e35e2ed7c9b63afca25d46699f2ea2fb9437b4c9",
+    "candidate_store_index_sha256": "29078a0b396fdbde828ea2a0f052a4714fb0c73c008125d2c65b8fb16aa1b316",
+    "controls": [
+      "authentic_retain",
+      "all_admitted_upgrades"
+    ],
+    "device": "cpu",
+    "gguf_sha256": "8e50912f5d0703401ca21b09deb2ee8a84d03536ade6fb44815fcb40a0b03596",
+    "identity_sha256": "8cb4f43292711faab2ac6cbc06c2f28acce9b362fa2f91a12662cc0f6d71713e",
+    "manifest_sha256": "16439bf49b91e737641e4534c6192c787d44729f359cc6bd65cba2f09d3bb10b",
+    "policy_sha256": "a598687f09e737606a954ca4a1c8b9e712590705a1af48bd03289443e44270a7",
+    "rows_per_chunk": 16,
+    "runtime_provenance": {
+      "environment": {
+        "packages": {
+          "accelerate": "1.13.0",
+          "numpy": "2.5.1",
+          "safetensors": "0.8.0",
+          "torch": "2.5.1+cu121",
+          "transformers": "5.13.1"
+        },
+        "python": "3.12.13",
+        "python_executable": "/home/christian/miniforge3/envs/video-ki/bin/python3.12"
+      },
+      "ggml_shared_library_sha256": "25104b01380a2f8f47fbb0ab97d81ea01c94752f76d50afe304b9a313628b9f6",
+      "gguf_python_files": {
+        "gguf/__init__.py": "3ccfc0104cd7ea88c6028743b7bf3f2c89b5f474425de03a217a6072320d7c2f",
+        "gguf/constants.py": "df0078c283a48061260ca4b3f35df36611230c3e7c2ac271bb8a11d2632839ba",
+        "gguf/gguf.py": "f0c0eeedad0911784b52ffed8e162a0eb5ae6d535ce35705bc16196e46597a72",
+        "gguf/gguf_reader.py": "d0ea743200e19d7ef0a4c969edcc4a6dba8e3656a790b217e3bdc7b31170718e",
+        "gguf/gguf_writer.py": "7e3ff8d04b290dde083ae30d1091b67c95299f6865958fe1cdcb7e35dd201766",
+        "gguf/lazy.py": "dbc98e3ee9ef8606df34e9d91f98ab29c2697e6824995f1dd8952938c135ad85",
+        "gguf/metadata.py": "7cedac3b8457271a3f58e5531a7e6958fdecb9ea072f7895ba5d7f6693c9db29",
+        "gguf/quants.py": "2c927a1b3d9f0920dcf4007fb686e1b0999333e9f65ce43dcc689900c0beae8b",
+        "gguf/scripts/gguf_convert_endian.py": "6be91de3af4d9b3fc2c90dafb3d1d8eed7e9dd72b3d6b52d245f005c76ece280",
+        "gguf/scripts/gguf_dump.py": "d8b8fc28e96d15d8a4d6f05cdff4a747f5a06f31172efee9dfc971998ed0203f",
+        "gguf/scripts/gguf_editor_gui.py": "6e9d70e850268fff5d4108d9ecbc2b4d90e70b61f08e71f7d37ac20916d854bb",
+        "gguf/scripts/gguf_hash.py": "9f277c9338d12a73857a4e54683d7da4d5de01531751f14401267c9289e4197f",
+        "gguf/scripts/gguf_new_metadata.py": "972499d35957b4721b9243828d5547d1c84def8d4e6fc641887c6578bf765255",
+        "gguf/scripts/gguf_set_metadata.py": "c8612a7109428a677ea55976dd5eeed6088934ddef7ef01246a5bc7a6e585b3b",
+        "gguf/tensor_mapping.py": "df97c2291dc1d8e8992ae91b800e0cf139f94d5173b9ed4705f5ef75a371d924",
+        "gguf/utility.py": "da920e2c62166ec9f30e407e9fb35ec29fda671310ffbf0f8ce856b62f1c70d7",
+        "gguf/vocab.py": "16cddd93700f86c8b72e6f9e741e2362189155b9f96aa9e3bbb0995060095f1a"
+      },
+      "gguf_python_sha256": "593aee20678fb93337028d736ec38b7b1c9389e75eeacf4253e3822a37c58fca",
+      "rco_implementation_files": {
+        "src/checkpoint_stream.py": "538779746980237d0cfae5332f1fa2ad5e950ffd283d3707df8a06f0e73ef742",
+        "src/gguf_checkpoint_stream.py": "974337bc35f07820e17af76c7e5d809a9d2b91d2f13a5c4f2df740a963e662ac",
+        "src/gsq_upgrade_runtime.py": "4a64e52f070bf431ca23c5aa9a21c71adb0c8afd8f80544fda41ac29de8caefb",
+        "src/native_gguf.py": "95158af02552bdab20e4179a96038e379ca07fe7ff3dea3e8b9c10aaaa119f4d",
+        "src/native_runtime.py": "724e51ebfd435079e6577de74f3b9cba30766585a40f687f1e64564625789128",
+        "src/native_store.py": "ef334c4893ceaa9f45a8d341f166bfee65ec5109973fad15bd5cba77a3024d4c",
+        "src/quant/ggml_native.py": "75dc0c924e44f777f93ae78d188f1e27eade55ee04b3f481f393edcfcffb379a",
+        "src/search/streaming.py": "70f7a085d9fe5daec92d3a3601a451d411d2cb71e2a8807900e975f0ec1285e2",
+        "tools/audit_qwen36_gsq_upgrade_runtime.py": "cde207beb2b7f6ca1ec2441ff4089f4dc4b647cb5672ee87bf779aaa7cdcc6c4",
+        "tools/qwen36_runtime_provenance.py": "525b8dd51277e537f63c03ecbcf731ba8295cb7dc7c2005850721bbb9abedfa1"
+      },
+      "rco_implementation_sha256": "4a0b9a16813c684b4e8eecc1daabd0a5f8e37784bb52ccf8fce54b9b6f2803a4",
+      "rco_revision": "6b40715d825d54e3a3fd6b15d6a5adda5389414a"
+    },
+    "vocab_chunk_size": 8192
+  },
+  "problem_sha256": "02ced5d9b6943cc02e63de90df3f56a3f9dd158972ec59ea0e2b0f2e2def2c97",
+  "results": {
+    "all_admitted_upgrades": {
+      "assignment_sha256": "b8025bb9bebec84207afb241f1821bb9906ce6e2c803afc0e2dbf144c7407cb6",
+      "complete_file_bytes": 20051622592,
+      "incremental_gguf_bytes": 7833845760,
+      "logit_comparison_to_authentic": {
+        "maximum_position_relative_rmse": 0.17621191097383682,
+        "minimum_position_cosine_similarity": 0.9857768525462269,
+        "passed": true,
+        "positions": [
+          {
+            "candidate_top1": 25,
+            "cosine_similarity": 0.9958534000322875,
+            "mean_absolute_error": 0.23390062183859403,
+            "position": 0,
+            "reference_rms": 3.230572090142963,
+            "reference_top1": 13,
+            "relative_rmse": 0.09148229816019067,
+            "rmse": 0.2955401591784489,
+            "top1_agrees": false
+          },
+          {
+            "candidate_top1": 13094,
+            "cosine_similarity": 0.9857768525462269,
+            "mean_absolute_error": 0.4419137816216086,
+            "position": 1,
+            "reference_rms": 3.098265959841396,
+            "reference_top1": 13094,
+            "relative_rmse": 0.17621191097383682,
+            "rmse": 0.5459513654888412,
+            "top1_agrees": true
+          },
+          {
+            "candidate_top1": 709,
+            "cosine_similarity": 0.9914380675512147,
+            "mean_absolute_error": 0.2892662997717595,
+            "position": 2,
+            "reference_rms": 2.774683096538986,
+            "reference_top1": 709,
+            "relative_rmse": 0.13154007499721382,
+            "rmse": 0.3649820226122397,
+            "top1_agrees": true
+          }
+        ],
+        "top1_agreement_fraction": 0.6666666666666666
+      },
+      "logits_sha256": "71d4a81bd8a5125e4ea32fce9845cce175b6ee748bdd00efebc8377693bc468b",
+      "mean_nll": 11.895512580871582,
+      "memory": {
+        "block_forward_seconds": 6.564138120011194,
+        "candidate_decode_seconds": 191.04615159398236,
+        "candidate_storage_bytes_read": 15906897920,
+        "checkpoint_load_seconds": 251.67251892900094,
+        "checkpoint_release_seconds": 21.0614507800492,
+        "checkpoint_tensor_bytes_read": 69321225472,
+        "cuda_decode_max_allocated": 0,
+        "cuda_decode_max_reserved": 0,
+        "cuda_forward_max_allocated": 0,
+        "cuda_forward_max_reserved": 0,
+        "cuda_load_max_allocated": 0,
+        "cuda_load_max_reserved": 0,
+        "cuda_loss_max_allocated": 0,
+        "cuda_loss_max_reserved": 0,
+        "cuda_max_allocated": 0,
+        "cuda_max_reserved": 0,
+        "cuda_release_max_allocated": 0,
+        "cuda_release_max_reserved": 0,
+        "loaded_blocks": 40,
+        "loss_seconds": 1.8260180759971263,
+        "max_block_bytes": 1685401984,
+        "max_candidate_bytes": 131072,
+        "process_peak_rss": 15890227200,
+        "total_seconds": 472.26159048800764
+      },
+      "predicted_token_count": 3,
+      "upgrade_count": 331
+    },
+    "authentic_retain": {
+      "assignment_sha256": "3404ad646903d0c1ae7521b82f606b13a88fd595496255217f6e4a250076f042",
+      "complete_file_bytes": 12217776832,
+      "exact_logit_match": true,
+      "exact_mean_nll_match": true,
+      "expected_mean_nll": 12.132878303527832,
+      "incremental_gguf_bytes": 0,
+      "logit_comparison_to_authentic": {
+        "maximum_position_relative_rmse": 0.0,
+        "minimum_position_cosine_similarity": 0.9999999999999999,
+        "passed": true,
+        "positions": [
+          {
+            "candidate_top1": 13,
+            "cosine_similarity": 1.0000000000000002,
+            "mean_absolute_error": 0.0,
+            "position": 0,
+            "reference_rms": 3.230572090142963,
+            "reference_top1": 13,
+            "relative_rmse": 0.0,
+            "rmse": 0.0,
+            "top1_agrees": true
+          },
+          {
+            "candidate_top1": 13094,
+            "cosine_similarity": 1.0,
+            "mean_absolute_error": 0.0,
+            "position": 1,
+            "reference_rms": 3.098265959841396,
+            "reference_top1": 13094,
+            "relative_rmse": 0.0,
+            "rmse": 0.0,
+            "top1_agrees": true
+          },
+          {
+            "candidate_top1": 709,
+            "cosine_similarity": 0.9999999999999999,
+            "mean_absolute_error": 0.0,
+            "position": 2,
+            "reference_rms": 2.774683096538986,
+            "reference_top1": 709,
+            "relative_rmse": 0.0,
+            "rmse": 0.0,
+            "top1_agrees": true
+          }
+        ],
+        "top1_agreement_fraction": 1.0
+      },
+      "logits_sha256": "b28709089ac0891f44cfb0498daf0297c75279b3429aae0bfaf25b31c7daa05c",
+      "mean_nll": 12.132878303527832,
+      "memory": {
+        "block_forward_seconds": 7.035318959038705,
+        "candidate_decode_seconds": 0.0006482310564024374,
+        "candidate_storage_bytes_read": 0,
+        "checkpoint_load_seconds": 272.1678600120358,
+        "checkpoint_release_seconds": 22.116202922014054,
+        "checkpoint_tensor_bytes_read": 69321225472,
+        "cuda_decode_max_allocated": 0,
+        "cuda_decode_max_reserved": 0,
+        "cuda_forward_max_allocated": 0,
+        "cuda_forward_max_reserved": 0,
+        "cuda_load_max_allocated": 0,
+        "cuda_load_max_reserved": 0,
+        "cuda_loss_max_allocated": 0,
+        "cuda_loss_max_reserved": 0,
+        "cuda_max_allocated": 0,
+        "cuda_max_reserved": 0,
+        "cuda_release_max_allocated": 0,
+        "cuda_release_max_reserved": 0,
+        "loaded_blocks": 40,
+        "loss_seconds": 1.4973873700073455,
+        "max_block_bytes": 1685401984,
+        "max_candidate_bytes": 0,
+        "process_peak_rss": 15890227200,
+        "total_seconds": 302.95539549100795
+      },
+      "predicted_token_count": 3,
+      "upgrade_count": 0
+    }
+  },
+  "schema": "rco.qwen36.gsq_upgrade_runtime.v1",
+  "scope": "real-model integration replay of authentic retain no-ops and policy-admitted precision upgrades",
+  "status": "complete",
+  "wall_seconds_this_invocation": 830.9934392790019,
+  "warning": "This is a fixed-sequence native integration gate, not a search or release-quality result."
+}

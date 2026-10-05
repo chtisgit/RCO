@@ -217,6 +217,60 @@ class HardSearchTest(unittest.TestCase):
         self.assertTrue(torch.equal(selected, incumbent))
         self.assertTrue(all(item["incumbent_loss"] == 1.0 for item in history))
 
+    def test_cost_reinforce_resume_matches_uninterrupted_state(self):
+        low = [10, 10, 10, 10]
+        high = [11, 12, 13, 14]
+        importance = torch.tensor([8.0, 1.0, 2.0, 7.0])
+
+        def evaluate(assignment):
+            return float((importance * (1 - assignment.float())).sum())
+
+        full_scores, full_selected, full_history = optimize_cost_reinforce(
+            evaluate,
+            low_costs=low,
+            high_costs=high,
+            target_cost=45,
+            n_steps=5,
+            lr=0.1,
+            seed=17,
+            log_interval=20,
+        )
+        checkpoints = []
+        _, _, first_history = optimize_cost_reinforce(
+            evaluate,
+            low_costs=low,
+            high_costs=high,
+            target_cost=45,
+            n_steps=2,
+            lr=0.1,
+            seed=17,
+            step_callback=checkpoints.append,
+            log_interval=20,
+        )
+        checkpoint = checkpoints[-1]
+        resumed_scores, resumed_selected, resumed_history = (
+            optimize_cost_reinforce(
+                evaluate,
+                low_costs=low,
+                high_costs=high,
+                target_cost=45,
+                n_steps=3,
+                lr=0.1,
+                seed=17,
+                initial_scores=checkpoint["scores"],
+                initial_incumbent_assignment=checkpoint[
+                    "incumbent_assignment"],
+                initial_incumbent_loss=checkpoint["incumbent_loss"],
+                initial_step=checkpoint["completed_steps"],
+                initial_baseline=checkpoint["baseline"],
+                initial_optimizer_state=checkpoint["optimizer_state"],
+                log_interval=20,
+            )
+        )
+        self.assertTrue(torch.equal(resumed_scores, full_scores))
+        self.assertTrue(torch.equal(resumed_selected, full_selected))
+        self.assertEqual(first_history + resumed_history, full_history)
+
     def test_spsa_preserves_budget_and_improves_synthetic_choice(self):
         # The optimum selects high precision for groups 0 and 1. The objective
         # is deliberately discrete, like a streamed model evaluation.

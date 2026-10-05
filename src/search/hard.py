@@ -15,7 +15,7 @@ from __future__ import annotations
 
 import logging
 import math
-from typing import Callable, Optional, Sequence
+from typing import Any, Callable, Mapping, Optional, Sequence
 
 import numpy as np
 import torch
@@ -929,9 +929,19 @@ def optimize_cost_reinforce(
     initial_scores: Optional[torch.Tensor] = None,
     initial_incumbent_assignment: Optional[torch.Tensor] = None,
     initial_incumbent_loss: Optional[float] = None,
+    initial_step: int = 0,
+    initial_baseline: Optional[float] = None,
+    initial_optimizer_state: Optional[Mapping[str, Any]] = None,
+    step_callback: Optional[Callable[[dict[str, Any]], None]] = None,
     log_interval: int = 10,
 ) -> tuple[torch.Tensor, torch.Tensor, list[dict]]:
-    """Optimize exact-cost choices with paired antithetic REINFORCE draws."""
+    """Optimize exact-cost choices with paired antithetic REINFORCE draws.
+
+    ``initial_*`` state and ``step_callback`` form a fail-closed restart
+    boundary.  The callback runs after each completed optimizer step and
+    receives detached tensors suitable for durable serialization.  Restoring
+    all of that state reproduces the uninterrupted trajectory exactly.
+    """
     low, high = _cost_vectors(low_costs, high_costs)
     n_groups = len(low)
     exact_cost_assignment(torch.zeros(n_groups), low, high, target_cost)
@@ -939,6 +949,8 @@ def optimize_cost_reinforce(
         raise ValueError("n_steps must be positive")
     if not 0.0 <= baseline_decay < 1.0:
         raise ValueError("baseline_decay must lie in [0, 1)")
+    if initial_step < 0:
+        raise ValueError("initial_step must be nonnegative")
     if initial_scores is None:
         scores = torch.zeros(n_groups, dtype=torch.float32)
     else:
@@ -951,7 +963,13 @@ def optimize_cost_reinforce(
     optimizer = torch.optim.Adam([scores], lr=lr)
     generator = torch.Generator(device=scores.device)
     generator.manual_seed(seed)
-    baseline = None
+    for _ in range(initial_step):
+        # Sampling consumes exactly one tensor per completed step. Advancing
+        # here avoids storing backend-specific generator bytes in JSON.
+        torch.rand(
+            scores.shape, generator=generator, device=scores.device,
+            dtype=scores.dtype)
+    baseline = initial_baseline
     history = []
     if ((initial_incumbent_assignment is None)
             != (initial_incumbent_loss is None)):
@@ -973,7 +991,34 @@ def optimize_cost_reinforce(
             raise ValueError("initial incumbent loss must be finite")
         incumbent_assignment = initial_incumbent_assignment.detach().clone()
 
-    for step in range(n_steps):
+    if initial_step:
+        if initial_scores is None or initial_baseline is None:
+            raise ValueError(
+                "resuming requires initial scores and moving baseline")
+        if incumbent_assignment is None or initial_optimizer_state is None:
+            raise ValueError(
+                "resuming requires incumbent and Adam optimizer state")
+        exp_avg = torch.as_tensor(
+            initial_optimizer_state.get("exp_avg"), dtype=scores.dtype,
+            device=scores.device)
+        exp_avg_sq = torch.as_tensor(
+            initial_optimizer_state.get("exp_avg_sq"), dtype=scores.dtype,
+            device=scores.device)
+        if exp_avg.shape != scores.shape or exp_avg_sq.shape != scores.shape:
+            raise ValueError("initial Adam moment shape differs from scores")
+        optimizer_step = int(initial_optimizer_state.get("step", -1))
+        if optimizer_step != initial_step:
+            raise ValueError("initial Adam step differs from initial_step")
+        optimizer.state[scores] = {
+            "step": torch.tensor(float(optimizer_step), device=scores.device),
+            "exp_avg": exp_avg.clone(),
+            "exp_avg_sq": exp_avg_sq.clone(),
+        }
+    elif initial_optimizer_state is not None:
+        raise ValueError("initial optimizer state requires a positive step")
+
+    for local_step in range(n_steps):
+        step = initial_step + local_step
         uniforms = torch.rand(
             scores.shape, generator=generator, device=scores.device,
             dtype=scores.dtype)
@@ -1016,7 +1061,22 @@ def optimize_cost_reinforce(
             "realized_cost": realized_cost(chosen, low, high),
         }
         history.append(entry)
-        if step % log_interval == 0 or step == n_steps - 1:
+        if step_callback is not None:
+            adam_state = optimizer.state[scores]
+            step_callback({
+                "completed_steps": step + 1,
+                "scores": scores.detach().clone(),
+                "baseline": float(baseline),
+                "incumbent_assignment": incumbent_assignment.detach().clone(),
+                "incumbent_loss": float(incumbent_loss),
+                "optimizer_state": {
+                    "step": int(adam_state["step"].item()),
+                    "exp_avg": adam_state["exp_avg"].detach().clone(),
+                    "exp_avg_sq": adam_state["exp_avg_sq"].detach().clone(),
+                },
+                "history_entry": dict(entry),
+            })
+        if step % log_interval == 0 or local_step == n_steps - 1:
             logger.info(
                 "[Cost REINFORCE %d] loss+=%.6f loss-=%.6f "
                 "baseline=%.6f grad=%.5f cost=%d",
