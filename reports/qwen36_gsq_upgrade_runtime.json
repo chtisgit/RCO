@@ -61,14 +61,14 @@
         "src/quant/ggml_native.py": "75dc0c924e44f777f93ae78d188f1e27eade55ee04b3f481f393edcfcffb379a",
         "src/search/streaming.py": "70f7a085d9fe5daec92d3a3601a451d411d2cb71e2a8807900e975f0ec1285e2",
         "tools/audit_qwen36_gsq_upgrade_runtime.py": "cde207beb2b7f6ca1ec2441ff4089f4dc4b647cb5672ee87bf779aaa7cdcc6c4",
-        "tools/qwen36_runtime_provenance.py": "525b8dd51277e537f63c03ecbcf731ba8295cb7dc7c2005850721bbb9abedfa1"
+        "tools/qwen36_runtime_provenance.py": "b22ef5f2c605a221852275db92112b8c1dc3f8b1b799bc045009d7e23c5079ac"
       },
-      "rco_implementation_sha256": "4a0b9a16813c684b4e8eecc1daabd0a5f8e37784bb52ccf8fce54b9b6f2803a4",
-      "rco_revision": "6b40715d825d54e3a3fd6b15d6a5adda5389414a"
+      "rco_implementation_revision": "f4daa348ad49754af4f697c00e42302cc64a450e",
+      "rco_implementation_sha256": "899e36f1d09a272c401d9749ab72e90dd4bc84d520000f81ce4dd17cbf04f7a8"
     },
     "vocab_chunk_size": 8192
   },
-  "problem_sha256": "02ced5d9b6943cc02e63de90df3f56a3f9dd158972ec59ea0e2b0f2e2def2c97",
+  "problem_sha256": "f36c1f624b038d27febafd3245d2518cf5c31303eadb2a8ea1251b1433d1ff53",
   "results": {
     "all_admitted_upgrades": {
       "assignment_sha256": "b8025bb9bebec84207afb241f1821bb9906ce6e2c803afc0e2dbf144c7407cb6",
@@ -118,11 +118,11 @@
       "logits_sha256": "71d4a81bd8a5125e4ea32fce9845cce175b6ee748bdd00efebc8377693bc468b",
       "mean_nll": 11.895512580871582,
       "memory": {
-        "block_forward_seconds": 6.564138120011194,
-        "candidate_decode_seconds": 191.04615159398236,
+        "block_forward_seconds": 6.463796960998934,
+        "candidate_decode_seconds": 194.14668003099814,
         "candidate_storage_bytes_read": 15906897920,
-        "checkpoint_load_seconds": 251.67251892900094,
-        "checkpoint_release_seconds": 21.0614507800492,
+        "checkpoint_load_seconds": 213.72165033699957,
+        "checkpoint_release_seconds": 18.878483306000362,
         "checkpoint_tensor_bytes_read": 69321225472,
         "cuda_decode_max_allocated": 0,
         "cuda_decode_max_reserved": 0,
@@ -137,11 +137,11 @@
         "cuda_release_max_allocated": 0,
         "cuda_release_max_reserved": 0,
         "loaded_blocks": 40,
-        "loss_seconds": 1.8260180759971263,
+        "loss_seconds": 1.7356869800000823,
         "max_block_bytes": 1685401984,
         "max_candidate_bytes": 131072,
-        "process_peak_rss": 15890227200,
-        "total_seconds": 472.26159048800764
+        "process_peak_rss": 15891701760,
+        "total_seconds": 435.04729845399993
       },
       "predicted_token_count": 3,
       "upgrade_count": 331
@@ -197,11 +197,11 @@
       "logits_sha256": "b28709089ac0891f44cfb0498daf0297c75279b3429aae0bfaf25b31c7daa05c",
       "mean_nll": 12.132878303527832,
       "memory": {
-        "block_forward_seconds": 7.035318959038705,
-        "candidate_decode_seconds": 0.0006482310564024374,
+        "block_forward_seconds": 6.742974316999607,
+        "candidate_decode_seconds": 0.000618891999238258,
         "candidate_storage_bytes_read": 0,
-        "checkpoint_load_seconds": 272.1678600120358,
-        "checkpoint_release_seconds": 22.116202922014054,
+        "checkpoint_load_seconds": 244.48211091599956,
+        "checkpoint_release_seconds": 15.89053670600083,
         "checkpoint_tensor_bytes_read": 69321225472,
         "cuda_decode_max_allocated": 0,
         "cuda_decode_max_reserved": 0,
@@ -216,11 +216,11 @@
         "cuda_release_max_allocated": 0,
         "cuda_release_max_reserved": 0,
         "loaded_blocks": 40,
-        "loss_seconds": 1.4973873700073455,
+        "loss_seconds": 1.5344265910000559,
         "max_block_bytes": 1685401984,
         "max_candidate_bytes": 0,
-        "process_peak_rss": 15890227200,
-        "total_seconds": 302.95539549100795
+        "process_peak_rss": 15891701760,
+        "total_seconds": 268.927960878
       },
       "predicted_token_count": 3,
       "upgrade_count": 0
@@ -229,6 +229,6 @@
   "schema": "rco.qwen36.gsq_upgrade_runtime.v1",
   "scope": "real-model integration replay of authentic retain no-ops and policy-admitted precision upgrades",
   "status": "complete",
-  "wall_seconds_this_invocation": 830.9934392790019,
+  "wall_seconds_this_invocation": 783.1428274510001,
   "warning": "This is a fixed-sequence native integration gate, not a search or release-quality result."
 }
