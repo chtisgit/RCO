@@ -1,0 +1,8291 @@
+{
+  "inputs": {
+    "candidate_store_index": {
+      "path": "/home/christian/projects/gsq-rco-moe/data/qwen36_35b_native/native-candidate-index.json",
+      "sha256": "29078a0b396fdbde828ea2a0f052a4714fb0c73c008125d2c65b8fb16aa1b316"
+    },
+    "dense_revision": "995ad96eacd98c81ed38be0c5b274b04031597b0",
+    "ggml_library_sha256": "25104b01380a2f8f47fbb0ab97d81ea01c94752f76d50afe304b9a313628b9f6",
+    "gsq_gguf": {
+      "path": "/home/christian/projects/gsq-rco-moe/results/Qwen3.6-35B-A3B-GSQ-hybrid.gguf",
+      "sha256": "8e50912f5d0703401ca21b09deb2ee8a84d03536ade6fb44815fcb40a0b03596"
+    },
+    "manifest": {
+      "path": "/home/christian/projects/gsq-rco-moe/repos/RCO/reports/qwen36_35b_base_gguf_manifest.json",
+      "sha256": "16439bf49b91e737641e4534c6192c787d44729f359cc6bd65cba2f09d3bb10b"
+    },
+    "model_dir": "/home/christian/projects/gsq-rco-moe/data/qwen36_35b_base",
+    "policy": {
+      "path": "/home/christian/projects/gsq-rco-moe/repos/RCO/reports/qwen36_gsq_upgrade_policy.json",
+      "sha256": "a598687f09e737606a954ca4a1c8b9e712590705a1af48bd03289443e44270a7"
+    },
+    "reference_report": {
+      "path": "/home/christian/projects/gsq-rco-moe/repos/RCO/reports/qwen36_gsq_rco_search.json",
+      "sha256": "d1171967c7e76c7f19f181e27f1ee0a6328a80ddc9aeaed596f96f0bb47a34cd"
+    },
+    "replay_report": {
+      "path": "/home/christian/projects/gsq-rco-moe/repos/RCO/reports/qwen36_gsq_rco_search_replay.json",
+      "sha256": "5189a1a7b3300f84e35e062c9f204cdbcdce58f1edd8cf048906994a545edaad"
+    }
+  },
+  "output": {
+    "bytes": 13012859584,
+    "expected_bytes": 13012859584,
+    "path": "/home/christian/projects/gsq-rco-moe/results/Qwen3.6-35B-A3B-GSQ-RCO-candidate-Q4K-UNGATED.gguf",
+    "sha256": "78ccdf04dea0ce5c910e8983b5f5bd99a222e11cbd47a7a6d1761f629a364b65"
+  },
+  "plan_sha256": "dd48c0841cc36f35df3232a02e4ccbf0cc65b27587a0d89abad6304da55c2045",
+  "schema": "rco.qwen36.gsq_rco_candidate_gguf.v1",
+  "selection": {
+    "calibration_delta_mean_nll_from_authentic": -0.014187097549438477,
+    "calibration_mean_nll": 1.9274516105651855,
+    "expert_upgrade_type": "Q4_K",
+    "incremental_gguf_bytes": 795082752,
+    "source_counts": {
+      "authentic_gsq": 639,
+      "bf16_derived_native_candidate": 6,
+      "pinned_bf16_source": 88
+    },
+    "upgrade_count": 94
+  },
+  "status": "candidate_constructed_pending_release_gates",
+  "tensors": [
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.0.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.0.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.0.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.1.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.1.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.1.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.2.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q4_K",
+      "ggml_type_id": 12,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 150994944,
+      "policy_ggml_type": "Q4_0",
+      "replaced_gsq_type": "Q2_0",
+      "requantization_audit": {
+        "payload_bytes": 150994944,
+        "q4_0_relative_rmse": 0.08633521653211905,
+        "q4_k_relative_rmse": 0.07163041716585847,
+        "sha256": "09599e9c364a4d066aa6fab9028dbca6b78190b2ec9e095504a305a900d5793a",
+        "stored_q4_0_sha256_reproduced": "f91c613ac8dd98e90ca0100f4dec9480bbc7a03b548bb8e5e4a20d98eaf37c7d"
+      },
+      "sha256": "09599e9c364a4d066aa6fab9028dbca6b78190b2ec9e095504a305a900d5793a",
+      "source": "bf16_derived_native_candidate",
+      "tensor": "blk.2.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.2.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.3.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.3.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.3.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.4.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.4.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.4.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.5.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.5.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.5.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.6.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.6.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.6.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.7.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.7.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.7.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.8.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.8.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.8.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.9.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.9.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.9.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.10.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.10.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.10.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.11.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.11.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.11.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.12.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.12.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.12.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.13.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.13.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.13.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.14.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.14.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.14.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.15.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.15.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.15.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.16.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q4_K",
+      "ggml_type_id": 12,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 150994944,
+      "policy_ggml_type": "Q4_0",
+      "replaced_gsq_type": "Q2_0",
+      "requantization_audit": {
+        "payload_bytes": 150994944,
+        "q4_0_relative_rmse": 0.08730455355668607,
+        "q4_k_relative_rmse": 0.07222273038780826,
+        "sha256": "1a2987dcb9c375341d52cd96624ebb7c5d05928d0465ed77689449e811dcb999",
+        "stored_q4_0_sha256_reproduced": "e943d2dcb5e0439ac7b7d27aee9fe19c121d491a6c4461f15893c92eab8dc863"
+      },
+      "sha256": "1a2987dcb9c375341d52cd96624ebb7c5d05928d0465ed77689449e811dcb999",
+      "source": "bf16_derived_native_candidate",
+      "tensor": "blk.16.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.16.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.17.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.17.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.17.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.18.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.18.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.18.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.19.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.19.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.19.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.20.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.20.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.20.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.21.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.21.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.21.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.22.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.22.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.22.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.23.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.23.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.23.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.24.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.24.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.24.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.25.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.25.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.25.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.26.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.26.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.26.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.27.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.27.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.27.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.28.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.28.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.28.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.29.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.29.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.29.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.30.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q4_K",
+      "ggml_type_id": 12,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 150994944,
+      "policy_ggml_type": "Q4_0",
+      "replaced_gsq_type": "Q2_0",
+      "requantization_audit": {
+        "payload_bytes": 150994944,
+        "q4_0_relative_rmse": 0.08720054002660645,
+        "q4_k_relative_rmse": 0.07213068315329386,
+        "sha256": "6ac499e4b64e217f6b18d5510138d2e960dd588b0cb0554ac0cd3d0a263170e6",
+        "stored_q4_0_sha256_reproduced": "ef722af06a4a86e3d7887d104c9e497f611f0ff2638d9174ff61126a796f8f3b"
+      },
+      "sha256": "6ac499e4b64e217f6b18d5510138d2e960dd588b0cb0554ac0cd3d0a263170e6",
+      "source": "bf16_derived_native_candidate",
+      "tensor": "blk.30.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.30.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q4_K",
+      "ggml_type_id": 12,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 150994944,
+      "policy_ggml_type": "Q4_0",
+      "replaced_gsq_type": "Q2_0",
+      "requantization_audit": {
+        "payload_bytes": 150994944,
+        "q4_0_relative_rmse": 0.08782497695305616,
+        "q4_k_relative_rmse": 0.07244586975704659,
+        "sha256": "788fa69dc56db90fc669327e69b13b457ab5d2f9604adc7878b9da650773bb19",
+        "stored_q4_0_sha256_reproduced": "cfc35d2dc70734ca9468e6ef43ed33ab23736b7b45f5cbdfafed98a124b5a95c"
+      },
+      "sha256": "788fa69dc56db90fc669327e69b13b457ab5d2f9604adc7878b9da650773bb19",
+      "source": "bf16_derived_native_candidate",
+      "tensor": "blk.31.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.31.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.31.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.32.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.32.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.32.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q4_K",
+      "ggml_type_id": 12,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 150994944,
+      "policy_ggml_type": "Q4_0",
+      "replaced_gsq_type": "Q2_0",
+      "requantization_audit": {
+        "payload_bytes": 150994944,
+        "q4_0_relative_rmse": 0.0897692143167384,
+        "q4_k_relative_rmse": 0.07342335357092032,
+        "sha256": "ef4e4a75af3a61c23ed16f1ab2c2c7a894da05902acf5a9cbde46dc77361bce3",
+        "stored_q4_0_sha256_reproduced": "51c392beae48a447097e076d87ea5eafe07bdef1e55f72e95267ac1147ff1a12"
+      },
+      "sha256": "ef4e4a75af3a61c23ed16f1ab2c2c7a894da05902acf5a9cbde46dc77361bce3",
+      "source": "bf16_derived_native_candidate",
+      "tensor": "blk.33.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.33.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.33.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.34.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.34.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.34.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.35.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.35.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.35.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.36.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.36.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.36.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q4_K",
+      "ggml_type_id": 12,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 150994944,
+      "policy_ggml_type": "Q4_0",
+      "replaced_gsq_type": "Q2_0",
+      "requantization_audit": {
+        "payload_bytes": 150994944,
+        "q4_0_relative_rmse": 0.08817412851759462,
+        "q4_k_relative_rmse": 0.07255323936945896,
+        "sha256": "35d671f28f1b73f8a8b464c8702e8e717c71e2190a0e74e1769cd6d8430154b5",
+        "stored_q4_0_sha256_reproduced": "44d46d760e4520997ff12584d6d69f9162c91a93edb1e72c3931d0f1a750b8bb"
+      },
+      "sha256": "35d671f28f1b73f8a8b464c8702e8e717c71e2190a0e74e1769cd6d8430154b5",
+      "source": "bf16_derived_native_candidate",
+      "tensor": "blk.37.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.37.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.37.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.38.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.38.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.38.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.39.ffn_gate_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        2048,
+        512,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.39.ffn_up_exps.weight"
+    },
+    {
+      "ggml_type": "Q2_0",
+      "ggml_type_id": 42,
+      "gguf_shape": [
+        512,
+        2048,
+        256
+      ],
+      "payload_bytes": 75497472,
+      "source": "authentic_gsq",
+      "tensor": "blk.39.ffn_down_exps.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        248320
+      ],
+      "payload_bytes": 540344320,
+      "source": "authentic_gsq",
+      "tensor": "output.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 17825792,
+      "source": "authentic_gsq",
+      "tensor": "blk.0.attn_qkv.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        4096
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.0.attn_gate.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.0.ssm_out.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.0.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.0.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "5138ca73efe99193b8df70380773614c59f48125136e652698ef7691df304386",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.0.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 33554432,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "d29b6147a5d54e80ad766902b00f65e52541635c1217d15f1ca154cdc4db2c7a",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.1.attn_qkv.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        4096
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.1.attn_gate.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 16777216,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "65fb7f413df6763f5fd7a8b3a2653fb7ae7cb428e97ca802cc2d483dafd7602c",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.1.ssm_out.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.1.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.1.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "5e2d1f603a0e2af68e618c643a5fcc8d65e468a770d4a463a904d5a124d71f40",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.1.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 17825792,
+      "source": "authentic_gsq",
+      "tensor": "blk.2.attn_qkv.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        4096
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.2.attn_gate.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.2.ssm_out.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.2.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.2.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "d7f883d6e5d0da85583327248ae72e5e4ffef112477716ab8921c717c41fd01c",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.2.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.3.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.3.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "861c1c8e63be1e757769e84ed4411e4a496a55c540ff90d55c9957c444302ac8",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.3.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "ffe19844b38ec0e79144415e251a7b7c14712108a7e1c2ccd5cd6f15f0f340e0",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.3.attn_k.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.3.attn_output.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 17825792,
+      "source": "authentic_gsq",
+      "tensor": "blk.3.attn_q.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "8e286b6d992a97a47845e6cb4b86f2a7895ed87495e3bd1130cd146bc1cac95d",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.3.attn_v.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 17825792,
+      "source": "authentic_gsq",
+      "tensor": "blk.4.attn_qkv.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        4096
+      ],
+      "payload_bytes": 16777216,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "ec06ebec1fc92d0739dc4b04c99be7297414f2a66307691bb800425e04e3648a",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.4.attn_gate.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 16777216,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "9fdeb4d5d473942ba94a27ef6f96a4bfe804592948e8542bd9f8f86f70f57f5a",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.4.ssm_out.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "a5a2a557c51caa17b231f95a778831010a3adb254ce6221df9bcd682903e34b7",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.4.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.4.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.4.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 17825792,
+      "source": "authentic_gsq",
+      "tensor": "blk.5.attn_qkv.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        4096
+      ],
+      "payload_bytes": 16777216,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "58f3de06667fe04f3f7a2b84a4cc562eb4092ee9aef07a0aac40d4133218dea0",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.5.attn_gate.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.5.ssm_out.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.5.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.5.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "7f2921a893b8549890691f78215fe5ee29d3556f7991637a07e35f228b1a6443",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.5.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 17825792,
+      "source": "authentic_gsq",
+      "tensor": "blk.6.attn_qkv.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        4096
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.6.attn_gate.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 16777216,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "ba3bd60121f83d7b41ef3b9d2f760dd9d186cee3c7c9054938b57f946a79a1b4",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.6.ssm_out.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "68b40a89d8709dee23a97bf7e79c1cebe41c2bb6b7accd5f031bfcac897c518c",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.6.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.6.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.6.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.7.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.7.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.7.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.7.attn_k.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 16777216,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "b4f70c79442553b168b6963ab736b96bf2fad8b8df7edada33f1efb34bc1d0e6",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.7.attn_output.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 17825792,
+      "source": "authentic_gsq",
+      "tensor": "blk.7.attn_q.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.7.attn_v.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 17825792,
+      "source": "authentic_gsq",
+      "tensor": "blk.8.attn_qkv.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        4096
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.8.attn_gate.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.8.ssm_out.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "98b2579710a8e8440dcfea443b3fbde411e256e07e03b976d213b2bdf6e55fb8",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.8.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "04097e804b249dfacc1906e5111b3de53c2ec142ed77a1e037bdb81f0a83f415",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.8.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.8.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 17825792,
+      "source": "authentic_gsq",
+      "tensor": "blk.9.attn_qkv.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        4096
+      ],
+      "payload_bytes": 16777216,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "165a6f81b6b71461e95c62ead19e8ba6bf76556816817ff8176224ded2249384",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.9.attn_gate.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.9.ssm_out.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "1ebf7baa5f98db27df03b427fce2b58c56e426c8aca795e61f79555dc5774a6c",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.9.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.9.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "367e6e10d64b841ef928dd095dd9a60eeae7fee83e2f4f6ac2d81a01b6490476",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.9.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 17825792,
+      "source": "authentic_gsq",
+      "tensor": "blk.10.attn_qkv.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        4096
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.10.attn_gate.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 16777216,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "f1c315cfa339369f533d0bc895ed79b13253f894040bcb3a9973d0f9b8917ecc",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.10.ssm_out.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "88a3dffaf32745b16c329d7d0327f6b75394a4a9c1cfe1d49d7361e0ce24830a",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.10.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.10.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "9adb315fe078e5a8354171b4cb9b286c4fbe984c7d2891823df20c29f3911145",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.10.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "c14ee46156d5401e0204d6bbf462427df7eeaaf1d5a00ab31015d3a6b2274102",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.11.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.11.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "bcb47bc79db027ba75dab788c46ed4bd5cc7a6dae9acb0cd4507382afa9ff9f6",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.11.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.11.attn_k.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.11.attn_output.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 33554432,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "0761c6f7a93c7bd60b27f0e4481482aa4964206b62e4a268b06ad13ed9abac93",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.11.attn_q.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "fc0ff361afbf728559ecbdd867d39131fcd842cb60a6dc1d3b3ab2e305fa4dd7",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.11.attn_v.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 17825792,
+      "source": "authentic_gsq",
+      "tensor": "blk.12.attn_qkv.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        4096
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.12.attn_gate.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.12.ssm_out.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.12.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "083ebc3a12177cd4b6ace2407c9585dcfe267541ae5bf9f7f0c25a0f04a04c82",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.12.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.12.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 17825792,
+      "source": "authentic_gsq",
+      "tensor": "blk.13.attn_qkv.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        4096
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.13.attn_gate.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.13.ssm_out.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.13.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "429b759fe1902b4fe29a5cecb7558f95585fa9ceba2573229531026214eb049a",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.13.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.13.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 17825792,
+      "source": "authentic_gsq",
+      "tensor": "blk.14.attn_qkv.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        4096
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.14.attn_gate.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.14.ssm_out.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "84289e5b0ba9b12d183bb0998fc98528b50746d58dab46a52a9665341ce90302",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.14.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.14.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.14.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "d80630cadf05765565a1c8be3e069b77fdbdb72192988f2233a5c746e14b10c8",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.15.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "fc851f6fd6929221422f9749affeed68a6779650ad77e4be5a45e94fbeb7d145",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.15.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "b25331915a04bc4e616ba7071fd9a624bc7547256f55e6e08f0b7657dca023ba",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.15.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.15.attn_k.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.15.attn_output.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 17825792,
+      "source": "authentic_gsq",
+      "tensor": "blk.15.attn_q.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "67fa8099be0927086b4942d871ef5d2e8fa35a1c999bb9e73ef8e50927022aba",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.15.attn_v.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 17825792,
+      "source": "authentic_gsq",
+      "tensor": "blk.16.attn_qkv.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        4096
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.16.attn_gate.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.16.ssm_out.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.16.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.16.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "9f2f356430db1543733ab80641e88fe1e04449070e393f48141ba14422d23bc5",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.16.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 17825792,
+      "source": "authentic_gsq",
+      "tensor": "blk.17.attn_qkv.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        4096
+      ],
+      "payload_bytes": 16777216,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "a0134da77f2bada881b490349927d95a3d75bfd56b511db643c4f0caca504dd3",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.17.attn_gate.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.17.ssm_out.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.17.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.17.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.17.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 17825792,
+      "source": "authentic_gsq",
+      "tensor": "blk.18.attn_qkv.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        4096
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.18.attn_gate.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.18.ssm_out.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.18.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "ff6d95cea33bbd293102b9e1381cffdf97aa4d6023d11c67c6a945f612a6d7ad",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.18.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "6d935ade61d3d60343a915166bcf9ec48df351a0beb3b07ec09399ed2d5fee90",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.18.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.19.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "0aa39444291734e31f3ac60b8542bf6500acda6828c3f5074fb35718bd66c58e",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.19.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.19.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.19.attn_k.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.19.attn_output.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 33554432,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "2f1085e032c0641cba1bc1c2fa68a1a66036cc0015790d029e2ec39548f33ed0",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.19.attn_q.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "1174569e8fac27df1dd1523673c732ab60e0ef91950063c075ba09f553f00f13",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.19.attn_v.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 33554432,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "33f983e2a276ac006d8a7430b4cca5500242b8530bbcb963975dc486be379217",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.20.attn_qkv.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        4096
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.20.attn_gate.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.20.ssm_out.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.20.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.20.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "b0ad05878fb6160284b893e4b034e1f802f9e30e9bfdc84d19647b090ad3e1cd",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.20.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 17825792,
+      "source": "authentic_gsq",
+      "tensor": "blk.21.attn_qkv.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        4096
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.21.attn_gate.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.21.ssm_out.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "758e40b4f5c8bb1387a1acd9ac8a3bc05fcd0a651b4773560388272cdb736d34",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.21.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "a4348796ffdbbca22d96923bc093a64a88328d4b053b80e161665eb7c679884f",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.21.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "b8fa408441527d04b6c1ce21a4547f98753036e695b23319ec5f59a47266c6bc",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.21.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 17825792,
+      "source": "authentic_gsq",
+      "tensor": "blk.22.attn_qkv.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        4096
+      ],
+      "payload_bytes": 16777216,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "b341e94400a72bb6431b50fb415be0bb984694976d9411cff57332ec8c17ed3d",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.22.attn_gate.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.22.ssm_out.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.22.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.22.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.22.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "da32384d1041899190c362acfb9281ddc0c17be609e5c3a850b8b4ebbca57317",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.23.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "c34f33f5865aafa005d89fe944413f2d2d59d7181ea055a488461100cd1ab3fc",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.23.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "d08361adb3ec7a21fe36c2386bc5447dc0f051f2b27de559a2b05fb8d47fa61d",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.23.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.23.attn_k.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.23.attn_output.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 17825792,
+      "source": "authentic_gsq",
+      "tensor": "blk.23.attn_q.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.23.attn_v.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 33554432,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "f6953552ca1c72ae8bb709f2d1f21c6effde3922982920bf3260c44e8e6122e2",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.24.attn_qkv.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        4096
+      ],
+      "payload_bytes": 16777216,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "b9b19078ff61450dde5478f100ea7abd371ac2b24aba1e22405aac42cd59950f",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.24.attn_gate.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.24.ssm_out.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.24.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.24.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "d40b035b9cb0db8005ff725cbd633b05e566e838d39734b6be7d15f98c420eb1",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.24.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 17825792,
+      "source": "authentic_gsq",
+      "tensor": "blk.25.attn_qkv.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        4096
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.25.attn_gate.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.25.ssm_out.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.25.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "baeb8326745b603fedfbeb1f59fc6f89c2343843025d5ed3c7a19ca78c321437",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.25.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.25.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 33554432,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "648cb73978e3c19a305d43b0699c6296ea555b1a7999f4d472f9bf4a6556a301",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.26.attn_qkv.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        4096
+      ],
+      "payload_bytes": 16777216,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "a0ac94d72198b229637ea9da4d21937b8d5ebd453c0b01391fee76f868815d45",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.26.attn_gate.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.26.ssm_out.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.26.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "431c924e4e484756ed5a762def70985b1812814aebfdc0bdb237f239527448b7",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.26.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "99105c30d64f3afb5cbbae7777212e4006dd5a22cffb4966cd2fcc85afc86f40",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.26.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "3297ddf26de7d5fe07f2e83872e714469bf7eeb099ef35ec3f84023c4581c55f",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.27.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.27.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.27.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.27.attn_k.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 16777216,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "b931fcc61abdddf623a6fe21e0cccb7e871f73a62babcaed99284e41b54370ec",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.27.attn_output.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 33554432,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "71c4f7911820a1c61cac98775d1a2a90e61624203a93cb91a45536872e3b1ed4",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.27.attn_q.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "a481b83f702099118002466eac5fd88c26986dd69207466a678b30aabaf2cf91",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.27.attn_v.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 17825792,
+      "source": "authentic_gsq",
+      "tensor": "blk.28.attn_qkv.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        4096
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.28.attn_gate.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.28.ssm_out.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.28.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "f5cf2a6e9912342d79677ea8110ac822025fcdf87728bca3296e2a4e0c6f84b3",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.28.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "c626af95d80ad83b825983b2fb90db9c13d882b252cc0abed8a8b2ed686945a8",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.28.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 17825792,
+      "source": "authentic_gsq",
+      "tensor": "blk.29.attn_qkv.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        4096
+      ],
+      "payload_bytes": 16777216,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "c3bb3c88ffd42239c1987e7b73bcdcafe5f9d56789b2e920e36c9643a8cc9157",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.29.attn_gate.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.29.ssm_out.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.29.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.29.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.29.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 17825792,
+      "source": "authentic_gsq",
+      "tensor": "blk.30.attn_qkv.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        4096
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.30.attn_gate.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.30.ssm_out.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.30.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "bd968ba487146dfc0e0d684a34628bf593663484488b9c7babf85d68c3a2a4ed",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.30.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "653373637d9c79d3bc09ac6db0f0ea28fd84e1e65e8bfce12c9f62739025d9a4",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.30.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.31.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.31.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.31.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "bf798b6c2fd540ba7b847b200a679d011cc7c4b30899985614ebbdf22e246b15",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.31.attn_k.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.31.attn_output.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 17825792,
+      "source": "authentic_gsq",
+      "tensor": "blk.31.attn_q.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.31.attn_v.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 17825792,
+      "source": "authentic_gsq",
+      "tensor": "blk.32.attn_qkv.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        4096
+      ],
+      "payload_bytes": 16777216,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "6ee032bbdff6eb84e227f5569eb6c15b06c042fb95b1a94ab457a3e8c6170ce3",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.32.attn_gate.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 16777216,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "d981b4729aefd36ac4d5085d3cb6b7b04da918c201e598a7abd6e1f1ab8c8153",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.32.ssm_out.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.32.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "8d2b8f875b093ba508a01018de5eda330b1ec066ed2da1129ca54f04a4157f79",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.32.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.32.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 17825792,
+      "source": "authentic_gsq",
+      "tensor": "blk.33.attn_qkv.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        4096
+      ],
+      "payload_bytes": 16777216,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "8112766343a798a6413a2cd54d51a8792f6e8f2ca113e305d075fc58e2ba7e95",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.33.attn_gate.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 16777216,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "2fea284fd0b42c035f65de9e48ec1b6a7cd900aaa8489204a0e62e74aecfc165",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.33.ssm_out.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "d125d5b0c963fce537c960ee91ea3a3c1174aa840d78fa1fdd5098b4d8d4f34b",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.33.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.33.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "5c26ebc5017958838d27dc252629b2f4c477da2c00bdf03236be4880ef6c7c23",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.33.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 17825792,
+      "source": "authentic_gsq",
+      "tensor": "blk.34.attn_qkv.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        4096
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.34.attn_gate.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.34.ssm_out.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.34.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "96c9635029dad721f8995fb9258ddadc97991fb5d1fa8561188f8d0dcc92b2ce",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.34.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.34.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "45e80fa10c729671298d30ff018e676311776ef39b4eebd2a162bdccbfc9a479",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.35.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.35.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.35.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "b1d1987ffbd922509a2d2530361584ad7cf9dcfab460426f1b838fb6dbeba77f",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.35.attn_k.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.35.attn_output.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 17825792,
+      "source": "authentic_gsq",
+      "tensor": "blk.35.attn_q.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "7cd861ac0f46162abc27d2d16e61c331833497d418fd09b33305b7abfcc2fdf3",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.35.attn_v.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 17825792,
+      "source": "authentic_gsq",
+      "tensor": "blk.36.attn_qkv.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        4096
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.36.attn_gate.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 16777216,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "7e64a5b948e9195ed479b33861f39cc5a37372c52cb7765c551b905313316e01",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.36.ssm_out.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "d9c65bf3e07cd84394358288f6114712a552ca13c2e7f63ed5d3c067e21b9976",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.36.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "c4f498660ac3904c6a8b29a7deccdcfdcc9ffdea4ff3e46c3971569a15b0c9ad",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.36.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "7fc2b9d1c1d0d6591265241305e667f25e22950d782a7faabf5ee7f5a6786b04",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.36.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 33554432,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "69603f21fd944881427bfb1d72021663af5ec0ee99abf2c791961fdd09cf27f1",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.37.attn_qkv.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        4096
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.37.attn_gate.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.37.ssm_out.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.37.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.37.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.37.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 17825792,
+      "source": "authentic_gsq",
+      "tensor": "blk.38.attn_qkv.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        4096
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.38.attn_gate.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 8912896,
+      "source": "authentic_gsq",
+      "tensor": "blk.38.ssm_out.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.38.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "8de9ec7bb176dcc07d758a0d3b2901a4b6d2ad890d1f9ffee2218572392007fc",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.38.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.38.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        512,
+        2048
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.39.ffn_down_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.39.ffn_gate_shexp.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.39.ffn_up_shexp.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 2097152,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "e913d288f5f9fb7c1e11cb7108f0670069df5a92c3fe4f2a2d8a372911bbae83",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.39.attn_k.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        4096,
+        2048
+      ],
+      "payload_bytes": 16777216,
+      "replaced_gsq_type": "Q8_0",
+      "sha256": "a6b40745711a5807e2db1fb63b05694695634ee7b3dce779d4aa53b994d37312",
+      "source": "pinned_bf16_source",
+      "tensor": "blk.39.attn_output.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        8192
+      ],
+      "payload_bytes": 17825792,
+      "source": "authentic_gsq",
+      "tensor": "blk.39.attn_q.weight"
+    },
+    {
+      "ggml_type": "Q8_0",
+      "ggml_type_id": 8,
+      "gguf_shape": [
+        2048,
+        512
+      ],
+      "payload_bytes": 1114112,
+      "source": "authentic_gsq",
+      "tensor": "blk.39.attn_v.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        248320
+      ],
+      "payload_bytes": 1017118720,
+      "source": "authentic_gsq",
+      "tensor": "token_embd.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "output_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.0.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.0.ssm_a"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        4,
+        8192
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.0.ssm_conv1d.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.0.ssm_dt.bias"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.0.ssm_alpha.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.0.ssm_beta.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        128
+      ],
+      "payload_bytes": 512,
+      "source": "authentic_gsq",
+      "tensor": "blk.0.ssm_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.0.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.0.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.0.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.1.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.1.ssm_a"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        4,
+        8192
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.1.ssm_conv1d.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.1.ssm_dt.bias"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.1.ssm_alpha.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.1.ssm_beta.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        128
+      ],
+      "payload_bytes": 512,
+      "source": "authentic_gsq",
+      "tensor": "blk.1.ssm_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.1.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.1.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.1.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.2.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.2.ssm_a"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        4,
+        8192
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.2.ssm_conv1d.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.2.ssm_dt.bias"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.2.ssm_alpha.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.2.ssm_beta.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        128
+      ],
+      "payload_bytes": 512,
+      "source": "authentic_gsq",
+      "tensor": "blk.2.ssm_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.2.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.2.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.2.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.3.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.3.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.3.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.3.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        256
+      ],
+      "payload_bytes": 1024,
+      "source": "authentic_gsq",
+      "tensor": "blk.3.attn_k_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        256
+      ],
+      "payload_bytes": 1024,
+      "source": "authentic_gsq",
+      "tensor": "blk.3.attn_q_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.4.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.4.ssm_a"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        4,
+        8192
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.4.ssm_conv1d.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.4.ssm_dt.bias"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.4.ssm_alpha.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.4.ssm_beta.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        128
+      ],
+      "payload_bytes": 512,
+      "source": "authentic_gsq",
+      "tensor": "blk.4.ssm_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.4.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.4.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.4.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.5.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.5.ssm_a"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        4,
+        8192
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.5.ssm_conv1d.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.5.ssm_dt.bias"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.5.ssm_alpha.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.5.ssm_beta.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        128
+      ],
+      "payload_bytes": 512,
+      "source": "authentic_gsq",
+      "tensor": "blk.5.ssm_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.5.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.5.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.5.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.6.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.6.ssm_a"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        4,
+        8192
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.6.ssm_conv1d.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.6.ssm_dt.bias"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.6.ssm_alpha.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.6.ssm_beta.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        128
+      ],
+      "payload_bytes": 512,
+      "source": "authentic_gsq",
+      "tensor": "blk.6.ssm_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.6.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.6.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.6.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.7.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.7.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.7.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.7.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        256
+      ],
+      "payload_bytes": 1024,
+      "source": "authentic_gsq",
+      "tensor": "blk.7.attn_k_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        256
+      ],
+      "payload_bytes": 1024,
+      "source": "authentic_gsq",
+      "tensor": "blk.7.attn_q_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.8.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.8.ssm_a"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        4,
+        8192
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.8.ssm_conv1d.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.8.ssm_dt.bias"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.8.ssm_alpha.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.8.ssm_beta.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        128
+      ],
+      "payload_bytes": 512,
+      "source": "authentic_gsq",
+      "tensor": "blk.8.ssm_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.8.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.8.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.8.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.9.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.9.ssm_a"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        4,
+        8192
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.9.ssm_conv1d.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.9.ssm_dt.bias"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.9.ssm_alpha.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.9.ssm_beta.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        128
+      ],
+      "payload_bytes": 512,
+      "source": "authentic_gsq",
+      "tensor": "blk.9.ssm_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.9.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.9.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.9.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.10.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.10.ssm_a"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        4,
+        8192
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.10.ssm_conv1d.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.10.ssm_dt.bias"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.10.ssm_alpha.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.10.ssm_beta.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        128
+      ],
+      "payload_bytes": 512,
+      "source": "authentic_gsq",
+      "tensor": "blk.10.ssm_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.10.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.10.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.10.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.11.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.11.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.11.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.11.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        256
+      ],
+      "payload_bytes": 1024,
+      "source": "authentic_gsq",
+      "tensor": "blk.11.attn_k_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        256
+      ],
+      "payload_bytes": 1024,
+      "source": "authentic_gsq",
+      "tensor": "blk.11.attn_q_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.12.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.12.ssm_a"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        4,
+        8192
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.12.ssm_conv1d.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.12.ssm_dt.bias"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.12.ssm_alpha.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.12.ssm_beta.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        128
+      ],
+      "payload_bytes": 512,
+      "source": "authentic_gsq",
+      "tensor": "blk.12.ssm_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.12.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.12.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.12.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.13.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.13.ssm_a"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        4,
+        8192
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.13.ssm_conv1d.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.13.ssm_dt.bias"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.13.ssm_alpha.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.13.ssm_beta.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        128
+      ],
+      "payload_bytes": 512,
+      "source": "authentic_gsq",
+      "tensor": "blk.13.ssm_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.13.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.13.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.13.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.14.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.14.ssm_a"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        4,
+        8192
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.14.ssm_conv1d.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.14.ssm_dt.bias"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.14.ssm_alpha.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.14.ssm_beta.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        128
+      ],
+      "payload_bytes": 512,
+      "source": "authentic_gsq",
+      "tensor": "blk.14.ssm_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.14.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.14.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.14.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.15.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.15.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.15.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.15.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        256
+      ],
+      "payload_bytes": 1024,
+      "source": "authentic_gsq",
+      "tensor": "blk.15.attn_k_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        256
+      ],
+      "payload_bytes": 1024,
+      "source": "authentic_gsq",
+      "tensor": "blk.15.attn_q_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.16.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.16.ssm_a"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        4,
+        8192
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.16.ssm_conv1d.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.16.ssm_dt.bias"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.16.ssm_alpha.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.16.ssm_beta.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        128
+      ],
+      "payload_bytes": 512,
+      "source": "authentic_gsq",
+      "tensor": "blk.16.ssm_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.16.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.16.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.16.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.17.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.17.ssm_a"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        4,
+        8192
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.17.ssm_conv1d.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.17.ssm_dt.bias"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.17.ssm_alpha.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.17.ssm_beta.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        128
+      ],
+      "payload_bytes": 512,
+      "source": "authentic_gsq",
+      "tensor": "blk.17.ssm_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.17.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.17.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.17.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.18.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.18.ssm_a"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        4,
+        8192
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.18.ssm_conv1d.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.18.ssm_dt.bias"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.18.ssm_alpha.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.18.ssm_beta.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        128
+      ],
+      "payload_bytes": 512,
+      "source": "authentic_gsq",
+      "tensor": "blk.18.ssm_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.18.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.18.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.18.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.19.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.19.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.19.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.19.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        256
+      ],
+      "payload_bytes": 1024,
+      "source": "authentic_gsq",
+      "tensor": "blk.19.attn_k_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        256
+      ],
+      "payload_bytes": 1024,
+      "source": "authentic_gsq",
+      "tensor": "blk.19.attn_q_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.20.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.20.ssm_a"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        4,
+        8192
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.20.ssm_conv1d.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.20.ssm_dt.bias"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.20.ssm_alpha.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.20.ssm_beta.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        128
+      ],
+      "payload_bytes": 512,
+      "source": "authentic_gsq",
+      "tensor": "blk.20.ssm_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.20.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.20.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.20.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.21.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.21.ssm_a"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        4,
+        8192
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.21.ssm_conv1d.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.21.ssm_dt.bias"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.21.ssm_alpha.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.21.ssm_beta.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        128
+      ],
+      "payload_bytes": 512,
+      "source": "authentic_gsq",
+      "tensor": "blk.21.ssm_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.21.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.21.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.21.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.22.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.22.ssm_a"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        4,
+        8192
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.22.ssm_conv1d.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.22.ssm_dt.bias"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.22.ssm_alpha.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.22.ssm_beta.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        128
+      ],
+      "payload_bytes": 512,
+      "source": "authentic_gsq",
+      "tensor": "blk.22.ssm_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.22.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.22.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.22.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.23.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.23.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.23.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.23.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        256
+      ],
+      "payload_bytes": 1024,
+      "source": "authentic_gsq",
+      "tensor": "blk.23.attn_k_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        256
+      ],
+      "payload_bytes": 1024,
+      "source": "authentic_gsq",
+      "tensor": "blk.23.attn_q_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.24.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.24.ssm_a"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        4,
+        8192
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.24.ssm_conv1d.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.24.ssm_dt.bias"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.24.ssm_alpha.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.24.ssm_beta.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        128
+      ],
+      "payload_bytes": 512,
+      "source": "authentic_gsq",
+      "tensor": "blk.24.ssm_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.24.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.24.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.24.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.25.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.25.ssm_a"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        4,
+        8192
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.25.ssm_conv1d.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.25.ssm_dt.bias"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.25.ssm_alpha.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.25.ssm_beta.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        128
+      ],
+      "payload_bytes": 512,
+      "source": "authentic_gsq",
+      "tensor": "blk.25.ssm_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.25.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.25.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.25.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.26.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.26.ssm_a"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        4,
+        8192
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.26.ssm_conv1d.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.26.ssm_dt.bias"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.26.ssm_alpha.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.26.ssm_beta.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        128
+      ],
+      "payload_bytes": 512,
+      "source": "authentic_gsq",
+      "tensor": "blk.26.ssm_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.26.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.26.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.26.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.27.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.27.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.27.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.27.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        256
+      ],
+      "payload_bytes": 1024,
+      "source": "authentic_gsq",
+      "tensor": "blk.27.attn_k_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        256
+      ],
+      "payload_bytes": 1024,
+      "source": "authentic_gsq",
+      "tensor": "blk.27.attn_q_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.28.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.28.ssm_a"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        4,
+        8192
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.28.ssm_conv1d.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.28.ssm_dt.bias"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.28.ssm_alpha.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.28.ssm_beta.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        128
+      ],
+      "payload_bytes": 512,
+      "source": "authentic_gsq",
+      "tensor": "blk.28.ssm_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.28.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.28.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.28.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.29.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.29.ssm_a"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        4,
+        8192
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.29.ssm_conv1d.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.29.ssm_dt.bias"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.29.ssm_alpha.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.29.ssm_beta.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        128
+      ],
+      "payload_bytes": 512,
+      "source": "authentic_gsq",
+      "tensor": "blk.29.ssm_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.29.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.29.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.29.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.30.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.30.ssm_a"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        4,
+        8192
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.30.ssm_conv1d.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.30.ssm_dt.bias"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.30.ssm_alpha.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.30.ssm_beta.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        128
+      ],
+      "payload_bytes": 512,
+      "source": "authentic_gsq",
+      "tensor": "blk.30.ssm_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.30.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.30.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.30.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.31.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.31.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.31.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.31.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        256
+      ],
+      "payload_bytes": 1024,
+      "source": "authentic_gsq",
+      "tensor": "blk.31.attn_k_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        256
+      ],
+      "payload_bytes": 1024,
+      "source": "authentic_gsq",
+      "tensor": "blk.31.attn_q_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.32.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.32.ssm_a"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        4,
+        8192
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.32.ssm_conv1d.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.32.ssm_dt.bias"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.32.ssm_alpha.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.32.ssm_beta.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        128
+      ],
+      "payload_bytes": 512,
+      "source": "authentic_gsq",
+      "tensor": "blk.32.ssm_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.32.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.32.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.32.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.33.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.33.ssm_a"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        4,
+        8192
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.33.ssm_conv1d.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.33.ssm_dt.bias"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.33.ssm_alpha.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.33.ssm_beta.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        128
+      ],
+      "payload_bytes": 512,
+      "source": "authentic_gsq",
+      "tensor": "blk.33.ssm_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.33.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.33.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.33.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.34.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.34.ssm_a"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        4,
+        8192
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.34.ssm_conv1d.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.34.ssm_dt.bias"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.34.ssm_alpha.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.34.ssm_beta.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        128
+      ],
+      "payload_bytes": 512,
+      "source": "authentic_gsq",
+      "tensor": "blk.34.ssm_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.34.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.34.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.34.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.35.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.35.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.35.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.35.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        256
+      ],
+      "payload_bytes": 1024,
+      "source": "authentic_gsq",
+      "tensor": "blk.35.attn_k_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        256
+      ],
+      "payload_bytes": 1024,
+      "source": "authentic_gsq",
+      "tensor": "blk.35.attn_q_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.36.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.36.ssm_a"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        4,
+        8192
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.36.ssm_conv1d.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.36.ssm_dt.bias"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.36.ssm_alpha.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.36.ssm_beta.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        128
+      ],
+      "payload_bytes": 512,
+      "source": "authentic_gsq",
+      "tensor": "blk.36.ssm_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.36.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.36.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.36.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.37.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.37.ssm_a"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        4,
+        8192
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.37.ssm_conv1d.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.37.ssm_dt.bias"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.37.ssm_alpha.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.37.ssm_beta.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        128
+      ],
+      "payload_bytes": 512,
+      "source": "authentic_gsq",
+      "tensor": "blk.37.ssm_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.37.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.37.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.37.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.38.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.38.ssm_a"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        4,
+        8192
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.38.ssm_conv1d.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        32
+      ],
+      "payload_bytes": 128,
+      "source": "authentic_gsq",
+      "tensor": "blk.38.ssm_dt.bias"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.38.ssm_alpha.weight"
+    },
+    {
+      "ggml_type": "BF16",
+      "ggml_type_id": 30,
+      "gguf_shape": [
+        2048,
+        32
+      ],
+      "payload_bytes": 131072,
+      "source": "authentic_gsq",
+      "tensor": "blk.38.ssm_beta.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        128
+      ],
+      "payload_bytes": 512,
+      "source": "authentic_gsq",
+      "tensor": "blk.38.ssm_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.38.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.38.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.38.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.39.attn_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        256
+      ],
+      "payload_bytes": 2097152,
+      "source": "authentic_gsq",
+      "tensor": "blk.39.ffn_gate_inp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048,
+        1
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.39.ffn_gate_inp_shexp.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        2048
+      ],
+      "payload_bytes": 8192,
+      "source": "authentic_gsq",
+      "tensor": "blk.39.post_attention_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        256
+      ],
+      "payload_bytes": 1024,
+      "source": "authentic_gsq",
+      "tensor": "blk.39.attn_k_norm.weight"
+    },
+    {
+      "ggml_type": "F32",
+      "ggml_type_id": 0,
+      "gguf_shape": [
+        256
+      ],
+      "payload_bytes": 1024,
+      "source": "authentic_gsq",
+      "tensor": "blk.39.attn_q_norm.weight"
+    }
+  ],
+  "validation": {
+    "bf16_upgrades_inverse_layout_bit_exact": 88,
+    "metadata_fields_identical": true,
+    "native_q4_upgrades_checksum_verified": 6,
+    "retained_tensors_byte_identical": 639,
+    "tensor_order_identical": true
+  },
+  "wall_seconds": 801.3706671639957,
+  "warning": "Ungated evaluation candidate. It must not be published or described as a release GSQ-RCO model until pinned-llama.cpp parity, held-out paired quality, repeat-NLL, deterministic generation, and CUDA/offload gates pass."
+}
