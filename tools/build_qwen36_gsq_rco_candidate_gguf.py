@@ -9,6 +9,12 @@ and every selected ``Q8_0 -> BF16`` upgrade streams the pinned BF16 source
 through the canonical converter row order without any arithmetic. Nothing is
 decoded and requantized.
 
+With ``--expert-upgrade-type Q4_K`` the selected routed-expert upgrades are
+instead quantized to the equal-size ``Q4_K`` format by ggml's reference
+quantizer from the same canonical BF16 rows. The same pass re-quantizes those
+rows to ``Q4_0`` and requires the stored candidate checksum, proving that the
+``Q4_K`` payload is derived from exactly the rows the search priced.
+
 Construction is resumable: the header is written first and each tensor payload
 is fsynced before a sidecar state records it. After publication the output is
 re-read and validated independently, including an inverse-layout comparison of
@@ -108,19 +114,28 @@ class CandidatePayloads:
         model_dir: Path,
         *,
         rows_per_chunk: int,
+        codec: GGMLNativeCodec | None = None,
+        expert_type: GGMLType = GGMLType.Q4_0,
     ) -> None:
+        if expert_type not in (GGMLType.Q4_0, GGMLType.Q4_K):
+            raise ValueError(f"unsupported expert upgrade type: {expert_type}")
+        if expert_type != GGMLType.Q4_0 and codec is None:
+            raise ValueError("re-quantized expert upgrades need a codec")
         self.policy = policy_records
         self.entries = manifest_entries
         self.store = store
         self.source = SafetensorGGUFRowSource(model_dir)
         self.rows_per_chunk = rows_per_chunk
+        self.codec = codec
+        self.expert_type = expert_type
+        self.audits: dict[str, dict[str, Any]] = {}
 
     def ggml_type_id(self, name: str) -> int:
         upgrade = self.policy[name]["upgrade"]
         if upgrade["kind"] == "bf16_derived_native_candidate":
             if upgrade["ggml_type"] != "Q4_0":
                 raise ValueError(f"unexpected native upgrade type for {name}")
-            return int(GGMLType.Q4_0)
+            return int(self.expert_type)
         if upgrade["kind"] == "pinned_bf16_source":
             if upgrade["ggml_type"] != "BF16":
                 raise ValueError(f"unexpected dense upgrade type for {name}")
@@ -135,9 +150,17 @@ class CandidatePayloads:
         raise ValueError(f"unsupported upgrade kind for {name}")
 
     def iter_payload(self, name: str, chunk_bytes: int) -> Iterator[bytes]:
-        if self.ggml_type_id(name) == int(GGMLType.Q4_0):
+        type_id = self.ggml_type_id(name)
+        if type_id == int(GGMLType.Q4_0):
             yield from self.store.iter_payload(
                 name, GGMLType.Q4_0, chunk_bytes=chunk_bytes)
+            return
+        if type_id == int(GGMLType.Q4_K):
+            rows = self.source.iter_rows(
+                self.entries[name], rows_per_chunk=self.rows_per_chunk)
+            yield from _rechunk(
+                (self.codec.quantize_rows(chunk, GGMLType.Q4_K) for chunk in rows),
+                chunk_bytes)
             return
         rows = self.source.iter_rows(
             self.entries[name], rows_per_chunk=self.rows_per_chunk)
@@ -148,12 +171,51 @@ class CandidatePayloads:
         if self.ggml_type_id(name) == int(GGMLType.Q4_0):
             metadata = self.store.metadata(name, GGMLType.Q4_0)
             return str(metadata["sha256"]), int(metadata["payload_bytes"])
+        if self.ggml_type_id(name) == int(GGMLType.Q4_K):
+            audit = self.audit_requantized_expert(name)
+            return audit["sha256"], audit["payload_bytes"]
         digest = hashlib.sha256()
         size = 0
         for chunk in self.iter_payload(name, chunk_bytes):
             digest.update(chunk)
             size += len(chunk)
         return digest.hexdigest(), size
+
+
+    def audit_requantized_expert(self, name: str) -> dict[str, Any]:
+        """Hash a Q4_K expert upgrade and prove its rows match the store."""
+        if name in self.audits:
+            return self.audits[name]
+        stored = self.store.metadata(name, GGMLType.Q4_0)
+        digests = {GGMLType.Q4_K: hashlib.sha256(), GGMLType.Q4_0: hashlib.sha256()}
+        sizes = {GGMLType.Q4_K: 0, GGMLType.Q4_0: 0}
+        squared_error = {GGMLType.Q4_K: 0.0, GGMLType.Q4_0: 0.0}
+        source_energy = 0.0
+        for rows in self.source.iter_rows(
+            self.entries[name], rows_per_chunk=self.rows_per_chunk,
+        ):
+            rows = np.ascontiguousarray(rows, dtype=np.float32)
+            source_energy += float(np.square(rows, dtype=np.float64).sum())
+            for ggml_type in digests:
+                payload = self.codec.quantize_rows(rows, ggml_type)
+                digests[ggml_type].update(payload)
+                sizes[ggml_type] += len(payload)
+                decoded = self.codec.dequantize_rows_into(
+                    payload, ggml_type, np.empty_like(rows))
+                squared_error[ggml_type] += float(np.square(
+                    decoded - rows, dtype=np.float64).sum())
+        if digests[GGMLType.Q4_0].hexdigest() != stored["sha256"]:
+            raise ValueError(f"source rows do not reproduce stored Q4_0: {name}")
+        if sizes[GGMLType.Q4_K] != int(stored["payload_bytes"]):
+            raise ValueError(f"Q4_K size differs from the priced Q4_0: {name}")
+        self.audits[name] = {
+            "sha256": digests[GGMLType.Q4_K].hexdigest(),
+            "payload_bytes": sizes[GGMLType.Q4_K],
+            "stored_q4_0_sha256_reproduced": stored["sha256"],
+            "q4_0_relative_rmse": (squared_error[GGMLType.Q4_0] / source_energy) ** 0.5,
+            "q4_k_relative_rmse": (squared_error[GGMLType.Q4_K] / source_energy) ** 0.5,
+        }
+        return self.audits[name]
 
 
 def _selected_assignment(
@@ -217,9 +279,10 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
 
     codec = GGMLNativeCodec(args.ggml_library)
     store = NativeCandidateStore(args.store, codec)
+    expert_type = GGMLType[args.expert_upgrade_type]
     payloads = CandidatePayloads(
         policy_records, manifest_entries, store, args.model_dir,
-        rows_per_chunk=args.rows_per_chunk)
+        rows_per_chunk=args.rows_per_chunk, codec=codec, expert_type=expert_type)
 
     gsq_path = args.gguf.resolve(strict=True)
     reader = gguf.GGUFReader(gsq_path)
@@ -272,6 +335,9 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
             "payload_bytes": size,
             "sha256": sha256,
             "replaced_gsq_type": tensor.tensor_type.name,
+            **({"policy_ggml_type": upgrade["ggml_type"],
+                "requantization_audit": payloads.audits[tensor.name]}
+               if tensor.name in payloads.audits else {}),
         })
 
     plan = {
@@ -280,6 +346,7 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
         "replay_report_sha256": _sha256_file(replay_path),
         "reference_report_sha256": reference_sha256,
         "alignment": alignment,
+        "expert_upgrade_type": expert_type.name,
         "selected": sorted(selected),
         "tensors": tensor_plan,
     }
@@ -435,6 +502,7 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
             "expected_bytes": expected_bytes,
         },
         "selection": {
+            "expert_upgrade_type": expert_type.name,
             "upgrade_count": len(selected),
             "source_counts": counts,
             "incremental_gguf_bytes": output_bytes - int(
@@ -540,6 +608,9 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--rows-per-chunk", type=int, default=64)
     parser.add_argument("--chunk-bytes", type=int, default=8 << 20)
+    parser.add_argument(
+        "--expert-upgrade-type", choices=("Q4_0", "Q4_K"), default="Q4_0",
+        help="format for selected routed-expert upgrades (equal size)")
     return parser.parse_args()
 
 
