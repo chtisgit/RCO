@@ -225,7 +225,7 @@ def _gsq_e6_evaluator(args, model):
     import torch
 
     from audit_qwen36_gsq_e6 import NAME, EmbeddingQ6KWeightStore, _entry
-    from gguf_checkpoint_stream import GGUFManifestPrefixLoader
+    from gguf_parallel_stream import ParallelGGUFManifestPrefixLoader
     from quant.ggml_native import GGMLNativeCodec
     from search.streaming import StreamingHardCausalEvaluator
 
@@ -237,10 +237,11 @@ def _gsq_e6_evaluator(args, model):
         GGMLNativeCodec(args.ggml_library), Path(embedding["payload"]["path"]),
         embedding["payload"]["sha256"], _entry(args.manifest),
         rows_per_chunk=4096)
-    loader = GGUFManifestPrefixLoader(
+    # Bit-identical to GGUFManifestPrefixLoader (tests/test_gguf_parallel_stream.py).
+    loader = ParallelGGUFManifestPrefixLoader(
         args.gguf, _load_json(args.manifest), args.model_dir,
         gguf_python=args.gguf_python, ggml_library=args.ggml_library,
-        rows_per_chunk=args.rows_per_chunk)
+        rows_per_chunk=args.rows_per_chunk, workers=args.decode_workers)
     evaluator = StreamingHardCausalEvaluator(
         model, loader, store, [SimpleNamespace(layer_names=(NAME,))], [0, 1],
         device=torch.device(args.device), vocab_chunk_size=args.vocab_chunk_size,
@@ -498,7 +499,8 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument("--work", type=Path, default=ROOT / "data/qwen36_prune24")
     parser.add_argument("--reports", type=Path, default=RCO / "reports")
     parser.add_argument("--device", default="cuda")
-    parser.add_argument("--rows-per-chunk", type=int, default=16)
+    parser.add_argument("--rows-per-chunk", type=int, default=1024)
+    parser.add_argument("--decode-workers", type=int, default=8)
     parser.add_argument("--vocab-chunk-size", type=int, default=8192)
     parser.add_argument("--batch-documents", type=int, default=25)
     args = parser.parse_args()
