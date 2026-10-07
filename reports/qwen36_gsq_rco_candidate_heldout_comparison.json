@@ -1,0 +1,87 @@
+{
+  "improvement_over_incumbent_passed": true,
+  "models": {
+    "candidate": {
+      "bytes": 13012859584,
+      "path": "/home/christian/projects/gsq-rco-moe/results/Qwen3.6-35B-A3B-GSQ-RCO-candidate-UNGATED.gguf",
+      "sha256": "ad17ae949201c7d9148a2828434cfd0d660ecad84855f770978cf549c65e3dd6"
+    },
+    "incumbent": {
+      "bytes": 12217776832,
+      "path": "/home/christian/projects/gsq-rco-moe/results/Qwen3.6-35B-A3B-GSQ-hybrid.gguf",
+      "sha256": "8e50912f5d0703401ca21b09deb2ee8a84d03536ade6fb44815fcb40a0b03596"
+    }
+  },
+  "quality": {
+    "bf16_gap_closed_fraction": 0.037900276724864644,
+    "bf16_mean_nll": 0.9128365476801992,
+    "bf16_perplexity": 2.491379436593314,
+    "bootstrap_samples": 10000,
+    "bootstrap_seed": 20261001,
+    "candidate_mean_nll": 1.3043604600089218,
+    "candidate_perplexity": 3.685331423047624,
+    "candidate_perplexity_ratio_to_bf16": 1.479233298997967,
+    "document_count": 100,
+    "documents_improved": 88,
+    "domains": {
+      "code": {
+        "documents": 25,
+        "predicted_tokens": 26225,
+        "token_weighted_candidate_minus_incumbent_mean_nll": -0.005201752979944942
+      },
+      "general": {
+        "documents": 25,
+        "predicted_tokens": 26225,
+        "token_weighted_candidate_minus_incumbent_mean_nll": -0.037361570952089626
+      },
+      "knowledge": {
+        "documents": 25,
+        "predicted_tokens": 26225,
+        "token_weighted_candidate_minus_incumbent_mean_nll": -0.009219522936889005
+      },
+      "multilingual": {
+        "documents": 25,
+        "predicted_tokens": 26225,
+        "token_weighted_candidate_minus_incumbent_mean_nll": -0.009910818611601245
+      }
+    },
+    "incumbent_mean_nll": 1.3197838763790528,
+    "incumbent_perplexity": 3.7426124228982998,
+    "incumbent_perplexity_ratio_to_bf16": 1.5022249794338467,
+    "paired_candidate_minus_incumbent_ci95_lower": -0.019135469158037856,
+    "paired_candidate_minus_incumbent_ci95_upper": -0.012143441915810082,
+    "paired_candidate_minus_incumbent_mean_nll": -0.015423416370131213,
+    "perplexity_ratio_gate": 1.15,
+    "perplexity_ratio_gate_passed": false,
+    "predicted_token_count": 104900,
+    "token_weighted_candidate_minus_incumbent_mean_nll": -0.015423416370131202
+  },
+  "reproducibility": {
+    "candidate_repeat_max_abs_document_nll_sum_delta": 0.0
+  },
+  "schema": "rco.qwen36.gsq_rco_candidate_heldout_comparison.v1",
+  "scope": "llama.cpp held-out quality of the ungated evaluation-only GSQ-RCO candidate; not a release certification",
+  "scoring": {
+    "corpus_manifest": {
+      "canonical_manifest_sha256": "dccd014fc55be379c176f87a724e1caa21292449203fc0a9dbbb2b5bae43387e",
+      "path": "/home/christian/projects/gsq-rco-moe/repos/RCO/reports/qwen36_35b_heldout_corpus_manifest.json"
+    },
+    "helper": {
+      "path": "/tmp/rco-gguf-document-nll",
+      "sha256": "a3c0d62d7551b5edf67ad5a4f0d80cfba5cda571d240effd98681108685eb714",
+      "source_path": "/home/christian/projects/gsq-rco-moe/repos/RCO/tools/gguf_document_nll.cpp",
+      "source_sha256": "410ae7fc4444cd139320ca37dda4fae914468579ecb31d8e76d9f69ecbfd987b"
+    },
+    "llama_cpp": {
+      "path": "/home/christian/projects/gsq-rco-moe/repos/llama.cpp",
+      "revision": "911f6cdc8ab8a530b2bee09ee61471a6f3178eeb"
+    },
+    "parameters": {
+      "gpu_layers": 20,
+      "threads": 8,
+      "ubatch": 256
+    },
+    "token_sequence_sha256": "c507a4fde2263909429eaf04b4fb7d533945efcbd993417d51ef209737d46b6e"
+  },
+  "status": "complete"
+}
