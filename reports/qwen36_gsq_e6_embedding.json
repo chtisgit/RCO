@@ -1,0 +1,28 @@
+{
+  "ggml_library_sha256": "25104b01380a2f8f47fbb0ab97d81ea01c94752f76d50afe304b9a313628b9f6",
+  "payload": {
+    "bf16_payload_bytes": 1017118720,
+    "ggml_type": "Q6_K",
+    "ggml_type_id": 14,
+    "gguf_shape": [
+      2048,
+      248320
+    ],
+    "path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_gsq_e6/token_embd.Q6_K.bin",
+    "payload_bytes": 417177600,
+    "saved_bytes": 599941120,
+    "sha256": "7d9761b306537a7ee6f3ebaeb85f0f5793bd6923ba08d29c74e997f83ee08849"
+  },
+  "relative_rmse_vs_bf16": 0.017879542684850588,
+  "schema": "rco.qwen36.gsq_e6.v1.embedding",
+  "source": {
+    "gsq_bf16_token_embd_bit_identical_to_source": true,
+    "gsq_gguf_sha256": "8e50912f5d0703401ca21b09deb2ee8a84d03536ade6fb44815fcb40a0b03596",
+    "model_dir": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_35b_base",
+    "source_shard": "model-00001-of-00026.safetensors",
+    "source_tensor": "model.language_model.embed_tokens.weight"
+  },
+  "status": "complete",
+  "tensor": "token_embd.weight",
+  "wall_seconds": 42.33750704801059
+}
