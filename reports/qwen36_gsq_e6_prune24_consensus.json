@@ -1,0 +1,41 @@
+{
+  "agreed_by_both_seeds": 558,
+  "agreed_per_layer": {
+    "max": 17,
+    "median": 14.0,
+    "min": 11
+  },
+  "filled_from_one_seed": 402,
+  "inputs": {
+    "seed0": {
+      "final_mask": {
+        "path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_prune24/search_seed0/final_mask.npy",
+        "sha256": "52855242087c7f801a143ef1cf4c237a4526b3e8f2b29588a80686d5fdaca88b"
+      },
+      "state": {
+        "path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_prune24/search_seed0/state.pt",
+        "sha256": "0fd59745f1da7de8fea30f79dc1443c34e8d40488a75e2ab7002f430aae06899"
+      }
+    },
+    "seed1": {
+      "final_mask": {
+        "path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_prune24/search_seed1/final_mask.npy",
+        "sha256": "9ccf46e4d72a03a3dadf8cd4eb665eb9ed32f5d50afe5a43d566ba61c34357e5"
+      },
+      "state": {
+        "path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_prune24/search_seed1/state.pt",
+        "sha256": "46bec47d7ff866e05f43f01e710b42a848eb5608088e4007dbdf2a7e0687a5e0"
+      }
+    }
+  },
+  "mask": {
+    "path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_prune24/consensus_mask.npy",
+    "pruned_per_layer": 24,
+    "sha256": "c96bb266ba165f515bce94208711a9c3a151189152d80096af465ee5c87f7cf9"
+  },
+  "rule": "prune every expert both seeds' final masks prune; fill each layer to 24 from experts exactly one seed prunes, ranked by the mean of the two seeds' final alpha[:,1]-alpha[:,0]; never choose an expert neither seed prunes",
+  "schema": "rco.qwen36.prune24_consensus.v1",
+  "shared_with_seed0_final": 769,
+  "shared_with_seed1_final": 749,
+  "status": "complete"
+}
