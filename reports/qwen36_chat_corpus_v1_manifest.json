@@ -1,0 +1,2484 @@
+{
+  "canonical_manifest": {
+    "chat_template": {
+      "path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_35b_base/chat_template.jinja",
+      "sha256": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+    },
+    "conversations": [
+      {
+        "content_sha256": "af244d6990c4371189ae15fe74f3fd6749880314eae87dba39bfb3e1e2ef03a6",
+        "id": "chat-v1-calibration-chat-00",
+        "language": "en",
+        "scored_target_count": 235,
+        "source_key": "6490b15d-e53c-41a5-ad7b-83f2a99048cd",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 273
+      },
+      {
+        "content_sha256": "97a9151e3de754fb803fbb7302467225e98d5e2b51954c1ca51ac1f521ff1f15",
+        "id": "chat-v1-calibration-chat-01",
+        "language": "es",
+        "scored_target_count": 483,
+        "source_key": "b14b1d98-2aa3-4fca-b6f8-a77260ce1fb8",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 598
+      },
+      {
+        "content_sha256": "c700cb357b669da4829747da9299a1598a96ddfad7669a051d06e5256c87a808",
+        "id": "chat-v1-calibration-chat-02",
+        "language": "es",
+        "scored_target_count": 240,
+        "source_key": "0d7f7c91-118b-4680-853a-c86843bf3085",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 277
+      },
+      {
+        "content_sha256": "05fb89818fb3a5f512a3286fc6d4b9bee5b87c5c34a6957ef668ade447b8ba18",
+        "id": "chat-v1-calibration-chat-03",
+        "language": "en",
+        "scored_target_count": 661,
+        "source_key": "c6db1216-d7b7-4b5c-8064-bc146fdd6512",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 714
+      },
+      {
+        "content_sha256": "2710a37ae80ae49ed042d6b3b8f23b2a9987efd20170dd567f74966dc44a3f9c",
+        "id": "chat-v1-calibration-chat-04",
+        "language": "es",
+        "scored_target_count": 472,
+        "source_key": "2091c976-f00c-47cc-ae2a-e7368488413a",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 517
+      },
+      {
+        "content_sha256": "f12a26c71f2183c755b671ae820c9d1ef29d9a1eedd0edf8fa83f02ce41d34b7",
+        "id": "chat-v1-calibration-chat-05",
+        "language": "en",
+        "scored_target_count": 377,
+        "source_key": "81a4ea09-d9ba-4720-8d83-fd797625727a",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 399
+      },
+      {
+        "content_sha256": "620ccb8e65f167ec6a62403cba95ccfe48dc734389fc5aacc3acdf12982a1bf9",
+        "id": "chat-v1-calibration-chat-06",
+        "language": "en",
+        "scored_target_count": 331,
+        "source_key": "d926b3de-c919-4ff9-bbb6-f11f727f0d5c",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 362
+      },
+      {
+        "content_sha256": "550ed463fd7c8252d09fbd950b8b0893caf78aab1c41b90fa760d27ce1cb6320",
+        "id": "chat-v1-calibration-chat-07",
+        "language": "de",
+        "scored_target_count": 467,
+        "source_key": "b38dfe7b-db61-4852-806b-2955780752ce",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 525
+      },
+      {
+        "content_sha256": "71eb0603bf4ddef6bf73422fc01f9afec87c1f33d4e1a2b6f33e4e89edb5667a",
+        "id": "chat-v1-calibration-chat-08",
+        "language": "es",
+        "scored_target_count": 321,
+        "source_key": "f7603923-9c41-471c-a231-a5995d321919",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 347
+      },
+      {
+        "content_sha256": "e5b79ab801ef4310e11dabd00020c46c644458d9ccdacf5aedabcbc018cdbcdc",
+        "id": "chat-v1-calibration-chat-09",
+        "language": "en",
+        "scored_target_count": 358,
+        "source_key": "50f2c4c9-4ce8-4047-bdf0-ce8f11d051fe",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 392
+      },
+      {
+        "content_sha256": "536e4288595e934f7327a9d7696be2569971177a6d20f3965daf19579bde47eb",
+        "id": "chat-v1-calibration-chat-10",
+        "language": "fr",
+        "scored_target_count": 209,
+        "source_key": "8c12449a-7e23-4368-b51d-73e1e9a4941f",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 251
+      },
+      {
+        "content_sha256": "e2e79058a2a0fd72255f8f41661d33d8125c3077424da79847eeebc32ed856d3",
+        "id": "chat-v1-calibration-chat-11",
+        "language": "en",
+        "scored_target_count": 250,
+        "source_key": "110a4388-61a2-4c60-8f85-79376f3b1687",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 301
+      },
+      {
+        "content_sha256": "12f82a77160cb45f820bd03e6c226a337fe5c4a5387947d601ad93e6d4637a1d",
+        "id": "chat-v1-calibration-chat-12",
+        "language": "en",
+        "scored_target_count": 585,
+        "source_key": "02ac48c9-f0ed-4886-aec9-6aad9aef4bba",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 651
+      },
+      {
+        "content_sha256": "1448ff57f5d2d8d0a88b6dac22520f0b891c5b12b1425f0338d44731cfac6ab7",
+        "id": "chat-v1-calibration-chat-13",
+        "language": "en",
+        "scored_target_count": 350,
+        "source_key": "b85b51d0-1c43-4c14-a0e7-b3316d72e72d",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 405
+      },
+      {
+        "content_sha256": "eaa69f2ba139d4035964c8c334223eaa8d1ea08338c3a27703c4ab6e52222b05",
+        "id": "chat-v1-calibration-chat-14",
+        "language": "en",
+        "scored_target_count": 236,
+        "source_key": "6bb2a0c2-56f4-47f4-9743-e63b4576e161",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 263
+      },
+      {
+        "content_sha256": "90fb35ab887062fbbd75069a65fe44825fa6ff64fc759d0171ec59bf62a430c4",
+        "id": "chat-v1-calibration-chat-15",
+        "language": "en",
+        "scored_target_count": 305,
+        "source_key": "2d056c74-b5a5-488a-8bc6-b6f816b230cd",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 363
+      },
+      {
+        "content_sha256": "06f7d3e5f7ad8097997a80c6d6c4b4e78e93ea8ba3b380257382b79ea9993550",
+        "id": "chat-v1-calibration-chat-16",
+        "language": "en",
+        "scored_target_count": 624,
+        "source_key": "12db4034-8680-4075-ab87-33a5a9316ef7",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 700
+      },
+      {
+        "content_sha256": "c5951cb9050a09e30646eda771bf5410ce47f43ca0452095fd00cf6481dc4b7b",
+        "id": "chat-v1-calibration-chat-17",
+        "language": "en",
+        "scored_target_count": 355,
+        "source_key": "40dfcf51-0698-4878-8ff0-ced3d372ddae",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 430
+      },
+      {
+        "content_sha256": "7e604e2743085401d83957535b01bf40bd80e70f5c4849aa18b36286cd96112e",
+        "id": "chat-v1-calibration-chat-18",
+        "language": "de",
+        "scored_target_count": 205,
+        "source_key": "15eb1ded-94d4-4e10-9141-17397face231",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 250
+      },
+      {
+        "content_sha256": "c18cf41d46414052ee2603254f90bf785f7dd2087843e930d67cdc7936e46443",
+        "id": "chat-v1-calibration-chat-19",
+        "language": "en",
+        "scored_target_count": 191,
+        "source_key": "c7d432cc-54b5-4c98-98ce-13c8883770e1",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 221
+      },
+      {
+        "content_sha256": "57f97db460a4d6b33f7c78ee93bee04c6bf7d63fc6a3a6c1fa6ac024d12b6f03",
+        "id": "chat-v1-calibration-chat-20",
+        "language": "en",
+        "scored_target_count": 212,
+        "source_key": "ab4436d2-39aa-45ea-8a84-7c1bf28c8793",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 270
+      },
+      {
+        "content_sha256": "59da5a280d170c88efbe07ac08b59fd495cbb63fadafb002f964b65ce82d8529",
+        "id": "chat-v1-calibration-chat-21",
+        "language": "en",
+        "scored_target_count": 235,
+        "source_key": "f282f994-3d56-417a-833a-c03e202f7d44",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 265
+      },
+      {
+        "content_sha256": "0c92c59ef8eb952d2f6b1092e6065de84a5411959d20ed924620c9ea2a149daf",
+        "id": "chat-v1-calibration-chat-22",
+        "language": "fr",
+        "scored_target_count": 169,
+        "source_key": "2e9f46d2-11ff-439d-b092-644a201e57ed",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 234
+      },
+      {
+        "content_sha256": "ec5b6860bd55f076c48563df8016dcc9c2b89830c036263889c28fc63cab409f",
+        "id": "chat-v1-calibration-chat-23",
+        "language": "en",
+        "scored_target_count": 236,
+        "source_key": "7c2e8cc4-a522-406f-b4a8-750c6c646c5e",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 283
+      },
+      {
+        "content_sha256": "7a0022baa1f439bdebb2c3a951811727bd03d7fe4ff8b2f6a19353dda3758295",
+        "id": "chat-v1-calibration-chat-24",
+        "language": "en",
+        "scored_target_count": 342,
+        "source_key": "144f38d2-3506-401f-b6a9-13c54c744e38",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 370
+      },
+      {
+        "content_sha256": "886dcad1849fa03c824a003be918cef024988097948f3d2e4899b22bf08476ef",
+        "id": "chat-v1-calibration-chat-25",
+        "language": "en",
+        "scored_target_count": 393,
+        "source_key": "0ee3e917-3bb3-4f38-9161-4576789fe691",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 412
+      },
+      {
+        "content_sha256": "7407120897d7047a11f3ecf606f5d1f88b9d56998cc7c42dd55ecc62fd946599",
+        "id": "chat-v1-calibration-chat-26",
+        "language": "en",
+        "scored_target_count": 606,
+        "source_key": "d3377a82-6c95-4b4c-a8d2-afe48221a317",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 656
+      },
+      {
+        "content_sha256": "d190cef7419b2cf9b91ec20a535361b6c079a0b0e68ee66e11782072a0f23429",
+        "id": "chat-v1-calibration-chat-27",
+        "language": "en",
+        "scored_target_count": 404,
+        "source_key": "1b892d49-4526-4dc6-8342-83555a337e9d",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 440
+      },
+      {
+        "content_sha256": "f1b8d47814ae32de07de6bf86784407b93c0d52a75a0e192b1d416a345296d85",
+        "id": "chat-v1-calibration-chat-28",
+        "language": "de",
+        "scored_target_count": 373,
+        "source_key": "82d1f072-19f3-483a-9e46-6594ae438350",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 500
+      },
+      {
+        "content_sha256": "e93dd3723e6675a08fae1c98d9991db3ef108b53870e523ce82eaa3eb04aaee8",
+        "id": "chat-v1-calibration-chat-29",
+        "language": "en",
+        "scored_target_count": 824,
+        "source_key": "12ae44b9-5fcf-4c1d-9568-02329c2eee3e",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 867
+      },
+      {
+        "content_sha256": "efd89cc4c451f1b68a6819a8a9fdc260d96c47f7b7c93ba81ec862139515b276",
+        "id": "chat-v1-calibration-chat-30",
+        "language": "en",
+        "scored_target_count": 434,
+        "source_key": "6a28563f-4f20-4b8f-9939-674a031d7f1a",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 525
+      },
+      {
+        "content_sha256": "beb679c8103156a8cebf07439e07ac15a52ac1138713003115578c392208b047",
+        "id": "chat-v1-calibration-chat-31",
+        "language": "en",
+        "scored_target_count": 367,
+        "source_key": "7734fb8c-c076-4a1a-9ce9-7aff36f93c7a",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 490
+      },
+      {
+        "content_sha256": "4105593cc9af7079be53edc328b2d14f60884523581eff1fb0296c104b2f5068",
+        "id": "chat-v1-calibration-chat-32",
+        "language": "en",
+        "scored_target_count": 268,
+        "source_key": "a3703434-c532-4836-bba5-da22d58264c2",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 310
+      },
+      {
+        "content_sha256": "ed0e9542c78dfb012be51f6a8fadab8bd586ff559a20955c9caec2d9e042bac0",
+        "id": "chat-v1-calibration-chat-33",
+        "language": "de",
+        "scored_target_count": 207,
+        "source_key": "0e3e2b5a-2066-4e6d-991f-a5b3e05e1ee4",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 379
+      },
+      {
+        "content_sha256": "196bd53aaf776171a80d652747f0be26ba6eb617110e59bb95c05f366faab024",
+        "id": "chat-v1-calibration-chat-34",
+        "language": "fr",
+        "scored_target_count": 308,
+        "source_key": "29e9493c-6cb6-40e8-a6c8-584f67bb17df",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 342
+      },
+      {
+        "content_sha256": "aede13ef13ddf7c8c106114603d5ed67c62a854c66cf0763a2d7edfa49862655",
+        "id": "chat-v1-calibration-chat-35",
+        "language": "fr",
+        "scored_target_count": 407,
+        "source_key": "c5c0e937-027a-44ca-8093-cde0c69c74cd",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 453
+      },
+      {
+        "content_sha256": "066a1e9c78924049405fdc7781aeb9fa09fb1060cd210441bcaccd13bfe7c475",
+        "id": "chat-v1-calibration-chat-36",
+        "language": "it",
+        "scored_target_count": 350,
+        "source_key": "ad8fe029-5307-4553-bb62-5f79e53fafc1",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 422
+      },
+      {
+        "content_sha256": "674ed549d363f4a57cd0b25a71b9c741a56ddb79d092c2ed7a4eec371302d679",
+        "id": "chat-v1-calibration-chat-37",
+        "language": "it",
+        "scored_target_count": 182,
+        "source_key": "cf6f9d84-27e3-4765-bb1b-1c77d7c4c373",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 216
+      },
+      {
+        "content_sha256": "9e77a459dd605488b98cf692707afc8a38a2bceabbb69d009eec27c5717aa0dc",
+        "id": "chat-v1-calibration-chat-38",
+        "language": "it",
+        "scored_target_count": 192,
+        "source_key": "74b42a96-9ca6-46ac-934e-ca1072343e73",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 249
+      },
+      {
+        "content_sha256": "f151d167f2e21d748117873d5ca2a3937a65788ffd6083d07b16db09da1bad58",
+        "id": "chat-v1-calibration-chat-39",
+        "language": "it",
+        "scored_target_count": 418,
+        "source_key": "a8a4ec92-6d83-4e2b-b57f-5598d78b9933",
+        "split": "calibration",
+        "stratum": "chat",
+        "token_count": 465
+      },
+      {
+        "content_sha256": "6ff742092733f836a47b8d65c03391bebc800c3ac5a0ed46ca2f34fb1cc80ef4",
+        "id": "chat-v1-calibration-tool-00",
+        "language": "en",
+        "scored_target_count": 141,
+        "source_key": "100211",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 618
+      },
+      {
+        "content_sha256": "85fa58ded3f88047650985a2740706267700de40b8f46f8e104e1a54f83630e9",
+        "id": "chat-v1-calibration-tool-01",
+        "language": "en",
+        "scored_target_count": 163,
+        "source_key": "76053",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 624
+      },
+      {
+        "content_sha256": "19428ab0b51271ff6d85103f199397d09ad8f26d14f6d136fb4c8f4b8b088999",
+        "id": "chat-v1-calibration-tool-02",
+        "language": "en",
+        "scored_target_count": 113,
+        "source_key": "37292",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 438
+      },
+      {
+        "content_sha256": "7270de4257367509b20986312bd745caeacf4bb31472908987c7b439e0623103",
+        "id": "chat-v1-calibration-tool-03",
+        "language": "en",
+        "scored_target_count": 152,
+        "source_key": "53082",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 597
+      },
+      {
+        "content_sha256": "8d1d7b43c506264804859d0e10dc85459574f4a6431b7a361c99216069d7c7f4",
+        "id": "chat-v1-calibration-tool-04",
+        "language": "en",
+        "scored_target_count": 117,
+        "source_key": "34901",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 508
+      },
+      {
+        "content_sha256": "36b6a195056ae6426cb2a647a8c881cd33085a2605784b2227b81a2d4235e9a4",
+        "id": "chat-v1-calibration-tool-05",
+        "language": "en",
+        "scored_target_count": 54,
+        "source_key": "987",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 592
+      },
+      {
+        "content_sha256": "8264127c5afcd20dc721a25833d71067f06a1849e4055f6411f950bd7f520060",
+        "id": "chat-v1-calibration-tool-06",
+        "language": "en",
+        "scored_target_count": 178,
+        "source_key": "100761",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 674
+      },
+      {
+        "content_sha256": "76cd564e991bc5a0cea6228c077bdfb659be61345ce3e79c46a1ba3dafc0a475",
+        "id": "chat-v1-calibration-tool-07",
+        "language": "en",
+        "scored_target_count": 64,
+        "source_key": "103791",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 434
+      },
+      {
+        "content_sha256": "6f43d1b4f8fba8cf4d42daa0e5c569d0337b8f6bd8eaac850d3964a567c3b087",
+        "id": "chat-v1-calibration-tool-08",
+        "language": "en",
+        "scored_target_count": 139,
+        "source_key": "57837",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 578
+      },
+      {
+        "content_sha256": "c3fbf882332447293591d99154fe4dafeaaf6e6b894020514e59fd33be7bccc9",
+        "id": "chat-v1-calibration-tool-09",
+        "language": "en",
+        "scored_target_count": 123,
+        "source_key": "67756",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 542
+      },
+      {
+        "content_sha256": "6ea9324388e99da6f12dfc723a269cc63060483490f118bb7fcbf062d24f2684",
+        "id": "chat-v1-calibration-tool-10",
+        "language": "en",
+        "scored_target_count": 158,
+        "source_key": "58044",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 730
+      },
+      {
+        "content_sha256": "d3c7e2f2a74ae0ef08e933d9bb6f674fa8b0b1611b3e3fbd02ee4e687cfc2152",
+        "id": "chat-v1-calibration-tool-11",
+        "language": "en",
+        "scored_target_count": 64,
+        "source_key": "64722",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 442
+      },
+      {
+        "content_sha256": "5a1837d8d1299d8fa61adff98b718c4ac1a69a595d2900379bb914a8346b054a",
+        "id": "chat-v1-calibration-tool-12",
+        "language": "en",
+        "scored_target_count": 144,
+        "source_key": "65199",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 581
+      },
+      {
+        "content_sha256": "688376313f096917edd92eefc00440bffbeeb49baaaec7cde47474733628a4cf",
+        "id": "chat-v1-calibration-tool-13",
+        "language": "en",
+        "scored_target_count": 152,
+        "source_key": "58365",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 593
+      },
+      {
+        "content_sha256": "8c3418c4d0039db29a82af5b87a44be416fc7f1867b121bd134683e2d1573850",
+        "id": "chat-v1-calibration-tool-14",
+        "language": "en",
+        "scored_target_count": 132,
+        "source_key": "25784",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 543
+      },
+      {
+        "content_sha256": "5e76e135aadea85dd30374b3a9dfd907238e2004bfc8d13ff6a76bd0ef5aaf4e",
+        "id": "chat-v1-calibration-tool-15",
+        "language": "en",
+        "scored_target_count": 63,
+        "source_key": "89799",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 439
+      },
+      {
+        "content_sha256": "21a04b9a475fae64e85c44317dd45394e4bfeb2bf957c0c8f3ba41c17c9e3ead",
+        "id": "chat-v1-calibration-tool-16",
+        "language": "en",
+        "scored_target_count": 281,
+        "source_key": "27885",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 847
+      },
+      {
+        "content_sha256": "2e0c7c139b568284d1fbc128aaa5c9fa341818b84ec8e87c044e7bd2c89cb072",
+        "id": "chat-v1-calibration-tool-17",
+        "language": "en",
+        "scored_target_count": 62,
+        "source_key": "12805",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 434
+      },
+      {
+        "content_sha256": "e8f92c621b7ba3614eb7b2bf364b6fb5b5ab1d0bcfe05ffd92ec79d6e68b927a",
+        "id": "chat-v1-calibration-tool-18",
+        "language": "en",
+        "scored_target_count": 174,
+        "source_key": "59754",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 630
+      },
+      {
+        "content_sha256": "803a5569819753291f2decee8bc83b80766044e70ac51d2cdd382c718f650a7f",
+        "id": "chat-v1-calibration-tool-19",
+        "language": "en",
+        "scored_target_count": 141,
+        "source_key": "14182",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 550
+      },
+      {
+        "content_sha256": "f27568d94cf056daf64ac8b4a37e445a050483f9d407d0951c3bd1b940cb1535",
+        "id": "chat-v1-calibration-tool-20",
+        "language": "en",
+        "scored_target_count": 163,
+        "source_key": "83210",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 735
+      },
+      {
+        "content_sha256": "180fcd550b8682f01937651a6578bfef8ce95c1cc719708c97122af805cbc340",
+        "id": "chat-v1-calibration-tool-21",
+        "language": "en",
+        "scored_target_count": 195,
+        "source_key": "22813",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 728
+      },
+      {
+        "content_sha256": "76b0489515f69f80840a4f87f0e7877bb75d32245c32daf52bd52cffec78f391",
+        "id": "chat-v1-calibration-tool-22",
+        "language": "en",
+        "scored_target_count": 118,
+        "source_key": "67101",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 515
+      },
+      {
+        "content_sha256": "25717616bade8a0bbbf07311a7ade5725c6ca5ca5199aef772cf04f2240ffdba",
+        "id": "chat-v1-calibration-tool-23",
+        "language": "en",
+        "scored_target_count": 166,
+        "source_key": "112236",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 670
+      },
+      {
+        "content_sha256": "ffbd9849b7281c5a646cfcfea6b375caa1c760f071f7288c85c6c914576eebb7",
+        "id": "chat-v1-calibration-tool-24",
+        "language": "en",
+        "scored_target_count": 141,
+        "source_key": "25514",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 647
+      },
+      {
+        "content_sha256": "6a2520b9dafb90f1ef61da1ab08370a939507775ac0f3f283363acd54f016a7d",
+        "id": "chat-v1-calibration-tool-25",
+        "language": "en",
+        "scored_target_count": 80,
+        "source_key": "31437",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 568
+      },
+      {
+        "content_sha256": "042c0d2af1b68c3342449f5fdb91a9aed6883aab7db79778fa4f5b4d11b13581",
+        "id": "chat-v1-calibration-tool-26",
+        "language": "en",
+        "scored_target_count": 137,
+        "source_key": "56716",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 639
+      },
+      {
+        "content_sha256": "caac4372523f7d0f051c099afd6906ef05e11fa59051ff4895ff51e024d81349",
+        "id": "chat-v1-calibration-tool-27",
+        "language": "en",
+        "scored_target_count": 28,
+        "source_key": "1737",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 308
+      },
+      {
+        "content_sha256": "18565297a86668fd8d58094e1085d38a5541689f006b2c04e8f081d65518b3e2",
+        "id": "chat-v1-calibration-tool-28",
+        "language": "en",
+        "scored_target_count": 166,
+        "source_key": "105183",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 653
+      },
+      {
+        "content_sha256": "bbe1ff3e989523aa573601d478a900ba8279f7cf3bb4196919d64d592fe0bf86",
+        "id": "chat-v1-calibration-tool-29",
+        "language": "en",
+        "scored_target_count": 60,
+        "source_key": "67466",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 405
+      },
+      {
+        "content_sha256": "031509f1dc20047ef1262a61960ee5ed15588f9557f4d04c19d8c7cb26795aab",
+        "id": "chat-v1-calibration-tool-30",
+        "language": "en",
+        "scored_target_count": 119,
+        "source_key": "11594",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 517
+      },
+      {
+        "content_sha256": "5bb12966054a1f7e1b11698584a097bf8b7b6fffdae75f5de39d0819c894708c",
+        "id": "chat-v1-calibration-tool-31",
+        "language": "en",
+        "scored_target_count": 56,
+        "source_key": "16790",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 425
+      },
+      {
+        "content_sha256": "5616b3015db9507eb1211349287861eb74303293408140f067772f221381eeb5",
+        "id": "chat-v1-calibration-tool-32",
+        "language": "en",
+        "scored_target_count": 136,
+        "source_key": "87788",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 571
+      },
+      {
+        "content_sha256": "506b725d60f27f08cf2d5c661e1052337578e9634afa1fa4bd0b8ca4b2c804b0",
+        "id": "chat-v1-calibration-tool-33",
+        "language": "en",
+        "scored_target_count": 121,
+        "source_key": "5987",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 558
+      },
+      {
+        "content_sha256": "74ccce3572deeff0d6a0088adacc243e9f9bb5eaff490f70d2402bf708e9770a",
+        "id": "chat-v1-calibration-tool-34",
+        "language": "en",
+        "scored_target_count": 91,
+        "source_key": "62069",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 459
+      },
+      {
+        "content_sha256": "02daee225751dc451cef2ed16b1cd3b28c0c92fb47e2f0aac6eef89ab49c623a",
+        "id": "chat-v1-calibration-tool-35",
+        "language": "en",
+        "scored_target_count": 167,
+        "source_key": "11934",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 639
+      },
+      {
+        "content_sha256": "b0f0065d9b15ba013d502e2aff0897c454ef4c477c6795ad44dd2a3956b0e82f",
+        "id": "chat-v1-calibration-tool-36",
+        "language": "en",
+        "scored_target_count": 140,
+        "source_key": "52831",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 609
+      },
+      {
+        "content_sha256": "1c398b608bc35c1516b5a75a03a925bc359c79234b11389e3823a43e16fc9573",
+        "id": "chat-v1-calibration-tool-37",
+        "language": "en",
+        "scored_target_count": 80,
+        "source_key": "1641",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 439
+      },
+      {
+        "content_sha256": "e908799bd4047b881589e3732476b5b5cf728b092aff4894bfd30fe4e147a172",
+        "id": "chat-v1-calibration-tool-38",
+        "language": "en",
+        "scored_target_count": 132,
+        "source_key": "45733",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 537
+      },
+      {
+        "content_sha256": "2cbc73cf3e42b3043c2e1997dc3c655c1f6aacba40de9f8e9f27c9c2fb1e7582",
+        "id": "chat-v1-calibration-tool-39",
+        "language": "en",
+        "scored_target_count": 134,
+        "source_key": "14587",
+        "split": "calibration",
+        "stratum": "tool",
+        "token_count": 534
+      },
+      {
+        "content_sha256": "e8cf73fec87bcabcf7e00c23a4153b7ca6e5b86ed7ad8fe4539a053b80537fee",
+        "id": "chat-v1-calibration-reasoning-00",
+        "language": "en",
+        "scored_target_count": 680,
+        "source_key": "1781",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 719
+      },
+      {
+        "content_sha256": "883f03d192493535661aa48d6b84bf00aebcee9feda9c63ef0bfe4ebcd31ce9d",
+        "id": "chat-v1-calibration-reasoning-01",
+        "language": "en",
+        "scored_target_count": 592,
+        "source_key": "17849",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 640
+      },
+      {
+        "content_sha256": "463b8dfd20cd08bb370044eb5acc3b13007c88ef4af3fc77b45cfafb79a794c8",
+        "id": "chat-v1-calibration-reasoning-02",
+        "language": "en",
+        "scored_target_count": 847,
+        "source_key": "1782",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 887
+      },
+      {
+        "content_sha256": "cd230b19de911a613bbfb39837005af7b55c8f21ab4950cb0546a2700a1fa303",
+        "id": "chat-v1-calibration-reasoning-03",
+        "language": "en",
+        "scored_target_count": 954,
+        "source_key": "723",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 989
+      },
+      {
+        "content_sha256": "bd5eb1dd60da16ba1c5f68bb7a3fc8b920e164b4c9ed0edc0969a215875680da",
+        "id": "chat-v1-calibration-reasoning-04",
+        "language": "en",
+        "scored_target_count": 821,
+        "source_key": "2339",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 879
+      },
+      {
+        "content_sha256": "e3c6da4a7f564f3425c4b4a1e7d5aa3181d2b2c696eb6a11fb7d1158382aa19e",
+        "id": "chat-v1-calibration-reasoning-05",
+        "language": "en",
+        "scored_target_count": 737,
+        "source_key": "18718",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 791
+      },
+      {
+        "content_sha256": "e67d0f2a9ecf66e9d6b6614575c897c4d70244a2e0d27d23f58e0593a64b74e6",
+        "id": "chat-v1-calibration-reasoning-06",
+        "language": "en",
+        "scored_target_count": 594,
+        "source_key": "18880",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 635
+      },
+      {
+        "content_sha256": "a3d25039c8dad6aac66dc457b68ac4749dcb848f0685ca07efb8dba5dc27a9bb",
+        "id": "chat-v1-calibration-reasoning-07",
+        "language": "en",
+        "scored_target_count": 840,
+        "source_key": "11347",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 988
+      },
+      {
+        "content_sha256": "d3ab299015e7e3ed55c7513c4756328c39778fd81472320cbedf7bc6e30f0017",
+        "id": "chat-v1-calibration-reasoning-08",
+        "language": "en",
+        "scored_target_count": 860,
+        "source_key": "18165",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 910
+      },
+      {
+        "content_sha256": "3bb6ef1953a01f8245a1a2c54960c334bcd7487c9a6b9678accaec1f722ac618",
+        "id": "chat-v1-calibration-reasoning-09",
+        "language": "en",
+        "scored_target_count": 771,
+        "source_key": "18043",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 843
+      },
+      {
+        "content_sha256": "64e8c97454769e31a057c1ffb6738d3d0f279e7af9143b9b70fee1bde6d20762",
+        "id": "chat-v1-calibration-reasoning-10",
+        "language": "en",
+        "scored_target_count": 798,
+        "source_key": "1681",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 840
+      },
+      {
+        "content_sha256": "744f75ac2cb951a4ea592b2d986ed04cb0f9a54670a89ad95e47dee392cdc115",
+        "id": "chat-v1-calibration-reasoning-11",
+        "language": "en",
+        "scored_target_count": 488,
+        "source_key": "18773",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 529
+      },
+      {
+        "content_sha256": "6a8da970c4614a27759b0ff4f3867cbb154e399c5de9b79757899c704630de0f",
+        "id": "chat-v1-calibration-reasoning-12",
+        "language": "en",
+        "scored_target_count": 642,
+        "source_key": "17997",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 687
+      },
+      {
+        "content_sha256": "a7651feb4ea1ef81020165d5f5776f23b0d9358338898611c38091f4e0b8c4b7",
+        "id": "chat-v1-calibration-reasoning-13",
+        "language": "en",
+        "scored_target_count": 787,
+        "source_key": "18508",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 832
+      },
+      {
+        "content_sha256": "fa5d1a6397029ac85d308b365daba3f397d2fefe3438dfd88c875929a020e6ac",
+        "id": "chat-v1-calibration-reasoning-14",
+        "language": "en",
+        "scored_target_count": 623,
+        "source_key": "18613",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 668
+      },
+      {
+        "content_sha256": "a7e40cbae5ca0a731891b418ef5f611df46ceeed415d7011bb7ae0b10405cade",
+        "id": "chat-v1-calibration-reasoning-15",
+        "language": "en",
+        "scored_target_count": 842,
+        "source_key": "18519",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 895
+      },
+      {
+        "content_sha256": "20fc23b4d8a109d2a794f2f2db8f5c43a2572053ef55b774a2e3ebdbea65bfb7",
+        "id": "chat-v1-calibration-reasoning-16",
+        "language": "en",
+        "scored_target_count": 796,
+        "source_key": "17950",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 847
+      },
+      {
+        "content_sha256": "388cb89e75a8ae69e0c314e08bcb6584c9dd7bb142816bbc6f03c9a03ce1eabc",
+        "id": "chat-v1-calibration-reasoning-17",
+        "language": "en",
+        "scored_target_count": 645,
+        "source_key": "18788",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 701
+      },
+      {
+        "content_sha256": "d9314a4843843c02c362969421b031de1b66323fe880838230fe5342c8a0620f",
+        "id": "chat-v1-calibration-reasoning-18",
+        "language": "en",
+        "scored_target_count": 700,
+        "source_key": "18577",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 755
+      },
+      {
+        "content_sha256": "ef61185f96c74cfaf7445f8bf0f9e0a09b48475fb8bad551b1154600046d6fee",
+        "id": "chat-v1-calibration-reasoning-19",
+        "language": "en",
+        "scored_target_count": 636,
+        "source_key": "18499",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 722
+      },
+      {
+        "content_sha256": "4c19fbc29334d5e24e5bc85a65af03354d55dda3e913f8e758f756a6ba30ee32",
+        "id": "chat-v1-calibration-reasoning-20",
+        "language": "en",
+        "scored_target_count": 777,
+        "source_key": "18807",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 830
+      },
+      {
+        "content_sha256": "fa7c08fac084768e2f0f844702c48ccf516457ce36e0c008d5734abbb58d1089",
+        "id": "chat-v1-calibration-reasoning-21",
+        "language": "en",
+        "scored_target_count": 652,
+        "source_key": "17870",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 699
+      },
+      {
+        "content_sha256": "69516d8b4ae3c6fc3dc99b27fb9869424e2a0773d364d4d8bced55707057fbc0",
+        "id": "chat-v1-calibration-reasoning-22",
+        "language": "en",
+        "scored_target_count": 612,
+        "source_key": "17924",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 682
+      },
+      {
+        "content_sha256": "0f6eb7e512db94c1f7df23769ad3da9bd8093b84db5363825b8b67922784b60d",
+        "id": "chat-v1-calibration-reasoning-23",
+        "language": "en",
+        "scored_target_count": 733,
+        "source_key": "18544",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 779
+      },
+      {
+        "content_sha256": "2f0bce5efa530386f9f342a366117f52d606e1e2734370634d4e77cd4efebb36",
+        "id": "chat-v1-calibration-reasoning-24",
+        "language": "en",
+        "scored_target_count": 741,
+        "source_key": "414",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 877
+      },
+      {
+        "content_sha256": "03c310bd7398e419b5c2ef97ee98d3df5173ac413e07af5e7ccea25ff0e16924",
+        "id": "chat-v1-calibration-reasoning-25",
+        "language": "en",
+        "scored_target_count": 489,
+        "source_key": "18040",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 536
+      },
+      {
+        "content_sha256": "548f8c7240816993ee245ddb52f34ce832c728086800b39438f5f9de25ca87ba",
+        "id": "chat-v1-calibration-reasoning-26",
+        "language": "en",
+        "scored_target_count": 686,
+        "source_key": "18274",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 738
+      },
+      {
+        "content_sha256": "5a1626c7da744e81618573a7754fcfe77a344d9d424a88eb7bd36562db83c497",
+        "id": "chat-v1-calibration-reasoning-27",
+        "language": "en",
+        "scored_target_count": 900,
+        "source_key": "18623",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 951
+      },
+      {
+        "content_sha256": "4c7695077745e87dfd198ed3bb6ddaed6ec80f790bc6fc4e1ea4e14b4ee29483",
+        "id": "chat-v1-calibration-reasoning-28",
+        "language": "en",
+        "scored_target_count": 637,
+        "source_key": "18710",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 693
+      },
+      {
+        "content_sha256": "e7c898a902b690d944340efb19ed0bad4a544373697c85b02e588d8f07a36e49",
+        "id": "chat-v1-calibration-reasoning-29",
+        "language": "en",
+        "scored_target_count": 809,
+        "source_key": "18545",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 854
+      },
+      {
+        "content_sha256": "ddf42064ccd73f57a2eecc9bed65fd039cda1d6d2062ce77d19c32853a1b613b",
+        "id": "chat-v1-calibration-reasoning-30",
+        "language": "en",
+        "scored_target_count": 628,
+        "source_key": "579",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 661
+      },
+      {
+        "content_sha256": "3d05dc9c39cc2e197987f9077dfa557e28dba11520665bc316a597d3acfb0332",
+        "id": "chat-v1-calibration-reasoning-31",
+        "language": "en",
+        "scored_target_count": 680,
+        "source_key": "18396",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 737
+      },
+      {
+        "content_sha256": "34cc6e8e562a289c13ca1df367c582f551fdd5111391dab61c820f6219286934",
+        "id": "chat-v1-calibration-reasoning-32",
+        "language": "en",
+        "scored_target_count": 899,
+        "source_key": "18146",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 950
+      },
+      {
+        "content_sha256": "f1f1bbb1a977b1489abacc73a2e010d5aaa3b780bcfea0b4398c86f6bb829c4b",
+        "id": "chat-v1-calibration-reasoning-33",
+        "language": "en",
+        "scored_target_count": 837,
+        "source_key": "403",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 900
+      },
+      {
+        "content_sha256": "7114b781bf9dd95f96bd9584c71c4c7ce0efe95c5753868780abff5be060f2a9",
+        "id": "chat-v1-calibration-reasoning-34",
+        "language": "en",
+        "scored_target_count": 810,
+        "source_key": "18486",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 859
+      },
+      {
+        "content_sha256": "b34ebe9deea417c86832df6d8ceec63860c58ed98a30e698763d3b483304dece",
+        "id": "chat-v1-calibration-reasoning-35",
+        "language": "en",
+        "scored_target_count": 860,
+        "source_key": "18093",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 915
+      },
+      {
+        "content_sha256": "577c3a176584ebd7a024264f29f7af86ce1e0f6aafbb5cb1de0aa0588a6f682d",
+        "id": "chat-v1-calibration-reasoning-36",
+        "language": "en",
+        "scored_target_count": 466,
+        "source_key": "14660",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 493
+      },
+      {
+        "content_sha256": "cd0b0cf4f9cddbd2a10b7186164a2e37151fd81d9a3c597f7842c898a82f7f63",
+        "id": "chat-v1-calibration-reasoning-37",
+        "language": "en",
+        "scored_target_count": 824,
+        "source_key": "18484",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 874
+      },
+      {
+        "content_sha256": "7e8dfb935a4124921012a72f9334451fee08bafba0a676993cf5bffd4d24c869",
+        "id": "chat-v1-calibration-reasoning-38",
+        "language": "en",
+        "scored_target_count": 766,
+        "source_key": "18565",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 810
+      },
+      {
+        "content_sha256": "a44c6ddd498c77620d7b1e3806aa6ec0626c902b3029811b710b1449f17308b4",
+        "id": "chat-v1-calibration-reasoning-39",
+        "language": "en",
+        "scored_target_count": 665,
+        "source_key": "17776",
+        "split": "calibration",
+        "stratum": "reasoning",
+        "token_count": 708
+      },
+      {
+        "content_sha256": "333f102135ece6dd105f2b0eb8bee345cd6d0d05472b48d3270b1d0dd2fe33db",
+        "id": "chat-v1-heldout-chat-00",
+        "language": "es",
+        "scored_target_count": 290,
+        "source_key": "e18abe34-f4d0-4bf9-bfcb-5d36f1f7fa6b",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 319
+      },
+      {
+        "content_sha256": "cb2da91b68b0868e05224ee2186f493277d1e774ad077f0287706cc584827179",
+        "id": "chat-v1-heldout-chat-01",
+        "language": "es",
+        "scored_target_count": 442,
+        "source_key": "8a8c1228-6f37-4495-83ec-481a169a79e0",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 486
+      },
+      {
+        "content_sha256": "a88a7bd33c67c3b02e95ce54c2ad442f91b4871f4b8b84862d6a6e9f40cb98ef",
+        "id": "chat-v1-heldout-chat-02",
+        "language": "en",
+        "scored_target_count": 519,
+        "source_key": "2abc0f7d-0b7f-41a1-998d-04a212f7e46d",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 599
+      },
+      {
+        "content_sha256": "3048824a3bc67b8c64e2e5c66f6795918b97cc6759befa558bba29e7ba8959d5",
+        "id": "chat-v1-heldout-chat-03",
+        "language": "en",
+        "scored_target_count": 268,
+        "source_key": "2bc1bd5f-fc62-4d1a-a1e8-e2f17442143d",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 291
+      },
+      {
+        "content_sha256": "3305b80ca3d5e947c3707837404281a1ea8bf61d702eb7d51f64b2bd0e1de3c2",
+        "id": "chat-v1-heldout-chat-04",
+        "language": "es",
+        "scored_target_count": 281,
+        "source_key": "e1079eb3-d4a1-46d7-8740-1f5142123b88",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 332
+      },
+      {
+        "content_sha256": "7f776a4232b5f0fbf16c5a00ac5b55a8fea25aa96229a5539d8be089c88ca32f",
+        "id": "chat-v1-heldout-chat-05",
+        "language": "en",
+        "scored_target_count": 663,
+        "source_key": "8c220d81-565e-4039-882a-7d77f5d3df9d",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 916
+      },
+      {
+        "content_sha256": "16f25f01922b34c3b44cd8954e7ecadac2202d44ae845764e74327fb7b751779",
+        "id": "chat-v1-heldout-chat-06",
+        "language": "es",
+        "scored_target_count": 438,
+        "source_key": "f1b95356-7960-405a-bdc7-9c003b414d3f",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 513
+      },
+      {
+        "content_sha256": "0f7c9c24f2e286c06daa77ed8727e1caa62b177532720bf21b7cae4fce422ded",
+        "id": "chat-v1-heldout-chat-07",
+        "language": "en",
+        "scored_target_count": 635,
+        "source_key": "c7bbd2e5-a2ed-4e4e-a9f9-dca8dc2b5232",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 707
+      },
+      {
+        "content_sha256": "b150c4f029b5e8f77bff0ba8153d65642bd78332f576c522da425a1b033e9d2b",
+        "id": "chat-v1-heldout-chat-08",
+        "language": "en",
+        "scored_target_count": 241,
+        "source_key": "e88f0b94-39f6-46a4-8a3b-2d16fb1f4f4c",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 294
+      },
+      {
+        "content_sha256": "e2dcf1e3e8824b55a1cc93846632675d514d4e37fe4766f435f7bd2c2575d81e",
+        "id": "chat-v1-heldout-chat-09",
+        "language": "de",
+        "scored_target_count": 282,
+        "source_key": "3b5d3bc8-1831-42d7-8cd2-6530fa17b739",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 306
+      },
+      {
+        "content_sha256": "12800424d8e25de6fee36e1c46f1a631ca6df93cb55cd0891156c3cae037c1dd",
+        "id": "chat-v1-heldout-chat-10",
+        "language": "en",
+        "scored_target_count": 246,
+        "source_key": "100db5cb-9c14-4db6-adda-2837440f0ee7",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 277
+      },
+      {
+        "content_sha256": "80db25a0819b70156aa93754abf75e64b539a9f4625b9c633ad58c874a56084e",
+        "id": "chat-v1-heldout-chat-11",
+        "language": "en",
+        "scored_target_count": 441,
+        "source_key": "2cdd6ab2-14c1-4bcb-ad8b-467b5eb39187",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 489
+      },
+      {
+        "content_sha256": "aea6cad84aa2a879d319226ff7a493f39b955a16c8cba7422477e925555d9736",
+        "id": "chat-v1-heldout-chat-12",
+        "language": "en",
+        "scored_target_count": 236,
+        "source_key": "05efc0c5-5594-48f9-9db9-bf0837285185",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 264
+      },
+      {
+        "content_sha256": "d5c8cf68523b2ce1247589d30122fb2acbdc9e3ca8247cad93bf327713e7328b",
+        "id": "chat-v1-heldout-chat-13",
+        "language": "en",
+        "scored_target_count": 302,
+        "source_key": "038501e0-4e3c-4839-8f44-c62bd7d3522f",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 346
+      },
+      {
+        "content_sha256": "27be18bad4cb305b9474f37f9d9125fb036140abeefb1fc0ab772348b40328ad",
+        "id": "chat-v1-heldout-chat-14",
+        "language": "en",
+        "scored_target_count": 313,
+        "source_key": "f079741d-d20f-4a94-a838-07f2e2adc81c",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 394
+      },
+      {
+        "content_sha256": "9accbf1284bc35217f8a0898a29de57cef98f2b70aa286d32216c18d383a3ac7",
+        "id": "chat-v1-heldout-chat-15",
+        "language": "en",
+        "scored_target_count": 236,
+        "source_key": "a07c33d1-4829-4fec-95f9-799747d3a136",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 306
+      },
+      {
+        "content_sha256": "ddc5315367a5c5e07eee82ac70018c47d5fd9e5755b4155224c45d93e1c6dc55",
+        "id": "chat-v1-heldout-chat-16",
+        "language": "fr",
+        "scored_target_count": 379,
+        "source_key": "fb21c340-fc10-423c-a00b-34b965974e54",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 411
+      },
+      {
+        "content_sha256": "f4814d0f5e32abf03c3b3ba7587288910e5b64f03ce3a8e762ecff4491b6ff83",
+        "id": "chat-v1-heldout-chat-17",
+        "language": "en",
+        "scored_target_count": 392,
+        "source_key": "b5ade8b5-fef4-45a4-afc3-285ef9ec8c45",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 489
+      },
+      {
+        "content_sha256": "74484aa1d97add25eb526cbc1020122036b8f28d4ff50ef1f99eabb2319486fb",
+        "id": "chat-v1-heldout-chat-18",
+        "language": "en",
+        "scored_target_count": 443,
+        "source_key": "d79204c2-dd06-4e59-913e-4599395f12ee",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 611
+      },
+      {
+        "content_sha256": "ebbcd7851077f2f9ebf786be163dbf17ab38cde6c72e2d4edf51f9b40bdd1687",
+        "id": "chat-v1-heldout-chat-19",
+        "language": "en",
+        "scored_target_count": 207,
+        "source_key": "392f8e6b-1f34-47d0-af4f-553286ef21ce",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 257
+      },
+      {
+        "content_sha256": "e6b79b995a03cb7ef735f5bc7894b4f35f8d878d329c9ef15b393710c448a917",
+        "id": "chat-v1-heldout-chat-20",
+        "language": "en",
+        "scored_target_count": 321,
+        "source_key": "62569d1e-8620-49fe-8d4d-267dc5e6e56b",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 551
+      },
+      {
+        "content_sha256": "df4e195be16028125d7c88fa6180bc3a9caa85014c39d6d16c98306c2c089709",
+        "id": "chat-v1-heldout-chat-21",
+        "language": "en",
+        "scored_target_count": 222,
+        "source_key": "61a08190-5939-4118-8b80-7d422ee96082",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 241
+      },
+      {
+        "content_sha256": "e5ccb606f120bbd45d9c2cb420b7213388ce6bd686244bea70c99a0b542f3a7f",
+        "id": "chat-v1-heldout-chat-22",
+        "language": "en",
+        "scored_target_count": 337,
+        "source_key": "21021513-4e90-4d1d-8427-d9105cc2ca58",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 387
+      },
+      {
+        "content_sha256": "cb01df869f0f5110da27c5ff5d9e7b3e2b58e380060f92496fac05a7767fa6fe",
+        "id": "chat-v1-heldout-chat-23",
+        "language": "de",
+        "scored_target_count": 330,
+        "source_key": "739e6332-f512-4091-8e99-a0b5f4200fa2",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 360
+      },
+      {
+        "content_sha256": "f90cf2ee9f7cf54373421a9aa6adc6465c010c4901bd2931326ec350c0407b1c",
+        "id": "chat-v1-heldout-chat-24",
+        "language": "en",
+        "scored_target_count": 436,
+        "source_key": "437bae24-df16-4226-a19b-f1851993ae2c",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 467
+      },
+      {
+        "content_sha256": "f6e22f4539da063345332a1bd4d94642edc33fc6977a6e3cc8c480b76cde35d5",
+        "id": "chat-v1-heldout-chat-25",
+        "language": "en",
+        "scored_target_count": 387,
+        "source_key": "a44c1bdd-8e2e-4362-b88d-e73715bfb364",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 445
+      },
+      {
+        "content_sha256": "a92a6e477182122e8e91b8e970183646ad2032e484472b2d4b016adac9f5fd16",
+        "id": "chat-v1-heldout-chat-26",
+        "language": "en",
+        "scored_target_count": 523,
+        "source_key": "ad746d05-eda5-4542-921b-3a78ce90b822",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 592
+      },
+      {
+        "content_sha256": "0f94306b227eea44c206ad8b38ac66def5b082a85b41ac06048c1dfeb47e67ca",
+        "id": "chat-v1-heldout-chat-27",
+        "language": "en",
+        "scored_target_count": 218,
+        "source_key": "da4d7f23-38f6-4425-be25-bf9b6c1bf449",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 264
+      },
+      {
+        "content_sha256": "ae3ebfb27a4930a3c8ba2e334caaa36b7d998b56f4f36ba2177236d4b0ba7845",
+        "id": "chat-v1-heldout-chat-28",
+        "language": "de",
+        "scored_target_count": 195,
+        "source_key": "994a37d2-efd5-488b-a438-91d46731629e",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 218
+      },
+      {
+        "content_sha256": "1f007d2a154ae29275f29b1edd092f7b88d2925f381fed4041b2df183e9d368e",
+        "id": "chat-v1-heldout-chat-29",
+        "language": "en",
+        "scored_target_count": 576,
+        "source_key": "bfbc6115-def8-4742-9be5-c76db3626f05",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 626
+      },
+      {
+        "content_sha256": "294e23e275d6f486242dcd564f28da69a45c9f967308b08a787e91eacfdac77f",
+        "id": "chat-v1-heldout-chat-30",
+        "language": "en",
+        "scored_target_count": 211,
+        "source_key": "4559a723-0ea8-48d8-9a3f-3b293a5465a7",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 239
+      },
+      {
+        "content_sha256": "e583010bdbfcc4e7c1c5d9357730e71f56ddfe6b95122d9455d497d800521c8f",
+        "id": "chat-v1-heldout-chat-31",
+        "language": "en",
+        "scored_target_count": 513,
+        "source_key": "15198b57-3811-4b25-b606-2069e265f12f",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 575
+      },
+      {
+        "content_sha256": "aedadc1710077b9596e36f9f68b07a0706bedf101e1fa62088eb9832670f664b",
+        "id": "chat-v1-heldout-chat-32",
+        "language": "de",
+        "scored_target_count": 226,
+        "source_key": "2bef9cdc-37dd-4595-ba43-cc7fb610f31a",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 300
+      },
+      {
+        "content_sha256": "ab5e4c9a76ee440f9954282c4a29f72ae8b4a0f916f9d9c79ec61957aa4c4f6d",
+        "id": "chat-v1-heldout-chat-33",
+        "language": "fr",
+        "scored_target_count": 524,
+        "source_key": "85dbcfa7-790a-4506-a82d-8bfa9a6301e2",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 591
+      },
+      {
+        "content_sha256": "a81e4b5b8f96e70ec4f2101a0b1b3c4f8b4b81d944287c61081823733820f2c4",
+        "id": "chat-v1-heldout-chat-34",
+        "language": "fr",
+        "scored_target_count": 399,
+        "source_key": "6d2c28b5-3fd4-402f-ba8f-7bc89c020cb9",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 477
+      },
+      {
+        "content_sha256": "85f4aadb8acdf02cf397e79cad4a0c62d7d0a32f31b161b5578d829d6a278648",
+        "id": "chat-v1-heldout-chat-35",
+        "language": "fr",
+        "scored_target_count": 697,
+        "source_key": "c68f2c46-eefa-4df2-b355-76ee44b63be9",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 803
+      },
+      {
+        "content_sha256": "a0827656af6123d02c05f9293e516b034eb134d59627c16f82143f0ca22e2734",
+        "id": "chat-v1-heldout-chat-36",
+        "language": "it",
+        "scored_target_count": 413,
+        "source_key": "b762b4e1-ece2-4f72-84ff-fb5713609eeb",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 452
+      },
+      {
+        "content_sha256": "1ae1f1069aa143b9586393012e84ed9ab1adc79e6ca596fa945c1a41e65c409b",
+        "id": "chat-v1-heldout-chat-37",
+        "language": "it",
+        "scored_target_count": 296,
+        "source_key": "cdb8e8fa-85ca-4b9a-b8ac-9c7d88ec859f",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 320
+      },
+      {
+        "content_sha256": "c4f7d4d1e0b27d5bf37290e15b3950a992d5812c4b284c25dbd2c498ae535276",
+        "id": "chat-v1-heldout-chat-38",
+        "language": "it",
+        "scored_target_count": 323,
+        "source_key": "dc9dd1b2-2b70-4007-baf2-38948bf4b116",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 355
+      },
+      {
+        "content_sha256": "cfc654a7aa26a2dfada5036f0a9d2197e5196b0a621fba49cb004f8f0e0370d2",
+        "id": "chat-v1-heldout-chat-39",
+        "language": "it",
+        "scored_target_count": 305,
+        "source_key": "e5a0195c-c6e6-4b49-968e-3835dcd23b2c",
+        "split": "heldout",
+        "stratum": "chat",
+        "token_count": 340
+      },
+      {
+        "content_sha256": "d80a679f90286ffe14d5c4a5a9e961fae2468882542f96b22ff36ce919b1f877",
+        "id": "chat-v1-heldout-tool-00",
+        "language": "en",
+        "scored_target_count": 125,
+        "source_key": "86177",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 515
+      },
+      {
+        "content_sha256": "308302347d0c6f9f01943a49b57946183a096dd351797e9ba014a248602de420",
+        "id": "chat-v1-heldout-tool-01",
+        "language": "en",
+        "scored_target_count": 161,
+        "source_key": "39967",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 590
+      },
+      {
+        "content_sha256": "2fb7d92880587448c058de19dc492fa94cfe832a710137dd5bc9a39a7b0eebd9",
+        "id": "chat-v1-heldout-tool-02",
+        "language": "en",
+        "scored_target_count": 94,
+        "source_key": "5667",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 586
+      },
+      {
+        "content_sha256": "f5c20a83bb2c793db7814580508e6ce73385510fbdb6aaac5b29226c835acb41",
+        "id": "chat-v1-heldout-tool-03",
+        "language": "en",
+        "scored_target_count": 202,
+        "source_key": "1203",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 721
+      },
+      {
+        "content_sha256": "54f87a59a86e643ce4fecdc9a5f8f4c99b8f772532e976b3ee3f0567cbce701d",
+        "id": "chat-v1-heldout-tool-04",
+        "language": "en",
+        "scored_target_count": 56,
+        "source_key": "95211",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 422
+      },
+      {
+        "content_sha256": "8b3128adf2e311d9dc35986563abbf91d85e684eaf40764cfd0c1ae41ed004c8",
+        "id": "chat-v1-heldout-tool-05",
+        "language": "en",
+        "scored_target_count": 115,
+        "source_key": "52652",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 496
+      },
+      {
+        "content_sha256": "e0bc4e6721fae344d5f3d63cfa8d2b05b6b9b6f02b88f62a1395592ab9b4ab62",
+        "id": "chat-v1-heldout-tool-06",
+        "language": "en",
+        "scored_target_count": 80,
+        "source_key": "74879",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 464
+      },
+      {
+        "content_sha256": "53fad85ea51002ffde40ef1c90e6d03dfb45773d0f7bfb1fd28aebc2d292a1ab",
+        "id": "chat-v1-heldout-tool-07",
+        "language": "en",
+        "scored_target_count": 148,
+        "source_key": "81763",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 610
+      },
+      {
+        "content_sha256": "5b2943aa0672c2016ba512d74b631344454f81aaaccf1b504876011038d8b53a",
+        "id": "chat-v1-heldout-tool-08",
+        "language": "en",
+        "scored_target_count": 104,
+        "source_key": "101286",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 461
+      },
+      {
+        "content_sha256": "9492d85ca78aa6005f20d7f0cd8ecada26fdfc0d84cae439d960ff4632d51355",
+        "id": "chat-v1-heldout-tool-09",
+        "language": "en",
+        "scored_target_count": 137,
+        "source_key": "88302",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 617
+      },
+      {
+        "content_sha256": "e786dc71e365c929711628f542080300c45e0b24d305f0afea6e9f70eb81bc1a",
+        "id": "chat-v1-heldout-tool-10",
+        "language": "en",
+        "scored_target_count": 69,
+        "source_key": "76264",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 470
+      },
+      {
+        "content_sha256": "9236c0e3fcccc80fa74c0b5752c0614f6624ba29520432aa556c3aee733bad46",
+        "id": "chat-v1-heldout-tool-11",
+        "language": "en",
+        "scored_target_count": 167,
+        "source_key": "91202",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 619
+      },
+      {
+        "content_sha256": "540d5f89bbd76ca36821715c8f94372d8370283ada129f954c15dc3029c49862",
+        "id": "chat-v1-heldout-tool-12",
+        "language": "en",
+        "scored_target_count": 128,
+        "source_key": "27419",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 542
+      },
+      {
+        "content_sha256": "1f8715012f571b907b5f6ddd7cb9d338f73f2cf0d5352efc655f5286ecdce6f6",
+        "id": "chat-v1-heldout-tool-13",
+        "language": "en",
+        "scored_target_count": 147,
+        "source_key": "72248",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 585
+      },
+      {
+        "content_sha256": "c9ff6b54c18c8488088e05e352ee0b6f14d5381b4a476c829f252192907127cc",
+        "id": "chat-v1-heldout-tool-14",
+        "language": "en",
+        "scored_target_count": 78,
+        "source_key": "2612",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 430
+      },
+      {
+        "content_sha256": "c771c6b925bd00edea2007f4ead18d92508ec3f4b5649758300878501f98cd64",
+        "id": "chat-v1-heldout-tool-15",
+        "language": "en",
+        "scored_target_count": 62,
+        "source_key": "62224",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 416
+      },
+      {
+        "content_sha256": "cd584ebc1eb7052389aed2e7b57e68decd443777a00a36a2787bd22a4f45ad95",
+        "id": "chat-v1-heldout-tool-16",
+        "language": "en",
+        "scored_target_count": 66,
+        "source_key": "106118",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 427
+      },
+      {
+        "content_sha256": "0e24b7430e1ad9b179955d589ae60dddbdb785a1a08e07623fb42db6b4acac24",
+        "id": "chat-v1-heldout-tool-17",
+        "language": "en",
+        "scored_target_count": 89,
+        "source_key": "109073",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 456
+      },
+      {
+        "content_sha256": "643e73557c1c17005535f7ee0516fa1e5c47cb0051d8512cae7ccf51681387ff",
+        "id": "chat-v1-heldout-tool-18",
+        "language": "en",
+        "scored_target_count": 161,
+        "source_key": "84167",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 633
+      },
+      {
+        "content_sha256": "766902741fd4e882da9add028a379ac1be60eb904837003e97f6379465f3bdc8",
+        "id": "chat-v1-heldout-tool-19",
+        "language": "en",
+        "scored_target_count": 55,
+        "source_key": "8992",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 466
+      },
+      {
+        "content_sha256": "f6000c23fc3daf7e1e17972c5cd184a915b2ecbed99978c8f39c19d94d901e0b",
+        "id": "chat-v1-heldout-tool-20",
+        "language": "en",
+        "scored_target_count": 113,
+        "source_key": "44862",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 501
+      },
+      {
+        "content_sha256": "ee97dde4b3c0c2e23c3658c2033057c6a10629cd88560af5e047521e650b1943",
+        "id": "chat-v1-heldout-tool-21",
+        "language": "en",
+        "scored_target_count": 116,
+        "source_key": "102030",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 518
+      },
+      {
+        "content_sha256": "509b87a037cc492301db5a5b4d07c58b77b641a50fe7d283e6aad7adac088b44",
+        "id": "chat-v1-heldout-tool-22",
+        "language": "en",
+        "scored_target_count": 118,
+        "source_key": "96919",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 529
+      },
+      {
+        "content_sha256": "3e03441924eb923a707d69a8442f74686c2b65b8e34e0e1cf99ea18b734ca34a",
+        "id": "chat-v1-heldout-tool-23",
+        "language": "en",
+        "scored_target_count": 144,
+        "source_key": "96284",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 646
+      },
+      {
+        "content_sha256": "3ba383751a34908fae779d58c491af0aced7cc430eadc689d13e85d799430813",
+        "id": "chat-v1-heldout-tool-24",
+        "language": "en",
+        "scored_target_count": 83,
+        "source_key": "6031",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 467
+      },
+      {
+        "content_sha256": "72e69b6abde2e5af2e901dd59fdf6e681ffa769466dbfd336cc4d8e2b48dfdd4",
+        "id": "chat-v1-heldout-tool-25",
+        "language": "en",
+        "scored_target_count": 73,
+        "source_key": "104608",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 463
+      },
+      {
+        "content_sha256": "1067c5a4cc5af6c566d9dec01312114e1b1cc85248faab21ce9f0a5eda14e6a6",
+        "id": "chat-v1-heldout-tool-26",
+        "language": "en",
+        "scored_target_count": 130,
+        "source_key": "28446",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 641
+      },
+      {
+        "content_sha256": "94dd68d7be198a35ee5cbe506fb932cc8c904fd4c3d8f41a7ebcf479ea76cf0f",
+        "id": "chat-v1-heldout-tool-27",
+        "language": "en",
+        "scored_target_count": 347,
+        "source_key": "104780",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 983
+      },
+      {
+        "content_sha256": "965e238ce35d306657694821c49becebbd9954dfb75fae4023fd04094814e923",
+        "id": "chat-v1-heldout-tool-28",
+        "language": "en",
+        "scored_target_count": 108,
+        "source_key": "80833",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 485
+      },
+      {
+        "content_sha256": "613cde10215337105a351acb90d79f9cacbf0170465efb0b7c49aacba48da859",
+        "id": "chat-v1-heldout-tool-29",
+        "language": "en",
+        "scored_target_count": 116,
+        "source_key": "5725",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 527
+      },
+      {
+        "content_sha256": "84d9429e1c9ae41700f091a30d76e4dc6f154d7e7fec184ceb9dffdb47b8d305",
+        "id": "chat-v1-heldout-tool-30",
+        "language": "en",
+        "scored_target_count": 57,
+        "source_key": "86644",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 418
+      },
+      {
+        "content_sha256": "a353c948b80c1dcd4cb6d5b37c70e0647b010411dbe25893d60e6b17bd60fad9",
+        "id": "chat-v1-heldout-tool-31",
+        "language": "en",
+        "scored_target_count": 91,
+        "source_key": "79104",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 526
+      },
+      {
+        "content_sha256": "73739731fc251ab055ad02d84b21c74d482289e93ae7fc62c7ebe1f74ea59bb7",
+        "id": "chat-v1-heldout-tool-32",
+        "language": "en",
+        "scored_target_count": 132,
+        "source_key": "110303",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 730
+      },
+      {
+        "content_sha256": "b44f298fc09e80612046fa07cabd218b43fb4afedff838051aea7990082210a9",
+        "id": "chat-v1-heldout-tool-33",
+        "language": "en",
+        "scored_target_count": 235,
+        "source_key": "46269",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 769
+      },
+      {
+        "content_sha256": "c04331d1d774a1b96ada03c8713c1d8bda9b3304dc146c1bf665f5828afdf662",
+        "id": "chat-v1-heldout-tool-34",
+        "language": "en",
+        "scored_target_count": 71,
+        "source_key": "43682",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 464
+      },
+      {
+        "content_sha256": "35e71eb80f78fda9b5cd064fddff216938fc6cd4166ce23b7b8996217b6e42ae",
+        "id": "chat-v1-heldout-tool-35",
+        "language": "en",
+        "scored_target_count": 142,
+        "source_key": "87241",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 796
+      },
+      {
+        "content_sha256": "e29b1300146ecd08dc6c83f05dbfe5d96bab1f9babdfce5803544e66acfb11f3",
+        "id": "chat-v1-heldout-tool-36",
+        "language": "en",
+        "scored_target_count": 56,
+        "source_key": "15861",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 511
+      },
+      {
+        "content_sha256": "93a031b4ae861cbecd4d9cbee7626e5f084e62e5884b0b3607d39a36706a860a",
+        "id": "chat-v1-heldout-tool-37",
+        "language": "en",
+        "scored_target_count": 75,
+        "source_key": "35021",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 470
+      },
+      {
+        "content_sha256": "0fde9a93072503c62c50eae1a66d7b28f9d41652ccf541e07468371d38f6378c",
+        "id": "chat-v1-heldout-tool-38",
+        "language": "en",
+        "scored_target_count": 137,
+        "source_key": "57073",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 553
+      },
+      {
+        "content_sha256": "9674568e8ccbc6e93a578c4d58132b8066c16a7dc25dbd7d59af42a07bf13c28",
+        "id": "chat-v1-heldout-tool-39",
+        "language": "en",
+        "scored_target_count": 145,
+        "source_key": "78043",
+        "split": "heldout",
+        "stratum": "tool",
+        "token_count": 584
+      },
+      {
+        "content_sha256": "9f1b2d7caeb1fe06f89b7492989b10fffb69b2f06fd1fb33fd96cd52f50ca215",
+        "id": "chat-v1-heldout-reasoning-00",
+        "language": "en",
+        "scored_target_count": 764,
+        "source_key": "18757",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 806
+      },
+      {
+        "content_sha256": "1aa3ed214733ca9e0d0933a27bfdcba60b3940a078348dfb46cf4ec3329a6888",
+        "id": "chat-v1-heldout-reasoning-01",
+        "language": "en",
+        "scored_target_count": 877,
+        "source_key": "18980",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 926
+      },
+      {
+        "content_sha256": "2b5447a2bc7c297d184156c06a57108bb9b250790be09f772691e0ad658861a7",
+        "id": "chat-v1-heldout-reasoning-02",
+        "language": "en",
+        "scored_target_count": 583,
+        "source_key": "18783",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 635
+      },
+      {
+        "content_sha256": "a22160776b53b9a51989af03f4b7fdf3fe7a08fc2a41f389030c7369a91baca6",
+        "id": "chat-v1-heldout-reasoning-03",
+        "language": "en",
+        "scored_target_count": 931,
+        "source_key": "18288",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 991
+      },
+      {
+        "content_sha256": "e6124f6f45ae341cd6babe2fb0f81279a70c7693af71acc6697dc149c6725899",
+        "id": "chat-v1-heldout-reasoning-04",
+        "language": "en",
+        "scored_target_count": 908,
+        "source_key": "18095",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 960
+      },
+      {
+        "content_sha256": "54f61b3d02b93ed3a041e1d960a02f8260b1f547112dd30c25f1bf0a45ee0fc6",
+        "id": "chat-v1-heldout-reasoning-05",
+        "language": "en",
+        "scored_target_count": 464,
+        "source_key": "17885",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 536
+      },
+      {
+        "content_sha256": "e59d97c6a8157e40947067559384467d6745f189e6ad805e14e8d74950d5c8d9",
+        "id": "chat-v1-heldout-reasoning-06",
+        "language": "en",
+        "scored_target_count": 723,
+        "source_key": "18616",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 776
+      },
+      {
+        "content_sha256": "6d4d4d2c942ad309373a4221218b30e0ae1d2ae2daac34630385e57b90093955",
+        "id": "chat-v1-heldout-reasoning-07",
+        "language": "en",
+        "scored_target_count": 776,
+        "source_key": "18661",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 819
+      },
+      {
+        "content_sha256": "552d3577ee5cf6368daee63fc6d75c7b36b1527df3b693808ec9b9de5818d056",
+        "id": "chat-v1-heldout-reasoning-08",
+        "language": "en",
+        "scored_target_count": 815,
+        "source_key": "18466",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 863
+      },
+      {
+        "content_sha256": "0b52854653bb10440fd6022ed9bc92d2f9ba19b41c2f957a1f40ad39cb9d39e7",
+        "id": "chat-v1-heldout-reasoning-09",
+        "language": "en",
+        "scored_target_count": 384,
+        "source_key": "18341",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 425
+      },
+      {
+        "content_sha256": "b7f0f9e5c516f09269b5685b22a67ff2cc5707797bf0354c6149c84c5d20ab67",
+        "id": "chat-v1-heldout-reasoning-10",
+        "language": "en",
+        "scored_target_count": 560,
+        "source_key": "18828",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 610
+      },
+      {
+        "content_sha256": "861fcd72ed8f5514097eeaacca31fe74ffdcffcce690936dff3648d153a98d13",
+        "id": "chat-v1-heldout-reasoning-11",
+        "language": "en",
+        "scored_target_count": 631,
+        "source_key": "18366",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 682
+      },
+      {
+        "content_sha256": "487ddb0ead4cbbaf7a1e02149b5261e8de423a8215c9355ce7bb49cc98133eb9",
+        "id": "chat-v1-heldout-reasoning-12",
+        "language": "en",
+        "scored_target_count": 979,
+        "source_key": "53",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 1019
+      },
+      {
+        "content_sha256": "36c56b3d97162ec5787d30845f4266c1cf101c1e835df0630745bc35f7c6ee74",
+        "id": "chat-v1-heldout-reasoning-13",
+        "language": "en",
+        "scored_target_count": 952,
+        "source_key": "18152",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 995
+      },
+      {
+        "content_sha256": "10dbe84fae5d45968e6c67ae3959d819bc1596b2f8ac1fb65bee3b456a63eb8d",
+        "id": "chat-v1-heldout-reasoning-14",
+        "language": "en",
+        "scored_target_count": 651,
+        "source_key": "18004",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 699
+      },
+      {
+        "content_sha256": "cff3b1e600c1acdf3de2c554c540b82bdebe03af6adb7359d15ab6cf28cf3b30",
+        "id": "chat-v1-heldout-reasoning-15",
+        "language": "en",
+        "scored_target_count": 905,
+        "source_key": "18364",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 950
+      },
+      {
+        "content_sha256": "a2ab550bb65106f5ee22dcb3fe4ec10e8d6134659b8bad231dd1bf2e1c0cdcac",
+        "id": "chat-v1-heldout-reasoning-16",
+        "language": "en",
+        "scored_target_count": 526,
+        "source_key": "18121",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 587
+      },
+      {
+        "content_sha256": "3cdc66f09e43930d102190e2b64984f602eab5a88ce06ecdcc30e42cc3a3d750",
+        "id": "chat-v1-heldout-reasoning-17",
+        "language": "en",
+        "scored_target_count": 879,
+        "source_key": "18376",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 957
+      },
+      {
+        "content_sha256": "b0fb6a86aa2ef1f95c060cef554a4ab5c9f2eb59091c0c8f776c6fca1d301fb3",
+        "id": "chat-v1-heldout-reasoning-18",
+        "language": "en",
+        "scored_target_count": 620,
+        "source_key": "18494",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 668
+      },
+      {
+        "content_sha256": "6bd305513c32f2385211bfd6683f82bf2065403ed34aeeb6d769886e5cc33aad",
+        "id": "chat-v1-heldout-reasoning-19",
+        "language": "en",
+        "scored_target_count": 733,
+        "source_key": "18473",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 788
+      },
+      {
+        "content_sha256": "4a807ce3f463e25c1fff01548e1d2a96e5653ff47b3d5aa471c3036c6658f28b",
+        "id": "chat-v1-heldout-reasoning-20",
+        "language": "en",
+        "scored_target_count": 881,
+        "source_key": "11145",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 992
+      },
+      {
+        "content_sha256": "91f3ce85e998926309bfc0608c94d57b20b041cbcf5e28e10e7fc857c9f84e04",
+        "id": "chat-v1-heldout-reasoning-21",
+        "language": "en",
+        "scored_target_count": 748,
+        "source_key": "18810",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 797
+      },
+      {
+        "content_sha256": "360f19dec7832e5b0b07aa55af8d7f2efbae933808a7929ca49c8b6c858cd872",
+        "id": "chat-v1-heldout-reasoning-22",
+        "language": "en",
+        "scored_target_count": 449,
+        "source_key": "18746",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 489
+      },
+      {
+        "content_sha256": "cc619c8b8b34163f0222b36555718cce5ad94a203419ad1562470e1ecd68e1f4",
+        "id": "chat-v1-heldout-reasoning-23",
+        "language": "en",
+        "scored_target_count": 828,
+        "source_key": "18961",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 874
+      },
+      {
+        "content_sha256": "fbbaca976af09880e9b0eaa3959ba3adb32dd6a3094943f01b302b1651866313",
+        "id": "chat-v1-heldout-reasoning-24",
+        "language": "en",
+        "scored_target_count": 976,
+        "source_key": "18948",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 1018
+      },
+      {
+        "content_sha256": "0278810f443378ed126abbd076052994f15023f761b67f7a6b3ccf7faa1db459",
+        "id": "chat-v1-heldout-reasoning-25",
+        "language": "en",
+        "scored_target_count": 688,
+        "source_key": "18951",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 740
+      },
+      {
+        "content_sha256": "61294a31775aba60cccc1b6d0038d5739404661600b64df321e50e7ff8fb2083",
+        "id": "chat-v1-heldout-reasoning-26",
+        "language": "en",
+        "scored_target_count": 688,
+        "source_key": "18490",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 738
+      },
+      {
+        "content_sha256": "b5f3165908df52b486619a50af6d4745e0257d737676e8636f0648da8172b28b",
+        "id": "chat-v1-heldout-reasoning-27",
+        "language": "en",
+        "scored_target_count": 845,
+        "source_key": "17680",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 882
+      },
+      {
+        "content_sha256": "d5981c837347f1aa8e7a99d78d3f818a0a21f949bd90b9de6a1825da10d6a8f8",
+        "id": "chat-v1-heldout-reasoning-28",
+        "language": "en",
+        "scored_target_count": 914,
+        "source_key": "17982",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 963
+      },
+      {
+        "content_sha256": "753e08ec4ba09f959711539f18e2b65c35f2432ed8dc2ad1efc6acede6a23f8f",
+        "id": "chat-v1-heldout-reasoning-29",
+        "language": "en",
+        "scored_target_count": 659,
+        "source_key": "18166",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 703
+      },
+      {
+        "content_sha256": "865533aca70c602fb67df617eee26a0209140f3fa46bb9d10c7bf03043d40aee",
+        "id": "chat-v1-heldout-reasoning-30",
+        "language": "en",
+        "scored_target_count": 670,
+        "source_key": "18108",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 723
+      },
+      {
+        "content_sha256": "e0585a2f22807f3ae5c05d903b8a1bcab0a481f5b258a705420204f74d91282f",
+        "id": "chat-v1-heldout-reasoning-31",
+        "language": "en",
+        "scored_target_count": 640,
+        "source_key": "9829",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 743
+      },
+      {
+        "content_sha256": "c4c806778763720f03fa184adb2cafdd6b1ea9334b333603b7bd1872fcfd2132",
+        "id": "chat-v1-heldout-reasoning-32",
+        "language": "en",
+        "scored_target_count": 735,
+        "source_key": "16329",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 768
+      },
+      {
+        "content_sha256": "c70b9b846c48ff8733af6de3cac09b04d6f46bd08d11934853a9fd30b4bb3f8a",
+        "id": "chat-v1-heldout-reasoning-33",
+        "language": "en",
+        "scored_target_count": 707,
+        "source_key": "18150",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 753
+      },
+      {
+        "content_sha256": "6a65ca726212a23a39f0616dfc17bbc3dfab01dcd29a06d00e85442d2ae0adde",
+        "id": "chat-v1-heldout-reasoning-34",
+        "language": "en",
+        "scored_target_count": 894,
+        "source_key": "18820",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 947
+      },
+      {
+        "content_sha256": "d2724bab246ccc49b9f04b9860632b25117114763b461bbb1c1dfe2669e6c099",
+        "id": "chat-v1-heldout-reasoning-35",
+        "language": "en",
+        "scored_target_count": 694,
+        "source_key": "17936",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 741
+      },
+      {
+        "content_sha256": "7a04e32e853a660402df31fa8ff4a3b0ce18e08ae9b3057ac1bb26b91f31deea",
+        "id": "chat-v1-heldout-reasoning-36",
+        "language": "en",
+        "scored_target_count": 811,
+        "source_key": "18236",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 915
+      },
+      {
+        "content_sha256": "8d0f53f893638c7432ca96689e845734954c839abbfd2e74e66193ae4821169e",
+        "id": "chat-v1-heldout-reasoning-37",
+        "language": "en",
+        "scored_target_count": 725,
+        "source_key": "18953",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 773
+      },
+      {
+        "content_sha256": "6336a170a4e836b4ffe4e369747c5a0ecb9149b251555c3d0fa808425852d6db",
+        "id": "chat-v1-heldout-reasoning-38",
+        "language": "en",
+        "scored_target_count": 654,
+        "source_key": "18559",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 701
+      },
+      {
+        "content_sha256": "f0e96b16a2c735e10c1bed16d262f419878de9c291be43bc689879e4a8fa1b8f",
+        "id": "chat-v1-heldout-reasoning-39",
+        "language": "en",
+        "scored_target_count": 719,
+        "source_key": "18796",
+        "split": "heldout",
+        "stratum": "reasoning",
+        "token_count": 823
+      }
+    ],
+    "corpus": {
+      "path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_chat_corpus_v1/corpus.jsonl",
+      "sha256": "5cd8715121d6e95b3c5a6ba87016ffc12e53dcd181ef3aea40b98b319b436f2d"
+    },
+    "quotas_per_split": {
+      "chat/de": 4,
+      "chat/en": 24,
+      "chat/es": 4,
+      "chat/fr": 4,
+      "chat/it": 4,
+      "reasoning/en": 40,
+      "tool/en": 40
+    },
+    "schema": "rco.qwen36.chat_corpus_v1",
+    "scoring": "assistant tokens from after '<|im_start|>assistant\\n' through '<|im_end|>', skipping a leading '<think>\\n' or empty think block",
+    "seed": 20261010,
+    "source_files": {
+      "chat": {
+        "path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_chat_corpus_v1/sources/OpenAssistant__oasst2/2023-11-05_oasst2_ready.trees.jsonl.gz",
+        "sha256": "7a886a16ccfc1173c4f00a6897523e3c95b2785a86ee44a18a98f4f2807ee29b"
+      },
+      "reasoning": {
+        "path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_chat_corpus_v1/sources/open-thoughts__OpenThoughts-114k/data/train-00005-of-00006.parquet",
+        "sha256": "bd455b4a7638967557919b683297f8f4014efe58a7c75c90cc5da62e88bced1f"
+      },
+      "tool": {
+        "path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_chat_corpus_v1/sources/glaiveai__glaive-function-calling-v2/glaive-function-calling-v2.json",
+        "sha256": "e9b5d671812b5ca2fbd7b625a37d5c99a19576c37252cdc806defe256aea6dad"
+      }
+    },
+    "sources": {
+      "chat": {
+        "dataset": "OpenAssistant/oasst2",
+        "file": "2023-11-05_oasst2_ready.trees.jsonl.gz",
+        "license": "Apache-2.0",
+        "revision": "179dd21fc55192153d94adb0e0ce8f69e222bf75"
+      },
+      "reasoning": {
+        "dataset": "open-thoughts/OpenThoughts-114k",
+        "file": "data/train-00005-of-00006.parquet",
+        "license": "Apache-2.0",
+        "revision": "bd093c3994fd54d2390985b66988ddf282a55eb6"
+      },
+      "tool": {
+        "dataset": "glaiveai/glaive-function-calling-v2",
+        "file": "glaive-function-calling-v2.json",
+        "license": "Apache-2.0",
+        "revision": "e7f4b6456019f5d8bcb991ef0dd67d8ff23221ac"
+      }
+    },
+    "token_range": [
+      192,
+      1024
+    ],
+    "tokenizer_sha256": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+    "tokens": {
+      "path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_chat_corpus_v1/tokens.json",
+      "sha256": "697d3d1f39ff4edc52cd135bda601a9d17fec7d5488f3c68035f1714327148c8"
+    }
+  },
+  "canonical_manifest_sha256": "1b1275fdb479efa77ac810265f991f0a2ba581bec48dc00eaa7797565df793a5",
+  "schema": "rco.qwen36.chat_corpus_v1.manifest",
+  "status": "complete",
+  "summary": {
+    "calibration": {
+      "conversations": 120,
+      "scored_targets": 48351,
+      "tokens": 70240
+    },
+    "heldout": {
+      "conversations": 120,
+      "scored_targets": 49025,
+      "tokens": 71092
+    }
+  }
+}
