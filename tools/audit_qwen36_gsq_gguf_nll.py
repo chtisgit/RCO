@@ -167,7 +167,7 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
         "llama_cpp": {"path": str(llama_dir), "revision": _git_revision(llama_dir)},
         "parameters": {
             "gpu_layers": args.gpu_layers, "threads": args.threads,
-            "ubatch": args.ubatch,
+            "ubatch": args.ubatch, "parse_special": args.parse_special,
         },
     }
     fingerprint = sha256_bytes(canonical_json_bytes(identity))
@@ -222,7 +222,7 @@ def audit(args: argparse.Namespace) -> dict[str, Any]:
             "--gpu-layers", str(args.gpu_layers), "--threads", str(args.threads),
             "--ubatch", str(args.ubatch), "--start-document", str(start),
             "--document-count", str(count),
-        ]
+        ] + (["--parse-special"] if args.parse_special else [])
         with stderr_path.open("w", encoding="utf-8") as stderr:
             process = subprocess.Popen(
                 command, stdout=subprocess.PIPE, stderr=stderr, text=True,
@@ -306,6 +306,10 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument("--threads", type=int, default=4)
     parser.add_argument("--ubatch", type=int, default=64)
     parser.add_argument("--stop-after-documents", type=int)
+    parser.add_argument(
+        "--parse-special", action="store_true",
+        help="have llama.cpp match control-token strings in the text, as the HF "
+             "tokenizer does (needed when a document contains e.g. <|im_end|>)")
     args = parser.parse_args()
     if args.gpu_layers < 0 or args.threads < 1 or args.ubatch < 1:
         parser.error("invalid execution parameter")

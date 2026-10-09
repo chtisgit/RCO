@@ -108,10 +108,10 @@ std::string json_escape(const std::string & value) {
 }
 
 std::vector<llama_token> tokenize(
-    const llama_vocab * vocab, const std::string & text) {
+    const llama_vocab * vocab, const std::string & text, bool parse_special) {
     const int32_t required = llama_tokenize(
         vocab, text.data(), static_cast<int32_t>(text.size()),
-        nullptr, 0, false, false);
+        nullptr, 0, false, parse_special);
     if (required == std::numeric_limits<int32_t>::min()) {
         throw std::runtime_error("token count overflow");
     }
@@ -119,7 +119,7 @@ std::vector<llama_token> tokenize(
     std::vector<llama_token> tokens(count);
     const int32_t actual = llama_tokenize(
         vocab, text.data(), static_cast<int32_t>(text.size()),
-        tokens.data(), count, false, false);
+        tokens.data(), count, false, parse_special);
     if (actual != count) {
         throw std::runtime_error("llama.cpp tokenization failed");
     }
@@ -148,12 +148,18 @@ struct Arguments {
     int32_t ubatch = 64;
     int32_t start_document = 0;
     int32_t document_count = -1;
+    // Match control-token strings in the text, as the HF tokenizer does.
+    bool parse_special = false;
 };
 
 Arguments parse_arguments(int argc, char ** argv) {
     Arguments arguments;
     for (int index = 1; index < argc; ++index) {
         const std::string name = argv[index];
+        if (name == "--parse-special") {
+            arguments.parse_special = true;
+            continue;
+        }
         if (index + 1 >= argc) {
             throw std::runtime_error("missing value for argument: " + name);
         }
@@ -258,7 +264,8 @@ int main(int argc, char ** argv) {
         for (int32_t document_index = arguments.start_document;
                 document_index < stop_document; ++document_index) {
             const Document & document = documents[document_index];
-            const auto runtime_tokens = tokenize(vocab, document.text);
+            const auto runtime_tokens = tokenize(
+                vocab, document.text, arguments.parse_special);
             if (runtime_tokens != document.tokens) {
                 size_t mismatch = 0;
                 while (mismatch < runtime_tokens.size()
