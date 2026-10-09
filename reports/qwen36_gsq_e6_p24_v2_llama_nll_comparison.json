@@ -1,0 +1,127 @@
+{
+  "schema": "rco.qwen36.p24_v2_llama_nll_comparison.v1",
+  "status": "complete",
+  "question": "Does llama.cpp, running the physically pruned P24 GGUF, reproduce the streaming evaluator's per-document NLL and its pruning gain over the unpruned GSQ-E6 model?",
+  "criteria": "none fixed in advance; descriptive",
+  "documents": 250,
+  "inputs": {
+    "p24_llama": "/extraspace/IronWolf/christian/gsq-rco-moe/repos/RCO/reports/qwen36_gsq_e6_p24_v2_llama_nll.json",
+    "control_llama": "/extraspace/IronWolf/christian/gsq-rco-moe/repos/RCO/reports/qwen36_gsq_e6_v2_llama_nll.json",
+    "p24_evaluator": "/extraspace/IronWolf/christian/gsq-rco-moe/repos/RCO/reports/qwen36_gsq_e6_prune24_score_consensus.json",
+    "control_evaluator": "/extraspace/IronWolf/christian/gsq-rco-moe/repos/RCO/reports/qwen36_gsq_e6_prune24_router_stats.json",
+    "p24_build": "/extraspace/IronWolf/christian/gsq-rco-moe/repos/RCO/reports/qwen36_gsq_e6_p24_gguf.json",
+    "control_build": "/extraspace/IronWolf/christian/gsq-rco-moe/repos/RCO/reports/qwen36_gsq_e6_gguf.json"
+  },
+  "agreement": {
+    "p24": {
+      "llama_mean_nll": 1.782238558319978,
+      "evaluator_mean_nll": 1.7834229052066803,
+      "difference_llama_minus_evaluator": {
+        "mean": -0.0011843468867025072,
+        "ci95": [
+          -0.0018575725745776097,
+          -0.0005228868643605195
+        ]
+      },
+      "mean_absolute_difference": 0.004154508706188144,
+      "max_absolute_difference": 0.0183670441324173,
+      "pearson_r": 0.999957610114824,
+      "per_stratum": {
+        "language": {
+          "llama_mean_nll": 2.117535346475054,
+          "evaluator_mean_nll": 2.120232161283493,
+          "mean_difference": -0.0026968148084389786
+        },
+        "knowledge": {
+          "llama_mean_nll": 1.5125365802379138,
+          "evaluator_mean_nll": 1.5131951427459718,
+          "mean_difference": -0.0006585625080579649
+        },
+        "reasoning": {
+          "llama_mean_nll": 2.4184967854072,
+          "evaluator_mean_nll": 2.4214609813690187,
+          "mean_difference": -0.002964195961818543
+        },
+        "code": {
+          "llama_mean_nll": 1.1276358433606957,
+          "evaluator_mean_nll": 1.1276973497867584,
+          "mean_difference": -6.150642606276735e-05
+        },
+        "multilingual": {
+          "llama_mean_nll": 1.7349882361190256,
+          "evaluator_mean_nll": 1.7345288908481598,
+          "mean_difference": 0.00045934527086571864
+        }
+      }
+    },
+    "control": {
+      "llama_mean_nll": 1.795132775158694,
+      "evaluator_mean_nll": 1.7963625161647796,
+      "difference_llama_minus_evaluator": {
+        "mean": -0.0012297410060853387,
+        "ci95": [
+          -0.0019702195076389067,
+          -0.0004760583229130826
+        ]
+      },
+      "mean_absolute_difference": 0.004377222683551212,
+      "max_absolute_difference": 0.022177914702322,
+      "pearson_r": 0.9999479953322137,
+      "per_stratum": {
+        "language": {
+          "llama_mean_nll": 2.144130924626999,
+          "evaluator_mean_nll": 2.1465969717502595,
+          "mean_difference": -0.0024660471232602578
+        },
+        "knowledge": {
+          "llama_mean_nll": 1.5198951934758411,
+          "evaluator_mean_nll": 1.5206114518642426,
+          "mean_difference": -0.0007162583884012918
+        },
+        "reasoning": {
+          "llama_mean_nll": 2.4333650270815776,
+          "evaluator_mean_nll": 2.4346985483169554,
+          "mean_difference": -0.0013335212353777059
+        },
+        "code": {
+          "llama_mean_nll": 1.1338426730736697,
+          "evaluator_mean_nll": 1.1356711375713349,
+          "mean_difference": -0.0018284644976652386
+        },
+        "multilingual": {
+          "llama_mean_nll": 1.744430057535384,
+          "evaluator_mean_nll": 1.744234471321106,
+          "mean_difference": 0.0001955862142778009
+        }
+      }
+    }
+  },
+  "pruning_gain_p24_minus_unpruned": {
+    "llama_cpp": {
+      "mean": -0.012894216838716534,
+      "ci95": [
+        -0.015573509362123568,
+        -0.010383247499351614
+      ]
+    },
+    "evaluator": {
+      "mean": -0.012939610958099364,
+      "ci95": [
+        -0.015519693851470947,
+        -0.010487803220748902
+      ]
+    },
+    "difference_llama_minus_evaluator": {
+      "mean": 4.5394119382831555e-05,
+      "ci95": [
+        -0.0008861146175834964,
+        0.000977256195820537
+      ]
+    },
+    "pearson_r_per_document": 0.9327559446388461,
+    "documents_improved": {
+      "llama_cpp": 188,
+      "evaluator": 186
+    }
+  }
+}
