@@ -17,6 +17,10 @@ It starts from the authentic GSQ GGUF and the promoted Phase 3 pruning mask
 
 Nothing is decoded or requantized.  This is the zero-upgrade base for the
 llama.cpp parity check, not a release artifact.
+
+``--unpruned`` builds the Phase 4 parity control instead: GSQ-E6 with all 256
+experts, which is authentic GSQ with only ``token_embd`` replaced.  No mask is
+read and no metadata is changed.
 """
 
 from __future__ import annotations
@@ -51,13 +55,14 @@ PRUNE_PER_LAYER = 24
 KEPT = EXPERTS - PRUNE_PER_LAYER
 EXPERT_TENSORS = ("ffn_gate_exps", "ffn_up_exps", "ffn_down_exps", "ffn_gate_inp")
 EXPECTED_BYTES = 10_760_624_832
-METADATA_OVERRIDES = {
+UNPRUNED_EXPECTED_BYTES = 11_617_835_712
+PRUNED_OVERRIDES = {
     "qwen35moe.expert_count": KEPT,
     "general.size_label": "232x2.6B",
 }
 WARNING = (
-    "Ungated pruned base model for the Phase 4 llama.cpp parity check. It is "
-    "not a release GSQ-RCO model.")
+    "Ungated model for the Phase 4 llama.cpp parity check. It is not a release "
+    "GSQ-RCO model.")
 
 
 def _load_json(path: Path) -> Any:
@@ -73,13 +78,14 @@ def _expert_tensor(name: str) -> int | None:
     return None
 
 
-def _copy_metadata(reader: Any, writer: Any, gguf: Any) -> None:
+def _copy_metadata(reader: Any, writer: Any, gguf: Any,
+                   overrides: dict[str, Any]) -> None:
     for field in reader.fields.values():
         if field.name == gguf.Keys.General.ARCHITECTURE or field.name.startswith("GGUF."):
             continue
         value_type = field.types[0]
         sub_type = field.types[-1] if value_type == gguf.GGUFValueType.ARRAY else None
-        value = METADATA_OVERRIDES.get(field.name, field.contents())
+        value = overrides.get(field.name, field.contents())
         writer.add_key_value(field.name, value, value_type, sub_type=sub_type)
 
 
@@ -93,18 +99,27 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
     started = time.monotonic()
     gguf = import_pinned_gguf(args.gguf_python)
 
-    # The promoted mask must be the one that step g replayed.
-    replay = _load_json(args.replay_report)
-    if replay.get("status") != "complete":
-        raise ValueError("replay report is not complete")
-    mask_sha256 = _sha256_file(args.mask)
-    if mask_sha256 != replay["mask"]["sha256"]:
-        raise ValueError("mask differs from the replayed mask")
-    mask = np.load(args.mask)
-    if mask.shape != (LAYERS, EXPERTS) or mask.dtype != bool:
-        raise ValueError("mask must be a 40 x 256 boolean array")
-    if not bool((mask.sum(axis=1) == PRUNE_PER_LAYER).all()):
-        raise ValueError(f"mask must prune {PRUNE_PER_LAYER} experts per layer")
+    pruned = not args.unpruned
+    overrides = PRUNED_OVERRIDES if pruned else {}
+    expected_bytes = EXPECTED_BYTES if pruned else UNPRUNED_EXPECTED_BYTES
+    inputs: dict[str, Any] = {}
+    mask = np.zeros((LAYERS, EXPERTS), dtype=bool)
+    if pruned:
+        # The promoted mask must be the one that step g replayed.
+        replay = _load_json(args.replay_report)
+        if replay.get("status") != "complete":
+            raise ValueError("replay report is not complete")
+        mask_sha256 = _sha256_file(args.mask)
+        if mask_sha256 != replay["mask"]["sha256"]:
+            raise ValueError("mask differs from the replayed mask")
+        mask = np.load(args.mask)
+        if mask.shape != (LAYERS, EXPERTS) or mask.dtype != bool:
+            raise ValueError("mask must be a 40 x 256 boolean array")
+        if not bool((mask.sum(axis=1) == PRUNE_PER_LAYER).all()):
+            raise ValueError(f"mask must prune {PRUNE_PER_LAYER} experts per layer")
+        inputs["mask"] = {"path": str(args.mask), "sha256": mask_sha256}
+        inputs["replay_report"] = {"path": str(args.replay_report),
+                                   "sha256": _sha256_file(args.replay_report)}
     kept = [np.flatnonzero(~mask[layer]) for layer in range(LAYERS)]
 
     embedding = _load_json(args.embedding_report)
@@ -138,9 +153,9 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
     writer.data_alignment = alignment
     plan = []
     try:
-        _copy_metadata(reader, writer, gguf)
+        _copy_metadata(reader, writer, gguf, overrides)
         for tensor in tensors:
-            layer = _expert_tensor(tensor.name)
+            layer = _expert_tensor(tensor.name) if pruned else None
             if tensor.name == "token_embd.weight":
                 if [int(value) for value in tensor.shape] != embd_shape:
                     raise ValueError("token_embd shape differs from the Q6_K payload")
@@ -213,8 +228,8 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
         writer.close()
 
     output_bytes = staging.stat().st_size
-    if output_bytes != EXPECTED_BYTES:
-        raise ValueError(f"output size {output_bytes} differs from the plan's {EXPECTED_BYTES}")
+    if output_bytes != expected_bytes:
+        raise ValueError(f"output size {output_bytes} differs from the expected {expected_bytes}")
     os.replace(staging, output)
     directory = os.open(output.parent, os.O_RDONLY)
     try:
@@ -223,25 +238,24 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
         os.close(directory)
     print(json.dumps({"written": str(output), "bytes": output_bytes}), flush=True)
 
-    validation = validate(gguf, reader, output, plan, kept, embd_path)
+    validation = validate(gguf, reader, output, plan, kept, embd_path, overrides, pruned)
     return {
         "schema": SCHEMA,
         "status": "built_pending_llama_cpp_parity",
+        "variant": "p24" if pruned else "unpruned_parity_control",
         "warning": WARNING,
         "inputs": {
             "gsq_gguf": {"path": str(gsq_path), "sha256": gsq_sha256},
-            "mask": {"path": str(args.mask), "sha256": mask_sha256},
-            "replay_report": {"path": str(args.replay_report),
-                              "sha256": _sha256_file(args.replay_report)},
+            **inputs,
             "embedding_report": {"path": str(args.embedding_report),
                                  "sha256": _sha256_file(args.embedding_report)},
             "token_embd_q6_k": {"path": str(embd_path), "sha256": embd_sha256},
         },
-        "metadata_overrides": METADATA_OVERRIDES,
+        "metadata_overrides": overrides,
         "pruned_experts_per_layer": [np.flatnonzero(mask[layer]).tolist()
                                      for layer in range(LAYERS)],
         "output": {"path": str(output), "bytes": output_bytes,
-                   "expected_bytes": EXPECTED_BYTES, "header_bytes": header_bytes,
+                   "expected_bytes": expected_bytes, "header_bytes": header_bytes,
                    "sha256": validation.pop("output_sha256")},
         "validation": validation,
         "wall_seconds": time.monotonic() - started,
@@ -250,7 +264,8 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
 
 
 def validate(gguf: Any, gsq: Any, output: Path, plan: list[dict[str, Any]],
-             kept: list[np.ndarray], embd_path: Path) -> dict[str, Any]:
+             kept: list[np.ndarray], embd_path: Path, overrides: dict[str, Any],
+             pruned: bool) -> dict[str, Any]:
     """Re-read the written GGUF and check it against its sources."""
     model = gguf.GGUFReader(output)
     gsq_fields = {name: (field.types, field.contents())
@@ -260,7 +275,7 @@ def validate(gguf: Any, gsq: Any, output: Path, plan: list[dict[str, Any]],
     if set(gsq_fields) != set(model_fields):
         raise ValueError("metadata keys differ from authentic GSQ")
     for name, (types, value) in gsq_fields.items():
-        expected = (types, METADATA_OVERRIDES.get(name, value))
+        expected = (types, overrides.get(name, value))
         if model_fields[name] != expected:
             raise ValueError(f"metadata differs for {name}")
     if [tensor.name for tensor in model.tensors] != [tensor.name for tensor in gsq.tensors]:
@@ -298,7 +313,7 @@ def validate(gguf: Any, gsq: Any, output: Path, plan: list[dict[str, Any]],
         if not np.array_equal(written.data, original.data):
             raise ValueError(f"retained tensor bytes differ: {written.name}")
         counts["retained_tensors_byte_identical"] += 1
-    if counts["expert_tensors_slice_identical"] != LAYERS * len(EXPERT_TENSORS):
+    if pruned and counts["expert_tensors_slice_identical"] != LAYERS * len(EXPERT_TENSORS):
         raise ValueError("not every per-expert tensor was sliced")
     return {"metadata_identical_except_overrides": True,
             "tensor_order_identical": True,
@@ -319,12 +334,18 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument("--gguf", type=Path,
                         default=ROOT / "results/Qwen3.6-35B-A3B-GSQ-hybrid.gguf")
     parser.add_argument("--gguf-python", type=Path, default=ROOT / "repos/llama.cpp/gguf-py")
-    parser.add_argument("--output-model", type=Path,
-                        default=ROOT / "results/Qwen3.6-35B-A3B-GSQ-E6-P24-UNGATED.gguf")
-    parser.add_argument("--output", type=Path,
-                        default=RCO / "reports/qwen36_gsq_e6_p24_gguf.json")
+    parser.add_argument("--unpruned", action="store_true",
+                        help="build the unpruned GSQ-E6 parity control")
+    parser.add_argument("--output-model", type=Path)
+    parser.add_argument("--output", type=Path)
     parser.add_argument("--chunk-bytes", type=int, default=64 << 20)
     args = parser.parse_args()
+    variant = "GSQ-E6" if args.unpruned else "GSQ-E6-P24"
+    if args.output_model is None:
+        args.output_model = ROOT / f"results/Qwen3.6-35B-A3B-{variant}-UNGATED.gguf"
+    if args.output is None:
+        stem = "qwen36_gsq_e6" if args.unpruned else "qwen36_gsq_e6_p24"
+        args.output = RCO / f"reports/{stem}_gguf.json"
     for key in ("mask", "replay_report", "embedding_report", "gguf", "gguf_python",
                 "output_model", "output"):
         setattr(args, key, getattr(args, key).resolve())
