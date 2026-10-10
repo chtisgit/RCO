@@ -4,7 +4,9 @@
 Starts the pinned ``llama-server`` with ``--jinja``, so the GGUF's own chat
 template is applied, and sends the fixed prompts
 (``qwen36_chat_generation_prompts.json``) through ``/v1/chat/completions``
-with greedy decoding.  Multi-turn prompts feed the model's own replies back
+with the prompt file's decoding.  Prompt file v1 decodes greedily once;
+v2 samples with the model card's settings for each mode (thinking on or off)
+once per listed seed.  Multi-turn prompts feed the model's own replies back
 as history.  ``verbose`` returns the raw generated text and the stop type.
 
 Checks per response:
@@ -49,7 +51,7 @@ from audit_qwen36_q3k_viability import _atomic_json, _load_json, _sha256_file  #
 SCHEMA = "rco.qwen36.chat_generation.v1"
 
 
-def _post(url: str, body: dict, timeout: float = 3600) -> dict:
+def _post(url: str, body: dict, timeout: float = 4 * 3600) -> dict:
     request = urllib.request.Request(
         url, data=json.dumps(body).encode("utf-8"),
         headers={"Content-Type": "application/json"})
@@ -70,6 +72,22 @@ def _wait_ready(base: str, process: subprocess.Popen, timeout: float) -> None:
             pass
         time.sleep(2)
     raise TimeoutError("llama-server did not become ready")
+
+
+def decoding_plan(prompts: dict) -> tuple[list[int | None], callable]:
+    """Return the seeds and a function giving a prompt's request settings."""
+    decoding = prompts["decoding"]
+    if prompts["schema"].endswith(".v1"):
+        def settings(prompt: dict) -> dict:
+            mode = "thinking_on" if prompt["thinking"] else "thinking_off"
+            return {"temperature": 0, "seed": decoding["seed"],
+                    "max_tokens": prompts["max_tokens"][mode]}
+        return [None], settings
+
+    def settings(prompt: dict) -> dict:
+        mode = "thinking_on" if prompt["thinking"] else "thinking_off"
+        return {**decoding[mode], "max_tokens": decoding["max_tokens"]}
+    return list(decoding["seeds"]), settings
 
 
 def check_tool_calls(tool_calls: list[dict] | None, tools: list[dict]) -> tuple[bool, str]:
@@ -104,7 +122,8 @@ def _transcript(report: dict) -> str:
     for item in report["responses"]:
         checks = ", ".join(f"{name}: {'pass' if ok else 'FAIL'}"
                            for name, ok in item["checks"].items())
-        lines += [f"## {item['prompt_id']}, turn {item['turn'] + 1}", "",
+        seed = "" if item.get("seed") is None else f", seed {item['seed']}"
+        lines += [f"## {item['prompt_id']}{seed}, turn {item['turn'] + 1}", "",
                   f"*{item['kind']}, thinking {'on' if item['thinking'] else 'off'}; "
                   f"stop `{item['stop_type']}`, {item['tokens_predicted']} tokens, "
                   f"{item['tokens_per_second']:.1f} tok/s; {checks}*", "",
@@ -152,6 +171,7 @@ def main() -> int:
                        "context": args.context,
                        "devices": "none" if args.device == "cpu" else "default"},
     }
+    seeds, settings = decoding_plan(prompts)
     report = {"schema": SCHEMA, "status": "incomplete", "label": args.label,
               "device": args.device, "identity": identity, "responses": []}
     if args.device == "cpu" and args.gpu_layers != 0:
@@ -164,11 +184,9 @@ def main() -> int:
             print(f"{stem}: already complete", flush=True)
             return 0
         report = previous
-    done = {item["prompt_id"] for item in report["responses"]}
-    # Drop a partly finished multi-turn prompt; it is rerun from turn 1.
-    complete = {p["id"] for p in selected if p["id"] in done and
-                sum(r["prompt_id"] == p["id"] for r in report["responses"]) == len(p["turns"])}
-    report["responses"] = [r for r in report["responses"] if r["prompt_id"] in complete]
+    # A prompt and seed is complete once it was written; the report is only
+    # written after a whole conversation, so a partial one is rerun.
+    complete = {(r["prompt_id"], r.get("seed")) for r in report["responses"]}
 
     base = f"http://127.0.0.1:{args.port}"
     log = (ROOT / f"{stem}.server.log").open("w")
@@ -182,19 +200,18 @@ def main() -> int:
     try:
         _wait_ready(base, process, timeout=900)
         started = time.perf_counter()
-        for prompt in selected:
-            if prompt["id"] in complete:
+        for prompt, seed in [(p, s) for s in seeds for p in selected]:
+            if (prompt["id"], seed) in complete:
                 continue
             tools = prompt.get("tools")
-            max_tokens = prompts["max_tokens"]["thinking_on" if prompt["thinking"]
-                                               else "thinking_off"]
             messages: list[dict[str, Any]] = []
             for turn, user in enumerate(prompt["turns"]):
                 messages.append({"role": "user", "content": user})
                 body = {"messages": messages,
                         "chat_template_kwargs": {"enable_thinking": prompt["thinking"]},
-                        "temperature": 0, "seed": prompts["decoding"]["seed"],
-                        "max_tokens": max_tokens, "verbose": True, "return_tokens": True}
+                        **settings(prompt), "verbose": True, "return_tokens": True}
+                if seed is not None:
+                    body["seed"] = seed
                 if tools:
                     body["tools"] = tools
                 rendered = _post(base + "/apply-template", body).get("prompt")
@@ -212,7 +229,7 @@ def main() -> int:
                         message.get("tool_calls"), tools)
                 timings = response.get("timings", {})
                 report["responses"].append({
-                    "prompt_id": prompt["id"], "kind": prompt["kind"],
+                    "prompt_id": prompt["id"], "seed": seed, "kind": prompt["kind"],
                     "thinking": prompt["thinking"], "turn": turn, "user": user,
                     "rendered_prompt_sha256": hashlib.sha256(
                         (rendered or "").encode("utf-8")).hexdigest(),
@@ -225,8 +242,11 @@ def main() -> int:
                     "reasoning_content": message.get("reasoning_content"),
                     "tool_calls": message.get("tool_calls"),
                     "checks": checks, "notes": notes,
+                    "request": {k: v for k, v in body.items()
+                                if k not in ("messages", "tools")},
+                    "server_settings": verbose.get("generation_settings"),
                 })
-                print(f"{stem}: {prompt['id']} turn {turn + 1}: "
+                print(f"{stem}: {prompt['id']} seed {seed} turn {turn + 1}: "
                       f"{verbose.get('tokens_predicted')} tokens, stop "
                       f"{verbose.get('stop_type')}, {checks}", flush=True)
                 if message.get("tool_calls"):
