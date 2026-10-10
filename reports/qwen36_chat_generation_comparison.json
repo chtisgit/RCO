@@ -1,0 +1,69 @@
+{
+  "control_only_failures": [],
+  "counted_failures": [
+    {
+      "check": "stopped",
+      "device": "cpu",
+      "prompt_id": "multi-bread",
+      "turn": 1
+    },
+    {
+      "check": "stopped",
+      "device": "cpu",
+      "prompt_id": "think-divisors",
+      "turn": 1
+    },
+    {
+      "check": "think_closed",
+      "device": "cpu",
+      "prompt_id": "think-divisors",
+      "turn": 1
+    },
+    {
+      "check": "stopped",
+      "device": "gpu",
+      "prompt_id": "think-divisors",
+      "turn": 1
+    },
+    {
+      "check": "think_closed",
+      "device": "gpu",
+      "prompt_id": "think-divisors",
+      "turn": 1
+    }
+  ],
+  "devices": {
+    "cpu": {
+      "p24": {
+        "checks": 22,
+        "failed_checks": 3,
+        "mean_tokens_per_second": 7.605232667184408,
+        "responses": 16
+      },
+      "unpruned": {
+        "checks": 22,
+        "failed_checks": 0,
+        "mean_tokens_per_second": 7.572582246425774,
+        "responses": 16
+      }
+    },
+    "gpu": {
+      "p24": {
+        "checks": 22,
+        "failed_checks": 2,
+        "mean_tokens_per_second": 14.104091269555433,
+        "responses": 16
+      },
+      "unpruned": {
+        "checks": 22,
+        "failed_checks": 0,
+        "mean_tokens_per_second": 14.088179917865133,
+        "responses": 16
+      }
+    }
+  },
+  "rule": "every p24 check passes on CPU and GPU, unless unpruned fails the same check on the same prompt, turn and device",
+  "schema": "rco.qwen36.chat_generation_comparison.v1",
+  "shared_failures": [],
+  "status": "fail"
+}
