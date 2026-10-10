@@ -42,23 +42,23 @@ class BatchingTest(unittest.TestCase):
 
 
 class CompareTest(unittest.TestCase):
-    def _score(self, label, kl, base_kl=None):
+    def _score(self, label, kl, template_kl=None):
         return {"status": "complete", "label": label,
                 "identity": {"corpus": {"split": "heldout"}, "reference_sha256": "r"},
                 "mean_top20_kl_to_bf16": float(np.mean(kl)), "mean_nll": 1.0,
                 "conversation_mean_top20_kl": kl,
                 "conversation_mean_nll": [1.0] * len(kl),
-                "conversation_template_kl": kl,
+                "conversation_template_kl": kl if template_kl is None else template_kl,
                 "strata": ["chat", "tool-call"] * (len(kl) // 2)}
 
-    def _run(self, base_label, candidate_label, delta):
+    def _run(self, base_label, candidate_label, delta, template_kl=None):
         base = [0.5, 0.4, 0.6, 0.3] * 5
         with tempfile.TemporaryDirectory() as directory:
             reports = Path(directory)
             for label, values in ((base_label, base),
                                   (candidate_label, [v + delta for v in base])):
                 (reports / f"qwen36_chat_kl_score_{label}_v2.json").write_text(
-                    json.dumps(self._score(label, values)))
+                    json.dumps(self._score(label, values, template_kl)))
             args = SimpleNamespace(reports=reports, suffix="_v2", base_label=base_label,
                                    candidate_label=candidate_label)
             with mock.patch("builtins.print"):
@@ -80,6 +80,14 @@ class CompareTest(unittest.TestCase):
         self.assertAlmostEqual(report["delta_top20_kl"]["mean"], -0.01)
         self.assertEqual(set(report["for_information"]["per_stratum_delta_top20_kl"]),
                          {"chat", "tool-call"})
+
+    def test_conversations_without_template_tokens_are_left_out(self):
+        # The score step writes NaN for a reply with no scored template token.
+        template = [0.2] * 18 + [float("nan")] * 2
+        status, _, report = self._run("unpruned", "p24", 0.001, template_kl=template)
+        self.assertEqual(status, 0)
+        self.assertEqual(report["for_information"]["delta_template_token_kl"],
+                         {"mean": 0.0, "ci95": [0.0, 0.0], "conversations": 18})
 
 
 class ModelTest(unittest.TestCase):

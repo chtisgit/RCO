@@ -423,6 +423,10 @@ def run_compare(args) -> int:
         return {"mean": float(values.mean()), "ci95": [lower, upper]}
 
     strata = np.asarray(base["strata"])
+    # A reply cut at the token limit inside its reasoning scores no template
+    # token, so its template KL is NaN; such conversations are left out.
+    has_template = (np.isfinite(base["conversation_template_kl"])
+                    & np.isfinite(candidate["conversation_template_kl"]))
     kl = delta("conversation_mean_top20_kl")
     status = "pass" if kl["ci95"][1] < KL_MARGIN else "fail"
     report = {
@@ -436,7 +440,9 @@ def run_compare(args) -> int:
         "delta_top20_kl": kl,
         "for_information": {
             "delta_nll": delta("conversation_mean_nll"),
-            "delta_template_token_kl": delta("conversation_template_kl"),
+            "delta_template_token_kl": {
+                **delta("conversation_template_kl", has_template),
+                "conversations": int(has_template.sum())},
             "per_stratum_delta_top20_kl": {
                 stratum: delta("conversation_mean_top20_kl", strata == stratum)
                 for stratum in dict.fromkeys(base["strata"])},
