@@ -1,5 +1,13 @@
 # Bounded-memory Qwen3.6 work
 
+> **Status (2026-10-10).** This document records the fork's first line of
+> work: the streaming foundations and the relaxed and hard bit-width
+> searches. The current work (GSQ-E6, P24 expert pruning, Q3_K upgrades) is
+> indexed in [QWEN36_PRUNE24.md](QWEN36_PRUNE24.md) and reuses the
+> foundations described here. "Remaining work" below is historical. In
+> particular, the CUDA problem it mentions is gone: the RTX 3060 has run the
+> plan-v2 searches and scoring passes since 2026-10-07.
+
 This fork is adding a bounded-memory path for Qwen3.5/Qwen3.6 MoE models. The
 target machine is an RTX 3060 with 12 GiB VRAM and about 32 GiB RAM. The design
 keeps inactive weights and candidates packed on disk and limits dense device

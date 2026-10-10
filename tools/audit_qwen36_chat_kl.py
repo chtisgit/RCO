@@ -1,24 +1,33 @@
 #!/usr/bin/env python3
 """Phase 4 chat check 2 of RCO_PLAN_NEW.md: chat KL against BF16.
 
-Scores chat corpus v1 (``build_qwen36_chat_corpus.py``) with the streaming
-evaluator and the Phase 3 machinery, over assistant tokens only.
+Scores a chat corpus with the streaming evaluator and the Phase 3
+machinery, over the scored (assistant) tokens only.  The corpus is chat
+corpus v1 (``build_qwen36_chat_corpus.py``) by default, or chat corpus v2
+(``build_qwen36_chat_corpus_v2.py``) via ``--corpus``.  For v2 this tool
+also gives Phase 4b its BF16 reference, router statistics and exact mask
+scores on the calibration half, and Phase 8 its held-out scores.  Use
+``--attn-implementation sdpa`` for v2: eager attention runs out of memory on
+its 8k-token conversations.
 
 Subcommands, run in this order and each resumable per batch:
 
 ``reference``
     Streamed BF16 forward over the chosen split; stores the top-20
     log-probabilities and token ids at every scored position.
-``score --label L [--mask M]``
+``score --label L [--mask M] [--router-stats]``
     GSQ-E6 forward, unpruned or with exact pruned routing for mask ``M``
     (pruned router logits -inf, softmax, top-8, renormalize).  Per
     conversation: mean top-20 KL to BF16 and mean NLL over the scored
     tokens, and the same restricted to template tokens (added tokens such as
-    ``<|im_end|>``, ``</think>``, ``<tool_call>``).
-``compare``
-    P24 minus unpruned per conversation, paired bootstrap 95% CI.  Pass: the
+    ``<|im_end|>``, ``</think>``, ``<tool_call>``).  ``--router-stats``
+    (unpruned only) also accumulates router statistics over every real
+    token, padding excluded.
+``compare [--base-label B --candidate-label C]``
+    Candidate minus base per conversation, paired bootstrap 95% CI; by
+    default P24 minus unpruned.  Pass (the Phase 4 chat check 2 rule): the
     CI upper bound of the mean KL difference is below +0.005.  Exit status 3
-    on failure.
+    on failure.  Other label pairs get their own report name.
 
 Conversations are sorted by length and batched up to a padded-token budget.
 Each batch is right-padded to its longest conversation.  The model is

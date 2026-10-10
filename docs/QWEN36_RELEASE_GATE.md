@@ -1,5 +1,13 @@
 # Qwen3.6-35B-A3B release gate
 
+> **Status (2026-10-10).** This gate belongs to the earlier relaxed
+> bit-width search (`tools/evaluate_qwen36_release_gate.py`). The current
+> work defines its own gates in Phases 8–9 of
+> [QWEN36_PRUNE24.md](QWEN36_PRUNE24.md). The main differences: the
+> primary measure is the chat KL to BF16 on a held-out chat set, with
+> raw-text NLL as a guard; and generation checks use the model card's
+> sampling with several seeds instead of temperature zero.
+
 The four-token search loss is a deterministic engineering oracle, not a
 release-quality measurement. A relaxed projection may authorize construction
 of a final GGUF only when `tools/evaluate_qwen36_release_gate.py` returns

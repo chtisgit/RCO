@@ -51,13 +51,45 @@ pip install -r requirements.txt
 
 Each top-level script (run_*.py and rco_*.py) adds src/ to sys.path on the first line of code, so you can run them directly from the repo root without an editable install.
 
-For the Qwen3.5/Qwen3.6 MoE adapter and the bounded-memory work in this fork,
-see [docs/LOW_MEMORY.md](docs/LOW_MEMORY.md).
+## This fork
+
+This fork adds bounded-memory Qwen3.5/Qwen3.6 MoE support and applies RCO to
+Qwen3.6-35B-A3B on a single 12 GiB GPU:
+
+- [docs/QWEN36_PRUNE24.md](docs/QWEN36_PRUNE24.md): the current work. It
+  covers expert pruning and Q3_K upgrades on top of the 2-bit GSQ release,
+  and indexes the tools and reports of each phase.
+- [docs/LOW_MEMORY.md](docs/LOW_MEMORY.md): the streaming foundations
+  (prefix loaders, native GGUF stores, compact references) and the earlier
+  relaxed and hard bit-width searches.
+- [docs/QWEN36_RELEASE_GATE.md](docs/QWEN36_RELEASE_GATE.md): the release
+  gate of that earlier search.
+
+Fork additions live in `tools/` (one entry point per audit, build or search
+step), `tests/`, `reports/` (committed JSON evidence) and `docs/`. The
+upstream entry points below are unchanged.
+
+### Tests
+
+The suite uses tiny synthetic models and tensors and writes no model
+artifacts:
+
+```bash
+python -m unittest discover -s tests
+```
+
+Tests that call ggml directly skip unless these two variables point at a
+ggml build and llama.cpp's `gguf-py`:
+
+```bash
+RCO_GGML_LIBRARY=/path/to/libggml-base.so RCO_GGUF_PYTHON=/path/to/llama.cpp/gguf-py \
+    python -m unittest discover -s tests
+```
 
 ## Repository layout
 
 ```
-rco-release/
+RCO/
   run_quantize.py             Build the multi-bitwidth GPTQ layer database.
   run_split_checkpoint.py      Split a quantized HF checkpoint into per-layer
                           tensors, populating one bitwidth slot of the
@@ -94,6 +126,9 @@ rco-release/
     common.py             Memory + parameter-counting utilities and shared
                           loss helpers (compute_kl_loss,
                           compute_reference_log_probs, get_input_device).
+
+  docs/, tools/, tests/, reports/
+                          Fork additions; see "This fork" above.
 
   README.md, requirements.txt, CITATION.cff
 ```
