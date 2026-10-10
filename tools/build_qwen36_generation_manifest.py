@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
-"""Build the pinned deterministic Qwen3.6 generation-prompt manifest."""
+"""Build the pinned Qwen3.6 generation-prompt manifest.
+
+``--decoding model-card-v2`` (the default since 2026-10-10) uses the
+Qwen3.6-35B-A3B model card's sampling for each mode, three seeds, thinking
+off and on, and the card's 32,768-token output limit; the assertions apply
+to the final answer.  ``--decoding greedy-v1`` rebuilds the superseded
+greedy manifest byte for byte.
+"""
 
 from __future__ import annotations
 
@@ -151,18 +158,36 @@ def _atomic_json(path: Path, value: dict) -> None:
         temporary.unlink(missing_ok=True)
 
 
+DECODING = {
+    "greedy-v1": {
+        "temperature": 0,
+        "seed": 20261001,
+        "reasoning": "off",
+        "maximum_generated_tokens": 64,
+    },
+    "model-card-v2": {
+        "source": "Qwen/Qwen3.6-35B-A3B model card, best practices",
+        "seeds": [20261010, 20261011, 20261012],
+        "reasoning": ["off", "on"],
+        "maximum_generated_tokens": 32768,
+        "thinking_on": {"temperature": 1.0, "top_p": 0.95, "top_k": 20, "min_p": 0.0,
+                        "presence_penalty": 1.5, "repeat_penalty": 1.0,
+                        "repeat_last_n": 64},
+        "thinking_off": {"temperature": 0.7, "top_p": 0.80, "top_k": 20, "min_p": 0.0,
+                         "presence_penalty": 1.5, "repeat_penalty": 1.0,
+                         "repeat_last_n": 64},
+    },
+}
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--decoding", choices=sorted(DECODING), default="model-card-v2")
     args = parser.parse_args()
     canonical_manifest = {
         "schema": 1,
-        "decoding": {
-            "temperature": 0,
-            "seed": 20261001,
-            "reasoning": "off",
-            "maximum_generated_tokens": 64,
-        },
+        "decoding": DECODING[args.decoding],
         "prompts": PROMPTS,
     }
     summary = validate_prompt_manifest(canonical_manifest)
@@ -173,6 +198,9 @@ def main() -> int:
         "scope": (
             "pinned deterministic generation prompts and machine-checkable "
             "assertions for Qwen3.6 release-quality evaluation"
+            if args.decoding == "greedy-v1" else
+            "pinned generation prompts, sampled with the model card's settings, "
+            "and machine-checkable assertions for Qwen3.6 release-quality evaluation"
         ),
         "canonical_manifest_sha256": digest,
         "summary": summary,

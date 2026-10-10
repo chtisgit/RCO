@@ -1,0 +1,352 @@
+{
+  "canonical_manifest": {
+    "decoding": {
+      "maximum_generated_tokens": 32768,
+      "reasoning": [
+        "off",
+        "on"
+      ],
+      "seeds": [
+        20261010,
+        20261011,
+        20261012
+      ],
+      "source": "Qwen/Qwen3.6-35B-A3B model card, best practices",
+      "thinking_off": {
+        "min_p": 0.0,
+        "presence_penalty": 1.5,
+        "repeat_last_n": 64,
+        "repeat_penalty": 1.0,
+        "temperature": 0.7,
+        "top_k": 20,
+        "top_p": 0.8
+      },
+      "thinking_on": {
+        "min_p": 0.0,
+        "presence_penalty": 1.5,
+        "repeat_last_n": 64,
+        "repeat_penalty": 1.0,
+        "temperature": 1.0,
+        "top_k": 20,
+        "top_p": 0.95
+      }
+    },
+    "prompts": [
+      {
+        "assertion": {
+          "expected": "BLUE",
+          "type": "exact"
+        },
+        "category": "instruction",
+        "id": "instruction-blue",
+        "prompt": "Reply with exactly the uppercase word BLUE and nothing else."
+      },
+      {
+        "assertion": {
+          "expected": "RCO",
+          "type": "exact"
+        },
+        "category": "instruction",
+        "id": "instruction-rco",
+        "prompt": "Output exactly these three uppercase letters: RCO"
+      },
+      {
+        "assertion": {
+          "expected": "cedar",
+          "type": "exact"
+        },
+        "category": "instruction",
+        "id": "instruction-cedar",
+        "prompt": "Repeat the lowercase word cedar and output nothing else."
+      },
+      {
+        "assertion": {
+          "expected": "OK",
+          "type": "exact"
+        },
+        "category": "instruction",
+        "id": "instruction-ok",
+        "prompt": "Respond with exactly OK, with no punctuation."
+      },
+      {
+        "assertion": {
+          "expected": "Vienna",
+          "type": "exact"
+        },
+        "category": "instruction",
+        "id": "instruction-vienna",
+        "prompt": "Write the single word Vienna and nothing else."
+      },
+      {
+        "assertion": {
+          "expected": "#",
+          "type": "exact"
+        },
+        "category": "instruction",
+        "id": "instruction-symbol",
+        "prompt": "Output exactly the symbol # and no other characters."
+      },
+      {
+        "assertion": {
+          "expected": "blue",
+          "type": "exact"
+        },
+        "category": "extraction",
+        "id": "extract-color",
+        "prompt": "Aster=red; Birch=blue; Cedar=green. What is Birch's value? Answer with the value only."
+      },
+      {
+        "assertion": {
+          "expected": "ZX-417",
+          "type": "exact"
+        },
+        "category": "extraction",
+        "id": "extract-order",
+        "prompt": "Record: customer Mira, order ZX-417, total 28 euros. Return only the order code."
+      },
+      {
+        "assertion": {
+          "expected": "Graz",
+          "type": "exact"
+        },
+        "category": "extraction",
+        "id": "extract-city",
+        "prompt": "Sentence: 'The conference moved from Linz to Graz on Tuesday.' Return only the destination city."
+      },
+      {
+        "assertion": {
+          "expected": "ada@example.org",
+          "type": "exact"
+        },
+        "category": "extraction",
+        "id": "extract-email",
+        "prompt": "Contact line: Name: Ada; Email: ada@example.org; Team: Core. Return only the email address."
+      },
+      {
+        "assertion": {
+          "expected": "cobalt",
+          "type": "exact"
+        },
+        "category": "extraction",
+        "id": "extract-third",
+        "prompt": "Values in order are quartz, amber, cobalt, silver. Return only the third value."
+      },
+      {
+        "assertion": {
+          "absolute_tolerance": 0.0,
+          "expected": 95,
+          "type": "numeric"
+        },
+        "category": "arithmetic_reasoning",
+        "id": "arithmetic-sum",
+        "prompt": "Compute 37 + 58. Return only the number."
+      },
+      {
+        "assertion": {
+          "absolute_tolerance": 0.0,
+          "expected": 12,
+          "type": "numeric"
+        },
+        "category": "arithmetic_reasoning",
+        "id": "arithmetic-division",
+        "prompt": "Compute 144 divided by 12. Return only the number."
+      },
+      {
+        "assertion": {
+          "absolute_tolerance": 0.0,
+          "expected": 323,
+          "type": "numeric"
+        },
+        "category": "arithmetic_reasoning",
+        "id": "arithmetic-product",
+        "prompt": "Compute 17 times 19. Return only the number."
+      },
+      {
+        "assertion": {
+          "absolute_tolerance": 0.0,
+          "expected": 150,
+          "type": "numeric"
+        },
+        "category": "arithmetic_reasoning",
+        "id": "reasoning-distance",
+        "prompt": "A train travels at 60 km/h for 2.5 hours. How many kilometres does it travel? Return only the number."
+      },
+      {
+        "assertion": {
+          "absolute_tolerance": 0.0,
+          "expected": 30,
+          "type": "numeric"
+        },
+        "category": "arithmetic_reasoning",
+        "id": "reasoning-sequence",
+        "prompt": "The sequence is 2, 6, 12, 20. Return only the next number."
+      },
+      {
+        "assertion": {
+          "absolute_tolerance": 0.001,
+          "expected": 0.6,
+          "type": "numeric"
+        },
+        "category": "arithmetic_reasoning",
+        "id": "reasoning-probability",
+        "prompt": "A bag has 3 red and 2 blue balls. Give the probability of drawing red as a decimal, and output only that number."
+      },
+      {
+        "assertion": {
+          "expected": "def",
+          "type": "exact"
+        },
+        "category": "code",
+        "id": "code-python-def",
+        "prompt": "Which Python keyword begins a function definition? Return only the keyword."
+      },
+      {
+        "assertion": {
+          "expected": "SELECT",
+          "type": "exact"
+        },
+        "category": "code",
+        "id": "code-sql-select",
+        "prompt": "Which SQL keyword retrieves rows from a table? Return only the uppercase keyword."
+      },
+      {
+        "assertion": {
+          "expected": "nullptr",
+          "type": "exact"
+        },
+        "category": "code",
+        "id": "code-cpp-null",
+        "prompt": "What is the C++11 null pointer literal? Return only the literal."
+      },
+      {
+        "assertion": {
+          "expected": "len(items)",
+          "type": "exact"
+        },
+        "category": "code",
+        "id": "code-python-length",
+        "prompt": "Give the Python expression that returns the length of variable items. Return only the expression."
+      },
+      {
+        "assertion": {
+          "pattern": "\\{\"ready\":true\\}",
+          "type": "regex"
+        },
+        "category": "code",
+        "id": "code-json-object",
+        "prompt": "Return exactly this compact JSON object with keys in the shown order and no code fence: {\"ready\":true}"
+      },
+      {
+        "assertion": {
+          "expected": "Paris",
+          "type": "exact"
+        },
+        "category": "knowledge",
+        "id": "knowledge-france",
+        "prompt": "What is the capital of France? Return only the city name."
+      },
+      {
+        "assertion": {
+          "expected": "H2O",
+          "type": "exact"
+        },
+        "category": "knowledge",
+        "id": "knowledge-water",
+        "prompt": "What is the chemical formula for water? Return only the formula."
+      },
+      {
+        "assertion": {
+          "expected": "Mars",
+          "type": "exact"
+        },
+        "category": "knowledge",
+        "id": "knowledge-red-planet",
+        "prompt": "Which planet is known as the Red Planet? Return only its name."
+      },
+      {
+        "assertion": {
+          "expected": "Jane Austen",
+          "type": "exact"
+        },
+        "category": "knowledge",
+        "id": "knowledge-austen",
+        "prompt": "Who wrote Pride and Prejudice? Return only the author's full name."
+      },
+      {
+        "assertion": {
+          "expected": "oxygen",
+          "type": "exact"
+        },
+        "category": "knowledge",
+        "id": "knowledge-photosynthesis",
+        "prompt": "Which gas do plants release during photosynthesis? Return only the gas name."
+      },
+      {
+        "assertion": {
+          "expected": "Haus",
+          "type": "exact"
+        },
+        "category": "multilingual",
+        "id": "multilingual-de",
+        "prompt": "Translate the English word 'house' into German. Return only the German word."
+      },
+      {
+        "assertion": {
+          "expected": "libro",
+          "type": "exact"
+        },
+        "category": "multilingual",
+        "id": "multilingual-es",
+        "prompt": "Translate the English word 'book' into Spanish. Return only the Spanish word."
+      },
+      {
+        "assertion": {
+          "expected": "eau",
+          "type": "exact"
+        },
+        "category": "multilingual",
+        "id": "multilingual-fr",
+        "prompt": "Translate the English word 'water' into French. Return only the French word."
+      },
+      {
+        "assertion": {
+          "expected": "sole",
+          "type": "exact"
+        },
+        "category": "multilingual",
+        "id": "multilingual-it",
+        "prompt": "Translate the English word 'sun' into Italian. Return only the Italian word."
+      },
+      {
+        "assertion": {
+          "expected": "obrigado",
+          "type": "exact"
+        },
+        "category": "multilingual",
+        "id": "multilingual-pt",
+        "prompt": "A male speaker says 'thank you' in Portuguese. Return only the Portuguese word."
+      }
+    ],
+    "schema": 1
+  },
+  "canonical_manifest_sha256": "0c0ac745a30139e6d3f789a43fdd443c937b79fc84683d4a7c50ff8aaea40ca1",
+  "schema": 1,
+  "scope": "pinned generation prompts, sampled with the model card's settings, and machine-checkable assertions for Qwen3.6 release-quality evaluation",
+  "status": "pass",
+  "summary": {
+    "assertion_types": [
+      "exact",
+      "numeric",
+      "regex"
+    ],
+    "categories": [
+      "arithmetic_reasoning",
+      "code",
+      "extraction",
+      "instruction",
+      "knowledge",
+      "multilingual"
+    ],
+    "prompt_count": 32
+  }
+}
