@@ -10,6 +10,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from audit_qwen36_prune24_prelim import (  # noqa: E402
+    EXPERTS,
+    LAYERS,
+    RouterHooks,
     exact_pruned_routing,
     frequency_prune_mask,
     top_k_kl,
@@ -66,6 +69,37 @@ class TopKKLTest(unittest.TestCase):
         shifted = torch.log_softmax(torch.randn(3, 50), dim=-1)
         manual = (values.exp() * (values - shifted.gather(-1, indices))).sum(-1)
         torch.testing.assert_close(top_k_kl(values, indices, shifted), manual)
+
+
+class RouterHooksValidTokenTest(unittest.TestCase):
+    def _hooks(self):
+        hooks = RouterHooks.__new__(RouterHooks)
+        hooks.torch, hooks.prune_mask, hooks.collect, hooks.valid = torch, None, True, None
+        hooks.counts = np.zeros((LAYERS, EXPERTS), dtype=np.int64)
+        hooks.weight_sum = np.zeros((LAYERS, EXPERTS))
+        hooks.probability_sum = np.zeros((LAYERS, EXPERTS))
+        return hooks
+
+    def test_counts_only_valid_tokens(self):
+        logits = torch.randn(5, EXPERTS)
+        weights, indices = torch.softmax(logits, dim=-1).topk(8, dim=-1)
+        valid = torch.tensor([True, False, True, True, False])
+        filtered, reference = self._hooks(), self._hooks()
+        filtered.valid = valid
+        filtered._hook(3)(None, None, (logits, weights, indices))
+        reference._hook(3)(None, None, (logits[valid], weights[valid], indices[valid]))
+        np.testing.assert_array_equal(filtered.counts, reference.counts)
+        np.testing.assert_allclose(filtered.weight_sum, reference.weight_sum)
+        np.testing.assert_allclose(filtered.probability_sum, reference.probability_sum)
+        self.assertEqual(int(filtered.counts[3].sum()), 3 * 8)
+
+    def test_rejects_mismatched_mask(self):
+        hooks = self._hooks()
+        hooks.valid = torch.tensor([True, False])
+        logits = torch.randn(3, EXPERTS)
+        weights, indices = torch.softmax(logits, dim=-1).topk(8, dim=-1)
+        with self.assertRaises(RuntimeError):
+            hooks._hook(0)(None, None, (logits, weights, indices))
 
 
 if __name__ == "__main__":

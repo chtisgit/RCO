@@ -172,6 +172,8 @@ class RouterHooks:
         self.torch = torch
         self.prune_mask = prune_mask
         self.collect = collect
+        # Optional flattened bool mask of the tokens to count (excludes padding).
+        self.valid = None
         self.counts = np.zeros((LAYERS, EXPERTS), dtype=np.int64)
         self.weight_sum = np.zeros((LAYERS, EXPERTS), dtype=np.float64)
         self.probability_sum = np.zeros((LAYERS, EXPERTS), dtype=np.float64)
@@ -191,15 +193,22 @@ class RouterHooks:
                 if bool(mask[indices].any()):
                     raise RuntimeError(f"pruned expert selected in layer {layer}")
             if self.collect:
-                flat = indices.reshape(-1)
+                counted_logits, counted_weights, counted = router_logits, weights, indices
+                if self.valid is not None:
+                    if self.valid.shape[0] != indices.shape[0]:
+                        raise RuntimeError("valid-token mask does not match the routed tokens")
+                    valid = self.valid.to(indices.device)
+                    counted_logits, counted_weights, counted = (
+                        router_logits[valid], weights[valid], indices[valid])
+                flat = counted.reshape(-1)
                 self.counts[layer] += torch.bincount(
                     flat, minlength=EXPERTS).cpu().numpy()
                 weight_sum = torch.zeros(EXPERTS, dtype=torch.float64,
                                          device=flat.device)
-                weight_sum.index_add_(0, flat, weights.reshape(-1).double())
+                weight_sum.index_add_(0, flat, counted_weights.reshape(-1).double())
                 self.weight_sum[layer] += weight_sum.cpu().numpy()
                 self.probability_sum[layer] += torch.softmax(
-                    router_logits, dim=-1, dtype=torch.float).double().sum(
+                    counted_logits, dim=-1, dtype=torch.float).double().sum(
                         dim=0).cpu().numpy()
             return router_logits, weights, indices
         return hook

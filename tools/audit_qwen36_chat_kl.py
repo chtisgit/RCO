@@ -56,7 +56,6 @@ from audit_qwen36_prune24_prelim import (  # noqa: E402
 )
 from audit_qwen36_q3k_viability import (  # noqa: E402
     _atomic_json,
-    _empty_model,
     _load_json,
     _sha256_file,
 )
@@ -117,6 +116,32 @@ class MaskedTap:
             self.result.append({key: np.concatenate(value) for key, value in out.items()
                                 if value})
         return self.original(hidden_states, labels, lm_head, **kwargs)
+
+
+def _model(args):
+    """Empty model skeleton.  Chat corpus v2 needs SDPA: eager attention
+    materializes the full attention matrix and runs out of memory on
+    8k-token conversations."""
+    from accelerate import init_empty_weights
+    from transformers import AutoConfig, AutoModelForImageTextToText
+
+    config = AutoConfig.from_pretrained(args.model_dir, local_files_only=True)
+    with init_empty_weights(include_buffers=False):
+        model = AutoModelForImageTextToText.from_config(
+            config, attn_implementation=args.attn_implementation)
+    model.eval()
+    return model
+
+
+def _valid_tokens(conversations, members):
+    """Flattened bool mask of the real (unpadded) tokens of a batch."""
+    import torch
+
+    width = max(conversations[i]["token_count"] for i in members)
+    valid = torch.zeros((len(members), width), dtype=torch.bool)
+    for row, index in enumerate(members):
+        valid[row, :conversations[index]["token_count"]] = True
+    return valid.reshape(-1)
 
 
 def load_corpus(args) -> tuple[list[dict[str, Any]], dict[str, Any]]:
@@ -232,7 +257,7 @@ def run_reference(args) -> None:
         return
     started = time.perf_counter()
     conversations, identity = load_corpus(args)
-    model = _empty_model(args.model_dir)
+    model = _model(args)
     evaluator = StreamingHardCausalEvaluator(
         model, SafeTensorPrefixLoader(args.model_dir), SimpleNamespace(), [], [0, 1],
         device=torch.device(args.device), vocab_chunk_size=args.vocab_chunk_size)
@@ -252,6 +277,7 @@ def run_reference(args) -> None:
         "schema": SCHEMA + ".reference",
         "status": "complete",
         "teacher": "pinned BF16 safetensors, streamed",
+        "attn_implementation": args.attn_implementation,
         "corpus": identity,
         "reference": {"path": str(path), "sha256": _sha256_file(path),
                       "top_k": TOP_K_REFERENCE},
@@ -286,21 +312,31 @@ def run_score(args) -> None:
     started = time.perf_counter()
     conversations, identity = load_corpus(args)
     reference, reference_report = _load_reference(args, identity)
+    if reference_report.get("attn_implementation", "eager") != args.attn_implementation:
+        raise RuntimeError("score and reference must use the same attention implementation")
     mask, mask_identity = None, None
+    if args.router_stats:
+        if args.mask is not None:
+            raise ValueError("router statistics are collected on the unpruned model only")
+        if any((args.work / f"score_{args.label}").glob("batch*.npz")):
+            raise RuntimeError(
+                f"router statistics need one uninterrupted pass; remove "
+                f"{args.work / f'score_{args.label}'} and rerun")
     if args.mask is not None:
         mask = np.load(args.mask)
         if mask.shape != (LAYERS, EXPERTS) or mask.dtype != bool or not bool(
                 (mask.sum(axis=1) == PRUNE_PER_LAYER).all()):
             raise ValueError(f"mask must be 40 x 256 bool with {PRUNE_PER_LAYER} per layer")
         mask_identity = {"path": str(args.mask), "sha256": _sha256_file(args.mask)}
-    model = _empty_model(args.model_dir)
+    model = _model(args)
     evaluator, assignment, model_identity = _gsq_e6_evaluator(args, model)
-    hooks = RouterHooks(model, prune_mask=mask, collect=False)
+    hooks = RouterHooks(model, prune_mask=mask, collect=args.router_stats)
     tap = MaskedTap()
     tap.mode = "compare"
 
     def before_batch(members):
         tap.reference = [reference[index] for index in members]
+        hooks.valid = _valid_tokens(conversations, members)
 
     try:
         results = _run(args, evaluator, assignment, conversations, tap,
@@ -308,6 +344,21 @@ def run_score(args) -> None:
     finally:
         tap.close()
         hooks.close()
+    router_stats = None
+    if args.router_stats:
+        path = args.work / f"router_stats_{args.label}.npz"
+        _save_npz(path, counts=hooks.counts, weight_sum=hooks.weight_sum,
+                  probability_sum=hooks.probability_sum)
+        router_stats = {
+            "path": str(path), "sha256": _sha256_file(path),
+            "tokens": "every real token of every conversation (context and replies), "
+                      "padding excluded",
+            "routed_slots_per_layer": int(hooks.counts[0].sum()),
+            "experts_never_selected": int((hooks.counts == 0).sum()),
+            "min_count": int(hooks.counts.min()),
+            "median_count": float(np.median(hooks.counts)),
+            "max_count": int(hooks.counts.max()),
+        }
     tokenizer = AutoTokenizer.from_pretrained(args.model_dir, local_files_only=True)
     template_ids = np.asarray(sorted(tokenizer.added_tokens_decoder))
     template_kl, template_counts = [], []
@@ -325,7 +376,9 @@ def run_score(args) -> None:
                       "exact: pruned router logits -inf, softmax, top-8, renormalize"),
         "mask": mask_identity,
         "identity": {**model_identity, "corpus": identity,
-                     "reference_sha256": reference_report["reference"]["sha256"]},
+                     "reference_sha256": reference_report["reference"]["sha256"],
+                     "attn_implementation": args.attn_implementation},
+        "router_stats": router_stats,
         "mean_top20_kl_to_bf16": float(np.mean([r["kl"].mean() for r in results])),
         "mean_nll": float(np.mean([r["eval_nll"][0] for r in results])),
         "conversation_mean_top20_kl": [float(r["kl"].mean()) for r in results],
@@ -380,7 +433,9 @@ def run_compare(args) -> int:
                 for stratum in dict.fromkeys(base["strata"])},
         },
     }
-    _atomic_json(args.reports / f"qwen36_chat_kl_comparison{args.suffix}.json", report)
+    pair = ("" if (args.base_label, args.candidate_label) == ("unpruned", "p24")
+            else f"_{args.candidate_label}_vs_{args.base_label}")
+    _atomic_json(args.reports / f"qwen36_chat_kl_comparison{pair}{args.suffix}.json", report)
     print(f"chat KL {args.candidate_label} - {args.base_label}: {kl['mean']:+.5f} "
           f"[{kl['ci95'][0]:+.5f}, {kl['ci95'][1]:+.5f}] -> {status}", flush=True)
     return 0 if status == "pass" else 3
@@ -415,6 +470,9 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument("--decode-workers", type=int, default=8)
     parser.add_argument("--vocab-chunk-size", type=int, default=8192)
     parser.add_argument("--batch-tokens", type=int, default=12_800)
+    parser.add_argument("--attn-implementation", default="eager", choices=("eager", "sdpa"))
+    parser.add_argument("--router-stats", action="store_true",
+                        help="score: also collect router statistics (unpruned only)")
     args = parser.parse_args()
     for key in ("corpus", "model_dir", "manifest", "gguf", "gguf_python",
                 "ggml_library", "work", "reports"):
