@@ -28,9 +28,9 @@ class ConsensusTest(unittest.TestCase):
         torch.save({"step": step, "alpha": alpha}, run / "state.pt")
         np.save(run / "final_mask.npy", _top(advantage) if final is None else final)
 
-    def _build(self, work):
+    def _build(self, work, *extra):
         return subprocess.run(
-            [sys.executable, str(TOOL), "--work", str(work), "--reports", str(work)],
+            [sys.executable, str(TOOL), "--work", str(work), "--reports", str(work), *extra],
             capture_output=True, text=True)
 
     def test_agreed_first_then_mean_advantage_never_unpruned(self):
@@ -61,6 +61,17 @@ class ConsensusTest(unittest.TestCase):
         self.assertFalse((mask & ~(finals[0] | finals[1])).any())
         self.assertEqual(report["agreed_by_both_seeds"], int(both.sum()))
         self.assertEqual(report["filled_from_one_seed"], LAYERS * PRUNE - int(both.sum()))
+
+    def test_report_name_can_be_chosen(self):
+        advantage = np.random.default_rng(6).normal(size=(LAYERS, EXPERTS)).astype(np.float32)
+        with tempfile.TemporaryDirectory() as directory:
+            work = Path(directory)
+            for seed in (0, 1):
+                self._write_run(work, seed, advantage)
+            result = self._build(work, "--report", "chat_consensus.json")
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertEqual(sorted(path.name for path in work.glob("*.json")),
+                             ["chat_consensus.json"])
 
     def test_refuses_a_final_mask_that_is_not_its_alpha_top_24(self):
         rng = np.random.default_rng(4)

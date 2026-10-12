@@ -10,8 +10,10 @@ The rule was fixed before any candidate was scored:
    per-layer top 24 gives each seed's own final mask.
 
 Experts that neither seed prunes are never chosen.  The mask is written to
-``data/qwen36_prune24/consensus_mask.npy`` and its provenance to
-``reports/qwen36_gsq_e6_prune24_consensus.json``.
+``consensus_mask.npy`` in ``--work`` (default ``data/qwen36_prune24``) and its
+provenance to ``--report`` (default
+``reports/qwen36_gsq_e6_prune24_consensus.json``).  Phase 4b applies the same
+rule to the chat search runs.
 """
 
 from __future__ import annotations
@@ -54,6 +56,8 @@ def main() -> int:
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--work", type=Path, default=ROOT / "data/qwen36_prune24")
     parser.add_argument("--reports", type=Path, default=RCO / "reports")
+    parser.add_argument("--report", default="qwen36_gsq_e6_prune24_consensus.json",
+                        help="report file name in --reports")
     parser.add_argument("--steps", type=int, default=300)
     args = parser.parse_args()
 
@@ -95,7 +99,7 @@ def main() -> int:
         "shared_with_seed0_final": int((mask & finals[0]).sum()),
         "shared_with_seed1_final": int((mask & finals[1]).sum()),
     }
-    _atomic_json(args.reports / "qwen36_gsq_e6_prune24_consensus.json", {
+    _atomic_json(args.reports / args.report, {
         "schema": SCHEMA,
         "status": "complete",
         "rule": (
