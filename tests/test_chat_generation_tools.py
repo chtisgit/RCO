@@ -102,24 +102,26 @@ class GateTest(unittest.TestCase):
                             "checks": len(responses)},
                 "responses": responses}
 
-    def _run(self, candidate, control, **control_kwargs):
+    def _run(self, candidate, control, candidate_label="p24", **control_kwargs):
         with tempfile.TemporaryDirectory() as directory:
             reports = Path(directory)
             for device in ("cpu", "gpu"):
-                for label, failures in (("p24", candidate), ("unpruned", control)):
+                for label, failures in ((candidate_label, candidate), ("unpruned", control)):
                     report = self._report(failures, **(control_kwargs if label == "unpruned"
                                                        else {}))
                     (reports / f"qwen36_chat_generation_{label}_{device}_v2.json").write_text(
                         json.dumps(report))
-            argv = ["compare", "--reports", str(reports), "--suffix", "_v2"]
+            argv = ["compare", "--reports", str(reports), "--suffix", "_v2",
+                    "--candidate", candidate_label]
             with mock.patch.object(sys, "argv", argv), mock.patch("builtins.print"):
                 status = gate.main()
-            result = json.loads(
-                (reports / "qwen36_chat_generation_comparison_v2.json").read_text())
-        return status, result
+            names = [path.name for path in reports.glob("qwen36_chat_generation_comparison*")]
+            self.assertEqual(len(names), 1)
+            result = json.loads((reports / names[0]).read_text())
+        return status, result, names[0]
 
     def test_counts_only_failures_beyond_the_control(self):
-        status, result = self._run(
+        status, result, _ = self._run(
             {("a", 0, "stopped"): 1, ("b", 0, "tool_call"): 2, ("c", 0, "stopped"): 0},
             {("a", 0, "stopped"): 1, ("b", 0, "tool_call"): 1, ("c", 0, "stopped"): 2})
         self.assertEqual(status, 3)
@@ -130,14 +132,21 @@ class GateTest(unittest.TestCase):
         self.assertEqual({e["prompt_id"] for e in result["control_only_failures"]}, {"c"})
 
     def test_equal_failures_pass(self):
-        status, result = self._run({("a", 0, "stopped"): 2}, {("a", 0, "stopped"): 2})
+        status, result, _ = self._run({("a", 0, "stopped"): 2}, {("a", 0, "stopped"): 2})
         self.assertEqual((status, result["status"]), (0, "pass"))
 
     def test_turn_the_control_never_reached_counts_as_passed(self):
-        status, result = self._run({("m", 2, "stopped"): 1}, {("m", 0, "stopped"): 0})
+        status, result, _ = self._run({("m", 2, "stopped"): 1}, {("m", 0, "stopped"): 0})
         self.assertEqual(status, 3)
         entry = [e for e in result["counted_failures"] if e["device"] == "cpu"][0]
         self.assertEqual((entry["turn"], entry["control_of"]), (3, 0))
+
+    def test_other_candidates_get_their_own_report(self):
+        _, _, name = self._run({("a", 0, "stopped"): 0}, {("a", 0, "stopped"): 0},
+                               candidate_label="p24_chat")
+        self.assertEqual(name, "qwen36_chat_generation_comparison_p24_chat_vs_unpruned_v2.json")
+        _, _, name = self._run({("a", 0, "stopped"): 0}, {("a", 0, "stopped"): 0})
+        self.assertEqual(name, "qwen36_chat_generation_comparison_v2.json")
 
     def test_refuses_different_prompt_sets(self):
         with self.assertRaises(RuntimeError):

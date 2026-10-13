@@ -81,7 +81,10 @@ def main() -> int:
     result["status"] = "pass" if not result["counted_failures"] else "fail"
     result["rule"] = (f"on CPU and GPU, {args.candidate} fails no check on a prompt and turn "
                       f"on more seeds than {args.control} does")
-    _atomic_json(args.reports / f"qwen36_chat_generation_comparison{args.suffix}.json", result)
+    pair = ("" if (args.candidate, args.control) == ("p24", "unpruned")
+            else f"_{args.candidate}_vs_{args.control}")
+    _atomic_json(args.reports / f"qwen36_chat_generation_comparison{pair}{args.suffix}.json",
+                 result)
     print(json.dumps({key: result[key] for key in
                       ("status", "devices", "counted_failures", "shared_failures",
                        "control_only_failures")}, indent=1), flush=True)
