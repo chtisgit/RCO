@@ -1,0 +1,59 @@
+{
+  "control_only_failures": [],
+  "counted_failures": [
+    {
+      "check": "tool_call",
+      "control_failed": 0,
+      "control_of": 3,
+      "device": "cpu",
+      "failed": 1,
+      "of": 3,
+      "prompt_id": "tool-currency",
+      "turn": 1
+    },
+    {
+      "check": "tool_call",
+      "control_failed": 0,
+      "control_of": 3,
+      "device": "gpu",
+      "failed": 1,
+      "of": 3,
+      "prompt_id": "tool-currency",
+      "turn": 1
+    }
+  ],
+  "devices": {
+    "cpu": {
+      "p24_chat": {
+        "checks": 66,
+        "failed_checks": 1,
+        "mean_tokens_per_second": 7.521518097998219,
+        "responses": 48
+      },
+      "unpruned": {
+        "checks": 66,
+        "failed_checks": 0,
+        "mean_tokens_per_second": 7.256354185771753,
+        "responses": 48
+      }
+    },
+    "gpu": {
+      "p24_chat": {
+        "checks": 66,
+        "failed_checks": 1,
+        "mean_tokens_per_second": 13.703931775789274,
+        "responses": 48
+      },
+      "unpruned": {
+        "checks": 66,
+        "failed_checks": 0,
+        "mean_tokens_per_second": 10.558318296962016,
+        "responses": 48
+      }
+    }
+  },
+  "rule": "on CPU and GPU, p24_chat fails no check on a prompt and turn on more seeds than unpruned does",
+  "schema": "rco.qwen36.chat_generation_comparison.v1",
+  "shared_failures": [],
+  "status": "fail"
+}
