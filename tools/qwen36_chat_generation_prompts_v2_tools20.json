@@ -1,0 +1,183 @@
+{
+ "schema": "rco.qwen36.chat_generation_prompts.v2",
+ "fixed": "2026-10-10, after the greedy v1 run and before any sampled run",
+ "source": "Qwen/Qwen3.6-35B-A3B model card, best practices: sampling per mode and 32,768 output tokens for standard queries; llama.cpp penalty window left at its default of 64 tokens, as in Qwen's own llama.cpp examples (Qwen/Qwen3-32B-GGUF)",
+ "decoding": {
+  "seeds": [
+   20261010,
+   20261011,
+   20261012,
+   20261013,
+   20261014,
+   20261015,
+   20261016,
+   20261017,
+   20261018,
+   20261019,
+   20261020,
+   20261021,
+   20261022,
+   20261023,
+   20261024,
+   20261025,
+   20261026,
+   20261027,
+   20261028,
+   20261029
+  ],
+  "max_tokens": 32768,
+  "thinking_on": {
+   "temperature": 1.0,
+   "top_p": 0.95,
+   "top_k": 20,
+   "min_p": 0.0,
+   "presence_penalty": 1.5,
+   "repeat_penalty": 1.0,
+   "repeat_last_n": 64
+  },
+  "thinking_off": {
+   "temperature": 0.7,
+   "top_p": 0.8,
+   "top_k": 20,
+   "min_p": 0.0,
+   "presence_penalty": 1.5,
+   "repeat_penalty": 1.0,
+   "repeat_last_n": 64
+  }
+ },
+ "prompts": [
+  {
+   "id": "tool-weather",
+   "kind": "tool",
+   "thinking": false,
+   "turns": [
+    "What's the weather in Athens right now? Please use Celsius."
+   ],
+   "tools": [
+    {
+     "type": "function",
+     "function": {
+      "name": "get_current_weather",
+      "description": "Get the current weather for a city.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "location": {
+         "type": "string",
+         "description": "City name, e.g. Paris"
+        },
+        "unit": {
+         "type": "string",
+         "enum": [
+          "celsius",
+          "fahrenheit"
+         ]
+        }
+       },
+       "required": [
+        "location"
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "tool-flights",
+   "kind": "tool",
+   "thinking": false,
+   "turns": [
+    "Find me flights from Berlin to Lisbon on 2026-11-14."
+   ],
+   "tools": [
+    {
+     "type": "function",
+     "function": {
+      "name": "search_flights",
+      "description": "Search for flights between two cities on a date.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "origin": {
+         "type": "string",
+         "description": "Departure city"
+        },
+        "destination": {
+         "type": "string",
+         "description": "Arrival city"
+        },
+        "date": {
+         "type": "string",
+         "description": "Date as YYYY-MM-DD"
+        }
+       },
+       "required": [
+        "origin",
+        "destination",
+        "date"
+       ]
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "tool-currency",
+   "kind": "tool",
+   "thinking": false,
+   "turns": [
+    "How much is 250 euros in US dollars?"
+   ],
+   "tools": [
+    {
+     "type": "function",
+     "function": {
+      "name": "convert_currency",
+      "description": "Convert an amount between currencies at today's rate.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "amount": {
+         "type": "number"
+        },
+        "from_currency": {
+         "type": "string",
+         "description": "ISO 4217 code"
+        },
+        "to_currency": {
+         "type": "string",
+         "description": "ISO 4217 code"
+        }
+       },
+       "required": [
+        "amount",
+        "from_currency",
+        "to_currency"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "get_local_time",
+      "description": "Get the current local time in a time zone.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "timezone": {
+         "type": "string",
+         "description": "IANA time zone"
+        }
+       },
+       "required": [
+        "timezone"
+       ]
+      }
+     }
+    }
+   ]
+  }
+ ],
+ "purpose": "Phase 4b diagnostic: the v2 tool prompts and decoding, with 20 seeds (the first 3 are gate 1's), to estimate each build's tool-call rate."
+}

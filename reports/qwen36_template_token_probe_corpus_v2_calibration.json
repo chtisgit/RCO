@@ -1,0 +1,1234 @@
+{
+  "base_label": "unpruned",
+  "identity": {
+    "corpus": {
+      "conversation_count": 223,
+      "conversation_ids": [
+        "chat-v2-calibration-chat-00",
+        "chat-v2-calibration-chat-01",
+        "chat-v2-calibration-chat-02",
+        "chat-v2-calibration-chat-03",
+        "chat-v2-calibration-chat-04",
+        "chat-v2-calibration-chat-05",
+        "chat-v2-calibration-chat-06",
+        "chat-v2-calibration-chat-07",
+        "chat-v2-calibration-chat-08",
+        "chat-v2-calibration-chat-09",
+        "chat-v2-calibration-chat-10",
+        "chat-v2-calibration-chat-11",
+        "chat-v2-calibration-chat-12",
+        "chat-v2-calibration-chat-13",
+        "chat-v2-calibration-chat-14",
+        "chat-v2-calibration-chat-15",
+        "chat-v2-calibration-chat-16",
+        "chat-v2-calibration-chat-17",
+        "chat-v2-calibration-chat-18",
+        "chat-v2-calibration-chat-19",
+        "chat-v2-calibration-chat-20",
+        "chat-v2-calibration-chat-21",
+        "chat-v2-calibration-chat-22",
+        "chat-v2-calibration-chat-23",
+        "chat-v2-calibration-chat-24",
+        "chat-v2-calibration-chat-25",
+        "chat-v2-calibration-chat-26",
+        "chat-v2-calibration-chat-27",
+        "chat-v2-calibration-chat-28",
+        "chat-v2-calibration-chat-29",
+        "chat-v2-calibration-chat-30",
+        "chat-v2-calibration-chat-31",
+        "chat-v2-calibration-chat-32",
+        "chat-v2-calibration-chat-33",
+        "chat-v2-calibration-chat-34",
+        "chat-v2-calibration-chat-35",
+        "chat-v2-calibration-chat-36",
+        "chat-v2-calibration-chat-37",
+        "chat-v2-calibration-chat-38",
+        "chat-v2-calibration-chat-39",
+        "chat-v2-calibration-chat-40",
+        "chat-v2-calibration-chat-41",
+        "chat-v2-calibration-chat-42",
+        "chat-v2-calibration-chat-43",
+        "chat-v2-calibration-chat-44",
+        "chat-v2-calibration-chat-45",
+        "chat-v2-calibration-chat-46",
+        "chat-v2-calibration-chat-47",
+        "chat-v2-calibration-chat-48",
+        "chat-v2-calibration-chat-49",
+        "chat-v2-calibration-chat-50",
+        "chat-v2-calibration-chat-51",
+        "chat-v2-calibration-chat-52",
+        "chat-v2-calibration-chat-53",
+        "chat-v2-calibration-chat-54",
+        "chat-v2-calibration-chat-55",
+        "chat-v2-calibration-chat-56",
+        "chat-v2-calibration-chat-57",
+        "chat-v2-calibration-chat-58",
+        "chat-v2-calibration-chat-59",
+        "chat-v2-calibration-chat-60",
+        "chat-v2-calibration-chat-61",
+        "chat-v2-calibration-chat-62",
+        "chat-v2-calibration-chat-63",
+        "chat-v2-calibration-document-00",
+        "chat-v2-calibration-document-01",
+        "chat-v2-calibration-document-02",
+        "chat-v2-calibration-document-03",
+        "chat-v2-calibration-document-04",
+        "chat-v2-calibration-document-05",
+        "chat-v2-calibration-document-06",
+        "chat-v2-calibration-document-07",
+        "chat-v2-calibration-document-08",
+        "chat-v2-calibration-document-09",
+        "chat-v2-calibration-document-10",
+        "chat-v2-calibration-document-11",
+        "chat-v2-calibration-document-12",
+        "chat-v2-calibration-document-13",
+        "chat-v2-calibration-document-14",
+        "chat-v2-calibration-document-15",
+        "chat-v2-calibration-document-16",
+        "chat-v2-calibration-document-17",
+        "chat-v2-calibration-document-18",
+        "chat-v2-calibration-document-19",
+        "chat-v2-calibration-document-20",
+        "chat-v2-calibration-document-21",
+        "chat-v2-calibration-document-22",
+        "chat-v2-calibration-document-23",
+        "chat-v2-calibration-document-24",
+        "chat-v2-calibration-document-25",
+        "chat-v2-calibration-document-26",
+        "chat-v2-calibration-document-27",
+        "chat-v2-calibration-document-28",
+        "chat-v2-calibration-document-29",
+        "chat-v2-calibration-document-30",
+        "chat-v2-calibration-document-31",
+        "chat-v2-calibration-document-32",
+        "chat-v2-calibration-document-33",
+        "chat-v2-calibration-document-34",
+        "chat-v2-calibration-document-35",
+        "chat-v2-calibration-document-36",
+        "chat-v2-calibration-document-37",
+        "chat-v2-calibration-document-38",
+        "chat-v2-calibration-document-39",
+        "chat-v2-calibration-document-40",
+        "chat-v2-calibration-document-41",
+        "chat-v2-calibration-document-42",
+        "chat-v2-calibration-document-43",
+        "chat-v2-calibration-document-44",
+        "chat-v2-calibration-document-45",
+        "chat-v2-calibration-document-46",
+        "chat-v2-calibration-document-47",
+        "chat-v2-calibration-document-48",
+        "chat-v2-calibration-document-49",
+        "chat-v2-calibration-document-50",
+        "chat-v2-calibration-document-51",
+        "chat-v2-calibration-document-52",
+        "chat-v2-calibration-document-53",
+        "chat-v2-calibration-document-54",
+        "chat-v2-calibration-document-55",
+        "chat-v2-calibration-document-56",
+        "chat-v2-calibration-document-57",
+        "chat-v2-calibration-document-58",
+        "chat-v2-calibration-document-59",
+        "chat-v2-calibration-document-60",
+        "chat-v2-calibration-document-61",
+        "chat-v2-calibration-document-62",
+        "chat-v2-calibration-reasoning-00",
+        "chat-v2-calibration-reasoning-01",
+        "chat-v2-calibration-reasoning-02",
+        "chat-v2-calibration-reasoning-03",
+        "chat-v2-calibration-reasoning-04",
+        "chat-v2-calibration-reasoning-05",
+        "chat-v2-calibration-reasoning-06",
+        "chat-v2-calibration-reasoning-07",
+        "chat-v2-calibration-reasoning-08",
+        "chat-v2-calibration-reasoning-09",
+        "chat-v2-calibration-reasoning-10",
+        "chat-v2-calibration-reasoning-11",
+        "chat-v2-calibration-reasoning-12",
+        "chat-v2-calibration-reasoning-13",
+        "chat-v2-calibration-reasoning-14",
+        "chat-v2-calibration-reasoning-15",
+        "chat-v2-calibration-reasoning-16",
+        "chat-v2-calibration-reasoning-17",
+        "chat-v2-calibration-reasoning-18",
+        "chat-v2-calibration-reasoning-19",
+        "chat-v2-calibration-reasoning-20",
+        "chat-v2-calibration-reasoning-21",
+        "chat-v2-calibration-reasoning-22",
+        "chat-v2-calibration-reasoning-23",
+        "chat-v2-calibration-reasoning-24",
+        "chat-v2-calibration-reasoning-25",
+        "chat-v2-calibration-reasoning-26",
+        "chat-v2-calibration-reasoning-27",
+        "chat-v2-calibration-reasoning-28",
+        "chat-v2-calibration-reasoning-29",
+        "chat-v2-calibration-reasoning-30",
+        "chat-v2-calibration-reasoning-31",
+        "chat-v2-calibration-reasoning-32",
+        "chat-v2-calibration-reasoning-33",
+        "chat-v2-calibration-reasoning-34",
+        "chat-v2-calibration-reasoning-35",
+        "chat-v2-calibration-reasoning-36",
+        "chat-v2-calibration-reasoning-37",
+        "chat-v2-calibration-reasoning-38",
+        "chat-v2-calibration-reasoning-39",
+        "chat-v2-calibration-reasoning-40",
+        "chat-v2-calibration-reasoning-41",
+        "chat-v2-calibration-reasoning-42",
+        "chat-v2-calibration-reasoning-43",
+        "chat-v2-calibration-reasoning-44",
+        "chat-v2-calibration-reasoning-45",
+        "chat-v2-calibration-reasoning-46",
+        "chat-v2-calibration-reasoning-47",
+        "chat-v2-calibration-tool-answer-00",
+        "chat-v2-calibration-tool-answer-01",
+        "chat-v2-calibration-tool-answer-02",
+        "chat-v2-calibration-tool-answer-03",
+        "chat-v2-calibration-tool-answer-04",
+        "chat-v2-calibration-tool-answer-05",
+        "chat-v2-calibration-tool-answer-06",
+        "chat-v2-calibration-tool-answer-07",
+        "chat-v2-calibration-tool-answer-08",
+        "chat-v2-calibration-tool-answer-09",
+        "chat-v2-calibration-tool-answer-10",
+        "chat-v2-calibration-tool-answer-11",
+        "chat-v2-calibration-tool-answer-12",
+        "chat-v2-calibration-tool-answer-13",
+        "chat-v2-calibration-tool-answer-14",
+        "chat-v2-calibration-tool-answer-15",
+        "chat-v2-calibration-tool-answer-16",
+        "chat-v2-calibration-tool-answer-17",
+        "chat-v2-calibration-tool-answer-18",
+        "chat-v2-calibration-tool-answer-19",
+        "chat-v2-calibration-tool-answer-20",
+        "chat-v2-calibration-tool-answer-21",
+        "chat-v2-calibration-tool-answer-22",
+        "chat-v2-calibration-tool-answer-23",
+        "chat-v2-calibration-tool-call-00",
+        "chat-v2-calibration-tool-call-01",
+        "chat-v2-calibration-tool-call-02",
+        "chat-v2-calibration-tool-call-03",
+        "chat-v2-calibration-tool-call-04",
+        "chat-v2-calibration-tool-call-05",
+        "chat-v2-calibration-tool-call-06",
+        "chat-v2-calibration-tool-call-07",
+        "chat-v2-calibration-tool-call-08",
+        "chat-v2-calibration-tool-call-09",
+        "chat-v2-calibration-tool-call-10",
+        "chat-v2-calibration-tool-call-11",
+        "chat-v2-calibration-tool-call-12",
+        "chat-v2-calibration-tool-call-13",
+        "chat-v2-calibration-tool-call-14",
+        "chat-v2-calibration-tool-call-15",
+        "chat-v2-calibration-tool-call-16",
+        "chat-v2-calibration-tool-call-17",
+        "chat-v2-calibration-tool-call-18",
+        "chat-v2-calibration-tool-call-19",
+        "chat-v2-calibration-tool-call-20",
+        "chat-v2-calibration-tool-call-21",
+        "chat-v2-calibration-tool-call-22",
+        "chat-v2-calibration-tool-call-23"
+      ],
+      "corpus_manifest_sha256": "6e2e8d27608bdcab7298b48a2c471379acf16fc2720c33139d1caa072fe72c49",
+      "split": "calibration"
+    },
+    "reference": {
+      "path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_chat_kl_v2/reference_bf16_top20.npz",
+      "sha256": "5db94ecd21424e1074e70d3952026f82005cbfc641fcba155b1e191d569053dc"
+    },
+    "score_reports": {
+      "chat_consensus": {
+        "path": "/extraspace/IronWolf/christian/gsq-rco-moe/repos/RCO/reports/qwen36_chat_kl_score_chat_consensus_v2_calibration.json",
+        "sha256": "9f2a2632924018cff8f97a1b5545a74a193f2c9bc67784363ba707b57a2ad4e8"
+      },
+      "chat_seed0_final": {
+        "path": "/extraspace/IronWolf/christian/gsq-rco-moe/repos/RCO/reports/qwen36_chat_kl_score_chat_seed0_final_v2_calibration.json",
+        "sha256": "91ed071864d7f3ae700d300e7147ecd50544f294a3075d9a523fc399454fff29"
+      },
+      "chat_seed1_final": {
+        "path": "/extraspace/IronWolf/christian/gsq-rco-moe/repos/RCO/reports/qwen36_chat_kl_score_chat_seed1_final_v2_calibration.json",
+        "sha256": "9fb88a76be6e794c44f071f575f455c9978a445f7f778daa3a37ab6428690fe2"
+      },
+      "frequency": {
+        "path": "/extraspace/IronWolf/christian/gsq-rco-moe/repos/RCO/reports/qwen36_chat_kl_score_frequency_v2_calibration.json",
+        "sha256": "5e1359428afeda06cd97cacc9c50f38f60e3c6742d14fa743c38c4992bc6c13e"
+      },
+      "p24_raw_text": {
+        "path": "/extraspace/IronWolf/christian/gsq-rco-moe/repos/RCO/reports/qwen36_chat_kl_score_p24_raw_text_v2_calibration.json",
+        "sha256": "69d13c5ab0a7f8ca0fa5c2ee4c0e775239b0528631862bd0dbc4316be4ecb5e0"
+      },
+      "unpruned": {
+        "path": "/extraspace/IronWolf/christian/gsq-rco-moe/repos/RCO/reports/qwen36_chat_kl_score_unpruned_v2_calibration.json",
+        "sha256": "e822634ed605c93e6769d2c84fc14e546a6c5eb7df9074783b521c6ca73b021c"
+      }
+    }
+  },
+  "schema": "rco.qwen36.template_token_probe.v1.corpus",
+  "status": "complete",
+  "tokens": {
+    "</think>": {
+      "all": {
+        "bf16_in_top20": 134,
+        "conversations": 134,
+        "delta_log_prob_vs_unpruned": {
+          "chat_consensus": {
+            "ci95": [
+              0.015100455684237611,
+              0.11669525029152052
+            ],
+            "mean": 0.06472783406335661
+          },
+          "chat_seed0_final": {
+            "ci95": [
+              -0.05806796045791333,
+              0.022539286941894464
+            ],
+            "mean": -0.015731990517537466
+          },
+          "chat_seed1_final": {
+            "ci95": [
+              -0.04414464075402161,
+              0.09289367109037283
+            ],
+            "mean": 0.026433838933639688
+          },
+          "frequency": {
+            "ci95": [
+              -0.02312806505309838,
+              0.008634497655323366
+            ],
+            "mean": -0.006184074766662291
+          },
+          "p24_raw_text": {
+            "ci95": [
+              -0.16543693256505776,
+              0.0060603345363260674
+            ],
+            "mean": -0.07481034758713963
+          }
+        },
+        "mean_log_prob": {
+          "bf16_where_in_top20": -0.19443202018737793,
+          "chat_consensus": -0.23985819601515443,
+          "chat_seed0_final": -0.32031802059604847,
+          "chat_seed1_final": -0.27815219114487133,
+          "frequency": -0.3107701048451733,
+          "p24_raw_text": -0.37939637766565065,
+          "unpruned": -0.30458603007851104
+        },
+        "mean_prob": {
+          "chat_consensus": 0.8513290270392732,
+          "chat_seed0_final": 0.8177744197272692,
+          "chat_seed1_final": 0.8350804787995507,
+          "frequency": 0.8201979531827709,
+          "p24_raw_text": 0.7775427895307028,
+          "unpruned": 0.8260759669097939
+        },
+        "positions": 134
+      },
+      "per_stratum": {
+        "chat": {
+          "bf16_in_top20": 32,
+          "conversations": 32,
+          "delta_log_prob_vs_unpruned": {
+            "chat_consensus": {
+              "ci95": [
+                -0.028965549042538896,
+                0.1380847799750029
+              ],
+              "mean": 0.05265093112911501
+            },
+            "chat_seed0_final": {
+              "ci95": [
+                0.0013818065768873566,
+                0.06917516670698731
+              ],
+              "mean": 0.029783101297663706
+            },
+            "chat_seed1_final": {
+              "ci95": [
+                -0.12212766370076622,
+                0.10665557954533256
+              ],
+              "mean": 0.010336858824295803
+            },
+            "frequency": {
+              "ci95": [
+                -0.00760159059476706,
+                0.011484987663941126
+              ],
+              "mean": 0.00044054870773635457
+            },
+            "p24_raw_text": {
+              "ci95": [
+                -0.11619972673194212,
+                0.0002517403889683578
+              ],
+              "mean": -0.04841542623316997
+            }
+          },
+          "mean_log_prob": {
+            "bf16_where_in_top20": -0.09982022643089294,
+            "chat_consensus": -0.1015144422024008,
+            "chat_seed0_final": -0.1243822720338521,
+            "chat_seed1_final": -0.14382851450722,
+            "frequency": -0.15372482462377945,
+            "p24_raw_text": -0.20258079956468578,
+            "unpruned": -0.1541653733315158
+          },
+          "mean_prob": {
+            "chat_consensus": 0.9204152616430815,
+            "chat_seed0_final": 0.9010786454985089,
+            "chat_seed1_final": 0.9020816236340075,
+            "frequency": 0.8860186828330083,
+            "p24_raw_text": 0.8485829129936739,
+            "unpruned": 0.8866010583367812
+          },
+          "positions": 32
+        },
+        "document": {
+          "bf16_in_top20": 34,
+          "conversations": 34,
+          "delta_log_prob_vs_unpruned": {
+            "chat_consensus": {
+              "ci95": [
+                0.0808456578381471,
+                0.319734511348877
+              ],
+              "mean": 0.18999560518799333
+            },
+            "chat_seed0_final": {
+              "ci95": [
+                -0.02535200700725347,
+                0.07982517433014008
+              ],
+              "mean": 0.024213952584866947
+            },
+            "chat_seed1_final": {
+              "ci95": [
+                0.07395842038434186,
+                0.2823439257673967
+              ],
+              "mean": 0.16953445505516676
+            },
+            "frequency": {
+              "ci95": [
+                -0.007357135976529689,
+                0.030864914703215618
+              ],
+              "mean": 0.010033441760322817
+            },
+            "p24_raw_text": {
+              "ci95": [
+                -0.023667219516904182,
+                0.16491296808208866
+              ],
+              "mean": 0.0600753315346096
+            }
+          },
+          "mean_log_prob": {
+            "bf16_where_in_top20": -0.1917952001094818,
+            "chat_consensus": -0.15914609616292558,
+            "chat_seed0_final": -0.32492774876605196,
+            "chat_seed1_final": -0.17960724629575212,
+            "frequency": -0.3391082595905961,
+            "p24_raw_text": -0.2890663698163093,
+            "unpruned": -0.3491417013509189
+          },
+          "mean_prob": {
+            "chat_consensus": 0.8845352060361792,
+            "chat_seed0_final": 0.799570453855992,
+            "chat_seed1_final": 0.8811838024073775,
+            "frequency": 0.8062624383954043,
+            "p24_raw_text": 0.8094853347015107,
+            "unpruned": 0.8048788369708816
+          },
+          "positions": 34
+        },
+        "reasoning": {
+          "bf16_in_top20": 44,
+          "conversations": 44,
+          "delta_log_prob_vs_unpruned": {
+            "chat_consensus": {
+              "ci95": [
+                -0.03362500401885365,
+                0.09321898170556799
+              ],
+              "mean": 0.021399039847091735
+            },
+            "chat_seed0_final": {
+              "ci95": [
+                -0.07285035717285898,
+                0.03306903250788454
+              ],
+              "mean": -0.023073126295607628
+            },
+            "chat_seed1_final": {
+              "ci95": [
+                -0.042142655378241176,
+                0.09522655172995863
+              ],
+              "mean": 0.015625054283062087
+            },
+            "frequency": {
+              "ci95": [
+                0.004508233019252698,
+                0.035686023446335084
+              ],
+              "mean": 0.01861356675754099
+            },
+            "p24_raw_text": {
+              "ci95": [
+                -0.12860783013599592,
+                0.045077765927539364
+              ],
+              "mean": -0.03171338598455329
+            }
+          },
+          "mean_log_prob": {
+            "bf16_where_in_top20": -0.23852919042110443,
+            "chat_consensus": -0.29168668447229346,
+            "chat_seed0_final": -0.33615885061499284,
+            "chat_seed1_final": -0.29746067003632315,
+            "frequency": -0.29447215756184425,
+            "p24_raw_text": -0.3447991103039385,
+            "unpruned": -0.3130857243193852
+          },
+          "mean_prob": {
+            "chat_consensus": 0.8146700075722471,
+            "chat_seed0_final": 0.8040968437518412,
+            "chat_seed1_final": 0.8128201939160267,
+            "frequency": 0.8337182317654321,
+            "p24_raw_text": 0.7987551662082025,
+            "unpruned": 0.8270125382363815
+          },
+          "positions": 44
+        },
+        "tool-answer": {
+          "bf16_in_top20": 12,
+          "conversations": 12,
+          "delta_log_prob_vs_unpruned": {
+            "chat_consensus": {
+              "ci95": [
+                -0.23527984725054316,
+                0.05696780480987703
+              ],
+              "mean": -0.07094728467806515
+            },
+            "chat_seed0_final": {
+              "ci95": [
+                -0.15019061183799445,
+                0.023542000193022734
+              ],
+              "mean": -0.05635527597163067
+            },
+            "chat_seed1_final": {
+              "ci95": [
+                -0.9667285005756033,
+                -0.11734675930347294
+              ],
+              "mean": -0.5002160598911966
+            },
+            "frequency": {
+              "ci95": [
+                -0.2746247830412661,
+                -0.038712715650035534
+              ],
+              "mean": -0.14554819674109845
+            },
+            "p24_raw_text": {
+              "ci95": [
+                -1.5350841021281667,
+                -0.49725718377158046
+              ],
+              "mean": -1.0089130824975048
+            }
+          },
+          "mean_log_prob": {
+            "bf16_where_in_top20": -0.13112273812294006,
+            "chat_consensus": -0.2094167539847452,
+            "chat_seed0_final": -0.19482474527831073,
+            "chat_seed1_final": -0.6386855291978767,
+            "frequency": -0.2840176660477785,
+            "p24_raw_text": -1.147382551804185,
+            "unpruned": -0.13846946930668005
+          },
+          "mean_prob": {
+            "chat_consensus": 0.8398111403728166,
+            "chat_seed0_final": 0.8499227597840006,
+            "chat_seed1_final": 0.6757076922347865,
+            "frequency": 0.7935104611565881,
+            "p24_raw_text": 0.4938523797049101,
+            "unpruned": 0.8807574272958054
+          },
+          "positions": 12
+        },
+        "tool-call": {
+          "bf16_in_top20": 12,
+          "conversations": 12,
+          "delta_log_prob_vs_unpruned": {
+            "chat_consensus": {
+              "ci95": [
+                -0.19126955251764835,
+                0.26355919187578064
+              ],
+              "mean": 0.03655492123592315
+            },
+            "chat_seed0_final": {
+              "ci95": [
+                -0.5546632082368887,
+                0.10707475019808044
+              ],
+              "mean": -0.18274495750786932
+            },
+            "chat_seed1_final": {
+              "ci95": [
+                0.00141104159168511,
+                0.49074247494960826
+              ],
+              "mean": 0.23018948275785078
+            },
+            "frequency": {
+              "ci95": [
+                -0.08092799624137115,
+                0.040497569512808695
+              ],
+              "mean": -0.021359931139159016
+            },
+            "p24_raw_text": {
+              "ci95": [
+                -0.0901029035449028,
+                0.5980944796125792
+              ],
+              "mean": 0.2487076469915337
+            }
+          },
+          "mean_log_prob": {
+            "bf16_where_in_top20": -0.35582074522972107,
+            "chat_consensus": -0.6778628067847118,
+            "chat_seed0_final": -0.8971626855285043,
+            "chat_seed1_final": -0.4842282452627842,
+            "frequency": -0.735777659159794,
+            "p24_raw_text": -0.4657100810291013,
+            "unpruned": -0.714417728020635
+          },
+          "mean_prob": {
+            "chat_consensus": 0.7189491856501031,
+            "chat_seed0_final": 0.6652104928257532,
+            "chat_seed1_final": 0.7667785068231749,
+            "frequency": 0.6612731032361013,
+            "p24_raw_text": 0.7035102776537853,
+            "unpruned": 0.6666187026812471
+          },
+          "positions": 12
+        }
+      },
+      "token_id": 248069
+    },
+    "</tool_call>": {
+      "all": {
+        "bf16_in_top20": 21,
+        "conversations": 21,
+        "delta_log_prob_vs_unpruned": {
+          "chat_consensus": {
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0
+          },
+          "chat_seed0_final": {
+            "ci95": [
+              -9.082611149952278e-08,
+              0.0
+            ],
+            "mean": -3.97364240982478e-08
+          },
+          "chat_seed1_final": {
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0
+          },
+          "frequency": {
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "mean": 0.0
+          },
+          "p24_raw_text": {
+            "ci95": [
+              -1.0217907136696642e-06,
+              -1.1353264994795609e-08
+            ],
+            "mean": -3.633034329671621e-07
+          }
+        },
+        "mean_log_prob": {
+          "bf16_where_in_top20": 0.0,
+          "chat_consensus": 0.0,
+          "chat_seed0_final": -3.97364240982478e-08,
+          "chat_seed1_final": 0.0,
+          "frequency": 0.0,
+          "p24_raw_text": -3.633034329671621e-07,
+          "unpruned": 0.0
+        },
+        "mean_prob": {
+          "chat_consensus": 1.0,
+          "chat_seed0_final": 0.9999999602635823,
+          "chat_seed1_final": 1.0,
+          "frequency": 1.0,
+          "p24_raw_text": 0.9999996366976356,
+          "unpruned": 1.0
+        },
+        "positions": 21
+      },
+      "per_stratum": {
+        "tool-call": {
+          "bf16_in_top20": 21,
+          "conversations": 21,
+          "delta_log_prob_vs_unpruned": {
+            "chat_consensus": {
+              "ci95": [
+                0.0,
+                0.0
+              ],
+              "mean": 0.0
+            },
+            "chat_seed0_final": {
+              "ci95": [
+                -9.082611149952278e-08,
+                0.0
+              ],
+              "mean": -3.97364240982478e-08
+            },
+            "chat_seed1_final": {
+              "ci95": [
+                0.0,
+                0.0
+              ],
+              "mean": 0.0
+            },
+            "frequency": {
+              "ci95": [
+                0.0,
+                0.0
+              ],
+              "mean": 0.0
+            },
+            "p24_raw_text": {
+              "ci95": [
+                -1.0217907136696642e-06,
+                -1.1353264994795609e-08
+              ],
+              "mean": -3.633034329671621e-07
+            }
+          },
+          "mean_log_prob": {
+            "bf16_where_in_top20": 0.0,
+            "chat_consensus": 0.0,
+            "chat_seed0_final": -3.97364240982478e-08,
+            "chat_seed1_final": 0.0,
+            "frequency": 0.0,
+            "p24_raw_text": -3.633034329671621e-07,
+            "unpruned": 0.0
+          },
+          "mean_prob": {
+            "chat_consensus": 1.0,
+            "chat_seed0_final": 0.9999999602635823,
+            "chat_seed1_final": 1.0,
+            "frequency": 1.0,
+            "p24_raw_text": 0.9999996366976356,
+            "unpruned": 1.0
+          },
+          "positions": 21
+        }
+      },
+      "token_id": 248059
+    },
+    "<tool_call>": {
+      "all": {
+        "bf16_in_top20": 21,
+        "conversations": 21,
+        "delta_log_prob_vs_unpruned": {
+          "chat_consensus": {
+            "ci95": [
+              -0.6412267448747896,
+              -0.0816452953343157
+            ],
+            "mean": -0.32144645868462857
+          },
+          "chat_seed0_final": {
+            "ci95": [
+              -0.15973855165902068,
+              -0.021652342533863184
+            ],
+            "mean": -0.08106717389803937
+          },
+          "chat_seed1_final": {
+            "ci95": [
+              -0.5164115868356887,
+              -0.0033789078436906755
+            ],
+            "mean": -0.22106417678975004
+          },
+          "frequency": {
+            "ci95": [
+              -0.007088527763677294,
+              0.001562273600181167
+            ],
+            "mean": -0.00233242232566443
+          },
+          "p24_raw_text": {
+            "ci95": [
+              -0.03992735800240899,
+              -0.0029440763604119033
+            ],
+            "mean": -0.01714642000819194
+          }
+        },
+        "mean_log_prob": {
+          "bf16_where_in_top20": -0.004881926812231541,
+          "chat_consensus": -0.32718347120594227,
+          "chat_seed0_final": -0.0868041864193531,
+          "chat_seed1_final": -0.2268011893110638,
+          "frequency": -0.00806943484697816,
+          "p24_raw_text": -0.02288343252950567,
+          "unpruned": -0.00573701252131373
+        },
+        "mean_prob": {
+          "chat_consensus": 0.8258212054709697,
+          "chat_seed0_final": 0.9285203348776657,
+          "chat_seed1_final": 0.8916910871172947,
+          "frequency": 0.9920523667802499,
+          "p24_raw_text": 0.9786010392971097,
+          "unpruned": 0.9943174500899696
+        },
+        "positions": 21
+      },
+      "per_stratum": {
+        "tool-call": {
+          "bf16_in_top20": 21,
+          "conversations": 21,
+          "delta_log_prob_vs_unpruned": {
+            "chat_consensus": {
+              "ci95": [
+                -0.6412267448747896,
+                -0.0816452953343157
+              ],
+              "mean": -0.32144645868462857
+            },
+            "chat_seed0_final": {
+              "ci95": [
+                -0.15973855165902068,
+                -0.021652342533863184
+              ],
+              "mean": -0.08106717389803937
+            },
+            "chat_seed1_final": {
+              "ci95": [
+                -0.5164115868356887,
+                -0.0033789078436906755
+              ],
+              "mean": -0.22106417678975004
+            },
+            "frequency": {
+              "ci95": [
+                -0.007088527763677294,
+                0.001562273600181167
+              ],
+              "mean": -0.00233242232566443
+            },
+            "p24_raw_text": {
+              "ci95": [
+                -0.03992735800240899,
+                -0.0029440763604119033
+              ],
+              "mean": -0.01714642000819194
+            }
+          },
+          "mean_log_prob": {
+            "bf16_where_in_top20": -0.004881926812231541,
+            "chat_consensus": -0.32718347120594227,
+            "chat_seed0_final": -0.0868041864193531,
+            "chat_seed1_final": -0.2268011893110638,
+            "frequency": -0.00806943484697816,
+            "p24_raw_text": -0.02288343252950567,
+            "unpruned": -0.00573701252131373
+          },
+          "mean_prob": {
+            "chat_consensus": 0.8258212054709697,
+            "chat_seed0_final": 0.9285203348776657,
+            "chat_seed1_final": 0.8916910871172947,
+            "frequency": 0.9920523667802499,
+            "p24_raw_text": 0.9786010392971097,
+            "unpruned": 0.9943174500899696
+          },
+          "positions": 21
+        }
+      },
+      "token_id": 248058
+    },
+    "<|im_end|>": {
+      "all": {
+        "bf16_in_top20": 218,
+        "conversations": 218,
+        "delta_log_prob_vs_unpruned": {
+          "chat_consensus": {
+            "ci95": [
+              -0.04632472283889658,
+              -0.0026708832053504786
+            ],
+            "mean": -0.02185559487638513
+          },
+          "chat_seed0_final": {
+            "ci95": [
+              -0.16876843650570492,
+              -0.066726843154022
+            ],
+            "mean": -0.11272485917151609
+          },
+          "chat_seed1_final": {
+            "ci95": [
+              -0.027246438439942663,
+              0.01693073750386413
+            ],
+            "mean": -0.003890385006497525
+          },
+          "frequency": {
+            "ci95": [
+              6.7472749339681665e-06,
+              0.011865013177569234
+            ],
+            "mean": 0.005348763894441325
+          },
+          "p24_raw_text": {
+            "ci95": [
+              -0.02413255570078434,
+              0.023803768112250347
+            ],
+            "mean": 0.0011822717574910793
+          }
+        },
+        "mean_log_prob": {
+          "bf16_where_in_top20": -0.12466885894536972,
+          "chat_consensus": -0.12193033985657808,
+          "chat_seed0_final": -0.21279960415170904,
+          "chat_seed1_final": -0.10396512998669048,
+          "frequency": -0.09472598108575163,
+          "p24_raw_text": -0.09889247322270188,
+          "unpruned": -0.10007474498019296
+        },
+        "mean_prob": {
+          "chat_consensus": 0.9283041840157394,
+          "chat_seed0_final": 0.8881809706559076,
+          "chat_seed1_final": 0.9368006173554052,
+          "frequency": 0.938836801403792,
+          "p24_raw_text": 0.9434195855368654,
+          "unpruned": 0.9369910456445228
+        },
+        "positions": 218
+      },
+      "per_stratum": {
+        "chat": {
+          "bf16_in_top20": 64,
+          "conversations": 64,
+          "delta_log_prob_vs_unpruned": {
+            "chat_consensus": {
+              "ci95": [
+                -0.027005242419576803,
+                0.03165116008474911
+              ],
+              "mean": 0.001473798553291772
+            },
+            "chat_seed0_final": {
+              "ci95": [
+                -0.2713896153835691,
+                -0.0730740044979683
+              ],
+              "mean": -0.16453275843545612
+            },
+            "chat_seed1_final": {
+              "ci95": [
+                0.01413388987212727,
+                0.08619591982298402
+              ],
+              "mean": 0.04548928055280044
+            },
+            "frequency": {
+              "ci95": [
+                0.0012800196796405316,
+                0.03400771863135077
+              ],
+              "mean": 0.015822610627886036
+            },
+            "p24_raw_text": {
+              "ci95": [
+                0.00431496774695006,
+                0.08496432330441905
+              ],
+              "mean": 0.043606344584560475
+            }
+          },
+          "mean_log_prob": {
+            "bf16_where_in_top20": -0.23703370988368988,
+            "chat_consensus": -0.18551478990727333,
+            "chat_seed0_final": -0.3515213468960212,
+            "chat_seed1_final": -0.14149930790776466,
+            "frequency": -0.17116597783267906,
+            "p24_raw_text": -0.14338224387600462,
+            "unpruned": -0.1869885884605651
+          },
+          "mean_prob": {
+            "chat_consensus": 0.8881868645335629,
+            "chat_seed0_final": 0.8056033543895339,
+            "chat_seed1_final": 0.9078131045120669,
+            "frequency": 0.8958709403193447,
+            "p24_raw_text": 0.9210833454604839,
+            "unpruned": 0.8894496569793078
+          },
+          "positions": 64
+        },
+        "document": {
+          "bf16_in_top20": 62,
+          "conversations": 62,
+          "delta_log_prob_vs_unpruned": {
+            "chat_consensus": {
+              "ci95": [
+                -0.010403343817506355,
+                0.016647472313494407
+              ],
+              "mean": 0.0005251091837912495
+            },
+            "chat_seed0_final": {
+              "ci95": [
+                -0.14277955445304488,
+                -0.026436524805149936
+              ],
+              "mean": -0.0734432354209774
+            },
+            "chat_seed1_final": {
+              "ci95": [
+                0.0011382804653619,
+                0.044179396967609266
+              ],
+              "mean": 0.019499019213773106
+            },
+            "frequency": {
+              "ci95": [
+                -0.0017892803913616535,
+                0.01777878160443069
+              ],
+              "mean": 0.005497801638384203
+            },
+            "p24_raw_text": {
+              "ci95": [
+                -0.02154871919627831,
+                0.013104057202462348
+              ],
+              "mean": -0.005061479088006367
+            }
+          },
+          "mean_log_prob": {
+            "bf16_where_in_top20": -0.05754891410470009,
+            "chat_consensus": -0.05507505459646077,
+            "chat_seed0_final": -0.12904339920122943,
+            "chat_seed1_final": -0.036101144566478914,
+            "frequency": -0.05010236214186782,
+            "p24_raw_text": -0.06066164286825839,
+            "unpruned": -0.055600163780252024
+          },
+          "mean_prob": {
+            "chat_consensus": 0.9573589411743626,
+            "chat_seed0_final": 0.921948373780003,
+            "chat_seed1_final": 0.9701115173940061,
+            "frequency": 0.9620360871588994,
+            "p24_raw_text": 0.9548182227484806,
+            "unpruned": 0.9601578836046626
+          },
+          "positions": 62
+        },
+        "reasoning": {
+          "bf16_in_top20": 44,
+          "conversations": 44,
+          "delta_log_prob_vs_unpruned": {
+            "chat_consensus": {
+              "ci95": [
+                -0.21060670505432003,
+                -0.0275950233705244
+              ],
+              "mean": -0.1030698597757539
+            },
+            "chat_seed0_final": {
+              "ci95": [
+                -0.40454665821145075,
+                -0.04105902931010002
+              ],
+              "mean": -0.18387109223939355
+            },
+            "chat_seed1_final": {
+              "ci95": [
+                -0.18501743792542413,
+                -0.026427682496994655
+              ],
+              "mean": -0.09416760519166768
+            },
+            "frequency": {
+              "ci95": [
+                -0.006973706754329421,
+                0.003434320230292604
+              ],
+              "mean": -0.0013911507259843409
+            },
+            "p24_raw_text": {
+              "ci95": [
+                -0.11397925171722147,
+                0.054603247379312686
+              ],
+              "mean": -0.01463599694937091
+            }
+          },
+          "mean_log_prob": {
+            "bf16_where_in_top20": -0.12335390597581863,
+            "chat_consensus": -0.22231084134798804,
+            "chat_seed0_final": -0.3031120738116277,
+            "chat_seed1_final": -0.21340858676390181,
+            "frequency": -0.12063213229821847,
+            "p24_raw_text": -0.13387697852160504,
+            "unpruned": -0.11924098157223413
+          },
+          "mean_prob": {
+            "chat_consensus": 0.8942137337102256,
+            "chat_seed0_final": 0.8816981181269047,
+            "chat_seed1_final": 0.8953614252264739,
+            "frequency": 0.9251274348368514,
+            "p24_raw_text": 0.9371868959109219,
+            "unpruned": 0.9254448512716085
+          },
+          "positions": 44
+        },
+        "tool-answer": {
+          "bf16_in_top20": 24,
+          "conversations": 24,
+          "delta_log_prob_vs_unpruned": {
+            "chat_consensus": {
+              "ci95": [
+                -0.0270293040530305,
+                -0.005308770062849059
+              ],
+              "mean": -0.013787154018814363
+            },
+            "chat_seed0_final": {
+              "ci95": [
+                -0.10771832210374062,
+                -0.016500811255771925
+              ],
+              "mean": -0.05633098659726935
+            },
+            "chat_seed1_final": {
+              "ci95": [
+                -0.07866443399594421,
+                -0.007167040927015478
+              ],
+              "mean": -0.033418294151147165
+            },
+            "frequency": {
+              "ci95": [
+                -0.011964401176252673,
+                -0.0007811440208721857
+              ],
+              "mean": -0.005244400648962255
+            },
+            "p24_raw_text": {
+              "ci95": [
+                -0.15881176315663956,
+                -0.00718632184513505
+              ],
+              "mean": -0.06247208402082075
+            }
+          },
+          "mean_log_prob": {
+            "bf16_where_in_top20": -0.12496557831764221,
+            "chat_consensus": -0.05991171131184577,
+            "chat_seed0_final": -0.10245554389030076,
+            "chat_seed1_final": -0.07954285144417857,
+            "frequency": -0.05136895794199366,
+            "p24_raw_text": -0.10859664131385216,
+            "unpruned": -0.04612455729303141
+          },
+          "mean_prob": {
+            "chat_consensus": 0.9540098120637083,
+            "chat_seed0_final": 0.9251112468570758,
+            "chat_seed1_final": 0.9436952758039933,
+            "frequency": 0.9594451597127879,
+            "p24_raw_text": 0.9333439687101434,
+            "unpruned": 0.9640564896392311
+          },
+          "positions": 24
+        },
+        "tool-call": {
+          "bf16_in_top20": 24,
+          "conversations": 24,
+          "delta_log_prob_vs_unpruned": {
+            "chat_consensus": {
+              "ci95": [
+                -0.003413286003099536,
+                0.0002434284930643571
+              ],
+              "mean": -0.0010597513863738566
+            },
+            "chat_seed0_final": {
+              "ci95": [
+                -0.005584224438128634,
+                9.18173845754211e-06
+              ],
+              "mean": -0.0020071011063723296
+            },
+            "chat_seed1_final": {
+              "ci95": [
+                -0.0033001019424435305,
+                0.0003048068165828847
+              ],
+              "mean": -0.0009559745828629692
+            },
+            "frequency": {
+              "ci95": [
+                -0.0003203121295077456,
+                0.00019788696391268937
+              ],
+              "mean": -1.6833552413035118e-05
+            },
+            "p24_raw_text": {
+              "ci95": [
+                -0.008715709093546131,
+                -5.7694391384662445e-05
+              ],
+              "mean": -0.0031643843562667584
+            }
+          },
+          "mean_log_prob": {
+            "bf16_where_in_top20": -0.0005364417447708547,
+            "chat_consensus": -0.0030690024538412666,
+            "chat_seed0_final": -0.004016352173839739,
+            "chat_seed1_final": -0.0029652256503303795,
+            "frequency": -0.002026084619880445,
+            "p24_raw_text": -0.005173635423734169,
+            "unpruned": -0.0020092510674674102
+          },
+          "mean_prob": {
+            "chat_consensus": 0.9970191108205735,
+            "chat_seed0_final": 0.9961104427309942,
+            "chat_seed1_final": 0.997124686959041,
+            "frequency": 0.9980064231586846,
+            "p24_raw_text": 0.9950386274181625,
+            "unpruned": 0.9980229963770376
+          },
+          "positions": 24
+        }
+      },
+      "token_id": 248046
+    }
+  },
+  "what": "log-probability, under each label's exact PyTorch score, of every template token the reference model wrote in a scored reply; deltas are paired per conversation (mean over its positions), 95% bootstrap"
+}
