@@ -195,6 +195,15 @@ def _tool_prompts(args) -> list[dict[str, Any]]:
     return prompts
 
 
+def _server_command(args) -> list[str]:
+    command = [str(args.server), "-m", str(args.model), "--jinja", "-ngl", str(args.gpu_layers),
+               "-t", str(args.threads), "-c", str(args.context), "-np", "1",
+               "--host", "127.0.0.1", "--port", str(args.port), "--no-webui"]
+    if args.n_cpu_moe:
+        command += ["--n-cpu-moe", str(args.n_cpu_moe)]
+    return command
+
+
 def run_first_token(args) -> int:
     output = args.reports / f"qwen36_template_token_probe_first_token_{args.label}.json"
     prompts = _tool_prompts(args)
@@ -210,12 +219,7 @@ def run_first_token(args) -> int:
         return 0
     base = f"http://127.0.0.1:{args.port}"
     log = (ROOT / f"{output.stem}.server.log").open("w")
-    command = [str(args.server), "-m", str(args.model), "--jinja", "-ngl", str(args.gpu_layers),
-               "-t", str(args.threads), "-c", str(args.context), "-np", "1",
-               "--host", "127.0.0.1", "--port", str(args.port), "--no-webui"]
-    if args.n_cpu_moe:
-        command[5:5] = ["--n-cpu-moe", str(args.n_cpu_moe)]
-    process = subprocess.Popen(command, stdout=log, stderr=subprocess.STDOUT,
+    process = subprocess.Popen(_server_command(args), stdout=log, stderr=subprocess.STDOUT,
                                start_new_session=True)
     results = []
     try:
@@ -251,11 +255,12 @@ def run_first_token(args) -> int:
                      f"< {np.exp(r['tool_call_log_prob_upper_bound']):.2e}")
                   + f", greedy {r['greedy_token']!r}", flush=True)
     finally:
-        os.killpg(process.pid, signal.SIGTERM)
-        try:
-            process.wait(timeout=60)
-        except subprocess.TimeoutExpired:
-            os.killpg(process.pid, signal.SIGKILL)
+        if process.poll() is None:
+            os.killpg(process.pid, signal.SIGTERM)
+            try:
+                process.wait(timeout=60)
+            except subprocess.TimeoutExpired:
+                os.killpg(process.pid, signal.SIGKILL)
     probs = {source: [np.exp(r["tool_call_log_prob"]) if r["tool_call_log_prob"] is not None
                       else 0.0 for r in results if r["source"] == source]
              for source in dict.fromkeys(r["source"] for r in results)}

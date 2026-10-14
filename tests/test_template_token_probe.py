@@ -60,5 +60,16 @@ class PromptsTest(unittest.TestCase):
                           ("tool-currency", "gate"), ("p0", "heldout")])
 
 
+class ServerCommandTest(unittest.TestCase):
+    def test_every_flag_keeps_its_value(self):
+        args = probe.SimpleArgs(server="llama-server", model="m.gguf", gpu_layers=99,
+                                n_cpu_moe=30, threads=8, context=8192, port=18081)
+        command = probe._server_command(args)
+        self.assertEqual(command[command.index("-ngl") + 1], "99")
+        self.assertEqual(command[command.index("--n-cpu-moe") + 1], "30")
+        args.n_cpu_moe = 0
+        self.assertNotIn("--n-cpu-moe", probe._server_command(args))
+
+
 if __name__ == "__main__":
     unittest.main()
