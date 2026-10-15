@@ -309,7 +309,7 @@ def main() -> int:
     parser.add_argument("--corpus-prompts", type=Path,
                         default=ROOT / "data/qwen36_chat_corpus_v2/prompts.jsonl")
     parser.add_argument("--server", type=Path,
-                        default=ROOT / "experiment/build-cuda/bin/llama-server")
+                        default=ROOT / "experiment/build-cuda-mmqfix/bin/llama-server")
     parser.add_argument("--gpu-layers", type=int, default=99)
     parser.add_argument("--n-cpu-moe", type=int, default=0)
     parser.add_argument("--threads", type=int, default=8)

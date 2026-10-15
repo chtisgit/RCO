@@ -146,8 +146,11 @@ def main() -> int:
     parser.add_argument("--context", type=int, default=8192)
     parser.add_argument("--port", type=int, default=18080)
     parser.add_argument("--server", type=Path,
-                        default=ROOT / "experiment/build-cuda/bin/llama-server")
-    parser.add_argument("--llama-dir", type=Path, default=ROOT / "repos/llama.cpp")
+                        default=ROOT / "experiment/build-cuda-mmqfix/bin/llama-server")
+    # The pinned revision plus upstream dd266785c (the MMQ padding fix); the
+    # pinned build aborts on some prompt lengths (RCO_PLAN_NEW.md, 2026-10-14).
+    parser.add_argument("--llama-dir", type=Path,
+                        default=ROOT / "experiment/llama.cpp-mmqfix")
     parser.add_argument("--prompts", type=Path,
                         default=RCO / "tools/qwen36_chat_generation_prompts.json")
     parser.add_argument("--reports", type=Path, default=RCO / "reports")
