@@ -40,6 +40,13 @@ Subcommands, in order; each writes one report and is resumable:
     minus unpruned GSQ-E6, paired bootstrap 95% CI upper bound below 0.
     Also reported: base minus unpruned (the pruning cost) and promoted
     minus base (the upgrades' gain), safeguard 3.
+
+``--stage NAME`` appends ``_NAME`` to the search, promotion and replay
+reports, so a later stage sits next to the first.  ``search --extend``
+continues a run's saved state to more steps; the run's manifest must match
+except for the step count, which is updated, and the report records every
+extension.  ``promote --candidates final`` takes only each run's final
+assignment, not its best-screened draw.
 """
 
 from __future__ import annotations
@@ -447,8 +454,12 @@ def run_pilot(args) -> None:
           f"{record['loss_minus']:+.5f}", flush=True)
 
 
+def _stage(args) -> str:
+    return f"_{args.stage}" if args.stage else ""
+
+
 def run_search(args) -> None:
-    output = args.reports / f"{PREFIX}_search_run{args.run}.json"
+    output = args.reports / f"{PREFIX}_search_run{args.run}{_stage(args)}.json"
     if output.exists() and _load_json(output).get("status") == "complete":
         print(f"search run {args.run}: already complete", flush=True)
         return
@@ -463,12 +474,28 @@ def run_search(args) -> None:
     search = Search(config["groups"], lr=args.lr, baseline_decay=args.baseline_decay,
                     seed=config["seed"])
     if manifest_path.exists():
-        if _load_json(manifest_path) != json.loads(json.dumps(manifest)):
+        stored = _load_json(manifest_path)
+        expected = json.loads(json.dumps(manifest))
+        extensions = stored.pop("extensions", [])
+        if args.extend:
+            stored["config"].pop("steps")
+            expected["config"].pop("steps")
+        if stored != expected:
             raise RuntimeError(f"{manifest_path} differs from this run; refusing to resume")
         if state_path.exists():
             search.load(state_path)
             print(f"search run {args.run}: resuming at step {len(search.history)}", flush=True)
+        if args.extend and _load_json(manifest_path)["config"]["steps"] != args.steps:
+            if len(search.history) < _load_json(manifest_path)["config"]["steps"]:
+                raise RuntimeError(f"run {args.run} has not finished its steps; resume first")
+            extensions.append({"from_steps": len(search.history), "to_steps": args.steps,
+                               "state_sha256": _sha256_file(state_path)})
+            _atomic_json(manifest_path, {**manifest, "extensions": extensions})
+        if extensions:
+            manifest = {**manifest, "extensions": extensions}
     else:
+        if args.extend:
+            raise RuntimeError(f"run {args.run} has no saved state to extend")
         _atomic_json(manifest_path, manifest)
     while len(search.history) < args.steps:
         step = len(search.history)
@@ -510,10 +537,11 @@ def _candidates(args, store_report) -> dict[str, list[str]]:
     candidates: dict[str, list[str]] = {}
     seen: dict[tuple[str, ...], str] = {}
     for run in range(args.runs):
-        report = _load_json(args.reports / f"{PREFIX}_search_run{run}.json")
+        report = _load_json(args.reports / f"{PREFIX}_search_run{run}{_stage(args)}.json")
         if report.get("status") != "complete":
             raise RuntimeError(f"search run {run} is not complete")
-        for kind in ("final", "best_screened"):
+        kinds = ("final",) if args.candidates == "final" else ("final", "best_screened")
+        for kind in kinds:
             tensors = tuple(sorted(report[kind]["tensors"]))
             if len(tensors) != UPGRADES:
                 raise RuntimeError(f"run {run} {kind} upgrades {len(tensors)} tensors")
@@ -534,7 +562,7 @@ def _candidates(args, store_report) -> dict[str, list[str]]:
 
 
 def run_promote(args) -> None:
-    output = args.reports / f"{PREFIX}_promotion.json"
+    output = args.reports / f"{PREFIX}_promotion{_stage(args)}.json"
     if output.exists() and _load_json(output).get("status") == "complete":
         print("promote: already complete", flush=True)
         return
@@ -558,6 +586,9 @@ def run_promote(args) -> None:
                      "conversation_ids": [c["id"] for c in parts["validation"]["conversations"]]},
         "rule": ("best search candidate by validation mean KL; it must beat both controls, "
                  "otherwise the better control is promoted and reported as such"),
+        "candidates": args.candidates,
+        "search_reports": [f"{PREFIX}_search_run{run}{_stage(args)}.json"
+                           for run in range(args.runs)],
         "best_search_candidate": best,
         "best_search_candidate_beats_controls": beats,
         "promoted": promoted,
@@ -576,12 +607,12 @@ def run_promote(args) -> None:
 
 
 def run_replay(args) -> int:
-    output = args.reports / f"{PREFIX}_replay.json"
+    output = args.reports / f"{PREFIX}_replay{_stage(args)}.json"
     if output.exists() and _load_json(output).get("status") in ("pass", "fail"):
         print(f"replay: already {_load_json(output)['status']}", flush=True)
         return 0
     started = time.perf_counter()
-    promotion = _load_json(args.reports / f"{PREFIX}_promotion.json")
+    promotion = _load_json(args.reports / f"{PREFIX}_promotion{_stage(args)}.json")
     if promotion.get("status") != "complete":
         raise RuntimeError("promotion is not complete")
     parts, data_identity = _parts(args)
@@ -624,6 +655,9 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument("--run", type=int, default=0)
     parser.add_argument("--runs", type=int, default=2)
     parser.add_argument("--steps", type=int, default=30)
+    parser.add_argument("--stage", default="")
+    parser.add_argument("--extend", action="store_true")
+    parser.add_argument("--candidates", choices=("all", "final"), default="all")
     parser.add_argument("--lr", type=float, default=0.1)
     parser.add_argument("--baseline-decay", type=float, default=0.9)
     parser.add_argument("--seed-base", type=int, default=20261016)
