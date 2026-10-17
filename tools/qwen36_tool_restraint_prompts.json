@@ -1,0 +1,1716 @@
+{
+ "schema": "rco.qwen36.tool_restraint_prompts.v1",
+ "status": "approved by the user 2026-10-17 (revision 3); validation on the Q6_K reference pending",
+ "decoding": "model card per mode, as qwen36_chat_generation_prompts_v2.json; 5 seeds",
+ "seeds": [
+  20261018,
+  20261019,
+  20261020,
+  20261021,
+  20261022
+ ],
+ "round_limit": 4,
+ "checks": {
+  "contains_any": "the final answer contains one accepted string, whole word, case ignored",
+  "starts_with_any": "the final answer, without leading markdown or punctuation, starts with an accepted word, case ignored",
+  "nonempty": "a non-empty plain-text final answer"
+ },
+ "tool_results": {
+  "get_current_weather": {
+   "location": "{location}",
+   "temperature": 13.7,
+   "unit": "celsius",
+   "condition": "light rain",
+   "humidity_percent": 81,
+   "wind_kph": 23.4
+  },
+  "get_stock_price": {
+   "symbol": "{symbol}",
+   "price": 187.42,
+   "currency": "USD",
+   "change_percent": -2.31
+  },
+  "convert_currency": {
+   "amount": "{amount}",
+   "from_currency": "{from_currency}",
+   "to_currency": "{to_currency}",
+   "rate": 1.0842,
+   "converted_amount": {
+    "$multiply": [
+     "{amount}",
+     1.0842
+    ],
+    "$round": 2
+   }
+  },
+  "send_email": {
+   "status": "queued",
+   "message_id": "MSG-58213"
+  },
+  "search_flights": {
+   "flights": [
+    {
+     "flight": "LH 4417",
+     "departure": "07:35",
+     "arrival": "09:10",
+     "price_eur": 389
+    }
+   ]
+  },
+  "get_current_date": {
+   "date": "2024-11-03"
+  }
+ },
+ "distractors": {
+  "get_current_weather": [
+   "13.7",
+   "light rain",
+   "81",
+   "23.4"
+  ],
+  "get_stock_price": [
+   "187.42",
+   "2.31"
+  ],
+  "convert_currency": [
+   "1.0842",
+   "$converted_amount"
+  ],
+  "send_email": [
+   "MSG-58213",
+   "58213"
+  ],
+  "search_flights": [
+   "LH 4417",
+   "4417",
+   "07:35",
+   "09:10",
+   "389"
+  ],
+  "get_current_date": [
+   "2024-11-03",
+   "November 3, 2024",
+   "3 November 2024"
+  ]
+ },
+ "distractor_rule": "whole-value match, case ignored; values the model itself passed as arguments are not distractors",
+ "prompts": [
+  {
+   "id": "unrelated-multiply",
+   "kind": "unrelated",
+   "thinking": false,
+   "turns": [
+    "What is 17 multiplied by 23?"
+   ],
+   "tools": [
+    {
+     "type": "function",
+     "function": {
+      "name": "get_current_weather",
+      "description": "Get the current weather for a city.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "location": {
+         "type": "string",
+         "description": "City name, e.g. Paris"
+        },
+        "unit": {
+         "type": "string",
+         "enum": [
+          "celsius",
+          "fahrenheit"
+         ]
+        }
+       },
+       "required": [
+        "location"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "get_stock_price",
+      "description": "Get the latest stock price for a ticker symbol.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "symbol": {
+         "type": "string",
+         "description": "Ticker symbol, e.g. MSFT"
+        }
+       },
+       "required": [
+        "symbol"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "convert_currency",
+      "description": "Convert an amount between two currencies at today's exchange rate.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "amount": {
+         "type": "number"
+        },
+        "from_currency": {
+         "type": "string",
+         "description": "ISO code, e.g. USD"
+        },
+        "to_currency": {
+         "type": "string",
+         "description": "ISO code, e.g. EUR"
+        }
+       },
+       "required": [
+        "amount",
+        "from_currency",
+        "to_currency"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "send_email",
+      "description": "Send an email.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "to": {
+         "type": "string"
+        },
+        "subject": {
+         "type": "string"
+        },
+        "body": {
+         "type": "string"
+        }
+       },
+       "required": [
+        "to",
+        "subject",
+        "body"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "search_flights",
+      "description": "Search flights between two airports on a date.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "origin": {
+         "type": "string",
+         "description": "IATA code"
+        },
+        "destination": {
+         "type": "string",
+         "description": "IATA code"
+        },
+        "date": {
+         "type": "string",
+         "description": "YYYY-MM-DD"
+        }
+       },
+       "required": [
+        "origin",
+        "destination",
+        "date"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "get_current_date",
+      "description": "Get today's date.",
+      "parameters": {
+       "type": "object",
+       "properties": {},
+       "required": []
+      }
+     }
+    }
+   ],
+   "check": {
+    "type": "contains_any",
+    "accept": [
+     "391"
+    ]
+   },
+   "offer": "toolbox"
+  },
+  {
+   "id": "unrelated-capital",
+   "kind": "unrelated",
+   "thinking": false,
+   "turns": [
+    "What is the capital of Australia?"
+   ],
+   "tools": [
+    {
+     "type": "function",
+     "function": {
+      "name": "get_stock_price",
+      "description": "Get the latest stock price for a ticker symbol.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "symbol": {
+         "type": "string",
+         "description": "Ticker symbol, e.g. MSFT"
+        }
+       },
+       "required": [
+        "symbol"
+       ]
+      }
+     }
+    }
+   ],
+   "check": {
+    "type": "contains_any",
+    "accept": [
+     "Canberra"
+    ]
+   },
+   "offer": "single"
+  },
+  {
+   "id": "unrelated-leap-year",
+   "kind": "unrelated",
+   "thinking": true,
+   "turns": [
+    "How many days are there in a leap year?"
+   ],
+   "tools": [
+    {
+     "type": "function",
+     "function": {
+      "name": "get_current_weather",
+      "description": "Get the current weather for a city.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "location": {
+         "type": "string",
+         "description": "City name, e.g. Paris"
+        },
+        "unit": {
+         "type": "string",
+         "enum": [
+          "celsius",
+          "fahrenheit"
+         ]
+        }
+       },
+       "required": [
+        "location"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "get_stock_price",
+      "description": "Get the latest stock price for a ticker symbol.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "symbol": {
+         "type": "string",
+         "description": "Ticker symbol, e.g. MSFT"
+        }
+       },
+       "required": [
+        "symbol"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "convert_currency",
+      "description": "Convert an amount between two currencies at today's exchange rate.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "amount": {
+         "type": "number"
+        },
+        "from_currency": {
+         "type": "string",
+         "description": "ISO code, e.g. USD"
+        },
+        "to_currency": {
+         "type": "string",
+         "description": "ISO code, e.g. EUR"
+        }
+       },
+       "required": [
+        "amount",
+        "from_currency",
+        "to_currency"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "send_email",
+      "description": "Send an email.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "to": {
+         "type": "string"
+        },
+        "subject": {
+         "type": "string"
+        },
+        "body": {
+         "type": "string"
+        }
+       },
+       "required": [
+        "to",
+        "subject",
+        "body"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "search_flights",
+      "description": "Search flights between two airports on a date.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "origin": {
+         "type": "string",
+         "description": "IATA code"
+        },
+        "destination": {
+         "type": "string",
+         "description": "IATA code"
+        },
+        "date": {
+         "type": "string",
+         "description": "YYYY-MM-DD"
+        }
+       },
+       "required": [
+        "origin",
+        "destination",
+        "date"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "get_current_date",
+      "description": "Get today's date.",
+      "parameters": {
+       "type": "object",
+       "properties": {},
+       "required": []
+      }
+     }
+    }
+   ],
+   "check": {
+    "type": "contains_any",
+    "accept": [
+     "366"
+    ]
+   },
+   "offer": "toolbox"
+  },
+  {
+   "id": "unrelated-gold",
+   "kind": "unrelated",
+   "thinking": true,
+   "turns": [
+    "What is the chemical symbol for gold?"
+   ],
+   "tools": [
+    {
+     "type": "function",
+     "function": {
+      "name": "get_current_weather",
+      "description": "Get the current weather for a city.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "location": {
+         "type": "string",
+         "description": "City name, e.g. Paris"
+        },
+        "unit": {
+         "type": "string",
+         "enum": [
+          "celsius",
+          "fahrenheit"
+         ]
+        }
+       },
+       "required": [
+        "location"
+       ]
+      }
+     }
+    }
+   ],
+   "check": {
+    "type": "contains_any",
+    "accept": [
+     "Au"
+    ]
+   },
+   "offer": "single"
+  },
+  {
+   "id": "related-yen",
+   "kind": "related",
+   "thinking": false,
+   "turns": [
+    "Which currency does Japan use?"
+   ],
+   "tools": [
+    {
+     "type": "function",
+     "function": {
+      "name": "get_current_weather",
+      "description": "Get the current weather for a city.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "location": {
+         "type": "string",
+         "description": "City name, e.g. Paris"
+        },
+        "unit": {
+         "type": "string",
+         "enum": [
+          "celsius",
+          "fahrenheit"
+         ]
+        }
+       },
+       "required": [
+        "location"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "get_stock_price",
+      "description": "Get the latest stock price for a ticker symbol.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "symbol": {
+         "type": "string",
+         "description": "Ticker symbol, e.g. MSFT"
+        }
+       },
+       "required": [
+        "symbol"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "convert_currency",
+      "description": "Convert an amount between two currencies at today's exchange rate.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "amount": {
+         "type": "number"
+        },
+        "from_currency": {
+         "type": "string",
+         "description": "ISO code, e.g. USD"
+        },
+        "to_currency": {
+         "type": "string",
+         "description": "ISO code, e.g. EUR"
+        }
+       },
+       "required": [
+        "amount",
+        "from_currency",
+        "to_currency"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "send_email",
+      "description": "Send an email.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "to": {
+         "type": "string"
+        },
+        "subject": {
+         "type": "string"
+        },
+        "body": {
+         "type": "string"
+        }
+       },
+       "required": [
+        "to",
+        "subject",
+        "body"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "search_flights",
+      "description": "Search flights between two airports on a date.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "origin": {
+         "type": "string",
+         "description": "IATA code"
+        },
+        "destination": {
+         "type": "string",
+         "description": "IATA code"
+        },
+        "date": {
+         "type": "string",
+         "description": "YYYY-MM-DD"
+        }
+       },
+       "required": [
+        "origin",
+        "destination",
+        "date"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "get_current_date",
+      "description": "Get today's date.",
+      "parameters": {
+       "type": "object",
+       "properties": {},
+       "required": []
+      }
+     }
+    }
+   ],
+   "check": {
+    "type": "contains_any",
+    "accept": [
+     "yen",
+     "JPY"
+    ]
+   },
+   "offer": "toolbox"
+  },
+  {
+   "id": "related-boiling",
+   "kind": "related",
+   "thinking": false,
+   "turns": [
+    "At what temperature in Celsius does water boil at sea level?"
+   ],
+   "tools": [
+    {
+     "type": "function",
+     "function": {
+      "name": "get_current_weather",
+      "description": "Get the current weather for a city.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "location": {
+         "type": "string",
+         "description": "City name, e.g. Paris"
+        },
+        "unit": {
+         "type": "string",
+         "enum": [
+          "celsius",
+          "fahrenheit"
+         ]
+        }
+       },
+       "required": [
+        "location"
+       ]
+      }
+     }
+    }
+   ],
+   "check": {
+    "type": "contains_any",
+    "accept": [
+     "100"
+    ]
+   },
+   "offer": "single"
+  },
+  {
+   "id": "related-ticker",
+   "kind": "related",
+   "thinking": true,
+   "turns": [
+    "Which company has the stock ticker symbol AAPL?"
+   ],
+   "tools": [
+    {
+     "type": "function",
+     "function": {
+      "name": "get_current_weather",
+      "description": "Get the current weather for a city.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "location": {
+         "type": "string",
+         "description": "City name, e.g. Paris"
+        },
+        "unit": {
+         "type": "string",
+         "enum": [
+          "celsius",
+          "fahrenheit"
+         ]
+        }
+       },
+       "required": [
+        "location"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "get_stock_price",
+      "description": "Get the latest stock price for a ticker symbol.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "symbol": {
+         "type": "string",
+         "description": "Ticker symbol, e.g. MSFT"
+        }
+       },
+       "required": [
+        "symbol"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "convert_currency",
+      "description": "Convert an amount between two currencies at today's exchange rate.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "amount": {
+         "type": "number"
+        },
+        "from_currency": {
+         "type": "string",
+         "description": "ISO code, e.g. USD"
+        },
+        "to_currency": {
+         "type": "string",
+         "description": "ISO code, e.g. EUR"
+        }
+       },
+       "required": [
+        "amount",
+        "from_currency",
+        "to_currency"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "send_email",
+      "description": "Send an email.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "to": {
+         "type": "string"
+        },
+        "subject": {
+         "type": "string"
+        },
+        "body": {
+         "type": "string"
+        }
+       },
+       "required": [
+        "to",
+        "subject",
+        "body"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "search_flights",
+      "description": "Search flights between two airports on a date.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "origin": {
+         "type": "string",
+         "description": "IATA code"
+        },
+        "destination": {
+         "type": "string",
+         "description": "IATA code"
+        },
+        "date": {
+         "type": "string",
+         "description": "YYYY-MM-DD"
+        }
+       },
+       "required": [
+        "origin",
+        "destination",
+        "date"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "get_current_date",
+      "description": "Get today's date.",
+      "parameters": {
+       "type": "object",
+       "properties": {},
+       "required": []
+      }
+     }
+    }
+   ],
+   "check": {
+    "type": "contains_any",
+    "accept": [
+     "Apple"
+    ]
+   },
+   "offer": "toolbox"
+  },
+  {
+   "id": "related-cents",
+   "kind": "related",
+   "thinking": true,
+   "turns": [
+    "How many cents are in one euro?"
+   ],
+   "tools": [
+    {
+     "type": "function",
+     "function": {
+      "name": "convert_currency",
+      "description": "Convert an amount between two currencies at today's exchange rate.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "amount": {
+         "type": "number"
+        },
+        "from_currency": {
+         "type": "string",
+         "description": "ISO code, e.g. USD"
+        },
+        "to_currency": {
+         "type": "string",
+         "description": "ISO code, e.g. EUR"
+        }
+       },
+       "required": [
+        "amount",
+        "from_currency",
+        "to_currency"
+       ]
+      }
+     }
+    }
+   ],
+   "check": {
+    "type": "contains_any",
+    "accept": [
+     "100"
+    ]
+   },
+   "offer": "single"
+  },
+  {
+   "id": "given-jacket",
+   "kind": "given",
+   "thinking": false,
+   "turns": [
+    "It's 31 degrees Celsius and sunny here in Madrid right now. Should I wear a warm jacket? Start your answer with yes or no."
+   ],
+   "tools": [
+    {
+     "type": "function",
+     "function": {
+      "name": "get_current_weather",
+      "description": "Get the current weather for a city.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "location": {
+         "type": "string",
+         "description": "City name, e.g. Paris"
+        },
+        "unit": {
+         "type": "string",
+         "enum": [
+          "celsius",
+          "fahrenheit"
+         ]
+        }
+       },
+       "required": [
+        "location"
+       ]
+      }
+     }
+    }
+   ],
+   "check": {
+    "type": "starts_with_any",
+    "accept": [
+     "no"
+    ]
+   },
+   "offer": "single",
+   "tool_result_overrides": {
+    "get_current_weather": {
+     "location": "{location}",
+     "temperature": 31,
+     "unit": "celsius",
+     "condition": "sunny"
+    }
+   }
+  },
+  {
+   "id": "given-profit",
+   "kind": "given",
+   "thinking": false,
+   "turns": [
+    "I bought 10 shares of Microsoft at $150 each and sold all of them at $180 each. What was my total profit, ignoring fees?"
+   ],
+   "tools": [
+    {
+     "type": "function",
+     "function": {
+      "name": "get_current_weather",
+      "description": "Get the current weather for a city.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "location": {
+         "type": "string",
+         "description": "City name, e.g. Paris"
+        },
+        "unit": {
+         "type": "string",
+         "enum": [
+          "celsius",
+          "fahrenheit"
+         ]
+        }
+       },
+       "required": [
+        "location"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "get_stock_price",
+      "description": "Get the latest stock price for a ticker symbol.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "symbol": {
+         "type": "string",
+         "description": "Ticker symbol, e.g. MSFT"
+        }
+       },
+       "required": [
+        "symbol"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "convert_currency",
+      "description": "Convert an amount between two currencies at today's exchange rate.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "amount": {
+         "type": "number"
+        },
+        "from_currency": {
+         "type": "string",
+         "description": "ISO code, e.g. USD"
+        },
+        "to_currency": {
+         "type": "string",
+         "description": "ISO code, e.g. EUR"
+        }
+       },
+       "required": [
+        "amount",
+        "from_currency",
+        "to_currency"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "send_email",
+      "description": "Send an email.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "to": {
+         "type": "string"
+        },
+        "subject": {
+         "type": "string"
+        },
+        "body": {
+         "type": "string"
+        }
+       },
+       "required": [
+        "to",
+        "subject",
+        "body"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "search_flights",
+      "description": "Search flights between two airports on a date.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "origin": {
+         "type": "string",
+         "description": "IATA code"
+        },
+        "destination": {
+         "type": "string",
+         "description": "IATA code"
+        },
+        "date": {
+         "type": "string",
+         "description": "YYYY-MM-DD"
+        }
+       },
+       "required": [
+        "origin",
+        "destination",
+        "date"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "get_current_date",
+      "description": "Get today's date.",
+      "parameters": {
+       "type": "object",
+       "properties": {},
+       "required": []
+      }
+     }
+    }
+   ],
+   "check": {
+    "type": "contains_any",
+    "accept": [
+     "300"
+    ]
+   },
+   "offer": "toolbox"
+  },
+  {
+   "id": "given-rate",
+   "kind": "given",
+   "thinking": true,
+   "turns": [
+    "Today's exchange rate is 1 EUR = 1.10 USD. How many US dollars do I get for 200 euros at that rate?"
+   ],
+   "tools": [
+    {
+     "type": "function",
+     "function": {
+      "name": "convert_currency",
+      "description": "Convert an amount between two currencies at today's exchange rate.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "amount": {
+         "type": "number"
+        },
+        "from_currency": {
+         "type": "string",
+         "description": "ISO code, e.g. USD"
+        },
+        "to_currency": {
+         "type": "string",
+         "description": "ISO code, e.g. EUR"
+        }
+       },
+       "required": [
+        "amount",
+        "from_currency",
+        "to_currency"
+       ]
+      }
+     }
+    }
+   ],
+   "check": {
+    "type": "contains_any",
+    "accept": [
+     "220"
+    ]
+   },
+   "offer": "single",
+   "tool_result_overrides": {
+    "convert_currency": {
+     "amount": "{amount}",
+     "from_currency": "{from_currency}",
+     "to_currency": "{to_currency}",
+     "rate": 1.1,
+     "converted_amount": {
+      "$multiply": [
+       "{amount}",
+       1.1
+      ],
+      "$round": 2
+     }
+    }
+   }
+  },
+  {
+   "id": "given-birthday",
+   "kind": "given",
+   "thinking": true,
+   "turns": [
+    "Today is 2025-08-21. My daughter was born on 2015-03-04. How old is she today?"
+   ],
+   "tools": [
+    {
+     "type": "function",
+     "function": {
+      "name": "get_current_weather",
+      "description": "Get the current weather for a city.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "location": {
+         "type": "string",
+         "description": "City name, e.g. Paris"
+        },
+        "unit": {
+         "type": "string",
+         "enum": [
+          "celsius",
+          "fahrenheit"
+         ]
+        }
+       },
+       "required": [
+        "location"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "get_stock_price",
+      "description": "Get the latest stock price for a ticker symbol.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "symbol": {
+         "type": "string",
+         "description": "Ticker symbol, e.g. MSFT"
+        }
+       },
+       "required": [
+        "symbol"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "convert_currency",
+      "description": "Convert an amount between two currencies at today's exchange rate.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "amount": {
+         "type": "number"
+        },
+        "from_currency": {
+         "type": "string",
+         "description": "ISO code, e.g. USD"
+        },
+        "to_currency": {
+         "type": "string",
+         "description": "ISO code, e.g. EUR"
+        }
+       },
+       "required": [
+        "amount",
+        "from_currency",
+        "to_currency"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "send_email",
+      "description": "Send an email.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "to": {
+         "type": "string"
+        },
+        "subject": {
+         "type": "string"
+        },
+        "body": {
+         "type": "string"
+        }
+       },
+       "required": [
+        "to",
+        "subject",
+        "body"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "search_flights",
+      "description": "Search flights between two airports on a date.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "origin": {
+         "type": "string",
+         "description": "IATA code"
+        },
+        "destination": {
+         "type": "string",
+         "description": "IATA code"
+        },
+        "date": {
+         "type": "string",
+         "description": "YYYY-MM-DD"
+        }
+       },
+       "required": [
+        "origin",
+        "destination",
+        "date"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "get_current_date",
+      "description": "Get today's date.",
+      "parameters": {
+       "type": "object",
+       "properties": {},
+       "required": []
+      }
+     }
+    }
+   ],
+   "check": {
+    "type": "contains_any",
+    "accept": [
+     "10"
+    ]
+   },
+   "offer": "toolbox",
+   "tool_result_overrides": {
+    "get_current_date": {
+     "date": "2025-08-21"
+    }
+   }
+  },
+  {
+   "id": "chat-greeting",
+   "kind": "chitchat",
+   "thinking": false,
+   "turns": [
+    "Hi! How are you doing today?"
+   ],
+   "tools": [
+    {
+     "type": "function",
+     "function": {
+      "name": "get_current_weather",
+      "description": "Get the current weather for a city.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "location": {
+         "type": "string",
+         "description": "City name, e.g. Paris"
+        },
+        "unit": {
+         "type": "string",
+         "enum": [
+          "celsius",
+          "fahrenheit"
+         ]
+        }
+       },
+       "required": [
+        "location"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "get_stock_price",
+      "description": "Get the latest stock price for a ticker symbol.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "symbol": {
+         "type": "string",
+         "description": "Ticker symbol, e.g. MSFT"
+        }
+       },
+       "required": [
+        "symbol"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "convert_currency",
+      "description": "Convert an amount between two currencies at today's exchange rate.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "amount": {
+         "type": "number"
+        },
+        "from_currency": {
+         "type": "string",
+         "description": "ISO code, e.g. USD"
+        },
+        "to_currency": {
+         "type": "string",
+         "description": "ISO code, e.g. EUR"
+        }
+       },
+       "required": [
+        "amount",
+        "from_currency",
+        "to_currency"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "send_email",
+      "description": "Send an email.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "to": {
+         "type": "string"
+        },
+        "subject": {
+         "type": "string"
+        },
+        "body": {
+         "type": "string"
+        }
+       },
+       "required": [
+        "to",
+        "subject",
+        "body"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "search_flights",
+      "description": "Search flights between two airports on a date.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "origin": {
+         "type": "string",
+         "description": "IATA code"
+        },
+        "destination": {
+         "type": "string",
+         "description": "IATA code"
+        },
+        "date": {
+         "type": "string",
+         "description": "YYYY-MM-DD"
+        }
+       },
+       "required": [
+        "origin",
+        "destination",
+        "date"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "get_current_date",
+      "description": "Get today's date.",
+      "parameters": {
+       "type": "object",
+       "properties": {},
+       "required": []
+      }
+     }
+    }
+   ],
+   "check": {
+    "type": "nonempty"
+   },
+   "offer": "toolbox"
+  },
+  {
+   "id": "chat-thanks",
+   "kind": "chitchat",
+   "thinking": false,
+   "turns": [
+    "Thanks for your help earlier, that's all I needed for today!"
+   ],
+   "tools": [
+    {
+     "type": "function",
+     "function": {
+      "name": "search_flights",
+      "description": "Search flights between two airports on a date.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "origin": {
+         "type": "string",
+         "description": "IATA code"
+        },
+        "destination": {
+         "type": "string",
+         "description": "IATA code"
+        },
+        "date": {
+         "type": "string",
+         "description": "YYYY-MM-DD"
+        }
+       },
+       "required": [
+        "origin",
+        "destination",
+        "date"
+       ]
+      }
+     }
+    }
+   ],
+   "check": {
+    "type": "nonempty"
+   },
+   "offer": "single"
+  },
+  {
+   "id": "chat-joke",
+   "kind": "chitchat",
+   "thinking": true,
+   "turns": [
+    "Tell me a short joke about cats."
+   ],
+   "tools": [
+    {
+     "type": "function",
+     "function": {
+      "name": "get_current_weather",
+      "description": "Get the current weather for a city.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "location": {
+         "type": "string",
+         "description": "City name, e.g. Paris"
+        },
+        "unit": {
+         "type": "string",
+         "enum": [
+          "celsius",
+          "fahrenheit"
+         ]
+        }
+       },
+       "required": [
+        "location"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "get_stock_price",
+      "description": "Get the latest stock price for a ticker symbol.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "symbol": {
+         "type": "string",
+         "description": "Ticker symbol, e.g. MSFT"
+        }
+       },
+       "required": [
+        "symbol"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "convert_currency",
+      "description": "Convert an amount between two currencies at today's exchange rate.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "amount": {
+         "type": "number"
+        },
+        "from_currency": {
+         "type": "string",
+         "description": "ISO code, e.g. USD"
+        },
+        "to_currency": {
+         "type": "string",
+         "description": "ISO code, e.g. EUR"
+        }
+       },
+       "required": [
+        "amount",
+        "from_currency",
+        "to_currency"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "send_email",
+      "description": "Send an email.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "to": {
+         "type": "string"
+        },
+        "subject": {
+         "type": "string"
+        },
+        "body": {
+         "type": "string"
+        }
+       },
+       "required": [
+        "to",
+        "subject",
+        "body"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "search_flights",
+      "description": "Search flights between two airports on a date.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "origin": {
+         "type": "string",
+         "description": "IATA code"
+        },
+        "destination": {
+         "type": "string",
+         "description": "IATA code"
+        },
+        "date": {
+         "type": "string",
+         "description": "YYYY-MM-DD"
+        }
+       },
+       "required": [
+        "origin",
+        "destination",
+        "date"
+       ]
+      }
+     }
+    },
+    {
+     "type": "function",
+     "function": {
+      "name": "get_current_date",
+      "description": "Get today's date.",
+      "parameters": {
+       "type": "object",
+       "properties": {},
+       "required": []
+      }
+     }
+    }
+   ],
+   "check": {
+    "type": "nonempty"
+   },
+   "offer": "toolbox"
+  },
+  {
+   "id": "chat-goodnight",
+   "kind": "chitchat",
+   "thinking": true,
+   "turns": [
+    "How do I say good night in German?"
+   ],
+   "tools": [
+    {
+     "type": "function",
+     "function": {
+      "name": "get_stock_price",
+      "description": "Get the latest stock price for a ticker symbol.",
+      "parameters": {
+       "type": "object",
+       "properties": {
+        "symbol": {
+         "type": "string",
+         "description": "Ticker symbol, e.g. MSFT"
+        }
+       },
+       "required": [
+        "symbol"
+       ]
+      }
+     }
+    }
+   ],
+   "check": {
+    "type": "contains_any",
+    "accept": [
+     "Gute Nacht"
+    ]
+   },
+   "offer": "single"
+  }
+ ],
+ "tool_result_overrides_rule": "where a prompt overrides a tool's result, that tool returns the data the user gave, and its values are not distractors for that prompt",
+ "tool_result_format": "a string \"{arg}\" is the call's argument (its own type when the whole value; \"unknown\" if the call omits it); {\"$multiply\": [a, b], \"$round\": n} is a product rounded to n decimals",
+ "distractors_note": "\"$key\" is the value computed for that call; numbers match numerically (thousands separators ignored), text as a whole phrase, case ignored",
+ "decoding_source": "tools/qwen36_chat_generation_prompts_v2.json"
+}
