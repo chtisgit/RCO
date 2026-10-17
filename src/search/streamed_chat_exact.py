@@ -17,8 +17,10 @@ the groups run in order of growing upgrade sets: a group whose set contains
 the previous one only installs the extra tensors; otherwise the block is
 released and loaded again.
 
-Every variant gets the same embedding (the GSQ-E6 Q6_K one, through
-``embedding_store``), so the embedding runs once.  Hidden states stay on
+A variant's embedding is either the configured one (``"store"``: the
+GSQ-E6 Q6_K one, through ``embedding_store``) or the checkpoint's own
+(``"checkpoint"``: authentic GSQ's BF16 ``token_embd``); each embedding kind
+runs once per pass.  Hidden states stay on
 the GPU while they fit ``device_hidden_bytes`` and otherwise wait in host
 memory between blocks.
 
@@ -75,6 +77,7 @@ class ExactVariant:
     label: str
     prune_mask: Optional[np.ndarray] = None   # [layers, experts] bool
     upgrades: frozenset = field(default_factory=frozenset)
+    embedding: str = "store"   # "store" (embedding_store) or "checkpoint"
 
 
 @dataclass
@@ -177,6 +180,8 @@ class StreamedChatExactEvaluator(StreamedChatPruneObjective):
             raise ValueError("need at least one row and one variant")
         if any(v.upgrades for v in variants) and self.upgrade_store is None:
             raise ValueError("upgrades need an upgrade store")
+        if any(v.embedding not in ("store", "checkpoint") for v in variants):
+            raise ValueError("a variant's embedding is 'store' or 'checkpoint'")
         stats = ExactStats(variants=len(variants))
         if self.device.type == "cuda":
             torch.cuda.reset_peak_memory_stats(self.device)
@@ -208,8 +213,16 @@ class StreamedChatExactEvaluator(StreamedChatPruneObjective):
         loaded: list[str] = []
         try:
             self.loader.move_runtime_buffers(self.model, self.device)
-            embedded = [item.to(home) for item in self._embed(input_batches, stats)]
-            hidden = [list(embedded) for _ in variants]
+            embedded = {}
+            for kind in sorted({v.embedding for v in variants}):
+                selected = self.embedding_selected
+                if kind == "checkpoint":
+                    self.embedding_selected = ()
+                try:
+                    embedded[kind] = [item.to(home) for item in self._embed(input_batches, stats)]
+                finally:
+                    self.embedding_selected = selected
+            hidden = [list(embedded[v.embedding]) for v in variants]
             del embedded
             for path in self.adapter.final_module_paths:
                 dtype = self.checkpoint_dtype if path == "lm_head" else None
