@@ -1,0 +1,424 @@
+{
+  "candidate_minus_gsq": {
+    "ci95": [
+      -0.0371736955206406,
+      -0.02456277888813242
+    ],
+    "conversations": 223,
+    "improved_conversations": 197,
+    "mean_delta": -0.031038144437357994
+  },
+  "candidate_minus_gsq_nll": {
+    "ci95": [
+      -0.045302673892041956,
+      -0.03022352545253759
+    ],
+    "conversations": 223,
+    "improved_conversations": 199,
+    "mean_delta": -0.038145151491795974
+  },
+  "candidate_minus_gsq_template_kl": {
+    "ci95": [
+      -0.03233864892938608,
+      0.0033945779636937816
+    ],
+    "conversations": 217,
+    "improved_conversations": 143,
+    "mean_delta": -0.015171509678689075
+  },
+  "crosscheck": {
+    "agree": true,
+    "means_pytorch": {
+      "base": 0.1435630910355783,
+      "candidate": 0.10391901758591986,
+      "gsq": 0.13442739321742825,
+      "gsq_e6": 0.13462966950969615
+    },
+    "nll_tolerance": 0.05,
+    "pytorch_candidate_minus_gsq": {
+      "ci95": [
+        -0.03669491655654327,
+        -0.023748767206489746
+      ],
+      "conversations": 223,
+      "improved_conversations": 196,
+      "mean_delta": -0.03050837563150838
+    },
+    "pytorch_gate_pass": true,
+    "runtimes": {
+      "candidate": {
+        "kl_correlation": 0.9978739296091687,
+        "max_abs_nll_difference": 0.16786963593941429,
+        "mean_kl_llama": 0.1032019049719594,
+        "mean_kl_pytorch": 0.10391901758591986,
+        "mean_nll_llama_minus_pytorch": -0.001193604352405063,
+        "position_check": false
+      },
+      "gsq": {
+        "kl_correlation": 0.9989612259865381,
+        "max_abs_nll_difference": 0.030694993275385385,
+        "mean_kl_llama": 0.13424004940931739,
+        "mean_kl_pytorch": 0.13442739321742825,
+        "mean_nll_llama_minus_pytorch": 3.593004761128271e-05,
+        "position_check": true
+      }
+    },
+    "steps_pytorch": {
+      "candidate_minus_gsq_e6": {
+        "ci95": [
+          -0.036881996586486186,
+          -0.023894669590700506
+        ],
+        "conversations": 223,
+        "improved_conversations": 197,
+        "mean_delta": -0.030710651923776273
+      },
+      "embedding_swap_gsq_e6_minus_gsq": {
+        "ci95": [
+          -0.00017011919022812418,
+          0.0006274830196660385
+        ],
+        "conversations": 223,
+        "improved_conversations": 118,
+        "mean_delta": 0.0002022762922678865
+      },
+      "pruning_base_minus_gsq_e6": {
+        "ci95": [
+          0.005727879005149458,
+          0.012820524184279031
+        ],
+        "conversations": 223,
+        "improved_conversations": 37,
+        "mean_delta": 0.008933421525882116
+      },
+      "upgrades_candidate_minus_base": {
+        "ci95": [
+          -0.04539179512102601,
+          -0.03356981474324409
+        ],
+        "conversations": 223,
+        "improved_conversations": 205,
+        "mean_delta": -0.03964407344965839
+      }
+    }
+  },
+  "gate": "candidate minus authentic GSQ (llama.cpp), per-conversation mean top-20 KL to BF16, paired bootstrap 95% CI upper bound below 0",
+  "inputs": {
+    "candidate": {
+      "corpus": {
+        "conversation_count": 223,
+        "conversation_ids": [
+          "chat-v2-heldout-chat-00",
+          "chat-v2-heldout-chat-01",
+          "chat-v2-heldout-chat-02",
+          "chat-v2-heldout-chat-03",
+          "chat-v2-heldout-chat-04",
+          "chat-v2-heldout-chat-05",
+          "chat-v2-heldout-chat-06",
+          "chat-v2-heldout-chat-07",
+          "chat-v2-heldout-chat-08",
+          "chat-v2-heldout-chat-09",
+          "chat-v2-heldout-chat-10",
+          "chat-v2-heldout-chat-11",
+          "chat-v2-heldout-chat-12",
+          "chat-v2-heldout-chat-13",
+          "chat-v2-heldout-chat-14",
+          "chat-v2-heldout-chat-15",
+          "chat-v2-heldout-chat-16",
+          "chat-v2-heldout-chat-17",
+          "chat-v2-heldout-chat-18",
+          "chat-v2-heldout-chat-19",
+          "chat-v2-heldout-chat-20",
+          "chat-v2-heldout-chat-21",
+          "chat-v2-heldout-chat-22",
+          "chat-v2-heldout-chat-23",
+          "chat-v2-heldout-chat-24",
+          "chat-v2-heldout-chat-25",
+          "chat-v2-heldout-chat-26",
+          "chat-v2-heldout-chat-27",
+          "chat-v2-heldout-chat-28",
+          "chat-v2-heldout-chat-29",
+          "chat-v2-heldout-chat-30",
+          "chat-v2-heldout-chat-31",
+          "chat-v2-heldout-chat-32",
+          "chat-v2-heldout-chat-33",
+          "chat-v2-heldout-chat-34",
+          "chat-v2-heldout-chat-35",
+          "chat-v2-heldout-chat-36",
+          "chat-v2-heldout-chat-37",
+          "chat-v2-heldout-chat-38",
+          "chat-v2-heldout-chat-39",
+          "chat-v2-heldout-chat-40",
+          "chat-v2-heldout-chat-41",
+          "chat-v2-heldout-chat-42",
+          "chat-v2-heldout-chat-43",
+          "chat-v2-heldout-chat-44",
+          "chat-v2-heldout-chat-45",
+          "chat-v2-heldout-chat-46",
+          "chat-v2-heldout-chat-47",
+          "chat-v2-heldout-chat-48",
+          "chat-v2-heldout-chat-49",
+          "chat-v2-heldout-chat-50",
+          "chat-v2-heldout-chat-51",
+          "chat-v2-heldout-chat-52",
+          "chat-v2-heldout-chat-53",
+          "chat-v2-heldout-chat-54",
+          "chat-v2-heldout-chat-55",
+          "chat-v2-heldout-chat-56",
+          "chat-v2-heldout-chat-57",
+          "chat-v2-heldout-chat-58",
+          "chat-v2-heldout-chat-59",
+          "chat-v2-heldout-chat-60",
+          "chat-v2-heldout-chat-61",
+          "chat-v2-heldout-chat-62",
+          "chat-v2-heldout-chat-63",
+          "chat-v2-heldout-document-00",
+          "chat-v2-heldout-document-01",
+          "chat-v2-heldout-document-02",
+          "chat-v2-heldout-document-03",
+          "chat-v2-heldout-document-04",
+          "chat-v2-heldout-document-05",
+          "chat-v2-heldout-document-06",
+          "chat-v2-heldout-document-07",
+          "chat-v2-heldout-document-08",
+          "chat-v2-heldout-document-09",
+          "chat-v2-heldout-document-10",
+          "chat-v2-heldout-document-11",
+          "chat-v2-heldout-document-12",
+          "chat-v2-heldout-document-13",
+          "chat-v2-heldout-document-14",
+          "chat-v2-heldout-document-15",
+          "chat-v2-heldout-document-16",
+          "chat-v2-heldout-document-17",
+          "chat-v2-heldout-document-18",
+          "chat-v2-heldout-document-19",
+          "chat-v2-heldout-document-20",
+          "chat-v2-heldout-document-21",
+          "chat-v2-heldout-document-22",
+          "chat-v2-heldout-document-23",
+          "chat-v2-heldout-document-24",
+          "chat-v2-heldout-document-25",
+          "chat-v2-heldout-document-26",
+          "chat-v2-heldout-document-27",
+          "chat-v2-heldout-document-28",
+          "chat-v2-heldout-document-29",
+          "chat-v2-heldout-document-30",
+          "chat-v2-heldout-document-31",
+          "chat-v2-heldout-document-32",
+          "chat-v2-heldout-document-33",
+          "chat-v2-heldout-document-34",
+          "chat-v2-heldout-document-35",
+          "chat-v2-heldout-document-36",
+          "chat-v2-heldout-document-37",
+          "chat-v2-heldout-document-38",
+          "chat-v2-heldout-document-39",
+          "chat-v2-heldout-document-40",
+          "chat-v2-heldout-document-41",
+          "chat-v2-heldout-document-42",
+          "chat-v2-heldout-document-43",
+          "chat-v2-heldout-document-44",
+          "chat-v2-heldout-document-45",
+          "chat-v2-heldout-document-46",
+          "chat-v2-heldout-document-47",
+          "chat-v2-heldout-document-48",
+          "chat-v2-heldout-document-49",
+          "chat-v2-heldout-document-50",
+          "chat-v2-heldout-document-51",
+          "chat-v2-heldout-document-52",
+          "chat-v2-heldout-document-53",
+          "chat-v2-heldout-document-54",
+          "chat-v2-heldout-document-55",
+          "chat-v2-heldout-document-56",
+          "chat-v2-heldout-document-57",
+          "chat-v2-heldout-document-58",
+          "chat-v2-heldout-document-59",
+          "chat-v2-heldout-document-60",
+          "chat-v2-heldout-document-61",
+          "chat-v2-heldout-document-62",
+          "chat-v2-heldout-reasoning-00",
+          "chat-v2-heldout-reasoning-01",
+          "chat-v2-heldout-reasoning-02",
+          "chat-v2-heldout-reasoning-03",
+          "chat-v2-heldout-reasoning-04",
+          "chat-v2-heldout-reasoning-05",
+          "chat-v2-heldout-reasoning-06",
+          "chat-v2-heldout-reasoning-07",
+          "chat-v2-heldout-reasoning-08",
+          "chat-v2-heldout-reasoning-09",
+          "chat-v2-heldout-reasoning-10",
+          "chat-v2-heldout-reasoning-11",
+          "chat-v2-heldout-reasoning-12",
+          "chat-v2-heldout-reasoning-13",
+          "chat-v2-heldout-reasoning-14",
+          "chat-v2-heldout-reasoning-15",
+          "chat-v2-heldout-reasoning-16",
+          "chat-v2-heldout-reasoning-17",
+          "chat-v2-heldout-reasoning-18",
+          "chat-v2-heldout-reasoning-19",
+          "chat-v2-heldout-reasoning-20",
+          "chat-v2-heldout-reasoning-21",
+          "chat-v2-heldout-reasoning-22",
+          "chat-v2-heldout-reasoning-23",
+          "chat-v2-heldout-reasoning-24",
+          "chat-v2-heldout-reasoning-25",
+          "chat-v2-heldout-reasoning-26",
+          "chat-v2-heldout-reasoning-27",
+          "chat-v2-heldout-reasoning-28",
+          "chat-v2-heldout-reasoning-29",
+          "chat-v2-heldout-reasoning-30",
+          "chat-v2-heldout-reasoning-31",
+          "chat-v2-heldout-reasoning-32",
+          "chat-v2-heldout-reasoning-33",
+          "chat-v2-heldout-reasoning-34",
+          "chat-v2-heldout-reasoning-35",
+          "chat-v2-heldout-reasoning-36",
+          "chat-v2-heldout-reasoning-37",
+          "chat-v2-heldout-reasoning-38",
+          "chat-v2-heldout-reasoning-39",
+          "chat-v2-heldout-reasoning-40",
+          "chat-v2-heldout-reasoning-41",
+          "chat-v2-heldout-reasoning-42",
+          "chat-v2-heldout-reasoning-43",
+          "chat-v2-heldout-reasoning-44",
+          "chat-v2-heldout-reasoning-45",
+          "chat-v2-heldout-reasoning-46",
+          "chat-v2-heldout-reasoning-47",
+          "chat-v2-heldout-tool-answer-00",
+          "chat-v2-heldout-tool-answer-01",
+          "chat-v2-heldout-tool-answer-02",
+          "chat-v2-heldout-tool-answer-03",
+          "chat-v2-heldout-tool-answer-04",
+          "chat-v2-heldout-tool-answer-05",
+          "chat-v2-heldout-tool-answer-06",
+          "chat-v2-heldout-tool-answer-07",
+          "chat-v2-heldout-tool-answer-08",
+          "chat-v2-heldout-tool-answer-09",
+          "chat-v2-heldout-tool-answer-10",
+          "chat-v2-heldout-tool-answer-11",
+          "chat-v2-heldout-tool-answer-12",
+          "chat-v2-heldout-tool-answer-13",
+          "chat-v2-heldout-tool-answer-14",
+          "chat-v2-heldout-tool-answer-15",
+          "chat-v2-heldout-tool-answer-16",
+          "chat-v2-heldout-tool-answer-17",
+          "chat-v2-heldout-tool-answer-18",
+          "chat-v2-heldout-tool-answer-19",
+          "chat-v2-heldout-tool-answer-20",
+          "chat-v2-heldout-tool-answer-21",
+          "chat-v2-heldout-tool-answer-22",
+          "chat-v2-heldout-tool-answer-23",
+          "chat-v2-heldout-tool-call-00",
+          "chat-v2-heldout-tool-call-01",
+          "chat-v2-heldout-tool-call-02",
+          "chat-v2-heldout-tool-call-03",
+          "chat-v2-heldout-tool-call-04",
+          "chat-v2-heldout-tool-call-05",
+          "chat-v2-heldout-tool-call-06",
+          "chat-v2-heldout-tool-call-07",
+          "chat-v2-heldout-tool-call-08",
+          "chat-v2-heldout-tool-call-09",
+          "chat-v2-heldout-tool-call-10",
+          "chat-v2-heldout-tool-call-11",
+          "chat-v2-heldout-tool-call-12",
+          "chat-v2-heldout-tool-call-13",
+          "chat-v2-heldout-tool-call-14",
+          "chat-v2-heldout-tool-call-15",
+          "chat-v2-heldout-tool-call-16",
+          "chat-v2-heldout-tool-call-17",
+          "chat-v2-heldout-tool-call-18",
+          "chat-v2-heldout-tool-call-19",
+          "chat-v2-heldout-tool-call-20",
+          "chat-v2-heldout-tool-call-21",
+          "chat-v2-heldout-tool-call-22",
+          "chat-v2-heldout-tool-call-23"
+        ],
+        "corpus_manifest_sha256": "6e2e8d27608bdcab7298b48a2c471379acf16fc2720c33139d1caa072fe72c49",
+        "split": "heldout"
+      },
+      "helper": {
+        "path": "/extraspace/IronWolf/christian/gsq-rco-moe/experiment/helpers-mmqfix/rco-gguf-chat-kl",
+        "sha256": "386642d756f57b0fa26d5e94bb5ccd56ab164e351dde5ed1fcc56c39f14c799d",
+        "source_sha256": "3361e3f413448391dabd03448b07bf55b91ff88bf83644ddff61156441e54731"
+      },
+      "llama_cpp": {
+        "path": "/extraspace/IronWolf/christian/gsq-rco-moe/experiment/llama.cpp-mmqfix",
+        "revision": "df4f2e491dc74bf61b67de2ef566e35237ff5563"
+      },
+      "model": {
+        "path": "/extraspace/IronWolf/christian/gsq-rco-moe/results/Qwen3.6-35B-A3B-GSQ-RCO-v2-UNGATED.gguf",
+        "sha256": "0a6eb59bcf02eb847a268560294f01418a27e5e34e5aafe8e1badbb2d58065a1"
+      },
+      "parameters": {
+        "gpu_layers": 20,
+        "threads": 8,
+        "ubatch": 256
+      },
+      "reference_sha256": "956013032689301260a1918001866372975e7a76d8a40774aa4013d0db3a5303"
+    },
+    "crosscheck_sha256": "0ff48336771b653b04d5c95f5de96faa70a3e61a7bfa35116c270dc26a0c1e02",
+    "gsq": {
+      "path": "/extraspace/IronWolf/christian/gsq-rco-moe/results/Qwen3.6-35B-A3B-GSQ-hybrid.gguf",
+      "sha256": "8e50912f5d0703401ca21b09deb2ee8a84d03536ade6fb44815fcb40a0b03596"
+    }
+  },
+  "llama_cpp_gate_pass": true,
+  "means": {
+    "candidate": {
+      "kl": 0.1032019049719594,
+      "nll": 0.3945783186441167
+    },
+    "gsq": {
+      "kl": 0.13424004940931739,
+      "nll": 0.43272347013591256
+    }
+  },
+  "per_stratum": {
+    "chat": {
+      "ci95": [
+        -0.07010095503944024,
+        -0.03977222731077506
+      ],
+      "conversations": 64,
+      "improved_conversations": 60,
+      "mean_delta": -0.05565950279300125
+    },
+    "document": {
+      "ci95": [
+        -0.04380072005450565,
+        -0.034905745701016386
+      ],
+      "conversations": 63,
+      "improved_conversations": 63,
+      "mean_delta": -0.039241490382705455
+    },
+    "reasoning": {
+      "ci95": [
+        -0.024534731875406054,
+        -0.01551946379084203
+      ],
+      "conversations": 48,
+      "improved_conversations": 46,
+      "mean_delta": -0.019966719085690962
+    },
+    "tool-answer": {
+      "ci95": [
+        -0.023923033857936756,
+        -0.0021019636679560673
+      ],
+      "conversations": 24,
+      "improved_conversations": 15,
+      "mean_delta": -0.01262393684451126
+    },
+    "tool-call": {
+      "ci95": [
+        -0.00614966596291082,
+        0.04592335859935092
+      ],
+      "conversations": 24,
+      "improved_conversations": 13,
+      "mean_delta": 0.015595535988046942
+    }
+  },
+  "schema": "rco.qwen36.chat_kl_gguf.v1.gate",
+  "status": "decision"
+}

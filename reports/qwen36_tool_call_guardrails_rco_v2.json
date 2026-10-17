@@ -1,0 +1,357 @@
+{
+  "arms": {
+    "gsq": {
+      "t1": {
+        "greedy_tool_call": 17,
+        "of": 17,
+        "other_prompts": 10,
+        "other_prompts_greedy_tool_call": 10,
+        "pass": true,
+        "prompts": [
+          {
+            "greedy_token": "<tool_call>",
+            "id": "chat-v2-calibration-tool-call-05",
+            "p_tool_call": 0.97835916269462,
+            "pass": true,
+            "reference_p_tool_call": 0.999944806098938
+          },
+          {
+            "greedy_token": "<tool_call>",
+            "id": "chat-v2-calibration-tool-call-11",
+            "p_tool_call": 0.9978522061345256,
+            "pass": true,
+            "reference_p_tool_call": 0.9996873140335083
+          },
+          {
+            "greedy_token": "<tool_call>",
+            "id": "chat-v2-calibration-tool-call-13",
+            "p_tool_call": 0.999820291992795,
+            "pass": true,
+            "reference_p_tool_call": 0.9999989867210388
+          },
+          {
+            "greedy_token": "<tool_call>",
+            "id": "chat-v2-calibration-tool-call-15",
+            "p_tool_call": 0.9434079538525496,
+            "pass": true,
+            "reference_p_tool_call": 0.9887027144432068
+          },
+          {
+            "greedy_token": "<tool_call>",
+            "id": "chat-v2-calibration-tool-call-17",
+            "p_tool_call": 0.9927767515504416,
+            "pass": true,
+            "reference_p_tool_call": 0.9999308586120605
+          },
+          {
+            "greedy_token": "<tool_call>",
+            "id": "chat-v2-calibration-tool-call-19",
+            "p_tool_call": 0.9992382526351107,
+            "pass": true,
+            "reference_p_tool_call": 0.9148730039596558
+          },
+          {
+            "greedy_token": "<tool_call>",
+            "id": "chat-v2-calibration-tool-call-21",
+            "p_tool_call": 0.9810199131782605,
+            "pass": true,
+            "reference_p_tool_call": 0.9997189044952393
+          },
+          {
+            "greedy_token": "<tool_call>",
+            "id": "chat-v2-calibration-tool-call-23",
+            "p_tool_call": 0.9905407428668712,
+            "pass": true,
+            "reference_p_tool_call": 0.9999722242355347
+          },
+          {
+            "greedy_token": "<tool_call>",
+            "id": "chat-v2-heldout-tool-call-03",
+            "p_tool_call": 0.9956380725170202,
+            "pass": true,
+            "reference_p_tool_call": 0.9999547004699707
+          },
+          {
+            "greedy_token": "<tool_call>",
+            "id": "chat-v2-heldout-tool-call-05",
+            "p_tool_call": 0.9798306819386904,
+            "pass": true,
+            "reference_p_tool_call": 0.9945855736732483
+          },
+          {
+            "greedy_token": "<tool_call>",
+            "id": "chat-v2-heldout-tool-call-09",
+            "p_tool_call": 0.9999969005585001,
+            "pass": true,
+            "reference_p_tool_call": 0.9999986290931702
+          },
+          {
+            "greedy_token": "<tool_call>",
+            "id": "chat-v2-heldout-tool-call-13",
+            "p_tool_call": 0.9996378421732942,
+            "pass": true,
+            "reference_p_tool_call": 0.9999353289604187
+          },
+          {
+            "greedy_token": "<tool_call>",
+            "id": "chat-v2-heldout-tool-call-19",
+            "p_tool_call": 0.8121162670889356,
+            "pass": true,
+            "reference_p_tool_call": 0.9212715029716492
+          },
+          {
+            "greedy_token": "<tool_call>",
+            "id": "chat-v2-heldout-tool-call-21",
+            "p_tool_call": 0.9989288449813274,
+            "pass": true,
+            "reference_p_tool_call": 0.9999720454216003
+          },
+          {
+            "greedy_token": "<tool_call>",
+            "id": "chat-v2-heldout-tool-call-23",
+            "p_tool_call": 0.9992392063395464,
+            "pass": true,
+            "reference_p_tool_call": 0.9868021011352539
+          },
+          {
+            "greedy_token": "<tool_call>",
+            "id": "tool-flights",
+            "p_tool_call": 0.9997090697402998,
+            "pass": true,
+            "reference_p_tool_call": 0.9985833168159688
+          },
+          {
+            "greedy_token": "<tool_call>",
+            "id": "tool-weather",
+            "p_tool_call": 0.9958446620229762,
+            "pass": true,
+            "reference_p_tool_call": 0.9910807012061329
+          }
+        ]
+      },
+      "t2": {
+        "model": {
+          "path": "/extraspace/IronWolf/christian/gsq-rco-moe/results/Qwen3.6-35B-A3B-GSQ-hybrid.gguf",
+          "sha256": "8e50912f5d0703401ca21b09deb2ee8a84d03536ade6fb44815fcb40a0b03596"
+        },
+        "pass": true,
+        "prompts": {
+          "tool-currency": {
+            "of": 20,
+            "pass": true,
+            "tool_calls": 20
+          },
+          "tool-flights": {
+            "of": 20,
+            "pass": true,
+            "tool_calls": 20
+          },
+          "tool-weather": {
+            "of": 20,
+            "pass": true,
+            "tool_calls": 20
+          }
+        },
+        "server": {
+          "path": "/extraspace/IronWolf/christian/gsq-rco-moe/experiment/build-cuda-mmqfix/bin/llama-server",
+          "sha256": "cfe3ab825f9c73c09faa8e43f5539932a3bf1df7614f193584ea71f2d655ce48"
+        }
+      }
+    },
+    "rco_v2": {
+      "t1": {
+        "greedy_tool_call": 17,
+        "of": 17,
+        "other_prompts": 10,
+        "other_prompts_greedy_tool_call": 10,
+        "pass": true,
+        "prompts": [
+          {
+            "greedy_token": "<tool_call>",
+            "id": "chat-v2-calibration-tool-call-05",
+            "p_tool_call": 0.994485914604646,
+            "pass": true,
+            "reference_p_tool_call": 0.999944806098938
+          },
+          {
+            "greedy_token": "<tool_call>",
+            "id": "chat-v2-calibration-tool-call-11",
+            "p_tool_call": 0.999972343445286,
+            "pass": true,
+            "reference_p_tool_call": 0.9996873140335083
+          },
+          {
+            "greedy_token": "<tool_call>",
+            "id": "chat-v2-calibration-tool-call-13",
+            "p_tool_call": 0.9999295473106812,
+            "pass": true,
+            "reference_p_tool_call": 0.9999989867210388
+          },
+          {
+            "greedy_token": "<tool_call>",
+            "id": "chat-v2-calibration-tool-call-15",
+            "p_tool_call": 0.9989286064692882,
+            "pass": true,
+            "reference_p_tool_call": 0.9887027144432068
+          },
+          {
+            "greedy_token": "<tool_call>",
+            "id": "chat-v2-calibration-tool-call-17",
+            "p_tool_call": 0.9857914446527594,
+            "pass": true,
+            "reference_p_tool_call": 0.9999308586120605
+          },
+          {
+            "greedy_token": "<tool_call>",
+            "id": "chat-v2-calibration-tool-call-19",
+            "p_tool_call": 0.9999923706054689,
+            "pass": true,
+            "reference_p_tool_call": 0.9148730039596558
+          },
+          {
+            "greedy_token": "<tool_call>",
+            "id": "chat-v2-calibration-tool-call-21",
+            "p_tool_call": 0.9914507270085878,
+            "pass": true,
+            "reference_p_tool_call": 0.9997189044952393
+          },
+          {
+            "greedy_token": "<tool_call>",
+            "id": "chat-v2-calibration-tool-call-23",
+            "p_tool_call": 0.9987006187293356,
+            "pass": true,
+            "reference_p_tool_call": 0.9999722242355347
+          },
+          {
+            "greedy_token": "<tool_call>",
+            "id": "chat-v2-heldout-tool-call-03",
+            "p_tool_call": 0.9987174272813233,
+            "pass": true,
+            "reference_p_tool_call": 0.9999547004699707
+          },
+          {
+            "greedy_token": "<tool_call>",
+            "id": "chat-v2-heldout-tool-call-05",
+            "p_tool_call": 0.9887617226052818,
+            "pass": true,
+            "reference_p_tool_call": 0.9945855736732483
+          },
+          {
+            "greedy_token": "<tool_call>",
+            "id": "chat-v2-heldout-tool-call-09",
+            "p_tool_call": 0.9999998807907176,
+            "pass": true,
+            "reference_p_tool_call": 0.9999986290931702
+          },
+          {
+            "greedy_token": "<tool_call>",
+            "id": "chat-v2-heldout-tool-call-13",
+            "p_tool_call": 0.9999073743792217,
+            "pass": true,
+            "reference_p_tool_call": 0.9999353289604187
+          },
+          {
+            "greedy_token": "<tool_call>",
+            "id": "chat-v2-heldout-tool-call-19",
+            "p_tool_call": 0.9994497895472684,
+            "pass": true,
+            "reference_p_tool_call": 0.9212715029716492
+          },
+          {
+            "greedy_token": "<tool_call>",
+            "id": "chat-v2-heldout-tool-call-21",
+            "p_tool_call": 0.9993141889578178,
+            "pass": true,
+            "reference_p_tool_call": 0.9999720454216003
+          },
+          {
+            "greedy_token": "<tool_call>",
+            "id": "chat-v2-heldout-tool-call-23",
+            "p_tool_call": 0.9999423027022163,
+            "pass": true,
+            "reference_p_tool_call": 0.9868021011352539
+          },
+          {
+            "greedy_token": "<tool_call>",
+            "id": "tool-flights",
+            "p_tool_call": 0.999950051307329,
+            "pass": true,
+            "reference_p_tool_call": 0.9985833168159688
+          },
+          {
+            "greedy_token": "<tool_call>",
+            "id": "tool-weather",
+            "p_tool_call": 0.9999154806131779,
+            "pass": true,
+            "reference_p_tool_call": 0.9910807012061329
+          }
+        ]
+      },
+      "t2": {
+        "model": {
+          "path": "/extraspace/IronWolf/christian/gsq-rco-moe/results/Qwen3.6-35B-A3B-GSQ-RCO-v2-UNGATED.gguf",
+          "sha256": "0a6eb59bcf02eb847a268560294f01418a27e5e34e5aafe8e1badbb2d58065a1"
+        },
+        "pass": true,
+        "prompts": {
+          "tool-currency": {
+            "of": 20,
+            "pass": true,
+            "tool_calls": 20
+          },
+          "tool-flights": {
+            "of": 20,
+            "pass": true,
+            "tool_calls": 20
+          },
+          "tool-weather": {
+            "of": 20,
+            "pass": true,
+            "tool_calls": 20
+          }
+        },
+        "server": {
+          "path": "/extraspace/IronWolf/christian/gsq-rco-moe/experiment/build-cuda-mmqfix/bin/llama-server",
+          "sha256": "cfe3ab825f9c73c09faa8e43f5539932a3bf1df7614f193584ea71f2d655ce48"
+        }
+      }
+    }
+  },
+  "candidate": "rco_v2",
+  "reference_arm": "gsq",
+  "rules": {
+    "t1": "greedy first reply token is <tool_call> on every thinking-off tool prompt with reference P(<tool_call>) >= 0.9",
+    "t2": "each gate tool prompt calls the tool in >= 18 of 20 seeds"
+  },
+  "schema": "rco.qwen36.tool_call_guardrails.v1",
+  "status": "pass",
+  "t1_reference_probabilities": {
+    "chat-v2-calibration-tool-call-01": 0.21171963214874268,
+    "chat-v2-calibration-tool-call-03": 0.060001879930496216,
+    "chat-v2-calibration-tool-call-05": 0.999944806098938,
+    "chat-v2-calibration-tool-call-07": 0.09420398622751236,
+    "chat-v2-calibration-tool-call-09": 0.5561733245849609,
+    "chat-v2-calibration-tool-call-11": 0.9996873140335083,
+    "chat-v2-calibration-tool-call-13": 0.9999989867210388,
+    "chat-v2-calibration-tool-call-15": 0.9887027144432068,
+    "chat-v2-calibration-tool-call-17": 0.9999308586120605,
+    "chat-v2-calibration-tool-call-19": 0.9148730039596558,
+    "chat-v2-calibration-tool-call-21": 0.9997189044952393,
+    "chat-v2-calibration-tool-call-23": 0.9999722242355347,
+    "chat-v2-heldout-tool-call-01": 0.219343900680542,
+    "chat-v2-heldout-tool-call-03": 0.9999547004699707,
+    "chat-v2-heldout-tool-call-05": 0.9945855736732483,
+    "chat-v2-heldout-tool-call-07": 0.042674414813518524,
+    "chat-v2-heldout-tool-call-09": 0.9999986290931702,
+    "chat-v2-heldout-tool-call-11": 0.08941705524921417,
+    "chat-v2-heldout-tool-call-13": 0.9999353289604187,
+    "chat-v2-heldout-tool-call-15": 0.5870010256767273,
+    "chat-v2-heldout-tool-call-17": 0.00794980674982071,
+    "chat-v2-heldout-tool-call-19": 0.9212715029716492,
+    "chat-v2-heldout-tool-call-21": 0.9999720454216003,
+    "chat-v2-heldout-tool-call-23": 0.9868021011352539,
+    "tool-currency": 0.6052846956912765,
+    "tool-flights": 0.9985833168159688,
+    "tool-weather": 0.9910807012061329
+  }
+}

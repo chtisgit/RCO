@@ -1,0 +1,88 @@
+{
+  "improvement_over_incumbent_passed": true,
+  "models": {
+    "candidate": {
+      "bytes": 11591162560,
+      "path": "/extraspace/IronWolf/christian/gsq-rco-moe/results/Qwen3.6-35B-A3B-GSQ-RCO-v2-UNGATED.gguf",
+      "sha256": "0a6eb59bcf02eb847a268560294f01418a27e5e34e5aafe8e1badbb2d58065a1"
+    },
+    "incumbent": {
+      "bytes": 13012859584,
+      "path": "/extraspace/IronWolf/christian/gsq-rco-moe/results/Qwen3.6-35B-A3B-GSQ-RCO-candidate-UNGATED.gguf",
+      "sha256": "ad17ae949201c7d9148a2828434cfd0d660ecad84855f770978cf549c65e3dd6"
+    }
+  },
+  "quality": {
+    "bf16_gap_closed_fraction": 0.11317044021068733,
+    "bf16_mean_nll": 0.9128365476801992,
+    "bf16_perplexity": 2.491379436593314,
+    "bootstrap_samples": 10000,
+    "bootstrap_seed": 20261001,
+    "candidate_mean_nll": 1.2600515264976697,
+    "candidate_perplexity": 3.525603144667478,
+    "candidate_perplexity_ratio_to_bf16": 1.4151209136928378,
+    "document_count": 100,
+    "documents_improved": 91,
+    "domains": {
+      "code": {
+        "documents": 25,
+        "predicted_tokens": 26225,
+        "token_weighted_candidate_minus_incumbent_mean_nll": -0.020879362723911422
+      },
+      "general": {
+        "documents": 25,
+        "predicted_tokens": 26225,
+        "token_weighted_candidate_minus_incumbent_mean_nll": -0.0530703069104658
+      },
+      "knowledge": {
+        "documents": 25,
+        "predicted_tokens": 26225,
+        "token_weighted_candidate_minus_incumbent_mean_nll": -0.028005157503929807
+      },
+      "multilingual": {
+        "documents": 25,
+        "predicted_tokens": 26225,
+        "token_weighted_candidate_minus_incumbent_mean_nll": -0.07528090690670129
+      }
+    },
+    "incumbent_mean_nll": 1.3043604600089218,
+    "incumbent_perplexity": 3.685331423047624,
+    "incumbent_perplexity_ratio_to_bf16": 1.479233298997967,
+    "paired_candidate_minus_incumbent_ci95_lower": -0.05291953907968834,
+    "paired_candidate_minus_incumbent_ci95_upper": -0.03602875809546593,
+    "paired_candidate_minus_incumbent_mean_nll": -0.04430893351125206,
+    "perplexity_ratio_gate": 1.15,
+    "perplexity_ratio_gate_passed": false,
+    "predicted_token_count": 104900,
+    "token_weighted_candidate_minus_incumbent_mean_nll": -0.04430893351125208
+  },
+  "reproducibility": {
+    "candidate_repeat_max_abs_document_nll_sum_delta": 0.0
+  },
+  "schema": "rco.qwen36.gsq_rco_candidate_heldout_comparison.v1",
+  "scope": "llama.cpp held-out quality of the ungated evaluation-only GSQ-RCO candidate; not a release certification",
+  "scoring": {
+    "corpus_manifest": {
+      "canonical_manifest_sha256": "dccd014fc55be379c176f87a724e1caa21292449203fc0a9dbbb2b5bae43387e",
+      "path": "/extraspace/IronWolf/christian/gsq-rco-moe/repos/RCO/reports/qwen36_35b_heldout_corpus_manifest.json"
+    },
+    "helper": {
+      "path": "/extraspace/IronWolf/christian/gsq-rco-moe/experiment/helpers-mmqfix/rco-gguf-document-nll",
+      "sha256": "9682a5f346cc73fa185dc4bf6b2eea75a5e8864f15124feee50e5b4ce8d400e9",
+      "source_path": "/extraspace/IronWolf/christian/gsq-rco-moe/repos/RCO/tools/gguf_document_nll.cpp",
+      "source_sha256": "dc2bbd4fa462bf4177c031aeccb68302c2b0a633bd066e5798cbd1cf75473576"
+    },
+    "llama_cpp": {
+      "path": "/extraspace/IronWolf/christian/gsq-rco-moe/experiment/llama.cpp-mmqfix",
+      "revision": "df4f2e491dc74bf61b67de2ef566e35237ff5563"
+    },
+    "parameters": {
+      "gpu_layers": 20,
+      "parse_special": false,
+      "threads": 8,
+      "ubatch": 256
+    },
+    "token_sequence_sha256": "c507a4fde2263909429eaf04b4fb7d533945efcbd993417d51ef209737d46b6e"
+  },
+  "status": "complete"
+}

@@ -1,0 +1,863 @@
+{
+  "identity": {
+    "corpus_prompts": {
+      "path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_chat_corpus_v2/prompts.jsonl",
+      "sha256": "edc036787d9b0715d605cf23c68e6ed4412a64dc6056a1b1dd2efffa3172e2e6"
+    },
+    "model": {
+      "path": "/extraspace/IronWolf/christian/gsq-rco-moe/results/Qwen3.6-35B-A3B-GSQ-hybrid.gguf",
+      "sha256": "8e50912f5d0703401ca21b09deb2ee8a84d03536ade6fb44815fcb40a0b03596"
+    },
+    "parameters": {
+      "context": 8192,
+      "gpu_layers": 20,
+      "n_cpu_moe": 0,
+      "threads": 8
+    },
+    "prompts": {
+      "path": "/extraspace/IronWolf/christian/gsq-rco-moe/repos/RCO/tools/qwen36_chat_generation_prompts_v2.json",
+      "sha256": "1edb81c10389723f37db6fdddef500b928fb078c99bcdd56252282e2cf70c189"
+    },
+    "server": {
+      "path": "/extraspace/IronWolf/christian/gsq-rco-moe/experiment/build-cuda-mmqfix/bin/llama-server",
+      "sha256": "cfe3ab825f9c73c09faa8e43f5539932a3bf1df7614f193584ea71f2d655ce48"
+    }
+  },
+  "label": "gsq",
+  "prompts": [
+    {
+      "greedy_token": "<tool_call>",
+      "id": "tool-weather",
+      "prompt_tokens": 317,
+      "source": "gate",
+      "tool_call_log_prob": -0.004163995385169983,
+      "tool_call_log_prob_upper_bound": null,
+      "top5": [
+        {
+          "logprob": -0.004163995385169983,
+          "token": "<tool_call>"
+        },
+        {
+          "logprob": -5.989302158355713,
+          "token": "I"
+        },
+        {
+          "logprob": -6.795065402984619,
+          "token": "The"
+        },
+        {
+          "logprob": -8.76905632019043,
+          "token": "Here"
+        },
+        {
+          "logprob": -9.631414413452148,
+          "token": "Of"
+        }
+      ]
+    },
+    {
+      "greedy_token": "<tool_call>",
+      "id": "tool-flights",
+      "prompt_tokens": 344,
+      "source": "gate",
+      "tool_call_log_prob": -0.00029097258811816573,
+      "tool_call_log_prob_upper_bound": null,
+      "top5": [
+        {
+          "logprob": -0.00029097258811816573,
+          "token": "<tool_call>"
+        },
+        {
+          "logprob": -8.372647285461426,
+          "token": "I"
+        },
+        {
+          "logprob": -11.377274513244629,
+          "token": "Here"
+        },
+        {
+          "logprob": -11.894286155700684,
+          "token": "No"
+        },
+        {
+          "logprob": -12.4041109085083,
+          "token": "Hello"
+        }
+      ]
+    },
+    {
+      "greedy_token": "<tool_call>",
+      "id": "tool-currency",
+      "prompt_tokens": 406,
+      "source": "gate",
+      "tool_call_log_prob": -0.04985868185758591,
+      "tool_call_log_prob_upper_bound": null,
+      "top5": [
+        {
+          "logprob": -0.04985868185758591,
+          "token": "<tool_call>"
+        },
+        {
+          "logprob": -3.2766575813293457,
+          "token": "2"
+        },
+        {
+          "logprob": -6.213764667510986,
+          "token": "To"
+        },
+        {
+          "logprob": -6.255991458892822,
+          "token": "I"
+        },
+        {
+          "logprob": -6.416843891143799,
+          "token": "The"
+        }
+      ]
+    },
+    {
+      "greedy_token": "<tool_call>",
+      "id": "chat-v2-calibration-tool-call-01",
+      "prompt_tokens": 359,
+      "source": "calibration",
+      "tool_call_log_prob": -0.026666613295674324,
+      "tool_call_log_prob_upper_bound": null,
+      "top5": [
+        {
+          "logprob": -0.026666613295674324,
+          "token": "<tool_call>"
+        },
+        {
+          "logprob": -4.519065856933594,
+          "token": "Sure"
+        },
+        {
+          "logprob": -4.776311874389648,
+          "token": "I"
+        },
+        {
+          "logprob": -5.549003601074219,
+          "token": "Of"
+        },
+        {
+          "logprob": -7.218149185180664,
+          "token": "1"
+        }
+      ]
+    },
+    {
+      "greedy_token": "<tool_call>",
+      "id": "chat-v2-calibration-tool-call-03",
+      "prompt_tokens": 346,
+      "source": "calibration",
+      "tool_call_log_prob": -0.010882427915930748,
+      "tool_call_log_prob_upper_bound": null,
+      "top5": [
+        {
+          "logprob": -0.010882427915930748,
+          "token": "<tool_call>"
+        },
+        {
+          "logprob": -5.45430850982666,
+          "token": "Sure"
+        },
+        {
+          "logprob": -5.696358680725098,
+          "token": "I"
+        },
+        {
+          "logprob": -6.252566337585449,
+          "token": "Of"
+        },
+        {
+          "logprob": -8.180573463439941,
+          "token": "Yes"
+        }
+      ]
+    },
+    {
+      "greedy_token": "<tool_call>",
+      "id": "chat-v2-calibration-tool-call-05",
+      "prompt_tokens": 427,
+      "source": "calibration",
+      "tool_call_log_prob": -0.021878434345126152,
+      "tool_call_log_prob_upper_bound": null,
+      "top5": [
+        {
+          "logprob": -0.021878434345126152,
+          "token": "<tool_call>"
+        },
+        {
+          "logprob": -4.37485408782959,
+          "token": "Of"
+        },
+        {
+          "logprob": -5.68422794342041,
+          "token": "I"
+        },
+        {
+          "logprob": -6.676743984222412,
+          "token": "Sure"
+        },
+        {
+          "logprob": -7.010819435119629,
+          "token": "Here"
+        }
+      ]
+    },
+    {
+      "greedy_token": "<tool_call>",
+      "id": "chat-v2-calibration-tool-call-07",
+      "prompt_tokens": 469,
+      "source": "calibration",
+      "tool_call_log_prob": -0.03103296086192131,
+      "tool_call_log_prob_upper_bound": null,
+      "top5": [
+        {
+          "logprob": -0.03103296086192131,
+          "token": "<tool_call>"
+        },
+        {
+          "logprob": -4.345570087432861,
+          "token": "I"
+        },
+        {
+          "logprob": -4.385071277618408,
+          "token": "The"
+        },
+        {
+          "logprob": -6.330149173736572,
+          "token": "Here"
+        },
+        {
+          "logprob": -6.613218784332275,
+          "token": "Hello"
+        }
+      ]
+    },
+    {
+      "greedy_token": "<tool_call>",
+      "id": "chat-v2-calibration-tool-call-09",
+      "prompt_tokens": 313,
+      "source": "calibration",
+      "tool_call_log_prob": -0.07649838924407959,
+      "tool_call_log_prob_upper_bound": null,
+      "top5": [
+        {
+          "logprob": -0.07649838924407959,
+          "token": "<tool_call>"
+        },
+        {
+          "logprob": -3.052839517593384,
+          "token": "The"
+        },
+        {
+          "logprob": -3.814985513687134,
+          "token": "I"
+        },
+        {
+          "logprob": -6.6892266273498535,
+          "token": "To"
+        },
+        {
+          "logprob": -7.665590763092041,
+          "token": "Of"
+        }
+      ]
+    },
+    {
+      "greedy_token": "<tool_call>",
+      "id": "chat-v2-calibration-tool-call-11",
+      "prompt_tokens": 363,
+      "source": "calibration",
+      "tool_call_log_prob": -0.002150103682652116,
+      "tool_call_log_prob_upper_bound": null,
+      "top5": [
+        {
+          "logprob": -0.002150103682652116,
+          "token": "<tool_call>"
+        },
+        {
+          "logprob": -6.670067310333252,
+          "token": "I"
+        },
+        {
+          "logprob": -8.0906400680542,
+          "token": "Here"
+        },
+        {
+          "logprob": -9.264121055603027,
+          "token": "Sure"
+        },
+        {
+          "logprob": -9.472731590270996,
+          "token": "Of"
+        }
+      ]
+    },
+    {
+      "greedy_token": "<tool_call>",
+      "id": "chat-v2-calibration-tool-call-13",
+      "prompt_tokens": 327,
+      "source": "calibration",
+      "tool_call_log_prob": -0.00017972415662370622,
+      "tool_call_log_prob_upper_bound": null,
+      "top5": [
+        {
+          "logprob": -0.00017972415662370622,
+          "token": "<tool_call>"
+        },
+        {
+          "logprob": -8.835393905639648,
+          "token": "I"
+        },
+        {
+          "logprob": -11.253198623657227,
+          "token": "Sure"
+        },
+        {
+          "logprob": -11.813178062438965,
+          "token": "Here"
+        },
+        {
+          "logprob": -12.341203689575195,
+          "token": "Yes"
+        }
+      ]
+    },
+    {
+      "greedy_token": "<tool_call>",
+      "id": "chat-v2-calibration-tool-call-15",
+      "prompt_tokens": 328,
+      "source": "calibration",
+      "tool_call_log_prob": -0.05825647711753845,
+      "tool_call_log_prob_upper_bound": null,
+      "top5": [
+        {
+          "logprob": -0.05825647711753845,
+          "token": "<tool_call>"
+        },
+        {
+          "logprob": -3.18416428565979,
+          "token": "I"
+        },
+        {
+          "logprob": -5.144167423248291,
+          "token": "Here"
+        },
+        {
+          "logprob": -5.258604526519775,
+          "token": "To"
+        },
+        {
+          "logprob": -7.04978609085083,
+          "token": "Using"
+        }
+      ]
+    },
+    {
+      "greedy_token": "<tool_call>",
+      "id": "chat-v2-calibration-tool-call-17",
+      "prompt_tokens": 389,
+      "source": "calibration",
+      "tool_call_log_prob": -0.00724946241825819,
+      "tool_call_log_prob_upper_bound": null,
+      "top5": [
+        {
+          "logprob": -0.00724946241825819,
+          "token": "<tool_call>"
+        },
+        {
+          "logprob": -5.954951763153076,
+          "token": "Of"
+        },
+        {
+          "logprob": -6.095504283905029,
+          "token": "Sure"
+        },
+        {
+          "logprob": -6.669652462005615,
+          "token": "I"
+        },
+        {
+          "logprob": -7.324828624725342,
+          "token": "Here"
+        }
+      ]
+    },
+    {
+      "greedy_token": "<tool_call>",
+      "id": "chat-v2-calibration-tool-call-19",
+      "prompt_tokens": 375,
+      "source": "calibration",
+      "tool_call_log_prob": -0.0007620376418344676,
+      "tool_call_log_prob_upper_bound": null,
+      "top5": [
+        {
+          "logprob": -0.0007620376418344676,
+          "token": "<tool_call>"
+        },
+        {
+          "logprob": -7.660578727722168,
+          "token": "Here"
+        },
+        {
+          "logprob": -8.793974876403809,
+          "token": "I"
+        },
+        {
+          "logprob": -11.229592323303223,
+          "token": "Sure"
+        },
+        {
+          "logprob": -11.233405113220215,
+          "token": "```"
+        }
+      ]
+    },
+    {
+      "greedy_token": "<tool_call>",
+      "id": "chat-v2-calibration-tool-call-21",
+      "prompt_tokens": 372,
+      "source": "calibration",
+      "tool_call_log_prob": -0.01916252076625824,
+      "tool_call_log_prob_upper_bound": null,
+      "top5": [
+        {
+          "logprob": -0.01916252076625824,
+          "token": "<tool_call>"
+        },
+        {
+          "logprob": -4.668290615081787,
+          "token": "I"
+        },
+        {
+          "logprob": -5.1038336753845215,
+          "token": "Sure"
+        },
+        {
+          "logprob": -6.515931606292725,
+          "token": "Of"
+        },
+        {
+          "logprob": -7.292993068695068,
+          "token": "Here"
+        }
+      ]
+    },
+    {
+      "greedy_token": "<tool_call>",
+      "id": "chat-v2-calibration-tool-call-23",
+      "prompt_tokens": 512,
+      "source": "calibration",
+      "tool_call_log_prob": -0.009504280053079128,
+      "tool_call_log_prob_upper_bound": null,
+      "top5": [
+        {
+          "logprob": -0.009504280053079128,
+          "token": "<tool_call>"
+        },
+        {
+          "logprob": -5.601545333862305,
+          "token": "Of"
+        },
+        {
+          "logprob": -6.333383560180664,
+          "token": "Here"
+        },
+        {
+          "logprob": -6.973865509033203,
+          "token": "I"
+        },
+        {
+          "logprob": -7.179279327392578,
+          "token": "Sure"
+        }
+      ]
+    },
+    {
+      "greedy_token": "<tool_call>",
+      "id": "chat-v2-heldout-tool-call-01",
+      "prompt_tokens": 326,
+      "source": "heldout",
+      "tool_call_log_prob": -0.0013091188156977296,
+      "tool_call_log_prob_upper_bound": null,
+      "top5": [
+        {
+          "logprob": -0.0013091188156977296,
+          "token": "<tool_call>"
+        },
+        {
+          "logprob": -7.3210225105285645,
+          "token": "The"
+        },
+        {
+          "logprob": -7.476200580596924,
+          "token": "I"
+        },
+        {
+          "logprob": -11.40817642211914,
+          "token": "Here"
+        },
+        {
+          "logprob": -11.451786994934082,
+          "token": "Of"
+        }
+      ]
+    },
+    {
+      "greedy_token": "<tool_call>",
+      "id": "chat-v2-heldout-tool-call-03",
+      "prompt_tokens": 519,
+      "source": "heldout",
+      "tool_call_log_prob": -0.00437146844342351,
+      "tool_call_log_prob_upper_bound": null,
+      "top5": [
+        {
+          "logprob": -0.00437146844342351,
+          "token": "<tool_call>"
+        },
+        {
+          "logprob": -5.750247955322266,
+          "token": "I"
+        },
+        {
+          "logprob": -8.299026489257812,
+          "token": "Sure"
+        },
+        {
+          "logprob": -8.548620223999023,
+          "token": "Here"
+        },
+        {
+          "logprob": -8.840030670166016,
+          "token": "Of"
+        }
+      ]
+    },
+    {
+      "greedy_token": "<tool_call>",
+      "id": "chat-v2-heldout-tool-call-05",
+      "prompt_tokens": 309,
+      "source": "heldout",
+      "tool_call_log_prob": -0.02037549577653408,
+      "tool_call_log_prob_upper_bound": null,
+      "top5": [
+        {
+          "logprob": -0.02037549577653408,
+          "token": "<tool_call>"
+        },
+        {
+          "logprob": -4.032631874084473,
+          "token": "I"
+        },
+        {
+          "logprob": -7.274378776550293,
+          "token": "Let"
+        },
+        {
+          "logprob": -7.489302635192871,
+          "token": "Here"
+        },
+        {
+          "logprob": -7.851800441741943,
+          "token": "Since"
+        }
+      ]
+    },
+    {
+      "greedy_token": "<tool_call>",
+      "id": "chat-v2-heldout-tool-call-07",
+      "prompt_tokens": 349,
+      "source": "heldout",
+      "tool_call_log_prob": -0.00997723825275898,
+      "tool_call_log_prob_upper_bound": null,
+      "top5": [
+        {
+          "logprob": -0.00997723825275898,
+          "token": "<tool_call>"
+        },
+        {
+          "logprob": -5.462013244628906,
+          "token": "I"
+        },
+        {
+          "logprob": -5.603115081787109,
+          "token": "Sure"
+        },
+        {
+          "logprob": -6.715858459472656,
+          "token": "Of"
+        },
+        {
+          "logprob": -8.301788330078125,
+          "token": "Yes"
+        }
+      ]
+    },
+    {
+      "greedy_token": "<tool_call>",
+      "id": "chat-v2-heldout-tool-call-09",
+      "prompt_tokens": 338,
+      "source": "heldout",
+      "tool_call_log_prob": -3.099446303167497e-06,
+      "tool_call_log_prob_upper_bound": null,
+      "top5": [
+        {
+          "logprob": -3.099446303167497e-06,
+          "token": "<tool_call>"
+        },
+        {
+          "logprob": -12.741316795349121,
+          "token": "I"
+        },
+        {
+          "logprob": -16.402877807617188,
+          "token": "Here"
+        },
+        {
+          "logprob": -16.72528648376465,
+          "token": "Hello"
+        },
+        {
+          "logprob": -16.836713790893555,
+          "token": "</tool_call>"
+        }
+      ]
+    },
+    {
+      "greedy_token": "<tool_call>",
+      "id": "chat-v2-heldout-tool-call-11",
+      "prompt_tokens": 347,
+      "source": "heldout",
+      "tool_call_log_prob": -0.2898541986942291,
+      "tool_call_log_prob_upper_bound": null,
+      "top5": [
+        {
+          "logprob": -0.2898541986942291,
+          "token": "<tool_call>"
+        },
+        {
+          "logprob": -1.4401799440383911,
+          "token": "To"
+        },
+        {
+          "logprob": -4.591104507446289,
+          "token": "I"
+        },
+        {
+          "logprob": -7.143457412719727,
+          "token": "You"
+        },
+        {
+          "logprob": -7.71391487121582,
+          "token": "Of"
+        }
+      ]
+    },
+    {
+      "greedy_token": "<tool_call>",
+      "id": "chat-v2-heldout-tool-call-13",
+      "prompt_tokens": 364,
+      "source": "heldout",
+      "tool_call_log_prob": -0.0003622234216891229,
+      "tool_call_log_prob_upper_bound": null,
+      "top5": [
+        {
+          "logprob": -0.0003622234216891229,
+          "token": "<tool_call>"
+        },
+        {
+          "logprob": -8.039691925048828,
+          "token": "I"
+        },
+        {
+          "logprob": -11.817995071411133,
+          "token": "Hello"
+        },
+        {
+          "logprob": -11.924034118652344,
+          "token": "Here"
+        },
+        {
+          "logprob": -12.642433166503906,
+          "token": "Sure"
+        }
+      ]
+    },
+    {
+      "greedy_token": "<tool_call>",
+      "id": "chat-v2-heldout-tool-call-15",
+      "prompt_tokens": 322,
+      "source": "heldout",
+      "tool_call_log_prob": -0.033609602600336075,
+      "tool_call_log_prob_upper_bound": null,
+      "top5": [
+        {
+          "logprob": -0.033609602600336075,
+          "token": "<tool_call>"
+        },
+        {
+          "logprob": -4.033992767333984,
+          "token": "To"
+        },
+        {
+          "logprob": -4.568092346191406,
+          "token": "I"
+        },
+        {
+          "logprob": -6.3638691902160645,
+          "token": "You"
+        },
+        {
+          "logprob": -6.580765247344971,
+          "token": "Based"
+        }
+      ]
+    },
+    {
+      "greedy_token": "<tool_call>",
+      "id": "chat-v2-heldout-tool-call-17",
+      "prompt_tokens": 350,
+      "source": "heldout",
+      "tool_call_log_prob": -0.02045311965048313,
+      "tool_call_log_prob_upper_bound": null,
+      "top5": [
+        {
+          "logprob": -0.02045311965048313,
+          "token": "<tool_call>"
+        },
+        {
+          "logprob": -4.826389789581299,
+          "token": "Sure"
+        },
+        {
+          "logprob": -4.871902942657471,
+          "token": "I"
+        },
+        {
+          "logprob": -5.813610553741455,
+          "token": "Of"
+        },
+        {
+          "logprob": -7.728630542755127,
+          "token": "Yes"
+        }
+      ]
+    },
+    {
+      "greedy_token": "<tool_call>",
+      "id": "chat-v2-heldout-tool-call-19",
+      "prompt_tokens": 311,
+      "source": "heldout",
+      "tool_call_log_prob": -0.20811176300048828,
+      "tool_call_log_prob_upper_bound": null,
+      "top5": [
+        {
+          "logprob": -0.20811176300048828,
+          "token": "<tool_call>"
+        },
+        {
+          "logprob": -2.3125524520874023,
+          "token": "Here"
+        },
+        {
+          "logprob": -3.566683769226074,
+          "token": "Sure"
+        },
+        {
+          "logprob": -3.6953611373901367,
+          "token": "**"
+        },
+        {
+          "logprob": -4.87131404876709,
+          "token": "I"
+        }
+      ]
+    },
+    {
+      "greedy_token": "<tool_call>",
+      "id": "chat-v2-heldout-tool-call-21",
+      "prompt_tokens": 495,
+      "source": "heldout",
+      "tool_call_log_prob": -0.0010717291152104735,
+      "tool_call_log_prob_upper_bound": null,
+      "top5": [
+        {
+          "logprob": -0.0010717291152104735,
+          "token": "<tool_call>"
+        },
+        {
+          "logprob": -7.775636196136475,
+          "token": "I"
+        },
+        {
+          "logprob": -8.384725570678711,
+          "token": "Sure"
+        },
+        {
+          "logprob": -9.327260971069336,
+          "token": "The"
+        },
+        {
+          "logprob": -9.496421813964844,
+          "token": "Here"
+        }
+      ]
+    },
+    {
+      "greedy_token": "<tool_call>",
+      "id": "chat-v2-heldout-tool-call-23",
+      "prompt_tokens": 321,
+      "source": "heldout",
+      "tool_call_log_prob": -0.0007610832108184695,
+      "tool_call_log_prob_upper_bound": null,
+      "top5": [
+        {
+          "logprob": -0.0007610832108184695,
+          "token": "<tool_call>"
+        },
+        {
+          "logprob": -7.899929046630859,
+          "token": "Here"
+        },
+        {
+          "logprob": -8.060537338256836,
+          "token": "I"
+        },
+        {
+          "logprob": -9.925605773925781,
+          "token": "The"
+        },
+        {
+          "logprob": -12.376821517944336,
+          "token": "Sure"
+        }
+      ]
+    }
+  ],
+  "schema": "rco.qwen36.template_token_probe.v1.first_token",
+  "status": "complete",
+  "summary": {
+    "calibration": {
+      "greedy_tool_call": 12,
+      "mean_prob": 0.9784729727487814,
+      "min_prob": 0.9263544064184649,
+      "prompts": 12
+    },
+    "gate": {
+      "greedy_tool_call": 3,
+      "mean_prob": 0.9823058639127106,
+      "min_prob": 0.9513638599748561,
+      "prompts": 3
+    },
+    "heldout": {
+      "greedy_tool_call": 12,
+      "mean_prob": 0.95576901232125,
+      "min_prob": 0.7483726733374667,
+      "prompts": 12
+    }
+  },
+  "tool_call_token_id": 248058,
+  "what": "raw next-token log-probability of <tool_call> at the first reply position of each tool prompt with thinking off (llama-server, n_probs, before sampling); absent from the top 100 means below the upper bound given"
+}

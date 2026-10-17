@@ -1,0 +1,38 @@
+{
+  "control_only_failures": [],
+  "counted_failures": [],
+  "devices": {
+    "cpu": {
+      "rco_v2": {
+        "checks": 66,
+        "failed_checks": 0,
+        "mean_tokens_per_second": 7.8613571473619,
+        "responses": 48
+      },
+      "unpruned_fixed": {
+        "checks": 66,
+        "failed_checks": 0,
+        "mean_tokens_per_second": 7.323178078843124,
+        "responses": 48
+      }
+    },
+    "gpu": {
+      "rco_v2": {
+        "checks": 66,
+        "failed_checks": 0,
+        "mean_tokens_per_second": 13.870445809578065,
+        "responses": 48
+      },
+      "unpruned_fixed": {
+        "checks": 66,
+        "failed_checks": 0,
+        "mean_tokens_per_second": 13.648868375007915,
+        "responses": 48
+      }
+    }
+  },
+  "rule": "on CPU and GPU, rco_v2 fails no check on a prompt and turn on more seeds than unpruned_fixed does",
+  "schema": "rco.qwen36.chat_generation_comparison.v1",
+  "shared_failures": [],
+  "status": "pass"
+}
