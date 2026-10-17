@@ -1,0 +1,297 @@
+{
+  "per_prompt": {
+    "chat-goodnight": {
+      "gsq": {
+        "failed": 0,
+        "no_answer": 0,
+        "r1": 0,
+        "r2": 0,
+        "unnecessary_call": 0,
+        "wrong_without_tool": 0
+      },
+      "rco_v2": {
+        "failed": 0,
+        "no_answer": 0,
+        "r1": 0,
+        "r2": 0,
+        "unnecessary_call": 0,
+        "wrong_without_tool": 0
+      }
+    },
+    "chat-greeting": {
+      "gsq": {
+        "failed": 0,
+        "no_answer": 0,
+        "r1": 0,
+        "r2": 0,
+        "unnecessary_call": 0,
+        "wrong_without_tool": 0
+      },
+      "rco_v2": {
+        "failed": 0,
+        "no_answer": 0,
+        "r1": 0,
+        "r2": 0,
+        "unnecessary_call": 0,
+        "wrong_without_tool": 0
+      }
+    },
+    "chat-joke": {
+      "gsq": {
+        "failed": 0,
+        "no_answer": 0,
+        "r1": 0,
+        "r2": 0,
+        "unnecessary_call": 0,
+        "wrong_without_tool": 0
+      },
+      "rco_v2": {
+        "failed": 0,
+        "no_answer": 0,
+        "r1": 0,
+        "r2": 0,
+        "unnecessary_call": 0,
+        "wrong_without_tool": 0
+      }
+    },
+    "chat-thanks": {
+      "gsq": {
+        "failed": 0,
+        "no_answer": 0,
+        "r1": 0,
+        "r2": 0,
+        "unnecessary_call": 0,
+        "wrong_without_tool": 0
+      },
+      "rco_v2": {
+        "failed": 0,
+        "no_answer": 0,
+        "r1": 0,
+        "r2": 0,
+        "unnecessary_call": 0,
+        "wrong_without_tool": 0
+      }
+    },
+    "given-birthday": {
+      "gsq": {
+        "failed": 0,
+        "no_answer": 0,
+        "r1": 0,
+        "r2": 0,
+        "unnecessary_call": 0,
+        "wrong_without_tool": 0
+      },
+      "rco_v2": {
+        "failed": 0,
+        "no_answer": 0,
+        "r1": 0,
+        "r2": 0,
+        "unnecessary_call": 0,
+        "wrong_without_tool": 0
+      }
+    },
+    "given-jacket": {
+      "gsq": {
+        "failed": 0,
+        "no_answer": 0,
+        "r1": 0,
+        "r2": 0,
+        "unnecessary_call": 0,
+        "wrong_without_tool": 0
+      },
+      "rco_v2": {
+        "failed": 0,
+        "no_answer": 0,
+        "r1": 0,
+        "r2": 0,
+        "unnecessary_call": 0,
+        "wrong_without_tool": 0
+      }
+    },
+    "given-profit": {
+      "gsq": {
+        "failed": 0,
+        "no_answer": 0,
+        "r1": 0,
+        "r2": 0,
+        "unnecessary_call": 0,
+        "wrong_without_tool": 0
+      },
+      "rco_v2": {
+        "failed": 0,
+        "no_answer": 0,
+        "r1": 0,
+        "r2": 0,
+        "unnecessary_call": 0,
+        "wrong_without_tool": 0
+      }
+    },
+    "related-boiling": {
+      "gsq": {
+        "failed": 0,
+        "no_answer": 0,
+        "r1": 0,
+        "r2": 0,
+        "unnecessary_call": 0,
+        "wrong_without_tool": 0
+      },
+      "rco_v2": {
+        "failed": 0,
+        "no_answer": 0,
+        "r1": 0,
+        "r2": 0,
+        "unnecessary_call": 0,
+        "wrong_without_tool": 0
+      }
+    },
+    "related-cents": {
+      "gsq": {
+        "failed": 0,
+        "no_answer": 0,
+        "r1": 0,
+        "r2": 0,
+        "unnecessary_call": 0,
+        "wrong_without_tool": 0
+      },
+      "rco_v2": {
+        "failed": 0,
+        "no_answer": 0,
+        "r1": 0,
+        "r2": 0,
+        "unnecessary_call": 0,
+        "wrong_without_tool": 0
+      }
+    },
+    "related-ticker": {
+      "gsq": {
+        "failed": 0,
+        "no_answer": 0,
+        "r1": 0,
+        "r2": 0,
+        "unnecessary_call": 1,
+        "wrong_without_tool": 0
+      },
+      "rco_v2": {
+        "failed": 0,
+        "no_answer": 0,
+        "r1": 0,
+        "r2": 0,
+        "unnecessary_call": 0,
+        "wrong_without_tool": 0
+      }
+    },
+    "related-yen": {
+      "gsq": {
+        "failed": 0,
+        "no_answer": 0,
+        "r1": 0,
+        "r2": 0,
+        "unnecessary_call": 0,
+        "wrong_without_tool": 0
+      },
+      "rco_v2": {
+        "failed": 0,
+        "no_answer": 0,
+        "r1": 0,
+        "r2": 0,
+        "unnecessary_call": 0,
+        "wrong_without_tool": 0
+      }
+    },
+    "unrelated-capital": {
+      "gsq": {
+        "failed": 0,
+        "no_answer": 0,
+        "r1": 0,
+        "r2": 0,
+        "unnecessary_call": 0,
+        "wrong_without_tool": 0
+      },
+      "rco_v2": {
+        "failed": 0,
+        "no_answer": 0,
+        "r1": 0,
+        "r2": 0,
+        "unnecessary_call": 0,
+        "wrong_without_tool": 0
+      }
+    },
+    "unrelated-gold": {
+      "gsq": {
+        "failed": 0,
+        "no_answer": 0,
+        "r1": 0,
+        "r2": 0,
+        "unnecessary_call": 0,
+        "wrong_without_tool": 0
+      },
+      "rco_v2": {
+        "failed": 0,
+        "no_answer": 0,
+        "r1": 0,
+        "r2": 0,
+        "unnecessary_call": 0,
+        "wrong_without_tool": 0
+      }
+    },
+    "unrelated-leap-year": {
+      "gsq": {
+        "failed": 0,
+        "no_answer": 0,
+        "r1": 0,
+        "r2": 0,
+        "unnecessary_call": 0,
+        "wrong_without_tool": 0
+      },
+      "rco_v2": {
+        "failed": 0,
+        "no_answer": 0,
+        "r1": 0,
+        "r2": 0,
+        "unnecessary_call": 0,
+        "wrong_without_tool": 0
+      }
+    },
+    "unrelated-multiply": {
+      "gsq": {
+        "failed": 0,
+        "no_answer": 0,
+        "r1": 0,
+        "r2": 0,
+        "unnecessary_call": 0,
+        "wrong_without_tool": 0
+      },
+      "rco_v2": {
+        "failed": 0,
+        "no_answer": 0,
+        "r1": 0,
+        "r2": 0,
+        "unnecessary_call": 0,
+        "wrong_without_tool": 0
+      }
+    }
+  },
+  "prompts_failing_rule": [],
+  "rule": "rco_v2 fails no kept prompt on more seeds than gsq does",
+  "schema": "rco.qwen36.tool_restraint.v1.comparison",
+  "status": "pass",
+  "totals": {
+    "gsq": {
+      "failed": 0,
+      "no_answer": 0,
+      "r1": 0,
+      "r2": 0,
+      "unnecessary_call": 1,
+      "wrong_without_tool": 0
+    },
+    "rco_v2": {
+      "failed": 0,
+      "no_answer": 0,
+      "r1": 0,
+      "r2": 0,
+      "unnecessary_call": 0,
+      "wrong_without_tool": 0
+    }
+  },
+  "validation_sha256": "18e9b3dec03ed0d5524e3cf3e447525d01b7165aac4b7803adae778494b80965"
+}

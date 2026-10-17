@@ -1,0 +1,151 @@
+{
+  "kept": [
+    "unrelated-multiply",
+    "unrelated-capital",
+    "unrelated-leap-year",
+    "unrelated-gold",
+    "related-yen",
+    "related-boiling",
+    "related-ticker",
+    "related-cents",
+    "given-jacket",
+    "given-profit",
+    "given-birthday",
+    "chat-greeting",
+    "chat-thanks",
+    "chat-joke",
+    "chat-goodnight"
+  ],
+  "kept_count": 15,
+  "prompts": {
+    "chat-goodnight": {
+      "calling_seeds": 0,
+      "check_failures": 0,
+      "dropped": false,
+      "reasons": [],
+      "seeds": 5
+    },
+    "chat-greeting": {
+      "calling_seeds": 0,
+      "check_failures": 0,
+      "dropped": false,
+      "reasons": [],
+      "seeds": 5
+    },
+    "chat-joke": {
+      "calling_seeds": 0,
+      "check_failures": 0,
+      "dropped": false,
+      "reasons": [],
+      "seeds": 5
+    },
+    "chat-thanks": {
+      "calling_seeds": 0,
+      "check_failures": 0,
+      "dropped": false,
+      "reasons": [],
+      "seeds": 5
+    },
+    "given-birthday": {
+      "calling_seeds": 0,
+      "check_failures": 0,
+      "dropped": false,
+      "reasons": [],
+      "seeds": 5
+    },
+    "given-jacket": {
+      "calling_seeds": 0,
+      "check_failures": 0,
+      "dropped": false,
+      "reasons": [],
+      "seeds": 5
+    },
+    "given-profit": {
+      "calling_seeds": 0,
+      "check_failures": 0,
+      "dropped": false,
+      "reasons": [],
+      "seeds": 5
+    },
+    "given-rate": {
+      "calling_seeds": 4,
+      "check_failures": 0,
+      "dropped": true,
+      "reasons": [
+        "reference calls a tool in 4 of 5 seeds"
+      ],
+      "seeds": 5
+    },
+    "related-boiling": {
+      "calling_seeds": 0,
+      "check_failures": 0,
+      "dropped": false,
+      "reasons": [],
+      "seeds": 5
+    },
+    "related-cents": {
+      "calling_seeds": 0,
+      "check_failures": 0,
+      "dropped": false,
+      "reasons": [],
+      "seeds": 5
+    },
+    "related-ticker": {
+      "calling_seeds": 0,
+      "check_failures": 0,
+      "dropped": false,
+      "reasons": [],
+      "seeds": 5
+    },
+    "related-yen": {
+      "calling_seeds": 0,
+      "check_failures": 0,
+      "dropped": false,
+      "reasons": [],
+      "seeds": 5
+    },
+    "unrelated-capital": {
+      "calling_seeds": 0,
+      "check_failures": 0,
+      "dropped": false,
+      "reasons": [],
+      "seeds": 5
+    },
+    "unrelated-gold": {
+      "calling_seeds": 0,
+      "check_failures": 0,
+      "dropped": false,
+      "reasons": [],
+      "seeds": 5
+    },
+    "unrelated-leap-year": {
+      "calling_seeds": 0,
+      "check_failures": 0,
+      "dropped": false,
+      "reasons": [],
+      "seeds": 5
+    },
+    "unrelated-multiply": {
+      "calling_seeds": 0,
+      "check_failures": 0,
+      "dropped": false,
+      "reasons": [],
+      "seeds": 5
+    }
+  },
+  "prompts_sha256": "919684380ad3f851060c16faa3e634fea80afcb953e52594c32e458cbd039f9f",
+  "reference": {
+    "path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_reference_gguf/Qwen3.6-35B-A3B-Q6_K.gguf",
+    "sha256": "e4f724374d8e93279867ce9ba06fdeccb7d62453b446b0920018a76d9a1bfb83"
+  },
+  "reference_summary": {
+    "conversations": 80,
+    "failed": 0,
+    "unnecessary_call": 4,
+    "wall_seconds_this_invocation": 882.4319667499512,
+    "wrong_without_tool": 0
+  },
+  "rule": "drop a prompt where the reference calls a tool in >= 3 seeds or fails the answer check in any seed; >= 12 must remain",
+  "schema": "rco.qwen36.tool_restraint.v1.validation",
+  "status": "pass"
+}
