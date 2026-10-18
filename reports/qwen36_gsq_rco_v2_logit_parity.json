@@ -1,0 +1,3008 @@
+{
+  "artifacts": {
+    "base_gguf_report": {
+      "path": "/extraspace/IronWolf/christian/gsq-rco-moe/repos/RCO/reports/qwen36_gsq_e6_p24_frequency_gguf.json",
+      "sha256": "deabb8fa424828dfa0cb750b3371705bfe18231594d2bee1de8d7d646c5f5519"
+    },
+    "base_gguf_sha256": "90c10a1adc6284031757040653442f094839a3e3cfcdca0c7c550375429fda80",
+    "calibration": {
+      "calibration_manifest_sha256": "019d25daaa9596c52d029e7a9a4abfbcf1b3e58e7d5753c00becfae3537eb671",
+      "calibration_token_sha256": "68a7ef1c2110eaf0eb26bb00ea3ece43aed8486c735e40b3130c04a5889d69dc",
+      "document_count": 250,
+      "documents": null,
+      "sequence_length": 512
+    },
+    "candidate_gguf_report": {
+      "path": "/extraspace/IronWolf/christian/gsq-rco-moe/repos/RCO/reports/qwen36_gsq_rco_v2_candidate_gguf.json",
+      "sha256": "6205531d7de60e1f1cc51a21155bf1f49cd0a6fb50a809ea5906492700ce745b"
+    },
+    "candidate_gguf_sha256": "0a6eb59bcf02eb847a268560294f01418a27e5e34e5aafe8e1badbb2d58065a1",
+    "control_gguf_report": {
+      "path": "/extraspace/IronWolf/christian/gsq-rco-moe/repos/RCO/reports/qwen36_gsq_e6_gguf.json",
+      "sha256": "3a6cbe90f5a47068ffa57e865f0482aff156f17ad094d7c0ea57ba8ea35175ae"
+    },
+    "control_gguf_sha256": "dbc06b5822e4bb9fc797cd39c9a96194942e2660cf0d4f6aa6061d4e04abfb75",
+    "helper": {
+      "path": "/extraspace/IronWolf/christian/gsq-rco-moe/experiment/helpers/rco-gguf-logit-dump",
+      "sha256": "d6a1e219e5ac4fa963c07f0f7cf1caecb494cef11aecca5440d511e1d6e77ee0"
+    },
+    "layer_helper": {
+      "path": "/extraspace/IronWolf/christian/gsq-rco-moe/experiment/helpers/rco-gguf-layer-dump",
+      "sha256": "3b30c9083dc67487f8c7f8f0f609ba09723827202f98793a720612f475836ba7"
+    },
+    "mask": {
+      "path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_prune24_chat/frequency_mask.npy",
+      "sha256": "e5fb9950407ca9aeafc6cfe9ac20b110dce5424847d3c5f18aa958fdcbce239c"
+    },
+    "measurements": {
+      "base_calibration-v2-code-00": {
+        "path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_rco_v2_parity/base_calibration-v2-code-00.npz",
+        "sha256": "57df4cfd243403677fdd3462f7f948b4eb79238581c7437f4549bfbeb39e408d"
+      },
+      "base_calibration-v2-knowledge-00": {
+        "path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_rco_v2_parity/base_calibration-v2-knowledge-00.npz",
+        "sha256": "39f4a59298bfd725bea8dfddba6cefe567d9edfb8f6141002ea3e9ac09d8a949"
+      },
+      "base_calibration-v2-language-00": {
+        "path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_rco_v2_parity/base_calibration-v2-language-00.npz",
+        "sha256": "ec6865d6f874369dbea9c4eeec4884e70ad6621e6cc1efe8a61509276e13c640"
+      },
+      "base_calibration-v2-multilingual-00": {
+        "path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_rco_v2_parity/base_calibration-v2-multilingual-00.npz",
+        "sha256": "3e3149a395f713c18d72e21057b0fbcecfd3ba09f17c0fa4bb8fe59202c18544"
+      },
+      "base_calibration-v2-reasoning-00": {
+        "path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_rco_v2_parity/base_calibration-v2-reasoning-00.npz",
+        "sha256": "3c38c69a0c89e1596cb574b99918c4761c00d30decf92fca9ca1336dd5a5c46e"
+      },
+      "candidate_calibration-v2-code-00": {
+        "path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_rco_v2_parity/candidate_calibration-v2-code-00.npz",
+        "sha256": "0ff7c46d82d0ea03315676b02a82bb3c644f49f4938967dee7a5e0e48a3deee2"
+      },
+      "candidate_calibration-v2-knowledge-00": {
+        "path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_rco_v2_parity/candidate_calibration-v2-knowledge-00.npz",
+        "sha256": "0941e841f86e0c68dc5aba1a787a55b8026a470f989396e2a1463580b74acf8e"
+      },
+      "candidate_calibration-v2-language-00": {
+        "path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_rco_v2_parity/candidate_calibration-v2-language-00.npz",
+        "sha256": "68e4b01b8e89642815edce91f4da71a98b779dba9212008dba0a501d00a2ffae"
+      },
+      "candidate_calibration-v2-multilingual-00": {
+        "path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_rco_v2_parity/candidate_calibration-v2-multilingual-00.npz",
+        "sha256": "fb6c4c0f3e2a308cafa3e9e0c4d1c3aaedd2c9e1b455660ac2aaf3ba8f38e463"
+      },
+      "candidate_calibration-v2-reasoning-00": {
+        "path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_rco_v2_parity/candidate_calibration-v2-reasoning-00.npz",
+        "sha256": "d4d1d95259559002757c2b68f8701737369ab92196d8f1ece10af6d48d18e2d4"
+      },
+      "control_calibration-v2-code-00": {
+        "path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_rco_v2_parity/control_calibration-v2-code-00.npz",
+        "sha256": "26feb0b261f02558aecd9b31b08ad4a44f3d4f8c884ebc989bd794623e1170ed"
+      },
+      "control_calibration-v2-knowledge-00": {
+        "path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_rco_v2_parity/control_calibration-v2-knowledge-00.npz",
+        "sha256": "17511257752683a81b1a0f641db3ac5ae978dce387d16af31b6763135477015c"
+      },
+      "control_calibration-v2-language-00": {
+        "path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_rco_v2_parity/control_calibration-v2-language-00.npz",
+        "sha256": "6cb09b459d35636d602ce367bba3aa6e32be80c7ec04382d7df4153297fe2828"
+      },
+      "control_calibration-v2-multilingual-00": {
+        "path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_rco_v2_parity/control_calibration-v2-multilingual-00.npz",
+        "sha256": "5675b28594e053901c9684cf0a536fc290f44c372ea37ce3cc0f40d0932e808f"
+      },
+      "control_calibration-v2-reasoning-00": {
+        "path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_rco_v2_parity/control_calibration-v2-reasoning-00.npz",
+        "sha256": "6439388cb0f8a30f0ca00146b27461ce80f03762b4d004dfc8a59da9df590332"
+      }
+    },
+    "native_gsq_gguf": {
+      "path": "/extraspace/IronWolf/christian/gsq-rco-moe/results/Qwen3.6-35B-A3B-GSQ-hybrid.gguf"
+    },
+    "q3k_store_index_sha256": "42f2accf7127015a2158b8b65c41858e7ee342fde4d27d41ad2b68b262f5f67a"
+  },
+  "control_reproduction": {
+    "calibration-v2-code-00": {
+      "arrays": {
+        "llama": {
+          "identical": true,
+          "max_abs_difference": 0.0
+        },
+        "llama_layers": {
+          "identical": true,
+          "max_abs_difference": 0.0
+        },
+        "native": {
+          "identical": true,
+          "max_abs_difference": 0.0
+        },
+        "native_layers": {
+          "identical": true,
+          "max_abs_difference": 0.0
+        },
+        "tokens": {
+          "identical": true,
+          "max_abs_difference": 0.0
+        }
+      },
+      "identical": true
+    },
+    "calibration-v2-knowledge-00": {
+      "arrays": {
+        "llama": {
+          "identical": true,
+          "max_abs_difference": 0.0
+        },
+        "llama_layers": {
+          "identical": true,
+          "max_abs_difference": 0.0
+        },
+        "native": {
+          "identical": true,
+          "max_abs_difference": 0.0
+        },
+        "native_layers": {
+          "identical": true,
+          "max_abs_difference": 0.0
+        },
+        "tokens": {
+          "identical": true,
+          "max_abs_difference": 0.0
+        }
+      },
+      "identical": true
+    },
+    "calibration-v2-language-00": {
+      "arrays": {
+        "llama": {
+          "identical": true,
+          "max_abs_difference": 0.0
+        },
+        "llama_layers": {
+          "identical": true,
+          "max_abs_difference": 0.0
+        },
+        "native": {
+          "identical": true,
+          "max_abs_difference": 0.0
+        },
+        "native_layers": {
+          "identical": true,
+          "max_abs_difference": 0.0
+        },
+        "tokens": {
+          "identical": true,
+          "max_abs_difference": 0.0
+        }
+      },
+      "identical": true
+    },
+    "calibration-v2-multilingual-00": {
+      "arrays": {
+        "llama": {
+          "identical": true,
+          "max_abs_difference": 0.0
+        },
+        "llama_layers": {
+          "identical": true,
+          "max_abs_difference": 0.0
+        },
+        "native": {
+          "identical": true,
+          "max_abs_difference": 0.0
+        },
+        "native_layers": {
+          "identical": true,
+          "max_abs_difference": 0.0
+        },
+        "tokens": {
+          "identical": true,
+          "max_abs_difference": 0.0
+        }
+      },
+      "identical": true
+    },
+    "calibration-v2-reasoning-00": {
+      "arrays": {
+        "llama": {
+          "identical": true,
+          "max_abs_difference": 0.0
+        },
+        "llama_layers": {
+          "identical": true,
+          "max_abs_difference": 0.0
+        },
+        "native": {
+          "identical": true,
+          "max_abs_difference": 0.0
+        },
+        "native_layers": {
+          "identical": true,
+          "max_abs_difference": 0.0
+        },
+        "tokens": {
+          "identical": true,
+          "max_abs_difference": 0.0
+        }
+      },
+      "identical": true
+    }
+  },
+  "documents": [
+    {
+      "id": "calibration-v2-language-00",
+      "index": 0,
+      "stratum": "language",
+      "tokens": 128
+    },
+    {
+      "id": "calibration-v2-knowledge-00",
+      "index": 50,
+      "stratum": "knowledge",
+      "tokens": 128
+    },
+    {
+      "id": "calibration-v2-reasoning-00",
+      "index": 100,
+      "stratum": "reasoning",
+      "tokens": 128
+    },
+    {
+      "id": "calibration-v2-code-00",
+      "index": 150,
+      "stratum": "code",
+      "tokens": 128
+    },
+    {
+      "id": "calibration-v2-multilingual-00",
+      "index": 200,
+      "stratum": "multilingual",
+      "tokens": 128
+    }
+  ],
+  "effects": [
+    {
+      "document": "calibration-v2-language-00",
+      "pruning_base_minus_control": {
+        "layers": [
+          {
+            "cosine_similarity": 0.9671892560433468,
+            "llama_effect_rms": 0.00037573824419734743,
+            "native_effect_rms": 0.00037931866535225427,
+            "relative_difference": 0.2551297266743714
+          },
+          {
+            "cosine_similarity": 0.9853996435973624,
+            "llama_effect_rms": 0.0015256891212217189,
+            "native_effect_rms": 0.0015220119041597048,
+            "relative_difference": 0.17110552181368582
+          },
+          {
+            "cosine_similarity": 0.9723165107174851,
+            "llama_effect_rms": 0.001947146812807555,
+            "native_effect_rms": 0.0019219479075422716,
+            "relative_difference": 0.23720203160091713
+          },
+          {
+            "cosine_similarity": 0.9578011422073542,
+            "llama_effect_rms": 0.002187660953601937,
+            "native_effect_rms": 0.002144784081999361,
+            "relative_difference": 0.29408260572440437
+          },
+          {
+            "cosine_similarity": 0.9393019724777206,
+            "llama_effect_rms": 0.002279014599987101,
+            "native_effect_rms": 0.0022074613382468944,
+            "relative_difference": 0.3555020472833047
+          },
+          {
+            "cosine_similarity": 0.9249444185135988,
+            "llama_effect_rms": 0.002529524973570134,
+            "native_effect_rms": 0.0024298777954816298,
+            "relative_difference": 0.39742777993671885
+          },
+          {
+            "cosine_similarity": 0.9117969304029064,
+            "llama_effect_rms": 0.0024807629430180014,
+            "native_effect_rms": 0.002370745081616834,
+            "relative_difference": 0.43214127352279524
+          },
+          {
+            "cosine_similarity": 0.8847618222099636,
+            "llama_effect_rms": 0.002650722139935084,
+            "native_effect_rms": 0.0025130603476573813,
+            "relative_difference": 0.4960868919707627
+          },
+          {
+            "cosine_similarity": 0.8508559510868453,
+            "llama_effect_rms": 0.0027191974146940786,
+            "native_effect_rms": 0.0025924147815452074,
+            "relative_difference": 0.5614870133459007
+          },
+          {
+            "cosine_similarity": 0.8417312722614603,
+            "llama_effect_rms": 0.0029260747253162106,
+            "native_effect_rms": 0.0027527885988748797,
+            "relative_difference": 0.5834602667506371
+          },
+          {
+            "cosine_similarity": 0.818606058949936,
+            "llama_effect_rms": 0.003176016303790603,
+            "native_effect_rms": 0.0029638065642866797,
+            "relative_difference": 0.6276067698272648
+          },
+          {
+            "cosine_similarity": 0.8076031542615123,
+            "llama_effect_rms": 0.003612708240783434,
+            "native_effect_rms": 0.00345025850809536,
+            "relative_difference": 0.6364965906427901
+          },
+          {
+            "cosine_similarity": 0.820045247624857,
+            "llama_effect_rms": 0.003807881559688221,
+            "native_effect_rms": 0.0035976046354353527,
+            "relative_difference": 0.6199695245407674
+          },
+          {
+            "cosine_similarity": 0.8124572710519209,
+            "llama_effect_rms": 0.004238726572361253,
+            "native_effect_rms": 0.003998797037881902,
+            "relative_difference": 0.63339624040248
+          },
+          {
+            "cosine_similarity": 0.7982614831990625,
+            "llama_effect_rms": 0.00437330798065064,
+            "native_effect_rms": 0.004169289352847269,
+            "relative_difference": 0.6523918680465144
+          },
+          {
+            "cosine_similarity": 0.7936754839988233,
+            "llama_effect_rms": 0.004902314299479102,
+            "native_effect_rms": 0.0046985419271593385,
+            "relative_difference": 0.6575912233284742
+          },
+          {
+            "cosine_similarity": 0.783641017262121,
+            "llama_effect_rms": 0.005023030384270569,
+            "native_effect_rms": 0.004839912264784058,
+            "relative_difference": 0.6712088654179922
+          },
+          {
+            "cosine_similarity": 0.7701151569156788,
+            "llama_effect_rms": 0.004951867501893023,
+            "native_effect_rms": 0.004805198641879454,
+            "relative_difference": 0.6890100624708536
+          },
+          {
+            "cosine_similarity": 0.7434119987121695,
+            "llama_effect_rms": 0.005370559308736987,
+            "native_effect_rms": 0.005233273965471415,
+            "relative_difference": 0.7261724400486078
+          },
+          {
+            "cosine_similarity": 0.7137115012230852,
+            "llama_effect_rms": 0.0057610995071464355,
+            "native_effect_rms": 0.005583537577494371,
+            "relative_difference": 0.7692833062626154
+          },
+          {
+            "cosine_similarity": 0.7096509564011635,
+            "llama_effect_rms": 0.005776627382972811,
+            "native_effect_rms": 0.005636065432417698,
+            "relative_difference": 0.7718824592397839
+          },
+          {
+            "cosine_similarity": 0.6897063031353535,
+            "llama_effect_rms": 0.005828096885078171,
+            "native_effect_rms": 0.00570643438395668,
+            "relative_difference": 0.7964125895454146
+          },
+          {
+            "cosine_similarity": 0.6746845275388506,
+            "llama_effect_rms": 0.005984796823706156,
+            "native_effect_rms": 0.005864917059305787,
+            "relative_difference": 0.8150752949277662
+          },
+          {
+            "cosine_similarity": 0.6625329482006589,
+            "llama_effect_rms": 0.0063263071392149015,
+            "native_effect_rms": 0.006156230254313463,
+            "relative_difference": 0.8332728283095479
+          },
+          {
+            "cosine_similarity": 0.6543107035301103,
+            "llama_effect_rms": 0.006361495488759208,
+            "native_effect_rms": 0.006184196350249886,
+            "relative_difference": 0.8438140622808711
+          },
+          {
+            "cosine_similarity": 0.6475916123656148,
+            "llama_effect_rms": 0.006734406708474346,
+            "native_effect_rms": 0.006593847298930346,
+            "relative_difference": 0.848702293981307
+          },
+          {
+            "cosine_similarity": 0.6347464405170282,
+            "llama_effect_rms": 0.006864073660188928,
+            "native_effect_rms": 0.006674317538888984,
+            "relative_difference": 0.8672279535346339
+          },
+          {
+            "cosine_similarity": 0.624073199682015,
+            "llama_effect_rms": 0.007107757829994482,
+            "native_effect_rms": 0.006871019028031831,
+            "relative_difference": 0.8825789514904929
+          },
+          {
+            "cosine_similarity": 0.6169809346866736,
+            "llama_effect_rms": 0.007367317284760634,
+            "native_effect_rms": 0.007055430746013141,
+            "relative_difference": 0.895463609691351
+          },
+          {
+            "cosine_similarity": 0.6070811415312262,
+            "llama_effect_rms": 0.007501208423709808,
+            "native_effect_rms": 0.007101689959384178,
+            "relative_difference": 0.9128040720790261
+          },
+          {
+            "cosine_similarity": 0.5796504320205681,
+            "llama_effect_rms": 0.008133069919660745,
+            "native_effect_rms": 0.007608598495765331,
+            "relative_difference": 0.9504742249311411
+          },
+          {
+            "cosine_similarity": 0.5662386369255465,
+            "llama_effect_rms": 0.008790192440325632,
+            "native_effect_rms": 0.008290143151073386,
+            "relative_difference": 0.9609832213244518
+          },
+          {
+            "cosine_similarity": 0.5478733708386051,
+            "llama_effect_rms": 0.009493578682710205,
+            "native_effect_rms": 0.008762651983718532,
+            "relative_difference": 0.9932967300881167
+          },
+          {
+            "cosine_similarity": 0.5266532891203574,
+            "llama_effect_rms": 0.010873228815680386,
+            "native_effect_rms": 0.009821422513781417,
+            "relative_difference": 1.0293428261946491
+          },
+          {
+            "cosine_similarity": 0.4984086918970211,
+            "llama_effect_rms": 0.011809170365350497,
+            "native_effect_rms": 0.01061829741145663,
+            "relative_difference": 1.0622008948833406
+          },
+          {
+            "cosine_similarity": 0.49449795223457427,
+            "llama_effect_rms": 0.012963886800992622,
+            "native_effect_rms": 0.011597868218715278,
+            "relative_difference": 1.0695581399548078
+          },
+          {
+            "cosine_similarity": 0.4898610705491362,
+            "llama_effect_rms": 0.014328095894424303,
+            "native_effect_rms": 0.0128781968083324,
+            "relative_difference": 1.0713645176599857
+          },
+          {
+            "cosine_similarity": 0.49301023723852055,
+            "llama_effect_rms": 0.016602161019761696,
+            "native_effect_rms": 0.014868933877875802,
+            "relative_difference": 1.0704036402111492
+          },
+          {
+            "cosine_similarity": 0.4890886621301041,
+            "llama_effect_rms": 0.01894534207354091,
+            "native_effect_rms": 0.017069270057393657,
+            "relative_difference": 1.0706122457806075
+          },
+          {
+            "cosine_similarity": 0.5293349435984251,
+            "llama_effect_rms": 0.021703908735289053,
+            "native_effect_rms": 0.019682412185239466,
+            "relative_difference": 1.023991493334735
+          }
+        ],
+        "logits": {
+          "cosine_similarity": 0.60144290277376,
+          "llama_effect_rms": 0.1985470969980721,
+          "native_effect_rms": 0.17841022666071152,
+          "relative_difference": 0.9485897093639963
+        }
+      },
+      "upgrades_candidate_minus_base": {
+        "layers": [
+          {
+            "cosine_similarity": NaN,
+            "llama_effect_rms": 0.0,
+            "native_effect_rms": 0.0,
+            "relative_difference": NaN
+          },
+          {
+            "cosine_similarity": NaN,
+            "llama_effect_rms": 0.0,
+            "native_effect_rms": 0.0,
+            "relative_difference": NaN
+          },
+          {
+            "cosine_similarity": 0.9969132692450468,
+            "llama_effect_rms": 0.0015852006311424137,
+            "native_effect_rms": 0.0015849739565172315,
+            "relative_difference": 0.07857712681860426
+          },
+          {
+            "cosine_similarity": 0.971637976480832,
+            "llama_effect_rms": 0.0017185506775195896,
+            "native_effect_rms": 0.0017033924229080764,
+            "relative_difference": 0.23939092771478404
+          },
+          {
+            "cosine_similarity": 0.940122436724615,
+            "llama_effect_rms": 0.0017317001906164498,
+            "native_effect_rms": 0.0017069904085098122,
+            "relative_difference": 0.34885269542680253
+          },
+          {
+            "cosine_similarity": 0.893763550291146,
+            "llama_effect_rms": 0.0017737713607056732,
+            "native_effect_rms": 0.0017542423964935555,
+            "relative_difference": 0.4636401275679479
+          },
+          {
+            "cosine_similarity": 0.8640768266314287,
+            "llama_effect_rms": 0.0017990920297005647,
+            "native_effect_rms": 0.0017315406235033069,
+            "relative_difference": 0.532891792352521
+          },
+          {
+            "cosine_similarity": 0.9696398924291075,
+            "llama_effect_rms": 0.004824580989234252,
+            "native_effect_rms": 0.004783981619450682,
+            "relative_difference": 0.24760359390069514
+          },
+          {
+            "cosine_similarity": 0.9556849702205111,
+            "llama_effect_rms": 0.004797934768723121,
+            "native_effect_rms": 0.004721966083021107,
+            "relative_difference": 0.3005242204466843
+          },
+          {
+            "cosine_similarity": 0.9420444635796343,
+            "llama_effect_rms": 0.004839601490243926,
+            "native_effect_rms": 0.0047164668068964705,
+            "relative_difference": 0.3458595174942224
+          },
+          {
+            "cosine_similarity": 0.963217681816609,
+            "llama_effect_rms": 0.007100859552629479,
+            "native_effect_rms": 0.006963882929871043,
+            "relative_difference": 0.2745878980650594
+          },
+          {
+            "cosine_similarity": 0.9558984877487144,
+            "llama_effect_rms": 0.007420482482125827,
+            "native_effect_rms": 0.00726653974729439,
+            "relative_difference": 0.3008661320140675
+          },
+          {
+            "cosine_similarity": 0.9450204877677417,
+            "llama_effect_rms": 0.007066453542944917,
+            "native_effect_rms": 0.006858322289319711,
+            "relative_difference": 0.33795996044164667
+          },
+          {
+            "cosine_similarity": 0.939762643349277,
+            "llama_effect_rms": 0.007714611807491092,
+            "native_effect_rms": 0.007377761435139805,
+            "relative_difference": 0.35785458139031423
+          },
+          {
+            "cosine_similarity": 0.9548467947141687,
+            "llama_effect_rms": 0.010177542165178074,
+            "native_effect_rms": 0.00985685635171094,
+            "relative_difference": 0.30708784638447134
+          },
+          {
+            "cosine_similarity": 0.9455109691361374,
+            "llama_effect_rms": 0.010586514050440905,
+            "native_effect_rms": 0.010179162675552834,
+            "relative_difference": 0.3390289318527797
+          },
+          {
+            "cosine_similarity": 0.940790410555618,
+            "llama_effect_rms": 0.010837059670941455,
+            "native_effect_rms": 0.010403506386516744,
+            "relative_difference": 0.35368185518910583
+          },
+          {
+            "cosine_similarity": 0.9374257585852612,
+            "llama_effect_rms": 0.010920431834653396,
+            "native_effect_rms": 0.010458195583583008,
+            "relative_difference": 0.3641886313342032
+          },
+          {
+            "cosine_similarity": 0.9293325004228833,
+            "llama_effect_rms": 0.011661850447554696,
+            "native_effect_rms": 0.011156944605042043,
+            "relative_difference": 0.38701304182017066
+          },
+          {
+            "cosine_similarity": 0.922826666878713,
+            "llama_effect_rms": 0.012455935382455124,
+            "native_effect_rms": 0.011918179821223012,
+            "relative_difference": 0.40416178911799583
+          },
+          {
+            "cosine_similarity": 0.9176810338578795,
+            "llama_effect_rms": 0.012389577241387518,
+            "native_effect_rms": 0.011850956328061879,
+            "relative_difference": 0.41735634639588476
+          },
+          {
+            "cosine_similarity": 0.9535082419080968,
+            "llama_effect_rms": 0.017555332998276434,
+            "native_effect_rms": 0.01735469775714848,
+            "relative_difference": 0.3069073787768314
+          },
+          {
+            "cosine_similarity": 0.9577025094500503,
+            "llama_effect_rms": 0.019096365081633315,
+            "native_effect_rms": 0.018883440595417793,
+            "relative_difference": 0.29270461703654627
+          },
+          {
+            "cosine_similarity": 0.9527973934331581,
+            "llama_effect_rms": 0.01947690722443438,
+            "native_effect_rms": 0.019220101737345615,
+            "relative_difference": 0.3095886197496541
+          },
+          {
+            "cosine_similarity": 0.9528588756379954,
+            "llama_effect_rms": 0.01945948559570934,
+            "native_effect_rms": 0.019053341012695502,
+            "relative_difference": 0.31104077967119353
+          },
+          {
+            "cosine_similarity": 0.9487916253510865,
+            "llama_effect_rms": 0.020076792513110193,
+            "native_effect_rms": 0.019611890289964268,
+            "relative_difference": 0.32466364659995506
+          },
+          {
+            "cosine_similarity": 0.9433011374037273,
+            "llama_effect_rms": 0.019758466959183332,
+            "native_effect_rms": 0.019196178498464837,
+            "relative_difference": 0.34289552179821337
+          },
+          {
+            "cosine_similarity": 0.9452567917537112,
+            "llama_effect_rms": 0.02137656487689605,
+            "native_effect_rms": 0.020796020011956348,
+            "relative_difference": 0.3366335805496417
+          },
+          {
+            "cosine_similarity": 0.9437264607758001,
+            "llama_effect_rms": 0.02154532968767379,
+            "native_effect_rms": 0.02092266430461063,
+            "relative_difference": 0.34173409808477495
+          },
+          {
+            "cosine_similarity": 0.9492494647384816,
+            "llama_effect_rms": 0.022943017314361533,
+            "native_effect_rms": 0.022286352545398506,
+            "relative_difference": 0.3245920008431229
+          },
+          {
+            "cosine_similarity": 0.9510884733341042,
+            "llama_effect_rms": 0.025352649294610216,
+            "native_effect_rms": 0.024659887346091897,
+            "relative_difference": 0.3183714204980547
+          },
+          {
+            "cosine_similarity": 0.9499873390168616,
+            "llama_effect_rms": 0.028384517938182714,
+            "native_effect_rms": 0.027693952076256616,
+            "relative_difference": 0.3211561933263775
+          },
+          {
+            "cosine_similarity": 0.9482750197346734,
+            "llama_effect_rms": 0.02937791294106212,
+            "native_effect_rms": 0.02862270361203985,
+            "relative_difference": 0.32691841812932004
+          },
+          {
+            "cosine_similarity": 0.9555891098992506,
+            "llama_effect_rms": 0.03611000280305149,
+            "native_effect_rms": 0.035400692368447,
+            "relative_difference": 0.3016669278838819
+          },
+          {
+            "cosine_similarity": 0.9590993845124683,
+            "llama_effect_rms": 0.040915821717924176,
+            "native_effect_rms": 0.040127439855094836,
+            "relative_difference": 0.2894725867684543
+          },
+          {
+            "cosine_similarity": 0.9598220852793331,
+            "llama_effect_rms": 0.047631602136933356,
+            "native_effect_rms": 0.04689291953588237,
+            "relative_difference": 0.28612895763969726
+          },
+          {
+            "cosine_similarity": 0.9616308025568933,
+            "llama_effect_rms": 0.054998449560650316,
+            "native_effect_rms": 0.054178394379594694,
+            "relative_difference": 0.2795157016363449
+          },
+          {
+            "cosine_similarity": 0.9668696434644749,
+            "llama_effect_rms": 0.06979315320520108,
+            "native_effect_rms": 0.06888383214225036,
+            "relative_difference": 0.25944106800484507
+          },
+          {
+            "cosine_similarity": 0.9679548881702461,
+            "llama_effect_rms": 0.08151927920492166,
+            "native_effect_rms": 0.08040153238618857,
+            "relative_difference": 0.2552929238000402
+          },
+          {
+            "cosine_similarity": 0.9670393186796398,
+            "llama_effect_rms": 0.08791419147740576,
+            "native_effect_rms": 0.08665883570507238,
+            "relative_difference": 0.25900996328921344
+          }
+        ],
+        "logits": {
+          "cosine_similarity": 0.9650669075116018,
+          "llama_effect_rms": 0.7336275584069679,
+          "native_effect_rms": 0.7234107656544159,
+          "relative_difference": 0.2665565094190152
+        }
+      }
+    },
+    {
+      "document": "calibration-v2-knowledge-00",
+      "pruning_base_minus_control": {
+        "layers": [
+          {
+            "cosine_similarity": 0.9867243930099259,
+            "llama_effect_rms": 0.000864424519022906,
+            "native_effect_rms": 0.0008651159938166504,
+            "relative_difference": 0.16288226064719205
+          },
+          {
+            "cosine_similarity": 0.9768337535421087,
+            "llama_effect_rms": 0.0015860539794526184,
+            "native_effect_rms": 0.0015701129779131567,
+            "relative_difference": 0.21657787291471237
+          },
+          {
+            "cosine_similarity": 0.9887156716820444,
+            "llama_effect_rms": 0.0032682436967214116,
+            "native_effect_rms": 0.0032574972785235513,
+            "relative_difference": 0.15051243619803353
+          },
+          {
+            "cosine_similarity": 0.9805561826567644,
+            "llama_effect_rms": 0.0035159920910641513,
+            "native_effect_rms": 0.003497860698595807,
+            "relative_difference": 0.19777785688364335
+          },
+          {
+            "cosine_similarity": 0.9748856530595342,
+            "llama_effect_rms": 0.0037364801352698673,
+            "native_effect_rms": 0.0037052659925362707,
+            "relative_difference": 0.2252172328035857
+          },
+          {
+            "cosine_similarity": 0.9748203139145087,
+            "llama_effect_rms": 0.004074525393223664,
+            "native_effect_rms": 0.004048757357958484,
+            "relative_difference": 0.22521187108539542
+          },
+          {
+            "cosine_similarity": 0.9730757514841466,
+            "llama_effect_rms": 0.004676718068154543,
+            "native_effect_rms": 0.004642328002287953,
+            "relative_difference": 0.23302849766674968
+          },
+          {
+            "cosine_similarity": 0.966534213102064,
+            "llama_effect_rms": 0.005148329366534088,
+            "native_effect_rms": 0.005114816846872081,
+            "relative_difference": 0.2596402163030128
+          },
+          {
+            "cosine_similarity": 0.9697941610031129,
+            "llama_effect_rms": 0.005992281190277965,
+            "native_effect_rms": 0.005954947768096646,
+            "relative_difference": 0.24663682183291916
+          },
+          {
+            "cosine_similarity": 0.9652792898566512,
+            "llama_effect_rms": 0.006246544361865423,
+            "native_effect_rms": 0.006200991957164296,
+            "relative_difference": 0.2645855240950314
+          },
+          {
+            "cosine_similarity": 0.9610142274471681,
+            "llama_effect_rms": 0.006719848162847569,
+            "native_effect_rms": 0.006678510829204641,
+            "relative_difference": 0.28016507498396304
+          },
+          {
+            "cosine_similarity": 0.9635646509356673,
+            "llama_effect_rms": 0.007871237203352869,
+            "native_effect_rms": 0.00780840256655437,
+            "relative_difference": 0.27114912436903893
+          },
+          {
+            "cosine_similarity": 0.9620978063057414,
+            "llama_effect_rms": 0.007953832489424512,
+            "native_effect_rms": 0.007870217131233901,
+            "relative_difference": 0.2769885003983252
+          },
+          {
+            "cosine_similarity": 0.957978073723923,
+            "llama_effect_rms": 0.008459430013689373,
+            "native_effect_rms": 0.008338132223042423,
+            "relative_difference": 0.29236636970663116
+          },
+          {
+            "cosine_similarity": 0.9515357241959895,
+            "llama_effect_rms": 0.008543533414981793,
+            "native_effect_rms": 0.008373302335186213,
+            "relative_difference": 0.3151387761786546
+          },
+          {
+            "cosine_similarity": 0.9430887171576395,
+            "llama_effect_rms": 0.008849813138408283,
+            "native_effect_rms": 0.008648518322318648,
+            "relative_difference": 0.3420723925787181
+          },
+          {
+            "cosine_similarity": 0.9367028812515679,
+            "llama_effect_rms": 0.0088964677639801,
+            "native_effect_rms": 0.008687896080981795,
+            "relative_difference": 0.3608458795308708
+          },
+          {
+            "cosine_similarity": 0.9267568052881902,
+            "llama_effect_rms": 0.008675824055690376,
+            "native_effect_rms": 0.008459222416092649,
+            "relative_difference": 0.3884493086563295
+          },
+          {
+            "cosine_similarity": 0.9256291311099053,
+            "llama_effect_rms": 0.009158705144453737,
+            "native_effect_rms": 0.009009471104886667,
+            "relative_difference": 0.38920416935189517
+          },
+          {
+            "cosine_similarity": 0.9187790327170472,
+            "llama_effect_rms": 0.009690078609977459,
+            "native_effect_rms": 0.009504139234164039,
+            "relative_difference": 0.40743429785047736
+          },
+          {
+            "cosine_similarity": 0.9180969741687154,
+            "llama_effect_rms": 0.009878052090194416,
+            "native_effect_rms": 0.009709604712528411,
+            "relative_difference": 0.40859370717332827
+          },
+          {
+            "cosine_similarity": 0.9140572665695693,
+            "llama_effect_rms": 0.00971063913936247,
+            "native_effect_rms": 0.00958234107979888,
+            "relative_difference": 0.41757168086933516
+          },
+          {
+            "cosine_similarity": 0.9140348091552745,
+            "llama_effect_rms": 0.009925880877845416,
+            "native_effect_rms": 0.009853169078016973,
+            "relative_difference": 0.4162374387020157
+          },
+          {
+            "cosine_similarity": 0.9126107585038434,
+            "llama_effect_rms": 0.010474421585051758,
+            "native_effect_rms": 0.010368172780035491,
+            "relative_difference": 0.42032672378656094
+          },
+          {
+            "cosine_similarity": 0.9156536980258572,
+            "llama_effect_rms": 0.010529758640397003,
+            "native_effect_rms": 0.010418535282019805,
+            "relative_difference": 0.4130465510571155
+          },
+          {
+            "cosine_similarity": 0.9139639957851164,
+            "llama_effect_rms": 0.011060612476925063,
+            "native_effect_rms": 0.010943408453400208,
+            "relative_difference": 0.41716855807205416
+          },
+          {
+            "cosine_similarity": 0.9154495602003675,
+            "llama_effect_rms": 0.01138594653308624,
+            "native_effect_rms": 0.011241576877443652,
+            "relative_difference": 0.4140500964052473
+          },
+          {
+            "cosine_similarity": 0.9120381468531119,
+            "llama_effect_rms": 0.011789495031914244,
+            "native_effect_rms": 0.011597682432975273,
+            "relative_difference": 0.4232101375056608
+          },
+          {
+            "cosine_similarity": 0.913595616421217,
+            "llama_effect_rms": 0.012010307207511287,
+            "native_effect_rms": 0.011798169469619734,
+            "relative_difference": 0.41980860743661536
+          },
+          {
+            "cosine_similarity": 0.9134528268680167,
+            "llama_effect_rms": 0.01193587243070931,
+            "native_effect_rms": 0.011717405870817887,
+            "relative_difference": 0.4203204088202913
+          },
+          {
+            "cosine_similarity": 0.9176499294318288,
+            "llama_effect_rms": 0.013014636143675318,
+            "native_effect_rms": 0.012816775505802111,
+            "relative_difference": 0.4092444763139189
+          },
+          {
+            "cosine_similarity": 0.912901397038164,
+            "llama_effect_rms": 0.014216706663909739,
+            "native_effect_rms": 0.013926932093841058,
+            "relative_difference": 0.42220209651990603
+          },
+          {
+            "cosine_similarity": 0.9125509798359006,
+            "llama_effect_rms": 0.015068507844070857,
+            "native_effect_rms": 0.014787233749399668,
+            "relative_difference": 0.42259515206164805
+          },
+          {
+            "cosine_similarity": 0.9061602044759002,
+            "llama_effect_rms": 0.016151981170599652,
+            "native_effect_rms": 0.015901790792748716,
+            "relative_difference": 0.43689814001424626
+          },
+          {
+            "cosine_similarity": 0.9007425345463498,
+            "llama_effect_rms": 0.017891800407044522,
+            "native_effect_rms": 0.017692905214385195,
+            "relative_difference": 0.44818847910819637
+          },
+          {
+            "cosine_similarity": 0.8949642000178314,
+            "llama_effect_rms": 0.020083236371651336,
+            "native_effect_rms": 0.019905539194993424,
+            "relative_difference": 0.46046346800805527
+          },
+          {
+            "cosine_similarity": 0.8881185965016085,
+            "llama_effect_rms": 0.02197431597715936,
+            "native_effect_rms": 0.021699615143809674,
+            "relative_difference": 0.476188757423106
+          },
+          {
+            "cosine_similarity": 0.8824172889010685,
+            "llama_effect_rms": 0.025152382606446304,
+            "native_effect_rms": 0.024830191252370695,
+            "relative_difference": 0.48824712034830825
+          },
+          {
+            "cosine_similarity": 0.8379873091191582,
+            "llama_effect_rms": 0.031080489085445858,
+            "native_effect_rms": 0.030871618558909204,
+            "relative_difference": 0.571194749109221
+          },
+          {
+            "cosine_similarity": 0.8529893281147924,
+            "llama_effect_rms": 0.037159010383842644,
+            "native_effect_rms": 0.03622822876478705,
+            "relative_difference": 0.549759470928707
+          }
+        ],
+        "logits": {
+          "cosine_similarity": 0.8515823551638844,
+          "llama_effect_rms": 0.2725527489082533,
+          "native_effect_rms": 0.27488053228997056,
+          "relative_difference": 0.5425802232795096
+        }
+      },
+      "upgrades_candidate_minus_base": {
+        "layers": [
+          {
+            "cosine_similarity": NaN,
+            "llama_effect_rms": 0.0,
+            "native_effect_rms": 0.0,
+            "relative_difference": NaN
+          },
+          {
+            "cosine_similarity": NaN,
+            "llama_effect_rms": 0.0,
+            "native_effect_rms": 0.0,
+            "relative_difference": NaN
+          },
+          {
+            "cosine_similarity": 0.9977162738411307,
+            "llama_effect_rms": 0.001805769430643982,
+            "native_effect_rms": 0.00180105430252359,
+            "relative_difference": 0.06772195845877518
+          },
+          {
+            "cosine_similarity": 0.9673537524364061,
+            "llama_effect_rms": 0.0020391372981478457,
+            "native_effect_rms": 0.0019998346537311966,
+            "relative_difference": 0.2587700202825242
+          },
+          {
+            "cosine_similarity": 0.9417548558841915,
+            "llama_effect_rms": 0.002132904792027734,
+            "native_effect_rms": 0.0020872411124322225,
+            "relative_difference": 0.3457129362502679
+          },
+          {
+            "cosine_similarity": 0.9218089147657276,
+            "llama_effect_rms": 0.002181017729589174,
+            "native_effect_rms": 0.002127189349316593,
+            "relative_difference": 0.4012228185057518
+          },
+          {
+            "cosine_similarity": 0.8942540439987774,
+            "llama_effect_rms": 0.002193902742284562,
+            "native_effect_rms": 0.0021416723004198225,
+            "relative_difference": 0.46609491610882514
+          },
+          {
+            "cosine_similarity": 0.973951877670924,
+            "llama_effect_rms": 0.005576962635130812,
+            "native_effect_rms": 0.005562722627641266,
+            "relative_difference": 0.22855231099129072
+          },
+          {
+            "cosine_similarity": 0.9665674468603629,
+            "llama_effect_rms": 0.005527867358342927,
+            "native_effect_rms": 0.0054942950929890875,
+            "relative_difference": 0.2594436638805871
+          },
+          {
+            "cosine_similarity": 0.9501360658094353,
+            "llama_effect_rms": 0.005477239386871229,
+            "native_effect_rms": 0.005458954196786738,
+            "relative_difference": 0.316343380321636
+          },
+          {
+            "cosine_similarity": 0.9678466789892842,
+            "llama_effect_rms": 0.0076971502738088044,
+            "native_effect_rms": 0.007659394512051708,
+            "relative_difference": 0.25425957157312273
+          },
+          {
+            "cosine_similarity": 0.9608344686541068,
+            "llama_effect_rms": 0.007920984085249183,
+            "native_effect_rms": 0.007857526666210254,
+            "relative_difference": 0.2811207685944063
+          },
+          {
+            "cosine_similarity": 0.9553730895175359,
+            "llama_effect_rms": 0.007513796547161325,
+            "native_effect_rms": 0.007442630964503918,
+            "relative_difference": 0.3003309597763217
+          },
+          {
+            "cosine_similarity": 0.9513384262262374,
+            "llama_effect_rms": 0.007689297179170077,
+            "native_effect_rms": 0.007612402501365369,
+            "relative_difference": 0.3137009191150965
+          },
+          {
+            "cosine_similarity": 0.9667924648627615,
+            "llama_effect_rms": 0.009825652336508015,
+            "native_effect_rms": 0.009738709234934084,
+            "relative_difference": 0.2590129297462309
+          },
+          {
+            "cosine_similarity": 0.9609134959161422,
+            "llama_effect_rms": 0.009896644089486822,
+            "native_effect_rms": 0.009813883043125474,
+            "relative_difference": 0.28089742284496405
+          },
+          {
+            "cosine_similarity": 0.9565031137247678,
+            "llama_effect_rms": 0.009872247989578056,
+            "native_effect_rms": 0.009752784507666569,
+            "relative_difference": 0.29700070007013346
+          },
+          {
+            "cosine_similarity": 0.9494042912524355,
+            "llama_effect_rms": 0.009625777697320436,
+            "native_effect_rms": 0.009449574799992672,
+            "relative_difference": 0.32159912274892316
+          },
+          {
+            "cosine_similarity": 0.9467657261446535,
+            "llama_effect_rms": 0.010207292907449813,
+            "native_effect_rms": 0.00992472473371681,
+            "relative_difference": 0.3321301455275906
+          },
+          {
+            "cosine_similarity": 0.9419571130017066,
+            "llama_effect_rms": 0.010992969883524464,
+            "native_effect_rms": 0.010582931998394555,
+            "relative_difference": 0.34940625681140686
+          },
+          {
+            "cosine_similarity": 0.937015323035294,
+            "llama_effect_rms": 0.011115240888880922,
+            "native_effect_rms": 0.010591226894089631,
+            "relative_difference": 0.36694650884475855
+          },
+          {
+            "cosine_similarity": 0.9419683450229743,
+            "llama_effect_rms": 0.01201986059672746,
+            "native_effect_rms": 0.011558840124654876,
+            "relative_difference": 0.3496902097467066
+          },
+          {
+            "cosine_similarity": 0.9545107092806658,
+            "llama_effect_rms": 0.013886194979705042,
+            "native_effect_rms": 0.01352122951340264,
+            "relative_difference": 0.30685965535143717
+          },
+          {
+            "cosine_similarity": 0.9510935362960419,
+            "llama_effect_rms": 0.014329356833300914,
+            "native_effect_rms": 0.013939502242003883,
+            "relative_difference": 0.31832484782621573
+          },
+          {
+            "cosine_similarity": 0.9570843243874387,
+            "llama_effect_rms": 0.015262368078762821,
+            "native_effect_rms": 0.014921850733275881,
+            "relative_difference": 0.2971712996423257
+          },
+          {
+            "cosine_similarity": 0.9536924625299862,
+            "llama_effect_rms": 0.015644523293914095,
+            "native_effect_rms": 0.015298834101855096,
+            "relative_difference": 0.30857471541685005
+          },
+          {
+            "cosine_similarity": 0.9509397527560924,
+            "llama_effect_rms": 0.015798279729915685,
+            "native_effect_rms": 0.015322494626198292,
+            "relative_difference": 0.31958013812153685
+          },
+          {
+            "cosine_similarity": 0.9548980712154425,
+            "llama_effect_rms": 0.017650063411525186,
+            "native_effect_rms": 0.017197978198839642,
+            "relative_difference": 0.30539493940161516
+          },
+          {
+            "cosine_similarity": 0.9535280963422315,
+            "llama_effect_rms": 0.017688817234564284,
+            "native_effect_rms": 0.017211580267767614,
+            "relative_difference": 0.31030589065765035
+          },
+          {
+            "cosine_similarity": 0.9591971562918452,
+            "llama_effect_rms": 0.019268413979486254,
+            "native_effect_rms": 0.01884316145568786,
+            "relative_difference": 0.289752790445648
+          },
+          {
+            "cosine_similarity": 0.9630121469809503,
+            "llama_effect_rms": 0.02194134805838151,
+            "native_effect_rms": 0.02157785205295734,
+            "relative_difference": 0.27478294359889455
+          },
+          {
+            "cosine_similarity": 0.9686349931938949,
+            "llama_effect_rms": 0.027231615953619285,
+            "native_effect_rms": 0.026831320769382428,
+            "relative_difference": 0.25276165610055357
+          },
+          {
+            "cosine_similarity": 0.9672495267365502,
+            "llama_effect_rms": 0.028219173119106107,
+            "native_effect_rms": 0.02787927053062158,
+            "relative_difference": 0.25777543359743277
+          },
+          {
+            "cosine_similarity": 0.9684048428213241,
+            "llama_effect_rms": 0.0320836523712899,
+            "native_effect_rms": 0.031867283362585534,
+            "relative_difference": 0.2523201477764359
+          },
+          {
+            "cosine_similarity": 0.974424017969616,
+            "llama_effect_rms": 0.039328851281584504,
+            "native_effect_rms": 0.03928252706124352,
+            "relative_difference": 0.22630438805738906
+          },
+          {
+            "cosine_similarity": 0.9761901552551308,
+            "llama_effect_rms": 0.048560642548778704,
+            "native_effect_rms": 0.04874399280009558,
+            "relative_difference": 0.21784103639657712
+          },
+          {
+            "cosine_similarity": 0.9784714149321818,
+            "llama_effect_rms": 0.05794882162714323,
+            "native_effect_rms": 0.05823032256246173,
+            "relative_difference": 0.20705649087016645
+          },
+          {
+            "cosine_similarity": 0.9803004727258865,
+            "llama_effect_rms": 0.0728125549392018,
+            "native_effect_rms": 0.0733769414506676,
+            "relative_difference": 0.19787666196535753
+          },
+          {
+            "cosine_similarity": 0.9813235512236818,
+            "llama_effect_rms": 0.09444842053455554,
+            "native_effect_rms": 0.09609615700067775,
+            "relative_difference": 0.19237054816704707
+          },
+          {
+            "cosine_similarity": 0.9808038393221302,
+            "llama_effect_rms": 0.10915044746166201,
+            "native_effect_rms": 0.11082666223429728,
+            "relative_difference": 0.1950394984316032
+          }
+        ],
+        "logits": {
+          "cosine_similarity": 0.9774764179372333,
+          "llama_effect_rms": 0.7264418110358245,
+          "native_effect_rms": 0.7365594334457732,
+          "relative_difference": 0.21122752708796172
+        }
+      }
+    },
+    {
+      "document": "calibration-v2-reasoning-00",
+      "pruning_base_minus_control": {
+        "layers": [
+          {
+            "cosine_similarity": 0.9524509525133692,
+            "llama_effect_rms": 0.0002449833550135259,
+            "native_effect_rms": 0.00024069485786920014,
+            "relative_difference": 0.31162465120981536
+          },
+          {
+            "cosine_similarity": 0.9492496434146817,
+            "llama_effect_rms": 0.0007850203435364571,
+            "native_effect_rms": 0.0007670155450908436,
+            "relative_difference": 0.32316303238394783
+          },
+          {
+            "cosine_similarity": 0.9015253872047306,
+            "llama_effect_rms": 0.0009043743544549293,
+            "native_effect_rms": 0.0008929342927189032,
+            "relative_difference": 0.44680715467009163
+          },
+          {
+            "cosine_similarity": 0.9317923349901194,
+            "llama_effect_rms": 0.001569396538416336,
+            "native_effect_rms": 0.001566987737186779,
+            "relative_difference": 0.3696314287407398
+          },
+          {
+            "cosine_similarity": 0.8969015670806747,
+            "llama_effect_rms": 0.0016843236522864193,
+            "native_effect_rms": 0.0016870843814938963,
+            "relative_difference": 0.45372031580885536
+          },
+          {
+            "cosine_similarity": 0.8606031664321675,
+            "llama_effect_rms": 0.00183043384283896,
+            "native_effect_rms": 0.0018502455592107326,
+            "relative_difference": 0.5252838328031001
+          },
+          {
+            "cosine_similarity": 0.8097200609767294,
+            "llama_effect_rms": 0.001879249918849568,
+            "native_effect_rms": 0.0019291276105855325,
+            "relative_difference": 0.6094169072378899
+          },
+          {
+            "cosine_similarity": 0.7860968743320571,
+            "llama_effect_rms": 0.0023045064338402857,
+            "native_effect_rms": 0.002302292617979329,
+            "relative_difference": 0.654384093384657
+          },
+          {
+            "cosine_similarity": 0.7773504706574881,
+            "llama_effect_rms": 0.0026179001537940186,
+            "native_effect_rms": 0.0026322012661548874,
+            "relative_difference": 0.6655142421437595
+          },
+          {
+            "cosine_similarity": 0.7513039705476299,
+            "llama_effect_rms": 0.002819088644507048,
+            "native_effect_rms": 0.002803220514690967,
+            "relative_difference": 0.7072762392930548
+          },
+          {
+            "cosine_similarity": 0.7167856300437163,
+            "llama_effect_rms": 0.0029795120499771692,
+            "native_effect_rms": 0.0029535484058126017,
+            "relative_difference": 0.7559664668091285
+          },
+          {
+            "cosine_similarity": 0.7135536445909302,
+            "llama_effect_rms": 0.0033209162994148078,
+            "native_effect_rms": 0.003272691767700202,
+            "relative_difference": 0.7625953489405128
+          },
+          {
+            "cosine_similarity": 0.7369843027853761,
+            "llama_effect_rms": 0.0034939609854267883,
+            "native_effect_rms": 0.0034515088489662617,
+            "relative_difference": 0.7298305581868415
+          },
+          {
+            "cosine_similarity": 0.7150257641210591,
+            "llama_effect_rms": 0.004033394491738641,
+            "native_effect_rms": 0.0038924141455634995,
+            "relative_difference": 0.769352595473673
+          },
+          {
+            "cosine_similarity": 0.7113926646886076,
+            "llama_effect_rms": 0.004139914724347745,
+            "native_effect_rms": 0.0040072638658384,
+            "relative_difference": 0.7729280432321908
+          },
+          {
+            "cosine_similarity": 0.7308220379088206,
+            "llama_effect_rms": 0.004860126890426395,
+            "native_effect_rms": 0.004722940324613558,
+            "relative_difference": 0.7448739429047972
+          },
+          {
+            "cosine_similarity": 0.7043260132435488,
+            "llama_effect_rms": 0.00504167273167034,
+            "native_effect_rms": 0.005007023451543631,
+            "relative_difference": 0.7716787348494957
+          },
+          {
+            "cosine_similarity": 0.6815099935999107,
+            "llama_effect_rms": 0.0049422393174536295,
+            "native_effect_rms": 0.004888364251158457,
+            "relative_difference": 0.8025719197751288
+          },
+          {
+            "cosine_similarity": 0.6840108932413748,
+            "llama_effect_rms": 0.005340693604578354,
+            "native_effect_rms": 0.005300366442176649,
+            "relative_difference": 0.7980253295007066
+          },
+          {
+            "cosine_similarity": 0.6672236640391496,
+            "llama_effect_rms": 0.005900192863648218,
+            "native_effect_rms": 0.005815208240108785,
+            "relative_difference": 0.8218836702908471
+          },
+          {
+            "cosine_similarity": 0.6596213675385959,
+            "llama_effect_rms": 0.0059643748976531364,
+            "native_effect_rms": 0.005884526764405331,
+            "relative_difference": 0.8307699423161661
+          },
+          {
+            "cosine_similarity": 0.64289236932587,
+            "llama_effect_rms": 0.0061258149462881835,
+            "native_effect_rms": 0.005999502207655082,
+            "relative_difference": 0.8542221736408893
+          },
+          {
+            "cosine_similarity": 0.6336242715866524,
+            "llama_effect_rms": 0.0061969434953437095,
+            "native_effect_rms": 0.0060926515520243335,
+            "relative_difference": 0.8634740656858975
+          },
+          {
+            "cosine_similarity": 0.6251438203550743,
+            "llama_effect_rms": 0.006570763930147011,
+            "native_effect_rms": 0.0064487968082974105,
+            "relative_difference": 0.8742136444992197
+          },
+          {
+            "cosine_similarity": 0.6192472575553652,
+            "llama_effect_rms": 0.006624025644179283,
+            "native_effect_rms": 0.006539286463449043,
+            "relative_difference": 0.8783742692162795
+          },
+          {
+            "cosine_similarity": 0.5997449879206206,
+            "llama_effect_rms": 0.007143059072684719,
+            "native_effect_rms": 0.00706792404744321,
+            "relative_difference": 0.899518087955955
+          },
+          {
+            "cosine_similarity": 0.583998883561005,
+            "llama_effect_rms": 0.00709353758575451,
+            "native_effect_rms": 0.007046610638334957,
+            "relative_difference": 0.9151979599798221
+          },
+          {
+            "cosine_similarity": 0.5798105439636074,
+            "llama_effect_rms": 0.0075042029775767875,
+            "native_effect_rms": 0.007464172218133741,
+            "relative_difference": 0.9191924020546074
+          },
+          {
+            "cosine_similarity": 0.5594098731693192,
+            "llama_effect_rms": 0.007592912911110044,
+            "native_effect_rms": 0.007514669986171901,
+            "relative_difference": 0.9436437537214011
+          },
+          {
+            "cosine_similarity": 0.5680312352929247,
+            "llama_effect_rms": 0.00747679034588093,
+            "native_effect_rms": 0.007289182670249452,
+            "relative_difference": 0.9417196153489141
+          },
+          {
+            "cosine_similarity": 0.5648646029312163,
+            "llama_effect_rms": 0.007902335703864592,
+            "native_effect_rms": 0.007640459596067864,
+            "relative_difference": 0.949354529137936
+          },
+          {
+            "cosine_similarity": 0.5534867252957222,
+            "llama_effect_rms": 0.008527091136126812,
+            "native_effect_rms": 0.008199077518793214,
+            "relative_difference": 0.9645483950971712
+          },
+          {
+            "cosine_similarity": 0.5447677705905711,
+            "llama_effect_rms": 0.009002726041894065,
+            "native_effect_rms": 0.008501365046174526,
+            "relative_difference": 0.983685062993608
+          },
+          {
+            "cosine_similarity": 0.5445572442258269,
+            "llama_effect_rms": 0.009869856721508767,
+            "native_effect_rms": 0.00924793885589394,
+            "relative_difference": 0.9882633474556767
+          },
+          {
+            "cosine_similarity": 0.5460508325347377,
+            "llama_effect_rms": 0.010351970961085654,
+            "native_effect_rms": 0.009583872604813803,
+            "relative_difference": 0.9935214863734075
+          },
+          {
+            "cosine_similarity": 0.5258196439451294,
+            "llama_effect_rms": 0.011348037242995865,
+            "native_effect_rms": 0.01021187944886438,
+            "relative_difference": 1.0325949292620724
+          },
+          {
+            "cosine_similarity": 0.5099910763188192,
+            "llama_effect_rms": 0.012334624877976668,
+            "native_effect_rms": 0.011110576498331042,
+            "relative_difference": 1.048867688691029
+          },
+          {
+            "cosine_similarity": 0.5045638313772683,
+            "llama_effect_rms": 0.013810670171473501,
+            "native_effect_rms": 0.012509498175436236,
+            "relative_difference": 1.0510740755736718
+          },
+          {
+            "cosine_similarity": 0.5118011322102344,
+            "llama_effect_rms": 0.015866193682095554,
+            "native_effect_rms": 0.014435051513279649,
+            "relative_difference": 1.040687614069731
+          },
+          {
+            "cosine_similarity": 0.4844625703816105,
+            "llama_effect_rms": 0.0174268169825843,
+            "native_effect_rms": 0.015651829852364227,
+            "relative_difference": 1.0774339440417091
+          }
+        ],
+        "logits": {
+          "cosine_similarity": 0.46627802987204486,
+          "llama_effect_rms": 0.10253427482794208,
+          "native_effect_rms": 0.09099098001786501,
+          "relative_difference": 1.1040633760732237
+        }
+      },
+      "upgrades_candidate_minus_base": {
+        "layers": [
+          {
+            "cosine_similarity": NaN,
+            "llama_effect_rms": 0.0,
+            "native_effect_rms": 0.0,
+            "relative_difference": NaN
+          },
+          {
+            "cosine_similarity": NaN,
+            "llama_effect_rms": 0.0,
+            "native_effect_rms": 0.0,
+            "relative_difference": NaN
+          },
+          {
+            "cosine_similarity": 0.996576919010908,
+            "llama_effect_rms": 0.0012521386784439547,
+            "native_effect_rms": 0.0012541119103541417,
+            "relative_difference": 0.08269138878029465
+          },
+          {
+            "cosine_similarity": 0.9504464989979482,
+            "llama_effect_rms": 0.0013914118836032064,
+            "native_effect_rms": 0.001378572080796368,
+            "relative_difference": 0.3164124154279232
+          },
+          {
+            "cosine_similarity": 0.9149793296954714,
+            "llama_effect_rms": 0.0014718763432433521,
+            "native_effect_rms": 0.0014408213533592246,
+            "relative_difference": 0.41733789250818404
+          },
+          {
+            "cosine_similarity": 0.8724476077819119,
+            "llama_effect_rms": 0.0015346978422353086,
+            "native_effect_rms": 0.0015245053629311734,
+            "relative_difference": 0.5068086952654604
+          },
+          {
+            "cosine_similarity": 0.8203718229690978,
+            "llama_effect_rms": 0.0015509067926712168,
+            "native_effect_rms": 0.0015172242531252093,
+            "relative_difference": 0.606403106843629
+          },
+          {
+            "cosine_similarity": 0.9589715887523722,
+            "llama_effect_rms": 0.004510370152590391,
+            "native_effect_rms": 0.004438603362554563,
+            "relative_difference": 0.2892144712193295
+          },
+          {
+            "cosine_similarity": 0.9275999829053987,
+            "llama_effect_rms": 0.0045762851964871116,
+            "native_effect_rms": 0.004492951755232966,
+            "relative_difference": 0.3844863320397243
+          },
+          {
+            "cosine_similarity": 0.9131485022046235,
+            "llama_effect_rms": 0.00464103141485763,
+            "native_effect_rms": 0.004579460580065984,
+            "relative_difference": 0.4197847065280721
+          },
+          {
+            "cosine_similarity": 0.9426889168166888,
+            "llama_effect_rms": 0.006419637600208392,
+            "native_effect_rms": 0.00635205505928933,
+            "relative_difference": 0.3405214893080675
+          },
+          {
+            "cosine_similarity": 0.9320218076588873,
+            "llama_effect_rms": 0.00671369105869683,
+            "native_effect_rms": 0.0066334244023252015,
+            "relative_difference": 0.371144069820579
+          },
+          {
+            "cosine_similarity": 0.9241657385043961,
+            "llama_effect_rms": 0.006225216637249646,
+            "native_effect_rms": 0.006173874982664375,
+            "relative_difference": 0.39115079750044457
+          },
+          {
+            "cosine_similarity": 0.8993964108395761,
+            "llama_effect_rms": 0.006582715271078188,
+            "native_effect_rms": 0.006505401407503299,
+            "relative_difference": 0.45137532156249593
+          },
+          {
+            "cosine_similarity": 0.9443126191135902,
+            "llama_effect_rms": 0.009102249508675171,
+            "native_effect_rms": 0.009021011271432355,
+            "relative_difference": 0.33534883232111723
+          },
+          {
+            "cosine_similarity": 0.9276355117465587,
+            "llama_effect_rms": 0.009415335195850673,
+            "native_effect_rms": 0.009315796592541448,
+            "relative_difference": 0.3826088899425552
+          },
+          {
+            "cosine_similarity": 0.9175493004285766,
+            "llama_effect_rms": 0.009386363357618258,
+            "native_effect_rms": 0.009262059010529847,
+            "relative_difference": 0.4090166596821961
+          },
+          {
+            "cosine_similarity": 0.9080075574012949,
+            "llama_effect_rms": 0.00894903802607547,
+            "native_effect_rms": 0.008806829507631921,
+            "relative_difference": 0.4326852536845273
+          },
+          {
+            "cosine_similarity": 0.8979947573857574,
+            "llama_effect_rms": 0.009182702411797748,
+            "native_effect_rms": 0.009011325497663246,
+            "relative_difference": 0.4563463906113135
+          },
+          {
+            "cosine_similarity": 0.8823714582673052,
+            "llama_effect_rms": 0.009712058924011347,
+            "native_effect_rms": 0.009529338668049952,
+            "relative_difference": 0.4900364072953437
+          },
+          {
+            "cosine_similarity": 0.8751000044393794,
+            "llama_effect_rms": 0.009656167873497667,
+            "native_effect_rms": 0.009486530482640974,
+            "relative_difference": 0.5045658113598404
+          },
+          {
+            "cosine_similarity": 0.8960480440853344,
+            "llama_effect_rms": 0.011331263146796482,
+            "native_effect_rms": 0.011154315331499956,
+            "relative_difference": 0.459840923392336
+          },
+          {
+            "cosine_similarity": 0.9074391661772148,
+            "llama_effect_rms": 0.012534825125193532,
+            "native_effect_rms": 0.01235711839163985,
+            "relative_difference": 0.43357894141914327
+          },
+          {
+            "cosine_similarity": 0.8991795167191506,
+            "llama_effect_rms": 0.012978867477796308,
+            "native_effect_rms": 0.012803899675050898,
+            "relative_difference": 0.4523087082367801
+          },
+          {
+            "cosine_similarity": 0.9067326314340481,
+            "llama_effect_rms": 0.013795451109324354,
+            "native_effect_rms": 0.013655977836979614,
+            "relative_difference": 0.43421675931818915
+          },
+          {
+            "cosine_similarity": 0.8949953445699629,
+            "llama_effect_rms": 0.01415286631468093,
+            "native_effect_rms": 0.013979191778121337,
+            "relative_difference": 0.4612729917149507
+          },
+          {
+            "cosine_similarity": 0.884932856113088,
+            "llama_effect_rms": 0.013825014789901125,
+            "native_effect_rms": 0.01365312657558933,
+            "relative_difference": 0.4828976077962081
+          },
+          {
+            "cosine_similarity": 0.8924419851880574,
+            "llama_effect_rms": 0.015887216716541006,
+            "native_effect_rms": 0.01564923608448076,
+            "relative_difference": 0.4675666736203575
+          },
+          {
+            "cosine_similarity": 0.8828466802695364,
+            "llama_effect_rms": 0.01574778237539985,
+            "native_effect_rms": 0.015454082641113883,
+            "relative_difference": 0.48899973127871554
+          },
+          {
+            "cosine_similarity": 0.9033856152893699,
+            "llama_effect_rms": 0.01644424249671503,
+            "native_effect_rms": 0.01620575058921078,
+            "relative_difference": 0.4430451395620973
+          },
+          {
+            "cosine_similarity": 0.9170397682799956,
+            "llama_effect_rms": 0.018614165442969528,
+            "native_effect_rms": 0.01838604642575142,
+            "relative_difference": 0.41004025036515646
+          },
+          {
+            "cosine_similarity": 0.9277305123440571,
+            "llama_effect_rms": 0.021420769098505706,
+            "native_effect_rms": 0.0212507771311247,
+            "relative_difference": 0.3817842053644098
+          },
+          {
+            "cosine_similarity": 0.9245897386735272,
+            "llama_effect_rms": 0.021811864494280395,
+            "native_effect_rms": 0.021655657571682186,
+            "relative_difference": 0.3898210538763527
+          },
+          {
+            "cosine_similarity": 0.9438976120807527,
+            "llama_effect_rms": 0.028004931787492294,
+            "native_effect_rms": 0.02785839617448517,
+            "relative_difference": 0.3358908193713654
+          },
+          {
+            "cosine_similarity": 0.951583994340992,
+            "llama_effect_rms": 0.0316978400101438,
+            "native_effect_rms": 0.03151271436707722,
+            "relative_difference": 0.31214640026609447
+          },
+          {
+            "cosine_similarity": 0.9571669703106267,
+            "llama_effect_rms": 0.03772631493033996,
+            "native_effect_rms": 0.03757814660734358,
+            "relative_difference": 0.29329061040436444
+          },
+          {
+            "cosine_similarity": 0.9605832947850791,
+            "llama_effect_rms": 0.043267870431626984,
+            "native_effect_rms": 0.0431152047720363,
+            "relative_difference": 0.2812918194593666
+          },
+          {
+            "cosine_similarity": 0.9652952245254679,
+            "llama_effect_rms": 0.05263855873495188,
+            "native_effect_rms": 0.052566352625376886,
+            "relative_difference": 0.2636413852441122
+          },
+          {
+            "cosine_similarity": 0.9668455850474685,
+            "llama_effect_rms": 0.061655350498005676,
+            "native_effect_rms": 0.061570560375678055,
+            "relative_difference": 0.2576859360955066
+          },
+          {
+            "cosine_similarity": 0.9660992669272548,
+            "llama_effect_rms": 0.0679002555761559,
+            "native_effect_rms": 0.06770887576237285,
+            "relative_difference": 0.26077019926680806
+          }
+        ],
+        "logits": {
+          "cosine_similarity": 0.9649985629891747,
+          "llama_effect_rms": 0.40233959001054576,
+          "native_effect_rms": 0.3998832095050859,
+          "relative_difference": 0.2654630240266139
+        }
+      }
+    },
+    {
+      "document": "calibration-v2-code-00",
+      "pruning_base_minus_control": {
+        "layers": [
+          {
+            "cosine_similarity": 0.9801213399225362,
+            "llama_effect_rms": 0.0016295431490832635,
+            "native_effect_rms": 0.0016110620359393473,
+            "relative_difference": 0.20086060929250793
+          },
+          {
+            "cosine_similarity": 0.9942802363009897,
+            "llama_effect_rms": 0.003769490331595615,
+            "native_effect_rms": 0.0037733727562237916,
+            "relative_difference": 0.10690564016934644
+          },
+          {
+            "cosine_similarity": 0.9926980187847795,
+            "llama_effect_rms": 0.004798381048956543,
+            "native_effect_rms": 0.004803592346731353,
+            "relative_difference": 0.12078615777109725
+          },
+          {
+            "cosine_similarity": 0.98889247455376,
+            "llama_effect_rms": 0.005441477307989417,
+            "native_effect_rms": 0.00544433020345181,
+            "relative_difference": 0.14900900819588866
+          },
+          {
+            "cosine_similarity": 0.9865732726697055,
+            "llama_effect_rms": 0.00579517171335656,
+            "native_effect_rms": 0.005792206662245135,
+            "relative_difference": 0.16391297411862024
+          },
+          {
+            "cosine_similarity": 0.9825893199928585,
+            "llama_effect_rms": 0.006037301008259783,
+            "native_effect_rms": 0.006019830927592185,
+            "relative_difference": 0.18689793147782566
+          },
+          {
+            "cosine_similarity": 0.9764589427470902,
+            "llama_effect_rms": 0.006612656704010914,
+            "native_effect_rms": 0.006577767469285707,
+            "relative_difference": 0.21762347549897337
+          },
+          {
+            "cosine_similarity": 0.963710144905655,
+            "llama_effect_rms": 0.007432088599493932,
+            "native_effect_rms": 0.007372797164310405,
+            "relative_difference": 0.2706068416933246
+          },
+          {
+            "cosine_similarity": 0.9577786055436877,
+            "llama_effect_rms": 0.008124460844562805,
+            "native_effect_rms": 0.00799067547864471,
+            "relative_difference": 0.293490895054215
+          },
+          {
+            "cosine_similarity": 0.9530829809489464,
+            "llama_effect_rms": 0.008654312211917292,
+            "native_effect_rms": 0.008465993393503693,
+            "relative_difference": 0.3105094178774782
+          },
+          {
+            "cosine_similarity": 0.9495425482557517,
+            "llama_effect_rms": 0.009022117740940295,
+            "native_effect_rms": 0.00882046916783294,
+            "relative_difference": 0.3220940981272667
+          },
+          {
+            "cosine_similarity": 0.9423128927956115,
+            "llama_effect_rms": 0.00993513381249219,
+            "native_effect_rms": 0.009695136701238186,
+            "relative_difference": 0.3447361470866207
+          },
+          {
+            "cosine_similarity": 0.9377557778404415,
+            "llama_effect_rms": 0.009514242368023828,
+            "native_effect_rms": 0.00929974872171263,
+            "relative_difference": 0.3576194509762272
+          },
+          {
+            "cosine_similarity": 0.9347209214376511,
+            "llama_effect_rms": 0.010524212626654627,
+            "native_effect_rms": 0.010285138406088374,
+            "relative_difference": 0.36624205892528444
+          },
+          {
+            "cosine_similarity": 0.9315339739260019,
+            "llama_effect_rms": 0.010965968242266099,
+            "native_effect_rms": 0.010757258577664153,
+            "relative_difference": 0.37411923482955156
+          },
+          {
+            "cosine_similarity": 0.9233147452158749,
+            "llama_effect_rms": 0.01233927407675836,
+            "native_effect_rms": 0.012023447967751134,
+            "relative_difference": 0.3976042683750864
+          },
+          {
+            "cosine_similarity": 0.9174800875503474,
+            "llama_effect_rms": 0.01323245340630762,
+            "native_effect_rms": 0.012833923461185948,
+            "relative_difference": 0.413677485627362
+          },
+          {
+            "cosine_similarity": 0.911273384703481,
+            "llama_effect_rms": 0.01347127847193132,
+            "native_effect_rms": 0.013069411634276669,
+            "relative_difference": 0.42878334703495846
+          },
+          {
+            "cosine_similarity": 0.9015648534429034,
+            "llama_effect_rms": 0.014577585191415922,
+            "native_effect_rms": 0.014079182726181387,
+            "relative_difference": 0.4528715601814348
+          },
+          {
+            "cosine_similarity": 0.8926884534743945,
+            "llama_effect_rms": 0.01604914546409399,
+            "native_effect_rms": 0.015492921540366782,
+            "relative_difference": 0.47288200482603965
+          },
+          {
+            "cosine_similarity": 0.8853237231924301,
+            "llama_effect_rms": 0.015960818499856682,
+            "native_effect_rms": 0.015366382817587777,
+            "relative_difference": 0.48961344971554677
+          },
+          {
+            "cosine_similarity": 0.852873380390232,
+            "llama_effect_rms": 0.016803583871972953,
+            "native_effect_rms": 0.01601944621439815,
+            "relative_difference": 0.5577209780160004
+          },
+          {
+            "cosine_similarity": 0.8486243058392298,
+            "llama_effect_rms": 0.01783169896673066,
+            "native_effect_rms": 0.017035166780817866,
+            "relative_difference": 0.5648838743592414
+          },
+          {
+            "cosine_similarity": 0.8520544154753281,
+            "llama_effect_rms": 0.01945819792421683,
+            "native_effect_rms": 0.018756420701586653,
+            "relative_difference": 0.5553034601520145
+          },
+          {
+            "cosine_similarity": 0.8523729355801585,
+            "llama_effect_rms": 0.019566617601066545,
+            "native_effect_rms": 0.01894272392692719,
+            "relative_difference": 0.5532299024213585
+          },
+          {
+            "cosine_similarity": 0.8498861046959844,
+            "llama_effect_rms": 0.020926875106992673,
+            "native_effect_rms": 0.020195461336750306,
+            "relative_difference": 0.5589389185388994
+          },
+          {
+            "cosine_similarity": 0.8506538225539285,
+            "llama_effect_rms": 0.02137029097913095,
+            "native_effect_rms": 0.02064833140379621,
+            "relative_difference": 0.5570983016523836
+          },
+          {
+            "cosine_similarity": 0.8431609066273996,
+            "llama_effect_rms": 0.022444400948083185,
+            "native_effect_rms": 0.02174010989579154,
+            "relative_difference": 0.5699908588319571
+          },
+          {
+            "cosine_similarity": 0.8342990455102732,
+            "llama_effect_rms": 0.02268461590922978,
+            "native_effect_rms": 0.021857955426522958,
+            "relative_difference": 0.587678265661728
+          },
+          {
+            "cosine_similarity": 0.8233871348176434,
+            "llama_effect_rms": 0.021698762691688113,
+            "native_effect_rms": 0.020946554213592136,
+            "relative_difference": 0.6059702582967482
+          },
+          {
+            "cosine_similarity": 0.812775837352096,
+            "llama_effect_rms": 0.023015943619936505,
+            "native_effect_rms": 0.022119282812157918,
+            "relative_difference": 0.6255164434533456
+          },
+          {
+            "cosine_similarity": 0.8076383472134138,
+            "llama_effect_rms": 0.024452085849203546,
+            "native_effect_rms": 0.023668652863407184,
+            "relative_difference": 0.6313107538777162
+          },
+          {
+            "cosine_similarity": 0.7857529970771991,
+            "llama_effect_rms": 0.024795669301522265,
+            "native_effect_rms": 0.02402722553519807,
+            "relative_difference": 0.6657484906091694
+          },
+          {
+            "cosine_similarity": 0.7845385623073853,
+            "llama_effect_rms": 0.026607342671930517,
+            "native_effect_rms": 0.025643458940661237,
+            "relative_difference": 0.6697262207713838
+          },
+          {
+            "cosine_similarity": 0.7871380371195247,
+            "llama_effect_rms": 0.029366657542410336,
+            "native_effect_rms": 0.028371885299825227,
+            "relative_difference": 0.664740515508631
+          },
+          {
+            "cosine_similarity": 0.7534241627341146,
+            "llama_effect_rms": 0.03263259459160495,
+            "native_effect_rms": 0.031334908775147656,
+            "relative_difference": 0.7178369207246162
+          },
+          {
+            "cosine_similarity": 0.6899920311191605,
+            "llama_effect_rms": 0.036799704462071446,
+            "native_effect_rms": 0.03519207693472261,
+            "relative_difference": 0.8064899309379502
+          },
+          {
+            "cosine_similarity": 0.7067403356653252,
+            "llama_effect_rms": 0.040817337220245935,
+            "native_effect_rms": 0.03875956294326523,
+            "relative_difference": 0.7877034388929719
+          },
+          {
+            "cosine_similarity": 0.726387438317408,
+            "llama_effect_rms": 0.04574819674037626,
+            "native_effect_rms": 0.04380962730223706,
+            "relative_difference": 0.7572303495215504
+          },
+          {
+            "cosine_similarity": 0.7392094793852164,
+            "llama_effect_rms": 0.05160569496509879,
+            "native_effect_rms": 0.050349952777016975,
+            "relative_difference": 0.7315814643953842
+          }
+        ],
+        "logits": {
+          "cosine_similarity": 0.6867256256710352,
+          "llama_effect_rms": 0.30930843206959957,
+          "native_effect_rms": 0.30131294113416685,
+          "relative_difference": 0.802420506258494
+        }
+      },
+      "upgrades_candidate_minus_base": {
+        "layers": [
+          {
+            "cosine_similarity": NaN,
+            "llama_effect_rms": 0.0,
+            "native_effect_rms": 0.0,
+            "relative_difference": NaN
+          },
+          {
+            "cosine_similarity": NaN,
+            "llama_effect_rms": 0.0,
+            "native_effect_rms": 0.0,
+            "relative_difference": NaN
+          },
+          {
+            "cosine_similarity": 0.9967987294962449,
+            "llama_effect_rms": 0.0016083300287431654,
+            "native_effect_rms": 0.0016104564373706745,
+            "relative_difference": 0.07997393723840712
+          },
+          {
+            "cosine_similarity": 0.9601319158198186,
+            "llama_effect_rms": 0.0018312423945013357,
+            "native_effect_rms": 0.0018524370191808368,
+            "relative_difference": 0.2809889249413909
+          },
+          {
+            "cosine_similarity": 0.9332167570177772,
+            "llama_effect_rms": 0.002026590153646233,
+            "native_effect_rms": 0.0020220397037685293,
+            "relative_difference": 0.36588540804013947
+          },
+          {
+            "cosine_similarity": 0.8914987535127832,
+            "llama_effect_rms": 0.0023159617495287018,
+            "native_effect_rms": 0.002286687104366222,
+            "relative_difference": 0.46898240978237504
+          },
+          {
+            "cosine_similarity": 0.8331547345711333,
+            "llama_effect_rms": 0.0024297017376153237,
+            "native_effect_rms": 0.0023854188911004545,
+            "relative_difference": 0.583292185033543
+          },
+          {
+            "cosine_similarity": 0.9211672840609524,
+            "llama_effect_rms": 0.005237122058401206,
+            "native_effect_rms": 0.005176489523745015,
+            "relative_difference": 0.3995614751146237
+          },
+          {
+            "cosine_similarity": 0.9086542342107037,
+            "llama_effect_rms": 0.005519438383211574,
+            "native_effect_rms": 0.005476482445211698,
+            "relative_difference": 0.4291690048005692
+          },
+          {
+            "cosine_similarity": 0.8971504646363127,
+            "llama_effect_rms": 0.0056839997077558725,
+            "native_effect_rms": 0.005619643472744872,
+            "relative_difference": 0.4562739176862455
+          },
+          {
+            "cosine_similarity": 0.9285620378136441,
+            "llama_effect_rms": 0.007478835132856489,
+            "native_effect_rms": 0.007403776650463905,
+            "relative_difference": 0.3800357317215713
+          },
+          {
+            "cosine_similarity": 0.9187066096554724,
+            "llama_effect_rms": 0.008091286808047762,
+            "native_effect_rms": 0.008016989755194345,
+            "relative_difference": 0.4051906109538672
+          },
+          {
+            "cosine_similarity": 0.9060821728929633,
+            "llama_effect_rms": 0.0075084514063408795,
+            "native_effect_rms": 0.007451655020925112,
+            "relative_difference": 0.43511542024465216
+          },
+          {
+            "cosine_similarity": 0.8937582738167458,
+            "llama_effect_rms": 0.008026840336771847,
+            "native_effect_rms": 0.007988662268009284,
+            "relative_difference": 0.46208414452845875
+          },
+          {
+            "cosine_similarity": 0.9216253738539911,
+            "llama_effect_rms": 0.010223514162198456,
+            "native_effect_rms": 0.010209721258256456,
+            "relative_difference": 0.3961853594284669
+          },
+          {
+            "cosine_similarity": 0.9127792388894741,
+            "llama_effect_rms": 0.011204275539710427,
+            "native_effect_rms": 0.011126820656270344,
+            "relative_difference": 0.4191709478762447
+          },
+          {
+            "cosine_similarity": 0.9044686354512802,
+            "llama_effect_rms": 0.011651005983025318,
+            "native_effect_rms": 0.011654695295503828,
+            "relative_difference": 0.43703815404286134
+          },
+          {
+            "cosine_similarity": 0.8953853165124838,
+            "llama_effect_rms": 0.011612605551017221,
+            "native_effect_rms": 0.011631568396453492,
+            "relative_difference": 0.45704586202715025
+          },
+          {
+            "cosine_similarity": 0.8912574097591722,
+            "llama_effect_rms": 0.012521424596912458,
+            "native_effect_rms": 0.01254938316511,
+            "relative_difference": 0.4658386117797938
+          },
+          {
+            "cosine_similarity": 0.8826563212205936,
+            "llama_effect_rms": 0.013700648022162856,
+            "native_effect_rms": 0.013716649866593496,
+            "relative_difference": 0.48416415835051
+          },
+          {
+            "cosine_similarity": 0.8848304978601889,
+            "llama_effect_rms": 0.014031182440620576,
+            "native_effect_rms": 0.013999292173168603,
+            "relative_difference": 0.48048819319511055
+          },
+          {
+            "cosine_similarity": 0.9040310792246697,
+            "llama_effect_rms": 0.017199990760806853,
+            "native_effect_rms": 0.017733099097428564,
+            "relative_difference": 0.43251752765506996
+          },
+          {
+            "cosine_similarity": 0.942942662134282,
+            "llama_effect_rms": 0.024331016756767656,
+            "native_effect_rms": 0.024781980080428662,
+            "relative_difference": 0.3352152206013724
+          },
+          {
+            "cosine_similarity": 0.935362865413655,
+            "llama_effect_rms": 0.024913584823769923,
+            "native_effect_rms": 0.024724379240296506,
+            "relative_difference": 0.3610015437027362
+          },
+          {
+            "cosine_similarity": 0.9339349052034951,
+            "llama_effect_rms": 0.025103781327713556,
+            "native_effect_rms": 0.024887506839973383,
+            "relative_difference": 0.36517657287354166
+          },
+          {
+            "cosine_similarity": 0.9279530328010339,
+            "llama_effect_rms": 0.025705491004363267,
+            "native_effect_rms": 0.025478102197390207,
+            "relative_difference": 0.381391672296524
+          },
+          {
+            "cosine_similarity": 0.9284449571403363,
+            "llama_effect_rms": 0.026148326580969945,
+            "native_effect_rms": 0.025947739738994842,
+            "relative_difference": 0.3798369988121758
+          },
+          {
+            "cosine_similarity": 0.919619435923296,
+            "llama_effect_rms": 0.026651687147820066,
+            "native_effect_rms": 0.026349011635650534,
+            "relative_difference": 0.4034101798312463
+          },
+          {
+            "cosine_similarity": 0.905297930086801,
+            "llama_effect_rms": 0.024979639472206116,
+            "native_effect_rms": 0.024868760778573685,
+            "relative_difference": 0.4361977612989375
+          },
+          {
+            "cosine_similarity": 0.9080791057905712,
+            "llama_effect_rms": 0.024801522705201456,
+            "native_effect_rms": 0.02474226673769542,
+            "relative_difference": 0.4292875634105635
+          },
+          {
+            "cosine_similarity": 0.920929056591582,
+            "llama_effect_rms": 0.02806474426253972,
+            "native_effect_rms": 0.02828955511250632,
+            "relative_difference": 0.3961670347852442
+          },
+          {
+            "cosine_similarity": 0.9050511414743887,
+            "llama_effect_rms": 0.028733439353019887,
+            "native_effect_rms": 0.028601948255563805,
+            "relative_difference": 0.43679728083330294
+          },
+          {
+            "cosine_similarity": 0.8981833818194213,
+            "llama_effect_rms": 0.029043480478894615,
+            "native_effect_rms": 0.02883505072210138,
+            "relative_difference": 0.45294306164023784
+          },
+          {
+            "cosine_similarity": 0.9084409289841161,
+            "llama_effect_rms": 0.03312552812928897,
+            "native_effect_rms": 0.03286886973861277,
+            "relative_difference": 0.4296614990063096
+          },
+          {
+            "cosine_similarity": 0.921842690496323,
+            "llama_effect_rms": 0.03854640116629124,
+            "native_effect_rms": 0.03845988510462943,
+            "relative_difference": 0.39581727007964074
+          },
+          {
+            "cosine_similarity": 0.9205340309449247,
+            "llama_effect_rms": 0.04574913224427448,
+            "native_effect_rms": 0.045004103742302605,
+            "relative_difference": 0.4022897746294941
+          },
+          {
+            "cosine_similarity": 0.9215409273021244,
+            "llama_effect_rms": 0.05443041770697332,
+            "native_effect_rms": 0.05340540587496835,
+            "relative_difference": 0.4003726432634003
+          },
+          {
+            "cosine_similarity": 0.9280801795326157,
+            "llama_effect_rms": 0.06453326894217747,
+            "native_effect_rms": 0.06348798799955521,
+            "relative_difference": 0.3827256472079717
+          },
+          {
+            "cosine_similarity": 0.9308931343029344,
+            "llama_effect_rms": 0.07589686062654866,
+            "native_effect_rms": 0.074828235119165,
+            "relative_difference": 0.3746885592235336
+          },
+          {
+            "cosine_similarity": 0.9374945072546905,
+            "llama_effect_rms": 0.09085568862969126,
+            "native_effect_rms": 0.09014733153340727,
+            "relative_difference": 0.35504230419201316
+          }
+        ],
+        "logits": {
+          "cosine_similarity": 0.9279174797719923,
+          "llama_effect_rms": 0.534308948375008,
+          "native_effect_rms": 0.5311204843596399,
+          "relative_difference": 0.3808760200465301
+        }
+      }
+    },
+    {
+      "document": "calibration-v2-multilingual-00",
+      "pruning_base_minus_control": {
+        "layers": [
+          {
+            "cosine_similarity": 0.9493266372548553,
+            "llama_effect_rms": 0.00044187248980965475,
+            "native_effect_rms": 0.0004408404310241084,
+            "relative_difference": 0.3187310320676041
+          },
+          {
+            "cosine_similarity": 0.9159128474518147,
+            "llama_effect_rms": 0.0008610325616052638,
+            "native_effect_rms": 0.0008704472741508847,
+            "relative_difference": 0.40801020241315433
+          },
+          {
+            "cosine_similarity": 0.9288267738701295,
+            "llama_effect_rms": 0.0013101604467188773,
+            "native_effect_rms": 0.0013121079135976577,
+            "relative_difference": 0.37701111475335325
+          },
+          {
+            "cosine_similarity": 0.8967872689702974,
+            "llama_effect_rms": 0.0015994177911732759,
+            "native_effect_rms": 0.0015870534008301648,
+            "relative_difference": 0.45617362327939015
+          },
+          {
+            "cosine_similarity": 0.8874261398738302,
+            "llama_effect_rms": 0.0020202761451792732,
+            "native_effect_rms": 0.0019731183643443614,
+            "relative_difference": 0.4807286091094055
+          },
+          {
+            "cosine_similarity": 0.883053914059487,
+            "llama_effect_rms": 0.0022230760448403697,
+            "native_effect_rms": 0.002184540495607563,
+            "relative_difference": 0.48818974876558074
+          },
+          {
+            "cosine_similarity": 0.8754619899700392,
+            "llama_effect_rms": 0.0025189063396765556,
+            "native_effect_rms": 0.002508451495408968,
+            "relative_difference": 0.5001314846919113
+          },
+          {
+            "cosine_similarity": 0.8385536044752264,
+            "llama_effect_rms": 0.002799865336579363,
+            "native_effect_rms": 0.0027771399671512446,
+            "relative_difference": 0.57061544694166
+          },
+          {
+            "cosine_similarity": 0.8103475583179237,
+            "llama_effect_rms": 0.003058285429725692,
+            "native_effect_rms": 0.0029886571405931314,
+            "relative_difference": 0.6234456828227266
+          },
+          {
+            "cosine_similarity": 0.7841892474138079,
+            "llama_effect_rms": 0.0032343501404374824,
+            "native_effect_rms": 0.0031501398557472423,
+            "relative_difference": 0.6662389405899415
+          },
+          {
+            "cosine_similarity": 0.7917487335966361,
+            "llama_effect_rms": 0.00360538864034279,
+            "native_effect_rms": 0.0034695719384049595,
+            "relative_difference": 0.659043928323739
+          },
+          {
+            "cosine_similarity": 0.8662849546244747,
+            "llama_effect_rms": 0.0049254182043905114,
+            "native_effect_rms": 0.0048139664148146724,
+            "relative_difference": 0.523600584091571
+          },
+          {
+            "cosine_similarity": 0.865520550407047,
+            "llama_effect_rms": 0.004956499486613235,
+            "native_effect_rms": 0.004833841701166911,
+            "relative_difference": 0.5257637865009455
+          },
+          {
+            "cosine_similarity": 0.8616181545443551,
+            "llama_effect_rms": 0.005320571954176452,
+            "native_effect_rms": 0.005220054914425446,
+            "relative_difference": 0.5314732596138358
+          },
+          {
+            "cosine_similarity": 0.855591789218224,
+            "llama_effect_rms": 0.005299415559425599,
+            "native_effect_rms": 0.005296814143445654,
+            "relative_difference": 0.5375486105688445
+          },
+          {
+            "cosine_similarity": 0.8573324942929705,
+            "llama_effect_rms": 0.005683452440118159,
+            "native_effect_rms": 0.005614245192796343,
+            "relative_difference": 0.5375912161674338
+          },
+          {
+            "cosine_similarity": 0.85656844967964,
+            "llama_effect_rms": 0.00577712294099054,
+            "native_effect_rms": 0.005714111236728255,
+            "relative_difference": 0.5386539275812406
+          },
+          {
+            "cosine_similarity": 0.8480797643217929,
+            "llama_effect_rms": 0.0056788294072575565,
+            "native_effect_rms": 0.005593185853890502,
+            "relative_difference": 0.5556324102793797
+          },
+          {
+            "cosine_similarity": 0.8414852432756592,
+            "llama_effect_rms": 0.0060307648976302385,
+            "native_effect_rms": 0.006069164036243201,
+            "relative_difference": 0.5613053730619236
+          },
+          {
+            "cosine_similarity": 0.8426235566705901,
+            "llama_effect_rms": 0.006625002980836118,
+            "native_effect_rms": 0.006779589712469351,
+            "relative_difference": 0.555063853100543
+          },
+          {
+            "cosine_similarity": 0.8351501137573675,
+            "llama_effect_rms": 0.006792598621296138,
+            "native_effect_rms": 0.006999179848741937,
+            "relative_difference": 0.5664272258055325
+          },
+          {
+            "cosine_similarity": 0.8203562152126067,
+            "llama_effect_rms": 0.00670269626011468,
+            "native_effect_rms": 0.0068632940618282975,
+            "relative_difference": 0.5928135876950399
+          },
+          {
+            "cosine_similarity": 0.8122730423623468,
+            "llama_effect_rms": 0.006839357280359,
+            "native_effect_rms": 0.007121467676510652,
+            "relative_difference": 0.6017889405167216
+          },
+          {
+            "cosine_similarity": 0.8184722621845791,
+            "llama_effect_rms": 0.007344181834625659,
+            "native_effect_rms": 0.007530582019788419,
+            "relative_difference": 0.5955515544199914
+          },
+          {
+            "cosine_similarity": 0.8219191486896086,
+            "llama_effect_rms": 0.007433521418869205,
+            "native_effect_rms": 0.007565530563416079,
+            "relative_difference": 0.5918205648962528
+          },
+          {
+            "cosine_similarity": 0.8198231302965788,
+            "llama_effect_rms": 0.007894010196958042,
+            "native_effect_rms": 0.008045583779980853,
+            "relative_difference": 0.5949116150519936
+          },
+          {
+            "cosine_similarity": 0.8239829643225165,
+            "llama_effect_rms": 0.008117836095622865,
+            "native_effect_rms": 0.008349842290616924,
+            "relative_difference": 0.5856830235033185
+          },
+          {
+            "cosine_similarity": 0.8218732454004478,
+            "llama_effect_rms": 0.00850107530460479,
+            "native_effect_rms": 0.008745820563039255,
+            "relative_difference": 0.5891240439626253
+          },
+          {
+            "cosine_similarity": 0.818427410772108,
+            "llama_effect_rms": 0.008511766684586456,
+            "native_effect_rms": 0.00871956376470903,
+            "relative_difference": 0.595868224058013
+          },
+          {
+            "cosine_similarity": 0.8208875283772222,
+            "llama_effect_rms": 0.008394337533827389,
+            "native_effect_rms": 0.008558034609453735,
+            "relative_difference": 0.5930756568023351
+          },
+          {
+            "cosine_similarity": 0.8199122974218254,
+            "llama_effect_rms": 0.008910392873558505,
+            "native_effect_rms": 0.00908030421797509,
+            "relative_difference": 0.5947990562588862
+          },
+          {
+            "cosine_similarity": 0.823697827083811,
+            "llama_effect_rms": 0.009842715378225165,
+            "native_effect_rms": 0.010012895474393262,
+            "relative_difference": 0.5889824419818921
+          },
+          {
+            "cosine_similarity": 0.8231203994191916,
+            "llama_effect_rms": 0.010368880306220246,
+            "native_effect_rms": 0.01053839665584205,
+            "relative_difference": 0.5901927831096178
+          },
+          {
+            "cosine_similarity": 0.8231800830315901,
+            "llama_effect_rms": 0.011363781668363986,
+            "native_effect_rms": 0.011400327233438578,
+            "relative_difference": 0.5937309671595101
+          },
+          {
+            "cosine_similarity": 0.8331394475782559,
+            "llama_effect_rms": 0.012979807783887562,
+            "native_effect_rms": 0.01290950362098664,
+            "relative_difference": 0.5792824720004462
+          },
+          {
+            "cosine_similarity": 0.8212190676035357,
+            "llama_effect_rms": 0.014170581971549944,
+            "native_effect_rms": 0.0140494882870205,
+            "relative_difference": 0.6005980421308874
+          },
+          {
+            "cosine_similarity": 0.8173868342510889,
+            "llama_effect_rms": 0.015821244857010554,
+            "native_effect_rms": 0.01576233051071664,
+            "relative_difference": 0.6054794762390469
+          },
+          {
+            "cosine_similarity": 0.8205899973223759,
+            "llama_effect_rms": 0.018428715431575496,
+            "native_effect_rms": 0.01839899057440842,
+            "relative_difference": 0.5995017216464333
+          },
+          {
+            "cosine_similarity": 0.8337715009165065,
+            "llama_effect_rms": 0.024016067403184745,
+            "native_effect_rms": 0.02364164883313435,
+            "relative_difference": 0.5813544694945921
+          },
+          {
+            "cosine_similarity": 0.8139078160275776,
+            "llama_effect_rms": 0.027591251536784794,
+            "native_effect_rms": 0.02701936489198166,
+            "relative_difference": 0.6168548788480458
+          }
+        ],
+        "logits": {
+          "cosine_similarity": 0.8192099426922594,
+          "llama_effect_rms": 0.18195781443584613,
+          "native_effect_rms": 0.17830281639305642,
+          "relative_difference": 0.6077929610582617
+        }
+      },
+      "upgrades_candidate_minus_base": {
+        "layers": [
+          {
+            "cosine_similarity": NaN,
+            "llama_effect_rms": 0.0,
+            "native_effect_rms": 0.0,
+            "relative_difference": NaN
+          },
+          {
+            "cosine_similarity": NaN,
+            "llama_effect_rms": 0.0,
+            "native_effect_rms": 0.0,
+            "relative_difference": NaN
+          },
+          {
+            "cosine_similarity": 0.9981049805386016,
+            "llama_effect_rms": 0.002120091854891297,
+            "native_effect_rms": 0.0021113173044967244,
+            "relative_difference": 0.06183091603097388
+          },
+          {
+            "cosine_similarity": 0.9804793390281582,
+            "llama_effect_rms": 0.002321121137178591,
+            "native_effect_rms": 0.0022943420160308338,
+            "relative_difference": 0.1990809782584558
+          },
+          {
+            "cosine_similarity": 0.9520946024024176,
+            "llama_effect_rms": 0.0024903911847916735,
+            "native_effect_rms": 0.002451683207454052,
+            "relative_difference": 0.31236638533853983
+          },
+          {
+            "cosine_similarity": 0.9342860188834287,
+            "llama_effect_rms": 0.002578111475249794,
+            "native_effect_rms": 0.0025206376775911295,
+            "relative_difference": 0.36734804835538776
+          },
+          {
+            "cosine_similarity": 0.9159192505741998,
+            "llama_effect_rms": 0.002730922713163335,
+            "native_effect_rms": 0.0026558085409186245,
+            "relative_difference": 0.4167943539382727
+          },
+          {
+            "cosine_similarity": 0.954465653429825,
+            "llama_effect_rms": 0.005262271298443881,
+            "native_effect_rms": 0.005195655250709124,
+            "relative_difference": 0.3039748677390887
+          },
+          {
+            "cosine_similarity": 0.9396439637133976,
+            "llama_effect_rms": 0.005390051057078145,
+            "native_effect_rms": 0.00530897284768412,
+            "relative_difference": 0.3504123417509028
+          },
+          {
+            "cosine_similarity": 0.925070584282901,
+            "llama_effect_rms": 0.005432494155070158,
+            "native_effect_rms": 0.005353736713760344,
+            "relative_difference": 0.3902304088991243
+          },
+          {
+            "cosine_similarity": 0.9552948404374758,
+            "llama_effect_rms": 0.007758693260777243,
+            "native_effect_rms": 0.007686936627485187,
+            "relative_difference": 0.3005529799251677
+          },
+          {
+            "cosine_similarity": 0.9464306834962359,
+            "llama_effect_rms": 0.007906407495962465,
+            "native_effect_rms": 0.007816117568225745,
+            "relative_difference": 0.32940813008500164
+          },
+          {
+            "cosine_similarity": 0.9326692546896874,
+            "llama_effect_rms": 0.007483801311713935,
+            "native_effect_rms": 0.007389058361451318,
+            "relative_difference": 0.3695301524488977
+          },
+          {
+            "cosine_similarity": 0.923340896262097,
+            "llama_effect_rms": 0.0077540962086356385,
+            "native_effect_rms": 0.007664416816666915,
+            "relative_difference": 0.3940165634580999
+          },
+          {
+            "cosine_similarity": 0.9386285518187995,
+            "llama_effect_rms": 0.00914735421674918,
+            "native_effect_rms": 0.009049063525524932,
+            "relative_difference": 0.3524118456669443
+          },
+          {
+            "cosine_similarity": 0.9318471887388867,
+            "llama_effect_rms": 0.009211125743260351,
+            "native_effect_rms": 0.009105533865538968,
+            "relative_difference": 0.3715114556484137
+          },
+          {
+            "cosine_similarity": 0.9280128360461737,
+            "llama_effect_rms": 0.009146076457050175,
+            "native_effect_rms": 0.009050631036510721,
+            "relative_difference": 0.3815807294187248
+          },
+          {
+            "cosine_similarity": 0.9252825799235389,
+            "llama_effect_rms": 0.008916215592694414,
+            "native_effect_rms": 0.008814960275313992,
+            "relative_difference": 0.3889515492261272
+          },
+          {
+            "cosine_similarity": 0.918952468183737,
+            "llama_effect_rms": 0.009233118857067835,
+            "native_effect_rms": 0.009130294508921942,
+            "relative_difference": 0.40502764113588746
+          },
+          {
+            "cosine_similarity": 0.9114682407936875,
+            "llama_effect_rms": 0.009645580956317464,
+            "native_effect_rms": 0.009515242195315425,
+            "relative_difference": 0.42388270504107495
+          },
+          {
+            "cosine_similarity": 0.9047413114009237,
+            "llama_effect_rms": 0.009798704670665343,
+            "native_effect_rms": 0.009588424995506089,
+            "relative_difference": 0.44178782575813386
+          },
+          {
+            "cosine_similarity": 0.9237398345544757,
+            "llama_effect_rms": 0.011429826635744345,
+            "native_effect_rms": 0.01114702678466487,
+            "relative_difference": 0.39627440568687256
+          },
+          {
+            "cosine_similarity": 0.9315025329398988,
+            "llama_effect_rms": 0.012856308927503099,
+            "native_effect_rms": 0.012603827774457687,
+            "relative_difference": 0.3743534634228744
+          },
+          {
+            "cosine_similarity": 0.9260292535575146,
+            "llama_effect_rms": 0.013192006412920074,
+            "native_effect_rms": 0.012923520521662277,
+            "relative_difference": 0.3891613732046374
+          },
+          {
+            "cosine_similarity": 0.9322784778571291,
+            "llama_effect_rms": 0.01408599542523294,
+            "native_effect_rms": 0.013823583415595834,
+            "relative_difference": 0.371987231511284
+          },
+          {
+            "cosine_similarity": 0.9279186385765924,
+            "llama_effect_rms": 0.014403688003723335,
+            "native_effect_rms": 0.01413218355295225,
+            "relative_difference": 0.38379869527108157
+          },
+          {
+            "cosine_similarity": 0.912487320781555,
+            "llama_effect_rms": 0.014171303873472263,
+            "native_effect_rms": 0.013926181073068757,
+            "relative_difference": 0.4223930599065217
+          },
+          {
+            "cosine_similarity": 0.9188515196381896,
+            "llama_effect_rms": 0.015910074287593817,
+            "native_effect_rms": 0.015765856005265547,
+            "relative_difference": 0.4048027300301759
+          },
+          {
+            "cosine_similarity": 0.9202906724611635,
+            "llama_effect_rms": 0.01581928452898365,
+            "native_effect_rms": 0.015635847326822966,
+            "relative_difference": 0.40177924863765674
+          },
+          {
+            "cosine_similarity": 0.9356768482115799,
+            "llama_effect_rms": 0.017085721683370674,
+            "native_effect_rms": 0.01689538382906884,
+            "relative_difference": 0.3608635559576522
+          },
+          {
+            "cosine_similarity": 0.9459699930799751,
+            "llama_effect_rms": 0.019380646935794187,
+            "native_effect_rms": 0.019201578908596164,
+            "relative_difference": 0.3303857092642369
+          },
+          {
+            "cosine_similarity": 0.9555885628241908,
+            "llama_effect_rms": 0.022830382290431852,
+            "native_effect_rms": 0.02265745945564202,
+            "relative_difference": 0.2992641358823569
+          },
+          {
+            "cosine_similarity": 0.9526361187128782,
+            "llama_effect_rms": 0.023604969365695585,
+            "native_effect_rms": 0.02342153380943257,
+            "relative_difference": 0.30908089830316354
+          },
+          {
+            "cosine_similarity": 0.9607171999870687,
+            "llama_effect_rms": 0.02778474148901388,
+            "native_effect_rms": 0.027520625785532025,
+            "relative_difference": 0.28180081159242654
+          },
+          {
+            "cosine_similarity": 0.9663151007167426,
+            "llama_effect_rms": 0.03332408220870519,
+            "native_effect_rms": 0.032977134928034176,
+            "relative_difference": 0.2611307600327178
+          },
+          {
+            "cosine_similarity": 0.9688655291866162,
+            "llama_effect_rms": 0.04008327327569434,
+            "native_effect_rms": 0.03964465596692369,
+            "relative_difference": 0.2511578657436255
+          },
+          {
+            "cosine_similarity": 0.9746687066187216,
+            "llama_effect_rms": 0.05001440631638085,
+            "native_effect_rms": 0.04961385567833587,
+            "relative_difference": 0.226134436491955
+          },
+          {
+            "cosine_similarity": 0.9791041460816746,
+            "llama_effect_rms": 0.06424830083278504,
+            "native_effect_rms": 0.06395758524047362,
+            "relative_difference": 0.20494470166795037
+          },
+          {
+            "cosine_similarity": 0.9832761973296809,
+            "llama_effect_rms": 0.09152169234856909,
+            "native_effect_rms": 0.09110194755735031,
+            "relative_difference": 0.18336559316858833
+          },
+          {
+            "cosine_similarity": 0.9826029140213782,
+            "llama_effect_rms": 0.10573883713766348,
+            "native_effect_rms": 0.10573822713062352,
+            "relative_difference": 0.18653249775619724
+          }
+        ],
+        "logits": {
+          "cosine_similarity": 0.9822449812165209,
+          "llama_effect_rms": 0.6526741141502692,
+          "native_effect_rms": 0.6536044419526265,
+          "relative_difference": 0.18831229190991247
+        }
+      }
+    }
+  ],
+  "elapsed_seconds": 3079.0456804519054,
+  "environment": {
+    "device": "cuda",
+    "gpu_layers": 0,
+    "native_compute_dtype": "fp32",
+    "python": "3.12.13",
+    "threads": 8,
+    "torch": "2.5.1+cu121",
+    "transformers": "5.13.1",
+    "ubatch": 64
+  },
+  "gates": {
+    "base": {
+      "layer_relative_rmse": {
+        "failing_layers": [],
+        "passed": true,
+        "ratio": 1.2,
+        "slack": 0.01
+      },
+      "logit_rmse_ratio": {
+        "limit": 1.2,
+        "passed": true,
+        "value": 0.9046104807347117
+      },
+      "passed": true,
+      "top1_agreement_difference": {
+        "limit": -0.03,
+        "passed": true,
+        "value": 0.017322834645669305
+      }
+    },
+    "candidate": {
+      "layer_relative_rmse": {
+        "failing_layers": [],
+        "passed": true,
+        "ratio": 1.2,
+        "slack": 0.01
+      },
+      "logit_rmse_ratio": {
+        "limit": 1.2,
+        "passed": true,
+        "value": 1.1055755810050316
+      },
+      "passed": true,
+      "top1_agreement_difference": {
+        "limit": -0.03,
+        "passed": true,
+        "value": 0.011023622047244164
+      }
+    }
+  },
+  "question": "does llama.cpp compute the candidate's Q3_K upgrades (and pruning) as the native evaluator does, beyond the unpruned control's divergence?",
+  "schema": "rco.qwen36.rco_v2_logit_parity.v1",
+  "status": "pass",
+  "upgraded_tensors": [
+    "blk.10.ffn_down_exps.weight",
+    "blk.14.ffn_down_exps.weight",
+    "blk.14.ffn_up_exps.weight",
+    "blk.2.ffn_gate_exps.weight",
+    "blk.21.ffn_down_exps.weight",
+    "blk.22.ffn_down_exps.weight",
+    "blk.24.ffn_down_exps.weight",
+    "blk.27.ffn_down_exps.weight",
+    "blk.29.ffn_down_exps.weight",
+    "blk.30.ffn_down_exps.weight",
+    "blk.31.ffn_down_exps.weight",
+    "blk.33.ffn_down_exps.weight",
+    "blk.34.ffn_down_exps.weight",
+    "blk.35.ffn_down_exps.weight",
+    "blk.35.ffn_gate_exps.weight",
+    "blk.36.ffn_down_exps.weight",
+    "blk.37.ffn_down_exps.weight",
+    "blk.37.ffn_gate_exps.weight",
+    "blk.38.ffn_down_exps.weight",
+    "blk.39.ffn_down_exps.weight",
+    "blk.39.ffn_gate_exps.weight",
+    "blk.39.ffn_up_exps.weight",
+    "blk.7.ffn_down_exps.weight"
+  ],
+  "variants": {
+    "base": {
+      "layer_mean_relative_rmse": [
+        0.0,
+        0.010839691321322502,
+        0.011949621509800548,
+        0.01289205719738559,
+        0.01589784223005278,
+        0.016760958311133865,
+        0.01822337825426804,
+        0.019013904847674578,
+        0.02397102853291528,
+        0.02690856009986737,
+        0.027349955319922747,
+        0.02642110730902282,
+        0.029938778024873557,
+        0.0314914540024561,
+        0.03363748253471404,
+        0.03130369729627577,
+        0.038120233035894895,
+        0.03852145332139939,
+        0.04070282575121726,
+        0.040115865947173084,
+        0.04401925222223375,
+        0.044538389994116086,
+        0.04385478171996173,
+        0.04083925808725423,
+        0.04392599441351877,
+        0.0457276082875096,
+        0.04693357368133214,
+        0.04467834580794443,
+        0.04699347429757079,
+        0.04512042017600759,
+        0.04468335632200401,
+        0.042792336286070654,
+        0.045521966148786,
+        0.044972152859946164,
+        0.042897751850563215,
+        0.039354397710558896,
+        0.043657936016864324,
+        0.04440808980479951,
+        0.04270328435715131,
+        0.037957115848004604,
+        0.040124813381945484
+      ],
+      "mean_logit_rmse": 0.08776565933719029,
+      "positions": 635,
+      "strict_original_thresholds_pass": false,
+      "top1_agreement_rate": 0.9826771653543307
+    },
+    "candidate": {
+      "layer_mean_relative_rmse": [
+        0.0,
+        0.010839691321322502,
+        0.011949621509800548,
+        0.012778561000395861,
+        0.015922775436278378,
+        0.0166449372741712,
+        0.0183518200485352,
+        0.01857557959252873,
+        0.025133337975600932,
+        0.02742518173364171,
+        0.02726739814384759,
+        0.026648950906176052,
+        0.030607019176197115,
+        0.033257227941767886,
+        0.03527716289805351,
+        0.03361182503816276,
+        0.04091954719094782,
+        0.04145613190287448,
+        0.04337457589269766,
+        0.042514870059495856,
+        0.04658073611615658,
+        0.048535592648681444,
+        0.04902731697636171,
+        0.04569193874409824,
+        0.04947681306059694,
+        0.05226245785553629,
+        0.05301637895597509,
+        0.050509309713033565,
+        0.0538888635558826,
+        0.051471896047511775,
+        0.05122209165567671,
+        0.04913175258518728,
+        0.053028382005366324,
+        0.05246820822591053,
+        0.050216723196302625,
+        0.04619546271384746,
+        0.05257830738634328,
+        0.05403994979723504,
+        0.05304965664285684,
+        0.047281044663753116,
+        0.04928081654026093
+      ],
+      "mean_logit_rmse": 0.10726337123045067,
+      "positions": 635,
+      "strict_original_thresholds_pass": false,
+      "top1_agreement_rate": 0.9763779527559056
+    },
+    "control": {
+      "layer_mean_relative_rmse": [
+        0.0,
+        0.01082057057367868,
+        0.01191722922198738,
+        0.012674346954907191,
+        0.015647247115503003,
+        0.016337927721787642,
+        0.017645489690266816,
+        0.01788228272644622,
+        0.02316253396089089,
+        0.02606021764058829,
+        0.025940190357199463,
+        0.025682827989438696,
+        0.029284060634953618,
+        0.03148496802853841,
+        0.033856393188679244,
+        0.03178534641734806,
+        0.03853510330778155,
+        0.03928420691345577,
+        0.04110361340409893,
+        0.04141961945754337,
+        0.045480849593507955,
+        0.04667493079821051,
+        0.046695039961841156,
+        0.04357858305360892,
+        0.04698748241033592,
+        0.049592426256851445,
+        0.05071453632426572,
+        0.04788154461655929,
+        0.05044863775392458,
+        0.04874197788462349,
+        0.048488825165983726,
+        0.046788282972310066,
+        0.0500140699222254,
+        0.04944033523548244,
+        0.04726887410465854,
+        0.04393764205193516,
+        0.048670356538214624,
+        0.04986429720404745,
+        0.047335410125803855,
+        0.041638630094592094,
+        0.044568656911753136
+      ],
+      "mean_logit_rmse": 0.09702038745550269,
+      "positions": 635,
+      "strict_original_thresholds_pass": false,
+      "top1_agreement_rate": 0.9653543307086614
+    }
+  }
+}
