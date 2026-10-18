@@ -142,7 +142,7 @@ class Server:
         self.log_path = args.work / f"{name}.server.log"
         command = [str(BUILDS[build]["bin"] / "llama-server"), "-m", str(MODELS[model]),
                    "--jinja", "-t", str(args.threads), "-np", "1", "--host", "127.0.0.1",
-                   "--port", str(args.port), "--no-webui", *extra]
+                   "--port", str(args.port), "--no-webui", "--log-verbosity", "4", *extra]
         if context:
             command += ["-c", str(context)]
         if fit_off:
