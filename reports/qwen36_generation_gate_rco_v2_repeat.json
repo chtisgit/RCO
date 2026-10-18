@@ -1,0 +1,1960 @@
+{
+  "generations": [
+    {
+      "category": "instruction",
+      "content": "BLUE",
+      "finish_reason": "stop",
+      "prompt_id": "instruction-blue",
+      "raw_content": "BLUE",
+      "reasoning_content": "",
+      "score": {
+        "assertion": {
+          "expected": "BLUE",
+          "normalized_output": "BLUE",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": false,
+      "tokens_per_second": 23.03828963737732,
+      "tokens_predicted": 2,
+      "user": "Reply with exactly the uppercase word BLUE and nothing else."
+    },
+    {
+      "category": "instruction",
+      "content": "RCO",
+      "finish_reason": "stop",
+      "prompt_id": "instruction-rco",
+      "raw_content": "RCO",
+      "reasoning_content": "",
+      "score": {
+        "assertion": {
+          "expected": "RCO",
+          "normalized_output": "RCO",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": false,
+      "tokens_per_second": 35.3363133624269,
+      "tokens_predicted": 3,
+      "user": "Output exactly these three uppercase letters: RCO"
+    },
+    {
+      "category": "instruction",
+      "content": "cedar",
+      "finish_reason": "stop",
+      "prompt_id": "instruction-cedar",
+      "raw_content": "cedar",
+      "reasoning_content": "",
+      "score": {
+        "assertion": {
+          "expected": "cedar",
+          "normalized_output": "cedar",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": false,
+      "tokens_per_second": 41.04669061056952,
+      "tokens_predicted": 3,
+      "user": "Repeat the lowercase word cedar and output nothing else."
+    },
+    {
+      "category": "instruction",
+      "content": "OK",
+      "finish_reason": "stop",
+      "prompt_id": "instruction-ok",
+      "raw_content": "OK",
+      "reasoning_content": "",
+      "score": {
+        "assertion": {
+          "expected": "OK",
+          "normalized_output": "OK",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": false,
+      "tokens_per_second": 40.726561863647476,
+      "tokens_predicted": 2,
+      "user": "Respond with exactly OK, with no punctuation."
+    },
+    {
+      "category": "instruction",
+      "content": "Vienna",
+      "finish_reason": "stop",
+      "prompt_id": "instruction-vienna",
+      "raw_content": "Vienna",
+      "reasoning_content": "",
+      "score": {
+        "assertion": {
+          "expected": "Vienna",
+          "normalized_output": "Vienna",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": false,
+      "tokens_per_second": 39.96562955857962,
+      "tokens_predicted": 3,
+      "user": "Write the single word Vienna and nothing else."
+    },
+    {
+      "category": "instruction",
+      "content": "#",
+      "finish_reason": "stop",
+      "prompt_id": "instruction-symbol",
+      "raw_content": "#",
+      "reasoning_content": "",
+      "score": {
+        "assertion": {
+          "expected": "#",
+          "normalized_output": "#",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": false,
+      "tokens_per_second": 41.50066401062417,
+      "tokens_predicted": 2,
+      "user": "Output exactly the symbol # and no other characters."
+    },
+    {
+      "category": "extraction",
+      "content": "blue",
+      "finish_reason": "stop",
+      "prompt_id": "extract-color",
+      "raw_content": "blue",
+      "reasoning_content": "",
+      "score": {
+        "assertion": {
+          "expected": "blue",
+          "normalized_output": "blue",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": false,
+      "tokens_per_second": 40.23011626503601,
+      "tokens_predicted": 2,
+      "user": "Aster=red; Birch=blue; Cedar=green. What is Birch's value? Answer with the value only."
+    },
+    {
+      "category": "extraction",
+      "content": "ZX-417",
+      "finish_reason": "stop",
+      "prompt_id": "extract-order",
+      "raw_content": "ZX-417",
+      "reasoning_content": "",
+      "score": {
+        "assertion": {
+          "expected": "ZX-417",
+          "normalized_output": "ZX-417",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": false,
+      "tokens_per_second": 43.67498820775318,
+      "tokens_predicted": 6,
+      "user": "Record: customer Mira, order ZX-417, total 28 euros. Return only the order code."
+    },
+    {
+      "category": "extraction",
+      "content": "Graz",
+      "finish_reason": "stop",
+      "prompt_id": "extract-city",
+      "raw_content": "Graz",
+      "reasoning_content": "",
+      "score": {
+        "assertion": {
+          "expected": "Graz",
+          "normalized_output": "Graz",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": false,
+      "tokens_per_second": 40.882238711391835,
+      "tokens_predicted": 3,
+      "user": "Sentence: 'The conference moved from Linz to Graz on Tuesday.' Return only the destination city."
+    },
+    {
+      "category": "extraction",
+      "content": "ada@example.org",
+      "finish_reason": "stop",
+      "prompt_id": "extract-email",
+      "raw_content": "ada@example.org",
+      "reasoning_content": "",
+      "score": {
+        "assertion": {
+          "expected": "ada@example.org",
+          "normalized_output": "ada@example.org",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": false,
+      "tokens_per_second": 42.19231256065145,
+      "tokens_predicted": 4,
+      "user": "Contact line: Name: Ada; Email: ada@example.org; Team: Core. Return only the email address."
+    },
+    {
+      "category": "extraction",
+      "content": "cobalt",
+      "finish_reason": "stop",
+      "prompt_id": "extract-third",
+      "raw_content": "cobalt",
+      "reasoning_content": "",
+      "score": {
+        "assertion": {
+          "expected": "cobalt",
+          "normalized_output": "cobalt",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": false,
+      "tokens_per_second": 40.8613574142933,
+      "tokens_predicted": 3,
+      "user": "Values in order are quartz, amber, cobalt, silver. Return only the third value."
+    },
+    {
+      "category": "arithmetic_reasoning",
+      "content": "95",
+      "finish_reason": "stop",
+      "prompt_id": "arithmetic-sum",
+      "raw_content": "95",
+      "reasoning_content": "",
+      "score": {
+        "assertion": {
+          "absolute_tolerance": 0.0,
+          "expected": 95.0,
+          "normalized_output": "95",
+          "numeric_match_count": 1,
+          "parsed_value": 95.0,
+          "passed": true,
+          "type": "numeric"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": false,
+      "tokens_per_second": 41.2779658218443,
+      "tokens_predicted": 3,
+      "user": "Compute 37 + 58. Return only the number."
+    },
+    {
+      "category": "arithmetic_reasoning",
+      "content": "12",
+      "finish_reason": "stop",
+      "prompt_id": "arithmetic-division",
+      "raw_content": "12",
+      "reasoning_content": "",
+      "score": {
+        "assertion": {
+          "absolute_tolerance": 0.0,
+          "expected": 12.0,
+          "normalized_output": "12",
+          "numeric_match_count": 1,
+          "parsed_value": 12.0,
+          "passed": true,
+          "type": "numeric"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": false,
+      "tokens_per_second": 41.08294646892075,
+      "tokens_predicted": 3,
+      "user": "Compute 144 divided by 12. Return only the number."
+    },
+    {
+      "category": "arithmetic_reasoning",
+      "content": "323",
+      "finish_reason": "stop",
+      "prompt_id": "arithmetic-product",
+      "raw_content": "323",
+      "reasoning_content": "",
+      "score": {
+        "assertion": {
+          "absolute_tolerance": 0.0,
+          "expected": 323.0,
+          "normalized_output": "323",
+          "numeric_match_count": 1,
+          "parsed_value": 323.0,
+          "passed": true,
+          "type": "numeric"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": false,
+      "tokens_per_second": 43.35448068557885,
+      "tokens_predicted": 4,
+      "user": "Compute 17 times 19. Return only the number."
+    },
+    {
+      "category": "arithmetic_reasoning",
+      "content": "150",
+      "finish_reason": "stop",
+      "prompt_id": "reasoning-distance",
+      "raw_content": "150",
+      "reasoning_content": "",
+      "score": {
+        "assertion": {
+          "absolute_tolerance": 0.0,
+          "expected": 150.0,
+          "normalized_output": "150",
+          "numeric_match_count": 1,
+          "parsed_value": 150.0,
+          "passed": true,
+          "type": "numeric"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": false,
+      "tokens_per_second": 43.70183693387912,
+      "tokens_predicted": 4,
+      "user": "A train travels at 60 km/h for 2.5 hours. How many kilometres does it travel? Return only the number."
+    },
+    {
+      "category": "arithmetic_reasoning",
+      "content": "30",
+      "finish_reason": "stop",
+      "prompt_id": "reasoning-sequence",
+      "raw_content": "30",
+      "reasoning_content": "",
+      "score": {
+        "assertion": {
+          "absolute_tolerance": 0.0,
+          "expected": 30.0,
+          "normalized_output": "30",
+          "numeric_match_count": 1,
+          "parsed_value": 30.0,
+          "passed": true,
+          "type": "numeric"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": false,
+      "tokens_per_second": 39.771710382405,
+      "tokens_predicted": 3,
+      "user": "The sequence is 2, 6, 12, 20. Return only the next number."
+    },
+    {
+      "category": "arithmetic_reasoning",
+      "content": "0.6",
+      "finish_reason": "stop",
+      "prompt_id": "reasoning-probability",
+      "raw_content": "0.6",
+      "reasoning_content": "",
+      "score": {
+        "assertion": {
+          "absolute_tolerance": 0.001,
+          "expected": 0.6,
+          "normalized_output": "0.6",
+          "numeric_match_count": 1,
+          "parsed_value": 0.6,
+          "passed": true,
+          "type": "numeric"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": false,
+      "tokens_per_second": 42.56707862139421,
+      "tokens_predicted": 4,
+      "user": "A bag has 3 red and 2 blue balls. Give the probability of drawing red as a decimal, and output only that number."
+    },
+    {
+      "category": "code",
+      "content": "def",
+      "finish_reason": "stop",
+      "prompt_id": "code-python-def",
+      "raw_content": "def",
+      "reasoning_content": "",
+      "score": {
+        "assertion": {
+          "expected": "def",
+          "normalized_output": "def",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": false,
+      "tokens_per_second": 41.204829205982946,
+      "tokens_predicted": 2,
+      "user": "Which Python keyword begins a function definition? Return only the keyword."
+    },
+    {
+      "category": "code",
+      "content": "SELECT",
+      "finish_reason": "stop",
+      "prompt_id": "code-sql-select",
+      "raw_content": "SELECT",
+      "reasoning_content": "",
+      "score": {
+        "assertion": {
+          "expected": "SELECT",
+          "normalized_output": "SELECT",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": false,
+      "tokens_per_second": 41.27455836222552,
+      "tokens_predicted": 2,
+      "user": "Which SQL keyword retrieves rows from a table? Return only the uppercase keyword."
+    },
+    {
+      "category": "code",
+      "content": "nullptr",
+      "finish_reason": "stop",
+      "prompt_id": "code-cpp-null",
+      "raw_content": "nullptr",
+      "reasoning_content": "",
+      "score": {
+        "assertion": {
+          "expected": "nullptr",
+          "normalized_output": "nullptr",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": false,
+      "tokens_per_second": 41.07619634421853,
+      "tokens_predicted": 2,
+      "user": "What is the C++11 null pointer literal? Return only the literal."
+    },
+    {
+      "category": "code",
+      "content": "len(items)",
+      "finish_reason": "stop",
+      "prompt_id": "code-python-length",
+      "raw_content": "len(items)",
+      "reasoning_content": "",
+      "score": {
+        "assertion": {
+          "expected": "len(items)",
+          "normalized_output": "len(items)",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": false,
+      "tokens_per_second": 42.938726437373866,
+      "tokens_predicted": 4,
+      "user": "Give the Python expression that returns the length of variable items. Return only the expression."
+    },
+    {
+      "category": "code",
+      "content": "{\"ready\":true}",
+      "finish_reason": "stop",
+      "prompt_id": "code-json-object",
+      "raw_content": "{\"ready\":true}",
+      "reasoning_content": "",
+      "score": {
+        "assertion": {
+          "normalized_output": "{\"ready\":true}",
+          "passed": true,
+          "pattern": "\\{\"ready\":true\\}",
+          "type": "regex"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": false,
+      "tokens_per_second": 45.136538027533284,
+      "tokens_predicted": 6,
+      "user": "Return exactly this compact JSON object with keys in the shown order and no code fence: {\"ready\":true}"
+    },
+    {
+      "category": "knowledge",
+      "content": "Paris",
+      "finish_reason": "stop",
+      "prompt_id": "knowledge-france",
+      "raw_content": "Paris",
+      "reasoning_content": "",
+      "score": {
+        "assertion": {
+          "expected": "Paris",
+          "normalized_output": "Paris",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": false,
+      "tokens_per_second": 40.995367523469845,
+      "tokens_predicted": 2,
+      "user": "What is the capital of France? Return only the city name."
+    },
+    {
+      "category": "knowledge",
+      "content": "H2O",
+      "finish_reason": "stop",
+      "prompt_id": "knowledge-water",
+      "raw_content": "H2O",
+      "reasoning_content": "",
+      "score": {
+        "assertion": {
+          "expected": "H2O",
+          "normalized_output": "H2O",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": false,
+      "tokens_per_second": 43.22891149600853,
+      "tokens_predicted": 4,
+      "user": "What is the chemical formula for water? Return only the formula."
+    },
+    {
+      "category": "knowledge",
+      "content": "Mars",
+      "finish_reason": "stop",
+      "prompt_id": "knowledge-red-planet",
+      "raw_content": "Mars",
+      "reasoning_content": "",
+      "score": {
+        "assertion": {
+          "expected": "Mars",
+          "normalized_output": "Mars",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": false,
+      "tokens_per_second": 40.90565111570163,
+      "tokens_predicted": 3,
+      "user": "Which planet is known as the Red Planet? Return only its name."
+    },
+    {
+      "category": "knowledge",
+      "content": "Jane Austen",
+      "finish_reason": "stop",
+      "prompt_id": "knowledge-austen",
+      "raw_content": "Jane Austen",
+      "reasoning_content": "",
+      "score": {
+        "assertion": {
+          "expected": "Jane Austen",
+          "normalized_output": "Jane Austen",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": false,
+      "tokens_per_second": 42.954711415930475,
+      "tokens_predicted": 4,
+      "user": "Who wrote Pride and Prejudice? Return only the author's full name."
+    },
+    {
+      "category": "knowledge",
+      "content": "Oxygen",
+      "finish_reason": "stop",
+      "prompt_id": "knowledge-photosynthesis",
+      "raw_content": "Oxygen",
+      "reasoning_content": "",
+      "score": {
+        "assertion": {
+          "expected": "oxygen",
+          "normalized_output": "Oxygen",
+          "passed": false,
+          "type": "exact"
+        },
+        "correct": false,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": false,
+      "tokens_per_second": 22.200761486118974,
+      "tokens_predicted": 3,
+      "user": "Which gas do plants release during photosynthesis? Return only the gas name."
+    },
+    {
+      "category": "multilingual",
+      "content": "Haus",
+      "finish_reason": "stop",
+      "prompt_id": "multilingual-de",
+      "raw_content": "Haus",
+      "reasoning_content": "",
+      "score": {
+        "assertion": {
+          "expected": "Haus",
+          "normalized_output": "Haus",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": false,
+      "tokens_per_second": 41.050903119868636,
+      "tokens_predicted": 2,
+      "user": "Translate the English word 'house' into German. Return only the German word."
+    },
+    {
+      "category": "multilingual",
+      "content": "libro",
+      "finish_reason": "stop",
+      "prompt_id": "multilingual-es",
+      "raw_content": "libro",
+      "reasoning_content": "",
+      "score": {
+        "assertion": {
+          "expected": "libro",
+          "normalized_output": "libro",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": false,
+      "tokens_per_second": 38.72516748634938,
+      "tokens_predicted": 3,
+      "user": "Translate the English word 'book' into Spanish. Return only the Spanish word."
+    },
+    {
+      "category": "multilingual",
+      "content": "eau",
+      "finish_reason": "stop",
+      "prompt_id": "multilingual-fr",
+      "raw_content": "eau",
+      "reasoning_content": "",
+      "score": {
+        "assertion": {
+          "expected": "eau",
+          "normalized_output": "eau",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": false,
+      "tokens_per_second": 41.201433809896585,
+      "tokens_predicted": 2,
+      "user": "Translate the English word 'water' into French. Return only the French word."
+    },
+    {
+      "category": "multilingual",
+      "content": "sole",
+      "finish_reason": "stop",
+      "prompt_id": "multilingual-it",
+      "raw_content": "sole",
+      "reasoning_content": "",
+      "score": {
+        "assertion": {
+          "expected": "sole",
+          "normalized_output": "sole",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": false,
+      "tokens_per_second": 41.18616144975288,
+      "tokens_predicted": 2,
+      "user": "Translate the English word 'sun' into Italian. Return only the Italian word."
+    },
+    {
+      "category": "multilingual",
+      "content": "obrigado",
+      "finish_reason": "stop",
+      "prompt_id": "multilingual-pt",
+      "raw_content": "obrigado",
+      "reasoning_content": "",
+      "score": {
+        "assertion": {
+          "expected": "obrigado",
+          "normalized_output": "obrigado",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": false,
+      "tokens_per_second": 38.73666813005191,
+      "tokens_predicted": 4,
+      "user": "A male speaker says 'thank you' in Portuguese. Return only the Portuguese word."
+    },
+    {
+      "category": "instruction",
+      "content": "BLUE",
+      "finish_reason": "stop",
+      "prompt_id": "instruction-blue",
+      "raw_content": "Thinking Process:\n\n1.  **Analyze User Input:** The user wants me to reply with *exactly* the uppercase word \"BLUE\" and *nothing else*.\n2.  **Identify Constraints:**\n   - Output must be exactly \"BLUE\".\n   - No extra text, punctuation, spaces, or formatting.\n   - Case must be uppercase.\n3.  **Formulate Response:** Just \"BLUE\".\n4.  **Verify against constraints:** Matches perfectly.\n5.  **Output Generation.**\u2705\n</think>\n\nBLUE",
+      "reasoning_content": "Thinking Process:\n\n1.  **Analyze User Input:** The user wants me to reply with *exactly* the uppercase word \"BLUE\" and *nothing else*.\n2.  **Identify Constraints:**\n   - Output must be exactly \"BLUE\".\n   - No extra text, punctuation, spaces, or formatting.\n   - Case must be uppercase.\n3.  **Formulate Response:** Just \"BLUE\".\n4.  **Verify against constraints:** Matches perfectly.\n5.  **Output Generation.**\u2705\n",
+      "score": {
+        "assertion": {
+          "expected": "BLUE",
+          "normalized_output": "BLUE",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true,
+          "think_closed": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": true,
+      "tokens_per_second": 44.22307047760916,
+      "tokens_predicted": 115,
+      "user": "Reply with exactly the uppercase word BLUE and nothing else."
+    },
+    {
+      "category": "instruction",
+      "content": "RCO",
+      "finish_reason": "stop",
+      "prompt_id": "instruction-rco",
+      "raw_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - The user explicitly states: \"Output exactly these three uppercase letters: RCO\"\n   - The instruction is clear and direct: output only the three letters R, C, O in uppercase.\n\n2.  **Identify Constraints:**\n   - Must be exactly three characters.\n   - Must be uppercase.\n   - Must be exactly \"RCO\".\n   - No additional text, explanations, or formatting should be included.\n\n3.  **Formulate Response:**\n   - Directly output: RCO\n   - Check against constraints: Exactly three uppercase letters? Yes. Matches request? Yes.\n\n4.  **Final Output Generation:**\n   - RCO (with no extra whitespace or newlines unless necessary, but keeping it exact is best)\n   - I will output just \"RCO\" as requested.\u2705\n</think>\n\nRCO",
+      "reasoning_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - The user explicitly states: \"Output exactly these three uppercase letters: RCO\"\n   - The instruction is clear and direct: output only the three letters R, C, O in uppercase.\n\n2.  **Identify Constraints:**\n   - Must be exactly three characters.\n   - Must be uppercase.\n   - Must be exactly \"RCO\".\n   - No additional text, explanations, or formatting should be included.\n\n3.  **Formulate Response:**\n   - Directly output: RCO\n   - Check against constraints: Exactly three uppercase letters? Yes. Matches request? Yes.\n\n4.  **Final Output Generation:**\n   - RCO (with no extra whitespace or newlines unless necessary, but keeping it exact is best)\n   - I will output just \"RCO\" as requested.\u2705\n",
+      "score": {
+        "assertion": {
+          "expected": "RCO",
+          "normalized_output": "RCO",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true,
+          "think_closed": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": true,
+      "tokens_per_second": 47.95983254471463,
+      "tokens_predicted": 198,
+      "user": "Output exactly these three uppercase letters: RCO"
+    },
+    {
+      "category": "instruction",
+      "content": "cedar",
+      "finish_reason": "stop",
+      "prompt_id": "instruction-cedar",
+      "raw_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - Command: \"Repeat the lowercase word cedar and output nothing else.\"\n   - Key constraints: \n     - Output must be exactly the word \"cedar\" in lowercase.\n     - No additional text, formatting, or extra characters.\n     - Strict compliance: \"output nothing else.\"\n\n2.  **Identify Core Requirement:**\n   - The exact string to output: `cedar`\n   - Case: lowercase (already matches)\n   - Nothing else: no greetings, explanations, newlines (unless necessary for the exact output, but usually just the word itself is expected), etc.\n\n3.  **Formulate Response:**\n   - Simply output: `cedar`\n   - Verify against constraints: \n     - Is it lowercase? Yes.\n     - Is it exactly the word? Yes.\n     - Is there anything else? No.\n\n4.  **Final Output Generation:**\n   - `cedar` (exactly as requested)\n   - Ready.\u2705\n</think>\n\ncedar",
+      "reasoning_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - Command: \"Repeat the lowercase word cedar and output nothing else.\"\n   - Key constraints: \n     - Output must be exactly the word \"cedar\" in lowercase.\n     - No additional text, formatting, or extra characters.\n     - Strict compliance: \"output nothing else.\"\n\n2.  **Identify Core Requirement:**\n   - The exact string to output: `cedar`\n   - Case: lowercase (already matches)\n   - Nothing else: no greetings, explanations, newlines (unless necessary for the exact output, but usually just the word itself is expected), etc.\n\n3.  **Formulate Response:**\n   - Simply output: `cedar`\n   - Verify against constraints: \n     - Is it lowercase? Yes.\n     - Is it exactly the word? Yes.\n     - Is there anything else? No.\n\n4.  **Final Output Generation:**\n   - `cedar` (exactly as requested)\n   - Ready.\u2705\n",
+      "score": {
+        "assertion": {
+          "expected": "cedar",
+          "normalized_output": "cedar",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true,
+          "think_closed": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": true,
+      "tokens_per_second": 46.74193595830942,
+      "tokens_predicted": 233,
+      "user": "Repeat the lowercase word cedar and output nothing else."
+    },
+    {
+      "category": "instruction",
+      "content": "OK",
+      "finish_reason": "stop",
+      "prompt_id": "instruction-ok",
+      "raw_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - User says: \"Respond with exactly OK, with no punctuation.\"\n   - Key constraints: \n     - Exact response: \"OK\"\n     - No punctuation allowed\n     - Nothing else should be included\n\n2.  **Identify Constraints & Requirements:**\n   - The output must be exactly the string \"OK\"\n   - No capitalization changes, no extra spaces, no line breaks, no punctuation (period, comma, etc.)\n   - Must strictly follow the instruction\n\n3.  **Formulate Response:**\n   - Directly output: OK\n   - Check against constraints: \n     - Exactly \"OK\"? Yes.\n     - No punctuation? Yes.\n     - Nothing else? Yes.\n\n4.  **Final Output Generation:**\n   - Output: OK (exactly as specified)\n   - Self-Correction/Verification during thought: \n     - Wait, the prompt says \"OK\" with capital O and K. I'll output exactly that.\n     - No punctuation means no period at the end either.\n     - I will just write OK.\n\n   All constraints met. Proceed. \n   Output matches response.\u2705\n</think>\n\nOK",
+      "reasoning_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - User says: \"Respond with exactly OK, with no punctuation.\"\n   - Key constraints: \n     - Exact response: \"OK\"\n     - No punctuation allowed\n     - Nothing else should be included\n\n2.  **Identify Constraints & Requirements:**\n   - The output must be exactly the string \"OK\"\n   - No capitalization changes, no extra spaces, no line breaks, no punctuation (period, comma, etc.)\n   - Must strictly follow the instruction\n\n3.  **Formulate Response:**\n   - Directly output: OK\n   - Check against constraints: \n     - Exactly \"OK\"? Yes.\n     - No punctuation? Yes.\n     - Nothing else? Yes.\n\n4.  **Final Output Generation:**\n   - Output: OK (exactly as specified)\n   - Self-Correction/Verification during thought: \n     - Wait, the prompt says \"OK\" with capital O and K. I'll output exactly that.\n     - No punctuation means no period at the end either.\n     - I will just write OK.\n\n   All constraints met. Proceed. \n   Output matches response.\u2705\n",
+      "score": {
+        "assertion": {
+          "expected": "OK",
+          "normalized_output": "OK",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true,
+          "think_closed": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": true,
+      "tokens_per_second": 47.660243125009934,
+      "tokens_predicted": 265,
+      "user": "Respond with exactly OK, with no punctuation."
+    },
+    {
+      "category": "instruction",
+      "content": "Vienna",
+      "finish_reason": "stop",
+      "prompt_id": "instruction-vienna",
+      "raw_content": "Thinking Process:\n\n1.  **Deconstruct the user's request:**\n    *   Goal: Write the single word \"Vienna\".\n    *   Constraint: Write \"nothing else\".\n\n2.  **Evaluate the constraint:**\n    *   \"Nothing else\" implies no greetings, no explanations, no punctuation (unless part of the word, which it isn't), no newlines after the word, etc.\n    *   The output must be exactly: `Vienna`.\n\n3.  **Formulate the response:**\n    *   Output: `Vienna`\n\n4.  **Final Check:**\n    *   Does the output contain only the word \"Vienna\"? Yes.\n    *   Are there any extra characters? No.\n    *   Result matches user's request perfectly.\n\n5.  **Output Generation:**\n    *   Vienna.\n</think>\n\nVienna",
+      "reasoning_content": "Thinking Process:\n\n1.  **Deconstruct the user's request:**\n    *   Goal: Write the single word \"Vienna\".\n    *   Constraint: Write \"nothing else\".\n\n2.  **Evaluate the constraint:**\n    *   \"Nothing else\" implies no greetings, no explanations, no punctuation (unless part of the word, which it isn't), no newlines after the word, etc.\n    *   The output must be exactly: `Vienna`.\n\n3.  **Formulate the response:**\n    *   Output: `Vienna`\n\n4.  **Final Check:**\n    *   Does the output contain only the word \"Vienna\"? Yes.\n    *   Are there any extra characters? No.\n    *   Result matches user's request perfectly.\n\n5.  **Output Generation:**\n    *   Vienna.\n",
+      "score": {
+        "assertion": {
+          "expected": "Vienna",
+          "normalized_output": "Vienna",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true,
+          "think_closed": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": true,
+      "tokens_per_second": 47.973551262546486,
+      "tokens_predicted": 189,
+      "user": "Write the single word Vienna and nothing else."
+    },
+    {
+      "category": "instruction",
+      "content": "#",
+      "finish_reason": "stop",
+      "prompt_id": "instruction-symbol",
+      "raw_content": "Here's a thinking process:\n\n1.  **Analyze User Input:** The user said \"Output exactly the symbol # and no other characters.\"\n2.  **Identify Key Constraint:** The constraint is strict: output *only* the symbol `#`, with absolutely nothing else (no spaces, newlines, explanations, etc.).\n3.  **Formulate Response:** I need to generate exactly `#`.\n4.  **Verify:** Check against constraints. Does it contain only `#`? Yes. Are there any other characters? No.\n5.  **Output Generation:** Just output `#`.\u2705\n</think>\n\n#",
+      "reasoning_content": "Here's a thinking process:\n\n1.  **Analyze User Input:** The user said \"Output exactly the symbol # and no other characters.\"\n2.  **Identify Key Constraint:** The constraint is strict: output *only* the symbol `#`, with absolutely nothing else (no spaces, newlines, explanations, etc.).\n3.  **Formulate Response:** I need to generate exactly `#`.\n4.  **Verify:** Check against constraints. Does it contain only `#`? Yes. Are there any other characters? No.\n5.  **Output Generation:** Just output `#`.\u2705\n",
+      "score": {
+        "assertion": {
+          "expected": "#",
+          "normalized_output": "#",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true,
+          "think_closed": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": true,
+      "tokens_per_second": 46.913398219618905,
+      "tokens_predicted": 134,
+      "user": "Output exactly the symbol # and no other characters."
+    },
+    {
+      "category": "extraction",
+      "content": "blue",
+      "finish_reason": "stop",
+      "prompt_id": "extract-color",
+      "raw_content": "Thinking Process:\n\n1.  **Analyze the Request:**\n    *   Input pattern: Aster = red, Birch = blue, Cedar = green.\n    *   Question: What is Birch's value?\n    *   Constraint: Answer with the value only.\n\n2.  **Extract Information:**\n    *   The prompt explicitly states \"Birch=blue\".\n\n3.  **Formulate Output:**\n    *   The value assigned to Birch is \"blue\".\n    *   The user requested \"Answer with the value only\".\n\n4.  **Final Check:**\n    *   Does \"blue\" satisfy the constraint? Yes.\n    *   Is it accurate based on the prompt? Yes.\n\n5.  **Output Generation:** blue.cw\n</think>\n\nblue",
+      "reasoning_content": "Thinking Process:\n\n1.  **Analyze the Request:**\n    *   Input pattern: Aster = red, Birch = blue, Cedar = green.\n    *   Question: What is Birch's value?\n    *   Constraint: Answer with the value only.\n\n2.  **Extract Information:**\n    *   The prompt explicitly states \"Birch=blue\".\n\n3.  **Formulate Output:**\n    *   The value assigned to Birch is \"blue\".\n    *   The user requested \"Answer with the value only\".\n\n4.  **Final Check:**\n    *   Does \"blue\" satisfy the constraint? Yes.\n    *   Is it accurate based on the prompt? Yes.\n\n5.  **Output Generation:** blue.cw\n",
+      "score": {
+        "assertion": {
+          "expected": "blue",
+          "normalized_output": "blue",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true,
+          "think_closed": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": true,
+      "tokens_per_second": 45.66442569650703,
+      "tokens_predicted": 166,
+      "user": "Aster=red; Birch=blue; Cedar=green. What is Birch's value? Answer with the value only."
+    },
+    {
+      "category": "extraction",
+      "content": "ZX-417",
+      "finish_reason": "stop",
+      "prompt_id": "extract-order",
+      "raw_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - Customer: Mira\n   - Order: ZX-417\n   - Total: 28 euros\n   - Instruction: \"Return only the order code.\"\n\n2.  **Identify Key Information:**\n   - The user explicitly asks for *only* the order code.\n   - The order code provided in the input is \"ZX-417\".\n\n3.  **Formulate Response:**\n   - Extract just the order code: ZX-417\n   - Ensure no extra text, explanations, or additional information are included, as per the strict instruction \"Return only the order code.\"\n\n4.  **Final Output Generation:**\n   - ZX-417\n   - Check against constraints: Matches exactly. No extra words. Ready.\u2705\n</think>\n\nZX-417",
+      "reasoning_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - Customer: Mira\n   - Order: ZX-417\n   - Total: 28 euros\n   - Instruction: \"Return only the order code.\"\n\n2.  **Identify Key Information:**\n   - The user explicitly asks for *only* the order code.\n   - The order code provided in the input is \"ZX-417\".\n\n3.  **Formulate Response:**\n   - Extract just the order code: ZX-417\n   - Ensure no extra text, explanations, or additional information are included, as per the strict instruction \"Return only the order code.\"\n\n4.  **Final Output Generation:**\n   - ZX-417\n   - Check against constraints: Matches exactly. No extra words. Ready.\u2705\n",
+      "score": {
+        "assertion": {
+          "expected": "ZX-417",
+          "normalized_output": "ZX-417",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true,
+          "think_closed": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": true,
+      "tokens_per_second": 46.251488184457784,
+      "tokens_predicted": 190,
+      "user": "Record: customer Mira, order ZX-417, total 28 euros. Return only the order code."
+    },
+    {
+      "category": "extraction",
+      "content": "Graz",
+      "finish_reason": "stop",
+      "prompt_id": "extract-city",
+      "raw_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - Sentence: \"The conference moved from Linz to Graz on Tuesday.\"\n   - Task: Return *only* the destination city.\n\n2.  **Identify Key Information in the Sentence:**\n   - Subject: The conference\n   - Action: moved\n   - Origin: from Linz\n   - Destination: to Graz\n   - Time: on Tuesday\n\n3.  **Extract Target Information:**\n   - The question asks for the \"destination city\".\n   - From the sentence, the destination is explicitly stated as \"Graz\".\n\n4.  **Format Output:**\n   - Constraint: \"Return only the destination city.\"\n   - Output should be just the city name: Graz\n\n5.  **Final Verification:**\n   - Does it match the constraint? Yes.\n   - Is it accurate based on the sentence? Yes.\n   - No extra text? Yes.\n\n   Output: Graz\u2705\n</think>\n\nGraz",
+      "reasoning_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - Sentence: \"The conference moved from Linz to Graz on Tuesday.\"\n   - Task: Return *only* the destination city.\n\n2.  **Identify Key Information in the Sentence:**\n   - Subject: The conference\n   - Action: moved\n   - Origin: from Linz\n   - Destination: to Graz\n   - Time: on Tuesday\n\n3.  **Extract Target Information:**\n   - The question asks for the \"destination city\".\n   - From the sentence, the destination is explicitly stated as \"Graz\".\n\n4.  **Format Output:**\n   - Constraint: \"Return only the destination city.\"\n   - Output should be just the city name: Graz\n\n5.  **Final Verification:**\n   - Does it match the constraint? Yes.\n   - Is it accurate based on the sentence? Yes.\n   - No extra text? Yes.\n\n   Output: Graz\u2705\n",
+      "score": {
+        "assertion": {
+          "expected": "Graz",
+          "normalized_output": "Graz",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true,
+          "think_closed": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": true,
+      "tokens_per_second": 47.63193218271344,
+      "tokens_predicted": 217,
+      "user": "Sentence: 'The conference moved from Linz to Graz on Tuesday.' Return only the destination city."
+    },
+    {
+      "category": "extraction",
+      "content": "ada@example.org",
+      "finish_reason": "stop",
+      "prompt_id": "extract-email",
+      "raw_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - Input text: \"Contact line: Name: Ada; Email: ada@example.org; Team: Core. Return only the email address.\"\n   - Task: Extract the email address from the provided text.\n   - Constraint: \"Return only the email address.\"\n\n2.  **Identify Key Information:**\n   - The text explicitly states: \"Email: ada@example.org\"\n   - The email address is \"ada@example.org\"\n\n3.  **Apply Constraints:**\n   - The user specifically says \"Return only the email address.\"\n   - I must output exactly that, with no extra text, greetings, or explanations.\n\n4.  **Formulate Output:**\n   - Output: ada@example.org\n\n5.  **Self-Correction/Verification:**\n   - Does it match the constraint? Yes.\n   - Is it accurate? Yes.\n   - Any extra characters? No.\n   - Ready.\u2705\n</think>\n\nada@example.org",
+      "reasoning_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - Input text: \"Contact line: Name: Ada; Email: ada@example.org; Team: Core. Return only the email address.\"\n   - Task: Extract the email address from the provided text.\n   - Constraint: \"Return only the email address.\"\n\n2.  **Identify Key Information:**\n   - The text explicitly states: \"Email: ada@example.org\"\n   - The email address is \"ada@example.org\"\n\n3.  **Apply Constraints:**\n   - The user specifically says \"Return only the email address.\"\n   - I must output exactly that, with no extra text, greetings, or explanations.\n\n4.  **Formulate Output:**\n   - Output: ada@example.org\n\n5.  **Self-Correction/Verification:**\n   - Does it match the constraint? Yes.\n   - Is it accurate? Yes.\n   - Any extra characters? No.\n   - Ready.\u2705\n",
+      "score": {
+        "assertion": {
+          "expected": "ada@example.org",
+          "normalized_output": "ada@example.org",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true,
+          "think_closed": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": true,
+      "tokens_per_second": 47.8031206746324,
+      "tokens_predicted": 221,
+      "user": "Contact line: Name: Ada; Email: ada@example.org; Team: Core. Return only the email address."
+    },
+    {
+      "category": "extraction",
+      "content": "cobalt",
+      "finish_reason": "stop",
+      "prompt_id": "extract-third",
+      "raw_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - The user provides a list of values in order: \"quartz, amber, cobalt, silver.\"\n   - The instruction is: \"Return only the third value.\"\n\n2.  **Identify the List and Positions:**\n   - Position 1: quartz\n   - Position 2: amber\n   - Position 3: cobalt\n   - Position 4: silver\n\n3.  **Extract the Third Value:**\n   - The third value is \"cobalt\".\n\n4.  **Format Output:**\n   - The user specified: \"Return only the third value.\"\n   - So, I should output just \"cobalt\" without any extra text.\n\n5.  **Final Check:**\n   - List: quartz (1), amber (2), cobalt (3), silver (4)\n   - Third value: cobalt\n   - Output matches requirement exactly.\u2705\n</think>\n\ncobalt",
+      "reasoning_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - The user provides a list of values in order: \"quartz, amber, cobalt, silver.\"\n   - The instruction is: \"Return only the third value.\"\n\n2.  **Identify the List and Positions:**\n   - Position 1: quartz\n   - Position 2: amber\n   - Position 3: cobalt\n   - Position 4: silver\n\n3.  **Extract the Third Value:**\n   - The third value is \"cobalt\".\n\n4.  **Format Output:**\n   - The user specified: \"Return only the third value.\"\n   - So, I should output just \"cobalt\" without any extra text.\n\n5.  **Final Check:**\n   - List: quartz (1), amber (2), cobalt (3), silver (4)\n   - Third value: cobalt\n   - Output matches requirement exactly.\u2705\n",
+      "score": {
+        "assertion": {
+          "expected": "cobalt",
+          "normalized_output": "cobalt",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true,
+          "think_closed": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": true,
+      "tokens_per_second": 47.83051392759137,
+      "tokens_predicted": 213,
+      "user": "Values in order are quartz, amber, cobalt, silver. Return only the third value."
+    },
+    {
+      "category": "arithmetic_reasoning",
+      "content": "95",
+      "finish_reason": "stop",
+      "prompt_id": "arithmetic-sum",
+      "raw_content": "Thinking Process:\n\n1.  **Analyze the Request:** The user wants to compute $37 + 58$ and expects *only* the number as the output.\n2.  **Perform Calculation:**\n    *   Add the ones digits: $7 + 8 = 15$. Write down 5, carry over 1.\n    *   Add the tens digits plus the carry: $3 + 5 + 1 = 9$.\n    *   Result: 95.\n3.  **Format Output:** The user requested \"Return only the number.\"\n4.  **Final Output:** 95.\n\nVerification:\n$30 + 50 = 80$\n$7 + 8 = 15$\n$80 + 15 = 95$. Correct.\n\nOutput string: \"95\".\n</think>\n\n95",
+      "reasoning_content": "Thinking Process:\n\n1.  **Analyze the Request:** The user wants to compute $37 + 58$ and expects *only* the number as the output.\n2.  **Perform Calculation:**\n    *   Add the ones digits: $7 + 8 = 15$. Write down 5, carry over 1.\n    *   Add the tens digits plus the carry: $3 + 5 + 1 = 9$.\n    *   Result: 95.\n3.  **Format Output:** The user requested \"Return only the number.\"\n4.  **Final Output:** 95.\n\nVerification:\n$30 + 50 = 80$\n$7 + 8 = 15$\n$80 + 15 = 95$. Correct.\n\nOutput string: \"95\".\n",
+      "score": {
+        "assertion": {
+          "absolute_tolerance": 0.0,
+          "expected": 95.0,
+          "normalized_output": "95",
+          "numeric_match_count": 1,
+          "parsed_value": 95.0,
+          "passed": true,
+          "type": "numeric"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true,
+          "think_closed": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": true,
+      "tokens_per_second": 47.927916413713774,
+      "tokens_predicted": 193,
+      "user": "Compute 37 + 58. Return only the number."
+    },
+    {
+      "category": "arithmetic_reasoning",
+      "content": "12",
+      "finish_reason": "stop",
+      "prompt_id": "arithmetic-division",
+      "raw_content": "Thinking Process:\n\n1.  **Analyze the Request:** The user wants to compute \"144 divided by 12\" and wants the output to be *only* the number.\n\n2.  **Perform the Calculation:**\n    *   $144 / 12$\n    *   I know that $12 \\times 10 = 120$.\n    *   $144 - 120 = 24$.\n    *   $12 \\times 2 = 24$.\n    *   So, $10 + 2 = 12$.\n    *   Alternatively, $12^2 = 144$, so $\\sqrt{144} = 12$ and $144 / 12 = 12$.\n\n3.  **Format the Output:** The user explicitly requested \"Return only the number.\"\n\n4.  **Final Result:** 12.\n\n5.  **Output Generation:** 12. (No extra text, no explanation).\n</think>\n\n12",
+      "reasoning_content": "Thinking Process:\n\n1.  **Analyze the Request:** The user wants to compute \"144 divided by 12\" and wants the output to be *only* the number.\n\n2.  **Perform the Calculation:**\n    *   $144 / 12$\n    *   I know that $12 \\times 10 = 120$.\n    *   $144 - 120 = 24$.\n    *   $12 \\times 2 = 24$.\n    *   So, $10 + 2 = 12$.\n    *   Alternatively, $12^2 = 144$, so $\\sqrt{144} = 12$ and $144 / 12 = 12$.\n\n3.  **Format the Output:** The user explicitly requested \"Return only the number.\"\n\n4.  **Final Result:** 12.\n\n5.  **Output Generation:** 12. (No extra text, no explanation).\n",
+      "score": {
+        "assertion": {
+          "absolute_tolerance": 0.0,
+          "expected": 12.0,
+          "normalized_output": "12",
+          "numeric_match_count": 1,
+          "parsed_value": 12.0,
+          "passed": true,
+          "type": "numeric"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true,
+          "think_closed": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": true,
+      "tokens_per_second": 48.064687675043274,
+      "tokens_predicted": 235,
+      "user": "Compute 144 divided by 12. Return only the number."
+    },
+    {
+      "category": "arithmetic_reasoning",
+      "content": "323",
+      "finish_reason": "stop",
+      "prompt_id": "arithmetic-product",
+      "raw_content": "Here's my thought process for computing $17 \\times 19$:\n\n1.  **Analyze the Request:** The user wants to calculate the product of 17 and 19. The output should be *only* the resulting number.\n\n2.  **Choose a Calculation Method:**\n    *   *Method 1: Standard Multiplication (Column).*\n        ```\n          17\n        x 19\n        ----\n         153  (7 * 19 -> 7*9=63, 7*10=70, 70+63=133? Wait, let's do it properly)\n               7 * 9 = 63 (write 3, carry 6)\n               7 * 1 = 7 + 6 = 13 -> 133\n          170  (10 * 17)\n        ----\n          323\n        ```\n        Let's re-verify step-by-step.\n        $17 \\times 9 = (10 + 7) \\times 9 = 90 + 63 = 153$.\n        $17 \\times 10 = 170$.\n        $153 + 170 = 323$.\n\n    *   *Method 2: Difference of Squares / Algebraic Identity.*\n        Notice that 17 and 19 are equidistant from 18.\n        $17 = 18 - 1$\n        $19 = 18 + 1$\n        So, $17 \\times 19 = (18 - 1)(18 + 1) = 18^2 - 1^2$.\n        Calculate $18^2$:\n        $18 \\times 10 = 180$\n        $18 \\times 8 = 144$\n        $180 + 144 = 324$\n        (Or just memorize squares: $18^2 = 324$).\n        Subtract 1: $324 - 1 = 323$.\n\n    *   *Method 3: Decomposition.*\n        $17 \\times 19 = 17 \\times (20 - 1)$\n        $= 17 \\times 20 - 17$\n        $= 340 - 17$\n        $= 323$.\n\n3.  **Verify the Result:**\n    *   Method 1 gave 323.\n    *   Method 2 gave 323.\n    *   Method 3 gave 323.\n    The result is consistent.\n\n4.  **Format the Output:**\n    The user explicitly requested: \"Return only the number.\"\n    So, I should not explain the steps or add text like \"The answer is\". Just \"323\".\n\n5.  **Final Output Generation:** 323.\n</think>\n\n323",
+      "reasoning_content": "Here's my thought process for computing $17 \\times 19$:\n\n1.  **Analyze the Request:** The user wants to calculate the product of 17 and 19. The output should be *only* the resulting number.\n\n2.  **Choose a Calculation Method:**\n    *   *Method 1: Standard Multiplication (Column).*\n        ```\n          17\n        x 19\n        ----\n         153  (7 * 19 -> 7*9=63, 7*10=70, 70+63=133? Wait, let's do it properly)\n               7 * 9 = 63 (write 3, carry 6)\n               7 * 1 = 7 + 6 = 13 -> 133\n          170  (10 * 17)\n        ----\n          323\n        ```\n        Let's re-verify step-by-step.\n        $17 \\times 9 = (10 + 7) \\times 9 = 90 + 63 = 153$.\n        $17 \\times 10 = 170$.\n        $153 + 170 = 323$.\n\n    *   *Method 2: Difference of Squares / Algebraic Identity.*\n        Notice that 17 and 19 are equidistant from 18.\n        $17 = 18 - 1$\n        $19 = 18 + 1$\n        So, $17 \\times 19 = (18 - 1)(18 + 1) = 18^2 - 1^2$.\n        Calculate $18^2$:\n        $18 \\times 10 = 180$\n        $18 \\times 8 = 144$\n        $180 + 144 = 324$\n        (Or just memorize squares: $18^2 = 324$).\n        Subtract 1: $324 - 1 = 323$.\n\n    *   *Method 3: Decomposition.*\n        $17 \\times 19 = 17 \\times (20 - 1)$\n        $= 17 \\times 20 - 17$\n        $= 340 - 17$\n        $= 323$.\n\n3.  **Verify the Result:**\n    *   Method 1 gave 323.\n    *   Method 2 gave 323.\n    *   Method 3 gave 323.\n    The result is consistent.\n\n4.  **Format the Output:**\n    The user explicitly requested: \"Return only the number.\"\n    So, I should not explain the steps or add text like \"The answer is\". Just \"323\".\n\n5.  **Final Output Generation:** 323.\n",
+      "score": {
+        "assertion": {
+          "absolute_tolerance": 0.0,
+          "expected": 323.0,
+          "normalized_output": "323",
+          "numeric_match_count": 1,
+          "parsed_value": 323.0,
+          "passed": true,
+          "type": "numeric"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true,
+          "think_closed": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": true,
+      "tokens_per_second": 46.42294664660673,
+      "tokens_predicted": 689,
+      "user": "Compute 17 times 19. Return only the number."
+    },
+    {
+      "category": "arithmetic_reasoning",
+      "content": "150",
+      "finish_reason": "stop",
+      "prompt_id": "reasoning-distance",
+      "raw_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - Speed: 60 km/h\n   - Time: 2.5 hours\n   - Question: How many kilometres does it travel?\n   - Constraint: Return only the number.\n\n2.  **Identify Mathematical Relationship:**\n   - Distance = Speed \u00d7 Time\n   - Distance = 60 km/h \u00d7 2.5 h\n\n3.  **Calculate:**\n   - 60 \u00d7 2.5 = 150\n   - Units: km (since hours cancel out)\n\n4.  **Verify Constraints:**\n   - User wants \"only the number\"\n   - Result: 150\n\n5.  **Formulate Output:**\n   - Just \"150\" as requested. No extra text.\u2705\n</think>\n\n150",
+      "reasoning_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - Speed: 60 km/h\n   - Time: 2.5 hours\n   - Question: How many kilometres does it travel?\n   - Constraint: Return only the number.\n\n2.  **Identify Mathematical Relationship:**\n   - Distance = Speed \u00d7 Time\n   - Distance = 60 km/h \u00d7 2.5 h\n\n3.  **Calculate:**\n   - 60 \u00d7 2.5 = 150\n   - Units: km (since hours cancel out)\n\n4.  **Verify Constraints:**\n   - User wants \"only the number\"\n   - Result: 150\n\n5.  **Formulate Output:**\n   - Just \"150\" as requested. No extra text.\u2705\n",
+      "score": {
+        "assertion": {
+          "absolute_tolerance": 0.0,
+          "expected": 150.0,
+          "normalized_output": "150",
+          "numeric_match_count": 1,
+          "parsed_value": 150.0,
+          "passed": true,
+          "type": "numeric"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true,
+          "think_closed": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": true,
+      "tokens_per_second": 47.61960842344789,
+      "tokens_predicted": 187,
+      "user": "A train travels at 60 km/h for 2.5 hours. How many kilometres does it travel? Return only the number."
+    },
+    {
+      "category": "arithmetic_reasoning",
+      "content": "30",
+      "finish_reason": "stop",
+      "prompt_id": "reasoning-sequence",
+      "raw_content": "Thinking Process:\n\n1.  **Analyze the Request:** The user provides a sequence of numbers: 2, 6, 12, 20. The goal is to find the *next* number in the sequence and return *only* that number.\n\n2.  **Analyze the Sequence:**\n    *   $a_1 = 2$\n    *   $a_2 = 6$\n    *   $a_3 = 12$\n    *   $a_4 = 20$\n\n3.  **Look for Patterns:**\n\n    *   *Differences between consecutive terms:*\n        *   $6 - 2 = 4$\n        *   $12 - 6 = 6$\n        *   $20 - 12 = 8$\n        *   The differences are 4, 6, 8. These form an arithmetic progression with a common difference of 2.\n        *   The next difference should be $8 + 2 = 10$.\n        *   Therefore, the next term $a_5 = 20 + 10 = 30$.\n\n    *   *Multiples relationship:*\n        *   $2 = 1 \\times 2$\n        *   $6 = 2 \\times 3$\n        *   $12 = 3 \\times 4$\n        *   $20 = 4 \\times 5$\n        *   Following this pattern, the next term should be $5 \\times 6 = 30$.\n\n    *   *Polynomial fit (Quadratic):*\n        *   Since the second difference is constant ($6-4=2$, $8-6=2$), it's a quadratic sequence.\n        *   General form: $an^2 + bn + c$.\n        *   For $n=1, value=2 \\Rightarrow a+b+c=2$\n        *   For $n=2, value=6 \\Rightarrow 4a+2b+c=6$\n        *   For $n=3, value=12 \\Rightarrow 9a+3b+c=12$\n        *   Subtracting (1) from (2): $3a+b=4$\n        *   Subtracting (2) from (3): $5a+b=6$\n        *   Subtracting these results: $(5a+b)-(3a+b)=6-4 \\Rightarrow 2a=2 \\Rightarrow a=1$.\n        *   Substituting $a=1$ into $3a+b=4$: $3(1)+b=4 \\Rightarrow b=1$.\n        *   Substituting $a=1, b=1$ into (1): $1+1+c=2 \\Rightarrow c=0$.\n        *   Formula: $n^2 + n = n(n+1)$.\n        *   For $n=5$: $5(5+1) = 30$.\n\n4.  **Verify the Result:**\n    *   Sequence: 2, 6, 12, 20...\n    *   Pattern: $n(n+1)$ for $n=1, 2, 3, 4$.\n    *   Next is $n=5$, so $5 \\times 6 = 30$.\n\n5.  **Format the Output:** The user requested \"Return only the next number.\"\n\n6.  **Final Answer Formulation:** 30.\n\n7.  **Double Check:** Is there any other interpretation?\n    *   $2, 6, 12, 20$ could be centered hexagonal numbers or something similar? No, usually simple arithmetic/geometric puzzles are implied unless specified otherwise.\n    *   Is it $n^2 + n - 1$? No.\n    *   Is it related to factors?\n        *   2: prime\n        *   6: composite\n        *   12: composite\n        *   20: composite\n    *   The difference method ($4, 6, 8 \\to 10$) is the most robust and standard interpretation for this specific sequence.\n\n    Result: 30.\n\n    One more check:\n    $2 = 1^2 + 1$\n    $6 = 2^2 + 2$\n    $12 = 3^2 + 3$\n    $20 = 4^2 + 4$\n    Next: $5^2 + 5 = 25 + 5 = 30$.\n\n    Everything points to 30.\n\n    Final output must be just \"30\".\n\n    *Self-Correction during formatting:* Ensure no explanation text is included as per the prompt \"Return only the next number\".\n\n    Output: 30.\n</think>\n\n30",
+      "reasoning_content": "Thinking Process:\n\n1.  **Analyze the Request:** The user provides a sequence of numbers: 2, 6, 12, 20. The goal is to find the *next* number in the sequence and return *only* that number.\n\n2.  **Analyze the Sequence:**\n    *   $a_1 = 2$\n    *   $a_2 = 6$\n    *   $a_3 = 12$\n    *   $a_4 = 20$\n\n3.  **Look for Patterns:**\n\n    *   *Differences between consecutive terms:*\n        *   $6 - 2 = 4$\n        *   $12 - 6 = 6$\n        *   $20 - 12 = 8$\n        *   The differences are 4, 6, 8. These form an arithmetic progression with a common difference of 2.\n        *   The next difference should be $8 + 2 = 10$.\n        *   Therefore, the next term $a_5 = 20 + 10 = 30$.\n\n    *   *Multiples relationship:*\n        *   $2 = 1 \\times 2$\n        *   $6 = 2 \\times 3$\n        *   $12 = 3 \\times 4$\n        *   $20 = 4 \\times 5$\n        *   Following this pattern, the next term should be $5 \\times 6 = 30$.\n\n    *   *Polynomial fit (Quadratic):*\n        *   Since the second difference is constant ($6-4=2$, $8-6=2$), it's a quadratic sequence.\n        *   General form: $an^2 + bn + c$.\n        *   For $n=1, value=2 \\Rightarrow a+b+c=2$\n        *   For $n=2, value=6 \\Rightarrow 4a+2b+c=6$\n        *   For $n=3, value=12 \\Rightarrow 9a+3b+c=12$\n        *   Subtracting (1) from (2): $3a+b=4$\n        *   Subtracting (2) from (3): $5a+b=6$\n        *   Subtracting these results: $(5a+b)-(3a+b)=6-4 \\Rightarrow 2a=2 \\Rightarrow a=1$.\n        *   Substituting $a=1$ into $3a+b=4$: $3(1)+b=4 \\Rightarrow b=1$.\n        *   Substituting $a=1, b=1$ into (1): $1+1+c=2 \\Rightarrow c=0$.\n        *   Formula: $n^2 + n = n(n+1)$.\n        *   For $n=5$: $5(5+1) = 30$.\n\n4.  **Verify the Result:**\n    *   Sequence: 2, 6, 12, 20...\n    *   Pattern: $n(n+1)$ for $n=1, 2, 3, 4$.\n    *   Next is $n=5$, so $5 \\times 6 = 30$.\n\n5.  **Format the Output:** The user requested \"Return only the next number.\"\n\n6.  **Final Answer Formulation:** 30.\n\n7.  **Double Check:** Is there any other interpretation?\n    *   $2, 6, 12, 20$ could be centered hexagonal numbers or something similar? No, usually simple arithmetic/geometric puzzles are implied unless specified otherwise.\n    *   Is it $n^2 + n - 1$? No.\n    *   Is it related to factors?\n        *   2: prime\n        *   6: composite\n        *   12: composite\n        *   20: composite\n    *   The difference method ($4, 6, 8 \\to 10$) is the most robust and standard interpretation for this specific sequence.\n\n    Result: 30.\n\n    One more check:\n    $2 = 1^2 + 1$\n    $6 = 2^2 + 2$\n    $12 = 3^2 + 3$\n    $20 = 4^2 + 4$\n    Next: $5^2 + 5 = 25 + 5 = 30$.\n\n    Everything points to 30.\n\n    Final output must be just \"30\".\n\n    *Self-Correction during formatting:* Ensure no explanation text is included as per the prompt \"Return only the next number\".\n\n    Output: 30.\n",
+      "score": {
+        "assertion": {
+          "absolute_tolerance": 0.0,
+          "expected": 30.0,
+          "normalized_output": "30",
+          "numeric_match_count": 1,
+          "parsed_value": 30.0,
+          "passed": true,
+          "type": "numeric"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true,
+          "think_closed": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": true,
+      "tokens_per_second": 46.59166363213513,
+      "tokens_predicted": 1075,
+      "user": "The sequence is 2, 6, 12, 20. Return only the next number."
+    },
+    {
+      "category": "arithmetic_reasoning",
+      "content": "0.6",
+      "finish_reason": "stop",
+      "prompt_id": "reasoning-probability",
+      "raw_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - Bag contents: 3 red balls, 2 blue balls\n   - Total balls: 3 + 2 = 5\n   - Question: Probability of drawing a red ball\n   - Output format: Decimal only, no extra text\n\n2.  **Calculate Probability:**\n   - P(red) = (Number of red balls) / (Total number of balls)\n   - P(red) = 3 / 5\n   - Convert to decimal: 3 \u00f7 5 = 0.6\n\n3.  **Check Constraints:**\n   - \"output only that number\" -> Just \"0.6\"\n\n4.  **Final Output Generation:**\n   - 0.6\n   - Double-check: 3 red, 2 blue -> total 5. 3/5 = 0.6. Correct. Format matches constraint.\u2705\n</think>\n\n0.6",
+      "reasoning_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - Bag contents: 3 red balls, 2 blue balls\n   - Total balls: 3 + 2 = 5\n   - Question: Probability of drawing a red ball\n   - Output format: Decimal only, no extra text\n\n2.  **Calculate Probability:**\n   - P(red) = (Number of red balls) / (Total number of balls)\n   - P(red) = 3 / 5\n   - Convert to decimal: 3 \u00f7 5 = 0.6\n\n3.  **Check Constraints:**\n   - \"output only that number\" -> Just \"0.6\"\n\n4.  **Final Output Generation:**\n   - 0.6\n   - Double-check: 3 red, 2 blue -> total 5. 3/5 = 0.6. Correct. Format matches constraint.\u2705\n",
+      "score": {
+        "assertion": {
+          "absolute_tolerance": 0.001,
+          "expected": 0.6,
+          "normalized_output": "0.6",
+          "numeric_match_count": 1,
+          "parsed_value": 0.6,
+          "passed": true,
+          "type": "numeric"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true,
+          "think_closed": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": true,
+      "tokens_per_second": 47.70381049741939,
+      "tokens_predicted": 208,
+      "user": "A bag has 3 red and 2 blue balls. Give the probability of drawing red as a decimal, and output only that number."
+    },
+    {
+      "category": "code",
+      "content": "def",
+      "finish_reason": "stop",
+      "prompt_id": "code-python-def",
+      "raw_content": "Thinking Process:\n\n1.  **Analyze the Request:** The user is asking for a specific Python keyword that starts a function definition. They want *only* the keyword as the output.\n\n2.  **Identify the Core Concept:** In Python, how do you define a function?\n    *   Syntax: `def function_name():`\n    *   Keyword used: `def`\n\n3.  **Verify Constraints:**\n    *   \"Which Python keyword...?\" -> Yes, looking for the keyword.\n    *   \"...begins a function definition?\" -> Yes, `def` starts the block.\n    *   \"Return only the keyword.\" -> Do not include explanations, quotes (unless necessary for the word itself, but usually just the raw text is best), or code blocks unless requested. Just the string.\n\n4.  **Formulate Output:**\n    *   Target: `def`\n\n5.  **Final Check:** Does `def` begin a function definition? Yes. Is it a keyword? Yes. Is the output only that keyword? Yes.\n\n6.  **Construct Final Response:** `def` (or potentially `def` with no extra text). The prompt asks to \"Return only the keyword.\" So, just `def`.\n\n    *   Self-correction/Refinement: Sometimes users might expect quotes if it's a string representation, but usually \"return only the keyword\" implies the raw token. I will provide `def`.\n\n    Let's double-check if there are any other ways.\n    *   `lambda`: creates anonymous functions, but `def` is the standard definition keyword for named functions. The prompt says \"a function definition\", which strongly implies the standard `def` statement.\n    *   `class`: defines a class (which contains methods, but isn't the function definition itself).\n\n    Result: `def`.\n\n7.  **Final Output Generation:** def. (I will output just the text 'def').\n</think>\n\ndef",
+      "reasoning_content": "Thinking Process:\n\n1.  **Analyze the Request:** The user is asking for a specific Python keyword that starts a function definition. They want *only* the keyword as the output.\n\n2.  **Identify the Core Concept:** In Python, how do you define a function?\n    *   Syntax: `def function_name():`\n    *   Keyword used: `def`\n\n3.  **Verify Constraints:**\n    *   \"Which Python keyword...?\" -> Yes, looking for the keyword.\n    *   \"...begins a function definition?\" -> Yes, `def` starts the block.\n    *   \"Return only the keyword.\" -> Do not include explanations, quotes (unless necessary for the word itself, but usually just the raw text is best), or code blocks unless requested. Just the string.\n\n4.  **Formulate Output:**\n    *   Target: `def`\n\n5.  **Final Check:** Does `def` begin a function definition? Yes. Is it a keyword? Yes. Is the output only that keyword? Yes.\n\n6.  **Construct Final Response:** `def` (or potentially `def` with no extra text). The prompt asks to \"Return only the keyword.\" So, just `def`.\n\n    *   Self-correction/Refinement: Sometimes users might expect quotes if it's a string representation, but usually \"return only the keyword\" implies the raw token. I will provide `def`.\n\n    Let's double-check if there are any other ways.\n    *   `lambda`: creates anonymous functions, but `def` is the standard definition keyword for named functions. The prompt says \"a function definition\", which strongly implies the standard `def` statement.\n    *   `class`: defines a class (which contains methods, but isn't the function definition itself).\n\n    Result: `def`.\n\n7.  **Final Output Generation:** def. (I will output just the text 'def').\n",
+      "score": {
+        "assertion": {
+          "expected": "def",
+          "normalized_output": "def",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true,
+          "think_closed": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": true,
+      "tokens_per_second": 46.77558610538507,
+      "tokens_predicted": 418,
+      "user": "Which Python keyword begins a function definition? Return only the keyword."
+    },
+    {
+      "category": "code",
+      "content": "SELECT",
+      "finish_reason": "stop",
+      "prompt_id": "code-sql-select",
+      "raw_content": "Thinking Process:\n\n1.  **Analyze User Input:**\n   - Question: \"Which SQL keyword retrieves rows from a table?\"\n   - Constraint: \"Return only the uppercase keyword.\"\n\n2.  **Identify Core Concept:**\n   - The fundamental SQL command for retrieving data/rows from a table is `SELECT`.\n\n3.  **Verify Constraints:**\n   - Must be uppercase.\n   - Must be only the keyword (no extra text).\n\n4.  **Formulate Output:**\n   - Keyword: SELECT\n   - Check constraint: \"Return only the uppercase keyword.\" -> \"SELECT\"\n\n5.  **Final Output Generation:**\n   - SELECT\u2705\n</think>\n\nSELECT",
+      "reasoning_content": "Thinking Process:\n\n1.  **Analyze User Input:**\n   - Question: \"Which SQL keyword retrieves rows from a table?\"\n   - Constraint: \"Return only the uppercase keyword.\"\n\n2.  **Identify Core Concept:**\n   - The fundamental SQL command for retrieving data/rows from a table is `SELECT`.\n\n3.  **Verify Constraints:**\n   - Must be uppercase.\n   - Must be only the keyword (no extra text).\n\n4.  **Formulate Output:**\n   - Keyword: SELECT\n   - Check constraint: \"Return only the uppercase keyword.\" -> \"SELECT\"\n\n5.  **Final Output Generation:**\n   - SELECT\u2705\n",
+      "score": {
+        "assertion": {
+          "expected": "SELECT",
+          "normalized_output": "SELECT",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true,
+          "think_closed": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": true,
+      "tokens_per_second": 45.204661799938926,
+      "tokens_predicted": 148,
+      "user": "Which SQL keyword retrieves rows from a table? Return only the uppercase keyword."
+    },
+    {
+      "category": "code",
+      "content": "nullptr",
+      "finish_reason": "stop",
+      "prompt_id": "code-cpp-null",
+      "raw_content": "Thinking Process:\n\n1.  **Deconstruct the user's request:**\n    *   Topic: C++11 null pointer literal.\n    *   Output constraint: Return *only* the literal.\n\n2.  **Retrieve knowledge about C++11 null pointer literals:**\n    *   Prior to C++11, `NULL` was a macro (often defined as `0` or `(void*)0`).\n    *   `nullptr` was introduced in C++11.\n    *   `nullptr` is a keyword/literal representing a null pointer of type `std::nullptr_t`.\n\n3.  **Identify the specific literal:**\n    *   The literal is `nullptr`.\n\n4.  **Format the output according to constraints:**\n    *   User asked for \"Return only the literal.\"\n    *   Result: `nullptr`.\n\n5.  **Final verification:**\n    *   Does `nullptr` match C++11? Yes.\n    *   Is it a null pointer literal? Yes.\n    *   Is the output just the literal? Yes.\n\n6.  **Construct response:**\n    *   `nullptr`\n</think>\n\nnullptr",
+      "reasoning_content": "Thinking Process:\n\n1.  **Deconstruct the user's request:**\n    *   Topic: C++11 null pointer literal.\n    *   Output constraint: Return *only* the literal.\n\n2.  **Retrieve knowledge about C++11 null pointer literals:**\n    *   Prior to C++11, `NULL` was a macro (often defined as `0` or `(void*)0`).\n    *   `nullptr` was introduced in C++11.\n    *   `nullptr` is a keyword/literal representing a null pointer of type `std::nullptr_t`.\n\n3.  **Identify the specific literal:**\n    *   The literal is `nullptr`.\n\n4.  **Format the output according to constraints:**\n    *   User asked for \"Return only the literal.\"\n    *   Result: `nullptr`.\n\n5.  **Final verification:**\n    *   Does `nullptr` match C++11? Yes.\n    *   Is it a null pointer literal? Yes.\n    *   Is the output just the literal? Yes.\n\n6.  **Construct response:**\n    *   `nullptr`\n",
+      "score": {
+        "assertion": {
+          "expected": "nullptr",
+          "normalized_output": "nullptr",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true,
+          "think_closed": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": true,
+      "tokens_per_second": 47.85141452199285,
+      "tokens_predicted": 253,
+      "user": "What is the C++11 null pointer literal? Return only the literal."
+    },
+    {
+      "category": "code",
+      "content": "len(items)",
+      "finish_reason": "stop",
+      "prompt_id": "code-python-length",
+      "raw_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - **Question:** \"Give the Python expression that returns the length of variable items. Return only the expression.\"\n   - **Key elements:** \n     - Python expression\n     - Returns the length of a variable named `items`\n     - Output should be *only* the expression\n\n2.  **Identify Core Concept:**\n   - In Python, to get the length of an object (like a list, tuple, string, dict, etc.), you use the built-in function `len()`.\n   - The variable name is `items`.\n   - So the expression would be `len(items)`.\n\n3.  **Verify Constraints:**\n   - \"Return only the expression.\" -> No extra text, explanations, or formatting. Just the code.\n   - Python syntax: `len(items)` is correct.\n\n4.  **Formulate Output:**\n   - `len(items)`\n\n5.  **Final Check:**\n   - Does it match the requirement? Yes.\n   - Is it a valid Python expression? Yes.\n   - Does it return the length of `items`? Yes.\n   - Only the expression? Yes.\n\n   Output: `len(items)`\u2705\n</think>\n\nlen(items)",
+      "reasoning_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - **Question:** \"Give the Python expression that returns the length of variable items. Return only the expression.\"\n   - **Key elements:** \n     - Python expression\n     - Returns the length of a variable named `items`\n     - Output should be *only* the expression\n\n2.  **Identify Core Concept:**\n   - In Python, to get the length of an object (like a list, tuple, string, dict, etc.), you use the built-in function `len()`.\n   - The variable name is `items`.\n   - So the expression would be `len(items)`.\n\n3.  **Verify Constraints:**\n   - \"Return only the expression.\" -> No extra text, explanations, or formatting. Just the code.\n   - Python syntax: `len(items)` is correct.\n\n4.  **Formulate Output:**\n   - `len(items)`\n\n5.  **Final Check:**\n   - Does it match the requirement? Yes.\n   - Is it a valid Python expression? Yes.\n   - Does it return the length of `items`? Yes.\n   - Only the expression? Yes.\n\n   Output: `len(items)`\u2705\n",
+      "score": {
+        "assertion": {
+          "expected": "len(items)",
+          "normalized_output": "len(items)",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true,
+          "think_closed": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": true,
+      "tokens_per_second": 47.140532441171615,
+      "tokens_predicted": 276,
+      "user": "Give the Python expression that returns the length of variable items. Return only the expression."
+    },
+    {
+      "category": "code",
+      "content": "{\"ready\":true}",
+      "finish_reason": "stop",
+      "prompt_id": "code-json-object",
+      "raw_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - **Request:** \"Return exactly this compact JSON object with keys in the shown order and no code fence: {\"ready\":true}\"\n   - **Key Constraints:**\n     - Exactly the specified JSON object\n     - Keys in the shown order (only one key: \"ready\")\n     - No code fence (no markdown backticks or language identifiers)\n     - Compact format\n\n2.  **Identify Core Requirements:**\n   - Output must be precisely: `{\"ready\":true}`\n   - Nothing else before, after, or formatted differently.\n\n3.  **Formulate Response:**\n   - Just output the exact string: `{\"ready\":true}`\n   - Verify constraints: JSON object? Yes. Keys in order? Yes (only one). No code fence? Yes. Compact? Yes.\n\n4.  **Final Output Generation:**\n   - `{\"ready\":true}` (exactly as requested)\u2705\n</think>\n\n{\"ready\":true}",
+      "reasoning_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - **Request:** \"Return exactly this compact JSON object with keys in the shown order and no code fence: {\"ready\":true}\"\n   - **Key Constraints:**\n     - Exactly the specified JSON object\n     - Keys in the shown order (only one key: \"ready\")\n     - No code fence (no markdown backticks or language identifiers)\n     - Compact format\n\n2.  **Identify Core Requirements:**\n   - Output must be precisely: `{\"ready\":true}`\n   - Nothing else before, after, or formatted differently.\n\n3.  **Formulate Response:**\n   - Just output the exact string: `{\"ready\":true}`\n   - Verify constraints: JSON object? Yes. Keys in order? Yes (only one). No code fence? Yes. Compact? Yes.\n\n4.  **Final Output Generation:**\n   - `{\"ready\":true}` (exactly as requested)\u2705\n",
+      "score": {
+        "assertion": {
+          "normalized_output": "{\"ready\":true}",
+          "passed": true,
+          "pattern": "\\{\"ready\":true\\}",
+          "type": "regex"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true,
+          "think_closed": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": true,
+      "tokens_per_second": 47.55482801472212,
+      "tokens_predicted": 221,
+      "user": "Return exactly this compact JSON object with keys in the shown order and no code fence: {\"ready\":true}"
+    },
+    {
+      "category": "knowledge",
+      "content": "Paris",
+      "finish_reason": "stop",
+      "prompt_id": "knowledge-france",
+      "raw_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - Question: \"What is the capital of France?\"\n   - Constraint: \"Return only the city name.\"\n\n2.  **Identify Key Fact:**\n   - The capital of France is Paris.\n\n3.  **Apply Constraint:**\n   - The user explicitly wants *only* the city name.\n   - So, I should output just \"Paris\".\n\n4.  **Formulate Response:**\n   - Check: Does it meet the constraint? Yes.\n   - Output: Paris\n\n5.  **Final Verification:**\n   - Factually correct? Yes.\n   - Matches constraint? Yes.\n   - Ready.\u2705\n</think>\n\nParis",
+      "reasoning_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - Question: \"What is the capital of France?\"\n   - Constraint: \"Return only the city name.\"\n\n2.  **Identify Key Fact:**\n   - The capital of France is Paris.\n\n3.  **Apply Constraint:**\n   - The user explicitly wants *only* the city name.\n   - So, I should output just \"Paris\".\n\n4.  **Formulate Response:**\n   - Check: Does it meet the constraint? Yes.\n   - Output: Paris\n\n5.  **Final Verification:**\n   - Factually correct? Yes.\n   - Matches constraint? Yes.\n   - Ready.\u2705\n",
+      "score": {
+        "assertion": {
+          "expected": "Paris",
+          "normalized_output": "Paris",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true,
+          "think_closed": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": true,
+      "tokens_per_second": 45.153874688281086,
+      "tokens_predicted": 159,
+      "user": "What is the capital of France? Return only the city name."
+    },
+    {
+      "category": "knowledge",
+      "content": "H\u2082O",
+      "finish_reason": "stop",
+      "prompt_id": "knowledge-water",
+      "raw_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - Question: \"What is the chemical formula for water?\"\n   - Constraint: \"Return only the formula.\"\n\n2.  **Identify Key Information:**\n   - Water's chemical formula is H\u2082O.\n\n3.  **Apply Constraints:**\n   - The user explicitly wants *only* the formula.\n   - So, I should output just \"H\u2082O\" or \"H2O\" (depending on formatting preferences, but standard chemical notation uses subscript). Since plain text usually renders as H2O or H\u2082O, I'll stick to the standard representation. I'll use H\u2082O if possible, but plain text H2O is universally acceptable. I'll output exactly \"H\u2082O\" or \"H2O\". Given the constraint \"Return only the formula\", I'll provide just the formula.\n\n   Let's check formatting: In plain text, H2O is standard. I'll use H\u2082O if Unicode subscript is supported, but H2O is safer for plain text. Actually, both are fine. I'll just output H\u2082O as it's chemically precise, or H2O. I'll go with H\u2082O.\n\n   Wait, the prompt says \"Return only the formula.\" So I will literally output just the formula without any extra text.\n\n4.  **Formulate Response:**\n   - H\u2082O (or H2O)\n   - I'll use H\u2082O for accuracy, but plain text H2O is also fine. I'll stick with H\u2082O. Actually, in many AI contexts, H2O is standard. I'll output H\u2082O.\n\n   Let's just output: H\u2082O\n\n   Double-check constraint: \"Return only the formula.\" -> No explanations, no greetings, just the formula.\n\n   Final answer: H\u2082O (or H2O). I'll use H\u2082O. If subscript isn't rendered well, H2O is fine. I'll just write H\u2082O. Actually, to be safe with plain text, H2O is universally accepted. I'll output H\u2082O as it's standard chemical notation. Both are fine. I'll go with H\u2082O.\n\n   Wait, let's just output `H\u2082O`. It's unambiguous.\n\n   Final check: \"What is the chemical formula for water? Return only the formula.\" -> H\u2082O.\u2705\n   Proceed. \n   Output: H\u2082O\n   (Self-Correction/Refinement during thought: In plain text, subscripts might not render consistently across all interfaces, so H2O is often preferred for strict compatibility. I'll use H\u2082O but it's fine either way. I'll just output H\u2082O.)\n   Actually, I'll just output `H\u2082O`. It's standard.\n   Done. \n   Output matches constraint.\u2705\n   Proceeds. \n   [Output Generation] -> H\u2082O\n   (Note: I'll use the subscript character if possible, otherwise H2O. I'll stick with H\u2082O as it's chemically precise.)\n   Final: H\u2082O\n   All good. \n   *Self-Correction/Verification during process*: \n   The prompt says \"Return only the formula.\" I will output exactly `H\u2082O`. If the system expects plain text, `H2O` is also acceptable. I'll use `H\u2082O`. It's fine.\n   Output: H\u2082O\n   Done. \n   [Output] H\u2082O\n   *(Note: I'll just write H\u2082O as requested.)*\n   Final Answer Generation. \n   \"H\u2082O\" (or \"H2O\") -> I'll go with H\u2082O.\n   All steps verified.\u2705\n   Output matches request.\u2705\n   Proceeds. \n   [Output] H\u2082O\n   *(Done.)*\n</think>\n\nH\u2082O",
+      "reasoning_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - Question: \"What is the chemical formula for water?\"\n   - Constraint: \"Return only the formula.\"\n\n2.  **Identify Key Information:**\n   - Water's chemical formula is H\u2082O.\n\n3.  **Apply Constraints:**\n   - The user explicitly wants *only* the formula.\n   - So, I should output just \"H\u2082O\" or \"H2O\" (depending on formatting preferences, but standard chemical notation uses subscript). Since plain text usually renders as H2O or H\u2082O, I'll stick to the standard representation. I'll use H\u2082O if possible, but plain text H2O is universally acceptable. I'll output exactly \"H\u2082O\" or \"H2O\". Given the constraint \"Return only the formula\", I'll provide just the formula.\n\n   Let's check formatting: In plain text, H2O is standard. I'll use H\u2082O if Unicode subscript is supported, but H2O is safer for plain text. Actually, both are fine. I'll just output H\u2082O as it's chemically precise, or H2O. I'll go with H\u2082O.\n\n   Wait, the prompt says \"Return only the formula.\" So I will literally output just the formula without any extra text.\n\n4.  **Formulate Response:**\n   - H\u2082O (or H2O)\n   - I'll use H\u2082O for accuracy, but plain text H2O is also fine. I'll stick with H\u2082O. Actually, in many AI contexts, H2O is standard. I'll output H\u2082O.\n\n   Let's just output: H\u2082O\n\n   Double-check constraint: \"Return only the formula.\" -> No explanations, no greetings, just the formula.\n\n   Final answer: H\u2082O (or H2O). I'll use H\u2082O. If subscript isn't rendered well, H2O is fine. I'll just write H\u2082O. Actually, to be safe with plain text, H2O is universally accepted. I'll output H\u2082O as it's standard chemical notation. Both are fine. I'll go with H\u2082O.\n\n   Wait, let's just output `H\u2082O`. It's unambiguous.\n\n   Final check: \"What is the chemical formula for water? Return only the formula.\" -> H\u2082O.\u2705\n   Proceed. \n   Output: H\u2082O\n   (Self-Correction/Refinement during thought: In plain text, subscripts might not render consistently across all interfaces, so H2O is often preferred for strict compatibility. I'll use H\u2082O but it's fine either way. I'll just output H\u2082O.)\n   Actually, I'll just output `H\u2082O`. It's standard.\n   Done. \n   Output matches constraint.\u2705\n   Proceeds. \n   [Output Generation] -> H\u2082O\n   (Note: I'll use the subscript character if possible, otherwise H2O. I'll stick with H\u2082O as it's chemically precise.)\n   Final: H\u2082O\n   All good. \n   *Self-Correction/Verification during process*: \n   The prompt says \"Return only the formula.\" I will output exactly `H\u2082O`. If the system expects plain text, `H2O` is also acceptable. I'll use `H\u2082O`. It's fine.\n   Output: H\u2082O\n   Done. \n   [Output] H\u2082O\n   *(Note: I'll just write H\u2082O as requested.)*\n   Final Answer Generation. \n   \"H\u2082O\" (or \"H2O\") -> I'll go with H\u2082O.\n   All steps verified.\u2705\n   Output matches request.\u2705\n   Proceeds. \n   [Output] H\u2082O\n   *(Done.)*\n",
+      "score": {
+        "assertion": {
+          "expected": "H2O",
+          "normalized_output": "H\u2082O",
+          "passed": false,
+          "type": "exact"
+        },
+        "correct": false,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true,
+          "think_closed": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": true,
+      "tokens_per_second": 47.31835103338931,
+      "tokens_predicted": 839,
+      "user": "What is the chemical formula for water? Return only the formula."
+    },
+    {
+      "category": "knowledge",
+      "content": "Mars",
+      "finish_reason": "stop",
+      "prompt_id": "knowledge-red-planet",
+      "raw_content": "Thinking Process:\n\n1.  **Analyze the Request:** The user is asking for the name of the planet known as the \"Red Planet\". The constraint is to return *only* its name.\n2.  **Identify the entity:** The \"Red Planet\" is a common nickname for Mars due to its reddish appearance caused by iron oxide on its surface.\n3.  **Formulate the answer:** The name is \"Mars\".\n4.  **Apply constraints:** Return *only* the name.\n5.  **Final Output:** Mars.\n\nDouble-check: Is there any other planet called the Red Planet? No. Is the output format strictly just the name? Yes.\n\nResult: Mars.\n</think>\n\nMars",
+      "reasoning_content": "Thinking Process:\n\n1.  **Analyze the Request:** The user is asking for the name of the planet known as the \"Red Planet\". The constraint is to return *only* its name.\n2.  **Identify the entity:** The \"Red Planet\" is a common nickname for Mars due to its reddish appearance caused by iron oxide on its surface.\n3.  **Formulate the answer:** The name is \"Mars\".\n4.  **Apply constraints:** Return *only* the name.\n5.  **Final Output:** Mars.\n\nDouble-check: Is there any other planet called the Red Planet? No. Is the output format strictly just the name? Yes.\n\nResult: Mars.\n",
+      "score": {
+        "assertion": {
+          "expected": "Mars",
+          "normalized_output": "Mars",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true,
+          "think_closed": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": true,
+      "tokens_per_second": 47.72717055473752,
+      "tokens_predicted": 156,
+      "user": "Which planet is known as the Red Planet? Return only its name."
+    },
+    {
+      "category": "knowledge",
+      "content": "Jane Austen",
+      "finish_reason": "stop",
+      "prompt_id": "knowledge-austen",
+      "raw_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - Question: \"Who wrote Pride and Prejudice?\"\n   - Constraint: \"Return only the author's full name.\"\n\n2.  **Identify Key Information:**\n   - Book: *Pride and Prejudice*\n   - Author: Jane Austen\n\n3.  **Verify Information:**\n   - *Pride and Prejudice* was published in 1813.\n   - Author is widely known as Jane Austen.\n   - Full name: Jane Austen (no middle name typically used; sometimes referred to as Jane Austen)\n\n4.  **Apply Constraint:**\n   - User explicitly says: \"Return only the author's full name.\"\n   - So I must output exactly \"Jane Austen\" and nothing else.\n\n5.  **Formulate Output:**\n   - Jane Austen\n\n   Check constraint: Only the full name? Yes.\n   Matches known fact? Yes.\n   Ready.\u2705\n</think>\n\nJane Austen",
+      "reasoning_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - Question: \"Who wrote Pride and Prejudice?\"\n   - Constraint: \"Return only the author's full name.\"\n\n2.  **Identify Key Information:**\n   - Book: *Pride and Prejudice*\n   - Author: Jane Austen\n\n3.  **Verify Information:**\n   - *Pride and Prejudice* was published in 1813.\n   - Author is widely known as Jane Austen.\n   - Full name: Jane Austen (no middle name typically used; sometimes referred to as Jane Austen)\n\n4.  **Apply Constraint:**\n   - User explicitly says: \"Return only the author's full name.\"\n   - So I must output exactly \"Jane Austen\" and nothing else.\n\n5.  **Formulate Output:**\n   - Jane Austen\n\n   Check constraint: Only the full name? Yes.\n   Matches known fact? Yes.\n   Ready.\u2705\n",
+      "score": {
+        "assertion": {
+          "expected": "Jane Austen",
+          "normalized_output": "Jane Austen",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true,
+          "think_closed": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": true,
+      "tokens_per_second": 47.444106224414824,
+      "tokens_predicted": 227,
+      "user": "Who wrote Pride and Prejudice? Return only the author's full name."
+    },
+    {
+      "category": "knowledge",
+      "content": "Oxygen",
+      "finish_reason": "stop",
+      "prompt_id": "knowledge-photosynthesis",
+      "raw_content": "Thinking Process:\n\n1.  **Analyze the Request:** The user is asking for the specific gas released by plants during the process of photosynthesis. The constraint is to \"Return only the gas name.\"\n\n2.  **Identify the Process:** Photosynthesis is the process by which green plants use sunlight to synthesize foods from carbon dioxide and water.\n    *   Inputs: Carbon dioxide ($CO_2$), Water ($H_2O$), Light energy.\n    *   Outputs: Glucose (sugar, $C_6H_{12}O_6$), Oxygen ($O_2$).\n\n3.  **Identify the Gas Released:** The byproduct released into the atmosphere is oxygen.\n\n4.  **Format the Output:** The user explicitly requested *only* the gas name.\n    *   Candidate: \"Oxygen\" or \"Oxygen gas\".\n    *   Best fit: \"Oxygen\".\n\n5.  **Final Verification:** Does a plant release anything else? Some might argue about trace amounts of volatile organic compounds, but in the context of general biology and photosynthesis questions, the primary gas released is oxygen.\n\n6.  **Construct Final Answer:** Oxygen.\n</think>\n\nOxygen",
+      "reasoning_content": "Thinking Process:\n\n1.  **Analyze the Request:** The user is asking for the specific gas released by plants during the process of photosynthesis. The constraint is to \"Return only the gas name.\"\n\n2.  **Identify the Process:** Photosynthesis is the process by which green plants use sunlight to synthesize foods from carbon dioxide and water.\n    *   Inputs: Carbon dioxide ($CO_2$), Water ($H_2O$), Light energy.\n    *   Outputs: Glucose (sugar, $C_6H_{12}O_6$), Oxygen ($O_2$).\n\n3.  **Identify the Gas Released:** The byproduct released into the atmosphere is oxygen.\n\n4.  **Format the Output:** The user explicitly requested *only* the gas name.\n    *   Candidate: \"Oxygen\" or \"Oxygen gas\".\n    *   Best fit: \"Oxygen\".\n\n5.  **Final Verification:** Does a plant release anything else? Some might argue about trace amounts of volatile organic compounds, but in the context of general biology and photosynthesis questions, the primary gas released is oxygen.\n\n6.  **Construct Final Answer:** Oxygen.\n",
+      "score": {
+        "assertion": {
+          "expected": "oxygen",
+          "normalized_output": "Oxygen",
+          "passed": false,
+          "type": "exact"
+        },
+        "correct": false,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true,
+          "think_closed": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": true,
+      "tokens_per_second": 47.274420556518116,
+      "tokens_predicted": 261,
+      "user": "Which gas do plants release during photosynthesis? Return only the gas name."
+    },
+    {
+      "category": "multilingual",
+      "content": "Haus",
+      "finish_reason": "stop",
+      "prompt_id": "multilingual-de",
+      "raw_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - Input word: 'house' (English)\n   - Task: Translate to German\n   - Constraint: Return *only* the German word\n\n2.  **Identify Translation:**\n   - English \"house\" -> German \"Haus\"\n   - Check for gender/case nuances: The base translation is \"das Haus\". In most dictionary/single-word contexts, just \"Haus\" is expected.\n   - Confirm: Yes, \"Haus\" is the standard translation.\n\n3.  **Apply Constraint:**\n   - User explicitly said: \"Return only the German word.\"\n   - So I must output exactly \"Haus\" without any extra text, explanations, or punctuation (unless necessary, but best to stick strictly to the word).\n\n4.  **Final Output Generation:**\n   - Output: Haus\n   - Check constraint: Matches exactly. No extra words. Ready.\u2705\n</think>\n\nHaus",
+      "reasoning_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - Input word: 'house' (English)\n   - Task: Translate to German\n   - Constraint: Return *only* the German word\n\n2.  **Identify Translation:**\n   - English \"house\" -> German \"Haus\"\n   - Check for gender/case nuances: The base translation is \"das Haus\". In most dictionary/single-word contexts, just \"Haus\" is expected.\n   - Confirm: Yes, \"Haus\" is the standard translation.\n\n3.  **Apply Constraint:**\n   - User explicitly said: \"Return only the German word.\"\n   - So I must output exactly \"Haus\" without any extra text, explanations, or punctuation (unless necessary, but best to stick strictly to the word).\n\n4.  **Final Output Generation:**\n   - Output: Haus\n   - Check constraint: Matches exactly. No extra words. Ready.\u2705\n",
+      "score": {
+        "assertion": {
+          "expected": "Haus",
+          "normalized_output": "Haus",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true,
+          "think_closed": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": true,
+      "tokens_per_second": 43.189579821996034,
+      "tokens_predicted": 207,
+      "user": "Translate the English word 'house' into German. Return only the German word."
+    },
+    {
+      "category": "multilingual",
+      "content": "libro",
+      "finish_reason": "stop",
+      "prompt_id": "multilingual-es",
+      "raw_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - Input word: 'book' (English)\n   - Task: Translate to Spanish\n   - Constraint: Return *only* the Spanish word\n\n2.  **Identify Translation:**\n   - English \"book\" translates to Spanish as \"libro\" (masculine noun)\n   - Other possible translations exist depending on context (e.g., \"reservar\" for booking, but \"book\" as a noun is universally \"libro\")\n   - Given the straightforward request, \"libro\" is the correct and most direct translation.\n\n3.  **Check Constraints:**\n   - Must return *only* the Spanish word\n   - No extra text, explanations, or formatting\n\n4.  **Formulate Output:**\n   - Output: libro\n\n5.  **Final Verification:**\n   - Does \"libro\" accurately translate \"book\"? Yes.\n   - Is it only the Spanish word? Yes.\n   - Matches constraint? Yes.\n\n   Proceed.\u2705\n</think>\n\nlibro",
+      "reasoning_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - Input word: 'book' (English)\n   - Task: Translate to Spanish\n   - Constraint: Return *only* the Spanish word\n\n2.  **Identify Translation:**\n   - English \"book\" translates to Spanish as \"libro\" (masculine noun)\n   - Other possible translations exist depending on context (e.g., \"reservar\" for booking, but \"book\" as a noun is universally \"libro\")\n   - Given the straightforward request, \"libro\" is the correct and most direct translation.\n\n3.  **Check Constraints:**\n   - Must return *only* the Spanish word\n   - No extra text, explanations, or formatting\n\n4.  **Formulate Output:**\n   - Output: libro\n\n5.  **Final Verification:**\n   - Does \"libro\" accurately translate \"book\"? Yes.\n   - Is it only the Spanish word? Yes.\n   - Matches constraint? Yes.\n\n   Proceed.\u2705\n",
+      "score": {
+        "assertion": {
+          "expected": "libro",
+          "normalized_output": "libro",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true,
+          "think_closed": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": true,
+      "tokens_per_second": 46.84926522707595,
+      "tokens_predicted": 232,
+      "user": "Translate the English word 'book' into Spanish. Return only the Spanish word."
+    },
+    {
+      "category": "multilingual",
+      "content": "eau",
+      "finish_reason": "stop",
+      "prompt_id": "multilingual-fr",
+      "raw_content": "Thinking Process:\n\n1.  **Analyze the Request:**\n   - Input word: \"water\" (English)\n   - Target language: French\n   - Constraint: Return *only* the French word.\n\n2.  **Identify the Translation:**\n   - English \"water\" -> French \"eau\".\n\n3.  **Check Constraints:**\n   - The user explicitly said: \"Return only the French word.\"\n   - So, I should output just \"eau\", nothing else.\n\n4.  **Formulate Output:**\n   - \"eau\"\n\n5.  **Final Verification:**\n   - Does \"eau\" mean water? Yes.\n   - Is it only the French word? Yes.\n   - No extra text, explanations, or formatting required.\n\n   Output matches requirement.\u2705\n</think>\n\neau",
+      "reasoning_content": "Thinking Process:\n\n1.  **Analyze the Request:**\n   - Input word: \"water\" (English)\n   - Target language: French\n   - Constraint: Return *only* the French word.\n\n2.  **Identify the Translation:**\n   - English \"water\" -> French \"eau\".\n\n3.  **Check Constraints:**\n   - The user explicitly said: \"Return only the French word.\"\n   - So, I should output just \"eau\", nothing else.\n\n4.  **Formulate Output:**\n   - \"eau\"\n\n5.  **Final Verification:**\n   - Does \"eau\" mean water? Yes.\n   - Is it only the French word? Yes.\n   - No extra text, explanations, or formatting required.\n\n   Output matches requirement.\u2705\n",
+      "score": {
+        "assertion": {
+          "expected": "eau",
+          "normalized_output": "eau",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true,
+          "think_closed": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": true,
+      "tokens_per_second": 47.539865959187026,
+      "tokens_predicted": 177,
+      "user": "Translate the English word 'water' into French. Return only the French word."
+    },
+    {
+      "category": "multilingual",
+      "content": "sole",
+      "finish_reason": "stop",
+      "prompt_id": "multilingual-it",
+      "raw_content": "Thinking Process:\n\n1.  **Analyze the Request:**\n   - Input word: \"sun\" (English)\n   - Target language: Italian\n   - Constraint: Return *only* the Italian word.\n\n2.  **Identify the Translation:**\n   - English \"sun\" -> Italian \"sole\".\n\n3.  **Check Constraints:**\n   - The user explicitly said: \"Return only the Italian word.\"\n   - I need to output just \"sole\", without any extra text, explanations, or formatting.\n\n4.  **Formulate Output:**\n   - Output: sole\n\n5.  **Final Verification:**\n   - Translation is correct.\n   - Constraint met (only the word).\n   - Ready.\u2705\n</think>\n\nsole",
+      "reasoning_content": "Thinking Process:\n\n1.  **Analyze the Request:**\n   - Input word: \"sun\" (English)\n   - Target language: Italian\n   - Constraint: Return *only* the Italian word.\n\n2.  **Identify the Translation:**\n   - English \"sun\" -> Italian \"sole\".\n\n3.  **Check Constraints:**\n   - The user explicitly said: \"Return only the Italian word.\"\n   - I need to output just \"sole\", without any extra text, explanations, or formatting.\n\n4.  **Formulate Output:**\n   - Output: sole\n\n5.  **Final Verification:**\n   - Translation is correct.\n   - Constraint met (only the word).\n   - Ready.\u2705\n",
+      "score": {
+        "assertion": {
+          "expected": "sole",
+          "normalized_output": "sole",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true,
+          "think_closed": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": true,
+      "tokens_per_second": 47.36833588563342,
+      "tokens_predicted": 162,
+      "user": "Translate the English word 'sun' into Italian. Return only the Italian word."
+    },
+    {
+      "category": "multilingual",
+      "content": "obrigado",
+      "finish_reason": "stop",
+      "prompt_id": "multilingual-pt",
+      "raw_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - Speaker: Male\n   - Action: Says \"thank you\"\n   - Language: Portuguese\n   - Requirement: Return *only* the Portuguese word\n\n2.  **Identify Key Information:**\n   - \"Thank you\" in Portuguese is commonly \"obrigado\" (masculine) or \"obrigada\" (feminine).\n   - The prompt specifies a *male speaker*, so the appropriate form is \"obrigado\".\n   - Requirement: Return *only* the word.\n\n3.  **Verify:**\n   - Portuguese for \"thank you\": obrigado (male), obrigada (female)\n   - Male speaker -> obrigado\n   - Only return the word -> \"obrigado\"\n\n4.  **Formulate Output:**\n   - Just the word: obrigado\n   - Check constraints: \"Return only the Portuguese word.\" -> Matches perfectly.\n\n5.  **Final Output Generation:** obrigado\n   - No extra text, no explanations, just the word.\u2705\n</think>\n\nobrigado",
+      "reasoning_content": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - Speaker: Male\n   - Action: Says \"thank you\"\n   - Language: Portuguese\n   - Requirement: Return *only* the Portuguese word\n\n2.  **Identify Key Information:**\n   - \"Thank you\" in Portuguese is commonly \"obrigado\" (masculine) or \"obrigada\" (feminine).\n   - The prompt specifies a *male speaker*, so the appropriate form is \"obrigado\".\n   - Requirement: Return *only* the word.\n\n3.  **Verify:**\n   - Portuguese for \"thank you\": obrigado (male), obrigada (female)\n   - Male speaker -> obrigado\n   - Only return the word -> \"obrigado\"\n\n4.  **Formulate Output:**\n   - Just the word: obrigado\n   - Check constraints: \"Return only the Portuguese word.\" -> Matches perfectly.\n\n5.  **Final Output Generation:** obrigado\n   - No extra text, no explanations, just the word.\u2705\n",
+      "score": {
+        "assertion": {
+          "expected": "obrigado",
+          "normalized_output": "obrigado",
+          "passed": true,
+          "type": "exact"
+        },
+        "correct": true,
+        "form_checks": {
+          "no_replacement_character": true,
+          "nonempty_answer": true,
+          "stopped": true,
+          "think_closed": true
+        },
+        "well_formed": true
+      },
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": true,
+      "tokens_per_second": 46.62582773244711,
+      "tokens_predicted": 236,
+      "user": "A male speaker says 'thank you' in Portuguese. Return only the Portuguese word."
+    }
+  ],
+  "identity": {
+    "llama_cpp_revision": "df4f2e491dc74bf61b67de2ef566e35237ff5563",
+    "manifest_sha256": "0c0ac745a30139e6d3f789a43fdd443c937b79fc84683d4a7c50ff8aaea40ca1",
+    "model": {
+      "path": "/extraspace/IronWolf/christian/gsq-rco-moe/results/Qwen3.6-35B-A3B-GSQ-RCO-v2-UNGATED.gguf",
+      "sha256": "0a6eb59bcf02eb847a268560294f01418a27e5e34e5aafe8e1badbb2d58065a1"
+    },
+    "only": null,
+    "parameters": {
+      "context": 65536,
+      "fit": "off",
+      "gpu_layers": 99,
+      "n_cpu_moe": 4,
+      "threads": 8
+    },
+    "seeds": [
+      20261010
+    ],
+    "server": {
+      "path": "/extraspace/IronWolf/christian/gsq-rco-moe/experiment/build-cuda-mmqfix/bin/llama-server",
+      "sha256": "cfe3ab825f9c73c09faa8e43f5539932a3bf1df7614f193584ea71f2d655ce48"
+    }
+  },
+  "label": "rco_v2",
+  "schema": "rco.qwen36.generation_gate.v1",
+  "status": "complete",
+  "summary": {
+    "correct": 61,
+    "generations": 64,
+    "wall_seconds_this_invocation": 211.5026947048027,
+    "well_formed": 64
+  }
+}

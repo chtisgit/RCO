@@ -1,0 +1,288 @@
+{
+  "absolute_rule_all_correct": {
+    "gsq": false,
+    "rco_v2": false
+  },
+  "cells_worse_than_gsq": [],
+  "checks": {
+    "candidate_well_formed": true,
+    "correct_relative_to_gsq": true,
+    "repeat_identical": true
+  },
+  "malformed_candidate": [],
+  "manifest_sha256": "0c0ac745a30139e6d3f789a43fdd443c937b79fc84683d4a7c50ff8aaea40ca1",
+  "per_cell_wrong_seeds": {
+    "arithmetic-division thinking off": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "arithmetic-division thinking on": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "arithmetic-product thinking off": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "arithmetic-product thinking on": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "arithmetic-sum thinking off": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "arithmetic-sum thinking on": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "code-cpp-null thinking off": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "code-cpp-null thinking on": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "code-json-object thinking off": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "code-json-object thinking on": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "code-python-def thinking off": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "code-python-def thinking on": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "code-python-length thinking off": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "code-python-length thinking on": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "code-sql-select thinking off": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "code-sql-select thinking on": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "extract-city thinking off": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "extract-city thinking on": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "extract-color thinking off": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "extract-color thinking on": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "extract-email thinking off": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "extract-email thinking on": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "extract-order thinking off": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "extract-order thinking on": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "extract-third thinking off": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "extract-third thinking on": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "instruction-blue thinking off": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "instruction-blue thinking on": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "instruction-cedar thinking off": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "instruction-cedar thinking on": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "instruction-ok thinking off": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "instruction-ok thinking on": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "instruction-rco thinking off": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "instruction-rco thinking on": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "instruction-symbol thinking off": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "instruction-symbol thinking on": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "instruction-vienna thinking off": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "instruction-vienna thinking on": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "knowledge-austen thinking off": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "knowledge-austen thinking on": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "knowledge-france thinking off": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "knowledge-france thinking on": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "knowledge-photosynthesis thinking off": {
+      "gsq": 3,
+      "rco_v2": 3
+    },
+    "knowledge-photosynthesis thinking on": {
+      "gsq": 3,
+      "rco_v2": 3
+    },
+    "knowledge-red-planet thinking off": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "knowledge-red-planet thinking on": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "knowledge-water thinking off": {
+      "gsq": 2,
+      "rco_v2": 2
+    },
+    "knowledge-water thinking on": {
+      "gsq": 3,
+      "rco_v2": 2
+    },
+    "multilingual-de thinking off": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "multilingual-de thinking on": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "multilingual-es thinking off": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "multilingual-es thinking on": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "multilingual-fr thinking off": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "multilingual-fr thinking on": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "multilingual-it thinking off": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "multilingual-it thinking on": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "multilingual-pt thinking off": {
+      "gsq": 3,
+      "rco_v2": 0
+    },
+    "multilingual-pt thinking on": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "reasoning-distance thinking off": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "reasoning-distance thinking on": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "reasoning-probability thinking off": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "reasoning-probability thinking on": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "reasoning-sequence thinking off": {
+      "gsq": 0,
+      "rco_v2": 0
+    },
+    "reasoning-sequence thinking on": {
+      "gsq": 0,
+      "rco_v2": 0
+    }
+  },
+  "repeat_differing": [],
+  "rule": "every rco_v2 generation well-formed; rco_v2 fails no prompt x mode on more seeds than gsq; the repeat reproduces seed 20261010 exactly",
+  "schema": "rco.qwen36.generation_gate.v1.comparison",
+  "status": "pass",
+  "totals": {
+    "gsq": {
+      "generations": 192,
+      "malformed": 0,
+      "wrong": 14
+    },
+    "rco_v2": {
+      "generations": 192,
+      "malformed": 0,
+      "wrong": 10
+    }
+  }
+}
