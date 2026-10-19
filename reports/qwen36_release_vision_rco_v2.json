@@ -1,0 +1,91 @@
+{
+  "expected": "MEN WALK ON MOON",
+  "generations": [
+    {
+      "content": "MEN WALK ON MOON",
+      "reads_headline": true,
+      "reasoning_content": "",
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": false,
+      "tokens_predicted": 7
+    },
+    {
+      "content": "MEN WALK ON MOON",
+      "reads_headline": true,
+      "reasoning_content": "",
+      "seed": 20261011,
+      "stop_type": "eos",
+      "thinking": false,
+      "tokens_predicted": 7
+    },
+    {
+      "content": "MEN WALK ON MOON",
+      "reads_headline": true,
+      "reasoning_content": "",
+      "seed": 20261012,
+      "stop_type": "eos",
+      "thinking": false,
+      "tokens_predicted": 7
+    },
+    {
+      "content": "MEN WALK ON MOON",
+      "reads_headline": true,
+      "reasoning_content": "The user wants me to identify the main headline from the provided image of a newspaper.\n\n1.  **Scan the image:** I see a newspaper front page.\n2.  **Identify the title:** \"The New York Times\" is at the top.\n3.  **Locate the headlines:** There are large bold letters below the title.\n4.  **Read the largest text:** The biggest, boldest text is \"MEN WALK ON MOON\".\n5.  **Look for secondary headlines:** Below that, there is \"ASTRONAUTS LAND ON PLAIN: COLLECT ROCKS, PLANT FLAG\". This looks like a sub-headline or a continuation of the main story.\n6.  **Determine the \"main\" headline:** Usually, the very first line in large caps is considered the main headline. In this case, \"MEN WALK ON MOON\" is clearly the primary, most impactful headline. The second line provides more detail.\n\nSo, the main headline is \"MEN WALK ON MOON\".\n",
+      "seed": 20261010,
+      "stop_type": "eos",
+      "thinking": true,
+      "tokens_predicted": 228
+    },
+    {
+      "content": "MEN WALK ON MOON",
+      "reads_headline": true,
+      "reasoning_content": "The user wants to identify the main headline from the provided image of a newspaper.\n\n1.  **Scan the image for the largest text.** The largest, boldest text is located near the top, just below the newspaper masthead (\"The New York Times\").\n2.  **Read the large text.** It says \"MEN WALK ON MOON\".\n3.  **Verify if there are other headlines.** Below that, there is a sub-headline: \"ASTRONAUTS LAND ON PLAIN: COLLECT ROCKS, PLANT FLAG\". However, the primary, most prominent headline is the first one.\n4.  **Formulate the final answer.** The user requested \"the headline only\". I will provide the main bold text.\n\nMain Headline: MEN WALK ON MOON\nSub-headline (often part of the full lead): ASTRONAUTS LAND ON PLAIN: COLLECT ROCKS, PLANT FLAG\n\nThe prompt asks for \"the main headline\". Usually, this refers to the very top, largest line.\n\nResult: MEN WALK ON MOON\n",
+      "seed": 20261011,
+      "stop_type": "eos",
+      "thinking": true,
+      "tokens_predicted": 236
+    },
+    {
+      "content": "MEN WALK ON MOON",
+      "reads_headline": true,
+      "reasoning_content": "The user wants me to identify the main headline from the provided image of a newspaper.\n\n1.  **Analyze the image:** I see a scan of \"The New York Times\" front page.\n2.  **Locate the headline:** The largest, boldest text is right at the top, below the newspaper masthead.\n3.  **Read the text:** It says \"MEN WALK ON MOON\". Below that is a sub-headline: \"ASTRONAUTS LAND ON PLAIN: COLLECT ROCKS, PLANT FLAG\". The question asks for the \"main headline\". Usually, this refers to the very first, largest line of text.\n\nSo, the main headline is \"MEN WALK ON MOON\".\n",
+      "seed": 20261012,
+      "stop_type": "eos",
+      "thinking": true,
+      "tokens_predicted": 163
+    }
+  ],
+  "identity": {
+    "image": {
+      "path": "/extraspace/IronWolf/christian/gsq-rco-moe/repos/llama.cpp/tools/mtmd/test-1.jpeg",
+      "sha256": "2dff664c0c8aaea18aff8cbe7e868845b775e90cdd7a0bac98df709b131deaa3"
+    },
+    "mmproj": {
+      "path": "/extraspace/IronWolf/christian/gsq-rco-moe/results/mmproj-BF16.gguf",
+      "sha256": "97cbba71bcf9d9f4268ce64c2cd32ddd0aaed25fd838f28fc8958e07cb240648"
+    },
+    "model": {
+      "path": "/extraspace/IronWolf/christian/gsq-rco-moe/results/Qwen3.6-35B-A3B-GSQ-RCO.gguf",
+      "sha256": "c9fcccf7b1e394e7fa709ff6c7c973fa61ce5dd7ca907302224004bacdd58a51"
+    },
+    "parameters": {
+      "context": 16384,
+      "fit": "off",
+      "gpu_layers": 99,
+      "n_cpu_moe": 4
+    },
+    "server": {
+      "path": "/extraspace/IronWolf/christian/gsq-rco-moe/experiment/build-cuda-mmqfix/bin/llama-server",
+      "sha256": "cfe3ab825f9c73c09faa8e43f5539932a3bf1df7614f193584ea71f2d655ce48"
+    }
+  },
+  "label": "rco_v2",
+  "question": "What is the main headline of this newspaper? Reply with the headline only.",
+  "schema": "rco.qwen36.release_vision.v1",
+  "status": "pass",
+  "summary": {
+    "generations": 6,
+    "passed": 6
+  }
+}
