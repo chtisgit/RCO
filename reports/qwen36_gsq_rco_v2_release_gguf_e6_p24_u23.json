@@ -1,0 +1,39 @@
+{
+ "candidate": {
+  "bytes": 11591162560,
+  "path": "/extraspace/IronWolf/christian/gsq-rco-moe/results/Qwen3.6-35B-A3B-GSQ-RCO-v2-UNGATED.gguf",
+  "sha256": "0a6eb59bcf02eb847a268560294f01418a27e5e34e5aafe8e1badbb2d58065a1"
+ },
+ "output": {
+  "bytes": 11591162592,
+  "path": "/extraspace/IronWolf/christian/gsq-rco-moe/results/Qwen3.6-35B-A3B-GSQ-RCO-E6-P24-U23.gguf",
+  "sha256": "7519733616de38163a49efd3da724ff0471d03bd7165a2ed477de3a0ce90dd7d"
+ },
+ "schema": "rco.qwen36.gsq_rco_v2_release_gguf.v1",
+ "status": "built",
+ "tool": {
+  "llama_cpp_revision": "911f6cdc8ab8a530b2bee09ee61471a6f3178eeb",
+  "script": "/extraspace/IronWolf/christian/gsq-rco-moe/repos/llama.cpp/gguf-py/gguf/scripts/gguf_new_metadata.py",
+  "sha256": "972499d35957b4721b9243828d5547d1c84def8d4e6fc641887c6578bf765255"
+ },
+ "validation": {
+  "metadata_differing": [],
+  "metadata_identical_except_name": true,
+  "metadata_keys": 47,
+  "name_after": "Qwen3.6-35B-A3B-GSQ-RCO-E6-P24-U23",
+  "name_before": "Qwen3.6-35B-A3B-GSQ-hybrid",
+  "name_set": true,
+  "tensor_count": 733,
+  "tensor_order_identical": true,
+  "tensor_types": {
+   "BF16": 60,
+   "F32": 301,
+   "Q2_0": 97,
+   "Q3_K": 23,
+   "Q6_K": 1,
+   "Q8_0": 251
+  },
+  "tensors_identical": true
+ },
+ "wall_seconds": 274.3586086081341
+}
