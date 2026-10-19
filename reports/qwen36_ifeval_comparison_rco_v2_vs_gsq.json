@@ -1,0 +1,74 @@
+{
+  "accuracy": {
+    "gsq": {
+      "instruction_level_loose": 0.9094724220623501,
+      "instruction_level_strict": 0.8854916067146283,
+      "prompt_level_loose": 0.865988909426987,
+      "prompt_level_strict": 0.833641404805915
+    },
+    "rco_v2": {
+      "instruction_level_loose": 0.9220623501199041,
+      "instruction_level_strict": 0.9010791366906474,
+      "prompt_level_loose": 0.8872458410351202,
+      "prompt_level_strict": 0.8595194085027726
+    }
+  },
+  "accuracy_by_mode": {
+    "gsq": {
+      "off": {
+        "instruction_level_loose": 0.8812949640287769,
+        "instruction_level_strict": 0.854916067146283,
+        "prompt_level_loose": 0.822550831792976,
+        "prompt_level_strict": 0.789279112754159
+      },
+      "on": {
+        "instruction_level_loose": 0.9376498800959233,
+        "instruction_level_strict": 0.9160671462829736,
+        "prompt_level_loose": 0.9094269870609981,
+        "prompt_level_strict": 0.878003696857671
+      }
+    },
+    "rco_v2": {
+      "off": {
+        "instruction_level_loose": 0.8896882494004796,
+        "instruction_level_strict": 0.8657074340527577,
+        "prompt_level_loose": 0.8373382624768947,
+        "prompt_level_strict": 0.8059149722735675
+      },
+      "on": {
+        "instruction_level_loose": 0.9544364508393285,
+        "instruction_level_strict": 0.9364508393285371,
+        "prompt_level_loose": 0.9371534195933456,
+        "prompt_level_strict": 0.9131238447319778
+      }
+    }
+  },
+  "bootstrap": {
+    "samples": 10000,
+    "seed": 20261001
+  },
+  "by_mode": {
+    "off": {
+      "candidate_better": 52,
+      "gsq_better": 43,
+      "mean_delta": 0.0166358595194085
+    },
+    "on": {
+      "candidate_better": 36,
+      "gsq_better": 17,
+      "mean_delta": 0.03512014787430684
+    }
+  },
+  "candidate_better": 88,
+  "ci95": [
+    0.0036968576709796672,
+    0.04713493530499076
+  ],
+  "gsq_better": 60,
+  "margin": 0.04,
+  "mean_delta": 0.025878003696857672,
+  "rule": "paired bootstrap 95% CI lower bound of prompt-level strict pass (rco_v2 - gsq) >= -0.04",
+  "schema": "rco.qwen36.ifeval.v1.comparison",
+  "status": "pass",
+  "units": 1082
+}
