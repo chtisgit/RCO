@@ -1,0 +1,186 @@
+{
+  "bench": {},
+  "model": {
+    "path": "/extraspace/IronWolf/christian/gsq-rco-moe/results/Qwen3.6-35B-A3B-GSQ-RCO-E6-P24-U23.gguf",
+    "sha256": "7519733616de38163a49efd3da724ff0471d03bd7165a2ed477de3a0ce90dd7d"
+  },
+  "schema": "rco.qwen36.speed_factors.v1",
+  "server": {
+    "fit_default": {
+      "build_info": "b11718-547208dca",
+      "command": [
+        "/extraspace/IronWolf/christian/gsq-rco-moe/experiment/build-cuda-upstream/bin/llama-server",
+        "--model",
+        "/extraspace/IronWolf/christian/gsq-rco-moe/results/Qwen3.6-35B-A3B-GSQ-RCO-E6-P24-U23.gguf",
+        "--jinja",
+        "--ctx-size",
+        "65536",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "18082",
+        "--no-webui"
+      ],
+      "requests": [
+        {
+          "cache_n": 0,
+          "predicted_ms": 4079.928,
+          "predicted_n": 256,
+          "predicted_per_second": 62.50110296064049,
+          "predicted_per_token_ms": 15.999717647058823,
+          "prompt_ms": 193.052,
+          "prompt_n": 16,
+          "prompt_per_second": 82.87922425046102,
+          "prompt_per_token_ms": 12.06575,
+          "prompt_tokens": 16
+        },
+        {
+          "cache_n": 0,
+          "predicted_ms": 4183.524,
+          "predicted_n": 256,
+          "predicted_per_second": 60.95339718380963,
+          "predicted_per_token_ms": 16.405976470588236,
+          "prompt_ms": 18282.125,
+          "prompt_n": 8192,
+          "prompt_per_second": 448.0879547645583,
+          "prompt_per_token_ms": 2.2317047119140625,
+          "prompt_tokens": 8192
+        },
+        {
+          "cache_n": 0,
+          "predicted_ms": 4594.109,
+          "predicted_n": 256,
+          "predicted_per_second": 55.505866317059514,
+          "predicted_per_token_ms": 18.016113725490197,
+          "prompt_ms": 77835.477,
+          "prompt_n": 32768,
+          "prompt_per_second": 420.99054650875973,
+          "prompt_per_token_ms": 2.3753502502441406,
+          "prompt_tokens": 32768
+        }
+      ],
+      "runs": true,
+      "server_log": "/extraspace/IronWolf/christian/gsq-rco-moe/speed_factors_fit_default.server.log"
+    },
+    "fit_target512": {
+      "build_info": "b11718-547208dca",
+      "command": [
+        "/extraspace/IronWolf/christian/gsq-rco-moe/experiment/build-cuda-upstream/bin/llama-server",
+        "--model",
+        "/extraspace/IronWolf/christian/gsq-rco-moe/results/Qwen3.6-35B-A3B-GSQ-RCO-E6-P24-U23.gguf",
+        "--jinja",
+        "--ctx-size",
+        "65536",
+        "--fit-target",
+        "512",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "18082",
+        "--no-webui"
+      ],
+      "requests": [
+        {
+          "cache_n": 0,
+          "predicted_ms": 3871.883,
+          "predicted_n": 256,
+          "predicted_per_second": 65.85942808705738,
+          "predicted_per_token_ms": 15.183854901960784,
+          "prompt_ms": 182.853,
+          "prompt_n": 16,
+          "prompt_per_second": 87.50198246679025,
+          "prompt_per_token_ms": 11.4283125,
+          "prompt_tokens": 16
+        },
+        {
+          "cache_n": 0,
+          "predicted_ms": 4098.45,
+          "predicted_n": 256,
+          "predicted_per_second": 62.218643633568796,
+          "predicted_per_token_ms": 16.07235294117647,
+          "prompt_ms": 13606.608,
+          "prompt_n": 8192,
+          "prompt_per_second": 602.0604106475324,
+          "prompt_per_token_ms": 1.660962890625,
+          "prompt_tokens": 8192
+        },
+        {
+          "cache_n": 0,
+          "predicted_ms": 4419.975,
+          "predicted_n": 256,
+          "predicted_per_second": 57.6926340081109,
+          "predicted_per_token_ms": 17.33323529411765,
+          "prompt_ms": 58235.593,
+          "prompt_n": 32768,
+          "prompt_per_second": 562.6799404274976,
+          "prompt_per_token_ms": 1.7772092590332031,
+          "prompt_tokens": 32768
+        }
+      ],
+      "runs": true,
+      "server_log": "/extraspace/IronWolf/christian/gsq-rco-moe/speed_factors_fit_target512.server.log"
+    },
+    "manual_ncmoe4": {
+      "build_info": "b11718-547208dca",
+      "command": [
+        "/extraspace/IronWolf/christian/gsq-rco-moe/experiment/build-cuda-upstream/bin/llama-server",
+        "--model",
+        "/extraspace/IronWolf/christian/gsq-rco-moe/results/Qwen3.6-35B-A3B-GSQ-RCO-E6-P24-U23.gguf",
+        "--jinja",
+        "--ctx-size",
+        "65536",
+        "--gpu-layers",
+        "99",
+        "--n-cpu-moe",
+        "4",
+        "--fit",
+        "off",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "18082",
+        "--no-webui"
+      ],
+      "requests": [
+        {
+          "cache_n": 0,
+          "predicted_ms": 3730.28,
+          "predicted_n": 256,
+          "predicted_per_second": 68.35947971734025,
+          "predicted_per_token_ms": 14.628549019607844,
+          "prompt_ms": 177.667,
+          "prompt_n": 16,
+          "prompt_per_second": 90.05611621741798,
+          "prompt_per_token_ms": 11.1041875,
+          "prompt_tokens": 16
+        },
+        {
+          "cache_n": 0,
+          "predicted_ms": 3876.017,
+          "predicted_n": 256,
+          "predicted_per_second": 65.78918513515292,
+          "predicted_per_token_ms": 15.200066666666666,
+          "prompt_ms": 14373.958,
+          "prompt_n": 8192,
+          "prompt_per_second": 569.9195726048455,
+          "prompt_per_token_ms": 1.754633544921875,
+          "prompt_tokens": 8192
+        },
+        {
+          "cache_n": 0,
+          "predicted_ms": 4263.811,
+          "predicted_n": 256,
+          "predicted_per_second": 59.80565273648387,
+          "predicted_per_token_ms": 16.72082745098039,
+          "prompt_ms": 60419.246,
+          "prompt_n": 32768,
+          "prompt_per_second": 542.3437425882474,
+          "prompt_per_token_ms": 1.8438490600585937,
+          "prompt_tokens": 32768
+        }
+      ],
+      "runs": true,
+      "server_log": "/extraspace/IronWolf/christian/gsq-rco-moe/speed_factors_manual_ncmoe4.server.log"
+    }
+  }
+}
