@@ -1,0 +1,1561 @@
+{
+  "corpus": {
+    "cpp": [
+      {
+        "id": "cpp-code-llama-cpp-00",
+        "source": "code-llama-cpp-00"
+      },
+      {
+        "id": "cpp-code-llama-cpp-01",
+        "source": "code-llama-cpp-01"
+      },
+      {
+        "id": "cpp-code-llama-cpp-02",
+        "source": "code-llama-cpp-02"
+      },
+      {
+        "id": "cpp-code-llama-cpp-03",
+        "source": "code-llama-cpp-03"
+      },
+      {
+        "id": "cpp-code-llama-cpp-04",
+        "source": "code-llama-cpp-04"
+      },
+      {
+        "id": "cpp-code-llama-cpp-05",
+        "source": "code-llama-cpp-05"
+      },
+      {
+        "id": "cpp-code-llama-cpp-06",
+        "source": "code-llama-cpp-06"
+      },
+      {
+        "id": "cpp-code-llama-cpp-07",
+        "source": "code-llama-cpp-07"
+      },
+      {
+        "id": "cpp-code-llama-cpp-08",
+        "source": "code-llama-cpp-08"
+      },
+      {
+        "id": "cpp-code-llama-cpp-09",
+        "source": "code-llama-cpp-09"
+      },
+      {
+        "id": "cpp-code-llama-cpp-10",
+        "source": "code-llama-cpp-10"
+      },
+      {
+        "id": "cpp-code-llama-cpp-11",
+        "source": "code-llama-cpp-11"
+      },
+      {
+        "id": "cpp-code-llama-cpp-12",
+        "source": "code-llama-cpp-12"
+      },
+      {
+        "id": "cpp-code-llama-cpp-13",
+        "source": "code-llama-cpp-13"
+      },
+      {
+        "id": "cpp-code-llama-cpp-14",
+        "source": "code-llama-cpp-14"
+      },
+      {
+        "id": "cpp-code-llama-cpp-15",
+        "source": "code-llama-cpp-15"
+      },
+      {
+        "id": "cpp-code-llama-cpp-16",
+        "source": "code-llama-cpp-16"
+      },
+      {
+        "id": "cpp-code-llama-cpp-17",
+        "source": "code-llama-cpp-17"
+      },
+      {
+        "id": "cpp-code-llama-cpp-18",
+        "source": "code-llama-cpp-18"
+      },
+      {
+        "id": "cpp-code-llama-cpp-19",
+        "source": "code-llama-cpp-19"
+      },
+      {
+        "id": "cpp-code-llama-cpp-20",
+        "source": "code-llama-cpp-20"
+      },
+      {
+        "id": "cpp-code-llama-cpp-21",
+        "source": "code-llama-cpp-21"
+      },
+      {
+        "id": "cpp-code-llama-cpp-22",
+        "source": "code-llama-cpp-22"
+      },
+      {
+        "id": "cpp-code-llama-cpp-23",
+        "source": "code-llama-cpp-23"
+      },
+      {
+        "id": "cpp-code-llama-cpp-24",
+        "source": "code-llama-cpp-24"
+      }
+    ],
+    "css": [
+      {
+        "id": "css-tools/ui/src/app.css#0",
+        "sha256": "45520c42d0af5e6295798f46b36fca654b9226492381d6efbab446846a400be1",
+        "source": "tools/ui/src/app.css"
+      },
+      {
+        "id": "css-tools/ui/src/app.css#1",
+        "sha256": "45520c42d0af5e6295798f46b36fca654b9226492381d6efbab446846a400be1",
+        "source": "tools/ui/src/app.css"
+      },
+      {
+        "id": "css-tools/ui/src/app.css#2",
+        "sha256": "45520c42d0af5e6295798f46b36fca654b9226492381d6efbab446846a400be1",
+        "source": "tools/ui/src/app.css"
+      },
+      {
+        "id": "css-tools/ui/src/app.css#3",
+        "sha256": "45520c42d0af5e6295798f46b36fca654b9226492381d6efbab446846a400be1",
+        "source": "tools/ui/src/app.css"
+      },
+      {
+        "id": "css-tools/ui/src/app.css#4",
+        "sha256": "45520c42d0af5e6295798f46b36fca654b9226492381d6efbab446846a400be1",
+        "source": "tools/ui/src/app.css"
+      },
+      {
+        "id": "css-tools/ui/src/lib/components/app/content/MarkdownContent/markdown-content.css#0",
+        "sha256": "1ff706aecd517b9f869b4539ac95197a1a41baf757c4c433d75f5034f6559484",
+        "source": "tools/ui/src/lib/components/app/content/MarkdownContent/markdown-content.css"
+      },
+      {
+        "id": "css-tools/ui/src/lib/components/app/content/MarkdownContent/markdown-content.css#1",
+        "sha256": "1ff706aecd517b9f869b4539ac95197a1a41baf757c4c433d75f5034f6559484",
+        "source": "tools/ui/src/lib/components/app/content/MarkdownContent/markdown-content.css"
+      },
+      {
+        "id": "css-tools/ui/src/lib/components/app/content/MarkdownContent/markdown-content.css#2",
+        "sha256": "1ff706aecd517b9f869b4539ac95197a1a41baf757c4c433d75f5034f6559484",
+        "source": "tools/ui/src/lib/components/app/content/MarkdownContent/markdown-content.css"
+      },
+      {
+        "id": "css-tools/ui/src/lib/components/app/content/MarkdownContent/markdown-content.css#3",
+        "sha256": "1ff706aecd517b9f869b4539ac95197a1a41baf757c4c433d75f5034f6559484",
+        "source": "tools/ui/src/lib/components/app/content/MarkdownContent/markdown-content.css"
+      },
+      {
+        "id": "css-tools/ui/src/lib/components/app/content/MarkdownContent/markdown-content.css#4",
+        "sha256": "1ff706aecd517b9f869b4539ac95197a1a41baf757c4c433d75f5034f6559484",
+        "source": "tools/ui/src/lib/components/app/content/MarkdownContent/markdown-content.css"
+      },
+      {
+        "id": "css-tools/ui/src/lib/components/app/content/MarkdownContent/markdown-content.css#5",
+        "sha256": "1ff706aecd517b9f869b4539ac95197a1a41baf757c4c433d75f5034f6559484",
+        "source": "tools/ui/src/lib/components/app/content/MarkdownContent/markdown-content.css"
+      },
+      {
+        "id": "css-tools/ui/src/lib/components/app/content/MarkdownContent/markdown-content.css#6",
+        "sha256": "1ff706aecd517b9f869b4539ac95197a1a41baf757c4c433d75f5034f6559484",
+        "source": "tools/ui/src/lib/components/app/content/MarkdownContent/markdown-content.css"
+      },
+      {
+        "id": "css-tools/ui/src/lib/components/app/content/MarkdownContent/markdown-content.css#7",
+        "sha256": "1ff706aecd517b9f869b4539ac95197a1a41baf757c4c433d75f5034f6559484",
+        "source": "tools/ui/src/lib/components/app/content/MarkdownContent/markdown-content.css"
+      },
+      {
+        "id": "css-tools/ui/src/lib/components/app/content/MarkdownContent/markdown-content.css#8",
+        "sha256": "1ff706aecd517b9f869b4539ac95197a1a41baf757c4c433d75f5034f6559484",
+        "source": "tools/ui/src/lib/components/app/content/MarkdownContent/markdown-content.css"
+      },
+      {
+        "id": "css-tools/ui/src/lib/components/app/content/MarkdownContent/markdown-content.css#9",
+        "sha256": "1ff706aecd517b9f869b4539ac95197a1a41baf757c4c433d75f5034f6559484",
+        "source": "tools/ui/src/lib/components/app/content/MarkdownContent/markdown-content.css"
+      }
+    ],
+    "gen_css": [
+      {
+        "id": "gen_css-00",
+        "source": "qwen36_coding_repro_gsq.json"
+      },
+      {
+        "id": "gen_css-01",
+        "source": "qwen36_coding_repro_gsq.json"
+      },
+      {
+        "id": "gen_css-02",
+        "source": "qwen36_coding_repro_gsq.json"
+      },
+      {
+        "id": "gen_css-03",
+        "source": "qwen36_coding_repro_gsq.json"
+      },
+      {
+        "id": "gen_css-04",
+        "source": "qwen36_coding_repro_gsq.json"
+      },
+      {
+        "id": "gen_css-05",
+        "source": "qwen36_coding_repro_gsq.json"
+      }
+    ],
+    "gen_html": [
+      {
+        "id": "gen_html-00",
+        "source": "qwen36_coding_repro_gsq.json"
+      },
+      {
+        "id": "gen_html-01",
+        "source": "qwen36_coding_repro_gsq.json"
+      },
+      {
+        "id": "gen_html-02",
+        "source": "qwen36_coding_repro_gsq.json"
+      },
+      {
+        "id": "gen_html-03",
+        "source": "qwen36_coding_repro_gsq.json"
+      }
+    ],
+    "gen_js": [
+      {
+        "id": "gen_js-00",
+        "source": "qwen36_coding_repro_gsq.json"
+      },
+      {
+        "id": "gen_js-01",
+        "source": "qwen36_coding_repro_gsq.json"
+      },
+      {
+        "id": "gen_js-02",
+        "source": "qwen36_coding_repro_gsq.json"
+      },
+      {
+        "id": "gen_js-03",
+        "source": "qwen36_coding_repro_gsq.json"
+      },
+      {
+        "id": "gen_js-04",
+        "source": "qwen36_coding_repro_gsq.json"
+      },
+      {
+        "id": "gen_js-05",
+        "source": "qwen36_coding_repro_gsq.json"
+      },
+      {
+        "id": "gen_js-06",
+        "source": "qwen36_coding_repro_gsq.json"
+      },
+      {
+        "id": "gen_js-07",
+        "source": "qwen36_coding_repro_gsq.json"
+      },
+      {
+        "id": "gen_js-08",
+        "source": "qwen36_coding_repro_gsq.json"
+      },
+      {
+        "id": "gen_js-09",
+        "source": "qwen36_coding_repro_gsq.json"
+      },
+      {
+        "id": "gen_js-10",
+        "source": "qwen36_coding_repro_gsq.json"
+      },
+      {
+        "id": "gen_js-11",
+        "source": "qwen36_coding_repro_gsq.json"
+      },
+      {
+        "id": "gen_js-12",
+        "source": "qwen36_coding_repro_gsq.json"
+      },
+      {
+        "id": "gen_js-13",
+        "source": "qwen36_coding_repro_gsq.json"
+      },
+      {
+        "id": "gen_js-14",
+        "source": "qwen36_coding_repro_gsq.json"
+      },
+      {
+        "id": "gen_js-15",
+        "source": "qwen36_coding_repro_gsq.json"
+      },
+      {
+        "id": "gen_js-16",
+        "source": "qwen36_coding_repro_gsq.json"
+      },
+      {
+        "id": "gen_js-17",
+        "source": "qwen36_coding_repro_gsq.json"
+      },
+      {
+        "id": "gen_js-18",
+        "source": "qwen36_coding_repro_gsq.json"
+      },
+      {
+        "id": "gen_js-19",
+        "source": "qwen36_coding_repro_gsq.json"
+      },
+      {
+        "id": "gen_js-20",
+        "source": "qwen36_coding_repro_gsq.json"
+      },
+      {
+        "id": "gen_js-21",
+        "source": "qwen36_coding_repro_gsq.json"
+      },
+      {
+        "id": "gen_js-22",
+        "source": "qwen36_coding_repro_gsq.json"
+      },
+      {
+        "id": "gen_js-23",
+        "source": "qwen36_coding_repro_gsq.json"
+      },
+      {
+        "id": "gen_js-24",
+        "source": "qwen36_coding_repro_gsq.json"
+      }
+    ],
+    "js": [
+      {
+        "id": "js-scripts/serve-static.js#0",
+        "sha256": "553c84c946e46d53ebecd026c2283398eaf3fd0436603d90e796aae30d944392",
+        "source": "scripts/serve-static.js"
+      },
+      {
+        "id": "js-tools/server/bench/script.js#0",
+        "sha256": "14c273a221c83c152c1af5b94dcd65b4535a134026bda72dd17a770ed272d2d1",
+        "source": "tools/server/bench/script.js"
+      },
+      {
+        "id": "js-tools/server/bench/script.js#1",
+        "sha256": "14c273a221c83c152c1af5b94dcd65b4535a134026bda72dd17a770ed272d2d1",
+        "source": "tools/server/bench/script.js"
+      },
+      {
+        "id": "js-tools/server/bench/script.js#2",
+        "sha256": "14c273a221c83c152c1af5b94dcd65b4535a134026bda72dd17a770ed272d2d1",
+        "source": "tools/server/bench/script.js"
+      },
+      {
+        "id": "js-tools/ui/eslint.config.js#0",
+        "sha256": "59d2e6976446610dee3663271d0d4e7956e255d709745b422d0462cf1b899cba",
+        "source": "tools/ui/eslint.config.js"
+      },
+      {
+        "id": "js-tools/ui/eslint.config.js#1",
+        "sha256": "59d2e6976446610dee3663271d0d4e7956e255d709745b422d0462cf1b899cba",
+        "source": "tools/ui/eslint.config.js"
+      },
+      {
+        "id": "js-tools/ui/eslint.config.js#2",
+        "sha256": "59d2e6976446610dee3663271d0d4e7956e255d709745b422d0462cf1b899cba",
+        "source": "tools/ui/eslint.config.js"
+      },
+      {
+        "id": "js-tools/ui/eslint.config.js#3",
+        "sha256": "59d2e6976446610dee3663271d0d4e7956e255d709745b422d0462cf1b899cba",
+        "source": "tools/ui/eslint.config.js"
+      },
+      {
+        "id": "js-tools/ui/scripts/make-icons-circular.js#0",
+        "sha256": "07e79baf0bfcf4556ee71f5b54f3706b8a5f2a7b557b8a451395776af27f8b9a",
+        "source": "tools/ui/scripts/make-icons-circular.js"
+      },
+      {
+        "id": "js-tools/ui/scripts/make-icons-circular.js#1",
+        "sha256": "07e79baf0bfcf4556ee71f5b54f3706b8a5f2a7b557b8a451395776af27f8b9a",
+        "source": "tools/ui/scripts/make-icons-circular.js"
+      },
+      {
+        "id": "js-tools/ui/src/lib/vendors/big-integer/BigInteger.js#0",
+        "sha256": "9157657de3b1e92a2b75a8bc2e2dbecde1cdd0db414bb729c165528962ab7647",
+        "source": "tools/ui/src/lib/vendors/big-integer/BigInteger.js"
+      },
+      {
+        "id": "js-tools/ui/src/lib/vendors/big-integer/BigInteger.js#1",
+        "sha256": "9157657de3b1e92a2b75a8bc2e2dbecde1cdd0db414bb729c165528962ab7647",
+        "source": "tools/ui/src/lib/vendors/big-integer/BigInteger.js"
+      },
+      {
+        "id": "js-tools/ui/src/lib/vendors/big-integer/BigInteger.js#2",
+        "sha256": "9157657de3b1e92a2b75a8bc2e2dbecde1cdd0db414bb729c165528962ab7647",
+        "source": "tools/ui/src/lib/vendors/big-integer/BigInteger.js"
+      },
+      {
+        "id": "js-tools/ui/src/lib/vendors/big-integer/BigInteger.js#3",
+        "sha256": "9157657de3b1e92a2b75a8bc2e2dbecde1cdd0db414bb729c165528962ab7647",
+        "source": "tools/ui/src/lib/vendors/big-integer/BigInteger.js"
+      },
+      {
+        "id": "js-tools/ui/src/lib/vendors/decimal.js/decimal.js#0",
+        "sha256": "6e99821f8204c5f611b56077e3fce056a1562d22bc341a1f4af01afe7e527d83",
+        "source": "tools/ui/src/lib/vendors/decimal.js/decimal.js"
+      },
+      {
+        "id": "js-tools/ui/src/lib/vendors/decimal.js/decimal.js#1",
+        "sha256": "6e99821f8204c5f611b56077e3fce056a1562d22bc341a1f4af01afe7e527d83",
+        "source": "tools/ui/src/lib/vendors/decimal.js/decimal.js"
+      },
+      {
+        "id": "js-tools/ui/src/lib/vendors/decimal.js/decimal.js#2",
+        "sha256": "6e99821f8204c5f611b56077e3fce056a1562d22bc341a1f4af01afe7e527d83",
+        "source": "tools/ui/src/lib/vendors/decimal.js/decimal.js"
+      },
+      {
+        "id": "js-tools/ui/src/lib/vendors/decimal.js/decimal.js#3",
+        "sha256": "6e99821f8204c5f611b56077e3fce056a1562d22bc341a1f4af01afe7e527d83",
+        "source": "tools/ui/src/lib/vendors/decimal.js/decimal.js"
+      },
+      {
+        "id": "js-tools/ui/src/lib/vendors/nerdamer-prime/Algebra.js#0",
+        "sha256": "1c350a2172c2b93e20fc718184a147113e1e36a13354f6e67bb43c821359f21d",
+        "source": "tools/ui/src/lib/vendors/nerdamer-prime/Algebra.js"
+      },
+      {
+        "id": "js-tools/ui/src/lib/vendors/nerdamer-prime/Algebra.js#1",
+        "sha256": "1c350a2172c2b93e20fc718184a147113e1e36a13354f6e67bb43c821359f21d",
+        "source": "tools/ui/src/lib/vendors/nerdamer-prime/Algebra.js"
+      },
+      {
+        "id": "js-tools/ui/src/lib/vendors/nerdamer-prime/Algebra.js#2",
+        "sha256": "1c350a2172c2b93e20fc718184a147113e1e36a13354f6e67bb43c821359f21d",
+        "source": "tools/ui/src/lib/vendors/nerdamer-prime/Algebra.js"
+      },
+      {
+        "id": "js-tools/ui/src/lib/vendors/nerdamer-prime/Algebra.js#3",
+        "sha256": "1c350a2172c2b93e20fc718184a147113e1e36a13354f6e67bb43c821359f21d",
+        "source": "tools/ui/src/lib/vendors/nerdamer-prime/Algebra.js"
+      },
+      {
+        "id": "js-tools/ui/src/lib/vendors/nerdamer-prime/Calculus.js#0",
+        "sha256": "74306ea7b0e99645f3cf2063dd3d67706d1c644252ab2a8ed9ade2061d85590c",
+        "source": "tools/ui/src/lib/vendors/nerdamer-prime/Calculus.js"
+      },
+      {
+        "id": "js-tools/ui/src/lib/vendors/nerdamer-prime/Calculus.js#1",
+        "sha256": "74306ea7b0e99645f3cf2063dd3d67706d1c644252ab2a8ed9ade2061d85590c",
+        "source": "tools/ui/src/lib/vendors/nerdamer-prime/Calculus.js"
+      },
+      {
+        "id": "js-tools/ui/src/lib/vendors/nerdamer-prime/Calculus.js#2",
+        "sha256": "74306ea7b0e99645f3cf2063dd3d67706d1c644252ab2a8ed9ade2061d85590c",
+        "source": "tools/ui/src/lib/vendors/nerdamer-prime/Calculus.js"
+      }
+    ],
+    "prose": [
+      {
+        "id": "prose-knowledge-wikipedia-775",
+        "source": "knowledge-wikipedia-775"
+      },
+      {
+        "id": "prose-knowledge-wikipedia-4650",
+        "source": "knowledge-wikipedia-4650"
+      },
+      {
+        "id": "prose-knowledge-wikipedia-5739",
+        "source": "knowledge-wikipedia-5739"
+      },
+      {
+        "id": "prose-knowledge-wikipedia-7955",
+        "source": "knowledge-wikipedia-7955"
+      },
+      {
+        "id": "prose-knowledge-wikipedia-11188",
+        "source": "knowledge-wikipedia-11188"
+      },
+      {
+        "id": "prose-knowledge-wikipedia-14958",
+        "source": "knowledge-wikipedia-14958"
+      },
+      {
+        "id": "prose-knowledge-wikipedia-23053",
+        "source": "knowledge-wikipedia-23053"
+      },
+      {
+        "id": "prose-knowledge-wikipedia-24544",
+        "source": "knowledge-wikipedia-24544"
+      },
+      {
+        "id": "prose-knowledge-wikipedia-24944",
+        "source": "knowledge-wikipedia-24944"
+      },
+      {
+        "id": "prose-knowledge-wikipedia-25202",
+        "source": "knowledge-wikipedia-25202"
+      },
+      {
+        "id": "prose-knowledge-wikipedia-25507",
+        "source": "knowledge-wikipedia-25507"
+      },
+      {
+        "id": "prose-knowledge-wikipedia-25532",
+        "source": "knowledge-wikipedia-25532"
+      },
+      {
+        "id": "prose-knowledge-wikipedia-26903",
+        "source": "knowledge-wikipedia-26903"
+      },
+      {
+        "id": "prose-knowledge-wikipedia-29664",
+        "source": "knowledge-wikipedia-29664"
+      },
+      {
+        "id": "prose-knowledge-wikipedia-4764461",
+        "source": "knowledge-wikipedia-4764461"
+      },
+      {
+        "id": "prose-knowledge-wikipedia-874",
+        "source": "knowledge-wikipedia-874"
+      },
+      {
+        "id": "prose-knowledge-wikipedia-9236",
+        "source": "knowledge-wikipedia-9236"
+      },
+      {
+        "id": "prose-knowledge-wikipedia-9550",
+        "source": "knowledge-wikipedia-9550"
+      },
+      {
+        "id": "prose-knowledge-wikipedia-12024",
+        "source": "knowledge-wikipedia-12024"
+      },
+      {
+        "id": "prose-knowledge-wikipedia-14539",
+        "source": "knowledge-wikipedia-14539"
+      },
+      {
+        "id": "prose-knowledge-wikipedia-18831",
+        "source": "knowledge-wikipedia-18831"
+      },
+      {
+        "id": "prose-knowledge-wikipedia-23295",
+        "source": "knowledge-wikipedia-23295"
+      },
+      {
+        "id": "prose-knowledge-wikipedia-490620",
+        "source": "knowledge-wikipedia-490620"
+      },
+      {
+        "id": "prose-knowledge-wikipedia-5042951",
+        "source": "knowledge-wikipedia-5042951"
+      },
+      {
+        "id": "prose-knowledge-wikipedia-13692155",
+        "source": "knowledge-wikipedia-13692155"
+      }
+    ],
+    "svelte": [
+      {
+        "id": "svelte-tools/ui/src/lib/components/app/actions/ActionIcon.svelte#0",
+        "sha256": "a3c6f46376c60960d552f8803236ef759ce2f1f9a19efc4e5480be2c370dcb6b",
+        "source": "tools/ui/src/lib/components/app/actions/ActionIcon.svelte"
+      },
+      {
+        "id": "svelte-tools/ui/src/lib/components/app/chat/ChatAttachments/ChatAttachmentsList/ChatAttachmentsList.svelte#0",
+        "sha256": "7b51de2822a04eb9a86d0cd6821fefafccbf8429bb581c54f665e02099f33abf",
+        "source": "tools/ui/src/lib/components/app/chat/ChatAttachments/ChatAttachmentsList/ChatAttachmentsList.svelte"
+      },
+      {
+        "id": "svelte-tools/ui/src/lib/components/app/chat/ChatAttachments/ChatAttachmentsList/ChatAttachmentsListItem/ChatAttachmentsListItem.svelte#0",
+        "sha256": "bf2757593f37998d32aa089be3d375cff5c2319b9deade5183bc4291c2678276",
+        "source": "tools/ui/src/lib/components/app/chat/ChatAttachments/ChatAttachmentsList/ChatAttachmentsListItem/ChatAttachmentsListItem.svelte"
+      },
+      {
+        "id": "svelte-tools/ui/src/lib/components/app/chat/ChatAttachments/ChatAttachmentsList/ChatAttachmentsListItem/ChatAttachmentsListItemMcpResource.svelte#0",
+        "sha256": "d4e0f148d586dbf78dd1e4cf9cef8f2df81e240ac5aef6e0bae58121110cd4f0",
+        "source": "tools/ui/src/lib/components/app/chat/ChatAttachments/ChatAttachmentsList/ChatAttachmentsListItem/ChatAttachmentsListItemMcpResource.svelte"
+      },
+      {
+        "id": "svelte-tools/ui/src/lib/components/app/chat/ChatAttachments/ChatAttachmentsList/ChatAttachmentsListItem/ChatAttachmentsListItemThumbnailFile.svelte#0",
+        "sha256": "a2b0e386c76f9bf02c762c4f0a4c23d67c3357ad76a41d68577cf864ca67a6f6",
+        "source": "tools/ui/src/lib/components/app/chat/ChatAttachments/ChatAttachmentsList/ChatAttachmentsListItem/ChatAttachmentsListItemThumbnailFile.svelte"
+      },
+      {
+        "id": "svelte-tools/ui/src/lib/components/app/chat/ChatAttachments/ChatAttachmentsPreview/ChatAttachmentsPreview.svelte#0",
+        "sha256": "c0c67b4b59ef644d15148b6127b4aa779b015b70bbf76ae08789498ed304e069",
+        "source": "tools/ui/src/lib/components/app/chat/ChatAttachments/ChatAttachmentsPreview/ChatAttachmentsPreview.svelte"
+      },
+      {
+        "id": "svelte-tools/ui/src/lib/components/app/chat/ChatAttachments/ChatAttachmentsPreview/ChatAttachmentsPreviewCurrentItem/ChatAttachmentsPreviewCurrentItem.svelte#0",
+        "sha256": "34c0bfc59a60e1227babb83d893a225d862d7d3ac4f5db6c65608d56f1608e14",
+        "source": "tools/ui/src/lib/components/app/chat/ChatAttachments/ChatAttachmentsPreview/ChatAttachmentsPreviewCurrentItem/ChatAttachmentsPreviewCurrentItem.svelte"
+      },
+      {
+        "id": "svelte-tools/ui/src/lib/components/app/chat/ChatAttachments/ChatAttachmentsPreview/ChatAttachmentsPreviewCurrentItem/ChatAttachmentsPreviewCurrentItemPdf.svelte#0",
+        "sha256": "bf40d04f24061d333ef77bfe8f05f46cf7279844585a7cc793e21eddc5784f13",
+        "source": "tools/ui/src/lib/components/app/chat/ChatAttachments/ChatAttachmentsPreview/ChatAttachmentsPreviewCurrentItem/ChatAttachmentsPreviewCurrentItemPdf.svelte"
+      },
+      {
+        "id": "svelte-tools/ui/src/lib/components/app/chat/ChatAttachments/ChatAttachmentsPreview/ChatAttachmentsPreviewThumbnailStrip.svelte#0",
+        "sha256": "ee4e200bf7c53c61685dee7c3f287d4e11e63c5c680be4d6238684f99807d6e8",
+        "source": "tools/ui/src/lib/components/app/chat/ChatAttachments/ChatAttachmentsPreview/ChatAttachmentsPreviewThumbnailStrip.svelte"
+      },
+      {
+        "id": "svelte-tools/ui/src/lib/components/app/chat/ChatForm/ChatForm.svelte#0",
+        "sha256": "5669afbd8f54f0d7b3b728654548793336ba9bd829ab8f03e878902732f12f66",
+        "source": "tools/ui/src/lib/components/app/chat/ChatForm/ChatForm.svelte"
+      },
+      {
+        "id": "svelte-tools/ui/src/lib/components/app/chat/ChatForm/ChatFormActions/ChatFormActionAdd/ChatFormActionAddDropdown.svelte#0",
+        "sha256": "c5284f1da47ad67429bf15265d4e7d4749999bc4102b5a16d99999d9a683c51e",
+        "source": "tools/ui/src/lib/components/app/chat/ChatForm/ChatFormActions/ChatFormActionAdd/ChatFormActionAddDropdown.svelte"
+      },
+      {
+        "id": "svelte-tools/ui/src/lib/components/app/chat/ChatForm/ChatFormActions/ChatFormActionAdd/ChatFormActionAddReasoningSubmenu.svelte#0",
+        "sha256": "4cb14c87c74a5e5a9439ae3b2984e4b8ea7fe97742af1675b8a898d050217666",
+        "source": "tools/ui/src/lib/components/app/chat/ChatForm/ChatFormActions/ChatFormActionAdd/ChatFormActionAddReasoningSubmenu.svelte"
+      },
+      {
+        "id": "svelte-tools/ui/src/lib/components/app/chat/ChatForm/ChatFormActions/ChatFormActionAdd/ChatFormActionAddSheet.svelte#0",
+        "sha256": "b89ed57629dbb44640ae45287b6ca142182a02f387d6ff8c733d7f3e256aa96f",
+        "source": "tools/ui/src/lib/components/app/chat/ChatForm/ChatFormActions/ChatFormActionAdd/ChatFormActionAddSheet.svelte"
+      },
+      {
+        "id": "svelte-tools/ui/src/lib/components/app/chat/ChatForm/ChatFormActions/ChatFormActionAdd/ChatFormActionAddToolsSubmenu.svelte#0",
+        "sha256": "5c15f33f779948845cc6ec1333616fb5454a04f2a9549ee1d2b1fb0e9145136e",
+        "source": "tools/ui/src/lib/components/app/chat/ChatForm/ChatFormActions/ChatFormActionAdd/ChatFormActionAddToolsSubmenu.svelte"
+      },
+      {
+        "id": "svelte-tools/ui/src/lib/components/app/chat/ChatForm/ChatFormActions/ChatFormActionModels.svelte#0",
+        "sha256": "d54a09e662b9f6090f961243a75e6bbd6519eb4a365b9718d10a75011d579058",
+        "source": "tools/ui/src/lib/components/app/chat/ChatForm/ChatFormActions/ChatFormActionModels.svelte"
+      },
+      {
+        "id": "svelte-tools/ui/src/lib/components/app/chat/ChatForm/ChatFormActions/ChatFormActions.svelte#0",
+        "sha256": "c2522d2ed121516ed29e9ef7fc6411898e7c59bd85b425362d1b9ebc639f946d",
+        "source": "tools/ui/src/lib/components/app/chat/ChatForm/ChatFormActions/ChatFormActions.svelte"
+      },
+      {
+        "id": "svelte-tools/ui/src/lib/components/app/chat/ChatForm/ChatFormContextGauge/ContextGaugeDetails.svelte#0",
+        "sha256": "1a537c65a84472681181261553365c41ef5d4dbfbc3ef99cb31863aed7b6be05",
+        "source": "tools/ui/src/lib/components/app/chat/ChatForm/ChatFormContextGauge/ContextGaugeDetails.svelte"
+      },
+      {
+        "id": "svelte-tools/ui/src/lib/components/app/chat/ChatForm/ChatFormContextGauge/ContextGaugePopup.svelte#0",
+        "sha256": "0d517cf5f7e1e18fc37c4241299a61f8403352d5b228f9535c83ab8e604e11e4",
+        "source": "tools/ui/src/lib/components/app/chat/ChatForm/ChatFormContextGauge/ContextGaugePopup.svelte"
+      },
+      {
+        "id": "svelte-tools/ui/src/lib/components/app/chat/ChatForm/ChatFormCurrentWorkingDirectory/ChatFormCurrentWorkingDirectory.svelte#0",
+        "sha256": "0f40c8f8498bdbc841844cfe5af3c88fce14bdd71f924f1c0f44a330cfecd986",
+        "source": "tools/ui/src/lib/components/app/chat/ChatForm/ChatFormCurrentWorkingDirectory/ChatFormCurrentWorkingDirectory.svelte"
+      },
+      {
+        "id": "svelte-tools/ui/src/lib/components/app/chat/ChatForm/ChatFormCurrentWorkingDirectory/ChatFormCurrentWorkingDirectoryChip.svelte#0",
+        "sha256": "e80398f74699e4fc5936a1ce6913709c3ada75adf622f214ef5466d3423cd4f7",
+        "source": "tools/ui/src/lib/components/app/chat/ChatForm/ChatFormCurrentWorkingDirectory/ChatFormCurrentWorkingDirectoryChip.svelte"
+      },
+      {
+        "id": "svelte-tools/ui/src/lib/components/app/chat/ChatForm/ChatFormCurrentWorkingDirectory/ChatFormCurrentWorkingDirectoryResultsList.svelte#0",
+        "sha256": "1c096d4689c701a635bff0ceee7cf5efb641e6c8ec7e561aceecc7b022891109",
+        "source": "tools/ui/src/lib/components/app/chat/ChatForm/ChatFormCurrentWorkingDirectory/ChatFormCurrentWorkingDirectoryResultsList.svelte"
+      },
+      {
+        "id": "svelte-tools/ui/src/lib/components/app/chat/ChatForm/ChatFormInput/ChatFormInput.svelte#0",
+        "sha256": "75768c641435fb38476b2d9675a09f8dab036f97f905cf0c1bffa6d8a62f8ec4",
+        "source": "tools/ui/src/lib/components/app/chat/ChatForm/ChatFormInput/ChatFormInput.svelte"
+      },
+      {
+        "id": "svelte-tools/ui/src/lib/components/app/chat/ChatForm/ChatFormInput/ChatFormInputBasic.svelte#0",
+        "sha256": "3fcebb60a29ec97cea73caf73a8ce65a2fada005633ad8e8de514ff6d9222557",
+        "source": "tools/ui/src/lib/components/app/chat/ChatForm/ChatFormInput/ChatFormInputBasic.svelte"
+      },
+      {
+        "id": "svelte-tools/ui/src/lib/components/app/chat/ChatForm/ChatFormInput/ChatFormInputRich.svelte#0",
+        "sha256": "01812be0ad271dbe5edc70c3ac4707e1250e687f54af2e80864ab58fadecf2ca",
+        "source": "tools/ui/src/lib/components/app/chat/ChatForm/ChatFormInput/ChatFormInputRich.svelte"
+      },
+      {
+        "id": "svelte-tools/ui/src/lib/components/app/chat/ChatForm/ChatFormPickers/ChatFormPicker/ChatFormPickerList.svelte#0",
+        "sha256": "0af43133c0f77cd300f9404f404d270c0d16cf9c3878fb23fab2cce6832b5d19",
+        "source": "tools/ui/src/lib/components/app/chat/ChatForm/ChatFormPickers/ChatFormPicker/ChatFormPickerList.svelte"
+      }
+    ],
+    "ts": [
+      {
+        "id": "ts-tools/ui/src/app.d.ts#0",
+        "sha256": "50a1765d7179f38f9155b9b132373b87cde707b098427dc507b1bd6f29762d00",
+        "source": "tools/ui/src/app.d.ts"
+      },
+      {
+        "id": "ts-tools/ui/src/lib/components/app/chat/ChatForm/ChatFormContextGauge/gauge-popup.svelte.ts#0",
+        "sha256": "db3defb16cb2b4b0a194ae39983e69a8290f61e38d372950d16dd05d376581af",
+        "source": "tools/ui/src/lib/components/app/chat/ChatForm/ChatFormContextGauge/gauge-popup.svelte.ts"
+      },
+      {
+        "id": "ts-tools/ui/src/lib/components/app/chat/ChatMessages/ChatMessage/ChatMessageToolCall/parsers/_shared.ts#0",
+        "sha256": "66039645bb779b2f1ffc1ed669842704a8100f5abd69572e3f2b8d12580401f6",
+        "source": "tools/ui/src/lib/components/app/chat/ChatMessages/ChatMessage/ChatMessageToolCall/parsers/_shared.ts"
+      },
+      {
+        "id": "ts-tools/ui/src/lib/components/app/chat/ChatMessages/ChatMessage/ChatMessageToolCall/parsers/edit-file.ts#0",
+        "sha256": "54b358639c0365fe42d3d2af6a5c9cb00346908895ae5f3af36848f57c4e11b0",
+        "source": "tools/ui/src/lib/components/app/chat/ChatMessages/ChatMessage/ChatMessageToolCall/parsers/edit-file.ts"
+      },
+      {
+        "id": "ts-tools/ui/src/lib/components/app/chat/ChatMessages/ChatMessage/ChatMessageToolCall/parsers/file-glob-search.ts#0",
+        "sha256": "f67a80aa34ba8da6fb807967e460b57d971b18681b33893ec601a9dd65ab38bb",
+        "source": "tools/ui/src/lib/components/app/chat/ChatMessages/ChatMessage/ChatMessageToolCall/parsers/file-glob-search.ts"
+      },
+      {
+        "id": "ts-tools/ui/src/lib/components/app/chat/ChatMessages/ChatMessage/ChatMessageToolCall/parsers/grep-search.ts#0",
+        "sha256": "4e5fa661061fdd57cd936db73eafd104e42e133d5ccb5802d266866932e202ac",
+        "source": "tools/ui/src/lib/components/app/chat/ChatMessages/ChatMessage/ChatMessageToolCall/parsers/grep-search.ts"
+      },
+      {
+        "id": "ts-tools/ui/src/lib/components/app/chat/ChatMessages/ChatMessage/ChatMessageToolCall/parsers/read-file.ts#0",
+        "sha256": "4e2701bc41c2ff6d6a1611420c8b434128259a348e349a9fdcc441f23e9d3de3",
+        "source": "tools/ui/src/lib/components/app/chat/ChatMessages/ChatMessage/ChatMessageToolCall/parsers/read-file.ts"
+      },
+      {
+        "id": "ts-tools/ui/src/lib/components/app/chat/ChatMessages/ChatMessage/ChatMessageToolCall/parsers/run-javascript.ts#0",
+        "sha256": "cf396a780dd841bea7b85fe4f2b47ef3d52b6d9a867c94685cfad1261be54fa1",
+        "source": "tools/ui/src/lib/components/app/chat/ChatMessages/ChatMessage/ChatMessageToolCall/parsers/run-javascript.ts"
+      },
+      {
+        "id": "ts-tools/ui/src/lib/components/app/chat/ChatMessages/ChatMessage/ChatMessageToolCall/parsers/write-file.ts#0",
+        "sha256": "1c245c0b85f06082900928a4b662e5faf48cf68dc6edbd680f7c7075bdc5394a",
+        "source": "tools/ui/src/lib/components/app/chat/ChatMessages/ChatMessage/ChatMessageToolCall/parsers/write-file.ts"
+      },
+      {
+        "id": "ts-tools/ui/src/lib/components/app/chat/index.ts#0",
+        "sha256": "34eb5d4a936321bf54a079260e714ee547d00b37cab3e79692e1d97aabaa4d60",
+        "source": "tools/ui/src/lib/components/app/chat/index.ts"
+      },
+      {
+        "id": "ts-tools/ui/src/lib/components/app/content/MarkdownContent/markdown-handlers.ts#0",
+        "sha256": "33c1d5b719da963185822c3c13d9eac5a3263fa39441349c817f8da2c08d804b",
+        "source": "tools/ui/src/lib/components/app/content/MarkdownContent/markdown-handlers.ts"
+      },
+      {
+        "id": "ts-tools/ui/src/lib/components/app/content/MarkdownContent/markdown-processor.ts#0",
+        "sha256": "86a840882da5082324200b388e796a465859e52c3d41af58be02a2a92905632f",
+        "source": "tools/ui/src/lib/components/app/content/MarkdownContent/markdown-processor.ts"
+      },
+      {
+        "id": "ts-tools/ui/src/lib/components/app/content/MarkdownContent/markdown-utils.ts#0",
+        "sha256": "fbe003c0687f76434671e5fc691b893359d497435397b1f01340270195e50951",
+        "source": "tools/ui/src/lib/components/app/content/MarkdownContent/markdown-utils.ts"
+      },
+      {
+        "id": "ts-tools/ui/src/lib/components/app/content/MarkdownContent/plugins/rehype/code-block-utils.ts#0",
+        "sha256": "42d39aa1193d9077ec6360c226444430737a70840ba3fc0314ae734cba5faff3",
+        "source": "tools/ui/src/lib/components/app/content/MarkdownContent/plugins/rehype/code-block-utils.ts"
+      },
+      {
+        "id": "ts-tools/ui/src/lib/components/app/content/MarkdownContent/plugins/rehype/enhance-code-blocks.ts#0",
+        "sha256": "a3ccb9d043fcedc60172d7dd0f7be1cd942f48d5740222d9b4bca67d35d4a975",
+        "source": "tools/ui/src/lib/components/app/content/MarkdownContent/plugins/rehype/enhance-code-blocks.ts"
+      },
+      {
+        "id": "ts-tools/ui/src/lib/components/app/content/MarkdownContent/plugins/rehype/enhance-mermaid-blocks.ts#0",
+        "sha256": "a62dad765b44699d93e3b6d6a32135e4c9669898603ca1df57e96f4fd2ff637e",
+        "source": "tools/ui/src/lib/components/app/content/MarkdownContent/plugins/rehype/enhance-mermaid-blocks.ts"
+      },
+      {
+        "id": "ts-tools/ui/src/lib/components/app/content/MarkdownContent/plugins/rehype/enhance-svg-blocks.ts#0",
+        "sha256": "990f8dd4383001e2399c6433e14d725b8b78e6a6726d28f601bd1752d0cb6318",
+        "source": "tools/ui/src/lib/components/app/content/MarkdownContent/plugins/rehype/enhance-svg-blocks.ts"
+      },
+      {
+        "id": "ts-tools/ui/src/lib/components/app/content/MarkdownContent/plugins/rehype/file-badge.ts#0",
+        "sha256": "74da204325c73a7dea71c8aa712bf641c6b81d6a8731e85e5f4dd0a1a8891728",
+        "source": "tools/ui/src/lib/components/app/content/MarkdownContent/plugins/rehype/file-badge.ts"
+      },
+      {
+        "id": "ts-tools/ui/src/lib/components/app/content/MarkdownContent/plugins/rehype/pre-transform.ts#0",
+        "sha256": "d2fcd0075095a571f2696a1265e072813cc3277c02a9bbc4989ece31d2d1711f",
+        "source": "tools/ui/src/lib/components/app/content/MarkdownContent/plugins/rehype/pre-transform.ts"
+      },
+      {
+        "id": "ts-tools/ui/src/lib/components/app/content/MarkdownContent/plugins/rehype/table-html-restorer.ts#0",
+        "sha256": "0aab96e902a2d95b59100848cfd252d9fadbd05cae64ddb6cec93310d2b8fc75",
+        "source": "tools/ui/src/lib/components/app/content/MarkdownContent/plugins/rehype/table-html-restorer.ts"
+      },
+      {
+        "id": "ts-tools/ui/src/lib/components/app/content/MarkdownContent/plugins/remark/literal-html.ts#0",
+        "sha256": "6f1786ad1cfeb8399888cba5b3d55526aa77eed0c36ffab0cfe1f361576a9032",
+        "source": "tools/ui/src/lib/components/app/content/MarkdownContent/plugins/remark/literal-html.ts"
+      },
+      {
+        "id": "ts-tools/ui/src/lib/components/app/content/index.ts#0",
+        "sha256": "e0bdacae068e6f2f7983b712894539e3ab7047d0ab111acfb3a40861b8e15bc2",
+        "source": "tools/ui/src/lib/components/app/content/index.ts"
+      },
+      {
+        "id": "ts-tools/ui/src/lib/components/app/dialogs/index.ts#0",
+        "sha256": "82e7b5da817a4e91c0ab9189fd09fa41a45acbc2fdb21f239c68726511b427c3",
+        "source": "tools/ui/src/lib/components/app/dialogs/index.ts"
+      },
+      {
+        "id": "ts-tools/ui/src/lib/components/app/mcp/McpResourcesBrowser/mcp-resources-browser.ts#0",
+        "sha256": "ffba53021569db0256515827eabbc37c31f7ed6d549880f10b5e1625f4336246",
+        "source": "tools/ui/src/lib/components/app/mcp/McpResourcesBrowser/mcp-resources-browser.ts"
+      },
+      {
+        "id": "ts-tools/ui/src/lib/components/app/mcp/index.ts#0",
+        "sha256": "065cc5676b0d6db9dab386649b59190a30fded1c3ff6f9e8e435419b05b717ba",
+        "source": "tools/ui/src/lib/components/app/mcp/index.ts"
+      }
+    ]
+  },
+  "identity": {
+    "embedding_sha256": "7d9761b306537a7ee6f3ebaeb85f0f5793bd6923ba08d29c74e997f83ee08849",
+    "gsq_gguf_sha256": "8e50912f5d0703401ca21b09deb2ee8a84d03536ade6fb44815fcb40a0b03596",
+    "heldout_manifest_sha256": "52b7041282f44c858f512ecf79764ef04c16d640f931ad28d8d9dffe42dd7eb0",
+    "llama_dir": "/extraspace/IronWolf/christian/gsq-rco-moe/repos/llama.cpp"
+  },
+  "mask": {
+    "chat_share": 0.021358604056886145,
+    "sha256": "e5fb9950407ca9aeafc6cfe9ac20b110dce5424847d3c5f18aa958fdcbce239c",
+    "uniform_share": 0.09375
+  },
+  "metric": "share of routed slots (8 per token per layer) on pruned experts",
+  "model": "GSQ-E6 (authentic GSQ + Q6_K token_embd), unpruned, as for the mask's counts",
+  "question": "how often web code selects the experts the release prunes",
+  "schema": "rco.qwen36.web_code_routing.v1",
+  "status": "complete",
+  "strata": {
+    "cpp": {
+      "gsq_e6_mean_nll": 0.9434907138347626,
+      "layer_share": [
+        0.141826171875,
+        0.140693359375,
+        0.098232421875,
+        0.07275390625,
+        0.0467578125,
+        0.03984375,
+        0.084169921875,
+        0.034111328125,
+        0.030380859375,
+        0.035625,
+        0.044580078125,
+        0.03998046875,
+        0.037861328125,
+        0.087529296875,
+        0.060380859375,
+        0.03912109375,
+        0.05392578125,
+        0.097998046875,
+        0.059169921875,
+        0.029638671875,
+        0.03146484375,
+        0.03666015625,
+        0.05486328125,
+        0.05560546875,
+        0.0425,
+        0.065341796875,
+        0.1009375,
+        0.055029296875,
+        0.10923828125,
+        0.041455078125,
+        0.060517578125,
+        0.020732421875,
+        0.02439453125,
+        0.017138671875,
+        0.021201171875,
+        0.018056640625,
+        0.017841796875,
+        0.019140625,
+        0.019775390625,
+        0.0213671875
+      ],
+      "layers_above_uniform": 6,
+      "pruned_experts_never_selected": 2,
+      "pruned_share": 0.052696044921875004,
+      "pruned_share_ci95": [
+        0.04985839233398438,
+        0.055993145751953126
+      ],
+      "ratio_to_chat": 2.4672045411547145,
+      "tokens": 12800,
+      "top_layers": [
+        {
+          "layer": 0,
+          "share": 0.141826171875
+        },
+        {
+          "layer": 1,
+          "share": 0.140693359375
+        },
+        {
+          "layer": 28,
+          "share": 0.10923828125
+        },
+        {
+          "layer": 26,
+          "share": 0.1009375
+        },
+        {
+          "layer": 2,
+          "share": 0.098232421875
+        }
+      ],
+      "window_share_min_max": [
+        0.041632080078125,
+        0.080316162109375
+      ],
+      "windows": 25
+    },
+    "css": {
+      "gsq_e6_mean_nll": 0.7018643279870351,
+      "layer_share": [
+        0.10895182291666666,
+        0.14806315104166667,
+        0.11593424479166667,
+        0.053271484375,
+        0.142578125,
+        0.17566731770833333,
+        0.152197265625,
+        0.10123697916666667,
+        0.14558919270833334,
+        0.11778971354166666,
+        0.14921875,
+        0.057177734375,
+        0.07897135416666666,
+        0.17913411458333334,
+        0.16946614583333333,
+        0.17303059895833334,
+        0.14332682291666668,
+        0.21194661458333333,
+        0.231396484375,
+        0.174072265625,
+        0.16515299479166667,
+        0.100390625,
+        0.15387369791666666,
+        0.15935872395833334,
+        0.09537760416666667,
+        0.17626953125,
+        0.20164388020833332,
+        0.24384765625,
+        0.18194986979166666,
+        0.23531901041666667,
+        0.202880859375,
+        0.1408203125,
+        0.022574869791666667,
+        0.015641276041666666,
+        0.014794921875,
+        0.04119466145833333,
+        0.016861979166666666,
+        0.11432291666666666,
+        0.013623046875,
+        0.011653645833333334
+      ],
+      "layers_above_uniform": 30,
+      "pruned_experts_never_selected": 17,
+      "pruned_share": 0.128414306640625,
+      "pruned_share_ci95": [
+        0.12476219685872397,
+        0.13202341715494792
+      ],
+      "ratio_to_chat": 6.012298664210849,
+      "tokens": 7680,
+      "top_layers": [
+        {
+          "layer": 27,
+          "share": 0.24384765625
+        },
+        {
+          "layer": 29,
+          "share": 0.23531901041666667
+        },
+        {
+          "layer": 18,
+          "share": 0.231396484375
+        },
+        {
+          "layer": 17,
+          "share": 0.21194661458333333
+        },
+        {
+          "layer": 30,
+          "share": 0.202880859375
+        }
+      ],
+      "window_share_min_max": [
+        0.116510009765625,
+        0.143499755859375
+      ],
+      "windows": 15
+    },
+    "gen_css": {
+      "gsq_e6_mean_nll": 0.4638981620470683,
+      "layer_share": [
+        0.098388671875,
+        0.1163330078125,
+        0.0980224609375,
+        0.061238606770833336,
+        0.11787923177083333,
+        0.12040201822916667,
+        0.13712565104166666,
+        0.07828776041666667,
+        0.14567057291666666,
+        0.09102376302083333,
+        0.12430826822916667,
+        0.0543212890625,
+        0.09383138020833333,
+        0.17789713541666666,
+        0.17390950520833334,
+        0.24601236979166666,
+        0.16878255208333334,
+        0.18998209635416666,
+        0.24418131510416666,
+        0.211669921875,
+        0.14383951822916666,
+        0.12455240885416667,
+        0.2132568359375,
+        0.18538411458333334,
+        0.121826171875,
+        0.19340006510416666,
+        0.19584147135416666,
+        0.24735514322916666,
+        0.18701171875,
+        0.2205810546875,
+        0.2528483072916667,
+        0.14835611979166666,
+        0.020467122395833332,
+        0.021443684895833332,
+        0.018961588541666668,
+        0.057576497395833336,
+        0.018717447916666668,
+        0.10428873697916667,
+        0.00634765625,
+        0.008951822916666666
+      ],
+      "layers_above_uniform": 29,
+      "pruned_experts_never_selected": 135,
+      "pruned_share": 0.13100687662760419,
+      "pruned_share_ci95": [
+        0.12692769368489584,
+        0.13429158528645835
+      ],
+      "ratio_to_chat": 6.133681596357266,
+      "tokens": 3072,
+      "top_layers": [
+        {
+          "layer": 30,
+          "share": 0.2528483072916667
+        },
+        {
+          "layer": 27,
+          "share": 0.24735514322916666
+        },
+        {
+          "layer": 15,
+          "share": 0.24601236979166666
+        },
+        {
+          "layer": 18,
+          "share": 0.24418131510416666
+        },
+        {
+          "layer": 29,
+          "share": 0.2205810546875
+        }
+      ],
+      "window_share_min_max": [
+        0.121710205078125,
+        0.1362060546875
+      ],
+      "windows": 6
+    },
+    "gen_html": {
+      "gsq_e6_mean_nll": 0.4414454624056816,
+      "layer_share": [
+        0.07489013671875,
+        0.10247802734375,
+        0.090087890625,
+        0.06304931640625,
+        0.048095703125,
+        0.0819091796875,
+        0.09356689453125,
+        0.035888671875,
+        0.14105224609375,
+        0.05810546875,
+        0.0594482421875,
+        0.0238037109375,
+        0.1051025390625,
+        0.0977783203125,
+        0.09735107421875,
+        0.2569580078125,
+        0.13873291015625,
+        0.15362548828125,
+        0.2257080078125,
+        0.1536865234375,
+        0.10028076171875,
+        0.14483642578125,
+        0.1588134765625,
+        0.13018798828125,
+        0.1494140625,
+        0.12548828125,
+        0.15240478515625,
+        0.12530517578125,
+        0.09765625,
+        0.10443115234375,
+        0.20751953125,
+        0.0782470703125,
+        0.007568359375,
+        0.00567626953125,
+        0.001708984375,
+        0.00823974609375,
+        0.00457763671875,
+        0.04241943359375,
+        0.00457763671875,
+        0.0113525390625
+      ],
+      "layers_above_uniform": 21,
+      "pruned_experts_never_selected": 209,
+      "pruned_share": 0.09405059814453126,
+      "pruned_share_ci95": [
+        0.0907379150390625,
+        0.09869232177734374
+      ],
+      "ratio_to_chat": 4.40340566705757,
+      "tokens": 2048,
+      "top_layers": [
+        {
+          "layer": 15,
+          "share": 0.2569580078125
+        },
+        {
+          "layer": 18,
+          "share": 0.2257080078125
+        },
+        {
+          "layer": 30,
+          "share": 0.20751953125
+        },
+        {
+          "layer": 22,
+          "share": 0.1588134765625
+        },
+        {
+          "layer": 19,
+          "share": 0.1536865234375
+        }
+      ],
+      "window_share_min_max": [
+        0.089996337890625,
+        0.100762939453125
+      ],
+      "windows": 4
+    },
+    "gen_js": {
+      "gsq_e6_mean_nll": 0.6644963729381561,
+      "layer_share": [
+        0.1409765625,
+        0.142646484375,
+        0.09900390625,
+        0.093037109375,
+        0.112509765625,
+        0.0848046875,
+        0.114873046875,
+        0.038447265625,
+        0.085263671875,
+        0.042353515625,
+        0.042080078125,
+        0.03185546875,
+        0.133623046875,
+        0.0676171875,
+        0.04154296875,
+        0.235517578125,
+        0.079013671875,
+        0.125634765625,
+        0.178623046875,
+        0.04326171875,
+        0.0247265625,
+        0.14982421875,
+        0.077666015625,
+        0.076650390625,
+        0.120322265625,
+        0.07521484375,
+        0.084052734375,
+        0.17,
+        0.06431640625,
+        0.07361328125,
+        0.148935546875,
+        0.0365625,
+        0.009775390625,
+        0.011552734375,
+        0.005322265625,
+        0.0151953125,
+        0.010771484375,
+        0.02380859375,
+        0.011767578125,
+        0.01529296875
+      ],
+      "layers_above_uniform": 13,
+      "pruned_experts_never_selected": 38,
+      "pruned_share": 0.078451416015625,
+      "pruned_share_ci95": [
+        0.07480794067382812,
+        0.08234888916015624
+      ],
+      "ratio_to_chat": 3.6730591478112906,
+      "tokens": 12800,
+      "top_layers": [
+        {
+          "layer": 15,
+          "share": 0.235517578125
+        },
+        {
+          "layer": 18,
+          "share": 0.178623046875
+        },
+        {
+          "layer": 27,
+          "share": 0.17
+        },
+        {
+          "layer": 21,
+          "share": 0.14982421875
+        },
+        {
+          "layer": 30,
+          "share": 0.148935546875
+        }
+      ],
+      "window_share_min_max": [
+        0.06414794921875,
+        0.10074462890625
+      ],
+      "windows": 25
+    },
+    "js": {
+      "gsq_e6_mean_nll": 1.2377720427513124,
+      "layer_share": [
+        0.125751953125,
+        0.136513671875,
+        0.0884765625,
+        0.07787109375,
+        0.11921875,
+        0.111923828125,
+        0.100654296875,
+        0.04970703125,
+        0.064599609375,
+        0.061689453125,
+        0.0616796875,
+        0.035771484375,
+        0.0509375,
+        0.053837890625,
+        0.0626953125,
+        0.053046875,
+        0.040009765625,
+        0.106669921875,
+        0.10240234375,
+        0.040087890625,
+        0.045654296875,
+        0.034794921875,
+        0.039599609375,
+        0.041640625,
+        0.03865234375,
+        0.0644921875,
+        0.096103515625,
+        0.07474609375,
+        0.0698828125,
+        0.0430078125,
+        0.0798828125,
+        0.0335546875,
+        0.016201171875,
+        0.011357421875,
+        0.01021484375,
+        0.01740234375,
+        0.01263671875,
+        0.018369140625,
+        0.011796875,
+        0.014228515625
+      ],
+      "layers_above_uniform": 8,
+      "pruned_experts_never_selected": 1,
+      "pruned_share": 0.05794409179687501,
+      "pruned_share_ci95": [
+        0.05410145263671875,
+        0.06264208984375
+      ],
+      "ratio_to_chat": 2.712915677567115,
+      "tokens": 12800,
+      "top_layers": [
+        {
+          "layer": 1,
+          "share": 0.136513671875
+        },
+        {
+          "layer": 0,
+          "share": 0.125751953125
+        },
+        {
+          "layer": 4,
+          "share": 0.11921875
+        },
+        {
+          "layer": 5,
+          "share": 0.111923828125
+        },
+        {
+          "layer": 17,
+          "share": 0.106669921875
+        }
+      ],
+      "window_share_min_max": [
+        0.046368408203125,
+        0.095660400390625
+      ],
+      "windows": 25
+    },
+    "prose": {
+      "gsq_e6_mean_nll": 1.5447472858428954,
+      "layer_share": [
+        0.0666796875,
+        0.06041015625,
+        0.060078125,
+        0.035830078125,
+        0.02607421875,
+        0.058662109375,
+        0.03087890625,
+        0.03162109375,
+        0.02392578125,
+        0.028369140625,
+        0.066455078125,
+        0.032578125,
+        0.046748046875,
+        0.038974609375,
+        0.038076171875,
+        0.03033203125,
+        0.04232421875,
+        0.059248046875,
+        0.03181640625,
+        0.024599609375,
+        0.017158203125,
+        0.0149609375,
+        0.032119140625,
+        0.057451171875,
+        0.036943359375,
+        0.072001953125,
+        0.033759765625,
+        0.031650390625,
+        0.040078125,
+        0.046171875,
+        0.026103515625,
+        0.02353515625,
+        0.00330078125,
+        0.002333984375,
+        0.000498046875,
+        0.003935546875,
+        0.002021484375,
+        0.0150390625,
+        0.00115234375,
+        0.0028125
+      ],
+      "layers_above_uniform": 0,
+      "pruned_experts_never_selected": 111,
+      "pruned_share": 0.032417724609375004,
+      "pruned_share_ci95": [
+        0.03035833740234375,
+        0.034627496337890626
+      ],
+      "ratio_to_chat": 1.51778292827725,
+      "tokens": 12800,
+      "top_layers": [
+        {
+          "layer": 25,
+          "share": 0.072001953125
+        },
+        {
+          "layer": 0,
+          "share": 0.0666796875
+        },
+        {
+          "layer": 10,
+          "share": 0.066455078125
+        },
+        {
+          "layer": 1,
+          "share": 0.06041015625
+        },
+        {
+          "layer": 2,
+          "share": 0.060078125
+        }
+      ],
+      "window_share_min_max": [
+        0.026165771484375,
+        0.047723388671875
+      ],
+      "windows": 25
+    },
+    "svelte": {
+      "gsq_e6_mean_nll": 1.22261958360672,
+      "layer_share": [
+        0.192158203125,
+        0.198173828125,
+        0.074326171875,
+        0.080654296875,
+        0.124755859375,
+        0.18890625,
+        0.15486328125,
+        0.050390625,
+        0.187626953125,
+        0.141953125,
+        0.067099609375,
+        0.036611328125,
+        0.04775390625,
+        0.189482421875,
+        0.20392578125,
+        0.141787109375,
+        0.13326171875,
+        0.199912109375,
+        0.23927734375,
+        0.147392578125,
+        0.223720703125,
+        0.108720703125,
+        0.07126953125,
+        0.108349609375,
+        0.078720703125,
+        0.15154296875,
+        0.235986328125,
+        0.1598046875,
+        0.1769140625,
+        0.117490234375,
+        0.176298828125,
+        0.070791015625,
+        0.0094921875,
+        0.005107421875,
+        0.00439453125,
+        0.01662109375,
+        0.010556640625,
+        0.054951171875,
+        0.012529296875,
+        0.01494140625
+      ],
+      "layers_above_uniform": 23,
+      "pruned_experts_never_selected": 14,
+      "pruned_share": 0.11521289062500001,
+      "pruned_share_ci95": [
+        0.11009549560546875,
+        0.12034729614257814
+      ],
+      "ratio_to_chat": 5.394214449509151,
+      "tokens": 12800,
+      "top_layers": [
+        {
+          "layer": 18,
+          "share": 0.23927734375
+        },
+        {
+          "layer": 26,
+          "share": 0.235986328125
+        },
+        {
+          "layer": 20,
+          "share": 0.223720703125
+        },
+        {
+          "layer": 14,
+          "share": 0.20392578125
+        },
+        {
+          "layer": 17,
+          "share": 0.199912109375
+        }
+      ],
+      "window_share_min_max": [
+        0.09295654296875,
+        0.13912353515625
+      ],
+      "windows": 25
+    },
+    "ts": {
+      "gsq_e6_mean_nll": 1.3635330414772033,
+      "layer_share": [
+        0.1568359375,
+        0.13869140625,
+        0.059912109375,
+        0.067080078125,
+        0.099921875,
+        0.12890625,
+        0.10875,
+        0.032431640625,
+        0.092783203125,
+        0.0725390625,
+        0.04107421875,
+        0.02447265625,
+        0.036376953125,
+        0.105224609375,
+        0.112216796875,
+        0.06474609375,
+        0.070556640625,
+        0.11890625,
+        0.1108984375,
+        0.070283203125,
+        0.106923828125,
+        0.067607421875,
+        0.04693359375,
+        0.054453125,
+        0.043310546875,
+        0.076416015625,
+        0.120625,
+        0.083427734375,
+        0.084306640625,
+        0.06462890625,
+        0.09078125,
+        0.033994140625,
+        0.011005859375,
+        0.0082421875,
+        0.00798828125,
+        0.012060546875,
+        0.013154296875,
+        0.02857421875,
+        0.01376953125,
+        0.01357421875
+      ],
+      "layers_above_uniform": 11,
+      "pruned_experts_never_selected": 5,
+      "pruned_share": 0.067359619140625,
+      "pruned_share_ci95": [
+        0.06062686767578125,
+        0.07411807861328125
+      ],
+      "ratio_to_chat": 3.153746329171163,
+      "tokens": 12800,
+      "top_layers": [
+        {
+          "layer": 0,
+          "share": 0.1568359375
+        },
+        {
+          "layer": 1,
+          "share": 0.13869140625
+        },
+        {
+          "layer": 5,
+          "share": 0.12890625
+        },
+        {
+          "layer": 26,
+          "share": 0.120625
+        },
+        {
+          "layer": 17,
+          "share": 0.11890625
+        }
+      ],
+      "window_share_min_max": [
+        0.034002685546875,
+        0.099481201171875
+      ],
+      "windows": 25
+    }
+  },
+  "wall_seconds": 842.4740639280062,
+  "window_tokens": 512
+}
