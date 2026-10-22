@@ -1,0 +1,2010 @@
+{
+  "families": [
+    "ffn_down_exps"
+  ],
+  "gsq_gguf_sha256": "8e50912f5d0703401ca21b09deb2ee8a84d03536ade6fb44815fcb40a0b03596",
+  "imatrix_path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/unsloth_imatrix/imatrix_unsloth.gguf",
+  "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+  "schema": "rco.qwen36.post_release_iq_store_full.v1",
+  "status": "complete",
+  "store": {
+    "index_sha256": "cfc3ad3767064a651c2e94e091a2b9ed8d2ea354b76edbb666e1cf39f201496b",
+    "root": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_post_release_full_iq/store_IQ3_XXS"
+  },
+  "summary": {
+    "all": {
+      "bytes": {
+        "IQ3_XXS": 4110417920,
+        "gsq_q2_0": 3019898880
+      },
+      "median_relative_rmse": {
+        "gsq_q2_0": 0.4149127850175782,
+        "iq3_xxs": 0.1849295985524403
+      },
+      "median_weighted_relative_error": {
+        "gsq_q2_0": 0.40487295217769265,
+        "iq3_xxs": 0.17361150636672595
+      },
+      "tensors": 40
+    },
+    "ffn_down_exps": {
+      "bytes": {
+        "IQ3_XXS": 4110417920,
+        "gsq_q2_0": 3019898880
+      },
+      "median_relative_rmse": {
+        "gsq_q2_0": 0.4149127850175782,
+        "iq3_xxs": 0.1849295985524403
+      },
+      "median_weighted_relative_error": {
+        "gsq_q2_0": 0.40487295217769265,
+        "iq3_xxs": 0.17361150636672595
+      },
+      "tensors": 40
+    }
+  },
+  "tensors": {
+    "blk.0.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 0,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.46644121188892773,
+          "weighted_relative_error": 0.4133082245086809
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.28737100102075624,
+          "weighted_relative_error": 0.12299903245942852
+        }
+      },
+      "name": "blk.0.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.0.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00002-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.0.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "fbb327f5a0037c0363e485853dfc474422c0053f8f27b02bd8c3704c48941149",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 105.4596375930123
+    },
+    "blk.1.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 1,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.45411754948963984,
+          "weighted_relative_error": 0.43631363337972773
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.1935810281776886,
+          "weighted_relative_error": 0.1536771792293568
+        }
+      },
+      "name": "blk.1.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.1.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00001-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.1.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "04288fdfd13c6ba2f73e6d5cbf89a2c1bc1e113591ad54803cfd2511eec3a94a",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 137.31010793801397
+    },
+    "blk.10.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 10,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.41657353510294404,
+          "weighted_relative_error": 0.4045251296338813
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.1846101486792367,
+          "weighted_relative_error": 0.17542238832922363
+        }
+      },
+      "name": "blk.10.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.10.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00006-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.10.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "9f44836869ae973086452dffb61f5eca0627a5cf29cd8da9d24d4ede437dbd8d",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 137.1235374500975
+    },
+    "blk.11.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 11,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4130224321453085,
+          "weighted_relative_error": 0.4012748638929402
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.1847814999725988,
+          "weighted_relative_error": 0.17649478318276032
+        }
+      },
+      "name": "blk.11.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.11.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00009-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.11.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "ad9dc8e7875565c8cbb223765386d33d8b6085893120d5f6dbbd44903a01f93d",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 134.68412375915796
+    },
+    "blk.12.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 12,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4141794316670545,
+          "weighted_relative_error": 0.40517165070440603
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18414845052555612,
+          "weighted_relative_error": 0.1756263457433984
+        }
+      },
+      "name": "blk.12.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.12.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00009-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.12.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "3cfb7cf6bae227d6f393456e914ac0b5b53f162d90159179919a9092af026994",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 136.1535756639205
+    },
+    "blk.13.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 13,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4111670362560202,
+          "weighted_relative_error": 0.40457425365097927
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18480421775949982,
+          "weighted_relative_error": 0.17462880062044514
+        }
+      },
+      "name": "blk.13.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.13.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00008-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.13.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "599357f80d6a7cb44a7a0de2967b2a6f3c4b8e03798c67d41f548cb90749fe8c",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 134.1150723900646
+    },
+    "blk.14.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 14,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4050844071447754,
+          "weighted_relative_error": 0.4000143929819467
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.1844197743139906,
+          "weighted_relative_error": 0.17499526218148503
+        }
+      },
+      "name": "blk.14.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.14.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00010-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.14.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "0edb3759df2abfce9890cfb72233dc290d08f395598d65512a43dbabf3d6dd30",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 137.20044068200514
+    },
+    "blk.15.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 15,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.402722330448692,
+          "weighted_relative_error": 0.39824916636797286
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18411737057493172,
+          "weighted_relative_error": 0.17624556742531486
+        }
+      },
+      "name": "blk.15.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.15.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00011-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.15.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "b326f5b8695e6f7445badd74c2ebba326cf0d4664402eacb9bd52dff9b09f938",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 136.14845386799425
+    },
+    "blk.16.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 16,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.40028879668950706,
+          "weighted_relative_error": 0.3959864405451292
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.1843266435479414,
+          "weighted_relative_error": 0.1762084704871323
+        }
+      },
+      "name": "blk.16.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.16.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00011-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.16.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "a960c00e0923169126ad03bc1c0a027ac85d266eac10534f511e168f9d308dd9",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 136.29193081893027
+    },
+    "blk.17.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 17,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.40295521885414426,
+          "weighted_relative_error": 0.39710339619354645
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18440805582450281,
+          "weighted_relative_error": 0.1757594993439678
+        }
+      },
+      "name": "blk.17.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.17.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00012-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.17.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "2af26a6f5f8bd9ba42d5ae1ebf4410824f425c2d9da5a9704def199c5ae79fa0",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 134.84105079295114
+    },
+    "blk.18.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 18,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.40461976815342054,
+          "weighted_relative_error": 0.39868029812855443
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18457527378599037,
+          "weighted_relative_error": 0.1745688578167718
+        }
+      },
+      "name": "blk.18.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.18.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00012-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.18.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "e2ea24a261541738448018d697f7596426b9dd59588e4e6ce65c53075268809d",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 135.21443837694824
+    },
+    "blk.19.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 19,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4029129212345502,
+          "weighted_relative_error": 0.3987490649044075
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18451333973087644,
+          "weighted_relative_error": 0.17602313699625283
+        }
+      },
+      "name": "blk.19.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.19.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00013-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.19.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "6cbfdcc9ab5442c281fc0646181c461a3de15d76f7f2014aff82b62bb5248554",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 133.8248093398288
+    },
+    "blk.2.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 2,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.5076478318415074,
+          "weighted_relative_error": 0.4839209038899623
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18706839875643966,
+          "weighted_relative_error": 0.16971109373046106
+        }
+      },
+      "name": "blk.2.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.2.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00003-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.2.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "893bf2891bcea335300be7e2030af8a8ab0238506fd2d45963f1e2bcb504edb0",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 136.04144175699912
+    },
+    "blk.20.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 20,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.42302984025257956,
+          "weighted_relative_error": 0.4218966158886982
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18481057265273704,
+          "weighted_relative_error": 0.17295148556436665
+        }
+      },
+      "name": "blk.20.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.20.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00014-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.20.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "83e6b8d8d892549e3031a1b026fb4a8c380547de076d3f48be9d48c162beb7f2",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 136.34558328287676
+    },
+    "blk.21.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 21,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4156461383681019,
+          "weighted_relative_error": 0.4133966024171899
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18484762606264485,
+          "weighted_relative_error": 0.17422115936477742
+        }
+      },
+      "name": "blk.21.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.21.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00014-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.21.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "29d8afc6a9707fb7d042d226ad100b16922a642b2bb9f84cf14f836fd84acc5a",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 135.2022356169764
+    },
+    "blk.22.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 22,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4080528909307932,
+          "weighted_relative_error": 0.401111813951909
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18439002562368775,
+          "weighted_relative_error": 0.17630769137496496
+        }
+      },
+      "name": "blk.22.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.22.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00015-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.22.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "f30809fd7c138fe4b01f9b3ee2777550f24cbb50f2822f1e655553c7bd534388",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 134.84260233305395
+    },
+    "blk.23.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 23,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4049722019098201,
+          "weighted_relative_error": 0.39822836186390137
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.1845835823896781,
+          "weighted_relative_error": 0.17696245350738038
+        }
+      },
+      "name": "blk.23.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.23.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00016-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.23.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "f85759f5311bfe38b8aa2cd16056007168a88f8af4e75866593bf4d27f7df3b6",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 138.17439722199924
+    },
+    "blk.24.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 24,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.41079370025635514,
+          "weighted_relative_error": 0.4036138040180595
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18383623858051507,
+          "weighted_relative_error": 0.1772115454350941
+        }
+      },
+      "name": "blk.24.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.24.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00016-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.24.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "d471e82bf00cf7238ed37820092d63a0e796e382b9a6ff36633e8b20edd810d1",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 137.29311617906205
+    },
+    "blk.25.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 25,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4084535121427633,
+          "weighted_relative_error": 0.40275930317011144
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.1846676030105859,
+          "weighted_relative_error": 0.17514901394275714
+        }
+      },
+      "name": "blk.25.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.25.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00016-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.25.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "62fe338dcd14169c3df7c8b5d5f66b18188573e479bfdccc770d8ffbda38e546",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 136.79852121602744
+    },
+    "blk.26.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 26,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.405453773735068,
+          "weighted_relative_error": 0.40062177686461375
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18446561471115816,
+          "weighted_relative_error": 0.1756237578907451
+        }
+      },
+      "name": "blk.26.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.26.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00019-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.26.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "90797314a2fed451e1a2991d1a078f9000ee07b73d73a70b2fddefa5dec5db37",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 134.03606812190264
+    },
+    "blk.27.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 27,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4036366870038697,
+          "weighted_relative_error": 0.399147573193703
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18474859484624803,
+          "weighted_relative_error": 0.1749326256425336
+        }
+      },
+      "name": "blk.27.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.27.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00019-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.27.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "bd1a05dcc771c6c343ab9d567a9adfb4d47d7714cd786810b904a3c5bf4fb0ef",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 133.45039407303557
+    },
+    "blk.28.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 28,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.40447729526618714,
+          "weighted_relative_error": 0.399984467328909
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18541569757921675,
+          "weighted_relative_error": 0.17357466501007326
+        }
+      },
+      "name": "blk.28.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.28.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00018-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.28.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "26def71bcdb69f6c1ea8701503b4e126ba89892e66e90941d18eae9cfb36aef2",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 134.42397402506322
+    },
+    "blk.29.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 29,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.40692889766007634,
+          "weighted_relative_error": 0.4020220717177908
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18576289201031468,
+          "weighted_relative_error": 0.17248739952031056
+        }
+      },
+      "name": "blk.29.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.29.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00020-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.29.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "aec4c0ce1f73dd4855f7e689c9802857dda752948dc62d9aa2e30e368dfd4579",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 135.2537777510006
+    },
+    "blk.3.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 3,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4901102572630573,
+          "weighted_relative_error": 0.46166361326232536
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18566544605821744,
+          "weighted_relative_error": 0.1716330451041268
+        }
+      },
+      "name": "blk.3.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.3.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00003-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.3.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "b38470601c4e57760bf81db8ccc8a9c8943c5c3d154744b48d182bdbd0413caa",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 137.10202506091446
+    },
+    "blk.30.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 30,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.40616768547774584,
+          "weighted_relative_error": 0.40198907996710553
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18584703664108188,
+          "weighted_relative_error": 0.172423343724443
+        }
+      },
+      "name": "blk.30.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.30.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00021-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.30.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "34db4d4830237068f0133406e7a56e8bb0a8362e44478026c8d311d0e1199ddc",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 134.15795041015372
+    },
+    "blk.31.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 31,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4058285644831383,
+          "weighted_relative_error": 0.4020128279829313
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.1863753699007399,
+          "weighted_relative_error": 0.17100518202820136
+        }
+      },
+      "name": "blk.31.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.31.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00020-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.31.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "6effb4870992efb93111b389727695dd0af5b510df7aff007c3eed69d6a30e7f",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 136.05111955688335
+    },
+    "blk.32.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 32,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4118536860865121,
+          "weighted_relative_error": 0.40630516168809566
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18808714388091397,
+          "weighted_relative_error": 0.16839696417571656
+        }
+      },
+      "name": "blk.32.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.32.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00022-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.32.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "407d4f9cb07144ff408e83f265fe345650006018fd969d6a46350ed36d8ff8db",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 134.88749797805212
+    },
+    "blk.33.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 33,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4171869297437129,
+          "weighted_relative_error": 0.4121210691226846
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.1889206036567521,
+          "weighted_relative_error": 0.16694478903286636
+        }
+      },
+      "name": "blk.33.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.33.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00022-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.33.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "05c6a2c6411e49222a5a0166524455a5e6d625becb388442882631666352d314",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 135.163731765002
+    },
+    "blk.34.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 34,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.42133150668073177,
+          "weighted_relative_error": 0.4175348489983302
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.1886447700884735,
+          "weighted_relative_error": 0.16813725854608935
+        }
+      },
+      "name": "blk.34.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.34.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00023-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.34.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "448dcc63123976eea09768385a85198c5804dae10be1c88745706531cb8d71ce",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 134.8208901830949
+    },
+    "blk.35.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 35,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.41654195578812425,
+          "weighted_relative_error": 0.4121788661892168
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18831854727547126,
+          "weighted_relative_error": 0.16702744258881025
+        }
+      },
+      "name": "blk.35.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.35.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00023-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.35.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "41a21dcdd540ae5a6478513c973b018a842fa7ac5a8382fff2c9ce5e345de7f7",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 134.70009701815434
+    },
+    "blk.36.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 36,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4223034493875876,
+          "weighted_relative_error": 0.4194734909048347
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18889568386963895,
+          "weighted_relative_error": 0.1663054013242343
+        }
+      },
+      "name": "blk.36.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.36.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00024-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.36.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "a5a2bbe1ef5fae2091f197d26d7c1e5c6addef23e2a445e8d79847807133abd7",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 133.05100142210722
+    },
+    "blk.37.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 37,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.42316799832244856,
+          "weighted_relative_error": 0.41913107972683217
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18987187915147025,
+          "weighted_relative_error": 0.16571970938811525
+        }
+      },
+      "name": "blk.37.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.37.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00024-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.37.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "a9425da5bc983c3835d2a6e220657fe9c3968095ee29c5f56e555e810c3224e3",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 133.00664442311972
+    },
+    "blk.38.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 38,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4289705452481634,
+          "weighted_relative_error": 0.42339390220029693
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.1907209140363384,
+          "weighted_relative_error": 0.16150736075372243
+        }
+      },
+      "name": "blk.38.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.38.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00025-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.38.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "74c7fb395e5e6759ed50522d419ae2db1a08966b470393a9abbd26449d8e80c9",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 133.81414533616044
+    },
+    "blk.39.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 39,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4364775484446318,
+          "weighted_relative_error": 0.3855756843926965
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.19414402479263584,
+          "weighted_relative_error": 0.12450206345052464
+        }
+      },
+      "name": "blk.39.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.39.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00026-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.39.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "fb0c72ef7be19a800149da15c93b527677a827171f7a1408e5f32acca15f1a5d",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 132.10138100897893
+    },
+    "blk.4.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 4,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.467033996466704,
+          "weighted_relative_error": 0.4361993090205334
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18602681728090614,
+          "weighted_relative_error": 0.1709302067503554
+        }
+      },
+      "name": "blk.4.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.4.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00004-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.4.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "89d4fd7affdbce0d41cd9c12ac30a4379130dcc88d2054023a5642fa4f3917e1",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 137.82132982998155
+    },
+    "blk.5.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 5,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4420761754940122,
+          "weighted_relative_error": 0.4219725170850303
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18539324033908747,
+          "weighted_relative_error": 0.1730658166865764
+        }
+      },
+      "name": "blk.5.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.5.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00004-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.5.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "6b287b7cf74c08eb01b23add50cb11b23aa2e0902cb5f8689be74d7f960f53b3",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 138.63596605393104
+    },
+    "blk.6.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 6,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.42674859433363205,
+          "weighted_relative_error": 0.41186908556627494
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18493079260371204,
+          "weighted_relative_error": 0.1743446076138816
+        }
+      },
+      "name": "blk.6.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.6.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00005-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.6.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "d5bb8b2c2d453f22486da4d4b9efd12a3dd8af6f447d84f5564330f631bf0134",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 140.16343768686056
+    },
+    "blk.7.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 7,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.42506450089929504,
+          "weighted_relative_error": 0.4147423787460262
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18478675845366194,
+          "weighted_relative_error": 0.17364834772337862
+        }
+      },
+      "name": "blk.7.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.7.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00005-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.7.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "33af0017119f25c91d86b6939dfce11b13f747899471bc4448d6b8757c4969dd",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 136.4734920070041
+    },
+    "blk.8.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 8,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4249359296158822,
+          "weighted_relative_error": 0.4210062605148915
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18492840450116851,
+          "weighted_relative_error": 0.1727247097283582
+        }
+      },
+      "name": "blk.8.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.8.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00006-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.8.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "c58f494ef9af76f42a0f1ae1b8c115f289ff530910444e33fa8961dc51ead382",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 138.165735949995
+    },
+    "blk.9.ffn_down_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_down_exps",
+      "layer": 9,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.42045400811901246,
+          "weighted_relative_error": 0.41540679984447787
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18501270320808597,
+          "weighted_relative_error": 0.1739257041308594
+        }
+      },
+      "name": "blk.9.ffn_down_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          512,
+          2048,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.9.ffn_down_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00006-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.9.mlp.experts.down_proj",
+          "source_view": null
+        },
+        "row_count": 524288,
+        "row_size": 196,
+        "row_width": 512,
+        "sha256": "6b2d45961931c390009bd8f8ae2007808531788e3399adb6c6793948a1bcff5d",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 137.5894069231581
+    }
+  },
+  "type": "IQ3_XXS",
+  "wall_seconds": 772.2519637299702
+}
