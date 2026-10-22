@@ -1,0 +1,35 @@
+{
+  "corpus": {
+    "description": "Unsloth's calibration text (not published)",
+    "limit": null
+  },
+  "imatrix": {
+    "layout": "our Phase 5 layout; pruned experts zeroed",
+    "path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_post_release_unsloth_imatrix/imatrix_unsloth_p24.npz",
+    "sha256": "2fec35ac572cd29ff707a188809348df633a1942588f4bdaf1712df46f03cf62"
+  },
+  "kept_expert_counts": {
+    "median": 22886.0,
+    "min": 442
+  },
+  "mask": {
+    "path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_prune24_chat/frequency_mask.npy",
+    "sha256": "e5fb9950407ca9aeafc6cfe9ac20b110dce5424847d3c5f18aa958fdcbce239c"
+  },
+  "schema": "rco.qwen36.unsloth_imatrix_p24.v1",
+  "source": {
+    "header": {
+      "general.type": "imatrix",
+      "imatrix.chunk_count": 76,
+      "imatrix.chunk_size": 11008,
+      "imatrix.datasets": [
+        "unsloth_calibration_Qwen3.6-35B-A3B.txt"
+      ]
+    },
+    "path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/unsloth_imatrix/imatrix_unsloth.gguf",
+    "revision": "a483e9e6cbd595906af30beda3187c2663a1118c",
+    "sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+    "url": "https://huggingface.co/unsloth/Qwen3.6-35B-A3B-GGUF/resolve/main/imatrix_unsloth.gguf_file"
+  },
+  "status": "complete"
+}
