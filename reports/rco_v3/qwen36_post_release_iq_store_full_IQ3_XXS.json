@@ -1,0 +1,4306 @@
+{
+  "families": [
+    "ffn_gate_exps",
+    "ffn_up_exps"
+  ],
+  "gsq_gguf_sha256": "8e50912f5d0703401ca21b09deb2ee8a84d03536ade6fb44815fcb40a0b03596",
+  "imatrix_path": "/extraspace/IronWolf/christian/gsq-rco-moe/data/unsloth_imatrix/imatrix_unsloth.gguf",
+  "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+  "schema": "rco.qwen36.post_release_iq_store_full.v1",
+  "status": "complete",
+  "store": {
+    "index_sha256": "45df1efdb2613a0c407cea88179f484d8386f0a98b2a0288ebb23ba3aee26190",
+    "root": "/extraspace/IronWolf/christian/gsq-rco-moe/data/qwen36_rco_v3/store_IQ3_XXS"
+  },
+  "summary": {
+    "all": {
+      "bytes": {
+        "IQ3_XXS": 8220835840,
+        "gsq_q2_0": 6039797760
+      },
+      "median_relative_rmse": {
+        "gsq_q2_0": 0.4388838088169159,
+        "iq3_xxs": 0.1846902000477364
+      },
+      "median_weighted_relative_error": {
+        "gsq_q2_0": 0.4467233595297894,
+        "iq3_xxs": 0.17607226436942203
+      },
+      "tensors": 80
+    },
+    "ffn_gate_exps": {
+      "bytes": {
+        "IQ3_XXS": 4110417920,
+        "gsq_q2_0": 3019898880
+      },
+      "median_relative_rmse": {
+        "gsq_q2_0": 0.4340048648997743,
+        "iq3_xxs": 0.18479275148822355
+      },
+      "median_weighted_relative_error": {
+        "gsq_q2_0": 0.435520785290034,
+        "iq3_xxs": 0.1746804570517253
+      },
+      "tensors": 40
+    },
+    "ffn_up_exps": {
+      "bytes": {
+        "IQ3_XXS": 4110417920,
+        "gsq_q2_0": 3019898880
+      },
+      "median_relative_rmse": {
+        "gsq_q2_0": 0.44362933501864005,
+        "iq3_xxs": 0.18453407408668504
+      },
+      "median_weighted_relative_error": {
+        "gsq_q2_0": 0.453594305199106,
+        "iq3_xxs": 0.17980896019849946
+      },
+      "tensors": 40
+    }
+  },
+  "tensors": {
+    "blk.0.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 0,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.49659297667859165,
+          "weighted_relative_error": 0.4553621252102693
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18958959720773022,
+          "weighted_relative_error": 0.1447894254662546
+        }
+      },
+      "name": "blk.0.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.0.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00001-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.0.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "6eea99539dfbbcb3072eed7efc36221f20801dda0f735026587dcf93ee6e0dc8",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 89.40219134488143
+    },
+    "blk.0.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 0,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.48950857490181165,
+          "weighted_relative_error": 0.5070937134622459
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18883776694164026,
+          "weighted_relative_error": 0.17061248123180234
+        }
+      },
+      "name": "blk.0.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.0.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00001-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.0.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "583a19d7ca77e236e3030720041bc86b3f9fab50094a7cd72d31387380580e56",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 89.57816169806756
+    },
+    "blk.1.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 1,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4772579506603182,
+          "weighted_relative_error": 0.4911639497477907
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18519345739461604,
+          "weighted_relative_error": 0.17634468539648068
+        }
+      },
+      "name": "blk.1.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.1.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00001-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.1.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "b796bac1d3ed7ea717afab491320d3562671f95d904a15e3daded9337e3d554e",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 133.52054056199268
+    },
+    "blk.1.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 1,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.49716524072532187,
+          "weighted_relative_error": 0.5135181619394042
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18512545247127343,
+          "weighted_relative_error": 0.1778724967054354
+        }
+      },
+      "name": "blk.1.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.1.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00001-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.1.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "9a4083ab74b3eabe21c77f40482d5cdff9a775d39a10b42e6f234c7b2f293dda",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 134.2515480031725
+    },
+    "blk.10.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 10,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.43631746090277185,
+          "weighted_relative_error": 0.4492626206533636
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18501180809566506,
+          "weighted_relative_error": 0.1765533376716779
+        }
+      },
+      "name": "blk.10.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.10.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00007-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.10.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "226a570d46a532b0620ed914f0591296fe4a7ccb90ca4e109f97d6497ce59323",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 133.41732420003973
+    },
+    "blk.10.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 10,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.44764039281687434,
+          "weighted_relative_error": 0.4653080303797292
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.1848211528939636,
+          "weighted_relative_error": 0.1804074167052914
+        }
+      },
+      "name": "blk.10.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.10.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00007-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.10.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "b3b7b97fd84fa63b2433bae3a04bdd8d04c3406eb6317633c91cbf8e055a2d1a",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 133.14570259302855
+    },
+    "blk.11.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 11,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4310732981314887,
+          "weighted_relative_error": 0.4415723681335402
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18465249633446035,
+          "weighted_relative_error": 0.17649142991128466
+        }
+      },
+      "name": "blk.11.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.11.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00008-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.11.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "1146205e41499382621bb491301f166569e517ca02c35b00e1947fb725a54598",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 132.29072904610075
+    },
+    "blk.11.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 11,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.44206445587966947,
+          "weighted_relative_error": 0.45816928273601015
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.1843536186711601,
+          "weighted_relative_error": 0.1807467402074077
+        }
+      },
+      "name": "blk.11.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.11.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00008-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.11.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "063f730fe9810f978457522533d68c1e1ba37baf924a7c709e9aedffc5f62224",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 132.27612827299163
+    },
+    "blk.12.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 12,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4323651340948169,
+          "weighted_relative_error": 0.44047221433118666
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.1844708797518697,
+          "weighted_relative_error": 0.1759220299796392
+        }
+      },
+      "name": "blk.12.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.12.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00008-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.12.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "b3ca6b378e8944f6f1af51723fa1fe036aea021f2724971eb19a355cbbb6215b",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 132.24401731113903
+    },
+    "blk.12.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 12,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4440344440402336,
+          "weighted_relative_error": 0.4601705533092461
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18422158599579663,
+          "weighted_relative_error": 0.18127906071681363
+        }
+      },
+      "name": "blk.12.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.12.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00008-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.12.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "16cf6dcc8b90866eec56e5d5c6e9eb82b1f79c36d43af897c0db8c3a314439f0",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 131.72531866002828
+    },
+    "blk.13.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 13,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.43134282492745335,
+          "weighted_relative_error": 0.43754911448596356
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18450713108046707,
+          "weighted_relative_error": 0.17563122016218358
+        }
+      },
+      "name": "blk.13.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.13.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00008-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.13.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "c1520770925386127cc551d76b9d1c4c31da73d9789677ecc0ca5abde0d9847f",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 132.6088522321079
+    },
+    "blk.13.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 13,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.44090035753404516,
+          "weighted_relative_error": 0.4558342434282845
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18424065684576277,
+          "weighted_relative_error": 0.18089345363849982
+        }
+      },
+      "name": "blk.13.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.13.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00008-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.13.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "09346aa7a7ce990dfb30a6fa72358e86ffa641303988b4f12e3afae8a12f4bc8",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 132.54399582813494
+    },
+    "blk.14.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 14,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.42697004225924573,
+          "weighted_relative_error": 0.43396814642077197
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18438148339904564,
+          "weighted_relative_error": 0.17600792286541894
+        }
+      },
+      "name": "blk.14.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.14.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00010-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.14.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "d9ad994096c650f2f44e1197c7fd973d5c006afa0f5585d909df92f3e92ccd17",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 133.0491057462059
+    },
+    "blk.14.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 14,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4359250071241692,
+          "weighted_relative_error": 0.4502773026717764
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.1841589124197578,
+          "weighted_relative_error": 0.18056772084255138
+        }
+      },
+      "name": "blk.14.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.14.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00010-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.14.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "3006671857354ad2ad04a1c51e599dbd9efb62ea74c3e83ad38769217e8bdf4b",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 133.22342018201016
+    },
+    "blk.15.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 15,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.42330154464281056,
+          "weighted_relative_error": 0.42988395495131965
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.1842938354606766,
+          "weighted_relative_error": 0.17612981254406518
+        }
+      },
+      "name": "blk.15.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.15.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00010-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.15.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "38caca3125afc0176aa90ba131e0f94360afb72e56e8eb8463ed0b3bf306330d",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 133.719616525108
+    },
+    "blk.15.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 15,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.43206177598417683,
+          "weighted_relative_error": 0.4454756825863631
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.1840597814006805,
+          "weighted_relative_error": 0.18085363855095504
+        }
+      },
+      "name": "blk.15.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.15.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00010-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.15.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "fe081edf4c7b0ae23c48e029d3c6546e2d3ce284b5e28c732319b949b84cf74c",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 133.9362778069917
+    },
+    "blk.16.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 16,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.42185548570216236,
+          "weighted_relative_error": 0.42876061265821913
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18443773452841086,
+          "weighted_relative_error": 0.17711228258742506
+        }
+      },
+      "name": "blk.16.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.16.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00010-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.16.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "10129c7493969b058a1bc4c3615c7e9a0d6f567e1c28982ccc01b771ca22af6e",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 132.72367262491025
+    },
+    "blk.16.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 16,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4289465031975742,
+          "weighted_relative_error": 0.44134653784747824
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.1842734963399157,
+          "weighted_relative_error": 0.180363221451549
+        }
+      },
+      "name": "blk.16.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.16.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00010-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.16.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "812f757bf07b9085b7b32a510c78a4ede4c8d617a45de902d865bcf012c257ee",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 133.15148251410574
+    },
+    "blk.17.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 17,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4242970827048507,
+          "weighted_relative_error": 0.43114379336659936
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18457556669496056,
+          "weighted_relative_error": 0.17629170576394526
+        }
+      },
+      "name": "blk.17.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.17.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00012-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.17.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "0089928d531f070a9c3b608ff439ec0f4366bcd3e719fd2f4a87d34cb31906b2",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 130.82203648705035
+    },
+    "blk.17.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 17,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.42975881322898196,
+          "weighted_relative_error": 0.4428600032313848
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18426056215982628,
+          "weighted_relative_error": 0.1804400325400389
+        }
+      },
+      "name": "blk.17.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.17.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00012-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.17.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "3203524b2dd91390bfef212c13977f2dca6932a83fed4465f917dba4d2a1603f",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 130.76568331895396
+    },
+    "blk.18.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 18,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.42605100435520965,
+          "weighted_relative_error": 0.43344945721074757
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.1846516859579685,
+          "weighted_relative_error": 0.1756008270940978
+        }
+      },
+      "name": "blk.18.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.18.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00013-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.18.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "05ab7a2a0a2d2a6bc97bfc88947c121028c6b9a5909cdc806c412c8437572715",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 130.69654789194465
+    },
+    "blk.18.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 18,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.43076117052753526,
+          "weighted_relative_error": 0.4449155845364863
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.1842992721385985,
+          "weighted_relative_error": 0.1804269111884625
+        }
+      },
+      "name": "blk.18.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.18.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00013-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.18.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "825526391a280e5b84f6ee011c3abb3d8cab1a272b9496b339dbef48e1a8a98a",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 131.2832611729391
+    },
+    "blk.19.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 19,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4248021646723992,
+          "weighted_relative_error": 0.429139830988707
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18450728953783363,
+          "weighted_relative_error": 0.17537895452313876
+        }
+      },
+      "name": "blk.19.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.19.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00012-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.19.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "8d348d113c8885fa4d14b74febfe29f101680589f787e42ba1a4105d59e136a0",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 131.9360362489242
+    },
+    "blk.19.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 19,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4304228583672892,
+          "weighted_relative_error": 0.44237240059204114
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18411542778031448,
+          "weighted_relative_error": 0.18008971950015057
+        }
+      },
+      "name": "blk.19.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.19.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00012-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.19.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "870f04b3abdaf188b5d973452b13029eb718ae0ae491cf24144c7afa593bf9e6",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 132.10226115002297
+    },
+    "blk.2.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 2,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.49952198216836424,
+          "weighted_relative_error": 0.5112806666231657
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18455102393128495,
+          "weighted_relative_error": 0.17842010234572758
+        }
+      },
+      "name": "blk.2.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.2.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00003-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.2.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "ec01058825a6f0515cbafcc83483dc37e50c53f0d4bcf30a2c7779a1a99097bf",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 134.7782113000285
+    },
+    "blk.2.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 2,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.5357471576691683,
+          "weighted_relative_error": 0.5501305858052122
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18449527365090843,
+          "weighted_relative_error": 0.1794158613198694
+        }
+      },
+      "name": "blk.2.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.2.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00003-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.2.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "9719ae1d592eee4346d279aa4686f3ec005d45f7677df4f11ce8ebacd2a44ea6",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 134.8271796638146
+    },
+    "blk.20.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 20,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.43564459570473174,
+          "weighted_relative_error": 0.4354931957972199
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18442279431705466,
+          "weighted_relative_error": 0.17276363967587255
+        }
+      },
+      "name": "blk.20.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.20.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00014-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.20.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "68aad3ca4f2a59f1d4383f4f61a3c6a363364da0951f70b4d2f0321f15e6efc0",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 141.18051619897597
+    },
+    "blk.20.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 20,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4504795517093164,
+          "weighted_relative_error": 0.4625768850017753
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18408626043594592,
+          "weighted_relative_error": 0.18000001173593455
+        }
+      },
+      "name": "blk.20.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.20.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00014-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.20.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "021cdd77a06c87ea4c79a479f8202eafa877e6c416aead6506bc624148c20bd7",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 140.79301749006845
+    },
+    "blk.21.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 21,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4318991687939698,
+          "weighted_relative_error": 0.4355380793942349
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18481250897286502,
+          "weighted_relative_error": 0.1745692952178051
+        }
+      },
+      "name": "blk.21.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.21.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00015-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.21.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "d1bc882643a76f30cec79f18ff6ce5c8507e739446b15d9f89806793f31a2f95",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 141.79948102706112
+    },
+    "blk.21.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 21,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4432242259970465,
+          "weighted_relative_error": 0.45676663622055763
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18437738346551305,
+          "weighted_relative_error": 0.18025519948675298
+        }
+      },
+      "name": "blk.21.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.21.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00015-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.21.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "49e95e08f2b678cc8101dafbaa2b3694b6cc5d31732e4d76469c4d466a0d80d5",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 141.83285603602417
+    },
+    "blk.22.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 22,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.42652691027421596,
+          "weighted_relative_error": 0.43271601774067625
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18517696429131586,
+          "weighted_relative_error": 0.17385058347643753
+        }
+      },
+      "name": "blk.22.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.22.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00014-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.22.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "76fa6cfce377d3f75be15b07e90313e2c8a4670fe142a110b8261093dd5f8844",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 143.01617782190442
+    },
+    "blk.22.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 22,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.43710106203797927,
+          "weighted_relative_error": 0.4532911304725941
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.1847732674236228,
+          "weighted_relative_error": 0.17996307850079843
+        }
+      },
+      "name": "blk.22.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.22.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00014-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.22.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "d67c4f61f5d4630fec28efd9ee5777a07d8482cdf76523a6b274fb60e195318e",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 142.26252673682757
+    },
+    "blk.23.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 23,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4232476593992567,
+          "weighted_relative_error": 0.4289555898946367
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18498911757161704,
+          "weighted_relative_error": 0.1744040796234737
+        }
+      },
+      "name": "blk.23.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.23.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00016-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.23.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "03779dce45630a4929859fcdb391877db6dc0c70936c9617bd58f2f5ab8cd584",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 146.40582060907036
+    },
+    "blk.23.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 23,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.43400396112577905,
+          "weighted_relative_error": 0.44959772850718327
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.1845915603910423,
+          "weighted_relative_error": 0.18008345375524362
+        }
+      },
+      "name": "blk.23.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.23.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00016-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.23.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "8a5de2e1fa3b31537b743c741afd0c8d18bb693166d7ab4c2c119129475df2cd",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 146.4301520420704
+    },
+    "blk.24.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 24,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4250607904242637,
+          "weighted_relative_error": 0.4303404452119875
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18459815514911831,
+          "weighted_relative_error": 0.1748499373439231
+        }
+      },
+      "name": "blk.24.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.24.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00016-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.24.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "f826c8f759df1ba11be6f6f7144d7e78d06cd5e5324f01b63d77bb422c6b8308",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 133.6147820178885
+    },
+    "blk.24.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 24,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4394509239988695,
+          "weighted_relative_error": 0.4547795661503999
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18431116040168014,
+          "weighted_relative_error": 0.18077676724445457
+        }
+      },
+      "name": "blk.24.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.24.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00016-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.24.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "bcadaa138e8dcede1dcac239b88c13fda15ac77d326cee395ae28e23f3e277eb",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 133.8143086391501
+    },
+    "blk.25.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 25,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4252469409101715,
+          "weighted_relative_error": 0.43106466209976246
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18483830526682976,
+          "weighted_relative_error": 0.174576179966009
+        }
+      },
+      "name": "blk.25.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.25.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00017-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.25.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "96e5fb395d759a3c8cb687c4871853c627edf09812348e1f0d8332f0bdc69a14",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 134.26012144400738
+    },
+    "blk.25.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 25,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.43684711837391305,
+          "weighted_relative_error": 0.451717823522956
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18447510377988358,
+          "weighted_relative_error": 0.1798810034675196
+        }
+      },
+      "name": "blk.25.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.25.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00017-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.25.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "a109a80c4f1b12481e1b0c0cf5ab255c30b93ad1b9a92cfe272d39b7b8f1b8c8",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 134.27943142107688
+    },
+    "blk.26.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 26,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4224969765468567,
+          "weighted_relative_error": 0.4295296534655898
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.1847478775893234,
+          "weighted_relative_error": 0.17444590322663614
+        }
+      },
+      "name": "blk.26.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.26.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00018-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.26.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "904e2a2ca39917e643cf087524cb1aa696565a307cb4339237786af32fd48f7a",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 132.21201954199933
+    },
+    "blk.26.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 26,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.433186820905423,
+          "weighted_relative_error": 0.44829876619988945
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18446390505578084,
+          "weighted_relative_error": 0.1797369169294793
+        }
+      },
+      "name": "blk.26.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.26.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00018-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.26.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "05b6924d3734c9807b89e6a8fd85f22633377f1a0053ac1294237b3b9d84c757",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 132.51098032691516
+    },
+    "blk.27.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 27,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4220167716784792,
+          "weighted_relative_error": 0.42734437419322074
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18489923225403188,
+          "weighted_relative_error": 0.17403299187500126
+        }
+      },
+      "name": "blk.27.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.27.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00018-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.27.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "1b738776f8a086f289618e9552fbd98840597d9c45736c1d9fb0b1bd791a1b5c",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 132.81063390220515
+    },
+    "blk.27.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 27,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.43134836407986854,
+          "weighted_relative_error": 0.4449768466354121
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18453275528274787,
+          "weighted_relative_error": 0.17900746092411815
+        }
+      },
+      "name": "blk.27.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.27.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00018-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.27.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "7fddc8595a5702ac41e9a8ec030cf7cdbdd9e1c5b1949d47b293611f8fee7570",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 132.58720592106692
+    },
+    "blk.28.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 28,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4237079190437968,
+          "weighted_relative_error": 0.4285782173664681
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18513745222661895,
+          "weighted_relative_error": 0.17405858274270983
+        }
+      },
+      "name": "blk.28.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.28.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00018-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.28.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "bdaaeb11d22b73311cdda4a2fb72c14be0edfa0233cfba453edf4c6e18ea0a5c",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 129.7904495249968
+    },
+    "blk.28.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 28,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4316337559469542,
+          "weighted_relative_error": 0.4435803051591835
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18481222357336763,
+          "weighted_relative_error": 0.177925689755102
+        }
+      },
+      "name": "blk.28.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.28.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00018-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.28.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "746a70bc6add9ecdf34def74eaefd329ef35ffe53d9ae9ba607bc4410d130c51",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 129.85557664907537
+    },
+    "blk.29.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 29,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4273713655657655,
+          "weighted_relative_error": 0.43115712669379963
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.1858762307953791,
+          "weighted_relative_error": 0.17217260312567845
+        }
+      },
+      "name": "blk.29.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.29.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00021-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.29.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "0c021d3f894d8c0667d277f392b8bc6338225725b05374728461508dd0126dbf",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 130.8170157878194
+    },
+    "blk.29.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 29,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.43363136632192756,
+          "weighted_relative_error": 0.4453599366688819
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18537508218841436,
+          "weighted_relative_error": 0.17685289106025406
+        }
+      },
+      "name": "blk.29.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.29.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00021-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.29.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "681acb308a34b361ef1c61a8da3579b42aa205ddc639a70354f91ef60a6eb0d2",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 130.52926213480532
+    },
+    "blk.3.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 3,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4842821881711907,
+          "weighted_relative_error": 0.4901106533974741
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18461635615510902,
+          "weighted_relative_error": 0.1760147161947789
+        }
+      },
+      "name": "blk.3.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.3.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00003-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.3.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "f7521c683ee083a4ba1a890564c50678830c7764414c16baa6a7f035e172cd07",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 134.77150844805874
+    },
+    "blk.3.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 3,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.5111714921080742,
+          "weighted_relative_error": 0.5227251327246955
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.1844592087249946,
+          "weighted_relative_error": 0.1791871764787203
+        }
+      },
+      "name": "blk.3.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.3.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00003-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.3.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "959c59fcd92b2063cfb905d5bda3402c490ae711d5702816f36002d8ee41371b",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 134.75320302392356
+    },
+    "blk.30.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 30,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4284121804171008,
+          "weighted_relative_error": 0.4318522378468756
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.1858166421591475,
+          "weighted_relative_error": 0.17152366034357439
+        }
+      },
+      "name": "blk.30.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.30.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00020-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.30.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "a6d1a4f4b2634af60a8238f429029345086530a3a39f301fa29c20b68d937344",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 130.5623351931572
+    },
+    "blk.30.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 30,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4344383169982793,
+          "weighted_relative_error": 0.445891366226611
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.1853149986420667,
+          "weighted_relative_error": 0.17657195222019995
+        }
+      },
+      "name": "blk.30.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.30.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00020-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.30.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "9e87a18c6c70e49fb604d0a1860274156ac1b1cea605bb69005cc80b4fb011a5",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 130.62936009000987
+    },
+    "blk.31.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 31,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4287825520017192,
+          "weighted_relative_error": 0.4285117789599895
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.185637293683994,
+          "weighted_relative_error": 0.17150036130330162
+        }
+      },
+      "name": "blk.31.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.31.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00020-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.31.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "a5db09745a9af5fb8be56bf885aae82207ca73310eaa284fe1426d304e714cf6",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 131.09930494008586
+    },
+    "blk.31.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 31,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4333297381430294,
+          "weighted_relative_error": 0.4416306390176102
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18499883370021794,
+          "weighted_relative_error": 0.17633689403951497
+        }
+      },
+      "name": "blk.31.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.31.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00020-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.31.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "e4a8dd6bd9c67e132265adc7a07520029867a3bf5287441ab0de3ebb012ab3d8",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 131.08808442694135
+    },
+    "blk.32.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 32,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4434308148406174,
+          "weighted_relative_error": 0.438599582238366
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18774451127114755,
+          "weighted_relative_error": 0.16897168826322517
+        }
+      },
+      "name": "blk.32.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.32.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00022-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.32.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "c33c52333c7185ba90fd1ac8373d95c5368bf9d7f13af612b9eba081cd7952e8",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 132.74059777194634
+    },
+    "blk.32.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 32,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4423239553777902,
+          "weighted_relative_error": 0.44858271712194286
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18640505066002472,
+          "weighted_relative_error": 0.17445731976624015
+        }
+      },
+      "name": "blk.32.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.32.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00022-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.32.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "3dd8bf8d8352fed50e3fd311e4328103cc75f5171c4ee2103bc123df6e2f236d",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 132.93900579004548
+    },
+    "blk.33.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 33,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4473380535723529,
+          "weighted_relative_error": 0.4413802444805065
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18828601493822367,
+          "weighted_relative_error": 0.16801976938824112
+        }
+      },
+      "name": "blk.33.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.33.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00022-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.33.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "df8fa1eea2b88f7935a290d3574efa452d58e390758ece3e0cb537df5d96fd05",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 132.99759956705384
+    },
+    "blk.33.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 33,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4460345450563295,
+          "weighted_relative_error": 0.4512400466801549
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18672251907210058,
+          "weighted_relative_error": 0.1737521482843633
+        }
+      },
+      "name": "blk.33.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.33.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00022-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.33.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "2dc70a9392b45dd5298a80a47fdc6eee3b5afc85b7da5f465fed3f0926157f37",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 133.1400534589775
+    },
+    "blk.34.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 34,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.44672386003482545,
+          "weighted_relative_error": 0.44205369007772843
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18731287168364655,
+          "weighted_relative_error": 0.1687780585826257
+        }
+      },
+      "name": "blk.34.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.34.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00023-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.34.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "0a35937150178017e55ab8b8b2a5db041d74c5e2d7607ab499f706dbc47253b8",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 134.24756915983744
+    },
+    "blk.34.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 34,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.44977804787393505,
+          "weighted_relative_error": 0.45389747992561785
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.1861892790829708,
+          "weighted_relative_error": 0.17387496234490854
+        }
+      },
+      "name": "blk.34.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.34.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00023-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.34.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "3a3c80b0afab3e61160e487cdd542c0ea30b2dfe885d18e222c13243a7a42d46",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 133.8819107960444
+    },
+    "blk.35.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 35,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4391915792055774,
+          "weighted_relative_error": 0.43174993908031556
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18586707334040978,
+          "weighted_relative_error": 0.16912915051556252
+        }
+      },
+      "name": "blk.35.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.35.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00023-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.35.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "6d1b2ce0dcc7e2f28bd4e502cfa11e0ada0eb9477a96bd14d4419185e3d6833a",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 132.9089005710557
+    },
+    "blk.35.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 35,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.44490622893680903,
+          "weighted_relative_error": 0.4464862609242332
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18505363465915745,
+          "weighted_relative_error": 0.17480585902397114
+        }
+      },
+      "name": "blk.35.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.35.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00023-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.35.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "d02a57edabef54012f4d3445118f0b3d960108df4bfa3710347cd4039be71138",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 133.1068490569014
+    },
+    "blk.36.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 36,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.44267035922303255,
+          "weighted_relative_error": 0.4351627123172597
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.186235365343076,
+          "weighted_relative_error": 0.16811614538143999
+        }
+      },
+      "name": "blk.36.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.36.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00024-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.36.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "7765c963311c7a04ff39dd2c79963dee4341098c1a25e4fff5e6fb715d2fd78d",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 133.51456725015305
+    },
+    "blk.36.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 36,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.45001140920407356,
+          "weighted_relative_error": 0.45165477457596803
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18530754906503905,
+          "weighted_relative_error": 0.17434031620855894
+        }
+      },
+      "name": "blk.36.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.36.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00024-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.36.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "41f188891ba36b611acb85fbd60eb0cc37ed05730a617e82d7e3900129bfaa88",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 133.48277252586558
+    },
+    "blk.37.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 37,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.44153846616460113,
+          "weighted_relative_error": 0.43550349118583315
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18620807093787187,
+          "weighted_relative_error": 0.16872597173146478
+        }
+      },
+      "name": "blk.37.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.37.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00024-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.37.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "58da3e0c6239f276c71e3e18664a3c455098ed146bb73f02bdf32536c5a8e033",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 130.9271981799975
+    },
+    "blk.37.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 37,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4500221567109507,
+          "weighted_relative_error": 0.4502448530288317
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.1852411993244907,
+          "weighted_relative_error": 0.1736263635196858
+        }
+      },
+      "name": "blk.37.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.37.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00024-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.37.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "d02e1258850d108a7bead94600b035fc5fcd7c8185d2ceed8429338f9e5da2f9",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 130.80676992307417
+    },
+    "blk.38.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 38,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.45050242214513114,
+          "weighted_relative_error": 0.44696045813534563
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18697472750052577,
+          "weighted_relative_error": 0.16899033666644037
+        }
+      },
+      "name": "blk.38.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.38.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00025-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.38.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "2e30bac476215cc06cafe850e5d34ee821c85a4fa353c818138a591be61bcbcd",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 130.6734731970355
+    },
+    "blk.38.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 38,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4576027028601658,
+          "weighted_relative_error": 0.45864629143233987
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18568116377968724,
+          "weighted_relative_error": 0.17328315978732162
+        }
+      },
+      "name": "blk.38.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.38.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00025-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.38.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "9dbdb28fa63bfefee41312c1c99fba31f59c50b5cddb554c1c79189a540c15ec",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 130.86076461314224
+    },
+    "blk.39.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 39,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4510914637352726,
+          "weighted_relative_error": 0.45200520545194633
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18621316287408224,
+          "weighted_relative_error": 0.17187398038373927
+        }
+      },
+      "name": "blk.39.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.39.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00025-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.39.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "113c6cd48949b3debd73be3036f92238ae974dadfd668225fc67888de78a1041",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 130.80586990807205
+    },
+    "blk.39.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 39,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.46614416329797187,
+          "weighted_relative_error": 0.4693305112917708
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18525204188288838,
+          "weighted_relative_error": 0.175394616162815
+        }
+      },
+      "name": "blk.39.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.39.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00025-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.39.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "99599594c6b554b5646ab02687cd89ca5dbe8fb01155eb3ee891ac554416368f",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 130.628062101081
+    },
+    "blk.4.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 4,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4700539814148007,
+          "weighted_relative_error": 0.4743950257628423
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.1847729940035821,
+          "weighted_relative_error": 0.17478473413744164
+        }
+      },
+      "name": "blk.4.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.4.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00004-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.4.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "9f25cd695e1923b9f460c0714b1e94853fb6ace321b0eade0b49908796dd0201",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 130.23277683695778
+    },
+    "blk.4.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 4,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4848621533964145,
+          "weighted_relative_error": 0.4964504782498733
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18457971375049548,
+          "weighted_relative_error": 0.17913648709282493
+        }
+      },
+      "name": "blk.4.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.4.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00004-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.4.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "083dac42246742ae5ebeae20e714f67070546add708f84e46a993794e71a2098",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 130.1993635459803
+    },
+    "blk.5.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 5,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4528785734081117,
+          "weighted_relative_error": 0.4592657877641222
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18465086174191428,
+          "weighted_relative_error": 0.1749122650848945
+        }
+      },
+      "name": "blk.5.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.5.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00004-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.5.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "283681b9c5be2704fb376d4c01f61b3e126254bbf189edb4bbad5884103c9e4c",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 130.01449005608447
+    },
+    "blk.5.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 5,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4678750295653178,
+          "weighted_relative_error": 0.4814705453419936
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18446154277445692,
+          "weighted_relative_error": 0.17967033628284998
+        }
+      },
+      "name": "blk.5.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.5.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00004-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.5.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "5e7d992cbde784aa4374f9b9ccfd2cb387256e6fcf7f9e5ae90aa342086f8524",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 129.66923275892623
+    },
+    "blk.6.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 6,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.445284537459698,
+          "weighted_relative_error": 0.45471657509120356
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18472790376101245,
+          "weighted_relative_error": 0.1750622551528837
+        }
+      },
+      "name": "blk.6.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.6.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00005-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.6.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "132ee2aa23437a02a6c06fc99c923645e83d3962ce991eca97b5cc9aaca00141",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 131.54848378989846
+    },
+    "blk.6.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 6,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4562791895221744,
+          "weighted_relative_error": 0.47227662066460985
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18453539289062218,
+          "weighted_relative_error": 0.18001506087297559
+        }
+      },
+      "name": "blk.6.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.6.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00005-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.6.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "8114045757edb6ad8763e9463efd1d03e0a4a040a5fae15b094990e169c29df3",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 131.91664636391215
+    },
+    "blk.7.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 7,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.43857603842825443,
+          "weighted_relative_error": 0.4463367005993436
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18436831447413668,
+          "weighted_relative_error": 0.17616643105814175
+        }
+      },
+      "name": "blk.7.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.7.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00005-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.7.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "734fe7a19530d68447b4301f6e0df04a86b31572ded41527db0b260f470197ac",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 131.13675771607086
+    },
+    "blk.7.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 7,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.453626353665718,
+          "weighted_relative_error": 0.4678530079504199
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18411059952991388,
+          "weighted_relative_error": 0.1807526235062028
+        }
+      },
+      "name": "blk.7.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.7.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00005-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.7.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "1dfa277561ebf71b96af7c98a50d1ab0da712dd5eb68f6de05130caaa1718db1",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 131.71281198598444
+    },
+    "blk.8.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 8,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.43826256408519576,
+          "weighted_relative_error": 0.44530091259598314
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18431857491244352,
+          "weighted_relative_error": 0.17593917955332547
+        }
+      },
+      "name": "blk.8.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.8.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00006-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.8.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "378396080fbca8b91066325efee626caa4ddc97e59f98ce1405d05d0c786c92b",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 133.78019689093344
+    },
+    "blk.8.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 8,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4536355481207804,
+          "weighted_relative_error": 0.4687526731871356
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.1841564431171672,
+          "weighted_relative_error": 0.1807256526612408
+        }
+      },
+      "name": "blk.8.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.8.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00006-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.8.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "3e01dab1189d8dc01b0d1d6485603023d0383d62f2943ad420567575226495ba",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 134.09035167098045
+    },
+    "blk.9.ffn_gate_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_gate_exps",
+      "layer": 9,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4377262411230769,
+          "weighted_relative_error": 0.4491998111766875
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.18473843492208356,
+          "weighted_relative_error": 0.1765606547242989
+        }
+      },
+      "name": "blk.9.ffn_gate_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.9.ffn_gate_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00006-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.9.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 0,
+            "stop": 512
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "a91f129f06cef6632438296386eda5919df8f7703a3795499249ce0a482f6538",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 133.86902672494762
+    },
+    "blk.9.ffn_up_exps.weight": {
+      "bytes": {
+        "IQ3_XXS": 102760448,
+        "gsq_q2_0": 75497472
+      },
+      "family": "ffn_up_exps",
+      "layer": 9,
+      "metrics": {
+        "gsq_q2_0": {
+          "relative_rmse": 0.4502084498906007,
+          "weighted_relative_error": 0.46839890658655764
+        },
+        "iq3_xxs": {
+          "relative_rmse": 0.1845825309299721,
+          "weighted_relative_error": 0.1810216171811206
+        }
+      },
+      "name": "blk.9.ffn_up_exps.weight",
+      "store_entry": {
+        "aligned_gguf_bytes": 102760448,
+        "alignment": 32,
+        "block_size": 256,
+        "byte_order": "little-endian-native-ggml",
+        "ggml_type": 18,
+        "ggml_type_name": "IQ3_XXS",
+        "gguf_shape": [
+          2048,
+          512,
+          256
+        ],
+        "offset": 0,
+        "path": "tensors/blk.9.ffn_up_exps.weight/IQ3_XXS.bin",
+        "payload_bytes": 102760448,
+        "provenance": {
+          "imatrix_sha256": "1ff7ed0501e6abe596ffe0be0d6756d15a433358ba7537e4dd75ca9084a2bed2",
+          "kind": "bf16_derived_imatrix_native_candidate",
+          "source_shard": "model-00006-of-00026.safetensors",
+          "source_tensor": "model.language_model.layers.9.mlp.experts.gate_up_proj",
+          "source_view": {
+            "axis": 1,
+            "start": 512,
+            "stop": 1024
+          }
+        },
+        "row_count": 131072,
+        "row_size": 784,
+        "row_width": 2048,
+        "sha256": "8d72c7c6f6bc11d1132cf2d70a81b8fefe680463ca4e817375171c51e2cae278",
+        "type_size": 98
+      },
+      "type": "IQ3_XXS",
+      "wall_seconds": 133.81425150181167
+    }
+  },
+  "type": "IQ3_XXS",
+  "wall_seconds": 1436.636391337961
+}
