@@ -118,8 +118,11 @@ def upgrade_keys(assignment: dict[str, str], center: dict[str, str]) -> frozense
                      for n, t in assignment.items() if t != center[n])
 
 
-def evaluator(args, gguf_path: Path, reports):
-    """The exact evaluator over a v3 GGUF; every store installable by label."""
+def evaluator(args, gguf_path: Path, reports, evaluator_class=None):
+    """The exact evaluator over a v3 GGUF; every store installable by label.
+
+    ``evaluator_class``: a ``StreamedChatExactEvaluator`` subclass to build
+    instead (the screening's ``SharedPrefixExactEvaluator``)."""
     import torch
 
     from audit_qwen36_chat_kl import PAD_TOKEN, _model
@@ -147,7 +150,7 @@ def evaluator(args, gguf_path: Path, reports):
         ggml_library=args.ggml_library, rows_per_chunk=args.rows_per_chunk,
         workers=args.decode_workers)
     model = _model(SimpleNamespace(model_dir=args.model_dir, attn_implementation="sdpa"))
-    result = StreamedChatExactEvaluator(
+    result = (evaluator_class or StreamedChatExactEvaluator)(
         model, loader, upgrade_store=upgrade_store, device=torch.device(args.device),
         checkpoint_dtype=torch.bfloat16, embedding_store=embedding_store,
         embedding_selected=[(NAME, 1)], position_chunk=args.position_chunk,
