@@ -1,0 +1,132 @@
+{
+  "changes": [
+    [
+      "blk.3.ffn_down_exps.weight",
+      "IQ2_XS"
+    ],
+    [
+      "blk.17.ffn_gate_exps.weight",
+      "IQ3_XXS"
+    ],
+    [
+      "blk.25.attn_qkv.weight",
+      "Q8_0"
+    ],
+    [
+      "blk.39.ffn_down_shexp.weight",
+      "Q4_K"
+    ]
+  ],
+  "gate": "shared-prefix evaluator (host hidden) equals the plain one (GPU hidden) within 1e-09, per conversation, KL and NLL",
+  "identity": {
+    "attn_implementation": "sdpa",
+    "corpus_manifest_sha256": "6e2e8d27608bdcab7298b48a2c471379acf16fc2720c33139d1caa072fe72c49",
+    "embedding_sha256": "7d9761b306537a7ee6f3ebaeb85f0f5793bd6923ba08d29c74e997f83ee08849",
+    "folds": {
+      "0": [
+        "chat-v2-calibration-chat-11",
+        "chat-v2-calibration-chat-23",
+        "chat-v2-calibration-chat-51",
+        "chat-v2-calibration-chat-54",
+        "chat-v2-calibration-chat-55",
+        "chat-v2-calibration-document-04",
+        "chat-v2-calibration-document-19",
+        "chat-v2-calibration-document-40",
+        "chat-v2-calibration-document-41",
+        "chat-v2-calibration-document-45",
+        "chat-v2-calibration-reasoning-17",
+        "chat-v2-calibration-reasoning-19",
+        "chat-v2-calibration-reasoning-23",
+        "chat-v2-calibration-tool-answer-03",
+        "chat-v2-calibration-tool-answer-16",
+        "chat-v2-calibration-tool-call-02"
+      ],
+      "1": [
+        "chat-v2-calibration-chat-06",
+        "chat-v2-calibration-chat-19",
+        "chat-v2-calibration-chat-37",
+        "chat-v2-calibration-chat-56",
+        "chat-v2-calibration-chat-63",
+        "chat-v2-calibration-document-11",
+        "chat-v2-calibration-document-46",
+        "chat-v2-calibration-document-48",
+        "chat-v2-calibration-document-54",
+        "chat-v2-calibration-reasoning-09",
+        "chat-v2-calibration-reasoning-24",
+        "chat-v2-calibration-reasoning-29",
+        "chat-v2-calibration-reasoning-41",
+        "chat-v2-calibration-tool-answer-22",
+        "chat-v2-calibration-tool-answer-23",
+        "chat-v2-calibration-tool-call-05"
+      ]
+    },
+    "gguf_sha256": "8ad78f2a882bb8f45b1470301c860365686871281dd1cd15a77518a8cb088d3c",
+    "microbatch_tokens": 8448,
+    "part": "fit",
+    "reference_sha256": "5db94ecd21424e1074e70d3952026f82005cbfc641fcba155b1e191d569053dc",
+    "split_sha256": "d7d8d046ed6181d151c3cb083436940a9c3b15117c9d112dde6d073d9413e678",
+    "store_index_sha256": {
+      "IQ2_XS": "ddac7544e92a3c6eff364ab36f9eaaf9c233d58020d08138a0fa8102086efd4d",
+      "IQ3_XXS_DOWN": "cfc3ad3767064a651c2e94e091a2b9ed8d2ea354b76edbb666e1cf39f201496b",
+      "IQ3_XXS_GATE_UP": "45df1efdb2613a0c407cea88179f484d8386f0a98b2a0288ebb23ba3aee26190",
+      "Q4_K": "57602e02f8f31d5d777b9543bcbe122e82c823cf70e6863f190064e19ebe201d",
+      "Q6_K": "bc8101c16d642400f7ab0085ae35447ca533ead9f0f2e9829644966f887d934a",
+      "Q8_0": "003a204da66905eef8906fbe074ed59c85859d0e8134550a00fceb9601fc8883"
+    }
+  },
+  "max_abs_difference": {
+    "blk.17.ffn_gate_exps.weight:IQ3_XXS": 0.0,
+    "blk.25.attn_qkv.weight:Q8_0": 0.0,
+    "blk.3.ffn_down_exps.weight:IQ2_XS": 0.0,
+    "blk.39.ffn_down_shexp.weight:Q4_K": 0.0,
+    "center": 0.0
+  },
+  "means": {
+    "blk.17.ffn_gate_exps.weight:IQ3_XXS": 0.0594481232860962,
+    "blk.25.attn_qkv.weight:Q8_0": 0.0609176479347477,
+    "blk.3.ffn_down_exps.weight:IQ2_XS": 0.06209715258021351,
+    "blk.39.ffn_down_shexp.weight:Q4_K": 0.06166132546600886,
+    "center": 0.061345789350232036
+  },
+  "schema": "rco.qwen36.rco_v3_screening.v1.check",
+  "stats": {
+    "plain": {
+      "block_loads": 40,
+      "cuda_max_allocated": 5179397120,
+      "cuda_max_reserved": 5578424320,
+      "forward_seconds": 112.94753009011038,
+      "hidden_on_device": true,
+      "install_seconds": 7.4078582741785794,
+      "installs": 4,
+      "load_seconds": 62.83026330755092,
+      "loss_seconds": 6.379238134017214,
+      "microbatch_count": 6,
+      "padded_tokens": 31941,
+      "rows": 16,
+      "scored_targets": 22197,
+      "tokens": 27176,
+      "total_seconds": 194.49089365103282,
+      "variants": 5
+    },
+    "shared": {
+      "block_loads": 40,
+      "cuda_max_allocated": 4462580736,
+      "cuda_max_reserved": 4550819840,
+      "forward_seconds": 85.018600667594,
+      "hidden_on_device": false,
+      "install_seconds": 4.892858790000901,
+      "installs": 4,
+      "load_seconds": 62.70652789971791,
+      "loss_seconds": 6.863763586152345,
+      "microbatch_count": 6,
+      "padded_tokens": 31941,
+      "rows": 16,
+      "scored_targets": 22197,
+      "tokens": 27176,
+      "total_seconds": 162.51164923608303,
+      "variants": 5
+    }
+  },
+  "status": "pass",
+  "wall_seconds": 386.7905735250097
+}
