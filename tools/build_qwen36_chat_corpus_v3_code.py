@@ -116,6 +116,8 @@ USER_DROPS = {
     "b0cc78d9-7b0e-4db7-bd0c-03316a84d7e7",
     # third review
     "b32be44b-63a0-403d-b873-d8c298f9125d", "e25856e4-3af8-49dd-acf0-562ebafda63c",
+    # fourth review
+    "5642151a-5310-4b96-ac5b-1a9daea482f0",
 }
 
 FENCE_BLOCK = re.compile(
