@@ -97,7 +97,7 @@ TASK = re.compile(
     r"refactor|class|api|compile|optimi[sz]e|unit test|algorithm)\b", re.I)
 
 
-# The user's reviews of the first and second selection (2026-10-25): source keys.
+# The user's reviews of the selections (2026-10-25): source keys.
 USER_DROPS = {
     "32f3c041-bc2c-42b8-87a4-37db3a23a12e", "8f661c6f-0dfa-4aad-ad07-fb96fa35c24b",
     "e0564934-9e0a-48b2-b3c3-8e493086e8e0", "fed54002-577e-48f5-a91b-8abde853c90e",
@@ -114,6 +114,8 @@ USER_DROPS = {
     # second review
     "6547b599-867a-4432-a31d-6b8a721cd0d1", "9e3b03cc-b216-4256-90c0-a491e2cb5f12",
     "b0cc78d9-7b0e-4db7-bd0c-03316a84d7e7",
+    # third review
+    "b32be44b-63a0-403d-b873-d8c298f9125d", "e25856e4-3af8-49dd-acf0-562ebafda63c",
 }
 
 FENCE_BLOCK = re.compile(
